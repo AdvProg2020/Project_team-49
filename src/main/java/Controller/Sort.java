@@ -1,10 +1,11 @@
 package Controller;
 
 import Models.Product;
+import org.graalvm.compiler.code.DataSection;
 
 import java.lang.*;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class Sort {
@@ -24,26 +25,36 @@ public class Sort {
     }
 
     public static void sortByScore() {
-        return;
+        Collections.sort(DataBase.sortedOrFilteredProduct , new SortByScore());
     }
 
     public static void sortByView() {
-        return;
+        Collections.sort(DataBase.sortedOrFilteredProduct , new SortByView());
     }
 
-    abstract class SortByView implements Comparator<Product> {
+    public static void disableSort(){
+        sortByView();
+        currentSort = "";
+    }
+
+    static class SortByView implements Comparator<Product> {
         public int compare(Product a, Product b) {
+            return -a.getNumberOfView() + b.getNumberOfView();
+        }
+    }
+
+    static class SortByScore implements Comparator<Product> {
+        public int compare(Product a, Product b) {
+            double value =  -a.getAverageScore() + b.getAverageScore();
+            if(value > 1)
+                return 1;
+            if(value < 1)
+                return -1;
             return 0;
         }
     }
 
-    abstract class SortByScore implements Comparator<Product> {
-        public int compare(Product a, Product b) {
-            return 0;
-        }
-    }
-
-    abstract class SortByTime implements Comparator<Product> {
+    static class SortByTime implements Comparator<Product> {
         public int compare(Product a, Product b) {
             return 0;
         }
@@ -67,17 +78,15 @@ public class Sort {
     }
 
     public static ArrayList<String> getSortedProducts() {
-        ArrayList<String> sortedProducts = new ArrayList<>();
+        ArrayList<String> sortedProducts = new ArrayList<String>();
         for (Product product : DataBase.sortedOrFilteredProduct) {
             sortedProducts.add(product.getName());
         }
         return sortedProducts;
     }
 
-
-
     public static ArrayList<String> showAvailableSorts() {
-        ArrayList<String> availableSorts = new ArrayList<>();
+        ArrayList<String> availableSorts = new ArrayList<String>();
         availableSorts.add("sort by time");
         availableSorts.add("sort by score");
         availableSorts.add("sort by views");
@@ -87,5 +96,4 @@ public class Sort {
     public static String showCurrentSort() {
         return currentSort;
     }
-
 }
