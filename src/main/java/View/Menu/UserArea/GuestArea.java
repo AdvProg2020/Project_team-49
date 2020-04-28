@@ -41,6 +41,42 @@ public class GuestArea extends Menu {
 
     @Override
     public String getCommandKey(String command) {
-        return null;
+        if (getMatcher(command, "(?i)create account (\\S+) (\\S+)").matches()) {
+            if (!checkCreateAccountCommand(command)) {
+                return "invalid";
+            }
+            return "Register Menu";
+        } else if (getMatcher(command, "(?i)login (\\S+)").matches()) {
+            if (!checkLoginCommand(command)) {
+                return "invalid";
+            }
+            return "Login Menu";
+        } else if (getMatcher(command, "(?i)help").matches()) {
+            return "help";
+        } else if (getMatcher(command, "(?i)back").matches()) {
+            return "back";
+        }
+        View.printString("invalid command");
+        return "invalid";
+    }
+
+    private boolean checkCreateAccountCommand(String command) {
+        if (!getMatcher(command, "(?i)create account (manager|seller|costumer) (\\S+)").matches()) {
+            View.printString("invalid account type");
+            return false;
+        }
+        if (!getMatcher(command, "(?i)create account (\\S+) (\\w+)").matches()) {
+            View.printString("invalid username");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkLoginCommand(String command) {
+        if (!getMatcher(command, "(?i)login (\\w+)").matches()) {
+            View.printString("invalid username");
+            return false;
+        }
+        return true;
     }
 }

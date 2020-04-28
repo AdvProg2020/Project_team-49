@@ -13,12 +13,12 @@ public abstract class Menu {
     protected HashMap<String, Menu> subMenus;
     protected Menu parentMenu;
     public static Scanner scanner;
-    protected static ArrayList<Menu> allMenus = new ArrayList<>();
+    protected static ArrayList<Menu> allMenus = new ArrayList<Menu>();
 
     public Menu(String name, Menu parentMenu) {
         this.name = name;
         this.parentMenu = parentMenu;
-        this.subMenus = new HashMap<>();
+        this.subMenus = new HashMap<String, Menu>();
         allMenus.add(this);
     }
 
@@ -67,11 +67,15 @@ public abstract class Menu {
         Menu nextMenu = null;
         if (getCommandKey(command).equals("invalid")) {
             nextMenu = this;
-            View.printString("invalid command");
         } else if (getCommandKey(command).equals("back")) {
-            nextMenu = this.parentMenu;
+            if (this.parentMenu == null) {
+                return;
+            } else {
+                nextMenu = this.parentMenu;
+            }
         } else if (getCommandKey(command).equals("help")) {
             this.showMenu();
+            nextMenu = this;
         } else {
             nextMenu = this.subMenus.get(getCommandKey(command));
         }
