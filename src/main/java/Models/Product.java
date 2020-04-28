@@ -111,7 +111,6 @@ public class Product {
         allBrands.add(brand);
     }
 
-
     public void setOffPercentage(double discountPercentage) {
         this.offPercentage = discountPercentage;
     }
@@ -180,5 +179,17 @@ public class Product {
             allSellerName.add(seller.getUsername());
         }
         return allSellerName;
+    }
+
+    public Seller getCommenSeller(){
+        return allSellers.get(0);
+    }
+    public Seller getSellerByUserName(String userName){
+        for (Seller seller : allSellers) {
+            if (seller.getUsername().equals(userName)){
+                return seller;
+            }
+        }
+        return null;
     }
 }

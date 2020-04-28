@@ -55,6 +55,6 @@ public class Costumer extends User {
 
     @Override
     public String getType() {
-        return "Consumer";
+        return "Costumer";
     }
 }

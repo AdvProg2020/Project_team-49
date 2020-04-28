@@ -3,6 +3,7 @@ package Controller;
 import Models.Product;
 
 import Models.User.Guest;
+import Models.User.Seller;
 import Models.User.User;
 
 
@@ -61,9 +62,9 @@ public class Controller {
         return false;
     }
 
-    public static void addToCart(Product product) {
+    public static void addToCart(Product product, Seller seller) {
 
-        //check beshe.
+
     }
 
     public static void logout() {

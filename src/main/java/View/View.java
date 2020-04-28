@@ -106,6 +106,14 @@ public class View {
         System.out.println(string);
     }
 
+    public static void printOnlyUserOrGuestCanBuyProduct(){
+        System.out.println("Only User Or Guest Can Buy Product");
+    }
+
+    public static void printAddToCardSuccessfullyDone(){
+        System.out.println("Add to Card Successfully Done");
+    }
+
     public static void run() {
         Menu.setScanner(new Scanner(System.in));
         new MainMenu().run("");
