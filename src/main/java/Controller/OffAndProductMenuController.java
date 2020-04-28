@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class OffAndProductMenuController {
 
-    private ArrayList<Product> SortedProduct=new ArrayList<>();
+    private ArrayList<Product> SortedProduct=new ArrayList<Product>();
 
     //agar bekham az in estefade konam bayad hamash static beshe ya to Menu tarif beshe.
 
@@ -146,6 +146,5 @@ public class OffAndProductMenuController {
             }
         }
     }
-
 
 }

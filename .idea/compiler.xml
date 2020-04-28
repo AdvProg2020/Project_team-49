@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Project_team-49" />
         <module name="AP Project" />
+        <module name="Project in Git-Phase1" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="13" />
