@@ -1,7 +1,10 @@
 package Controller;
 
 import Models.Category;
+import Models.Comment;
 import Models.Product;
+import View.Menu.OffsAndProductsMenu.Comments;
+
 import static Controller.DataBase.*;
 import java.util.ArrayList;
 
@@ -132,7 +135,7 @@ public class OffAndProductMenuController {
     }
 
     public static void addCommentsById(long productId, String title, String content) {
-        //
+        Controller.getProductById(productId).addAComment(new Comment(Controller.currentUser,Controller.getProductById(productId),title,content));
     }
 
     public static ArrayList<String> getCategoriesName(){

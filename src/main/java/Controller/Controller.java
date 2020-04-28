@@ -29,9 +29,8 @@ public class Controller {
         currentUser = user;
     }
 
-    public static String getProductById(long productId) {
-        DataBase.getProductById(productId);
-        return null;
+    public static Product getProductById(long productId) {
+        return DataBase.getProductById(productId);
     }
 
     public static boolean isPasswordCorrect(String password) {
@@ -72,6 +71,10 @@ public class Controller {
     }
 
     public static boolean hasDiscountCode(String code) {
+        return false;
+    }
+
+    public static boolean isCurrentUserBoughtProductById(long productId){
         return false;
     }
 }

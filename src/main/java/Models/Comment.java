@@ -6,14 +6,18 @@ public class Comment {
     private User userWhoComment;
     private Product product;
     private String note;
-    private enum commentStatus {REVIEWFORCONFIRMATION, ACCEPTED , NOTCONFIRMEDFROMMANAGER};
+    private String title;
+
+    private enum commentStatus {REVIEWFORCONFIRMATION, ACCEPTED, NOTCONFIRMEDFROMMANAGER}
+
+    ;
     private boolean isUserBuyThisProduct;
 
-    public Comment(User user , Product product , String note , /* vaziat */ boolean isUserBuyThisProduct) {
+    public Comment(User user, Product product, String title, String note) {
         this.userWhoComment = user;
         this.product = product;
         this.note = note;
-        this.isUserBuyThisProduct = isUserBuyThisProduct;
+        this.isUserBuyThisProduct = isUserBuyThisProduct();
     }
 
     public User getUserWhoComment() {

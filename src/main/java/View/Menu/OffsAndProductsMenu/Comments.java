@@ -27,6 +27,5 @@ public class Comments extends Menu {
         if (command.equals("back")) {
             this.parentMenu.run(lastCommand);
         }
-        //agar invalid bood chi?
     }
 }
