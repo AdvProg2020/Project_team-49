@@ -8,7 +8,7 @@ public class Comments extends Menu {
 
     public Comments(Menu parentMenu, long productId) {
         super("Comments", parentMenu);
-        this.productId=productId;
+        this.productId = productId;
     }
 
     @Override
