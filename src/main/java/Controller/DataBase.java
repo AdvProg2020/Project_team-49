@@ -15,15 +15,29 @@ public class DataBase {
     static ArrayList<Product> sortedOrFilteredProduct = new ArrayList<>();
 
     public static User getUserByUsername(String username) {
+        for (User user : allUsers) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
         return null;
     }
 
     public static Product getProductById(long productId) {
+        for (Product product : allProducts) {
+            if (product.getProductId() == productId) {
+                return product;
+            }
+        }
         return null;
     }
 
     public static void addNewUser(User user) {
+        allUsers.add(user);
+    }
 
+    public static void removeUser(String username) {
+        allUsers.remove(getUserByUsername(username));
     }
 
     public static void addNewProduct(Product product) {

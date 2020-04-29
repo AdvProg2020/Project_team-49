@@ -2,28 +2,43 @@ package Controller;
 
 import Models.DiscountCode;
 import Models.User.Manager;
+import Models.User.Seller;
+import Models.User.User;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 public class ManagerAreaController {
 
     public static String viewUser(String username) {
-        return "";
+        User user = DataBase.getUserByUsername(username);
+        String info = username + " ";
+        info += user.getFirstName() + " ";
+        info += user.getLastName() + " ";
+        info += user.getEMail() + " ";
+        info += user.getPhoneNumber() + " ";
+        if (user.getType().equals("Seller")) {
+            info += ((Seller) user).getCompanyName() + " ";
+        }
+        info += user.getType() + " ";
+        return info;
     }
 
     public static void deleteUser(String username) {
+        DataBase.removeUser(username);
     }
 
     public static void changeUserType(String username, String newType) {
 
     }
 
-    public static void createManagerProfile(String[] info) {
-
-    }
-
-    public static void deleteProduct(long productID) {
-
+    public static String deleteProduct(long productId) {
+        if (DataBase.getProductById(productId) == null) {
+            return "product not exist";
+        } else {
+            DataBase.removeProduct(productId);
+            return "product removed";
+        }
     }
 
     public static void createDiscountCode(String[] info) {

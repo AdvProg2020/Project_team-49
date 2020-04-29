@@ -44,7 +44,7 @@ public class Controller {
     }
 
     public static String getCurrentUserSpecifications() {
-        return "";
+        return ManagerAreaController.viewUser(currentUser.getUsername());
     }
 
     public static String createAccount(ArrayList<String> info, String type) {
