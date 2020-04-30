@@ -34,7 +34,23 @@ public class ManagerArea extends Menu {
         return new Menu("Create Discount Code", this) {
             @Override
             public void run(String lastCommand) {
-                ManagerAreaController.createDiscountCode(new String[3]);
+                ArrayList<String> info = getDiscountCodeInfo();
+                if (!getMatcher(info.get(0), "\\w+").matches()) {
+                    View.printString("invalid Id");
+                } else if (!getMatcher(info.get(1), "time regex").matches()) {
+                    View.printString("invalid start time");
+                } else if (!getMatcher(info.get(2), "time regex").matches()) {
+                    View.printString("invalid end time");
+                } else if (!getMatcher(info.get(3), "\\d+").matches()) {
+                    View.printString("invalid percentage");
+                } else if (!getMatcher(info.get(4), "\\d+").matches()) {
+                    View.printString("invalid maximum amount");
+                } else if (!getMatcher(info.get(5), "\\d+").matches()) {
+                    View.printString("invalid repeat times");
+                } else {
+                    View.printString(ManagerAreaController.createDiscountCode(info));
+                }
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -65,6 +81,8 @@ public class ManagerArea extends Menu {
 
     private ArrayList<String> getDiscountCodeInfo() {
         ArrayList<String> info = new ArrayList<>();
+        View.printString("inter discount Id:");
+        info.add(scanner.nextLine().trim());
         View.printString("inter start time(instruction):");
         info.add(scanner.nextLine().trim());
         View.printString("inter end time(instruction):");

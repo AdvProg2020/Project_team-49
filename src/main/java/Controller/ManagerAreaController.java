@@ -1,12 +1,15 @@
 package Controller;
 
 import Models.DiscountCode;
+import Models.User.Costumer;
 import Models.User.Manager;
 import Models.User.Seller;
 import Models.User.User;
 
 import javax.xml.crypto.Data;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ManagerAreaController {
 
@@ -41,8 +44,23 @@ public class ManagerAreaController {
         }
     }
 
-    public static void createDiscountCode(String[] info) {
-        DiscountCode.addDiscountCode(null);
+    public static String createDiscountCode(ArrayList<String> info) {
+        ArrayList<String> allowedCostumersNames = new ArrayList<String>(Arrays.asList(info.get(6).split("\\s")));
+        ArrayList<Costumer> allowedCostumers = new ArrayList<>();
+        for (String allowedCostumersName : allowedCostumersNames) {
+            if (DataBase.getUserByUsername(allowedCostumersName) == null) {
+                return "invalid costumer name";
+            }
+            allowedCostumers.add((Costumer) DataBase.getUserByUsername(allowedCostumersName));
+        }
+        DiscountCode.addDiscountCode(new DiscountCode(info.get(0),
+                Date.valueOf(info.get(1)),
+                Date.valueOf(info.get(2)),
+                Integer.parseInt(info.get(3)),
+                Long.parseLong(info.get(4)),
+                Integer.parseInt(info.get(5)),
+                allowedCostumers));
+        return "discount code created";
     }
 
     public static void editDiscountCode(long code) {
