@@ -14,8 +14,6 @@ public class DataBase {
     static ArrayList<String> allAvailableSorting = new ArrayList<String>();
     static ArrayList<Product> sortedOrFilteredProduct = new ArrayList<Product>();
 
-    //comment
-
     public static User getUserByUsername(String username) {
         return null;
     }
@@ -31,6 +29,10 @@ public class DataBase {
 
     public static void addNewUser(User user) {
 
+    }
+
+    public static void removeUser(String username) {
+        allUsers.remove(getUserByUsername(username));
     }
 
     public static void addNewProduct(Product product) {
