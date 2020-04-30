@@ -2,15 +2,15 @@ package Controller;
 
 import Models.Product;
 
-import Models.User.Guest;
-import Models.User.Seller;
-import Models.User.User;
+import Models.User.*;
+
+import java.util.ArrayList;
 
 
 public class Controller {
     public static User currentUser;
     private static boolean hasHeadManager;
-
+    //comment
     public Controller() {
         this.currentUser = new Guest();
         this.hasHeadManager = false;
@@ -30,8 +30,13 @@ public class Controller {
         currentUser = user;
     }
 
-    public static Product getProductById(long productId) {
-        return DataBase.getProductById(productId);
+    public static String getProductById(long productId) {
+        DataBase.getProductById(productId);
+        return null;
+    }
+
+    public static boolean hasHeadManager() {
+        return hasHeadManager;
     }
 
     public static boolean isPasswordCorrect(String password) {
@@ -39,18 +44,27 @@ public class Controller {
     }
 
     public static String getCurrentUserSpecifications() {
-        return "";
+        return ManagerAreaController.viewUser(currentUser.getUsername());
     }
 
-    public static String createAccount(String[] info) {
-        DataBase.addNewUser(null);
-        return "";
+    public static String createAccount(ArrayList<String> info, String type) {
+        //login beshe ya na
+        if (type.toLowerCase().equals("costumer")) {
+            DataBase.addNewUser(new Costumer(info.get(0), info.get(2), info.get(3), info.get(4), Long.parseLong(info.get(5)), info.get(1)));
+        }
+        if (type.toLowerCase().equals("seller")) {
+            DataBase.addNewUser(new Seller(info.get(0), info.get(2), info.get(3), info.get(4), Long.parseLong(info.get(5)), info.get(1), info.get(6)));
+        }
+        if (type.toLowerCase().equals("manager")) {
+            hasHeadManager = true;
+            DataBase.addNewUser(new Manager(info.get(0), info.get(2), info.get(3), info.get(4), Long.parseLong(info.get(5)), info.get(1)));
+        }
+        return "account created";
     }
 
     public static String loginAccount(String username) {
-        DataBase.getUserByUsername(username);
-        setCurrentUser(null);
-        return "";
+        setCurrentUser(DataBase.getUserByUsername(username));
+        return "login successful";
     }
 
     public static double getBalance() {
@@ -62,9 +76,9 @@ public class Controller {
         return false;
     }
 
-    public static void addToCart(Product product, Seller seller) {
+    public static void addToCart(Product product) {
 
-
+        //check beshe.
     }
 
     public static void logout() {
@@ -75,7 +89,14 @@ public class Controller {
         return false;
     }
 
-    public static boolean isCurrentUserBoughtProductById(long productId){
-        return false;
+    public static ArrayList<String> getPersonalInfo() {
+        ArrayList<String> info = new ArrayList<String>();
+        info.add(currentUser.getUsername());
+        info.add(currentUser.getFirstName());
+        info.add(currentUser.getLastName());
+        info.add(currentUser.getEMail());
+        info.add(String.valueOf(currentUser.getPhoneNumber()));
+        info.add(currentUser.getPassword());
+        return info;
     }
 }

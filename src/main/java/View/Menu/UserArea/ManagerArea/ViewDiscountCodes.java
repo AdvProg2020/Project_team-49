@@ -10,7 +10,7 @@ public class ViewDiscountCodes extends Menu {
 
     public ViewDiscountCodes(Menu parentMenu) {
         super("View Discount Codes", parentMenu);
-        HashMap<String, Menu> subMenus = new HashMap<>();
+        HashMap<String, Menu> subMenus = new HashMap<String, Menu>();
         subMenus.put("View Discount Code", getViewDiscountCode());
         subMenus.put("Edit Discount Code", getEditDiscountCode());
         subMenus.put("Remove Discount Code", getRemoveDiscountCode());
