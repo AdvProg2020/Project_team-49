@@ -10,7 +10,8 @@ import java.util.ArrayList;
 public class Controller {
     public static User currentUser;
     private static boolean hasHeadManager;
-    //comment
+
+    //hamid ceghad khafane
     public Controller() {
         this.currentUser = new Guest();
         this.hasHeadManager = false;
