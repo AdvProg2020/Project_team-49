@@ -15,7 +15,7 @@ public class Controller {
         this.currentUser = new Guest();
         this.hasHeadManager = false;
     }
-
+    //comment
     public static String editField(String field, String newContent) {
         currentUser.setFirstName(newContent);
         currentUser.setLastName(newContent);
@@ -90,7 +90,7 @@ public class Controller {
     }
 
     public static ArrayList<String> getPersonalInfo() {
-        ArrayList<String> info = new ArrayList<>();
+        ArrayList<String> info = new ArrayList<String>();
         info.add(currentUser.getUsername());
         info.add(currentUser.getFirstName());
         info.add(currentUser.getLastName());
