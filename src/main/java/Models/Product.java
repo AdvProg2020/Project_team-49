@@ -36,7 +36,7 @@ public class Product {
         this.brand = brand;
         this.addItem(seller, remainingItems);
         this.defaultSeller = seller;
-        allComments = new ArrayList<Comment>();
+        this.allComments = new ArrayList<>();
         this.explanation = explanation;
         addProductDate = new Date();
         this.name = name;
