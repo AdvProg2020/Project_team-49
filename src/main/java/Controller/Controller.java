@@ -75,9 +75,15 @@ public class Controller {
         return false;
     }
 
-    public static void addToCart(Product product) {
-
-        //check beshe.
+    public static void addToCart(Product product,Seller seller) {
+        if (currentUser.getType().equalsIgnoreCase("Guest")){
+            Guest guest= (Guest) currentUser;
+            guest.addProductToCart(product,seller);
+        }
+        if (currentUser.getType().equalsIgnoreCase("Costumer")){
+            Costumer costumer=(Costumer) currentUser;
+            costumer.addProductToCart(product,seller);
+        }
     }
 
     public static void logout() {

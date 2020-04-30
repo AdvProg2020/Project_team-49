@@ -15,9 +15,9 @@ public class Costumer extends User {
 
     public Costumer(String username, String firstName, String lastName, String eMail, long phoneNumber, String password) {
         super(username, firstName, lastName, eMail, phoneNumber, password);
-        this.cart = new HashMap<>();
-        this.buyHistory = new ArrayList<>();
-        this.discountCodes = new ArrayList<>();
+        this.cart = new HashMap<Product,Integer>();
+        this.buyHistory = new ArrayList<BuyLog>();
+        this.discountCodes = new ArrayList<DiscountCode>();
         this.credit = 0;
     }
 
@@ -41,7 +41,7 @@ public class Costumer extends User {
         this.credit = credit;
     }
 
-    public void addProductToCart(Product product) {
+    public void addProductToCart(Product product,Seller seller) {
 
     }
 

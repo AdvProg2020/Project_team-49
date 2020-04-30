@@ -184,7 +184,7 @@ public class Product {
         return allSellerName;
     }
 
-    public Seller getCommenSeller(){
+    public Seller getDefaultSeller(){
         return allSellers.get(0);
     }
 

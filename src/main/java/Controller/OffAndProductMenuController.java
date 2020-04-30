@@ -3,8 +3,6 @@ package Controller;
 import Models.Category;
 import Models.Comment;
 import Models.Product;
-import Models.User.Seller;
-import View.Menu.OffsAndProductsMenu.Comments;
 
 import static Controller.DataBase.*;
 import java.util.ArrayList;
@@ -148,7 +146,7 @@ public class OffAndProductMenuController {
         for (Product product : allProducts) {
             if (product.getProductId()==productId){
                 if (commenSeller){
-                    Controller.addToCart(product,product.getCommenSeller());
+                    Controller.addToCart(product,product.getDefaultSeller());
                 }else
                 Controller.addToCart(product,product.getSellerByUserName(sellerUserName));
             }
