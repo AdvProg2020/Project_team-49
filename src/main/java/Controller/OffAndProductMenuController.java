@@ -1,7 +1,11 @@
 package Controller;
 
 import Models.Category;
+import Models.Comment;
 import Models.Product;
+import Models.User.Seller;
+import View.Menu.OffsAndProductsMenu.Comments;
+
 import static Controller.DataBase.*;
 import java.util.ArrayList;
 
@@ -131,20 +135,29 @@ public class OffAndProductMenuController {
         //va baghie.
     }
 
+    //Test ino chi kar konam?
     public static void addCommentsById(long productId, String title, String content) {
-        //
+        Controller.getProductById(productId).addAComment(new Comment(Controller.currentUser,Controller.getProductById(productId),title,content));
     }
 
     public static ArrayList<String> getCategoriesName(){
         return null;
     }
 
-    public static void addToCartById(long productId){
+    public static void addToCartById(long productId, boolean commenSeller,String sellerUserName){
         for (Product product : allProducts) {
             if (product.getProductId()==productId){
-                Controller.addToCart(product);
+                if (commenSeller){
+                    Controller.addToCart(product,product.getCommenSeller());
+                }else
+                Controller.addToCart(product,product.getSellerByUserName(sellerUserName));
             }
         }
     }
 
+    public static boolean isCurrentUserGuestOrUser(){
+        if (Controller.currentUser.getType().equals("Guest")||Controller.currentUser.getType().equals("Costumer"))
+            return true;
+        return false;
+    }
 }

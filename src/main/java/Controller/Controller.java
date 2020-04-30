@@ -3,6 +3,7 @@ package Controller;
 import Models.Product;
 
 import Models.User.Guest;
+import Models.User.Seller;
 import Models.User.User;
 
 
@@ -29,9 +30,8 @@ public class Controller {
         currentUser = user;
     }
 
-    public static String getProductById(long productId) {
-        DataBase.getProductById(productId);
-        return null;
+    public static Product getProductById(long productId) {
+        return DataBase.getProductById(productId);
     }
 
     public static boolean isPasswordCorrect(String password) {
@@ -62,9 +62,9 @@ public class Controller {
         return false;
     }
 
-    public static void addToCart(Product product) {
+    public static void addToCart(Product product, Seller seller) {
 
-        //check beshe.
+
     }
 
     public static void logout() {
@@ -72,6 +72,10 @@ public class Controller {
     }
 
     public static boolean hasDiscountCode(String code) {
+        return false;
+    }
+
+    public static boolean isCurrentUserBoughtProductById(long productId){
         return false;
     }
 }

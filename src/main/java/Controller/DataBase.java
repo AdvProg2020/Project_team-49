@@ -19,6 +19,11 @@ public class DataBase {
     }
 
     public static Product getProductById(long productId) {
+        for (Product product : allProducts) {
+            if (product.getProductId()==productId){
+                return product;
+            }
+        }
         return null;
     }
 
