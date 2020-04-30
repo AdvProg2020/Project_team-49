@@ -2,6 +2,7 @@ package Controller;
 
 import Models.Product;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 public class Filter {
@@ -17,6 +18,7 @@ public class Filter {
     private static double maxPrice = -1;
     private static String name = "";
     private static String categoryName = "";
+    private static ArrayList<String> availableBrands = new ArrayList<>();
 
     public static boolean isIsItFilteredByName() {
         return isItFilteredByName;
@@ -58,6 +60,10 @@ public class Filter {
         return name;
     }
 
+    public static ArrayList<String> getAvailableBrands() {
+        return availableBrands;
+    }
+
     public static String getCategoryName() {
         return categoryName;
     }
@@ -86,11 +92,11 @@ public class Filter {
         Filter.isItFilteredByOffs = isItFilteredByOffs;
     }
 
-    public static void setMinPrice(int minPrice) {
+    public static void setMinPrice(double minPrice) {
         Filter.minPrice = minPrice;
     }
 
-    public static void setMaxPrice(int maxPrice) {
+    public static void setMaxPrice(double maxPrice) {
         Filter.maxPrice = maxPrice;
     }
 
@@ -102,133 +108,148 @@ public class Filter {
         Filter.categoryName = categoryName;
     }
 
-    public static void addBrand(String brand){
+    public static void addBrand(String brand) {
         for (String selectedBrand : selectedBrands) {
-            if(selectedBrand.toLowerCase().equals(brand.toLowerCase())){
+            if (selectedBrand.toLowerCase().equals(brand.toLowerCase())) {
                 return;
             }
         }
         selectedBrands.add(brand);
-        isItFilteredByBrand = true;
     }
 
     public static void filterByName(String name) {
+        setName(name);
+        isItFilteredByName = true;
         if (DataBase.sortedOrFilteredProduct.size() == 0)
             return;
 
         ArrayList<Product> temp = new ArrayList<Product>();
         for (Product product : DataBase.sortedOrFilteredProduct) {
-            if(!product.getName().toLowerCase().startsWith(name.toLowerCase())){
+            if (!product.getName().toLowerCase().startsWith(name.toLowerCase())) {
                 temp.add(product);
             }
         }
-        if(temp.size() == 0)
+        if (temp.size() == 0)
             return;
 
         for (Product product : temp) {
             DataBase.sortedOrFilteredProduct.remove(product);
         }
         temp.clear();
+        updateAvailableBrands();
         return;
     }
 
     public static void filterByCategory(String categoryName) {
-        if(DataBase.sortedOrFilteredProduct.size() == 0)
+        setCategoryName(categoryName);
+        isItFilteredByCategory = true;
+        if (DataBase.sortedOrFilteredProduct.size() == 0)
             return;
         ArrayList<Product> temp = new ArrayList<Product>();
         for (Product product : DataBase.sortedOrFilteredProduct) {
-            if(!product.getParentCategory().getName().toLowerCase().startsWith(categoryName.toLowerCase())){
+            if (!product.getParentCategory().getName().toLowerCase().startsWith(categoryName.toLowerCase())) {
                 temp.add(product);
             }
         }
-        if(temp.size() == 0)
+        if (temp.size() == 0)
             return;
 
         for (Product product : temp) {
             DataBase.sortedOrFilteredProduct.remove(product);
         }
         temp.clear();
+        updateAvailableBrands();
         return;
     }
 
-    public static void filterByPrice(double minPrice , double maxPrice) {
-        if(DataBase.sortedOrFilteredProduct.size() == 0)
+    public static void filterByPrice(double minPrice, double maxPrice) {
+        setMaxPrice(maxPrice);
+        setMinPrice(minPrice);
+        isItFilteredByPrice = true;
+        if (DataBase.sortedOrFilteredProduct.size() == 0)
             return;
         ArrayList<Product> temp = new ArrayList<Product>();
         for (Product product : DataBase.sortedOrFilteredProduct) {
-            if(!(product.getPrice() >= minPrice && product.getPrice() <= maxPrice)){
+            if (!(product.getPrice() >= minPrice && product.getPrice() <= maxPrice)) {
                 temp.add(product);
             }
         }
-        if(temp.size() == 0)
+        if (temp.size() == 0)
             return;
 
         for (Product product : temp) {
             DataBase.sortedOrFilteredProduct.remove(product);
         }
         temp.clear();
+        updateAvailableBrands();
         return;
     }
 
     public static void filterByAvailability() {
-        if(DataBase.sortedOrFilteredProduct.size() == 0)
+        isItFilteredByAvailability = true;
+        if (DataBase.sortedOrFilteredProduct.size() == 0)
             return;
         ArrayList<Product> temp = new ArrayList<Product>();
         for (Product product : DataBase.sortedOrFilteredProduct) {
-            if((product.getRemainedNumber() == 0)){
+            if ((product.remainingItems() == 0)) {
                 temp.add(product);
             }
         }
-        if(temp.size() == 0)
+        if (temp.size() == 0)
             return;
 
         for (Product product : temp) {
             DataBase.sortedOrFilteredProduct.remove(product);
         }
         temp.clear();
+        updateAvailableBrands();
         return;
     }
 
     public static void filterByBrand(String brandName) {
         addBrand(brandName);
-        if(DataBase.sortedOrFilteredProduct.size() == 0)
+        isItFilteredByBrand = true;
+        if (DataBase.sortedOrFilteredProduct.size() == 0)
             return;
         ArrayList<Product> temp = new ArrayList<Product>();
         main:
         for (Product product : DataBase.sortedOrFilteredProduct) {
-            for (String brand : product.getAllBrands()) {
-                if((brand.toLowerCase().equals(brandName.toLowerCase()))){
+            for (String selectedBrand : selectedBrands) {
+                if (selectedBrand.toLowerCase().equals(product.getBrand().toLowerCase())) {
                     continue main;
                 }
             }
             temp.add(product);
         }
-        if(temp.size() == 0)
+        if (temp.size() == 0)
             return;
 
         for (Product product : temp) {
             DataBase.sortedOrFilteredProduct.remove(product);
         }
         temp.clear();
+        updateAvailableBrands();
         return;
     }
 
     public static void filterByOffs() {
-        if(DataBase.sortedOrFilteredProduct.size() == 0)
+        isItFilteredByOffs = true;
+        if (DataBase.sortedOrFilteredProduct.size() == 0)
             return;
         ArrayList<Product> temp = new ArrayList<Product>();
         for (Product product : DataBase.sortedOrFilteredProduct) {
-            if(!(product.getDoesItHaveDiscount())){
+            if (!(product.getDoesItHaveDiscount())) {
                 temp.add(product);
             }
         }
-        if(temp.size() == 0)
+        if (temp.size() == 0)
             return;
 
         for (Product product : temp) {
             DataBase.sortedOrFilteredProduct.remove(product);
         }
         temp.clear();
+        updateAvailableBrands();
         return;
     }
 
@@ -245,19 +266,19 @@ public class Filter {
 
     public static ArrayList<String> showCurrentFilters() {
         ArrayList<String> currentFilters = new ArrayList<String>();
-        if(isItFilteredByAvailability)
+        if (isItFilteredByAvailability)
             currentFilters.add("Availability filter is on");
-        if(isItFilteredByBrand)
+        if (isItFilteredByBrand)
             currentFilters.add("Brand filter is on");
-        if(isItFilteredByCategory)
+        if (isItFilteredByCategory)
             currentFilters.add("Category filter is on");
-        if(isItFilteredByName)
+        if (isItFilteredByName)
             currentFilters.add("Name filter is on");
-        if(isItFilteredByPrice)
+        if (isItFilteredByPrice)
             currentFilters.add("Price filter is on");
-        if(isItFilteredByOffs)
+        if (isItFilteredByOffs)
             currentFilters.add("Off filter is on");
-        if(currentFilters.size() == 0){
+        if (currentFilters.size() == 0) {
             currentFilters.add("there are no filters on");
         }
         return currentFilters;
@@ -266,39 +287,45 @@ public class Filter {
     public static void disableNameFilter() {
         name = "";
         isItFilteredByName = false;
+        filter();
     }
 
     public static void disableOffsFilter() {
         isItFilteredByOffs = false;
+        filter();
     }
 
     public static void disablePriceFilter() {
         minPrice = -1;
         maxPrice = -1;
         isItFilteredByPrice = false;
+        filter();
     }
 
     public static void disableCategoryFilter() {
         categoryName = "";
         isItFilteredByCategory = false;
+        filter();
     }
 
     public static void disableAvailabilityFilter() {
         isItFilteredByAvailability = false;
+        filter();
     }
 
     public static void disableBrandFilter(String brand) {
         int i = 0;
         for (String selectedBrand : selectedBrands) {
-            if(selectedBrand.toLowerCase().equals(brand.toLowerCase())){
+            if (selectedBrand.toLowerCase().equals(brand.toLowerCase())) {
                 i = selectedBrands.indexOf(selectedBrand);
                 break;
             }
         }
         selectedBrands.remove(i);
-        if(selectedBrands.size() == 0){
+        if (selectedBrands.size() == 0) {
             isItFilteredByBrand = false;
         }
+        filter();
     }
 
     public static void restartFilters() {
@@ -310,7 +337,7 @@ public class Filter {
         isItFilteredByBrand = false;
         isItFilteredByName = false;
         name = "";
-        categoryName=  "";
+        categoryName = "";
         minPrice = -1;
         maxPrice = -1;
         selectedBrands.clear();
@@ -318,62 +345,39 @@ public class Filter {
         for (Product product : DataBase.allProducts) {
             DataBase.sortedOrFilteredProduct.add(product);
         }
+        updateAvailableBrands();
         Sort.sort();
     }
 
-    public static boolean canDisableNameFilter() {
-
-        return false;
-    }
-
-    public static boolean canDisableOffsFilter() {
-        return false;
-    }
-
-    public static boolean canDisablePriceFilter() {
-        return false;
-    }
-
-    public static boolean canDisableCategoryFilter() {
-        return false;
-    }
-
-    public static boolean canDisableAvailabilityFilter() {
-        return false;
-    }
-
-    public static boolean canDisableBrandFilter() {
-        return false;
-    }
-
-    public static void filter(){
+    public static void filter() {
         DataBase.sortedOrFilteredProduct.clear();
         for (Product product : DataBase.allProducts) {
             DataBase.sortedOrFilteredProduct.add(product);
         }
-        if(isItFilteredByName)
-            filterByName();
-        if(isItFilteredByBrand){
+        if (isItFilteredByName)
+            filterByName(name);
+        if (isItFilteredByBrand) {
             for (String selectedBrand : selectedBrands) {
                 filterByBrand(selectedBrand);
             }
         }
-        if(isItFilteredByOffs)
+        if (isItFilteredByOffs)
             filterByOffs();
-        if(isItFilteredByPrice)
-            filterByPrice(double minPrice , double maxPrice);
-        if(isItFilteredByCategory)
-            filterByCategory();
-        if(isItFilteredByAvailability)
+        if (isItFilteredByPrice)
+            filterByPrice(minPrice, maxPrice);
+        if (isItFilteredByCategory)
+            filterByCategory(categoryName);
+        if (isItFilteredByAvailability)
             filterByAvailability();
+        updateAvailableBrands();
     }
 
-    public static boolean isItFilter(String filterName){
-        return false;
-    }
-
-    public static void findProductByName(String productName){
-         //
+    public static ArrayList<String> updateAvailableBrands() {
+        availableBrands.clear();
+        for (Product product : DataBase.sortedOrFilteredProduct) {
+            availableBrands.add(product.getBrand());
+        }
+        return availableBrands;
     }
 
 }

@@ -20,20 +20,20 @@ public class Sort {
     }
 
     public static void sortByTime() {
-        return;
+        Collections.sort(DataBase.sortedOrFilteredProduct, new SortByTime());
     }
 
     public static void sortByScore() {
-        Collections.sort(DataBase.sortedOrFilteredProduct , new SortByScore());
+        Collections.sort(DataBase.sortedOrFilteredProduct, new SortByScore());
     }
 
     public static void sortByView() {
-        Collections.sort(DataBase.sortedOrFilteredProduct , new SortByView());
+        Collections.sort(DataBase.sortedOrFilteredProduct, new SortByView());
     }
 
-    public static void disableSort(){
-        sortByView();
-        currentSort = "";
+    public static void disableSort() {
+        currentSort = "view";
+        sort();
     }
 
     static class SortByView implements Comparator<Product> {
@@ -44,10 +44,10 @@ public class Sort {
 
     static class SortByScore implements Comparator<Product> {
         public int compare(Product a, Product b) {
-            double value =  -a.getAverageScore() + b.getAverageScore();
-            if(value > 1)
+            double value = b.getAverageScore() - a.getAverageScore();
+            if (value > 1)
                 return 1;
-            if(value < 1)
+            if (value < 1)
                 return -1;
             return 0;
         }
@@ -55,19 +55,12 @@ public class Sort {
 
     static class SortByTime implements Comparator<Product> {
         public int compare(Product a, Product b) {
-            return 0;
+            return (int)(-a.getProductDate().getTime() + b.getProductDate().getTime());
         }
-    }
-
-    public static boolean isInputASortKind(String input) {
-        if (input.matches("(?i)score") || input.matches("(?i)time") || (input.matches("(?i)viewed"))) {
-            return true;
-        }
-        return false;
     }
 
     public static void sort() {
-        if (currentSort.matches("(?i)views")) {
+        if (currentSort.matches("(?i)view")) {
             sortByView();
         } else if (currentSort.matches("(?i)time")) {
             sortByTime();
@@ -88,11 +81,8 @@ public class Sort {
         ArrayList<String> availableSorts = new ArrayList<String>();
         availableSorts.add("sort by time");
         availableSorts.add("sort by score");
-        availableSorts.add("sort by views");
+        availableSorts.add("sort by view");
         return availableSorts;
     }
 
-    public static String showCurrentSort() {
-        return currentSort;
-    }
 }
