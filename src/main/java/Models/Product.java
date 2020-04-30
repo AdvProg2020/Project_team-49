@@ -32,13 +32,13 @@ public class Product {
     private Date addProductDate;
 
     public Product(String name, long productId, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems) {
-        allSellers = new HashMap<Seller, Integer>();
+        this.allSellers = new HashMap<Seller, Integer>();
         this.brand = brand;
         this.addItem(seller, remainingItems);
         this.defaultSeller = seller;
         this.allComments = new ArrayList<>();
         this.explanation = explanation;
-        addProductDate = new Date();
+        this.addProductDate = new Date();
         this.name = name;
         this.numberOfView = 0;
         this.productId = productId;
