@@ -14,8 +14,8 @@ public class Filter {
     private static boolean isItFilteredByBrand = false;
     private static boolean isItFilteredByOffs = false;
     private static ArrayList<String> selectedBrands = new ArrayList<String>();
-    private static int minPrice = -1;
-    private static int maxPrice = -1;
+    private static double minPrice = -1;
+    private static double maxPrice = -1;
     private static String name = "";
     private static String categoryName = "";
 
@@ -47,11 +47,11 @@ public class Filter {
         return selectedBrands;
     }
 
-    public static int getMinPrice() {
+    public static double getMinPrice() {
         return minPrice;
     }
 
-    public static int getMaxPrice() {
+    public static double getMaxPrice() {
         return maxPrice;
     }
 
@@ -110,9 +110,10 @@ public class Filter {
             }
         }
         selectedBrands.add(brand);
+        isItFilteredByBrand = true;
     }
 
-    public static void filterByName() {
+    public static void filterByName(String name) {
         if (DataBase.sortedOrFilteredProduct.size() == 0)
             return;
 
@@ -132,7 +133,7 @@ public class Filter {
         return;
     }
 
-    public static void filterByCategory() {
+    public static void filterByCategory(String categoryName) {
         if(DataBase.sortedOrFilteredProduct.size() == 0)
             return;
         ArrayList<Product> temp = new ArrayList<Product>();
@@ -151,7 +152,7 @@ public class Filter {
         return;
     }
 
-    public static void filterByPrice() {
+    public static void filterByPrice(double minPrice , double maxPrice) {
         if(DataBase.sortedOrFilteredProduct.size() == 0)
             return;
         ArrayList<Product> temp = new ArrayList<Product>();
@@ -190,6 +191,7 @@ public class Filter {
     }
 
     public static void filterByBrand(String brandName) {
+        addBrand(brandName);
         if(DataBase.sortedOrFilteredProduct.size() == 0)
             return;
         ArrayList<Product> temp = new ArrayList<Product>();
