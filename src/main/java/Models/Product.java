@@ -29,7 +29,7 @@ public class Product {
     private boolean doesItHaveDiscount;
     private double discountPercentage;
     private int numberOfView;
-    private Date addProductDate;
+    private Date productDate;
 
     public Product(String name, long productId, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems) {
         this.allSellers = new HashMap<Seller, Integer>();
@@ -38,7 +38,7 @@ public class Product {
         this.defaultSeller = seller;
         this.allComments = new ArrayList<>();
         this.explanation = explanation;
-        this.addProductDate = new Date();
+        productDate = new Date();
         this.name = name;
         this.numberOfView = 0;
         this.productId = productId;
@@ -52,6 +52,23 @@ public class Product {
         this.doesItHaveDiscount = false;
         this.averageScore = 0;
         this.allScores = new ArrayList<Score>();
+    }
+
+    public int remainingProductForSeller(Seller seller) {
+        for (Seller eachSeller : allSellers.keySet()) {
+            if (eachSeller.equals(seller)) {
+                return allSellers.get(eachSeller);
+            }
+        }
+        return 0;
+    }
+
+    public int remainingItems() {
+        int sum = 0;
+        for (Seller seller : allSellers.keySet()) {
+            sum += allSellers.get(seller);
+        }
+        return sum;
     }
 
     public String getBrand() {
@@ -164,8 +181,8 @@ public class Product {
         return numberOfView;
     }
 
-    public Date getAddProductDate() {
-        return addProductDate;
+    public Date getProductDate() {
+        return productDate;
     }
 
     public Seller getSellerByUsername(String username) {
