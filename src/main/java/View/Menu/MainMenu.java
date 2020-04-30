@@ -3,6 +3,7 @@ package View.Menu;
 import View.Menu.OffsAndProductsMenu.OffsPage;
 import View.Menu.OffsAndProductsMenu.ProductsPage;
 import View.Menu.UserArea.UserArea;
+import View.View;
 
 import java.util.HashMap;
 
@@ -19,6 +20,18 @@ public class MainMenu extends Menu {
 
     @Override
     public String getCommandKey(String command) {
-        return null;
+        if (getMatcher(command, "(?i)User Area").matches()) {
+            return "User Area";
+        } else if (getMatcher(command, "(?i)Products Page").matches()) {
+            return "Products Page";
+        } else if (getMatcher(command, "(?i)Offs").matches()) {
+            return "Offs";
+        } else if (getMatcher(command, "(?i)help").matches()) {
+            return "help";
+        } else if (getMatcher(command, "(?i)exit").matches()) {
+            return "back";
+        }
+        View.printString("invalid command");
+        return "invalid";
     }
 }

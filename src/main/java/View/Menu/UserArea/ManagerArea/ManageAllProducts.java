@@ -3,6 +3,7 @@ package View.Menu.UserArea.ManagerArea;
 import Controller.Controller;
 import Controller.ManagerAreaController;
 import View.Menu.Menu;
+import View.View;
 
 public class ManageAllProducts extends Menu {
 
@@ -10,6 +11,7 @@ public class ManageAllProducts extends Menu {
         super("Manage All Products", parentMenu);
     }
 
+    //kamel nist
     private void showAllProducts() {
         ManagerAreaController.showAllProducts();
     }
@@ -17,17 +19,25 @@ public class ManageAllProducts extends Menu {
     @Override
     public void run(String lastCommand) {
         this.showAllProducts();
-        String command = scanner.nextLine().trim();
-        if (command.startsWith("delete")) {
-            ManagerAreaController.deleteProduct(1);
-            this.run("");
+        while (true) {
+            String command = scanner.nextLine().trim();
+            if (getMatcher(command, "(?i)remove (\\S+)").matches()) {
+                if (!getMatcher(command.split("\\s")[1], "\\d+").matches()) {
+                    View.printString("invalid product Id");
+                } else {
+                    View.printString(ManagerAreaController.deleteProduct(Long.parseLong(command.split("\\s")[1])));
+                }
+                continue;
+            }
+            if (lastCommand.equals("logout")) {
+                Controller.logout();
+                View.printString("logout successful");
+                allMenus.get(0).run(lastCommand);
+            }
+            if (getMatcher(command, "(?i)back").matches()) {
+                break;
+            }
         }
-        if (lastCommand.equals("logout")) {
-            Controller.logout();
-            allMenus.get(0).run("");
-        }
-        if (command.equals("back")) {
-            this.parentMenu.run("");
-        }
+        this.parentMenu.run(lastCommand);
     }
 }

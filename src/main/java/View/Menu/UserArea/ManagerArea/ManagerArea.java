@@ -4,7 +4,9 @@ import Controller.Controller;
 import Controller.ManagerAreaController;
 import View.Menu.Menu;
 import View.Menu.UserArea.ViewPersonalInfo;
+import View.View;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ManagerArea extends Menu {
@@ -32,7 +34,23 @@ public class ManagerArea extends Menu {
         return new Menu("Create Discount Code", this) {
             @Override
             public void run(String lastCommand) {
-                ManagerAreaController.createDiscountCode(new String[3]);
+                ArrayList<String> info = getDiscountCodeInfo();
+                if (!getMatcher(info.get(0), "\\w+").matches()) {
+                    View.printString("invalid Id");
+                } else if (!getMatcher(info.get(1), "time regex").matches()) {
+                    View.printString("invalid start time");
+                } else if (!getMatcher(info.get(2), "time regex").matches()) {
+                    View.printString("invalid end time");
+                } else if (!getMatcher(info.get(3), "\\d+").matches()) {
+                    View.printString("invalid percentage");
+                } else if (!getMatcher(info.get(4), "\\d+").matches()) {
+                    View.printString("invalid maximum amount");
+                } else if (!getMatcher(info.get(5), "\\d+").matches()) {
+                    View.printString("invalid repeat times");
+                } else {
+                    View.printString(ManagerAreaController.createDiscountCode(info));
+                }
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -42,18 +60,41 @@ public class ManagerArea extends Menu {
             @Override
             public void run(String lastCommand) {
                 Controller.logout();
-                allMenus.get(0).run("");
+                View.printString("logout successful");
+                allMenus.get(0).run(lastCommand);
             }
         };
     }
 
     public void showSpecifications() {
-        Controller.getCurrentUserSpecifications();
+        String[] info = Controller.getCurrentUserSpecifications().split("\\s");
+        for (int i = 0; i < info.length - 1; i++) {
+            View.printString(info[i]);
+        }
     }
 
     @Override
     public void run(String lastCommand) {
         this.showSpecifications();
         super.run(lastCommand);
+    }
+
+    private ArrayList<String> getDiscountCodeInfo() {
+        ArrayList<String> info = new ArrayList<>();
+        View.printString("inter discount Id:");
+        info.add(scanner.nextLine().trim());
+        View.printString("inter start time(instruction):");
+        info.add(scanner.nextLine().trim());
+        View.printString("inter end time(instruction):");
+        info.add(scanner.nextLine().trim());
+        View.printString("inter discount percentage:");
+        info.add(scanner.nextLine().trim());
+        View.printString("inter maximum discount:");
+        info.add(scanner.nextLine().trim());
+        View.printString("inter repeated times for discount code:");
+        info.add(scanner.nextLine().trim());
+        View.printString("inter allowed costumers(inter them in one line and separated with space):");
+        info.add(scanner.nextLine().trim());
+        return info;
     }
 }

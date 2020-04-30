@@ -4,6 +4,7 @@ import Controller.Controller;
 import View.Menu.Menu;
 import View.View;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GuestArea extends Menu {
@@ -20,20 +21,40 @@ public class GuestArea extends Menu {
         return new Menu("Login Menu", this) {
             @Override
             public void run(String lastCommand) {
-                Controller.hasUserWithUsername("");
-                Controller.isPasswordCorrect("");
-                View.printString(Controller.loginAccount(""));
+                String[] command = lastCommand.split("\\s");
+                if (!Controller.hasUserWithUsername(command[1])){
+                    View.printString("user not exist");
+                } else {
+                    while (true) {
+                        String input = scanner.nextLine().trim();
+                        if (getMatcher(input, "(?i)back").matches()) {
+                            this.parentMenu.run(lastCommand);
+                        }
+                        if (!Controller.isPasswordCorrect(input)) {
+                            break;
+                        }
+                        View.printString("invalid password");
+                    }
+                    View.printString(Controller.loginAccount(command[1]));
+                }
                 this.parentMenu.run(lastCommand);
             }
         };
     }
 
     private Menu getRegisterMenu() {
-        return new Menu("Sign Up Menu", this) {
+        return new Menu("Register Menu", this) {
             @Override
             public void run(String lastCommand) {
-                Controller.hasUserWithUsername("");
-                View.printString(Controller.createAccount(new String[3]));
+                String[] command = lastCommand.split("\\s");
+                if (Controller.hasUserWithUsername(command[3])) {
+                    View.printString("user exist with this username");
+                } else if (Controller.hasHeadManager()) {
+                    View.printString("cant create manager account");
+                } else {
+                    View.printString(Controller.createAccount(getAccountInformation(command[3], command[2]), command[2]));
+                    // error haye vorodi ha check nashode
+                }
                 this.parentMenu.run(lastCommand);
             }
         };
@@ -41,6 +62,62 @@ public class GuestArea extends Menu {
 
     @Override
     public String getCommandKey(String command) {
-        return null;
+        if (getMatcher(command, "(?i)create account (\\S+) (\\S+)").matches()) {
+            if (!checkCreateAccountCommand(command)) {
+                return "invalid";
+            }
+            return "Register Menu";
+        } else if (getMatcher(command, "(?i)login (\\S+)").matches()) {
+            if (!checkLoginCommand(command)) {
+                return "invalid";
+            }
+            return "Login Menu";
+        } else if (getMatcher(command, "(?i)help").matches()) {
+            return "help";
+        } else if (getMatcher(command, "(?i)back").matches()) {
+            return "back";
+        }
+        View.printString("invalid command");
+        return "invalid";
+    }
+
+    private boolean checkCreateAccountCommand(String command) {
+        if (!getMatcher(command, "(?i)create account (manager|seller|costumer) (\\S+)").matches()) {
+            View.printString("invalid account type");
+            return false;
+        }
+        if (!getMatcher(command, "(?i)create account (\\S+) (\\w+)").matches()) {
+            View.printString("invalid username");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkLoginCommand(String command) {
+        if (!getMatcher(command, "(?i)login (\\w+)").matches()) {
+            View.printString("invalid username");
+            return false;
+        }
+        return true;
+    }
+
+    private ArrayList<String> getAccountInformation(String username, String type) {
+        ArrayList<String> info = new ArrayList<>();
+        info.add(username);
+        View.printString("inter password:");
+        info.add(scanner.nextLine().trim());
+        View.printString("inter first name:");
+        info.add(scanner.nextLine().trim());
+        View.printString("inter last name");
+        info.add(scanner.nextLine().trim());
+        View.printString("inter Email:");
+        info.add(scanner.nextLine().trim());
+        View.printString("inter phone number:");
+        info.add(scanner.nextLine().trim());
+        if (type.toLowerCase().equals("seller")) {
+            View.printString("inter company name:");
+            info.add(scanner.nextLine().trim());
+        }
+        return info;
     }
 }
