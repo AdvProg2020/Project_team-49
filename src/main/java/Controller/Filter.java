@@ -361,7 +361,7 @@ public class Filter {
         if(isItFilteredByOffs)
             filterByOffs();
         if(isItFilteredByPrice)
-            filterByPrice();
+            filterByPrice(double minPrice , double maxPrice);
         if(isItFilteredByCategory)
             filterByCategory();
         if(isItFilteredByAvailability)
