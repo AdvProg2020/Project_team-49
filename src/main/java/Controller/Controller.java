@@ -11,7 +11,6 @@ public class Controller {
     public static User currentUser;
     private static boolean hasHeadManager;
 
-    //hamid ceghad khafane
     public Controller() {
         this.currentUser = new Guest();
         this.hasHeadManager = false;
@@ -31,9 +30,8 @@ public class Controller {
         currentUser = user;
     }
 
-    public static String getProductById(long productId) {
-        DataBase.getProductById(productId);
-        return null;
+    public static Product getProductById(long productId) {
+        return DataBase.getProductById(productId);
     }
 
     public static boolean hasHeadManager() {

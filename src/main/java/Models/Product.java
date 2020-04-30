@@ -1,5 +1,6 @@
 package Models;
 
+import Controller.Controller;
 import Models.User.Seller;
 
 import java.util.ArrayList;
@@ -31,11 +32,11 @@ public class Product {
     private Date addProductDate;
 
     public Product(String name, long productId, String brand, double price, String explanation, Category parentCategory, Seller seller) {
-        allBrands = new ArrayList<>();
-        allSellers = new ArrayList<>();
+        allBrands = new ArrayList<String>();
+        allSellers = new ArrayList<Seller>();
         allBrands.add(brand);
         this.addSeller(seller);
-        allComments = new ArrayList<>();
+        allComments = new ArrayList<Comment>();
         this.explanation = explanation;
         addProductDate = new Date();
         this.name = name;
@@ -139,7 +140,6 @@ public class Product {
         return doesItHaveOff;
     }
 
-
     public void setDiscountCode(DiscountCode discountCode) {
         this.discountCode = discountCode;
     }
@@ -164,7 +164,6 @@ public class Product {
         return doesItHaveDiscount;
     }
 
-
     public void setNumberOfView(int numberOfView) {
         this.numberOfView = numberOfView;
     }
@@ -188,6 +187,7 @@ public class Product {
     public Seller getCommenSeller(){
         return allSellers.get(0);
     }
+
     public Seller getSellerByUserName(String userName){
         for (Seller seller : allSellers) {
             if (seller.getUsername().equals(userName)){
@@ -195,5 +195,10 @@ public class Product {
             }
         }
         return null;
+    }
+
+    public void addAComment(long productId,String title,String content){
+        Controller.getProductById(productId);
+        allComments.add(new Comment(Controller.currentUser,Controller.getProductById(productId),title,content));
     }
 }
