@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class UserArea extends Menu {
     public UserArea(Menu parentMenu) {
         super("User Area", parentMenu);
-        HashMap<String, Menu> subMenus = new HashMap<>();
+        HashMap<String, Menu> subMenus = new HashMap<String, Menu>();
         subMenus.put("Costumer Area", new CostumerArea(this));
         subMenus.put("Guest Area", new GuestArea(this));
         subMenus.put("Seller Area", new SellerArea(this));

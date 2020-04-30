@@ -11,7 +11,7 @@ public class GuestArea extends Menu {
 
     public GuestArea(Menu parentMenu) {
         super("Guest Area", parentMenu);
-        HashMap<String, Menu> subMenus = new HashMap<>();
+        HashMap<String, Menu> subMenus = new HashMap<String, Menu>();
         subMenus.put("Login Menu", getLoginMenu());
         subMenus.put("Register Menu", getRegisterMenu());
         this.setSubMenus(subMenus);
@@ -102,7 +102,7 @@ public class GuestArea extends Menu {
     }
 
     private ArrayList<String> getAccountInformation(String username, String type) {
-        ArrayList<String> info = new ArrayList<>();
+        ArrayList<String> info = new ArrayList<String>();
         info.add(username);
         View.printString("inter password:");
         info.add(scanner.nextLine().trim());
