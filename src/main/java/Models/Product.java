@@ -50,7 +50,11 @@ public class Product {
         this.discountPercentage = 0;
         this.doesItHaveDiscount = false;
         this.averageScore = 0;
-        this.allScores = new ArrayList<>();
+        this.allScores = new ArrayList<Score>();
+    }
+
+    public ArrayList<String> getAllBrands() {
+        return allBrands;
     }
 
     public void setRemainedNumber(int remainedNumber) {

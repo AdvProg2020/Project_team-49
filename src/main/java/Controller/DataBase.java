@@ -7,12 +7,12 @@ import Models.User.User;
 import java.util.ArrayList;
 
 public class DataBase {
-    static ArrayList<User> allUsers = new ArrayList<>();
-    static ArrayList<Product> allProducts = new ArrayList<>();
-    static ArrayList<Category> allCategories = new ArrayList<>();
-    static ArrayList<String> allAvailableFilters = new ArrayList<>();
-    static ArrayList<String> allAvailableSorting = new ArrayList<>();
-    static ArrayList<Product> sortedOrFilteredProduct = new ArrayList<>();
+    static ArrayList<User> allUsers = new ArrayList<User>();
+    static ArrayList<Product> allProducts = new ArrayList<Product>();
+    static ArrayList<Category> allCategories = new ArrayList<Category>();
+    static ArrayList<String> allAvailableFilters = new ArrayList<String>();
+    static ArrayList<String> allAvailableSorting = new ArrayList<String>();
+    static ArrayList<Product> sortedOrFilteredProduct = new ArrayList<Product>();
 
     public static User getUserByUsername(String username) {
         for (User user : allUsers) {
