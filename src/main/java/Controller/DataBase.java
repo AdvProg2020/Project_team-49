@@ -31,6 +31,10 @@ public class DataBase {
 
     }
 
+    public static void removeUser(String username) {
+        allUsers.remove(getUserByUsername(username));
+    }
+
     public static void addNewProduct(Product product) {
 
     }
