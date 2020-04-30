@@ -4,14 +4,15 @@ import Models.User.Seller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class Product {
     private long productId;
     private String name;
-    private ArrayList<String> allBrands;
+    private String brand;
     private double price;
-    private ArrayList<Seller> allSellers;
-    private int remainedNumber;
+    private HashMap<Seller, Integer> allSellers;
+    private Seller defaultSeller;
     private Category parentCategory;
     private String explanation;
     private double averageScore;
@@ -30,14 +31,14 @@ public class Product {
     private int numberOfView;
     private Date addProductDate;
 
-    public Product(String name, long productId, String brand, double price, String explanation, Category parentCategory, Seller seller) {
-        allBrands = new ArrayList<>();
-        allSellers = new ArrayList<>();
-        allBrands.add(brand);
-        this.addSeller(seller);
-        allComments = new ArrayList<>();
+    public Product(String name, long productId, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems) {
+        this.allSellers = new HashMap<Seller, Integer>();
+        this.brand = brand;
+        this.addItem(seller, remainingItems);
+        this.defaultSeller = seller;
+        this.allComments = new ArrayList<>();
         this.explanation = explanation;
-        addProductDate = new Date();
+        this.addProductDate = new Date();
         this.name = name;
         this.numberOfView = 0;
         this.productId = productId;
@@ -53,12 +54,8 @@ public class Product {
         this.allScores = new ArrayList<Score>();
     }
 
-    public ArrayList<String> getAllBrands() {
-        return allBrands;
-    }
-
-    public void setRemainedNumber(int remainedNumber) {
-        this.remainedNumber = remainedNumber;
+    public String getBrand() {
+        return brand;
     }
 
     public void setAverageScore(double averageScore) {
@@ -81,10 +78,6 @@ public class Product {
         return price;
     }
 
-    public int getRemainedNumber() {
-        return remainedNumber;
-    }
-
     public Category getParentCategory() {
         return parentCategory;
     }
@@ -105,14 +98,12 @@ public class Product {
         this.allScores.add(score);
     }
 
-    public void addSeller(Seller seller) {
-        if (!allSellers.contains(seller)) {
-            allSellers.add(seller);
+    public void addItem(Seller seller, int remainingItems) {
+        if (!allSellers.containsKey(seller)) {
+            allSellers.put(seller, remainingItems);
+        } else {
+            allSellers.replace(seller, allSellers.get(seller) + remainingItems);
         }
-    }
-
-    public void addBrand(String brand) {
-        allBrands.add(brand);
     }
 
     public void setOffPercentage(double discountPercentage) {
@@ -177,23 +168,20 @@ public class Product {
         return addProductDate;
     }
 
-    public ArrayList<String> getAllSellersName() {
-        ArrayList<String>allSellerName=new ArrayList<String>();
-        for (Seller seller : allSellers) {
-            allSellerName.add(seller.getUsername());
-        }
-        return allSellerName;
-    }
-
-    public Seller getCommenSeller(){
-        return allSellers.get(0);
-    }
-    public Seller getSellerByUserName(String userName){
-        for (Seller seller : allSellers) {
-            if (seller.getUsername().equals(userName)){
+    public Seller getSellerByUsername(String username) {
+        for (Seller seller : allSellers.keySet()) {
+            if (seller.getUsername().equals(username)) {
                 return seller;
             }
         }
         return null;
+    }
+
+    public Seller getDefaultSeller() {
+        return defaultSeller;
+    }
+
+    public int getRemainingItemsForSeller(Seller seller) {
+        return allSellers.get(seller);
     }
 }

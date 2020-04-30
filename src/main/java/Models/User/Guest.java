@@ -9,10 +9,10 @@ public class Guest extends User {
 
     public Guest() {
         super(null, null, null, null, 0, null);
-        this.cart = new HashMap<>();
+        this.cart = new HashMap<Product,Integer>(   );
     }
 
-    public void addProductToCart(Product product){}
+    public void addProductToCart(Product product,Seller seller){}
 
     public HashMap<Product, Integer> getCart() {
         return cart;

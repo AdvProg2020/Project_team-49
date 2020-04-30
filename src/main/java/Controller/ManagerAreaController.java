@@ -6,7 +6,6 @@ import Models.User.Manager;
 import Models.User.Seller;
 import Models.User.User;
 
-import javax.xml.crypto.Data;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +45,7 @@ public class ManagerAreaController {
 
     public static String createDiscountCode(ArrayList<String> info) {
         ArrayList<String> allowedCostumersNames = new ArrayList<String>(Arrays.asList(info.get(6).split("\\s")));
-        ArrayList<Costumer> allowedCostumers = new ArrayList<>();
+        ArrayList<Costumer> allowedCostumers = new ArrayList<Costumer>();
         for (String allowedCostumersName : allowedCostumersNames) {
             if (DataBase.getUserByUsername(allowedCostumersName) == null) {
                 return "invalid costumer name";

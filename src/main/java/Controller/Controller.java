@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Controller {
     public static User currentUser;
     private static boolean hasHeadManager;
-    //comment
+
     public Controller() {
         this.currentUser = new Guest();
         this.hasHeadManager = false;
@@ -30,9 +30,8 @@ public class Controller {
         currentUser = user;
     }
 
-    public static String getProductById(long productId) {
-        DataBase.getProductById(productId);
-        return null;
+    public static Product getProductById(long productId) {
+        return DataBase.getProductById(productId);
     }
 
     public static boolean hasHeadManager() {
@@ -76,9 +75,15 @@ public class Controller {
         return false;
     }
 
-    public static void addToCart(Product product) {
-
-        //check beshe.
+    public static void addToCart(Product product,Seller seller) {
+        if (currentUser.getType().equalsIgnoreCase("Guest")){
+            Guest guest= (Guest) currentUser;
+            guest.addProductToCart(product,seller);
+        }
+        if (currentUser.getType().equalsIgnoreCase("Costumer")){
+            Costumer costumer=(Costumer) currentUser;
+            costumer.addProductToCart(product,seller);
+        }
     }
 
     public static void logout() {
