@@ -14,8 +14,7 @@ public class Filtering extends Menu {
     public void run(String lastCommand) {
         String command = scanner.nextLine().trim();
         if (command.equals("show available filters")) {
-            View.printAvailableFilters(OffAndProductMenuController.getAllAvailableFilters());
-
+            View.printAvailableFilters(Filter.showAvailableFilters());
             this.run(lastCommand);
         }
         if (command.equals("filter [an available filter]")) {
@@ -31,7 +30,7 @@ public class Filtering extends Menu {
             this.run(lastCommand);
         }
         if (command.equals("current filters")) {
-            View.printCurrentFilter(Filter.getCurrentFilter());
+            View.printCurrentFilter(Filter.showCurrentFilters());
 
             this.run(lastCommand);
         }

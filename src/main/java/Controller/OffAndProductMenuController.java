@@ -15,6 +15,9 @@ public class OffAndProductMenuController {
 
     private ArrayList<Product> SortedProduct=new ArrayList<Product>();
 
+    //kheili khari
+
+
     //agar bekham az in estefade konam bayad hamash static beshe ya to Menu tarif beshe.
 
     public static ArrayList<String> getName(){
@@ -105,6 +108,7 @@ public class OffAndProductMenuController {
         return allCategories;
     }
 
+    //
     public static ArrayList<Product> filtering(String filter,String Type) {
         Filter.filterByBrand("");
         // va baghie.
@@ -113,6 +117,7 @@ public class OffAndProductMenuController {
         return null;
     }
 
+    //
     public static void disableFilter(String filter) {
         //
     }
@@ -121,6 +126,7 @@ public class OffAndProductMenuController {
         return allAvailableSorting;
     }
 
+    //
     public static ArrayList<Product> sorting(String sort) {
         //va baghie
         return null;
@@ -130,6 +136,7 @@ public class OffAndProductMenuController {
         return null;
     }
 
+    //
     public static void disableSort(String sort) {
         Filter.disableAvailabilityFilter();
         //va baghie.
@@ -141,7 +148,11 @@ public class OffAndProductMenuController {
     }
 
     public static ArrayList<String> getCategoriesName(){
-        return null;
+        ArrayList<String> categoryName=new ArrayList<String>();
+        for (Category category : allCategories) {
+            categoryName.add(category.getName());
+        }
+        return categoryName;
     }
 
     public static void addToCartById(long productId, boolean commenSeller,String sellerUserName){
