@@ -15,7 +15,7 @@ public class Controller {
         this.currentUser = new Guest();
         this.hasHeadManager = false;
     }
-    //comment
+
     public static String editField(String field, String newContent) {
         currentUser.setFirstName(newContent);
         currentUser.setLastName(newContent);
