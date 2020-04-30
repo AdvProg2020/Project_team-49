@@ -287,7 +287,14 @@ public class Filter {
     }
 
     public static void disableBrandFilter(String brand) {
-        selectedBrands.remove(brand);
+        int i = 0;
+        for (String selectedBrand : selectedBrands) {
+            if(selectedBrand.toLowerCase().equals(brand.toLowerCase())){
+                i = selectedBrands.indexOf(selectedBrand);
+                break;
+            }
+        }
+        selectedBrands.remove(i);
         if(selectedBrands.size() == 0){
             isItFilteredByBrand = false;
         }
