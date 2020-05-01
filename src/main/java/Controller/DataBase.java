@@ -59,6 +59,7 @@ public class DataBase {
     }
 
     public static void removeProduct(long productId) {
+
     }
 
     public static void removeCategory(String name) {
