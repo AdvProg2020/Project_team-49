@@ -7,6 +7,9 @@ import Models.User.User;
 import View.View;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ArrayList;
 
@@ -99,26 +102,28 @@ public class DataBase {
     }
 
     public static void startProgram() throws IOException, ClassNotFoundException {
-        File resourcesDir = new File("src/main/resources/DataBase");
-        if (!resourcesDir.exists()) {
+        Path resourcesPath = Paths.get("src/main/resources");
+        if (!Files.exists(resourcesPath)) {
             try {
+                File resourcesDir = new File("src/main/resources");
                 resourcesDir.mkdir();
             } catch (Exception e) {
                 System.out.println("sorry we can't create resources directory");
                 System.exit(0);
             }
         }
-        File dataBaseDir = new File("src/main/resources/DataBase");
-        if (!dataBaseDir.exists()) {
+        Path dataBasePath = Paths.get("src/main/resources/DataBase");
+        if (!Files.exists(dataBasePath)) {
             try {
+                File dataBaseDir = new File("src/main/resources/DataBase");
                 dataBaseDir.mkdir();
                 File productsFile = new File("src/main/resources/DataBase/products.txt");
                 productsFile.createNewFile();
                 File usersFile = new File("src/main/resources/DataBase/users.txt");
-                productsFile.createNewFile();
+                usersFile.createNewFile();
                 File categoriesFile = new File("src/main/resources/DataBase/categories.txt");
-                productsFile.createNewFile();
-                return;
+                categoriesFile.createNewFile();
+
             } catch (Exception e) {
                 System.out.println("sorry we can't create DataBase directory");
                 System.exit(0);
