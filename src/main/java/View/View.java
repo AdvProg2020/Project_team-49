@@ -100,6 +100,9 @@ public class View {
         //
     }
 
+    public static void printAvailableBrand(ArrayList<String> availableBrand){
+
+    }
     //tavabee ke az alireza type khroji ro migiram.
 
     public static void printString(String string) {

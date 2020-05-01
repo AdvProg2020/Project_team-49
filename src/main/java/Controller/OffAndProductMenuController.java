@@ -23,7 +23,7 @@ public class OffAndProductMenuController {
         return productName;
     }
 
-    public static ArrayList<String> getCurentName(){
+    public static ArrayList<String> getCurrentName(){
         ArrayList<String> productName=new ArrayList<String>();
         for (Product product : sortedOrFilteredProduct) {
             productName.add(product.getName());
@@ -148,7 +148,7 @@ public class OffAndProductMenuController {
                 if (commenSeller){
                     Controller.addToCart(product,product.getDefaultSeller());
                 }else
-                Controller.addToCart(product,product.getSellerByUserName(sellerUserName));
+                Controller.addToCart(product,product.getSellerByUsername(sellerUserName));
             }
         }
     }

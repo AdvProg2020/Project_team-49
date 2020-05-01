@@ -188,4 +188,12 @@ public class Product {
     public int getRemainingItemsForSeller(Seller seller) {
         return allSellers.get(seller);
     }
+
+    public ArrayList<String> getAllSellerName(){
+        ArrayList<String> allSellerName=new ArrayList<String>();
+        for (Seller seller : allSellers.keySet()) {
+            allSellerName.add(seller.getCompanyName());
+        }
+        return allSellerName;
+    }
 }

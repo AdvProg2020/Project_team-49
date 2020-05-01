@@ -45,7 +45,7 @@ public class ShowProductDetail {
     }
     public static ArrayList<String> getAllSeller(long productId){
         for (Product product : allProducts) {
-            return product.getAllSellersName();
+            return product.getAllSellerName();
         }
         return null;
     }
