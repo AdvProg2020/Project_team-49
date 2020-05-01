@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.Category;
 import Models.Product;
 
 import javax.xml.crypto.Data;
@@ -137,21 +138,19 @@ public class Filter {
             DataBase.sortedOrFilteredProduct.remove(product);
         }
         temp.clear();
-        updateAvailableBrands();
         return;
     }
 
     public static void filterByCategory(String categoryName) {
         setCategoryName(categoryName);
         isItFilteredByCategory = true;
-        if (DataBase.sortedOrFilteredProduct.size() == 0)
-            return;
         ArrayList<Product> temp = new ArrayList<Product>();
         for (Product product : DataBase.sortedOrFilteredProduct) {
-            if (!product.getParentCategory().getName().toLowerCase().startsWith(categoryName.toLowerCase())) {
+            if(!DataBase.isProductInThisCategory(categoryName , product)){
                 temp.add(product);
             }
         }
+
         if (temp.size() == 0)
             return;
 
@@ -159,9 +158,10 @@ public class Filter {
             DataBase.sortedOrFilteredProduct.remove(product);
         }
         temp.clear();
-        updateAvailableBrands();
         return;
     }
+
+
 
     public static void filterByPrice(double minPrice, double maxPrice) {
         setMaxPrice(maxPrice);
@@ -182,9 +182,10 @@ public class Filter {
             DataBase.sortedOrFilteredProduct.remove(product);
         }
         temp.clear();
-        updateAvailableBrands();
         return;
     }
+
+
 
     public static void filterByAvailability() {
         isItFilteredByAvailability = true;
@@ -203,7 +204,6 @@ public class Filter {
             DataBase.sortedOrFilteredProduct.remove(product);
         }
         temp.clear();
-        updateAvailableBrands();
         return;
     }
 
@@ -229,7 +229,6 @@ public class Filter {
             DataBase.sortedOrFilteredProduct.remove(product);
         }
         temp.clear();
-        updateAvailableBrands();
         return;
     }
 
@@ -250,11 +249,10 @@ public class Filter {
             DataBase.sortedOrFilteredProduct.remove(product);
         }
         temp.clear();
-        updateAvailableBrands();
         return;
     }
 
-    public static ArrayList<String> showAvailableFilters() {
+    public static ArrayList<String> getAvailableFilters() {
         ArrayList<String> allAvailableFilters = new ArrayList<String>();
         allAvailableFilters.add("Filter by Brand -brand-");
         allAvailableFilters.add("Filter by Price -minPrice- -maxPrice");
@@ -346,7 +344,6 @@ public class Filter {
         for (Product product : DataBase.allProducts) {
             DataBase.sortedOrFilteredProduct.add(product);
         }
-        updateAvailableBrands();
         Sort.sort();
     }
 
@@ -370,7 +367,6 @@ public class Filter {
             filterByCategory(categoryName);
         if (isItFilteredByAvailability)
             filterByAvailability();
-        updateAvailableBrands();
     }
 
     public static ArrayList<String> updateAvailableBrands() {
@@ -379,6 +375,25 @@ public class Filter {
             availableBrands.add(product.getBrand());
         }
         return availableBrands;
+    }
+
+    public static ArrayList<String> showSubCategories(){
+        ArrayList<String> subCategories = new ArrayList<>();
+        for (Category category : DataBase.allCategories) {
+            if(category.getName().toLowerCase().equals(categoryName.toLowerCase())){
+                for (Category subCategory : category.getSubCategories()) {
+                    subCategories.add(subCategory.getName());
+                }
+            }
+        }
+        if(subCategories.size() == 0){
+            for (Category category : DataBase.allCategories) {
+                if(category.getParentCategory() == null){
+                    subCategories.add(category.getName());
+                }
+            }
+        }
+        return subCategories;
     }
 
 }
