@@ -39,6 +39,7 @@ public class Filtering extends Menu {
             }
             if (type.equalsIgnoreCase("Categories")){
                 //in alan bayad categories har category ro neshon bede.
+
             }
 
             //
