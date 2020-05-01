@@ -12,7 +12,7 @@ public class ShowOffProducts extends Menu {
     @Override
     public void run(String lastCommand) {
         View.printAllOffProduct(OffAndProductMenuController.getCurrentId(),
-                                OffAndProductMenuController.getCurentName(),
+                                OffAndProductMenuController.getCurrentName(),
                                 OffAndProductMenuController.getCurrentPrice(),
                                 OffAndProductMenuController.getCurrentOffPercentage());
         this.parentMenu.run(lastCommand);

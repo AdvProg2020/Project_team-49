@@ -18,6 +18,7 @@ public class Filter {
     private static double maxPrice = -1;
     private static String name = "";
     private static String categoryName = "";
+
     private static ArrayList<String> availableBrands = new ArrayList<>();
 
     public static boolean isIsItFilteredByName() {
