@@ -26,7 +26,7 @@ public class Sorting extends Menu {
             OffAndProductMenuController.sorting(command.split("\\s")[1]);
 
             View.printSortedProduct(OffAndProductMenuController.getCurrentId(),
-                    OffAndProductMenuController.getCurentName(),
+                    OffAndProductMenuController.getCurrentName(),
                     OffAndProductMenuController.getCurrentPrice(),
                     OffAndProductMenuController.getCurrentOffPercentage(),
                     OffAndProductMenuController.doesCurrentOff());
@@ -42,7 +42,7 @@ public class Sorting extends Menu {
             OffAndProductMenuController.disableSort(command.split("\\s")[2]);
 
             View.printSortedProduct(OffAndProductMenuController.getCurrentId(),
-                    OffAndProductMenuController.getCurentName(),
+                    OffAndProductMenuController.getCurrentName(),
                     OffAndProductMenuController.getCurrentPrice(),
                     OffAndProductMenuController.getCurrentOffPercentage(),
                     OffAndProductMenuController.doesCurrentOff());
