@@ -51,7 +51,7 @@ public class ShowProductDetail {
     }
     public static int getRemainedNumber(long productId){
         for (Product product : allProducts) {
-            return product.getRemainedNumber();
+            return product.remainingItems();
         }
         return 0;
     }

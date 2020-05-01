@@ -41,7 +41,7 @@ public class ViewCart extends Menu {
         return new Menu("Increase Product", this) {
             @Override
             public void run(String lastCommand) {
-                Controller.addToCart(null);
+                Controller.addToCart(null,null);
                 this.parentMenu.run("");
             }
         };
