@@ -1,5 +1,7 @@
 package Models;
 
+import Controller.DataBase;
+
 import java.util.ArrayList;
 
 public class Category {
@@ -15,6 +17,16 @@ public class Category {
         subCategories = new ArrayList<>();
         allProducts = new ArrayList<Product>();
         this.parentCategory = null;
+    }
+
+
+
+    public ArrayList<Product> getAllProducts() {
+        return allProducts;
+    }
+
+    public void setAllProducts(ArrayList<Product> allProducts) {
+        this.allProducts = allProducts;
     }
 
     public String getName() {
@@ -64,4 +76,15 @@ public class Category {
     public Category getCategoryByName(String name) {
         return null;
     }
+
+    public ArrayList<Category> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(ArrayList<Category> subCategories) {
+        this.subCategories = subCategories;
+    }
+
+
+
 }

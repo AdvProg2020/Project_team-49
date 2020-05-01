@@ -66,6 +66,8 @@ public class Sort {
             sortByTime();
         } else if (currentSort.matches("(?i)score")) {
             sortByScore();
+        }else{
+            sortByView();
         }
     }
 
@@ -77,7 +79,7 @@ public class Sort {
         return sortedProducts;
     }
 
-    public static ArrayList<String> showAvailableSorts() {
+    public static ArrayList<String> getAvailableSorts() {
         ArrayList<String> availableSorts = new ArrayList<String>();
         availableSorts.add("sort by time");
         availableSorts.add("sort by score");
