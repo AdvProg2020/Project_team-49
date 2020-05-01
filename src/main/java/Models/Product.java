@@ -38,20 +38,7 @@ public class Product {
         this.defaultSeller = seller;
         this.allComments = new ArrayList<>();
         this.explanation = explanation;
-        productDate = new Date();
-        this.name = name;
-        this.numberOfView = 0;
-        this.productId = productId;
-        this.price = price;
-        this.parentCategory = parentCategory;
-        this.off = null;
-        this.offPercentage = 0;
-        this.doesItHaveOff = false;
-        this.discountCode = null;
-        this.discountPercentage = 0;
-        this.doesItHaveDiscount = false;
-        this.averageScore = 0;
-        this.allScores = new ArrayList<Score>();
+ 
     }
 
     public int remainingProductForSeller(Seller seller) {
