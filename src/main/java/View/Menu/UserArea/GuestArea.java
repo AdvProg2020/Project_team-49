@@ -64,11 +64,13 @@ public class GuestArea extends Menu {
     public String getCommandKey(String command) {
         if (getMatcher(command, "(?i)create account (\\S+) (\\S+)").matches()) {
             if (!checkCreateAccountCommand(command)) {
+                //View.printString("invalid command");
                 return "invalid";
             }
             return "Register Menu";
         } else if (getMatcher(command, "(?i)login (\\S+)").matches()) {
             if (!checkLoginCommand(command)) {
+                //View.printString("invalid command");
                 return "invalid";
             }
             return "Login Menu";
