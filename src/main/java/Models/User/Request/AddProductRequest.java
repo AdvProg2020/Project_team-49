@@ -11,7 +11,7 @@ public class AddProductRequest extends Request {
 
     @Override
     public String getType() {
-        return null;
+        return "Add Product";
     }
 
     @Override

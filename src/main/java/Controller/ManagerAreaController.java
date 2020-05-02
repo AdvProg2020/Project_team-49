@@ -5,6 +5,7 @@ import Models.User.Costumer;
 import Models.User.Manager;
 import Models.User.Seller;
 import Models.User.User;
+import View.View;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -62,16 +63,26 @@ public class ManagerAreaController {
         return "discount code created";
     }
 
-    public static void editDiscountCode(long code) {
+    public static void editDiscountCode(String code) {
 
     }
 
-    public static void removeDiscountCode(long code) {
-
+    public static void removeDiscountCode(String code) {
+        if (Manager.getDiscountCodeById(code) == null) {
+            View.printString("discount code not exist");
+        } else {
+            Manager.removeDiscountCode(code);
+            View.printString("discount code removed");
+        }
     }
 
-    public static String requestDetails(long requestID) {
-        return "";
+    public static void requestDetails(long requestId) {
+        if (Manager.getRequestById(requestId) == null) {
+            View.printString("request not exist");
+        } else {
+            View.printString(Manager.getRequestById(requestId).getType());
+            View.printString(Manager.getRequestById(requestId).toString());
+        }
     }
 
     public static void acceptRequest(long requestID) {
@@ -96,8 +107,21 @@ public class ManagerAreaController {
         DataBase.removeCategory("");
     }
 
-    public static String viewDiscountCode(long discountCode) {
-        return "";
+    public static void viewDiscountCode(String code) {
+        if (Manager.getDiscountCodeById(code) == null) {
+            View.printString("discount code not exist");
+        } else {
+            ArrayList<String> info = new ArrayList<>();
+            DiscountCode discountCode = Manager.getDiscountCodeById(code);
+            info.add(code);
+            info.add(discountCode.getStartDate().toString());
+            info.add(discountCode.getEndDate().toString());
+            info.add(String.valueOf(discountCode.getDiscountPercent()));
+            info.add(String.valueOf(discountCode.getMaximumDiscountAmount()));
+            info.add(String.valueOf(discountCode.getDiscountCount()));
+            info.add(discountCode.getAllowedCostumers().toString());
+            View.printArrayList(info);
+        }
     }
 
     public static ArrayList<String> showAllProducts() {

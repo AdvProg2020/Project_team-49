@@ -15,7 +15,7 @@ public class EditProduct extends Request {
 
     @Override
     public String getType() {
-        return null;
+        return "Edit Product";
     }
 
     @Override

@@ -15,7 +15,7 @@ public class EditOff extends Request {
 
     @Override
     public String getType() {
-        return null;
+        return "Edit Off";
     }
 
     @Override

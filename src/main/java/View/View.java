@@ -109,6 +109,12 @@ public class View {
         System.out.println(string);
     }
 
+    public static void printArrayList(ArrayList<String> list) {
+        for (String s : list) {
+            printString(s);
+        }
+    }
+
     public static void printOnlyUserOrGuestCanBuyProduct(){
         System.out.println("Only User Or Guest Can Buy Product");
     }

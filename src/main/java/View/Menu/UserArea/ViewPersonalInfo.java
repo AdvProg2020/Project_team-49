@@ -25,19 +25,25 @@ public class ViewPersonalInfo extends Menu {
     @Override
     public void run(String lastCommand) {
         this.showPersonalInfo(Controller.getPersonalInfo());
-        if (getMatcher(lastCommand, "(?i)edit (\\S+)").matches()) {
-            View.printString("inter new" + lastCommand.split("\\s")[1] + ":");
-            Controller.editField(lastCommand.split("\\s")[1], scanner.nextLine().trim());
-            View.printString(lastCommand.split("\\s")[1] + "edited");
-            this.run(scanner.nextLine().trim());
+        while (true) {
+            String command = scanner.nextLine().trim();
+            if (getMatcher(command, "(?i)edit (\\S+)").matches()) {
+                View.printString("inter new" + lastCommand.split("\\s")[1] + ":");
+                Controller.editField(lastCommand.split("\\s")[1], scanner.nextLine().trim());
+                View.printString(lastCommand.split("\\s")[1] + "edited");
+                continue;
+            }
+            if (getMatcher(command, "(?i)logout").matches()) {
+                Controller.logout();
+                View.printString("logout");
+                allMenus.get(0).run(lastCommand);
+                break;
+            }
+            if (command.equals("back")) {
+                break;
+            }
+            View.printString("invalid command");
         }
-        if (getMatcher(lastCommand, "(?i)logout").matches()) {
-            Controller.logout();
-            View.printString("logout");
-            allMenus.get(0).run("");
-        }
-        if (lastCommand.equals("back")) {
-            this.parentMenu.run("");
-        }
+        this.parentMenu.run(lastCommand);
     }
 }

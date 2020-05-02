@@ -21,7 +21,7 @@ public class Manager extends User {
         return null;
     }
 
-    public static DiscountCode getDiscountCodeById(long Id) {
+    public static DiscountCode getDiscountCodeById(String Id) {
         return null;
     }
 
@@ -33,6 +33,15 @@ public class Manager extends User {
 
     public static void  editDiscountCode() {
 
+    }
+
+    public static void removeDiscountCode(String code) {
+        for (DiscountCode discountCode : allDiscountCodes) {
+            if (discountCode.getDiscountId().equals(code)) {
+                allDiscountCodes.remove(discountCode);
+                return;
+            }
+        }
     }
 
     @Override

@@ -11,7 +11,7 @@ public class AddOff extends Request {
 
     @Override
     public String getType() {
-        return null;
+        return "Add Off";
     }
 
     @Override

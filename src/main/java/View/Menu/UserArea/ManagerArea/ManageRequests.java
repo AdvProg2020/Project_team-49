@@ -3,6 +3,7 @@ package View.Menu.UserArea.ManagerArea;
 import Controller.Controller;
 import Controller.ManagerAreaController;
 import View.Menu.Menu;
+import View.View;
 
 public class ManageRequests extends Menu {
 
@@ -17,25 +18,48 @@ public class ManageRequests extends Menu {
     @Override
     public void run(String lastCommand) {
         this.showRequests();
-        String command = scanner.nextLine().trim();
-        if (command.startsWith("details")) {
-            ManagerAreaController.requestDetails(1);
-            this.run("");
+        while (true) {
+            String command = scanner.nextLine().trim();
+            if (getMatcher(command, "(?i)details (\\S+)").matches()) {
+                if (!checkRequestId(command.split("\\s")[1])) {
+                    continue;
+                }
+                ManagerAreaController.requestDetails(Long.parseLong(command.split("\\s")[1]));
+                continue;
+            }
+            if (getMatcher(command, "(?i)accept (\\S+)").matches()) {
+                if (!checkRequestId(command.split("\\s")[1])) {
+                    continue;
+                }
+                ManagerAreaController.acceptRequest(Long.parseLong(command.split("\\s")[1]));
+                continue;
+            }
+            if (getMatcher(command, "(?i)decline (\\S+)").matches()) {
+                if (!checkRequestId(command.split("\\s")[1])) {
+                    continue;
+                }
+                ManagerAreaController.declineRequest(Long.parseLong(command.split("\\s")[1]));
+                continue;
+            }
+            if (lastCommand.equals("logout")) {
+                Controller.logout();
+                View.printString("logout successful");
+                allMenus.get(0).run("");
+                break;
+            }
+            if (command.equals("back")) {
+                break;
+            }
+            View.printString("invalid command");
         }
-        if (command.startsWith("accept")) {
-            ManagerAreaController.acceptRequest(1);
-            this.run("");
+        this.parentMenu.run(lastCommand);
+    }
+
+    private boolean checkRequestId(String Id) {
+        if (!getMatcher(Id, "\\d+").matches()) {
+            View.printString("invalid Id");
+            return false;
         }
-        if (command.startsWith("decline")) {
-            ManagerAreaController.declineRequest(1);
-            this.run("");
-        }
-        if (lastCommand.equals("logout")) {
-            Controller.logout();
-            allMenus.get(0).run("");
-        }
-        if (command.equals("back")) {
-            this.parentMenu.run("");
-        }
+        return true;
     }
 }
