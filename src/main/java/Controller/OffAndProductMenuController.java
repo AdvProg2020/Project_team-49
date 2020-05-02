@@ -107,18 +107,24 @@ public class OffAndProductMenuController {
         return allAvailableSorting;
     }
 
-    public static ArrayList<Product> sorting(String sort) {
-        //va baghie
-        return null;
+    public static void sorting(String sort) {
+        if (sort.equalsIgnoreCase("View")){
+            Sort.sortByView();
+        }
+        if (sort.equalsIgnoreCase("Time")){
+            Sort.sortByTime();
+        }
+        if (sort.equalsIgnoreCase("Score")){
+            Sort.sortByScore();
+        }
     }
 
     public static ArrayList<String> getCurrentSort() {
         return null;
     }
 
-    public static void disableSort(String sort) {
-        Filter.disableAvailabilityFilter();
-        //va baghie.
+    public static void disableSort() {
+        Sort.disableSort();
     }
 
     //Test ino chi kar konam?
