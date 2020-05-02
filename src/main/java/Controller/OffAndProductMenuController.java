@@ -103,18 +103,6 @@ public class OffAndProductMenuController {
         return allCategories;
     }
 
-    public static ArrayList<Product> filtering(String filter,String Type) {
-        Filter.filterByBrand("");
-        // va baghie.
-
-        //bayad havasam bashe shayad chnta filter yoho On bokone.
-        return null;
-    }
-
-    public static void disableFilter(String filter) {
-        //
-    }
-
     public static ArrayList<String> getAllAvailableSorting() {
         return allAvailableSorting;
     }

@@ -13,6 +13,7 @@ public class Filtering extends Menu {
     @Override
     public void run(String lastCommand) {
         String command = scanner.nextLine().trim();
+
         if (command.equals("show available filters")) {
             View.printAvailableFilters(OffAndProductMenuController.getAllAvailableFilters());
 
@@ -51,8 +52,26 @@ public class Filtering extends Menu {
         }
 
         if (command.equals("disable filter [a selected filter]")) {
-            OffAndProductMenuController.disableFilter(command.split("\\s")[1]);
+            String type=command.split("\\s")[2];
 
+            if (type.equalsIgnoreCase("Name")){
+                Filter.disableNameFilter();
+            }
+            if (type.equalsIgnoreCase("Price")){
+                Filter.disablePriceFilter();
+            }
+            if (type.equalsIgnoreCase("Brand")){
+                disableFilterByBrand();
+            }
+            if (type.equalsIgnoreCase("Availability")){
+                Filter.disableAvailabilityFilter();
+            }
+            if (type.equalsIgnoreCase("Off")){
+                Filter.disableOffsFilter();
+            }
+            if (type.equalsIgnoreCase("Categories")){
+                Filter.disableCategoryFilter();
+            }
             View.printFilteredProduct(OffAndProductMenuController.getCurrentId(),
                     OffAndProductMenuController.getCurrentName(),
                     OffAndProductMenuController.getCurrentPrice(),
@@ -174,6 +193,24 @@ public class Filtering extends Menu {
                 Filter.showSubCategories();
                 String categoryForFilter=scanner.nextLine();
                 Filter.filterByCategory(categoryForFilter);
+
+                View.printFilteredProduct(OffAndProductMenuController.getCurrentId(),
+                        OffAndProductMenuController.getCurrentName(),
+                        OffAndProductMenuController.getCurrentPrice(),
+                        OffAndProductMenuController.getCurrentOffPercentage(),
+                        OffAndProductMenuController.doesCurrentOff());
+
+                this.parentMenu.run(lastCommand);
+            }
+        };
+    }
+
+    private Menu disableFilterByBrand(){
+        return new Menu("DisableFilterByBrand",this) {
+            @Override
+            public void run(String lastCommand) {
+                String brandToDisable=scanner.nextLine();
+                Filter.disableBrandFilter(brandToDisable);
 
                 View.printFilteredProduct(OffAndProductMenuController.getCurrentId(),
                         OffAndProductMenuController.getCurrentName(),
