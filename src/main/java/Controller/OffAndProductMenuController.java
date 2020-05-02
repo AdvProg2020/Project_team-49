@@ -133,7 +133,7 @@ public class OffAndProductMenuController {
     }
 
     public static ArrayList<String> getCategoriesName(){
-        return null;
+        return Filter.showSubCategories();
     }
 
     public static void addToCartById(long productId, boolean commenSeller,String sellerUserName){
