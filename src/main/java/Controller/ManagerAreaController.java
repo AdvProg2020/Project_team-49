@@ -85,14 +85,22 @@ public class ManagerAreaController {
         }
     }
 
-    public static void acceptRequest(long requestID) {
-        Manager manager = (Manager) Controller.currentUser;
-        manager.answerRequest("accept", 1);
+    public static void acceptRequest(long requestId) {
+        if (Manager.getRequestById(requestId) == null) {
+            View.printString("request not exist");
+        } else {
+            Manager.answerRequest("accept", requestId);
+            View.printString("request" + requestId + "accepted");
+        }
     }
 
-    public static void declineRequest(long requestID) {
-        Manager manager = (Manager) Controller.currentUser;
-        manager.answerRequest("decline", 1);
+    public static void declineRequest(long requestId) {
+        if (Manager.getRequestById(requestId) == null) {
+            View.printString("request not exist");
+        } else {
+            Manager.answerRequest("decline", requestId);
+            View.printString("request" + requestId + "declined");
+        }
     }
 
     public static void editCategory(String name) {

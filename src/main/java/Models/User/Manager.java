@@ -13,11 +13,19 @@ public class Manager extends User {
         super(username, firstName, lastName, eMail, phoneNumber, password);
     }
 
-    public static void answerRequest(String answer, long requestID) {
-
+    public static void answerRequest(String answer, long requestId) {
+        if (answer.equals("accept")) {
+            getRequestById(requestId).run();
+        }
+        allActiveRequests.remove(getRequestById(requestId));
     }
 
     public static Request getRequestById(long Id) {
+        for (Request activeRequest : allActiveRequests) {
+            if (activeRequest.getRequestId() == Id) {
+                return activeRequest;
+            }
+        }
         return null;
     }
 
@@ -29,7 +37,9 @@ public class Manager extends User {
         return allActiveRequests;
     }
 
-    public static void addDiscountCode(DiscountCode discountCode) {}
+    public static void addDiscountCode(DiscountCode discountCode) {
+        allDiscountCodes.add(discountCode);
+    }
 
     public static void  editDiscountCode() {
 

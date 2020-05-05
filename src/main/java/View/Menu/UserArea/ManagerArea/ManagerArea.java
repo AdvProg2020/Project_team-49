@@ -27,7 +27,27 @@ public class ManagerArea extends Menu {
 
     @Override
     public String getCommandKey(String command) {
-        return null;
+        if (getMatcher(command, "(?i)create discount code").matches()) {
+            return "Create Discount Code";
+        } else if (getMatcher(command, "(?i)view personal info").matches()) {
+            return "View Personal Info";
+        } else if (getMatcher(command, "(?i)manage users").matches()) {
+            return "Manage Users";
+        } else if (getMatcher(command, "(?i)manage all products").matches()) {
+            return "Manage All Products";
+        } else if (getMatcher(command, "(?i)view discount codes").matches()) {
+            return "View Discount Codes";
+        } else if (getMatcher(command, "(?i)manage Requests").matches()) {
+            return "Manage Requests";
+        } else if (getMatcher(command, "(?i)manage categories").matches()) {
+            return "Manage Categories";
+        } else if (getMatcher(command, "(?i)back").matches()) {
+            return "back";
+        } else if (getMatcher(command, "(?i)logout").matches()) {
+            return "Logout";
+        }
+        View.printString("invalid command");
+        return "invalid";
     }
 
     private Menu getCreateDiscountCode() {
@@ -81,19 +101,19 @@ public class ManagerArea extends Menu {
 
     private ArrayList<String> getDiscountCodeInfo() {
         ArrayList<String> info = new ArrayList<>();
-        View.printString("inter discount Id:");
+        View.printString("enter discount Id:");
         info.add(scanner.nextLine().trim());
-        View.printString("inter start time(instruction):");
+        View.printString("enter start time(instruction):");
         info.add(scanner.nextLine().trim());
-        View.printString("inter end time(instruction):");
+        View.printString("enter end time(instruction):");
         info.add(scanner.nextLine().trim());
-        View.printString("inter discount percentage:");
+        View.printString("enter discount percentage:");
         info.add(scanner.nextLine().trim());
-        View.printString("inter maximum discount:");
+        View.printString("enter maximum discount:");
         info.add(scanner.nextLine().trim());
-        View.printString("inter repeated times for discount code:");
+        View.printString("enter repeated times for discount code:");
         info.add(scanner.nextLine().trim());
-        View.printString("inter allowed costumers(inter them in one line and separated with space):");
+        View.printString("enter allowed costumers(inter them in one line and separated with space):");
         info.add(scanner.nextLine().trim());
         return info;
     }

@@ -28,7 +28,7 @@ public class ViewPersonalInfo extends Menu {
         while (true) {
             String command = scanner.nextLine().trim();
             if (getMatcher(command, "(?i)edit (\\S+)").matches()) {
-                View.printString("inter new" + lastCommand.split("\\s")[1] + ":");
+                View.printString("enter new" + lastCommand.split("\\s")[1] + ":");
                 Controller.editField(lastCommand.split("\\s")[1], scanner.nextLine().trim());
                 View.printString(lastCommand.split("\\s")[1] + "edited");
                 continue;
