@@ -19,7 +19,7 @@ public class Product {
     private ArrayList<Score> allScores;
     private ArrayList<Comment> allComments;
 
-    private enum productStatus {REVIEWFORMAKE, REVIEWFOREDIT, ACCEPTED}
+    private ProductStatus status;
 
     private Off off;
     private boolean doesItHaveOff;
@@ -38,7 +38,7 @@ public class Product {
         this.defaultSeller = seller;
         this.allComments = new ArrayList<>();
         this.explanation = explanation;
- 
+        this.status = ProductStatus.REVIEWFORMAKE;
     }
 
     public int remainingProductForSeller(Seller seller) {
@@ -56,6 +56,15 @@ public class Product {
             sum += allSellers.get(seller);
         }
         return sum;
+    }
+
+    public void setStatus(String status) {
+        if (status.equals("accepted")) {
+            this.status = ProductStatus.ACCEPTED;
+        }
+        if (status.equals("edit")) {
+            this.status = ProductStatus.REVIEWFOREDIT;
+        }
     }
 
     public String getBrand() {
@@ -196,4 +205,10 @@ public class Product {
         }
         return allSellerName;
     }
+}
+
+enum ProductStatus {
+    REVIEWFORMAKE,
+    REVIEWFOREDIT,
+    ACCEPTED
 }

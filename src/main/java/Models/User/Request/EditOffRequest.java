@@ -2,12 +2,12 @@ package Models.User.Request;
 
 import Models.Off;
 
-public class EditOff extends Request {
+public class EditOffRequest extends Request {
     private String field;
     private String newContent;
     private Off off;
 
-    public EditOff(String field, String newContent, Off off) {
+    public EditOffRequest(String field, String newContent, Off off) {
         this.field = field;
         this.newContent = newContent;
         this.off = off;

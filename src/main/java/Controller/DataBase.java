@@ -39,16 +39,6 @@ public class DataBase {
         return null;
     }
 
-    public static Category getCategoryWithName(String name) {
-        for (Category category : allCategories) {
-            if (category.getName().toLowerCase().equals(name.toLowerCase())) {
-                return category;
-            }
-        }
-        return null;
-    }
-
-
     public static void addNewUser(User user) {
 
     }
@@ -65,8 +55,10 @@ public class DataBase {
 
     }
 
+    //kamel nist
     public static void removeCategory(String name) {
-
+        //bayad kol derakht ro remove kard
+        allCategories.remove(getCategoryByName(name));
     }
 
     public static void addCategory(String name) {

@@ -103,7 +103,7 @@ public class ManagerAreaController {
         }
     }
 
-    public static void editCategory(String name) {
+    public static void editCategory(String name, String field, String newContent) {
         DataBase.getCategoryByName(name);
     }
 
@@ -112,7 +112,12 @@ public class ManagerAreaController {
     }
 
     public static void removeCategory(String name) {
-        DataBase.removeCategory("");
+        if (DataBase.getCategoryByName(name) == null) {
+            View.printString("category not exist");
+        } else {
+            DataBase.removeCategory(name);
+            View.printString(name + "category removed");
+        }
     }
 
     public static void viewDiscountCode(String code) {

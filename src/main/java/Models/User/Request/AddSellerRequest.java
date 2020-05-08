@@ -1,5 +1,6 @@
 package Models.User.Request;
 
+import Controller.DataBase;
 import Models.User.Seller;
 
 public class AddSellerRequest extends Request {
@@ -23,6 +24,6 @@ public class AddSellerRequest extends Request {
 
     @Override
     public void run() {
-
+        DataBase.addNewUser(seller);
     }
 }

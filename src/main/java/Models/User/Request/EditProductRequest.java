@@ -4,12 +4,12 @@ import Models.Product;
 
 import java.util.ArrayList;
 
-public class EditProduct extends Request {
+public class EditProductRequest extends Request {
     private ArrayList<String> fields;
     private ArrayList<String> newContents;
     private Product product;
 
-    public EditProduct(ArrayList<String> fields, ArrayList<String> newContents, Product product) {
+    public EditProductRequest(ArrayList<String> fields, ArrayList<String> newContents, Product product) {
         this.fields = fields;
         this.newContents = newContents;
         this.product = product;
