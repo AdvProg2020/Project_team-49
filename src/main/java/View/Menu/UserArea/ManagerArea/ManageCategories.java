@@ -5,6 +5,8 @@ import Controller.ManagerAreaController;
 import View.Menu.Menu;
 import View.View;
 
+import java.util.ArrayList;
+
 public class ManageCategories extends Menu {
 
     public ManageCategories(Menu parentMenu) {
@@ -29,7 +31,18 @@ public class ManageCategories extends Menu {
     }
 
     private void doAddCategory(String category) {
-        ManagerAreaController.addCategory("");
+        ArrayList<String> info = new ArrayList<>();
+        View.printString("enter name:");
+        info.add(scanner.nextLine().trim());
+        if (!getMatcher(info.get(0), "\\w+").matches()) {
+            View.printString("invalid name");
+            return;
+        }
+        View.printString("enter special attributes:");
+        info.add(scanner.nextLine().trim());
+        View.printString("enter parent category (if doesnt have enter null word):");
+        info.add(scanner.nextLine().trim());
+        ManagerAreaController.addCategory(info);
     }
 
     //kamel nist

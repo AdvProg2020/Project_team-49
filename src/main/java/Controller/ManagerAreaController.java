@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.Category;
 import Models.DiscountCode;
 import Models.User.Costumer;
 import Models.User.Manager;
@@ -104,11 +105,40 @@ public class ManagerAreaController {
     }
 
     public static void editCategory(String name, String field, String newContent) {
-        DataBase.getCategoryByName(name);
+        if (DataBase.getCategoryByName(name) == null) {
+            View.printString("category not exist");
+            return;
+        }
+        if (field.toLowerCase().equals("attribute")) {
+            DataBase.getCategoryByName(name).setSpecialAttributes(newContent);
+            View.printString("field edited");
+            return;
+        }
+        if (field.toLowerCase().equals("name")) {
+            if (!newContent.matches("\\w+")) {
+                View.printString("invalid new name");
+            } else if (DataBase.getCategoryByName(newContent) != null) {
+                View.printString("category exist with this new name");
+            } else {
+                DataBase.getCategoryByName(name).setName(newContent);
+                View.printString("field edited");
+                return;
+            }
+        }
+        View.printString("invalid field");
     }
 
-    public static void addCategory(String name) {
-        DataBase.addCategory(name);
+    public static void addCategory(ArrayList<String> info) {
+        if (DataBase.getCategoryByName(info.get(0)) != null) {
+            View.printString("category exist with this name");
+        } else if ((!info.get(2).matches("(?i)null")) || (DataBase.getCategoryByName(info.get(0)) == null)) {
+            View.printString("invalid parent category");
+        } else if (info.get(2).matches("(?i)null")) {
+            DataBase.addCategory(new Category(info.get(0), info.get(1), null));
+        } else {
+            DataBase.addCategory(new Category(info.get(0), info.get(1), DataBase.getCategoryByName(info.get(2))));
+        }
+        View.printString("category added");
     }
 
     public static void removeCategory(String name) {

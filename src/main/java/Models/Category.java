@@ -6,17 +6,17 @@ import java.util.ArrayList;
 
 public class Category {
     private String name;
-    private String specialAttribute;
+    private String specialAttributes;
     private ArrayList<Category> subCategories;
     private Category parentCategory;
     private ArrayList<Product> allProducts;
 
-    public Category(String name, String specialAttribute) {
+    public Category(String name, String specialAttributes , Category parentCategory) {
         this.name = name;
-        this.specialAttribute = specialAttribute;
+        this.specialAttributes = specialAttributes;
         subCategories = new ArrayList<>();
         allProducts = new ArrayList<Product>();
-        this.parentCategory = null;
+        this.parentCategory = parentCategory;
     }
 
 
@@ -33,16 +33,16 @@ public class Category {
         return name;
     }
 
-    public String getSpecialAttribute() {
-        return specialAttribute;
+    public String getSpecialAttributes() {
+        return specialAttributes;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setSpecialAttribute(String specialAttribute) {
-        this.specialAttribute = specialAttribute;
+    public void setSpecialAttributes(String specialAttributes) {
+        this.specialAttributes = specialAttributes;
     }
 
     public void addProduct(Product product){

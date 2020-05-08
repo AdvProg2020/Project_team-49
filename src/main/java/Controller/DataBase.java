@@ -61,8 +61,8 @@ public class DataBase {
         allCategories.remove(getCategoryByName(name));
     }
 
-    public static void addCategory(String name) {
-
+    public static void addCategory(Category category) {
+        allCategories.add(category);
     }
 
     public static Category getCategoryByName(String name) {
