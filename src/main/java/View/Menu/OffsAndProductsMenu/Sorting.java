@@ -22,6 +22,7 @@ public class Sorting extends Menu {
             View.printAvailableSorting(OffAndProductMenuController.getAllAvailableSorting());
             this.run(lastCommand);
         }
+
         if (command.equals("sort [an available sort]")) {
             OffAndProductMenuController.sorting(command.split("\\s")[1]);
 
@@ -33,13 +34,15 @@ public class Sorting extends Menu {
 
             this.run(lastCommand);
         }
+
         if (command.equals("current sort")) {
             View.printCurrentSort(OffAndProductMenuController.getCurrentSort());
 
             this.run(lastCommand);
         }
+
         if (command.equals("disable sort")) {
-            OffAndProductMenuController.disableSort(command.split("\\s")[2]);
+            OffAndProductMenuController.disableSort();
 
             View.printSortedProduct(OffAndProductMenuController.getCurrentId(),
                     OffAndProductMenuController.getCurrentName(),
@@ -49,6 +52,7 @@ public class Sorting extends Menu {
 
             this.run(lastCommand);
         }
+
         if (command.equals("back")) {
             this.parentMenu.run(lastCommand);
         }

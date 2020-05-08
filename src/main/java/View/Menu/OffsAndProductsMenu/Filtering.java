@@ -13,6 +13,7 @@ public class Filtering extends Menu {
     @Override
     public void run(String lastCommand) {
         String command = scanner.nextLine().trim();
+
         if (command.equals("show available filters")) {
             View.printAvailableFilters(OffAndProductMenuController.getAllAvailableFilters());
 
@@ -38,18 +39,8 @@ public class Filtering extends Menu {
                 filterByOff();
             }
             if (type.equalsIgnoreCase("Categories")){
-                //in alan bayad categories har category ro neshon bede.
-
+                filterByCategory();
             }
-
-            //
-            OffAndProductMenuController.filtering(command.split("\\s")[1],type);
-            //in ye aray liste moratab mide bayad bazesh konam.
-            View.printFilteredProduct(OffAndProductMenuController.getCurrentId(),
-                    OffAndProductMenuController.getCurrentName(),
-                    OffAndProductMenuController.getCurrentPrice(),
-                    OffAndProductMenuController.getCurrentOffPercentage(),
-                    OffAndProductMenuController.doesCurrentOff());
 
             this.run(lastCommand);
         }
@@ -61,8 +52,26 @@ public class Filtering extends Menu {
         }
 
         if (command.equals("disable filter [a selected filter]")) {
-            OffAndProductMenuController.disableFilter(command.split("\\s")[1]);
+            String type=command.split("\\s")[2];
 
+            if (type.equalsIgnoreCase("Name")){
+                Filter.disableNameFilter();
+            }
+            if (type.equalsIgnoreCase("Price")){
+                Filter.disablePriceFilter();
+            }
+            if (type.equalsIgnoreCase("Brand")){
+                disableFilterByBrand();
+            }
+            if (type.equalsIgnoreCase("Availability")){
+                Filter.disableAvailabilityFilter();
+            }
+            if (type.equalsIgnoreCase("Off")){
+                Filter.disableOffsFilter();
+            }
+            if (type.equalsIgnoreCase("Categories")){
+                Filter.disableCategoryFilter();
+            }
             View.printFilteredProduct(OffAndProductMenuController.getCurrentId(),
                     OffAndProductMenuController.getCurrentName(),
                     OffAndProductMenuController.getCurrentPrice(),
@@ -90,7 +99,7 @@ public class Filtering extends Menu {
 
     //che lozomi dare ke menu bashe?
     private Menu filterByName(){
-        return new Menu("filterByName",this) {
+        return new Menu("FilterByName",this) {
             @Override
             public void run(String lastCommand) {
                 String nameForFilter=scanner.nextLine();
@@ -108,7 +117,7 @@ public class Filtering extends Menu {
     }
 
     private Menu filterByPrice(){
-        return new Menu("filterByPrice",this) {
+        return new Menu("FilterByPrice",this) {
             @Override
             public void run(String lastCommand) {
                 double minPrice=scanner.nextDouble();
@@ -127,7 +136,7 @@ public class Filtering extends Menu {
     }
 
     private Menu filterByBrand(){
-        return new Menu("filterByBrand",this) {
+        return new Menu("FilterByBrand",this) {
             @Override
             public void run(String lastCommand) {
                 View.printAvailableBrand(Filter.getAvailableBrands());
@@ -146,7 +155,7 @@ public class Filtering extends Menu {
     }
 
     private Menu filterByAvailability(){
-        return new Menu("filterByAvailability",this) {
+        return new Menu("FilterByAvailability",this) {
             @Override
             public void run(String lastCommand) {
                 Filter.filterByAvailability();
@@ -162,7 +171,7 @@ public class Filtering extends Menu {
     }
 
     private Menu filterByOff(){
-        return new Menu("filterByOff",this) {
+        return new Menu("FilterByOff",this) {
             @Override
             public void run(String lastCommand) {
                 Filter.filterByOffs();
@@ -175,4 +184,43 @@ public class Filtering extends Menu {
                 this.parentMenu.run(lastCommand);
             }
         };
-    }}
+    }
+
+    private Menu filterByCategory(){
+        return new Menu("FilterByCategory",this) {
+            @Override
+            public void run(String lastCommand) {
+                Filter.showSubCategories();
+                String categoryForFilter=scanner.nextLine();
+                Filter.filterByCategory(categoryForFilter);
+
+                View.printFilteredProduct(OffAndProductMenuController.getCurrentId(),
+                        OffAndProductMenuController.getCurrentName(),
+                        OffAndProductMenuController.getCurrentPrice(),
+                        OffAndProductMenuController.getCurrentOffPercentage(),
+                        OffAndProductMenuController.doesCurrentOff());
+
+                this.parentMenu.run(lastCommand);
+            }
+        };
+    }
+
+    private Menu disableFilterByBrand(){
+        return new Menu("DisableFilterByBrand",this) {
+            @Override
+            public void run(String lastCommand) {
+                String brandToDisable=scanner.nextLine();
+                Filter.disableBrandFilter(brandToDisable);
+
+                View.printFilteredProduct(OffAndProductMenuController.getCurrentId(),
+                        OffAndProductMenuController.getCurrentName(),
+                        OffAndProductMenuController.getCurrentPrice(),
+                        OffAndProductMenuController.getCurrentOffPercentage(),
+                        OffAndProductMenuController.doesCurrentOff());
+
+                this.parentMenu.run(lastCommand);
+            }
+        };
+    }
+
+}

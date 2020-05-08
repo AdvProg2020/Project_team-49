@@ -3,6 +3,7 @@ package View.Menu.OffsAndProductsMenu;
 import Controller.Controller;
 import View.Menu.Menu;
 import View.Menu.UserArea.UserArea;
+import View.View;
 
 import java.util.HashMap;
 
@@ -35,6 +36,28 @@ public class OffsPage extends Menu {
 
     @Override
     public String getCommandKey(String command) {
-        return super.getCommandKey(command);
+        if (command.equalsIgnoreCase("Show All Product")){
+            return "Show All Product";
+        }
+        if (command.equalsIgnoreCase("Show Categories")){
+            return "Show Categories";
+        }
+        if (command.equalsIgnoreCase("Filtering")){
+            return "Filtering";
+        }
+        if (command.equalsIgnoreCase("Sorting")){
+            return "Sorting";
+        }
+        if (command.equalsIgnoreCase("Show Product")){
+            return "Show Product";
+        }
+        if (command.equalsIgnoreCase("Log In")){
+            return "Log In";
+        }
+        if (command.equalsIgnoreCase("Log Out")){
+            return "Log Out";
+        }
+        View.printString("invalid command");
+        return "invalid";
     }
 }

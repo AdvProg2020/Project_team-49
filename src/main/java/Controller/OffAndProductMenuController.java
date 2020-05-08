@@ -103,34 +103,28 @@ public class OffAndProductMenuController {
         return allCategories;
     }
 
-    public static ArrayList<Product> filtering(String filter,String Type) {
-        Filter.filterByBrand("");
-        // va baghie.
-
-        //bayad havasam bashe shayad chnta filter yoho On bokone.
-        return null;
-    }
-
-    public static void disableFilter(String filter) {
-        //
-    }
-
     public static ArrayList<String> getAllAvailableSorting() {
         return allAvailableSorting;
     }
 
-    public static ArrayList<Product> sorting(String sort) {
-        //va baghie
-        return null;
+    public static void sorting(String sort) {
+        if (sort.equalsIgnoreCase("View")){
+            Sort.sortByView();
+        }
+        if (sort.equalsIgnoreCase("Time")){
+            Sort.sortByTime();
+        }
+        if (sort.equalsIgnoreCase("Score")){
+            Sort.sortByScore();
+        }
     }
 
     public static ArrayList<String> getCurrentSort() {
         return null;
     }
 
-    public static void disableSort(String sort) {
-        Filter.disableAvailabilityFilter();
-        //va baghie.
+    public static void disableSort() {
+        Sort.disableSort();
     }
 
     //Test ino chi kar konam?
@@ -139,7 +133,7 @@ public class OffAndProductMenuController {
     }
 
     public static ArrayList<String> getCategoriesName(){
-        return null;
+        return Filter.showSubCategories();
     }
 
     public static void addToCartById(long productId, boolean commenSeller,String sellerUserName){
