@@ -7,15 +7,15 @@ import java.util.Date;
 
 public class SellLog extends Log {
     private double receivedAmount;
-    private double reducedAmountForSale;
-    private ArrayList<Product> soldProduct = new ArrayList<Product>();
+    private double reducedAmountForOff;
+    private ArrayList<Product> soldProduct;
     private String buyerName;
     private DeliveryStatus deliveryStatus;
 
-    public SellLog(double receivedAmount, double reducedAmountForSale, ArrayList<Product> soldProduct,
+    public SellLog(double receivedAmount, double reducedAmountForOff, ArrayList<Product> soldProduct,
                    String buyerName,long logId, Date logDate) {
         this.receivedAmount = receivedAmount;
-        this.reducedAmountForSale = reducedAmountForSale;
+        this.reducedAmountForOff = reducedAmountForOff;
         this.soldProduct = soldProduct;
         this.buyerName = buyerName;
         this.deliveryStatus =DeliveryStatus.DELIVERY_IN_PROGRESS;
@@ -35,8 +35,8 @@ public class SellLog extends Log {
         return receivedAmount;
     }
 
-    public double getReducedAmountForSale() {
-        return reducedAmountForSale;
+    public double getReducedAmountForOff() {
+        return reducedAmountForOff;
     }
 
     public ArrayList<Product> getSoldProduct() {

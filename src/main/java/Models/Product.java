@@ -31,7 +31,12 @@ public class Product {
     private int numberOfView;
     private Date productDate;
 
-    public Product(String name, long productId, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems) {
+    public Product(String name, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems) {
+        this.name = name;
+        this.productId = 0;
+        this.price = price;
+        this.parentCategory = parentCategory;
+
         this.allSellers = new HashMap<Seller, Integer>();
         this.brand = brand;
         this.addItem(seller, remainingItems);

@@ -6,6 +6,7 @@ import View.Menu.Menu;
 import View.Menu.UserArea.ViewPersonalInfo;
 import View.View;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SellerArea extends Menu {
@@ -28,15 +29,41 @@ public class SellerArea extends Menu {
 
     @Override
     public String getCommandKey(String command) {
-        return null;
+        if (getMatcher(command, "(?i)view company information").matches()) {
+            return "View Company Information";
+        } else if (getMatcher(command, "(?i)view sales history").matches()) {
+            return "View Sales History";
+        } else if (getMatcher(command, "(?i)manage products").matches()) {
+            return "Manage Products";
+        } else if (getMatcher(command, "(?i)add product").matches()) {
+            return "Add Product";
+        } else if (getMatcher(command, "(?i)remove Product (\\S+)").matches()) {
+            if (!getMatcher(command.split("\\s")[2], "\\d+").matches()) {
+                View.printString("invalid Id");
+                return "invalid";
+            }
+            return "Remove Product";
+        } else if (getMatcher(command, "(?i)show categories").matches()) {
+            return "Show Categories";
+        } else if (getMatcher(command, "(?i)view offs").matches()) {
+            return "View Offs";
+        } else if (getMatcher(command, "(?i)view balance").matches()) {
+            return "View Balance";
+        } else if (getMatcher(command, "(?i)back").matches()) {
+            return "back";
+        } else if (getMatcher(command, "(?i)logout").matches()) {
+            return "Logout";
+        }
+        View.printString("invalid command");
+        return "invalid";
     }
 
     private Menu getViewCompanyInformation() {
         return new Menu("View Company Information", this) {
             @Override
             public void run(String lastCommand) {
-                SellerAreaController.viewCompanyInfo();
-                this.parentMenu.run("");
+                View .printString(SellerAreaController.viewCompanyInfo());
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -45,8 +72,22 @@ public class SellerArea extends Menu {
         return new Menu("View Sales History", this) {
             @Override
             public void run(String lastCommand) {
-                SellerAreaController.viewSalesHistory();
-                View.printString("");
+                ArrayList<String> logs = SellerAreaController.viewSalesHistory();
+                View.printString("Sales History:");
+                View.printString("____________________");
+                for (String log : logs) {
+                    View.printString("log Id:");
+                    View.printString(log.split("\\s")[0]);
+                    View.printString("log Date:");
+                    View.printString(log.split("\\s")[1]);
+                    View.printString("buyer name:");
+                    View.printString(log.split("\\s")[2]);
+                    View.printString("received amount:");
+                    View.printString(log.split("\\s")[3]);
+                    View.printString("off amount:");
+                    View.printString(log.split("\\s")[4]);
+                    View.printString("____________________");
+                }
                 this.parentMenu.run("");
             }
         };
@@ -56,8 +97,21 @@ public class SellerArea extends Menu {
         return new Menu("Add Product", this) {
             @Override
             public void run(String lastCommand) {
-                SellerAreaController.addProduct(new String[3]);
-                this.parentMenu.run("");
+                ArrayList<String> productInfo = new ArrayList<>();
+                View.printString("enter name:");
+                productInfo.add(scanner.nextLine().trim());
+                View.printString("enter brand:");
+                productInfo.add(scanner.nextLine().trim());
+                View.printString("enter price:");
+                productInfo.add(scanner.nextLine().trim());
+                View.printString("enter product explanations:");
+                productInfo.add(scanner.nextLine().trim());
+                View.printString("enter parent category:");
+                productInfo.add(scanner.nextLine().trim());
+                View.printString("enter available items for sale:");
+                productInfo.add(scanner.nextLine().trim());
+                SellerAreaController.addProduct(productInfo);
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -66,12 +120,13 @@ public class SellerArea extends Menu {
         return new Menu("Remove Product", this) {
             @Override
             public void run(String lastCommand) {
-                SellerAreaController.removeProduct(1);
-                this.parentMenu.run("");
+                View.printString(SellerAreaController.removeProduct(Long.parseLong(lastCommand.split("\\s")[2])));
+                this.parentMenu.run(lastCommand);
             }
         };
     }
 
+    //kamel nist
     private Menu getShowCategories() {
         return new Menu("Show Categories", this) {
             @Override
@@ -86,8 +141,8 @@ public class SellerArea extends Menu {
         return new Menu("View Balance", this) {
             @Override
             public void run(String lastCommand) {
-                Controller.getBalance();
-                this.parentMenu.run("");
+                View.printString("current balance: " + Controller.getBalance());
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -97,13 +152,17 @@ public class SellerArea extends Menu {
             @Override
             public void run(String lastCommand) {
                 Controller.logout();
-                allMenus.get(0).run("");
+                View.printString("logout successful");
+                allMenus.get(0).run(lastCommand);
             }
         };
     }
 
     public void showSpecifications() {
-        Controller.getCurrentUserSpecifications();
+        String[] info = Controller.getCurrentUserSpecifications().split("\\s");
+        for (int i = 0; i < info.length - 1; i++) {
+            View.printString(info[i]);
+        }
     }
 
     @Override

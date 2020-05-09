@@ -20,6 +20,10 @@ public class Manager extends User {
         allActiveRequests.remove(getRequestById(requestId));
     }
 
+    public static void addRequest(Request request) {
+        allActiveRequests.add(request);
+    }
+
     public static Request getRequestById(long Id) {
         for (Request activeRequest : allActiveRequests) {
             if (activeRequest.getRequestId() == Id) {

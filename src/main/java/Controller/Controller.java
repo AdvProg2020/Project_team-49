@@ -67,10 +67,14 @@ public class Controller {
     }
 
     public static double getBalance() {
-
-        return 0;
+        if (currentUser.getType().equals("Costumer")) {
+            return ((Costumer) currentUser).getCredit();
+        } else {
+            return ((Seller) currentUser).getCredit();
+        }
     }
 
+    //bayad hazf beshe
     public static boolean hasUserWithUsername(String username) {
         return false;
     }

@@ -24,7 +24,7 @@ public class DataBase {
     static ArrayList<Category> allCategories = new ArrayList<Category>();
     static ArrayList<String> allAvailableFilters = new ArrayList<String>();
     static ArrayList<String> allAvailableSorting = new ArrayList<String>();
-    static ArrayList<Product> sortedOrFilteredProduct = new ArrayList<Product>();
+    public static long createdProductsCount = 0;
 
     public static User getUserByUsername(String username) {
         return null;

@@ -22,7 +22,7 @@ public class Seller extends User {
         this.credit = 0;
     }
 
-    public Off getOffById(long ID) {return null;}
+    public Off getOffById(long Id) {return null;}
 
     public ArrayList<SellLog> getSellHistory() {
         return sellHistory;
@@ -45,7 +45,12 @@ public class Seller extends User {
     }
 
     public void removeProduct(long productId) {
-
+        for (Product product : productsForSale) {
+            if (product.getProductId() == productId) {
+                productsForSale.remove(product);
+                break;
+            }
+        }
     }
 
     public void addOff(Off off) {

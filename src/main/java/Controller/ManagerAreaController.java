@@ -32,10 +32,6 @@ public class ManagerAreaController {
         DataBase.removeUser(username);
     }
 
-    public static void changeUserType(String username, String newType) {
-
-    }
-
     public static String deleteProduct(long productId) {
         if (DataBase.getProductById(productId) == null) {
             return "product not exist";
@@ -62,10 +58,6 @@ public class ManagerAreaController {
                 Integer.parseInt(info.get(5)),
                 allowedCostumers));
         return "discount code created";
-    }
-
-    public static void editDiscountCode(String code) {
-
     }
 
     public static void removeDiscountCode(String code) {
@@ -165,6 +157,16 @@ public class ManagerAreaController {
             info.add(discountCode.getAllowedCostumers().toString());
             View.printArrayList(info);
         }
+    }
+
+
+    //kamel nist
+    public static void editDiscountCode(String code) {
+
+    }
+
+    public static void changeUserType(String username, String newType) {
+
     }
 
     public static ArrayList<String> showAllProducts() {
