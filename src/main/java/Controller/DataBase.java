@@ -74,26 +74,26 @@ public class DataBase {
 
     public static Category getCategoryByName(String name) {
         for (Category category : allCategories) {
-            if(category.getName().equals(name.toLowerCase())){
+            if (category.getName().equals(name.toLowerCase())) {
                 return category;
             }
         }
         return null;
     }
 
-    public static boolean isThereAnyCategoryWithName(String name){
+    public static boolean isThereAnyCategoryWithName(String name) {
         for (Category category : allCategories) {
-            if(category.getName().equals(name.toLowerCase())){
+            if (category.getName().equals(name.toLowerCase())) {
                 return true;
             }
         }
         return false;
     }
 
-    public static boolean isProductInThisCategory(String categoryName , Product product){
+    public static boolean isProductInThisCategory(String categoryName, Product product) {
         Category category = product.getParentCategory();
-        while (category != null){
-            if(category.getName().equalsIgnoreCase(categoryName)){
+        while (category != null) {
+            if (category.getName().toLowerCase().equals(categoryName.toLowerCase())) {
                 return true;
             }
             category = category.getParentCategory();
@@ -101,7 +101,7 @@ public class DataBase {
         return false;
     }
 
-    public static void startProgram() throws IOException, ClassNotFoundException {
+    public static void startProgram() {
         Path resourcesPath = Paths.get("src/main/resources");
         if (!Files.exists(resourcesPath)) {
             try {
@@ -135,18 +135,18 @@ public class DataBase {
         View.run();
     }
 
-    public static void endProgram() throws IOException, ClassNotFoundException {
+    public static void endProgram() {
         saveAllData();
         System.exit(0);
     }
 
-    public static void loadAllData() throws IOException, ClassNotFoundException {
+    public static void loadAllData() {
         loadAllProducts();
         loadAllCategories();
         loadAllUsers();
     }
 
-    public static void loadAllProducts() throws IOException, ClassNotFoundException {
+    public static void loadAllProducts() {
         try {
             inputStream = new FileInputStream("src/main/resources/DataBase/products.txt");
             objectInputStream = new ObjectInputStream(inputStream);
@@ -157,7 +157,7 @@ public class DataBase {
         }
     }
 
-    public static void loadAllUsers() throws IOException, ClassNotFoundException {
+    public static void loadAllUsers() {
         try {
             inputStream = new FileInputStream("src/main/resources/DataBase/users.txt");
             objectInputStream = new ObjectInputStream(inputStream);
@@ -168,7 +168,7 @@ public class DataBase {
         }
     }
 
-    public static void loadAllCategories() throws IOException, ClassNotFoundException {
+    public static void loadAllCategories() {
         try {
             inputStream = new FileInputStream("src/main/resources/DataBase/categories.txt");
             objectInputStream = new ObjectInputStream(inputStream);
@@ -179,47 +179,44 @@ public class DataBase {
         }
     }
 
-    public static void saveAllData() throws IOException, ClassNotFoundException {
+    public static void saveAllData() {
         saveAllProducts();
         saveAllCategories();
         saveAllUsers();
     }
 
-    public static void saveAllProducts() throws IOException, ClassNotFoundException {
-        try{
+    public static void saveAllProducts() {
+        try {
             outputStream = new FileOutputStream("src/main/resources/DataBase/products.txt");
             objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(allProducts);
             objectOutputStream.close();
             outputStream.close();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("can't save products");
         }
     }
 
-    public static void saveAllUsers() throws IOException, ClassNotFoundException {
-        try{
+    public static void saveAllUsers() {
+        try {
             outputStream = new FileOutputStream("src/main/resources/DataBase/users.txt");
             objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(allUsers);
             objectOutputStream.close();
             outputStream.close();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("can't save users");
         }
     }
 
-    public static void saveAllCategories() throws IOException, ClassNotFoundException {
-        try{
+    public static void saveAllCategories() {
+        try {
             outputStream = new FileOutputStream("src/main/resources/DataBase/categories.txt");
             objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(allCategories);
             objectOutputStream.close();
             outputStream.close();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("can't save categories");
         }
     }

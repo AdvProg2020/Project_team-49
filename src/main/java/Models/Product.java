@@ -2,6 +2,7 @@ package Models;
 
 import Models.User.Seller;
 
+import javax.swing.plaf.PanelUI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,17 +29,36 @@ public class Product {
     private DiscountCode discountCode;
     private boolean doesItHaveDiscount;
     private double discountPercentage;
-    private int numberOfView;
+    private long numberOfView;
     private Date productDate;
 
     public Product(String name, long productId, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems) {
         this.allSellers = new HashMap<Seller, Integer>();
         this.brand = brand;
+        this.name = name;
+        this.parentCategory = parentCategory;
         this.addItem(seller, remainingItems);
         this.defaultSeller = seller;
         this.allComments = new ArrayList<>();
         this.explanation = explanation;
- 
+        this.productDate = new Date();
+        this.price = price;
+    }
+
+    public Product (){
+        productDate = new Date();
+    }
+
+    public Product (long views){
+        numberOfView = views;
+    }
+
+    public Product(double averageScore){
+        this.averageScore = averageScore;
+    }
+
+    public Product(String brand){
+        this.brand = brand;
     }
 
     public int remainingProductForSeller(Seller seller) {
@@ -164,7 +184,7 @@ public class Product {
         this.numberOfView = numberOfView;
     }
 
-    public int getNumberOfView() {
+    public long getNumberOfView() {
         return numberOfView;
     }
 
