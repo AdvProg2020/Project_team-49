@@ -40,6 +40,17 @@ public class Product {
         this.explanation = explanation;
         this.status = ProductStatus.REVIEWFORMAKE;
     }
+    public Product(){
+        this.productDate = new Date();
+    }
+
+    public Product (int numberOfView){
+        this.numberOfView = numberOfView;
+    }
+
+    public Product (double averageScore){
+        this.averageScore = averageScore;
+    }
 
     public int remainingProductForSeller(Seller seller) {
         for (Seller eachSeller : allSellers.keySet()) {

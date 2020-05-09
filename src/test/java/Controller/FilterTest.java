@@ -17,13 +17,13 @@ import static Controller.Sort.*;
 
 public class FilterTest {
     static ArrayList<Product> temp = new ArrayList<>();
-    Category mother = new Category("xx", null);
-    Category father = new Category("xxlx", null);
-    Category phone = new Category("mobile", "");
-    Category makeup = new Category("aaaa", "");
-    Category shirt = new Category("nike", "");
-    Category car = new Category("bmw", "");
-    Category child = new Category("child" , null);
+    Category mother = new Category("xx", null , null);
+    Category father = new Category("xxlx", null , null);
+    Category phone = new Category("mobile", "" , null);
+    Category makeup = new Category("aaaa", "",  null);
+    Category shirt = new Category("nike", "" , null);
+    Category car = new Category("bmw", "" , null);
+    Category child = new Category("child" , null , null);
     final Product a = new Product("phone", 1112, "apple", 1000.0, "nothing", phone, null, 1000);
     final Product b = new Product("plakolang", 11212, "iran", 10.0, "nothing", car, null, 0);
     final Product c = new Product("S9", 1112, "samsung", 7000.0, "nothing", phone, null, 1000);
