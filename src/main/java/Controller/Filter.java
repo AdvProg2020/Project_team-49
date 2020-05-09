@@ -295,8 +295,8 @@ public class Filter {
     }
 
     public static void disablePriceFilter() {
-        minPrice = -1;
-        maxPrice = -1;
+        minPrice = -1.0;
+        maxPrice = -1.0;
         isItFilteredByPrice = false;
         filter();
     }
@@ -313,13 +313,19 @@ public class Filter {
     }
 
     public static void disableBrandFilter(String brand) {
-        int i = 0;
+        int i = -10;
+        if(selectedBrands.size() == 0) {
+            isItFilteredByBrand = false;
+            return;
+        }
         for (String selectedBrand : selectedBrands) {
             if (selectedBrand.toLowerCase().equals(brand.toLowerCase())) {
                 i = selectedBrands.indexOf(selectedBrand);
                 break;
             }
         }
+        if(i == -10)
+            return;
         selectedBrands.remove(i);
         if (selectedBrands.size() == 0) {
             isItFilteredByBrand = false;

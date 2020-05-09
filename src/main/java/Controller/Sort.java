@@ -9,7 +9,7 @@ import java.util.Comparator;
 
 public class Sort {
 
-    private static String currentSort;
+    private static String currentSort = "";
 
     public static void setCurrentSort(String currentSort) {
         Sort.currentSort = currentSort;
@@ -38,16 +38,16 @@ public class Sort {
 
     static class SortByView implements Comparator<Product> {
         public int compare(Product a, Product b) {
-            return -a.getNumberOfView() + b.getNumberOfView();
+            return (int)(-a.getNumberOfView() + b.getNumberOfView());
         }
     }
 
     static class SortByScore implements Comparator<Product> {
         public int compare(Product a, Product b) {
             double value = b.getAverageScore() - a.getAverageScore();
-            if (value > 1)
+            if (value > 0)
                 return 1;
-            if (value < 1)
+            if (value < 0)
                 return -1;
             return 0;
         }
@@ -66,17 +66,7 @@ public class Sort {
             sortByTime();
         } else if (currentSort.matches("(?i)score")) {
             sortByScore();
-        }else{
-            sortByView();
         }
-    }
-
-    public static ArrayList<String> getSortedProducts() {
-        ArrayList<String> sortedProducts = new ArrayList<String>();
-        for (Product product : DataBase.sortedOrFilteredProduct) {
-            sortedProducts.add(product.getName());
-        }
-        return sortedProducts;
     }
 
     public static ArrayList<String> getAvailableSorts() {
