@@ -21,16 +21,45 @@ public class ManageProducts extends Menu {
 
     @Override
     public String getCommandKey(String command) {
-        return null;
+        if (getMatcher(command, "(?i)view (\\S+)").matches()) {
+            if (!checkId(command.split("\\s")[1])) {
+                return "invalid";
+            }
+            return "View Product";
+        } else if (getMatcher(command, "(?i)view buyers (\\S+)").matches()) {
+            if (!checkId(command.split("\\s")[2])) {
+                return "invalid";
+            }
+            return "View Buyers";
+        } else if (getMatcher(command, "(?i)edit (\\S+)").matches()) {
+            if (!checkId(command.split("\\s")[1])) {
+                return "invalid";
+            }
+            return "Edit Product";
+        } else if (getMatcher(command, "(?i)logout").matches()) {
+            return "Logout";
+        } else if (getMatcher(command, "(?i)back").matches()) {
+            return "back";
+        }
+        View.printString("invalid command");
+        return "invalid";
     }
 
     private Menu getView() {
         return new Menu("view",this) {
             @Override
             public void run(String lastCommand) {
-                SellerAreaController.viewSellerProducts();
-                View.printString("");
-                this.parentMenu.run("");
+                String info = SellerAreaController.viewProduct(Long.parseLong(lastCommand.split("\\s")[1]));
+                if (info.equals("product not exist")) {
+                    View.printString(info);
+                } else {
+                    View.printString("product name: " + info.split("\\s")[0]);
+                    View.printString("product Id: " + info.split("\\s")[1]);
+                    View.printString("product brand: " + info.split("\\s")[2]);
+                    View.printString("product explanation: " + info.split("\\s")[3]);
+                    View.printString("_____________________________________________");
+                }
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -39,8 +68,13 @@ public class ManageProducts extends Menu {
         return new Menu("View Buyers", this) {
             @Override
             public void run(String lastCommand) {
-                SellerAreaController.viewProductBuyers(1);
-                this.parentMenu.run("");
+                String answer = SellerAreaController.viewProductBuyers(Long.parseLong(lastCommand.split("\\s")[2]));
+                if (answer.equals("product not exist")) {
+                    View.printString(answer);
+                } else {
+                    View.printString("buyers: " + answer);
+                }
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -49,8 +83,20 @@ public class ManageProducts extends Menu {
         return new Menu("Edit", this) {
             @Override
             public void run(String lastCommand) {
-                SellerAreaController.editProduct("", "", 1);
-                this.parentMenu.run("");
+                while (true) {
+                    View.printString("enter field:");
+                    String field = scanner.nextLine().trim();
+                    if (field.matches("(?i)back")) {
+                        break;
+                    }
+                    View.printString("enter new content:");
+                    String content = scanner.nextLine().trim();
+                    if (content.matches("(?i)back")) {
+                        break;
+                    }
+                    View.printString(SellerAreaController.editProduct(field, content, Long.parseLong(lastCommand.split("\\s")[1])));
+                }
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -60,16 +106,28 @@ public class ManageProducts extends Menu {
             @Override
             public void run(String lastCommand) {
                 Controller.logout();
-                allMenus.get(0).run("");
+                View.printString("logout successful");
+                allMenus.get(0).run(lastCommand);
             }
         };
     }
 
-    private void showProducts(){}
+    //kamel nist
+    private void showProducts(){
+        SellerAreaController.viewSellerProducts();
+    }
 
     @Override
     public void run(String lastCommand) {
         this.showProducts();
         super.run(lastCommand);
+    }
+
+    private boolean checkId(String Id) {
+        if (!getMatcher(Id, "\\d+").matches()) {
+            View.printString("invalid product Id");
+            return false;
+        }
+        return true;
     }
 }

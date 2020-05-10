@@ -45,6 +45,7 @@ public class Product {
         this.explanation = explanation;
         this.status = ProductStatus.REVIEWFORMAKE;
     }
+
     public Product(){
         this.productDate = new Date();
     }
@@ -64,6 +65,22 @@ public class Product {
             }
         }
         return 0;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
     }
 
     public int remainingItems() {

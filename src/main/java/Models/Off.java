@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Off {
     private long offId;
-    private ArrayList<Product> products = new ArrayList<Product>();
+    private ArrayList<Product> products;
     private OffStatus offStatus;
     private Date startDate;
     private Date endDate;

@@ -3,6 +3,7 @@ package View.Menu.UserArea.SellerArea;
 import Controller.Controller;
 import Controller.SellerAreaController;
 import View.Menu.Menu;
+import View.View;
 
 import java.util.HashMap;
 
@@ -19,14 +20,42 @@ public class ViewOffs extends Menu {
 
     @Override
     public String getCommandKey(String command) {
-        return super.getCommandKey(command);
+        if (getMatcher(command, "(?i)view (\\S+)").matches()) {
+            if (!checkId(command.split("\\s")[1])) {
+                return "invalid";
+            }
+            return "View Off";
+        } else if (getMatcher(command, "(?i)add off").matches()) {
+            return "Add Off";
+        } else if (getMatcher(command, "(?i)edit (\\S+)").matches()) {
+            if (!checkId(command.split("\\s")[1])) {
+                return "invalid";
+            }
+            return "Edit Off";
+        } else if (getMatcher(command, "(?i)logout").matches()) {
+            return "Logout";
+        } else if (getMatcher(command, "(?i)back").matches()) {
+            return "back";
+        }
+        View.printString("invalid command");
+        return "invalid";
     }
 
     private Menu getView() {
         return new Menu("View Off", this) {
             @Override
             public void run(String lastCommand) {
-                SellerAreaController.viewOff(1);
+                String answer = SellerAreaController.viewOff(Long.parseLong(lastCommand.split("\\s")[1]));
+                if (answer.equals("off not exist")) {
+                    View.printString(answer);
+                } else {
+                    View.printString("off Id: " + answer.split("\\s")[0]);
+                    View.printString("off started at: " + answer.split("\\s")[1]);
+                    View.printString("off ends at: " + answer.split("\\s")[2]);
+                    View.printString("off amount: " + answer.split("\\s")[3]);
+                    View.printString("_______________________________________");
+                }
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -60,6 +89,7 @@ public class ViewOffs extends Menu {
             @Override
             public void run(String lastCommand) {
                 Controller.logout();
+                View.printString("logout successful");
                 allMenus.get(0).run("");
             }
         };
@@ -69,5 +99,18 @@ public class ViewOffs extends Menu {
     public void run(String lastCommand) {
         this.showOffs();
         super.run(lastCommand);
+    }
+
+    //chiz jalebie!!
+    public void repeatRun(String lastCommand) {
+        super.run(lastCommand);
+    }
+
+    private boolean checkId(String Id) {
+        if (!getMatcher(Id, "\\d+").matches()) {
+            View.printString("invalid product Id");
+            return false;
+        }
+        return true;
     }
 }

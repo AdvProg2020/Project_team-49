@@ -30,6 +30,7 @@ public class Controller {
         currentUser = user;
     }
 
+    //bayad hazf beshe
     public static Product getProductById(long productId) {
         return DataBase.getProductById(productId);
     }
