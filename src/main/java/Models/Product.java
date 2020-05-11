@@ -39,17 +39,12 @@ public class Product {
         this.allComments = new ArrayList<>();
         this.explanation = explanation;
         this.status = ProductStatus.REVIEWFORMAKE;
-    }
-    public Product(){
+        this.parentCategory = parentCategory;
+        this.name = name;
+        this.price = price;
+        this.productId = productId;
         this.productDate = new Date();
-    }
 
-    public Product (int numberOfView){
-        this.numberOfView = numberOfView;
-    }
-
-    public Product (double averageScore){
-        this.averageScore = averageScore;
     }
 
     public int remainingProductForSeller(Seller seller) {

@@ -17,7 +17,7 @@ public class Filter {
     private static ArrayList<String> selectedBrands = new ArrayList<String>();
     private static double minPrice = -1;
     private static double maxPrice = -1;
-    private static String name = "";
+    private static String productName = "";
     private static String categoryName = "";
 
     private static ArrayList<String> availableBrands = new ArrayList<>();
@@ -59,7 +59,7 @@ public class Filter {
     }
 
     public static String getName() {
-        return name;
+        return productName;
     }
 
     public static ArrayList<String> getAvailableBrands() {
@@ -103,7 +103,7 @@ public class Filter {
     }
 
     public static void setName(String name) {
-        Filter.name = name;
+        Filter.productName = name;
     }
 
     public static void setCategoryName(String categoryName) {
@@ -284,7 +284,7 @@ public class Filter {
     }
 
     public static void disableNameFilter() {
-        name = "";
+        productName = "";
         isItFilteredByName = false;
         filter();
     }
@@ -341,7 +341,7 @@ public class Filter {
         isItFilteredByOffs = false;
         isItFilteredByBrand = false;
         isItFilteredByName = false;
-        name = "";
+        productName = "";
         categoryName = "";
         minPrice = -1;
         maxPrice = -1;
@@ -359,7 +359,7 @@ public class Filter {
             DataBase.sortedOrFilteredProduct.add(product);
         }
         if (isItFilteredByName)
-            filterByName(name);
+            filterByName(productName);
         if (isItFilteredByBrand) {
             for (String selectedBrand : selectedBrands) {
                 filterByBrand(selectedBrand);
@@ -385,6 +385,7 @@ public class Filter {
 
     public static ArrayList<String> showSubCategories(){
         ArrayList<String> subCategories = new ArrayList<>();
+
         for (Category category : DataBase.allCategories) {
             if(category.getName().toLowerCase().equals(categoryName.toLowerCase())){
                 for (Category subCategory : category.getSubCategories()) {
@@ -392,7 +393,7 @@ public class Filter {
                 }
             }
         }
-        if(subCategories.size() == 0){
+        if(subCategories.size() == 0 && categoryName.equals("")){
             for (Category category : DataBase.allCategories) {
                 if(category.getParentCategory() == null){
                     subCategories.add(category.getName());
