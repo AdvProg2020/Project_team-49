@@ -43,6 +43,7 @@ public class Controller {
         return false;
     }
 
+    //kamel nist
     public static String getCurrentUserSpecifications() {
         return ManagerAreaController.viewUser(currentUser.getUsername());
     }

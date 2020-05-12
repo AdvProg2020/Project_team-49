@@ -132,6 +132,14 @@ public class Product implements Serializable {
         return averageScore;
     }
 
+    public void resetAverageScore() {
+        double average = 0;
+        for (Score allScore : allScores) {
+            average += allScore.getScore();
+        }
+        this.averageScore = (average / allScores.size());
+    }
+
     public ArrayList<Comment> getAllComments() {
         return allComments;
     }

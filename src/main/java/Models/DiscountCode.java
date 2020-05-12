@@ -12,6 +12,7 @@ public class DiscountCode {
     private int discountPercent;
     private long maximumDiscountAmount;
     private int discountCount;
+    private int usageCount;
     private ArrayList<Costumer> allowedCostumers = new ArrayList<Costumer>();
 
     public DiscountCode(String discountId, Date startDate, Date endDate, int discountPercent, long maximumDiscountAmount, int discountCount, ArrayList<Costumer> allowedCostumers) {
@@ -22,6 +23,7 @@ public class DiscountCode {
         this.maximumDiscountAmount = maximumDiscountAmount;
         this.discountCount = discountCount;
         this.allowedCostumers = allowedCostumers;
+        this.usageCount = 0;
     }
 //    all setter and getter
 
@@ -52,6 +54,10 @@ public class DiscountCode {
     public ArrayList<Costumer> getAllowedCostumers() {
     return allowedCostumers;
 }
+
+    public int getUsageCount() {
+        return usageCount;
+    }
 
     public void setDiscountId (String discountId){
     DiscountId = discountId;

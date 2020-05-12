@@ -38,6 +38,15 @@ public class Costumer extends User implements Serializable {
         return cart;
     }
 
+    public BuyLog getBuyLogById(Long Id) {
+        for (BuyLog buyLog : buyHistory) {
+            if (buyLog.getLogId() == Id) {
+                return buyLog;
+            }
+        }
+        return null;
+    }
+
     public void setCredit(double credit) {
         this.credit = credit;
     }
