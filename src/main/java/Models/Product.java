@@ -2,11 +2,12 @@ package Models;
 
 import Models.User.Seller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Product {
+public class Product implements Serializable {
     private long productId;
     private String name;
     private String brand;
@@ -235,7 +236,7 @@ public class Product {
     }
 }
 
-enum ProductStatus {
+enum ProductStatus implements Serializable {
     REVIEWFORMAKE,
     REVIEWFOREDIT,
     ACCEPTED

@@ -22,23 +22,17 @@ public class SortTest {
 
     @Test
     public void testSortByTime() {
-//         Product a = new Product("phone", 1112, "apple", 1000.0, "nothing", null, null, 1000);
-//         Product b = new Product("plakolang", 11212, "iran", 10.0, "nothing", null, null, 0);
-//         Product c = new Product("S9", 1112, "samsung", 7000.0, "nothing", null, null, 1000);
-//         Product d = new Product("yaghe7", 1112, "nikooTanPoosh", 5.0, "nothing", null, null, 1000);
-//
-
         setCurrentSort("time");
         Product a = new Product("phone", 1112, "apple", 1000.0, "nothing", null, null, 1000);
-        for (long i = 0; i < 10000000; i++) ;
+        for (long i = 0; i < 100000000; i++) ;
         Product b = new Product("plakolang", 11212, "iran", 10.0, "nothing", null, null, 0);
-        for (long i = 0; i < 10000000; i++) ;
+        for (long i = 0; i < 100000000; i++) ;
         Product c = new Product("S9", 1112, "samsung", 7000.0, "nothing", null, null, 1000);
-        for (long i = 0; i < 10000000; i++) ;
+        for (long i = 0; i < 100000000; i++) ;
         Product d = new Product("yaghe7", 1112, "nikooTanPoosh", 5.0, "nothing", null, null, 1000);
-        for (long i = 0; i < 10000000; i++) ;
+        for (long i = 0; i < 100000000; i++) ;
         Product e = new Product("poster", 1112, "LMV", 500.0, "nothing", null, null, 0);
-        for (long i = 0; i < 10000000; i++) ;
+        for (long i = 0; i < 100000000; i++) ;
         Product f = new Product("towelr", 152, "LllV", 2500.0, "nothing", null, null, 0);
         DataBase.allProducts.clear();
         DataBase.sortedOrFilteredProduct.clear();

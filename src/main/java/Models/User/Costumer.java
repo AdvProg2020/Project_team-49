@@ -4,10 +4,11 @@ import Models.DiscountCode;
 import Models.Log.BuyLog;
 import Models.Product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Costumer extends User {
+public class Costumer extends User implements Serializable {
     private HashMap<Product, Integer> cart;
     private ArrayList<BuyLog> buyHistory;
     private ArrayList<DiscountCode> discountCodes;

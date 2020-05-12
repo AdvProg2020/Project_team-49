@@ -4,9 +4,10 @@ import Models.Log.SellLog;
 import Models.Off;
 import Models.Product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Seller extends User {
+public class Seller extends User implements Serializable {
     private ArrayList<SellLog> sellHistory;
     private ArrayList<Product> productsForSale;
     private ArrayList<Off> offs;
