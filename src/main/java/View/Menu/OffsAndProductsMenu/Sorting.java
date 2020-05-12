@@ -1,7 +1,9 @@
 package View.Menu.OffsAndProductsMenu;
 
+import Controller.Controller;
 import Controller.OffAndProductMenuController;
 import View.Menu.Menu;
+import View.Menu.UserArea.UserArea;
 import View.View;
 
 public class Sorting extends Menu {
@@ -17,44 +19,79 @@ public class Sorting extends Menu {
 
     @Override
     public void run(String lastCommand) {
-        String command = scanner.nextLine().trim();
-        if (command.equals("show available sorts")) {
-            View.printAvailableSorting(OffAndProductMenuController.getAllAvailableSorting());
-            this.run(lastCommand);
-        }
+        View.printString("Sorting Menu:");
+        while (true) {
+            String command = scanner.nextLine().trim();
 
-        if (command.equals("sort [an available sort]")) {
-            OffAndProductMenuController.sorting(command.split("\\s")[1]);
+            if (command.equalsIgnoreCase("Show Available Sorts")) {
+                View.printAvailableSorting(OffAndProductMenuController.getAllAvailableSorting());
+                this.run(lastCommand);
+            }
 
-            View.printSortedProduct(OffAndProductMenuController.getCurrentId(),
-                    OffAndProductMenuController.getCurrentName(),
-                    OffAndProductMenuController.getCurrentPrice(),
-                    OffAndProductMenuController.getCurrentOffPercentage(),
-                    OffAndProductMenuController.doesCurrentOff());
+            if (command.equalsIgnoreCase("Sort")) {
+                View.printString("Enter Your Sort:");
+                String sort;
+                while (true){
+                    sort=scanner.nextLine().trim();
+                    if (OffAndProductMenuController.checkSortingInput(sort)){
+                        break;
+                    }
+                    if (sort.equalsIgnoreCase("Back")){
+                        this.run(lastCommand);
+                    }
+                    View.printString("Please Insert Valid Sorting\n" +
+                            "You Can Check Available Sorts By Go Back And Typing (Show Available Sorts)");
+                }
+                OffAndProductMenuController.sorting(sort);
 
-            this.run(lastCommand);
-        }
+                View.printSortedProduct(OffAndProductMenuController.getCurrentId(),
+                        OffAndProductMenuController.getCurrentName(),
+                        OffAndProductMenuController.getCurrentPrice(),
+                        OffAndProductMenuController.getCurrentOffPercentage(),
+                        OffAndProductMenuController.doesCurrentOff());
 
-        if (command.equals("current sort")) {
-            View.printCurrentSort(OffAndProductMenuController.getCurrentSort());
+                this.run(lastCommand);
+            }
 
-            this.run(lastCommand);
-        }
+            if (command.equalsIgnoreCase("current sort")) {
+                View.printCurrentSort(OffAndProductMenuController.getCurrentSort());
 
-        if (command.equals("disable sort")) {
-            OffAndProductMenuController.disableSort();
+                this.run(lastCommand);
+            }
 
-            View.printSortedProduct(OffAndProductMenuController.getCurrentId(),
-                    OffAndProductMenuController.getCurrentName(),
-                    OffAndProductMenuController.getCurrentPrice(),
-                    OffAndProductMenuController.getCurrentOffPercentage(),
-                    OffAndProductMenuController.doesCurrentOff());
+            if (command.equalsIgnoreCase("disable sort")) {
+                OffAndProductMenuController.disableSort();
 
-            this.run(lastCommand);
-        }
+                View.printSortedProduct(OffAndProductMenuController.getCurrentId(),
+                        OffAndProductMenuController.getCurrentName(),
+                        OffAndProductMenuController.getCurrentPrice(),
+                        OffAndProductMenuController.getCurrentOffPercentage(),
+                        OffAndProductMenuController.doesCurrentOff());
 
-        if (command.equals("back")) {
-            this.parentMenu.run(lastCommand);
+                this.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("log in")) {
+                new UserArea(this);
+                this.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("log Out")) {
+                Controller.logout();
+                this.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("Help")) {
+                View.printSortingMenu();
+                this.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("back")) {
+                this.parentMenu.run(lastCommand);
+            }
+
+            View.printString("Please Insert Valid Instruction\n" +
+                    "You Can Check Sorting Instruction By Typing Help.");
         }
     }
 }
