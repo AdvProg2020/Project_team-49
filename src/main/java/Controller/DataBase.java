@@ -23,6 +23,7 @@ public class DataBase {
     private static ObjectOutputStream objectOutputStream;
     static ArrayList<User> allUsers = new ArrayList<User>();
     static ArrayList<Product> allProducts = new ArrayList<Product>();
+    static ArrayList<Product> sortedOrFilteredProduct = new ArrayList<Product>();
     static ArrayList<Category> allCategories = new ArrayList<Category>();
     static ArrayList<String> allAvailableFilters = new ArrayList<String>();
     static ArrayList<String> allAvailableSorting = new ArrayList<String>();

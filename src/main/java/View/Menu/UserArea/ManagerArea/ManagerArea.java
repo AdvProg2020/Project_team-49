@@ -50,6 +50,8 @@ public class ManagerArea extends Menu {
         return "invalid";
     }
 
+
+    //kamel nist
     private Menu getCreateDiscountCode() {
         return new Menu("Create Discount Code", this) {
             @Override
@@ -68,7 +70,7 @@ public class ManagerArea extends Menu {
                 } else if (!getMatcher(info.get(5), "\\d+").matches()) {
                     View.printString("invalid repeat times");
                 } else {
-                    View.printString(ManagerAreaController.createDiscountCode(info));
+                    //View.printString(ManagerAreaController.createDiscountCode(info));
                 }
                 this.parentMenu.run(lastCommand);
             }
