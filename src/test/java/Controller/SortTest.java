@@ -22,19 +22,24 @@ public class SortTest {
 
     @Test
     public void testSortByTime() {
+//         Product a = new Product("phone", 1112, "apple", 1000.0, "nothing", null, null, 1000);
+//         Product b = new Product("plakolang", 11212, "iran", 10.0, "nothing", null, null, 0);
+//         Product c = new Product("S9", 1112, "samsung", 7000.0, "nothing", null, null, 1000);
+//         Product d = new Product("yaghe7", 1112, "nikooTanPoosh", 5.0, "nothing", null, null, 1000);
+//
 
         setCurrentSort("time");
-        Product a = new Product();
+        Product a = new Product("phone", 1112, "apple", 1000.0, "nothing", null, null, 1000);
         for (long i = 0; i < 10000000; i++) ;
-        Product b = new Product();
+        Product b = new Product("plakolang", 11212, "iran", 10.0, "nothing", null, null, 0);
         for (long i = 0; i < 10000000; i++) ;
-        Product c = new Product();
+        Product c = new Product("S9", 1112, "samsung", 7000.0, "nothing", null, null, 1000);
         for (long i = 0; i < 10000000; i++) ;
-        Product d = new Product();
+        Product d = new Product("yaghe7", 1112, "nikooTanPoosh", 5.0, "nothing", null, null, 1000);
         for (long i = 0; i < 10000000; i++) ;
-        Product e = new Product();
+        Product e = new Product("poster", 1112, "LMV", 500.0, "nothing", null, null, 0);
         for (long i = 0; i < 10000000; i++) ;
-        Product f = new Product();
+        Product f = new Product("towelr", 152, "LllV", 2500.0, "nothing", null, null, 0);
         DataBase.allProducts.clear();
         DataBase.sortedOrFilteredProduct.clear();
         DataBase.allProducts.add(a);
@@ -58,14 +63,19 @@ public class SortTest {
 
     @Test
     public void testSortByViews() {
-
         setCurrentSort("view");
-        Product a = new Product(1000);
-        Product b = new Product(500);
-        Product c = new Product(200);
-        Product d = new Product(100);
-        Product e = new Product(90);
-        Product f = new Product(10);
+        Product a = new Product("phone", 1112, "apple", 1000.0, "nothing", null, null, 1000);
+        Product b = new Product("plakolang", 11212, "iran", 10.0, "nothing", null, null, 0);
+        Product c = new Product("S9", 1112, "samsung", 7000.0, "nothing", null, null, 1000);
+        Product d = new Product("yaghe7", 1112, "nikooTanPoosh", 5.0, "nothing", null, null, 1000);
+        Product e = new Product("poster", 1112, "LMV", 500.0, "nothing", null, null, 0);
+        Product f = new Product("towelr", 152, "LllV", 2500.0, "nothing", null, null, 0);
+        a.setNumberOfView(1000);
+        b.setNumberOfView(500);
+        c.setNumberOfView(200);
+        d.setNumberOfView(100);
+        e.setNumberOfView(90);
+        f.setNumberOfView(90);
         DataBase.allProducts.clear();
         DataBase.sortedOrFilteredProduct.clear();
         DataBase.allProducts.add(a);
@@ -90,12 +100,18 @@ public class SortTest {
     @Test
     public void testSortByScore() {
         setCurrentSort("score");
-        Product a = new Product(4.99);
-        Product b = new Product(4.80);
-        Product c = new Product(4.82);
-        Product d = new Product(4.7);
-        Product e = new Product(4.6);
-        Product f = new Product(4.6);
+        Product a = new Product("phone", 1112, "apple", 1000.0, "nothing", null, null, 1000);
+        Product b = new Product("plakolang", 11212, "iran", 10.0, "nothing", null, null, 0);
+        Product c = new Product("S9", 1112, "samsung", 7000.0, "nothing", null, null, 1000);
+        Product d = new Product("yaghe7", 1112, "nikooTanPoosh", 5.0, "nothing", null, null, 1000);
+        Product e = new Product("poster", 1112, "LMV", 500.0, "nothing", null, null, 0);
+        Product f = new Product("towelr", 152, "LllV", 2500.0, "nothing", null, null, 0);
+        a.setAverageScore(4.99);
+        b.setAverageScore(4.8);
+        c.setAverageScore(4.82);
+        d.setAverageScore(4.7);
+        e.setAverageScore(4.6);
+        f.setAverageScore(4.6);
         DataBase.allProducts.clear();
         DataBase.sortedOrFilteredProduct.clear();
         DataBase.allProducts.add(a);

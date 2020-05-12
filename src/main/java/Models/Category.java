@@ -21,6 +21,7 @@ public class Category {
 
 
 
+
     public ArrayList<Product> getAllProducts() {
         return allProducts;
     }

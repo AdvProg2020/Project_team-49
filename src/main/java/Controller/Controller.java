@@ -80,14 +80,14 @@ public class Controller {
         return false;
     }
 
-    public static void addToCart(Product product,Seller seller) {
+    public static void  addToCart(Product product,Seller seller,int count) {
         if (currentUser.getType().equalsIgnoreCase("Guest")){
             Guest guest= (Guest) currentUser;
-            guest.addProductToCart(product,seller);
+            guest.addProductToCart(product,seller,count);
         }
         if (currentUser.getType().equalsIgnoreCase("Costumer")){
             Costumer costumer=(Costumer) currentUser;
-            costumer.addProductToCart(product,seller);
+            costumer.addProductToCart(product,seller,count);
         }
     }
 

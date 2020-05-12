@@ -31,12 +31,7 @@ public class Product {
     private int numberOfView;
     private Date productDate;
 
-    public Product(String name, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems) {
-        this.name = name;
-        this.productId = 0;
-        this.price = price;
-        this.parentCategory = parentCategory;
-
+    public Product(String name, long productId, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems) {
         this.allSellers = new HashMap<Seller, Integer>();
         this.brand = brand;
         this.addItem(seller, remainingItems);
@@ -44,9 +39,10 @@ public class Product {
         this.allComments = new ArrayList<>();
         this.explanation = explanation;
         this.status = ProductStatus.REVIEWFORMAKE;
-    }
-
-    public Product(){
+        this.parentCategory = parentCategory;
+        this.name = name;
+        this.price = price;
+        this.productId = productId;
         this.productDate = new Date();
     }
 

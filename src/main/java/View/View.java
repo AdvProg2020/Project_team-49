@@ -2,6 +2,7 @@ package View;
 
 import View.Menu.MainMenu;
 import View.Menu.Menu;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,6 +11,10 @@ public class View {
 
     public View() {
 
+    }
+    public static void run() {
+        Menu.setScanner(new Scanner(System.in));
+        new MainMenu().run("");
     }
 
     public static void printAllProduct(ArrayList<Long> productsId,
@@ -197,8 +202,80 @@ public class View {
         System.out.println("Add to Card Successfully Done");
     }
 
-    public static void run() {
-        Menu.setScanner(new Scanner(System.in));
-        new MainMenu().run("");
+    public static void printProductsPage(){
+        System.out.println("Products Page:\n"+
+                "1. Show All Product\n"+
+                "2. Show Categories\n"+
+                "3. Filtering Menu \n"+
+                "4. Sorting Menu \n"+
+                "5. Show Product\n"+
+                "6. Log In\n"+
+                "7. Log Out");
+    }
+
+    public static void printOffsPage(){
+        System.out.println("Offs Page:\n"+
+                "1. Show All Product\n"+
+                "2. Show Categories\n"+
+                "3. Filtering Menu \n"+
+                "4. Sorting Menu \n"+
+                "5. Show Product\n"+
+                "6. Log In\n"+
+                "7. Log Out");
+    }
+
+    public static void printCommentsMenu(){
+        System.out.println("Comment Menu Instruction:\n"+
+                "1. Add Comment\n"+
+                "2. Log In\n"+
+                "3. Log out\n"+
+                "4. Help\n"+
+                "5. back");
+    }
+
+    public static void printDigestMenu(){
+        System.out.println("Digest Menu Instruction:\n"+
+                "1. Add To Cart\n"+
+                "2. Select Seller\n"+
+                "3. Log In\n"+
+                "4. Log Out\n"+
+                "5. Help\n"+
+                "6. Back");
+    }
+
+    public static void printFilteringMenu(){
+        System.out.println("Filtering Menu Instruction:\n"+
+                "1. Show Available Filters\n"+
+                "2. Filter\n"+
+                "3. Current Filter\n"+
+                "4. Disable Filter\n"+
+                "5. Search For [sth]\n"+
+                "6. Log In\n"+
+                "7. Log Out\n"+
+                "8. Help\n"+
+                "9. Back\n");
+    }
+
+    public static void printSortingMenu(){
+        System.out.println("Sorting Menu Instruction\n" +
+                "1. Show Available Sort\n" +
+                "2. Sort\n" +
+                "3. Current Sort\n" +
+                "4. Disable Sort\n" +
+                "5. Log In\n" +
+                "6. Log Out\n" +
+                "7. Help\n" +
+                "8. Back");
+    }
+    public static void printShowProductMenu(){
+        System.out.println("Show Product Instruction:\n" +
+                "1. Digest\n" +
+                "2. Attribute\n" +
+                "3. Compare [productID]\n" +
+                "4. Comments\n" +
+                "5. Log In\n" +
+                "6. Log Out\n" +
+                "7. Help\n" +
+                "8. Back");
     }
 }
