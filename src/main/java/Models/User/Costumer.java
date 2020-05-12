@@ -42,7 +42,7 @@ public class Costumer extends User implements Serializable {
         this.credit = credit;
     }
 
-    public void addProductToCart(Product product,Seller seller) {
+    public void addProductToCart(Product product,Seller seller,int count) {
 
     }
 

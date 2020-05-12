@@ -21,6 +21,8 @@ public class ProductsPage extends Menu {
         subMenus.put("Log Out",getLogout());
         //bara show Product bayad havasam bashe commond ba id pass bedam
         this.setSubMenus(subMenus);
+
+
     }
 
     private Menu getLogout() {
@@ -35,6 +37,8 @@ public class ProductsPage extends Menu {
 
     @Override
     public String getCommandKey(String command) {
+        View.printProductsPage();
+
         if (command.equalsIgnoreCase("Show All Product")){
             return "Show All Product";
         }

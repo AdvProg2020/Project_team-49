@@ -16,57 +16,71 @@ public class ShowProduct extends Menu {
 
     @Override
     public void run(String lastCommand) {
+        View.printString("Show Product Menu:");
         long productId = Long.parseLong(lastCommand.split("\\s")[2]);
-        String command = scanner.nextLine().trim();
-        if (command.equals("digest")) {
-            View.printProductSummery(productId,ShowProductDetail.getName(productId),
-                    ShowProductDetail.getOffPercentage(productId),ShowProductDetail.getExplanation(productId),
-                    ShowProductDetail.getPrice(productId), ShowProductDetail.getCategory(productId),
-                    ShowProductDetail.getAverageScore(productId));
 
-            new Digest(this);
-            //bayad in line tarif beshe vali baraye tamizi in karo kardam
+        while (true) {
+            String command = scanner.nextLine().trim();
 
-            this.run(lastCommand);
-        }
-        if (command.equals("attributes")) {
-            View.printAttributes(productId,ShowProductDetail.getName(productId),
-                    ShowProductDetail.getOffPercentage(productId),ShowProductDetail.getExplanation(productId),
-                    ShowProductDetail.getPrice(productId), ShowProductDetail.getCategory(productId),
-                    ShowProductDetail.getAverageScore(productId),ShowProductDetail.getAllSeller(productId),
-                    ShowProductDetail.getRemainedNumber(productId));
+            if (command.equalsIgnoreCase("digest")) {
+                View.printProductSummery(productId, ShowProductDetail.getName(productId),
+                        ShowProductDetail.getOffPercentage(productId), ShowProductDetail.getExplanation(productId),
+                        ShowProductDetail.getPrice(productId), ShowProductDetail.getCategory(productId),
+                        ShowProductDetail.getAverageScore(productId));
 
-            this.run(lastCommand);
-        }
-        if (command.equals("compare [productID]")) {
-            long secondProductId=Long.parseLong(command.split("\\s")[1]);
-            View.printCompareProduct(ShowProductDetail.getName(productId),ShowProductDetail.getOffPercentage(productId),
-                    ShowProductDetail.getExplanation(productId),ShowProductDetail.getPrice(productId),
-                    ShowProductDetail.getAverageScore(productId),
+                new Digest(this);
+                this.run(lastCommand);
+            }
 
-                    ShowProductDetail.getName(secondProductId),ShowProductDetail.getOffPercentage(secondProductId),
-                    ShowProductDetail.getExplanation(secondProductId),ShowProductDetail.getPrice(secondProductId),
-                    ShowProductDetail.getAverageScore(secondProductId));
-            //bayad havasm bashe ke controller bayad ye product jadid bi in pas bede
+            if (command.equalsIgnoreCase("attributes")) {
+                View.printAttributes(productId, ShowProductDetail.getName(productId),
+                        ShowProductDetail.getOffPercentage(productId), ShowProductDetail.getExplanation(productId),
+                        ShowProductDetail.getPrice(productId), ShowProductDetail.getCategory(productId),
+                        ShowProductDetail.getAverageScore(productId), ShowProductDetail.getAllSeller(productId),
+                        ShowProductDetail.getRemainedNumber(productId));
 
-            this.run(lastCommand);
-        }
-        if (command.equals("Comments")) {
-            new Comments(this,productId);
-            this.run(lastCommand);
-        }
-        if (command.equals("log in")){
-            new UserArea(this);
-            this.run(lastCommand);
-        }
+                this.run(lastCommand);
+            }
 
-        if (command.equals("log Out")){
-            Controller.logout();
-            this.run(lastCommand);
-        }
+            if (command.equalsIgnoreCase("compare [productID]")) {
+                long secondProductId = Long.parseLong(command.split("\\s")[1]);
+                View.printCompareProduct(ShowProductDetail.getName(productId), ShowProductDetail.getOffPercentage(productId),
+                        ShowProductDetail.getExplanation(productId), ShowProductDetail.getPrice(productId),
+                        ShowProductDetail.getAverageScore(productId),
 
-        if (command.equals("back")) {
-            this.parentMenu.run(lastCommand);
+                        ShowProductDetail.getName(secondProductId), ShowProductDetail.getOffPercentage(secondProductId),
+                        ShowProductDetail.getExplanation(secondProductId), ShowProductDetail.getPrice(secondProductId),
+                        ShowProductDetail.getAverageScore(secondProductId));
+                //bayad havasm bashe ke controller bayad ye product jadid bi in pas bede
+
+                this.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("Comments")) {
+                new Comments(this, productId);
+                this.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("log in")) {
+                new UserArea(this);
+                this.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("log Out")) {
+                Controller.logout();
+                this.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("Help")){
+                View.printShowProductMenu();
+            }
+
+            if (command.equals("back")) {
+                this.parentMenu.run(lastCommand);
+            }
+
+            View.printString("Please enter valid Instruction\n" +
+                    "You Can Instruction By Typing Help");
         }
     }
 }

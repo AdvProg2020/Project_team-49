@@ -13,7 +13,7 @@ public class Guest extends User implements Serializable {
         this.cart = new HashMap<Product,Integer>(   );
     }
 
-    public void addProductToCart(Product product,Seller seller){}
+    public void addProductToCart(Product product,Seller seller,int Count){}
 
     public HashMap<Product, Integer> getCart() {
         return cart;
