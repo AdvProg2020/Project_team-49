@@ -2,9 +2,10 @@ package Models.User;
 
 import Models.Product;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Guest extends User {
+public class Guest extends User implements Serializable {
     private HashMap<Product, Integer> cart;
 
     public Guest() {

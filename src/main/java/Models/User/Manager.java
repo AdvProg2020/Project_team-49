@@ -3,9 +3,10 @@ package Models.User;
 import Models.DiscountCode;
 import Models.User.Request.Request;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Manager extends User {
+public class Manager extends User implements Serializable {
     private static ArrayList<Request> allActiveRequests = new ArrayList<>();
     private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
 

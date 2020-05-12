@@ -5,7 +5,10 @@ import Models.Category;
 import Models.Product;
 import Models.User.User;
 import View.View;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +21,6 @@ public class DataBase {
     private static OutputStream outputStream;
     private static ObjectInputStream objectInputStream;
     private static ObjectOutputStream objectOutputStream;
-
     static ArrayList<User> allUsers = new ArrayList<User>();
     static ArrayList<Product> allProducts = new ArrayList<Product>();
     static ArrayList<Category> allCategories = new ArrayList<Category>();
@@ -27,6 +29,11 @@ public class DataBase {
     static ArrayList<Product> sortedOrFilteredProduct = new ArrayList<Product>();
 
     public static User getUserByUsername(String username) {
+        for (User user : allUsers) {
+            if (user.getUsername().equalsIgnoreCase(username)) {
+                return user;
+            }
+        }
         return null;
     }
 
@@ -144,6 +151,7 @@ public class DataBase {
             inputStream = new FileInputStream("src/main/resources/DataBase/products.txt");
             objectInputStream = new ObjectInputStream(inputStream);
             allProducts = (ArrayList<Product>) objectInputStream.readObject();
+            objectInputStream.close();
             inputStream.close();
         } catch (Exception e) {
             System.out.println("still no files in dataBase/products");
@@ -155,6 +163,7 @@ public class DataBase {
             inputStream = new FileInputStream("src/main/resources/DataBase/users.txt");
             objectInputStream = new ObjectInputStream(inputStream);
             allUsers = (ArrayList<User>) objectInputStream.readObject();
+            objectInputStream.close();
             inputStream.close();
         } catch (Exception e) {
             System.out.println("still no files in dataBase/users");
@@ -166,6 +175,7 @@ public class DataBase {
             inputStream = new FileInputStream("src/main/resources/DataBase/categories.txt");
             objectInputStream = new ObjectInputStream(inputStream);
             allCategories = (ArrayList<Category>) objectInputStream.readObject();
+            objectInputStream.close();
             inputStream.close();
         } catch (Exception e) {
             System.out.println("still no files in dataBase/categories");
@@ -204,13 +214,14 @@ public class DataBase {
 
     public static void saveAllCategories() {
         try {
-            outputStream = new FileOutputStream("src/main/resources/DataBase/categories.txt");
-            objectOutputStream = new ObjectOutputStream(outputStream);
+            OutputStream outputStream = new FileOutputStream("src/main/resources/DataBase/categories.txt");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(allCategories);
             objectOutputStream.close();
             outputStream.close();
         } catch (Exception e) {
             System.out.println("can't save categories");
         }
+
     }
 }

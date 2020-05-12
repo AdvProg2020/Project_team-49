@@ -2,9 +2,10 @@ package Models;
 
 import Controller.DataBase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Category {
+public class Category implements Serializable {
     private String name;
     private String specialAttributes;
     private ArrayList<Category> subCategories;
