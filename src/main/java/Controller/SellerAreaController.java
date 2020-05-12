@@ -1,13 +1,21 @@
 package Controller;
 
 import Models.Log.SellLog;
+import Models.Off;
+import Models.OffStatus;
 import Models.Product;
 import Models.User.Manager;
+import Models.User.Request.AddOffRequest;
 import Models.User.Request.AddProductRequest;
+import Models.User.Request.EditOffRequest;
+import Models.User.Request.EditProductRequest;
 import Models.User.Seller;
 import View.View;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SellerAreaController {
 
@@ -44,14 +52,48 @@ public class SellerAreaController {
         }
     }
 
-    public static void editOff(String field, String newContent, long offId) {
+    //kamel nist
+    public static String editOff(String field, String newContent, long offId) {
         Seller seller = (Seller) Controller.currentUser;
-        seller.getOffById(1);
+        if (seller.getOffById(offId) == null) {
+            return "off not exist";
+        } else if (field.toLowerCase().equals("enddate")) {
+            Manager.addRequest(new EditOffRequest("endDate", newContent, seller.getOffById(offId)));
+            return "request sent";
+        } else if (field.toLowerCase().equals("amount")) {
+            if (!newContent.matches("\\d+")) {
+                return "invalid new content";
+            }
+            Manager.addRequest(new EditOffRequest("amount", newContent, seller.getOffById(offId)));
+            return "request sent";
+        }
+        return "invalid field";
     }
 
-    public static void addOff(String[] info) {
+    //kamel nist
+    public static String addOff(ArrayList<String> info) throws ParseException {
         Seller seller = (Seller) Controller.currentUser;
-        seller.addOff(null);
+        ArrayList<Product> products = new ArrayList<>();
+        for (String Id : info.get(0).split("\\s")) {
+            if (!Id.matches("\\d+")) {
+                return "invalid Id";
+            }
+            if (seller.getProductById(Long.parseLong(Id)) == null) {
+                return "product not exist";
+            }
+            products.add(DataBase.getProductById(Long.parseLong(Id)));
+        }
+        if (!info.get(1).matches("date structure")) {
+            return "invalid end date";
+        }
+        if (!info.get(2).matches("\\d+")) {
+            return "invalid percentage";
+        }
+        if (Integer.parseInt(info.get(2)) >= 100) {
+            return "invalid percentage";
+        }
+        Manager.addRequest(new AddOffRequest(new Off(products, OffStatus.inProgressToBuild, new Date(), new SimpleDateFormat("date structure").parse(info.get(1)), Integer.parseInt(info.get(2)))));
+        return "request sent";
     }
 
     public static String viewCompanyInfo() {
@@ -98,20 +140,20 @@ public class SellerAreaController {
         if (DataBase.getProductById(productId) == null) {
             return "product not exist";
         } else if (field.toLowerCase().equals("name")) {
-            DataBase.getProductById(productId).setName(newContent);
-            return "field edited";
+            Manager.addRequest(new EditProductRequest("name", newContent, DataBase.getProductById(productId)));
+            return "request sent";
         } else if (field.toLowerCase().equals("brand")) {
-            DataBase.getProductById(productId).setBrand(newContent);
-            return "field edited";
+            Manager.addRequest(new EditProductRequest("brand", newContent, DataBase.getProductById(productId)));
+            return "request sent";
         } else if (field.toLowerCase().equals("price")) {
             if (!newContent.matches("(\\d+)(\\.?)(\\d*)")) {
                 return "invalid new content";
             }
-            DataBase.getProductById(productId).setPrice(Double.parseDouble(newContent));
-            return "field edited";
+            Manager.addRequest(new EditProductRequest("price", newContent, DataBase.getProductById(productId)));
+            return "request sent";
         } else if (field.toLowerCase().equals("explanation")) {
-            DataBase.getProductById(productId).setExplanation(newContent);
-            return "field edited";
+            Manager.addRequest(new EditProductRequest("explanation", newContent, DataBase.getProductById(productId)));
+            return "request sent";
         } else {
             return "invalid field";
         }

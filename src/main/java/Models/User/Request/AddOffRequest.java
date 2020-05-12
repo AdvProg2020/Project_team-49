@@ -2,10 +2,10 @@ package Models.User.Request;
 
 import Models.Off;
 
-public class AddOff extends Request {
+public class AddOffRequest extends Request {
     private Off off;
 
-    public AddOff(Off off) {
+    public AddOffRequest(Off off) {
         this.off = off;
     }
 

@@ -13,9 +13,8 @@ public class Off {
     private Date endDate;
     private int offAmount;
 
-    public Off(long offId, ArrayList<Product> products, OffStatus offStatus,
-               Date startDate, Date endDate, int offAmount) {
-        this.offId = offId;
+    public Off(ArrayList<Product> products, OffStatus offStatus, Date startDate, Date endDate, int offAmount) {
+        this.offId = 0;
         this.products = products;
         this.offStatus = offStatus;
         this.startDate = startDate;

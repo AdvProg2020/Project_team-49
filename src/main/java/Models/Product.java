@@ -31,7 +31,7 @@ public class Product {
     private int numberOfView;
     private Date productDate;
 
-    public Product(String name, long productId, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems) {
+    public Product(String name, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems) {
         this.allSellers = new HashMap<Seller, Integer>();
         this.brand = brand;
         this.addItem(seller, remainingItems);
@@ -42,7 +42,6 @@ public class Product {
         this.parentCategory = parentCategory;
         this.name = name;
         this.price = price;
-        this.productId = productId;
         this.productDate = new Date();
     }
 

@@ -5,13 +5,13 @@ import Models.Product;
 import java.util.ArrayList;
 
 public class EditProductRequest extends Request {
-    private ArrayList<String> fields;
-    private ArrayList<String> newContents;
+    private String field;
+    private String newContent;
     private Product product;
 
-    public EditProductRequest(ArrayList<String> fields, ArrayList<String> newContents, Product product) {
-        this.fields = fields;
-        this.newContents = newContents;
+    public EditProductRequest(String field, String newContent, Product product) {
+        this.field = field;
+        this.newContent = newContent;
         this.product = product;
     }
 
@@ -23,18 +23,14 @@ public class EditProductRequest extends Request {
     @Override
     public String toString() {
         return "EditProduct{" +
-                "field='" + fields + '\'' +
-                ", newContent='" + newContents + '\'' +
+                "field='" + field + '\'' +
+                ", newContent='" + newContent + '\'' +
                 ", product=" + product +
                 '}';
     }
 
     @Override
     public void run() {
-        for (int i = 0; i < fields.size(); i++) {
-            if (fields.get(i).equals("")) {
 
-            }
-        }
     }
 }

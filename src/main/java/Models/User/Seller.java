@@ -40,6 +40,15 @@ public class Seller extends User {
         return companyName;
     }
 
+    public Product getProductById(Long Id) {
+        for (Product product : productsForSale) {
+            if (product.getProductId() == Id) {
+                return product;
+            }
+        }
+        return null;
+    }
+
     public void addProduct(Product product) {
 
     }

@@ -5,6 +5,8 @@ import Controller.SellerAreaController;
 import View.Menu.Menu;
 import View.View;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ViewOffs extends Menu {
@@ -64,18 +66,38 @@ public class ViewOffs extends Menu {
         return new Menu("Edit Off", this) {
             @Override
             public void run(String lastCommand) {
-                SellerAreaController.editOff("", "", 1);
-                this.parentMenu.run("");
+                while (true) {
+                    View.printString("enter field:");
+                    String field = scanner.nextLine().trim();
+                    if (field.matches("(?i)back")) {
+                        break;
+                    }
+                    View.printString("enter new content:");
+                    String content = scanner.nextLine().trim();
+                    if (content.matches("(?i)back")) {
+                        break;
+                    }
+                    View.printString(SellerAreaController.editOff(field, content, Long.parseLong(lastCommand.split("\\s")[1])));
+                }
+                this.parentMenu.run(lastCommand);
             }
         };
     }
 
+    //kamel nist
     private Menu getAddOff() {
         return new Menu("Add Off", this) {
             @Override
             public void run(String lastCommand) {
-                SellerAreaController.addOff(new String[3]);
-                this.parentMenu.run("");
+                ArrayList<String> info = new ArrayList<>();
+                View.printString("enter products Ids (separate them with space):");
+                info.add(scanner.nextLine().trim());
+                View.printString("enter end date (date structure):");
+                info.add(scanner.nextLine().trim());
+                View.printString("enter off percentage:");
+                info.add(scanner.nextLine().trim());
+                //SellerAreaController.addOff(info);
+                this.parentMenu.run(lastCommand);
             }
         };
     }
