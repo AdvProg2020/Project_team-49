@@ -7,6 +7,7 @@ import View.View;
 
 import javax.naming.ldap.SortResponseControl;
 import java.awt.image.VolatileImage;
+import java.util.ArrayList;
 
 public class ViewOrders extends Menu {
 
@@ -19,6 +20,7 @@ public class ViewOrders extends Menu {
             View.printString("order not exist");
             return;
         }
+        showOrder(orderId);
         while (true) {
             String command = scanner.nextLine().trim();
             if (getMatcher(command, "(?i)rate (\\S+) (\\S)").matches()) {
@@ -43,7 +45,12 @@ public class ViewOrders extends Menu {
     }
 
     private void showOrders(){
-
+        ArrayList<String> orders = CostumerAreaController.getOrders();
+        View.printString("Orders:");
+        for (String order : orders) {
+            showOrder(Long.parseLong(order.split("\\s")[0]));
+            View.printString("______________________________________");
+        }
     }
 
     @Override
@@ -68,5 +75,14 @@ public class ViewOrders extends Menu {
         }
         View.printString("invalid command");
         this.run(lastCommand);
+    }
+
+    private void showOrder(long orderId) {
+        String info = CostumerAreaController.getOrderInfoById(orderId);
+        View.printString("order Id: " + info.split("\\s")[0]);
+        View.printString("seller name: " + info.split("\\s")[1]);
+        View.printString("paid amount: " + info.split("\\s")[2]);
+        View.printString("receive status: " + info.split("\\s")[3]);
+        View.printString("bought products: " + info.split("\\s")[4]);
     }
 }

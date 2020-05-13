@@ -4,6 +4,7 @@ import Controller.Controller;
 import Controller.CostumerAreaController;
 import View.Menu.Menu;
 import View.Menu.OffsAndProductsMenu.ShowProduct;
+import View.View;
 
 import java.util.HashMap;
 
@@ -24,7 +25,36 @@ public class ViewCart extends Menu {
 
     @Override
     public String getCommandKey(String command) {
-        return super.getCommandKey(command);
+        if (getMatcher(command, "(?i)show products").matches()) {
+            return "Show Products";
+        } else if (getMatcher(command, "(?i)view (\\S+)").matches()) {
+            if (!checkProductId(command.split("\\s")[1])) {
+                return "invalid";
+            }
+            return "Show Product";
+        } else if (getMatcher(command, "(?i)increase (\\S+)").matches()) {
+            if (!checkProductId(command.split("\\s")[1])) {
+                return "invalid";
+            }
+            return "Increase Product";
+        } else if (getMatcher(command, "(?i)decrease (\\S+)").matches()) {
+            if (!checkProductId(command.split("\\s")[1])) {
+                return "invalid";
+            }
+            return "Decrease Product";
+        } else if (getMatcher(command, "(?i)show total price").matches()) {
+            return "Show Total Price";
+        } else if (getMatcher(command, "(?i)purchase").matches()) {
+            return "Purchase";
+        } else if (getMatcher(command, "(?i)logout").matches()) {
+            return "Logout";
+        } else if (getMatcher(command, "(?i)help").matches()) {
+            return "help";
+        } else if (getMatcher(command, "(?i)back").matches()) {
+            return "back";
+        }
+        View.printString("invalid command");
+        return "invalid";
     }
 
     private Menu getShowProducts() {
@@ -32,7 +62,7 @@ public class ViewCart extends Menu {
             @Override
             public void run(String lastCommand) {
                 CostumerAreaController.showProducts();
-                this.parentMenu.run("");
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -41,8 +71,8 @@ public class ViewCart extends Menu {
         return new Menu("Increase Product", this) {
             @Override
             public void run(String lastCommand) {
-                //Controller.addToCart(null,null);
-                this.parentMenu.run("");
+                View.printString(CostumerAreaController.IncreaseOrDecreaseProduct(Long.parseLong(lastCommand.split("\\s")[1]), 1));
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -52,7 +82,8 @@ public class ViewCart extends Menu {
             @Override
             public void run(String lastCommand) {
                 Controller.logout();
-                allMenus.get(0).run("");
+                View.printString("logout successful");
+                allMenus.get(0).run(lastCommand);
             }
         };
     }
@@ -61,8 +92,8 @@ public class ViewCart extends Menu {
         return new Menu("Decrease Product", this) {
             @Override
             public void run(String lastCommand) {
-                CostumerAreaController.removeFromCart(1);
-                this.parentMenu.run("");
+                View.printString(CostumerAreaController.IncreaseOrDecreaseProduct(Long.parseLong(lastCommand.split("\\s")[1]), -1));
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -71,9 +102,17 @@ public class ViewCart extends Menu {
         return new Menu("Show Total Price", this) {
             @Override
             public void run(String lastCommand) {
-                CostumerAreaController.getTotalPrice();
-                this.parentMenu.run("");
+                View.printString("total price: " + CostumerAreaController.getTotalPrice());
+                this.parentMenu.run(lastCommand);
             }
         };
+    }
+
+    private boolean checkProductId(String Id) {
+        if (!getMatcher(Id, "\\d+").matches()) {
+            View.printString("invalid product Id");
+            return false;
+        }
+        return true;
     }
 }
