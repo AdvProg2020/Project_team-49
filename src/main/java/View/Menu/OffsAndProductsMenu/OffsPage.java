@@ -17,7 +17,7 @@ public class OffsPage extends Menu {
         subMenus.put("Filtering", new Filtering(this));
         subMenus.put("Sorting", new Sorting(this));
         subMenus.put("Show Product", new ShowProduct(this));
-        new ShowOffProducts(this).run("");
+//        new ShowOffProducts(this).run("");
         subMenus.put("Log In",new UserArea(this));
         subMenus.put("Log Out",getLogout());
         //bara show Product bayad havasam bashe commond ba id pass bedam
@@ -42,6 +42,7 @@ public class OffsPage extends Menu {
 
     @Override
     public String getCommandKey(String command) {
+        View.printOffsPage();
 
         if (command.equalsIgnoreCase("Show All Product")){
             return "Show All Product";
@@ -58,7 +59,6 @@ public class OffsPage extends Menu {
         if (command.equalsIgnoreCase("Show Product")){
             return "Show Product";
         }
-        //back
         if (command.equalsIgnoreCase("Log In")){
             return "Log In";
         }
