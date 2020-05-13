@@ -53,7 +53,6 @@ public class ViewOrders extends Menu {
         if (getMatcher(command, "(?i)show order (\\S+)").matches()) {
             if (!getMatcher(command.split("\\s")[2], "\\d+").matches()) {
                 View.printString("invalid order Id");
-
             } else {
                 this.showOrderPage(Long.parseLong(command.split("\\s")[2]));
             }
