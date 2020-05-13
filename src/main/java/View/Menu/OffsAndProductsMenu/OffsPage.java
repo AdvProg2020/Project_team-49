@@ -42,7 +42,6 @@ public class OffsPage extends Menu {
 
     @Override
     public String getCommandKey(String command) {
-        View.printOffsPage();
 
         if (command.equalsIgnoreCase("Show All Product")){
             return "Show All Product";
