@@ -29,14 +29,20 @@ public class ManageAllProducts extends Menu {
                 }
                 continue;
             }
-            if (lastCommand.equals("logout")) {
+            if (getMatcher(command, "(?i)logout").matches()) {
                 Controller.logout();
                 View.printString("logout successful");
                 allMenus.get(0).run(lastCommand);
+                break;
+            }
+            if (getMatcher(command, "(?i)help").matches()) {
+                this.showMenu();
+                continue;
             }
             if (getMatcher(command, "(?i)back").matches()) {
                 break;
             }
+            View.printString("invalid command");
         }
         this.parentMenu.run(lastCommand);
     }

@@ -42,6 +42,7 @@ public class GuestArea extends Menu {
         };
     }
 
+    //has user with username!
     private Menu getRegisterMenu() {
         return new Menu("Register Menu", this) {
             @Override
@@ -64,7 +65,6 @@ public class GuestArea extends Menu {
     public String getCommandKey(String command) {
         if (getMatcher(command, "(?i)create account (\\S+) (\\S+)").matches()) {
             if (!checkCreateAccountCommand(command)) {
-                //View.printString("invalid command");
                 return "invalid";
             }
             return "Register Menu";

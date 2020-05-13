@@ -31,6 +31,6 @@ public class Purchase extends Menu {
         this.getReceiverInformation();
         this.getDiscountCode();
         this.doPayment();
-        this.parentMenu.run("");
+        this.parentMenu.run(lastCommand);
     }
 }

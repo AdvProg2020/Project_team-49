@@ -22,6 +22,12 @@ public class ViewPersonalInfo extends Menu {
         View.printString(line);
     }
 
+    //kamel nist
+    @Override
+    public void showMenu() {
+
+    }
+
     @Override
     public void run(String lastCommand) {
         this.showPersonalInfo(Controller.getPersonalInfo());
@@ -39,7 +45,11 @@ public class ViewPersonalInfo extends Menu {
                 allMenus.get(0).run(lastCommand);
                 break;
             }
-            if (command.equals("back")) {
+            if (getMatcher(command, "(?i)help").matches()) {
+                this.showMenu();
+                continue;
+            }
+            if (getMatcher(command, "(?i)back").matches()) {
                 break;
             }
             View.printString("invalid command");

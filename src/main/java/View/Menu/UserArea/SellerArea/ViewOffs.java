@@ -38,6 +38,8 @@ public class ViewOffs extends Menu {
             return "Logout";
         } else if (getMatcher(command, "(?i)back").matches()) {
             return "back";
+        } else if (getMatcher(command, "(?i)help").matches()) {
+            return "help";
         }
         View.printString("invalid command");
         return "invalid";

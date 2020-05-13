@@ -45,11 +45,12 @@ public class ManagerArea extends Menu {
             return "back";
         } else if (getMatcher(command, "(?i)logout").matches()) {
             return "Logout";
+        } else if (getMatcher(command, "(?i)help").matches()) {
+            return "help";
         }
         View.printString("invalid command");
         return "invalid";
     }
-
 
     //kamel nist
     private Menu getCreateDiscountCode() {

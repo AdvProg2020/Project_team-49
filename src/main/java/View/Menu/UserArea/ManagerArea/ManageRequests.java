@@ -15,6 +15,12 @@ public class ManageRequests extends Menu {
         ManagerAreaController.showRequests();
     }
 
+    //kamel nist
+    @Override
+    public void showMenu() {
+
+    }
+
     @Override
     public void run(String lastCommand) {
         this.showRequests();
@@ -41,13 +47,17 @@ public class ManageRequests extends Menu {
                 ManagerAreaController.declineRequest(Long.parseLong(command.split("\\s")[1]));
                 continue;
             }
-            if (lastCommand.equals("logout")) {
+            if (getMatcher(command, "(?i)logout").matches()) {
                 Controller.logout();
                 View.printString("logout successful");
-                allMenus.get(0).run("");
+                allMenus.get(0).run(lastCommand);
                 break;
             }
-            if (command.equals("back")) {
+            if (getMatcher(command, "(?i)help").matches()) {
+                this.showMenu();
+                continue;
+            }
+            if (getMatcher(command, "(?i)back").matches()) {
                 break;
             }
             View.printString("invalid command");

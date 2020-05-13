@@ -76,15 +76,20 @@ public class ManageCategories extends Menu {
                 this.doEditCategory(command.split("\\s")[1]);
                 continue;
             }
-            if (lastCommand.equals("logout")) {
+            if (getMatcher(command, "(?i)logout").matches()) {
                 Controller.logout();
                 View.printString("logout successful");
                 allMenus.get(0).run(lastCommand);
                 break;
             }
-            if (command.equals("back")){
+            if (getMatcher(command, "(?i)help").matches()) {
+                this.showMenu();
+                continue;
+            }
+            if (getMatcher(command, "(?i)back").matches()) {
                 break;
             }
+            View.printString("invalid command");
         }
         this.parentMenu.run(lastCommand);
     }

@@ -56,25 +56,32 @@ public class ViewOrders extends Menu {
     @Override
     public void run(String lastCommand) {
         this.showOrders();
-        String command = scanner.nextLine().trim();
-        if (getMatcher(command, "(?i)show order (\\S+)").matches()) {
-            if (!getMatcher(command.split("\\s")[2], "\\d+").matches()) {
-                View.printString("invalid order Id");
-            } else {
-                this.showOrderPage(Long.parseLong(command.split("\\s")[2]));
+        while (true) {
+            String command = scanner.nextLine().trim();
+            if (getMatcher(command, "(?i)show order (\\S+)").matches()) {
+                if (!getMatcher(command.split("\\s")[2], "\\d+").matches()) {
+                    View.printString("invalid order Id");
+                } else {
+                    this.showOrderPage(Long.parseLong(command.split("\\s")[2]));
+                }
+                this.run(lastCommand);
             }
+            if (getMatcher(command, "(?i)logout").matches()) {
+                Controller.logout();
+                View.printString("logout successful");
+                allMenus.get(0).run(lastCommand);
+                break;
+            }
+            if (getMatcher(command, "(?i)help").matches()) {
+                this.showMenu();
+                continue;
+            }
+            if (getMatcher(command, "(?i)back").matches()) {
+                break;
+            }
+            View.printString("invalid command");
             this.run(lastCommand);
         }
-        if (lastCommand.equals("logout")) {
-            Controller.logout();
-            View.printString("logout successful");
-            allMenus.get(0).run(lastCommand);
-        }
-        if (command.equals("back")) {
-            this.parentMenu.run(lastCommand);
-        }
-        View.printString("invalid command");
-        this.run(lastCommand);
     }
 
     private void showOrder(long orderId) {
