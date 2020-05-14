@@ -9,6 +9,7 @@ import Models.User.Request.Request;
 import Models.User.Seller;
 import Models.User.User;
 import View.View;
+import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -232,5 +233,19 @@ public class ManagerAreaController {
     //kamel nist
     public static void changeUserType(String username, String newType) {
 
+    }
+    
+    public static ArrayList<String> showCategories() {
+        ArrayList<String> categories = new ArrayList<>();
+        for (Category category : DataBase.allCategories) {
+            String info = category.getName() + " " + category.getSpecialAttributes();
+            if (category.getParentCategory() == null) {
+                info += " null";
+            } else {
+                info += " " + category.getParentCategory().getName();
+            }
+            categories.add(info);
+        }
+        return categories;
     }
 }

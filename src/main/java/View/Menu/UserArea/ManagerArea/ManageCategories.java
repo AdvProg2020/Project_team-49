@@ -45,9 +45,26 @@ public class ManageCategories extends Menu {
         ManagerAreaController.addCategory(info);
     }
 
-    //kamel nist
     private void showCategories() {
+        ArrayList<String> categories = ManagerAreaController.showCategories();
+        View.printString("Categories:");
+        for (String category : categories) {
+            View.printString("name: " + category.split("\\s")[0]);
+            View.printString("attributes: " + category.split("\\s")[1]);
+            View.printString("parent category: " + category.split("\\s")[2]);
+            View.printString("________________________________________");
+        }
+    }
 
+    @Override
+    public void showMenu() {
+        View.printString(this.getName() + " help:");
+        View.printString("remove");
+        View.printString("add");
+        View.printString("edit");
+        View.printString("logout");
+        View.printString("help");
+        View.printString("back");
     }
 
     @Override
