@@ -8,12 +8,10 @@ import java.util.ArrayList;
 
 
 public class Controller {
-    public static User currentUser;
-    private static boolean hasHeadManager;
+    public static User currentUser = new Guest();
+    private static boolean hasHeadManager = false;
 
     public Controller() {
-        this.currentUser = new Guest();
-        this.hasHeadManager = false;
     }
 
     public static String editField(String field, String newContent) {
@@ -50,6 +48,12 @@ public class Controller {
 
     public static String createAccount(ArrayList<String> info, String type) {
         //login beshe ya na
+        if (!info.get(1).matches("\\w+")) {
+            return "invalid password";
+        }
+        if (!info.get(5).matches("\\d+")) {
+            return "invalid phone number";
+        }
         if (type.toLowerCase().equals("costumer")) {
             DataBase.addNewUser(new Costumer(info.get(0), info.get(2), info.get(3), info.get(4), Long.parseLong(info.get(5)), info.get(1)));
         }
@@ -78,7 +82,10 @@ public class Controller {
 
     //bayad hazf beshe
     public static boolean hasUserWithUsername(String username) {
-        return false;
+        if (DataBase.getUserByUsername(username) == null) {
+            return false;
+        }
+        return true;
     }
 
     public static void addToCart(Product product, Seller seller, int count) {

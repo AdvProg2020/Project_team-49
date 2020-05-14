@@ -14,6 +14,7 @@ public class GuestArea extends Menu {
         HashMap<String, Menu> subMenus = new HashMap<String, Menu>();
         subMenus.put("Login Menu", getLoginMenu());
         subMenus.put("Register Menu", getRegisterMenu());
+        subMenus.put("User Area", new UserArea(this));
         this.setSubMenus(subMenus);
     }
 
@@ -26,6 +27,7 @@ public class GuestArea extends Menu {
                     View.printString("user not exist");
                 } else {
                     while (true) {
+                        View.printString("enter password:");
                         String input = scanner.nextLine().trim();
                         if (getMatcher(input, "(?i)back").matches()) {
                             this.parentMenu.run(lastCommand);
@@ -36,6 +38,7 @@ public class GuestArea extends Menu {
                         View.printString("invalid password");
                     }
                     View.printString(Controller.loginAccount(command[1]));
+                    doLogin();
                 }
                 this.parentMenu.run(lastCommand);
             }
@@ -50,7 +53,7 @@ public class GuestArea extends Menu {
                 String[] command = lastCommand.split("\\s");
                 if (Controller.hasUserWithUsername(command[3])) {
                     View.printString("user exist with this username");
-                } else if (Controller.hasHeadManager()) {
+                } else if (Controller.hasHeadManager() && command[2].toLowerCase().equals("manager")) {
                     View.printString("cant create manager account");
                 } else {
                     View.printString(Controller.createAccount(getAccountInformation(command[3], command[2]), command[2]));
@@ -70,7 +73,6 @@ public class GuestArea extends Menu {
             return "Register Menu";
         } else if (getMatcher(command, "(?i)login (\\S+)").matches()) {
             if (!checkLoginCommand(command)) {
-                //View.printString("invalid command");
                 return "invalid";
             }
             return "Login Menu";
@@ -121,5 +123,9 @@ public class GuestArea extends Menu {
             info.add(scanner.nextLine().trim());
         }
         return info;
+    }
+
+    private void doLogin() {
+        subMenus.get("User Area").run("");
     }
 }

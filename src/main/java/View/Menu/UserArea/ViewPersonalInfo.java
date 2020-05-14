@@ -22,10 +22,13 @@ public class ViewPersonalInfo extends Menu {
         View.printString(line);
     }
 
-    //kamel nist
     @Override
     public void showMenu() {
-
+        View.printString(this.getName() + ":");
+        View.printString("edit");
+        View.printString("logout");
+        View.printString("help");
+        View.printString("back");
     }
 
     @Override

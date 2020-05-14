@@ -59,6 +59,10 @@ public class Manager extends User implements Serializable {
         }
     }
 
+    public static ArrayList<DiscountCode> getAllDiscountCodes() {
+        return allDiscountCodes;
+    }
+
     @Override
     public String getType() {
         return "Manager";

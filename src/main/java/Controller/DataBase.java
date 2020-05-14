@@ -48,7 +48,7 @@ public class DataBase {
     }
 
     public static void addNewUser(User user) {
-
+        allUsers.add(user);
     }
 
     public static void removeUser(String username) {

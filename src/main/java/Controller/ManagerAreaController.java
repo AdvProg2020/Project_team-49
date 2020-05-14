@@ -2,6 +2,7 @@ package Controller;
 
 import Models.Category;
 import Models.DiscountCode;
+import Models.Product;
 import Models.User.Costumer;
 import Models.User.Manager;
 import Models.User.Seller;
@@ -162,6 +163,40 @@ public class ManagerAreaController {
         }
     }
 
+    public static ArrayList<String> showAllUsers() {
+        ArrayList<String> users = new ArrayList<>();
+        for (User user : DataBase.allUsers) {
+            String info = user.getUsername() + " " + user.getType();
+            info += " " + user.getFirstName() + " " + user.getLastName();
+            info += " " + user.getEMail() + " " + user.getPhoneNumber();
+            users.add(info);
+        }
+        return users;
+    }
+
+    public static ArrayList<String> showAllProducts() {
+        ArrayList<String> products = new ArrayList<>();
+        for (Product product : DataBase.allProducts) {
+            String info = product.getName() + " " + product.getProductId();
+            info += " " + product.getBrand() + " " + product.getPrice();
+            info += " " + product.getAverageScore() + " " + product.getExplanation();
+            products.add(info);
+        }
+        return products;
+    }
+
+    //allowed costumers
+    public static ArrayList<String> showDiscountCodes() {
+        ArrayList<String> discountCodes = new ArrayList<>();
+        for (DiscountCode discountCode : Manager.getAllDiscountCodes()) {
+            String info = discountCode.getDiscountId() + " " + discountCode.getStartDate();
+            info += " " + discountCode.getEndDate() + " " + discountCode.getDiscountPercent();
+            info += " " + discountCode.getMaximumDiscountAmount() + " " + discountCode.getDiscountCount();
+            discountCodes.add(info);
+        }
+        return discountCodes;
+    }
+
 
     //kamel nist
     public static void editDiscountCode(String code) {
@@ -172,19 +207,9 @@ public class ManagerAreaController {
 
     }
 
-    public static ArrayList<String> showAllProducts() {
-        DataBase.allProducts.get(1);
-        return null;
-    }
-
     public static ArrayList<String> showRequests() {
         Manager manager = (Manager) Controller.currentUser;
         manager.getAllActiveRequests();
-        return null;
-    }
-
-    public static ArrayList<String> showAllUsers() {
-        DataBase.allUsers.get(0);
         return null;
     }
 }

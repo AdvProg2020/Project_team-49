@@ -40,7 +40,7 @@ public abstract class Menu {
     }
 
     public void showMenu() {
-        String show = this.name + " :\n";
+        String show = this.name + " help:\n";
         for (String key : this.subMenus.keySet()) {
             show += subMenus.get(key).getName() + "\n";
         }
@@ -63,21 +63,23 @@ public abstract class Menu {
     }
 
     public void run(String lastCommand) {
+        View.printString(this.name.toUpperCase() + ":");
         String command = scanner.nextLine().trim();
         Menu nextMenu = null;
-        if (getCommandKey(command).equals("invalid")) {
+        String key = getCommandKey(command);
+        if (key.equals("invalid")) {
             nextMenu = this;
-        } else if (getCommandKey(command).equals("back")) {
+        } else if (key.equals("back")) {
             if (this.parentMenu == null) {
                 return;
             } else {
                 nextMenu = this.parentMenu;
             }
-        } else if (getCommandKey(command).equals("help")) {
+        } else if (key.equals("help")) {
             this.showMenu();
             nextMenu = this;
         } else {
-            nextMenu = this.subMenus.get(getCommandKey(command));
+            nextMenu = this.subMenus.get(key);
         }
         nextMenu.run(command);
     }

@@ -5,6 +5,7 @@ import Controller.ManagerAreaController;
 import View.Menu.Menu;
 import View.View;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ViewDiscountCodes extends Menu {
@@ -86,9 +87,19 @@ public class ViewDiscountCodes extends Menu {
         };
     }
 
-    //kamel nist
+    //kamel nist(allowed costumers)
     private void showDiscountCodes() {
-
+        ArrayList<String> discountCodes = ManagerAreaController.showDiscountCodes();
+        View.printString("Discount Codes:");
+        for (String discountCode : discountCodes) {
+            View.printString("discount Id: " + discountCode.split("\\s")[0]);
+            View.printString("start time: " + discountCode.split("\\s")[1]);
+            View.printString("end time: " + discountCode.split("\\s")[2]);
+            View.printString("discount percent: " + discountCode.split("\\s")[3]);
+            View.printString("maximum discount amount: " + discountCode.split("\\s")[4]);
+            View.printString("acceptable using times: " + discountCode.split("\\s")[5]);
+            View.printString("______________________________________");
+        }
     }
 
     @Override
