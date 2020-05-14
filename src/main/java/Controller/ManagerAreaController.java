@@ -5,6 +5,7 @@ import Models.DiscountCode;
 import Models.Product;
 import Models.User.Costumer;
 import Models.User.Manager;
+import Models.User.Request.Request;
 import Models.User.Seller;
 import Models.User.User;
 import View.View;
@@ -219,15 +220,17 @@ public class ManagerAreaController {
         return "invalid field";
     }
 
+    public static ArrayList<String> showRequests() {
+        ArrayList<String> requests = new ArrayList<>();
+        for (Request request : Manager.getAllActiveRequests()) {
+            String info = request.getRequestId() + " " + request.getType();
+            requests.add(info);
+        }
+        return requests;
+    }
 
     //kamel nist
     public static void changeUserType(String username, String newType) {
 
-    }
-
-    public static ArrayList<String> showRequests() {
-        Manager manager = (Manager) Controller.currentUser;
-        manager.getAllActiveRequests();
-        return null;
     }
 }
