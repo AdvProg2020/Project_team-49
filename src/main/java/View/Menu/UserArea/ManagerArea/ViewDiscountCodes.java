@@ -57,12 +57,17 @@ public class ViewDiscountCodes extends Menu {
         };
     }
 
-    //kamel nist
+    //kamel nist (allowed costumers)
     private Menu getEditDiscountCode() {
         return new Menu("Edit Discount Code", this) {
             @Override
             public void run(String lastCommand) {
-                ManagerAreaController.editDiscountCode(lastCommand.split("\\s")[3]);
+                View.printString("enter field:");
+                String field = scanner.nextLine().trim();
+                View.printString("enter new content:");
+                String content = scanner.nextLine().trim();
+                View.printString(ManagerAreaController.editDiscountCode(lastCommand.split("\\s")[3], field, content));
+                this.parentMenu.run(lastCommand);
             }
         };
     }

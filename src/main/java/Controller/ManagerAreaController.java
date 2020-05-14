@@ -197,12 +197,30 @@ public class ManagerAreaController {
         return discountCodes;
     }
 
-
-    //kamel nist
-    public static void editDiscountCode(String code) {
-
+    //kamel nist (allowed costumers)
+    public static String editDiscountCode(String code, String field, String newContent) {
+        if (Manager.getDiscountCodeById(code) == null) {
+            return "discount code not exist";
+        }
+        if (field.toLowerCase().equals("percent")) {
+            if (!newContent.matches("\\d+")) {
+                return "invalid percent";
+            }
+            Manager.getDiscountCodeById(code).setDiscountPercent(Integer.parseInt(newContent));
+            return "field edited";
+        }
+        if (field.toLowerCase().equals("maximum amount")) {
+            if (!newContent.matches("\\d+")) {
+                return "invalid amount";
+            }
+            Manager.getDiscountCodeById(code).setMaximumDiscountAmount(Long.parseLong(newContent));
+            return "field edited";
+        }
+        return "invalid field";
     }
 
+
+    //kamel nist
     public static void changeUserType(String username, String newType) {
 
     }
