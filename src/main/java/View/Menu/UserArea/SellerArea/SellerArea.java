@@ -3,6 +3,7 @@ package View.Menu.UserArea.SellerArea;
 import Controller.Controller;
 import Controller.SellerAreaController;
 import View.Menu.Menu;
+import View.Menu.UserArea.ManagerArea.ManageCategories;
 import View.Menu.UserArea.ViewPersonalInfo;
 import View.View;
 
@@ -112,7 +113,7 @@ public class SellerArea extends Menu {
                 productInfo.add(scanner.nextLine().trim());
                 View.printString("enter available items for sale:");
                 productInfo.add(scanner.nextLine().trim());
-                SellerAreaController.addProduct(productInfo);
+                View.printString(SellerAreaController.addProduct(productInfo));
                 this.parentMenu.run(lastCommand);
             }
         };
@@ -128,13 +129,12 @@ public class SellerArea extends Menu {
         };
     }
 
-    //kamel nist
     private Menu getShowCategories() {
         return new Menu("Show Categories", this) {
             @Override
             public void run(String lastCommand) {
-                SellerAreaController.showCategories();
-                this.parentMenu.run("");
+                ManageCategories.showCategories();
+                this.parentMenu.run(lastCommand);
             }
         };
     }

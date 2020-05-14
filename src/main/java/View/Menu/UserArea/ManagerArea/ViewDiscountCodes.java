@@ -62,11 +62,24 @@ public class ViewDiscountCodes extends Menu {
         return new Menu("Edit Discount Code", this) {
             @Override
             public void run(String lastCommand) {
-                View.printString("enter field:");
-                String field = scanner.nextLine().trim();
-                View.printString("enter new content:");
-                String content = scanner.nextLine().trim();
-                View.printString(ManagerAreaController.editDiscountCode(lastCommand.split("\\s")[3], field, content));
+                while (true) {
+                    View.printString("enter field (available fields: percent, maximum amount):");
+                    String field = scanner.nextLine().trim();
+                    if (getMatcher(field, "(?i)back").matches()) {
+                        break;
+                    }
+                    if (!checkField(field.toLowerCase())) {
+                        View.printString("invalid field");
+                        continue;
+                    } else {
+                        View.printString("enter new content:");
+                        String content = scanner.nextLine().trim();
+                        if (getMatcher(content, "(?i)back").matches()) {
+                            break;
+                        }
+                        View.printString(ManagerAreaController.editDiscountCode(lastCommand.split("\\s")[3], field, content));
+                    }
+                }
                 this.parentMenu.run(lastCommand);
             }
         };
@@ -119,5 +132,15 @@ public class ViewDiscountCodes extends Menu {
             return false;
         }
         return true;
+    }
+
+    private boolean checkField(String field) {
+        if (field.equals("percent")) {
+            return true;
+        }
+        if (field.equals("maximum amount")) {
+            return true;
+        }
+        return false;
     }
 }

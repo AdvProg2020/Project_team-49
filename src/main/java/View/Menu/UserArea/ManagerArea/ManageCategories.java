@@ -13,20 +13,25 @@ public class ManageCategories extends Menu {
         super("Manage Categories", parentMenu);
     }
 
+    //field ha kaman
     private void doEditCategory(String category) {
         while (true) {
-            View.printString("enter field for edit (edit [field]):");
-            String command = scanner.nextLine().trim();
-            if (getMatcher(command, "(?i)edit (\\S+)").matches()) {
-                View.printString("enter new content:");
-                String newContent = scanner.nextLine().trim();
-                ManagerAreaController.editCategory(category, command.split("\\s")[1], newContent);
-                continue;
-            }
-            if (getMatcher(command, "(?i)back").matches()) {
+            View.printString("enter field (available fields: attribute, name):");
+            String field = scanner.nextLine().trim();
+            if (getMatcher(field, "(?i)back").matches()) {
                 break;
             }
-            View.printString("invalid command");
+            if (!checkField(field.toLowerCase())) {
+                View.printString("invalid field");
+                continue;
+            } else {
+                View.printString("enter new content:");
+                String newContent = scanner.nextLine().trim();
+                if (getMatcher(newContent, "(?i)back").matches()) {
+                    break;
+                }
+                View.printString(ManagerAreaController.editCategory(category, field, newContent));
+            }
         }
     }
 
@@ -45,7 +50,7 @@ public class ManageCategories extends Menu {
         ManagerAreaController.addCategory(info);
     }
 
-    private void showCategories() {
+    public static void showCategories() {
         ArrayList<String> categories = ManagerAreaController.showCategories();
         View.printString("Categories:");
         for (String category : categories) {
@@ -117,5 +122,15 @@ public class ManageCategories extends Menu {
             return false;
         }
         return true;
+    }
+
+    private boolean checkField(String field) {
+        if (field.equals("name")) {
+            return true;
+        }
+        if (field.equals("attribute")) {
+            return true;
+        }
+        return false;
     }
 }

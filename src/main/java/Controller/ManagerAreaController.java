@@ -102,28 +102,22 @@ public class ManagerAreaController {
         }
     }
 
-    public static void editCategory(String name, String field, String newContent) {
+    public static String editCategory(String name, String field, String newContent) {
         if (DataBase.getCategoryByName(name) == null) {
-            View.printString("category not exist");
-            return;
+            return "category not exist";
         }
         if (field.toLowerCase().equals("attribute")) {
             DataBase.getCategoryByName(name).setSpecialAttributes(newContent);
-            View.printString("field edited");
-            return;
-        }
-        if (field.toLowerCase().equals("name")) {
+        } else if (field.toLowerCase().equals("name")) {
             if (!newContent.matches("\\w+")) {
-                View.printString("invalid new name");
+                return "invalid new name";
             } else if (DataBase.getCategoryByName(newContent) != null) {
-                View.printString("category exist with this new name");
+                return "category exist with this new name";
             } else {
                 DataBase.getCategoryByName(name).setName(newContent);
-                View.printString("field edited");
-                return;
             }
         }
-        View.printString("invalid field");
+        return "field edited";
     }
 
     public static void addCategory(ArrayList<String> info) {
@@ -209,16 +203,14 @@ public class ManagerAreaController {
                 return "invalid percent";
             }
             Manager.getDiscountCodeById(code).setDiscountPercent(Integer.parseInt(newContent));
-            return "field edited";
         }
         if (field.toLowerCase().equals("maximum amount")) {
             if (!newContent.matches("\\d+")) {
                 return "invalid amount";
             }
             Manager.getDiscountCodeById(code).setMaximumDiscountAmount(Long.parseLong(newContent));
-            return "field edited";
         }
-        return "invalid field";
+        return "field edited";
     }
 
     public static ArrayList<String> showRequests() {
