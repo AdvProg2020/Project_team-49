@@ -56,6 +56,7 @@ public class CostumerArea extends Menu {
         };
     }
 
+    //usege neveshte nemishe
     private Menu getViewDiscountCodes() {
         return new Menu("View Discount Codes", this) {
             @Override
@@ -88,9 +89,11 @@ public class CostumerArea extends Menu {
         };
     }
 
-    //;amel nist
     public void showSpecifications() {
-        Controller.getCurrentUserSpecifications();
+        String[] info = Controller.getCurrentUserSpecifications().split("\\s");
+        for (int i = 0; i < info.length - 1; i++) {
+            View.printString(info[i]);
+        }
     }
 
     @Override

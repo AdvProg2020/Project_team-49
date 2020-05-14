@@ -27,4 +27,13 @@ public class Cart {
     public ArrayList<Product> getProducts() {
         return products;
     }
+
+    public int getItemsByProductId(long productId) {
+        for (Product product : products) {
+            if (product.getProductId() == productId) {
+                return items.get(products.indexOf(product));
+            }
+        }
+        return -1;
+    }
 }
