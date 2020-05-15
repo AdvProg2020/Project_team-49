@@ -3,6 +3,7 @@ package View.Menu.UserArea.CostumerArea;
 import Controller.CostumerAreaController;
 import Controller.Controller;
 import View.Menu.Menu;
+import View.View;
 
 import java.util.ArrayList;
 
@@ -15,11 +16,46 @@ public class Purchase extends Menu {
     }
 
     private void getReceiverInformation() {
-
+        while (true) {
+            receiverInfo.clear();
+            View.printString("enter your phone number (back to exit):");
+            receiverInfo.add(scanner.nextLine().trim());
+            if (receiverInfo.get(0).matches("(?i)back")) {
+                break;
+            }
+            if (!getMatcher(receiverInfo.get(0), "\\d+").matches()) {
+                View.printString("invalid");
+            }
+            View.printString("enter your address (back to exit):");
+            receiverInfo.add(scanner.nextLine().trim());
+            if (receiverInfo.get(1).matches("(?i)back")) {
+                break;
+            }
+            getDiscountCode();
+        }
     }
 
     private void getDiscountCode() {
-        Controller.hasDiscountCode("");
+        while (true) {
+            View.printString("enter your discount code or type 'skip' (back to exit):");
+            String discountCode = scanner.nextLine().trim();
+            if (getMatcher(discountCode, "(?i)back").matches()) {
+                break;
+            }
+            if (getMatcher(discountCode, "(?i)skip").matches()) {
+                receiverInfo.add("no");
+                doPayment();
+                break;
+            }
+            if (!Controller.hasDiscountCode(discountCode)) {
+                View.printString("invalid discount code");
+                continue;
+            } else {
+                receiverInfo.add(discountCode);
+                doPayment();
+                break;
+            }
+        }
     }
 
     private void doPayment() {
@@ -28,9 +64,7 @@ public class Purchase extends Menu {
 
     @Override
     public void run(String lastCommand) {
-        this.getReceiverInformation();
-        this.getDiscountCode();
-        this.doPayment();
+        getReceiverInformation();
         this.parentMenu.run(lastCommand);
     }
 }

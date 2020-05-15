@@ -58,6 +58,7 @@ public class CostumerAreaController {
         }
     }
 
+    //kamel nist
     public static double getTotalPrice() {
         return 0;
     }
