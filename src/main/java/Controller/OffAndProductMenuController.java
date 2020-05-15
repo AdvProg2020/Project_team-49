@@ -6,6 +6,8 @@ import Models.Product;
 import Models.User.Seller;
 
 import static Controller.DataBase.*;
+
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 
@@ -63,7 +65,7 @@ public class OffAndProductMenuController {
     }
 
     public static ArrayList<String> getAllAvailableFilters() {
-        return allAvailableFilters;
+        return Filter.getAvailableFilters();
     }
 
     public static ArrayList<String> getCategoriesName(){

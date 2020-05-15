@@ -52,7 +52,7 @@ public class GuestArea extends Menu {
                 String[] command = lastCommand.split("\\s");
                 if (Controller.hasUserWithUsername(command[3])) {
                     View.printString("user exist with this username");
-                } else if (Controller.hasHeadManager() && command[2].toLowerCase().equals("manager")) {
+                } else if (Controller.getHasHeadManager() && command[2].toLowerCase().equals("manager")) {
                     View.printString("cant create manager account");
                 } else {
                     View.printString(Controller.createAccount(getAccountInformation(command[3], command[2]), command[2]));
