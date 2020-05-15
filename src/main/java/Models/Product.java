@@ -76,6 +76,10 @@ public class Product implements Serializable {
         this.name = name;
     }
 
+    public void setProductId(long productId) {
+        this.productId = productId;
+    }
+
     public void setPrice(double price, Seller seller) {
         for (int i = 0; i < allSellers.size(); i++) {
             if (allSellers.get(i).equals(seller)) {

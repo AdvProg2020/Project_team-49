@@ -57,7 +57,9 @@ public class DataBase {
     }
 
     public static void addNewProduct(Product product) {
-
+        createdProductsCount++;
+        product.setProductId(createdProductsCount);
+        allProducts.add(product);
     }
 
     public static void removeProduct(long productId) {
