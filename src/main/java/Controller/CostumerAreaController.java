@@ -30,7 +30,7 @@ public class CostumerAreaController {
         Cart cart = ((Costumer) Controller.currentUser).getCart();
         for (Product product : cart.getProducts()) {
             String info = product.getName() + " " + product.getProductId();
-            info += " " + product.getBrand() + " " + product.getPrice();
+            info += " " + product.getBrand() + " " + product.getPrice(product.getDefaultSeller());
             info += " " + cart.getItemsByProductId(product.getProductId()) + " " + cart.getSellerByProductId(product.getProductId());
             products.add(info);
         }

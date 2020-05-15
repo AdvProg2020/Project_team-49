@@ -100,7 +100,7 @@ public class SellerAreaController {
         ArrayList<String> products = new ArrayList<>();
         for (Product product : seller.getProductsForSale()) {
             String info = product.getName() + " " + product.getProductId();
-            info += " " + product.getBrand() + " " + product.getPrice();
+            info += " " + product.getBrand() + " " + product.getPrice(product.getDefaultSeller());
             info += " " + product.getAverageScore() + " " + product.getExplanation();
             products.add(info);
         }

@@ -152,7 +152,7 @@ public class DataBaseTest {
         loadAllProducts();
         assertEquals(allProducts.size(), 5);
         assertEquals("phone", allProducts.get(0).getName());
-        assertEquals(10.0, allProducts.get(1).getPrice(), 0.0001);
+        assertEquals(10.0, allProducts.get(1).getPrice(allProducts.get(1).getDefaultSeller()), 0.0001);
         allProducts.clear();
         loadAllProducts();
         loadAllProducts();
@@ -206,7 +206,7 @@ public class DataBaseTest {
 
         assertEquals(allProducts.size(), 5);
         assertEquals("phone", allProducts.get(0).getName());
-        assertEquals(10.0, allProducts.get(1).getPrice(), 0.0001);
+        assertEquals(10.0, allProducts.get(1).getPrice(allProducts.get(1).getDefaultSeller()), 0.0001);
         assertEquals(allProducts.get(4).getBrand(), "LMV");
         assertEquals(5, allProducts.size());
 
