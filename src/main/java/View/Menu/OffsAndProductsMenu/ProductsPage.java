@@ -47,7 +47,7 @@ public class ProductsPage extends Menu {
         if (command.equalsIgnoreCase("Sorting")){
             return "Sorting";
         }
-        if (command.toLowerCase().startsWith("show product")){
+        if (command.toLowerCase().startsWith("show product ")){
             String productIdString = command.split("\\s")[2];
             if (!productIdString.matches("^\\d+$")){
                 View.printString("Please Enter Number For Product Id.");
@@ -59,6 +59,7 @@ public class ProductsPage extends Menu {
             }
             return "Show Product";
         }
+
         if (command.equalsIgnoreCase("Log In")){
             return "Log In";
         }
