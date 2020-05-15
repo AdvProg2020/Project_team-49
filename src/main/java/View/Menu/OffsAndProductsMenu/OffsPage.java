@@ -27,7 +27,7 @@ public class OffsPage extends Menu {
 
     @Override
     public void run(String lastCommand) {
-        //View.printOffsPage();
+        View.printOffsPage();
         boolean showed=false;
         //bayad faghat ye br neshon bedim?
         View.printAllOffProduct(OffAndProductMenuController.getCurrentId(),

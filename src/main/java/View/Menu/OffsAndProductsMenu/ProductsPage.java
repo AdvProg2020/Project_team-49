@@ -28,7 +28,7 @@ public class ProductsPage extends Menu {
 
     @Override
     public void run(String lastCommand) {
-        //View.printProductsPage();
+        View.printProductsPage();
         super.run(lastCommand);
     }
 
