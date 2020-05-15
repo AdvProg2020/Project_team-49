@@ -98,7 +98,10 @@ public class CostumerAreaController {
     }
 
     public static boolean hasDiscountCode(String discountCode) {
-
+        if (((Costumer) Controller.currentUser).getDiscountCodeById(discountCode) == null) {
+            return false;
+        }
+        return true;
     }
 
     public static boolean hasOrderWithId(Long Id) {
