@@ -63,8 +63,9 @@ public class CostumerAreaController {
         return 0;
     }
 
-    public static void finishPayment(ArrayList<String> receiverInfo) {
-
+    //kamel nist
+    public static String finishPayment(ArrayList<String> receiverInfo) {
+        return "";
     }
 
     public static boolean hasOrderWithId(Long Id) {

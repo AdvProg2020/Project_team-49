@@ -59,7 +59,17 @@ public class Purchase extends Menu {
     }
 
     private void doPayment() {
-        CostumerAreaController.finishPayment(receiverInfo);
+        while (true) {
+            View.printString("enter 'pay' to do payment or 'back' to exit:");
+            String task = scanner.nextLine().trim();
+            if (getMatcher(task, "(?i)back").matches()) {
+                break;
+            }
+            if (getMatcher(task, "(?i)pay").matches()) {
+                View.printString(CostumerAreaController.finishPayment(receiverInfo));
+            }
+            View.printString("invalid command");
+        }
     }
 
     @Override
