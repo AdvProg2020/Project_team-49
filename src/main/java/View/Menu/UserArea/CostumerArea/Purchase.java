@@ -5,6 +5,7 @@ import Controller.Controller;
 import View.Menu.Menu;
 import View.View;
 
+import java.awt.image.VolatileImage;
 import java.util.ArrayList;
 
 public class Purchase extends Menu {
@@ -47,7 +48,7 @@ public class Purchase extends Menu {
                 doPayment();
                 break;
             }
-            if (!Controller.hasDiscountCode(discountCode)) {
+            if (!CostumerAreaController.hasDiscountCode(discountCode)) {
                 View.printString("invalid discount code");
                 continue;
             } else {
@@ -66,7 +67,12 @@ public class Purchase extends Menu {
                 break;
             }
             if (getMatcher(task, "(?i)pay").matches()) {
-                View.printString(CostumerAreaController.finishPayment(receiverInfo));
+                if (CostumerAreaController.getTotalPrice() > Controller.getBalance()) {
+                    View.printString("your credit is not enough. increase your credit.");
+                    break;
+                } else {
+                    View.printString(CostumerAreaController.finishPayment(receiverInfo));
+                }
             }
             View.printString("invalid command");
         }
