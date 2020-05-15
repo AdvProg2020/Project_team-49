@@ -68,6 +68,10 @@ public class Product implements Serializable {
         return 0;
     }
 
+    public ArrayList<Seller> getAllSellers() {
+        return allSellers;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
