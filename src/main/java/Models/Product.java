@@ -11,8 +11,9 @@ public class Product implements Serializable {
     private long productId;
     private String name;
     private String brand;
-    private double price;
-    private HashMap<Seller, Integer> allSellers;
+    private ArrayList<Double> price;
+    private ArrayList<Seller> allSellers;
+    private ArrayList<Integer> availableItems;
     private Seller defaultSeller;
     private Category parentCategory;
     private String explanation;
@@ -33,7 +34,10 @@ public class Product implements Serializable {
     private Date productDate;
 
     public Product(String name, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems) {
-        this.allSellers = new HashMap<Seller, Integer>();
+        this.allSellers = new ArrayList<>();
+        this.allSellers.add(seller);
+        this.availableItems = new ArrayList<>();
+        this.availableItems.add(remainingItems);
         this.brand = brand;
         this.addItem(seller, remainingItems);
         this.defaultSeller = seller;
@@ -42,22 +46,23 @@ public class Product implements Serializable {
         this.status = ProductStatus.REVIEWFORMAKE;
         this.parentCategory = parentCategory;
         this.name = name;
-        this.price = price;
+        this.price = new ArrayList<>();
+        this.price.add(price);
         this.productDate = new Date();
     }
 
-    public Product (int numberOfView){
+    public Product(int numberOfView) {
         this.numberOfView = numberOfView;
     }
 
-    public Product (double averageScore){
+    public Product(double averageScore) {
         this.averageScore = averageScore;
     }
 
     public int remainingProductForSeller(Seller seller) {
-        for (Seller eachSeller : allSellers.keySet()) {
-            if (eachSeller.equals(seller)) {
-                return allSellers.get(eachSeller);
+        for (int i = 0; i < allSellers.size(); i++) {
+            if (allSellers.get(i).equals(seller)) {
+                return availableItems.get(i);
             }
         }
         return 0;
@@ -67,8 +72,12 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPrice(double price, Seller seller) {
+        for (int i = 0; i < allSellers.size(); i++) {
+            if (allSellers.get(i).equals(seller)) {
+                this.price.set(i, price);
+            }
+        }
     }
 
     public void setBrand(String brand) {
@@ -81,8 +90,8 @@ public class Product implements Serializable {
 
     public int remainingItems() {
         int sum = 0;
-        for (Seller seller : allSellers.keySet()) {
-            sum += allSellers.get(seller);
+        for (Integer availableItem : availableItems) {
+            sum += availableItem;
         }
         return sum;
     }
@@ -116,8 +125,13 @@ public class Product implements Serializable {
         return name;
     }
 
-    public double getPrice() {
-        return price;
+    public double getPrice(Seller seller) {
+        for (int i = 0; i < allSellers.size(); i++) {
+            if (allSellers.get(i).equals(seller)) {
+                return price.get(i);
+            }
+        }
+        return 0;
     }
 
     public Category getParentCategory() {
@@ -149,10 +163,11 @@ public class Product implements Serializable {
     }
 
     public void addItem(Seller seller, int remainingItems) {
-        if (!allSellers.containsKey(seller)) {
-            allSellers.put(seller, remainingItems);
+        if (!allSellers.contains(seller)) {
+            allSellers.add(seller);
+            availableItems.add(remainingItems);
         } else {
-            allSellers.replace(seller, allSellers.get(seller) + remainingItems);
+            availableItems.set(allSellers.indexOf(seller), availableItems.get(allSellers.indexOf(seller)) + remainingItems);
         }
     }
 
@@ -219,7 +234,7 @@ public class Product implements Serializable {
     }
 
     public Seller getSellerByUsername(String username) {
-        for (Seller seller : allSellers.keySet()) {
+        for (Seller seller : allSellers) {
             if (seller.getUsername().equals(username)) {
                 return seller;
             }
@@ -232,12 +247,12 @@ public class Product implements Serializable {
     }
 
     public int getRemainingItemsForSeller(Seller seller) {
-        return allSellers.get(seller);
+        return availableItems.get(allSellers.indexOf(seller));
     }
 
-    public ArrayList<String> getAllSellerName(){
-        ArrayList<String> allSellerName=new ArrayList<String>();
-        for (Seller seller : allSellers.keySet()) {
+    public ArrayList<String> getAllSellerName() {
+        ArrayList<String> allSellerName = new ArrayList<String>();
+        for (Seller seller : allSellers) {
             allSellerName.add(seller.getCompanyName());
         }
         return allSellerName;
