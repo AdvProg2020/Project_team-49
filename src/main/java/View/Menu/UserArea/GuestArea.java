@@ -14,7 +14,6 @@ public class GuestArea extends Menu {
         HashMap<String, Menu> subMenus = new HashMap<String, Menu>();
         subMenus.put("Login Menu", getLoginMenu());
         subMenus.put("Register Menu", getRegisterMenu());
-        subMenus.put("User Area", new UserArea(this));
         this.setSubMenus(subMenus);
     }
 
