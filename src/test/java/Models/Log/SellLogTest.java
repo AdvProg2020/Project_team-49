@@ -1,4 +1,4 @@
-package Controller.Log;
+package Models.Log;
 
 public class SellLogTest {
 }
