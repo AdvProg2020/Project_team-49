@@ -2,10 +2,11 @@ package Models.Log;
 
 import Models.Product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class BuyLog extends Log {
+public class BuyLog extends Log  implements Serializable {
     private double paidAmount;
     private int saleCodeApplied;
     private ArrayList<Product> boughtProduct = new ArrayList<Product>();

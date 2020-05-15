@@ -3,7 +3,9 @@ package Models.User.Request;
 import Models.Off;
 import Models.User.Seller;
 
-public class AddOffRequest extends Request {
+import java.io.Serializable;
+
+public class AddOffRequest extends Request  implements Serializable {
     private Off off;
     private Seller seller;
 

@@ -2,7 +2,9 @@ package Models;
 
 import Models.User.User;
 
-public class Comment {
+import java.io.Serializable;
+
+public class Comment  implements Serializable {
     private User userWhoComment;
     private Product product;
     private String note;

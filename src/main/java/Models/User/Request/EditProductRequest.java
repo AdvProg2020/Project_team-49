@@ -2,9 +2,10 @@ package Models.User.Request;
 
 import Models.Product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class EditProductRequest extends Request {
+public class EditProductRequest extends Request  implements Serializable {
     private String field;
     private String newContent;
     private Product product;

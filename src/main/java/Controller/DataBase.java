@@ -223,6 +223,5 @@ public class DataBase {
         } catch (Exception e) {
             System.out.println("can't save categories");
         }
-
     }
 }

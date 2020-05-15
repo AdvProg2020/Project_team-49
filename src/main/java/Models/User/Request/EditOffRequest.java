@@ -2,7 +2,9 @@ package Models.User.Request;
 
 import Models.Off;
 
-public class EditOffRequest extends Request {
+import java.io.Serializable;
+
+public class EditOffRequest extends Request  implements Serializable {
     private String field;
     private String newContent;
     private Off off;

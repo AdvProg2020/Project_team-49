@@ -19,8 +19,9 @@ public class Filter {
     private static double maxPrice = -1;
     private static String productName = "";
     private static String categoryName = "";
-
     private static ArrayList<String> availableBrands = new ArrayList<>();
+    private static ArrayList<String> currentFilters = new ArrayList<>();
+
 
     public static boolean isIsItFilteredByName() {
         return isItFilteredByName;
@@ -264,7 +265,7 @@ public class Filter {
     }
 
     public static ArrayList<String> showCurrentFilters() {
-        ArrayList<String> currentFilters = new ArrayList<String>();
+       currentFilters.clear();
         if (isItFilteredByAvailability)
             currentFilters.add("Availability filter is on");
         if (isItFilteredByBrand)

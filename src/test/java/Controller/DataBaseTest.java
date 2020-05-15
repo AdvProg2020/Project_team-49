@@ -168,7 +168,9 @@ public class DataBaseTest {
 
     @Test
     public void TestSaveAndLoadAllUsers() {
+//        deleteOrMake();
         initialise();
+        assertEquals(6 , allUsers.size());
         saveAllUsers();
         allUsers.clear();
         loadAllUsers();

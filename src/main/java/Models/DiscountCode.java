@@ -1,10 +1,12 @@
 package Models;
 
 import Models.User.Costumer;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DiscountCode {
+public class DiscountCode implements Serializable {
     private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
     private String DiscountId;
     private Date startDate;

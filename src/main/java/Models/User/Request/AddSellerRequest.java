@@ -3,7 +3,9 @@ package Models.User.Request;
 import Controller.DataBase;
 import Models.User.Seller;
 
-public class AddSellerRequest extends Request {
+import java.io.Serializable;
+
+public class AddSellerRequest extends Request  implements Serializable {
     private Seller seller;
 
     public AddSellerRequest(Seller seller) {

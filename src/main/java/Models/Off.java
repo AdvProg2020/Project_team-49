@@ -2,10 +2,11 @@ package Models;
 
 import Models.OffStatus;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Off {
+public class Off  implements Serializable {
     private long offId;
     private ArrayList<Product> products;
     private OffStatus offStatus;

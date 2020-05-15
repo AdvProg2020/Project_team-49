@@ -1,8 +1,9 @@
 package Models.User.Request;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Request {
+public abstract class Request  implements Serializable {
     private static ArrayList<Request> allRequests = new ArrayList<>();
     protected String managerAnswer;
     protected long requestId;

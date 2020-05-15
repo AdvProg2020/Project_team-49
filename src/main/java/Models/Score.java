@@ -2,7 +2,9 @@ package Models;
 
 import Models.User.User;
 
-public class Score {
+import java.io.Serializable;
+
+public class Score  implements Serializable {
     private User buyer;
     private int score;
     private Product product;
