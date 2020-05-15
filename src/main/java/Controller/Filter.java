@@ -172,7 +172,7 @@ public class Filter {
             return;
         ArrayList<Product> temp = new ArrayList<Product>();
         for (Product product : DataBase.sortedOrFilteredProduct) {
-            if (!(product.getPrice() >= minPrice && product.getPrice() <= maxPrice)) {
+            if (!(product.getPrice(product.getDefaultSeller()) >= minPrice && product.getPrice(product.getDefaultSeller()) <= maxPrice)) {
                 temp.add(product);
             }
         }

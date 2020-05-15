@@ -49,7 +49,7 @@ public class OffAndProductMenuController {
     public static ArrayList<Double> getCurrentPrice(){
         ArrayList<Double> productPrice=new ArrayList<Double>();
         for (Product product : sortedOrFilteredProduct) {
-            productPrice.add(product.getPrice());
+            productPrice.add(product.getPrice(product.getDefaultSeller()));
         }
         return productPrice;
     }

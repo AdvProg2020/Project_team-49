@@ -27,7 +27,7 @@ public class ShowProductDetail {
     }
     public static Double getPrice(long productId){
         for (Product product : allProducts) {
-            return product.getPrice();
+            return product.getPrice(product.getDefaultSeller());
         }
         return null;
     }

@@ -29,6 +29,10 @@ public class Seller extends User implements Serializable {
         return sellHistory;
     }
 
+    public void removeProduct(Product product) {
+        productsForSale.remove(product);
+    }
+
     public ArrayList<Product> getProductsForSale() {
         return productsForSale;
     }

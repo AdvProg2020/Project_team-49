@@ -3,6 +3,7 @@ package Controller;
 
 import Models.Category;
 import Models.Product;
+import Models.User.Seller;
 import Models.User.User;
 import View.View;
 import com.google.gson.Gson;
@@ -56,16 +57,22 @@ public class DataBase {
     }
 
     public static void addNewProduct(Product product) {
-
+        createdProductsCount++;
+        product.setProductId(createdProductsCount);
+        allProducts.add(product);
     }
 
     public static void removeProduct(long productId) {
-
+        for (Seller seller : getProductById(productId).getAllSellers()) {
+            seller.removeProduct(getProductById(productId));
+        }
+        allProducts.remove(getProductById(productId));
     }
 
     //kamel nist
     public static void removeCategory(String name) {
         //bayad kol derakht ro remove kard
+
         allCategories.remove(getCategoryByName(name));
     }
 
