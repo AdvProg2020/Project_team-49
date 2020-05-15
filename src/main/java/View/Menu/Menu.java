@@ -63,19 +63,19 @@ public abstract class Menu {
     }
 
     public void run(String lastCommand) {
-        View.printString(this.name.toUpperCase() + ":");
+        View.printString("\""+this.name.toUpperCase() + ":\"");
         String command = scanner.nextLine().trim();
         Menu nextMenu = null;
         String key = getCommandKey(command);
-        if (key.equals("invalid")) {
+        if (key.equalsIgnoreCase("invalid")) {
             nextMenu = this;
-        } else if (key.equals("back")) {
+        } else if (key.equalsIgnoreCase("back")) {
             if (this.parentMenu == null) {
                 return;
             } else {
                 nextMenu = this.parentMenu;
             }
-        } else if (key.equals("help")) {
+        } else if (key.equalsIgnoreCase("help")) {
             this.showMenu();
             nextMenu = this;
         } else {
