@@ -12,6 +12,7 @@ public class Controller {
     private static boolean hasHeadManager = false;
 
     public Controller() {
+
     }
 
     public static String editField(String field, String newContent) {
@@ -33,12 +34,16 @@ public class Controller {
         return DataBase.getProductById(productId);
     }
 
-    public static boolean hasHeadManager() {
+    public static boolean getHasHeadManager() {
         return hasHeadManager;
     }
 
     public static boolean isPasswordCorrect(String password) {
         return false;
+    }
+
+    public static void setHasHeadManager(boolean hasHeadManager) {
+        Controller.hasHeadManager = hasHeadManager;
     }
 
     //kamel nist
@@ -48,18 +53,18 @@ public class Controller {
 
     public static String createAccount(ArrayList<String> info, String type) {
         //login beshe ya na
-        if (!info.get(1).matches("\\w+")) {
+        if (!info.get(1).matches("\\w+"))
             return "invalid password";
-        }
-        if (!info.get(5).matches("\\d+")) {
+
+        if (!info.get(5).matches("\\d+"))
             return "invalid phone number";
-        }
-        if (type.toLowerCase().equals("costumer")) {
+
+        if (type.toLowerCase().equals("costumer"))
             DataBase.addNewUser(new Costumer(info.get(0), info.get(2), info.get(3), info.get(4), Long.parseLong(info.get(5)), info.get(1)));
-        }
-        if (type.toLowerCase().equals("seller")) {
+
+        if (type.toLowerCase().equals("seller"))
             DataBase.addNewUser(new Seller(info.get(0), info.get(2), info.get(3), info.get(4), Long.parseLong(info.get(5)), info.get(1), info.get(6)));
-        }
+
         if (type.toLowerCase().equals("manager")) {
             hasHeadManager = true;
             DataBase.addNewUser(new Manager(info.get(0), info.get(2), info.get(3), info.get(4), Long.parseLong(info.get(5)), info.get(1)));
