@@ -2,11 +2,14 @@ package Controller;
 
 import Models.Category;
 import Models.DiscountCode;
+import Models.Product;
 import Models.User.Costumer;
 import Models.User.Manager;
+import Models.User.Request.Request;
 import Models.User.Seller;
 import Models.User.User;
 import View.View;
+import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -99,28 +102,22 @@ public class ManagerAreaController {
         }
     }
 
-    public static void editCategory(String name, String field, String newContent) {
+    public static String editCategory(String name, String field, String newContent) {
         if (DataBase.getCategoryByName(name) == null) {
-            View.printString("category not exist");
-            return;
+            return "category not exist";
         }
         if (field.toLowerCase().equals("attribute")) {
             DataBase.getCategoryByName(name).setSpecialAttributes(newContent);
-            View.printString("field edited");
-            return;
-        }
-        if (field.toLowerCase().equals("name")) {
+        } else if (field.toLowerCase().equals("name")) {
             if (!newContent.matches("\\w+")) {
-                View.printString("invalid new name");
+                return "invalid new name";
             } else if (DataBase.getCategoryByName(newContent) != null) {
-                View.printString("category exist with this new name");
+                return "category exist with this new name";
             } else {
                 DataBase.getCategoryByName(name).setName(newContent);
-                View.printString("field edited");
-                return;
             }
         }
-        View.printString("invalid field");
+        return "field edited";
     }
 
     public static void addCategory(ArrayList<String> info) {
@@ -162,29 +159,85 @@ public class ManagerAreaController {
         }
     }
 
-
-    //kamel nist
-    public static void editDiscountCode(String code) {
-
-    }
-
-    public static void changeUserType(String username, String newType) {
-
+    public static ArrayList<String> showAllUsers() {
+        ArrayList<String> users = new ArrayList<>();
+        for (User user : DataBase.allUsers) {
+            String info = user.getUsername() + " " + user.getType();
+            info += " " + user.getFirstName() + " " + user.getLastName();
+            info += " " + user.getEMail() + " " + user.getPhoneNumber();
+            users.add(info);
+        }
+        return users;
     }
 
     public static ArrayList<String> showAllProducts() {
-        DataBase.allProducts.get(1);
-        return null;
+        ArrayList<String> products = new ArrayList<>();
+        for (Product product : DataBase.allProducts) {
+            String info = product.getName() + " " + product.getProductId();
+            info += " " + product.getBrand() + " " + product.getPrice();
+            info += " " + product.getAverageScore() + " " + product.getExplanation();
+            products.add(info);
+        }
+        return products;
+    }
+
+    //allowed costumers
+    public static ArrayList<String> showDiscountCodes() {
+        ArrayList<String> discountCodes = new ArrayList<>();
+        for (DiscountCode discountCode : Manager.getAllDiscountCodes()) {
+            String info = discountCode.getDiscountId() + " " + discountCode.getStartDate();
+            info += " " + discountCode.getEndDate() + " " + discountCode.getDiscountPercent();
+            info += " " + discountCode.getMaximumDiscountAmount() + " " + discountCode.getDiscountCount();
+            discountCodes.add(info);
+        }
+        return discountCodes;
+    }
+
+    //kamel nist (allowed costumers)
+    public static String editDiscountCode(String code, String field, String newContent) {
+        if (Manager.getDiscountCodeById(code) == null) {
+            return "discount code not exist";
+        }
+        if (field.toLowerCase().equals("percent")) {
+            if (!newContent.matches("\\d+")) {
+                return "invalid percent";
+            }
+            Manager.getDiscountCodeById(code).setDiscountPercent(Integer.parseInt(newContent));
+        }
+        if (field.toLowerCase().equals("maximum amount")) {
+            if (!newContent.matches("\\d+")) {
+                return "invalid amount";
+            }
+            Manager.getDiscountCodeById(code).setMaximumDiscountAmount(Long.parseLong(newContent));
+        }
+        return "field edited";
     }
 
     public static ArrayList<String> showRequests() {
-        Manager manager = (Manager) Controller.currentUser;
-        manager.getAllActiveRequests();
-        return null;
+        ArrayList<String> requests = new ArrayList<>();
+        for (Request request : Manager.getAllActiveRequests()) {
+            String info = request.getRequestId() + " " + request.getType();
+            requests.add(info);
+        }
+        return requests;
     }
 
-    public static ArrayList<String> showAllUsers() {
-        DataBase.allUsers.get(0);
-        return null;
+    //kamel nist
+    public static void changeUserType(String username, String newType) {
+
+    }
+    
+    public static ArrayList<String> showCategories() {
+        ArrayList<String> categories = new ArrayList<>();
+        for (Category category : DataBase.allCategories) {
+            String info = category.getName() + " " + category.getSpecialAttributes();
+            if (category.getParentCategory() == null) {
+                info += " null";
+            } else {
+                info += " " + category.getParentCategory().getName();
+            }
+            categories.add(info);
+        }
+        return categories;
     }
 }

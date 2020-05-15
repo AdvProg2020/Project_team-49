@@ -44,6 +44,8 @@ public class ManageUsers extends Menu {
             return "Create Manager Profile";
         } else if (getMatcher(command, "(?i)back").matches()) {
             return "back";
+        } else if (getMatcher(command, "(?i)help").matches()) {
+            return "help";
         }
         View.printString("invalid command");
         return "invalid";
@@ -122,15 +124,24 @@ public class ManageUsers extends Menu {
             @Override
             public void run(String lastCommand) {
                 Controller.logout();
-                View.printString("logout");
+                View.printString("logout successful");
                 allMenus.get(0).run("");
             }
         };
     }
 
-    //neveshte nashode
     private void showUsers() {
-        ManagerAreaController.showAllUsers();
+        ArrayList<String> users = ManagerAreaController.showAllUsers();
+        View.printString("Users:");
+        for (String user : users) {
+            View.printString("username: " + user.split("\\s")[0]);
+            View.printString("user type: " + user.split("\\s")[1]);
+            View.printString("first name: " + user.split("\\s")[2]);
+            View.printString("last name: " + user.split("\\s")[3]);
+            View.printString("Email: " + user.split("\\s")[4]);
+            View.printString("phone number: " + user.split("\\s")[5]);
+            View.printString("______________________________________");
+        }
     }
 
     @Override
@@ -159,6 +170,7 @@ public class ManageUsers extends Menu {
         return true;
     }
 
+    //kamel nist
     private ArrayList<String> getManagerInformation() {
         ArrayList<String> info = new ArrayList<>();
         String command = "";
@@ -175,6 +187,10 @@ public class ManageUsers extends Menu {
             }
             View.printString("inter password:");
             info.add(scanner.nextLine().trim());
+            if (getMatcher(info.get(1), "\\w+").matches()) {
+                View.printString("invalid password");
+                continue;
+            }
             View.printString("inter first name:");
             info.add(scanner.nextLine().trim());
             View.printString("inter last name");
@@ -183,6 +199,10 @@ public class ManageUsers extends Menu {
             info.add(scanner.nextLine().trim());
             View.printString("inter phone number:");
             info.add(scanner.nextLine().trim());
+            if (getMatcher(info.get(5), "\\d+").matches()) {
+                View.printString("invalid phone number");
+                continue;
+            }
             break;
         }
         return info;

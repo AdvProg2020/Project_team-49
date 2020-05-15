@@ -31,12 +31,6 @@ public class SellerAreaController {
         }
     }
 
-    //kamel nist
-    public static ArrayList<String> showCategories() {
-        DataBase.allCategories.get(0);
-        return null;
-    }
-
     //parameter ha ro mishe bishtear kard
     public static String viewOff(long offId) {
         Seller seller = (Seller) Controller.currentUser;
@@ -92,7 +86,7 @@ public class SellerAreaController {
         if (Integer.parseInt(info.get(2)) >= 100) {
             return "invalid percentage";
         }
-        Manager.addRequest(new AddOffRequest(new Off(products, OffStatus.inProgressToBuild, new Date(), new SimpleDateFormat("date structure").parse(info.get(1)), Integer.parseInt(info.get(2)))));
+        Manager.addRequest(new AddOffRequest(new Off(products, OffStatus.inProgressToBuild, new Date(), new SimpleDateFormat("date structure").parse(info.get(1)), Integer.parseInt(info.get(2))), (Seller) Controller.currentUser));
         return "request sent";
     }
 
@@ -103,8 +97,14 @@ public class SellerAreaController {
 
     public static ArrayList<String> viewSellerProducts() {
         Seller seller = (Seller) Controller.currentUser;
-        seller.getProductsForSale();
-        return null;
+        ArrayList<String> products = new ArrayList<>();
+        for (Product product : seller.getProductsForSale()) {
+            String info = product.getName() + " " + product.getProductId();
+            info += " " + product.getBrand() + " " + product.getPrice();
+            info += " " + product.getAverageScore() + " " + product.getExplanation();
+            products.add(info);
+        }
+        return products;
     }
 
     //logs mitone kamel tar beshe
@@ -141,32 +141,27 @@ public class SellerAreaController {
             return "product not exist";
         } else if (field.toLowerCase().equals("name")) {
             Manager.addRequest(new EditProductRequest("name", newContent, DataBase.getProductById(productId)));
-            return "request sent";
         } else if (field.toLowerCase().equals("brand")) {
             Manager.addRequest(new EditProductRequest("brand", newContent, DataBase.getProductById(productId)));
-            return "request sent";
         } else if (field.toLowerCase().equals("price")) {
             if (!newContent.matches("(\\d+)(\\.?)(\\d*)")) {
                 return "invalid new content";
             }
             Manager.addRequest(new EditProductRequest("price", newContent, DataBase.getProductById(productId)));
-            return "request sent";
         } else if (field.toLowerCase().equals("explanation")) {
             Manager.addRequest(new EditProductRequest("explanation", newContent, DataBase.getProductById(productId)));
-            return "request sent";
-        } else {
-            return "invalid field";
         }
+        return "request sent";
     }
 
     //halate vojod dashtan product dar nazar gerefte nashode
-    public static void addProduct(ArrayList<String> productInfo) {
+    public static String addProduct(ArrayList<String> productInfo) {
         if (!productInfo.get(2).matches("(\\d+)(\\.?)(\\d*)")) {
-            View.printString("invalid price");
+            return "invalid price";
         } else if (DataBase.getCategoryByName(productInfo.get(4)) == null) {
-            View.printString("invalid category");
+            return "invalid category";
         } else if (!productInfo.get(5).matches("\\d+")) {
-            View.printString("invalid number of items");
+            return "invalid number of items";
         } else {
             Manager.addRequest(new AddProductRequest(new Product(productInfo.get(0)
                     , productInfo.get(1)
@@ -175,14 +170,20 @@ public class SellerAreaController {
                     , DataBase.getCategoryByName(productInfo.get(4))
                     , (Seller) Controller.currentUser
                     , Integer.parseInt(productInfo.get(5)))));
-            View.printString("request sent");
+            return "request sent";
         }
     }
 
+    //check parameters
     public static ArrayList<String> showOffs() {
         Seller seller = (Seller) Controller.currentUser;
-        seller.getOffs();
-        return null;
+        ArrayList<String> offs = new ArrayList<>();
+        for (Off off : seller.getOffs()) {
+            String info = off.getOffId() + " " + off.getOffAmount();
+            info += " " + off.getStartDate() + " " + off.getEndDate();
+            offs.add(info);
+        }
+        return offs;
     }
 
     public static String viewProduct(long productId) {

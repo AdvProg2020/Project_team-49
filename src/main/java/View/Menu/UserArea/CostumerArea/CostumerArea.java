@@ -39,6 +39,8 @@ public class CostumerArea extends Menu {
             return "Logout";
         } else if (getMatcher(command, "(?i)back").matches()) {
             return "back";
+        } else if (getMatcher(command, "(?i)help").matches()) {
+            return "help";
         }
         View.printString("invalid command");
         return "invalid";
@@ -54,6 +56,7 @@ public class CostumerArea extends Menu {
         };
     }
 
+    //usege neveshte nemishe
     private Menu getViewDiscountCodes() {
         return new Menu("View Discount Codes", this) {
             @Override
@@ -86,9 +89,11 @@ public class CostumerArea extends Menu {
         };
     }
 
-    //;amel nist
     public void showSpecifications() {
-        Controller.getCurrentUserSpecifications();
+        String[] info = Controller.getCurrentUserSpecifications().split("\\s");
+        for (int i = 0; i < info.length - 1; i++) {
+            View.printString(info[i]);
+        }
     }
 
     @Override

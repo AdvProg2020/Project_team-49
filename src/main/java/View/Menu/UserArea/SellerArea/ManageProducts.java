@@ -5,6 +5,8 @@ import Controller.SellerAreaController;
 import View.Menu.Menu;
 import View.View;
 
+import java.awt.image.VolatileImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ManageProducts extends Menu {
@@ -40,6 +42,8 @@ public class ManageProducts extends Menu {
             return "Logout";
         } else if (getMatcher(command, "(?i)back").matches()) {
             return "back";
+        } else if (getMatcher(command, "(?i)help").matches()) {
+            return "help";
         }
         View.printString("invalid command");
         return "invalid";
@@ -84,17 +88,21 @@ public class ManageProducts extends Menu {
             @Override
             public void run(String lastCommand) {
                 while (true) {
-                    View.printString("enter field:");
+                    View.printString("enter field (available fields: name, brand, price, explanation):");
                     String field = scanner.nextLine().trim();
                     if (field.matches("(?i)back")) {
                         break;
                     }
-                    View.printString("enter new content:");
-                    String content = scanner.nextLine().trim();
-                    if (content.matches("(?i)back")) {
-                        break;
+                    if (!checkField(field.toLowerCase())) {
+                        View.printString("invalid field");
+                    } else {
+                        View.printString("enter new content:");
+                        String content = scanner.nextLine().trim();
+                        if (content.matches("(?i)back")) {
+                            break;
+                        }
+                        View.printString(SellerAreaController.editProduct(field, content, Long.parseLong(lastCommand.split("\\s")[1])));
                     }
-                    View.printString(SellerAreaController.editProduct(field, content, Long.parseLong(lastCommand.split("\\s")[1])));
                 }
                 this.parentMenu.run(lastCommand);
             }
@@ -112,9 +120,18 @@ public class ManageProducts extends Menu {
         };
     }
 
-    //kamel nist
     private void showProducts(){
-        SellerAreaController.viewSellerProducts();
+        ArrayList<String> products = SellerAreaController.viewSellerProducts();
+        View.printString("Products:");
+        for (String product : products) {
+            View.printString("product name: " + product.split("\\s")[0]);
+            View.printString("product Id: " + product.split("\\s")[1]);
+            View.printString("product brand: " + product.split("\\s")[2]);
+            View.printString("product price: " + product.split("\\s")[3]);
+            View.printString("product average score: " + product.split("\\s")[4]);
+            View.printString("product explanation: " + product.split("\\s")[5]);
+            View.printString("_____________________________________________________");
+        }
     }
 
     @Override
@@ -129,5 +146,21 @@ public class ManageProducts extends Menu {
             return false;
         }
         return true;
+    }
+
+    private boolean checkField(String field) {
+        if (field.equals("name")) {
+            return true;
+        }
+        if (field.equals("brand")) {
+            return true;
+        }
+        if (field.equals("price")) {
+            return true;
+        }
+        if (field.equals("explanation")) {
+            return true;
+        }
+        return false;
     }
 }

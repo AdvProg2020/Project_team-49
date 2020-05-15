@@ -7,6 +7,7 @@ import View.View;
 
 import javax.naming.ldap.SortResponseControl;
 import java.awt.image.VolatileImage;
+import java.util.ArrayList;
 
 public class ViewOrders extends Menu {
 
@@ -19,6 +20,7 @@ public class ViewOrders extends Menu {
             View.printString("order not exist");
             return;
         }
+        showOrder(orderId);
         while (true) {
             String command = scanner.nextLine().trim();
             if (getMatcher(command, "(?i)rate (\\S+) (\\S)").matches()) {
@@ -43,30 +45,51 @@ public class ViewOrders extends Menu {
     }
 
     private void showOrders(){
-
+        ArrayList<String> orders = CostumerAreaController.getOrders();
+        View.printString("Orders:");
+        for (String order : orders) {
+            showOrder(Long.parseLong(order.split("\\s")[0]));
+            View.printString("______________________________________");
+        }
     }
 
     @Override
     public void run(String lastCommand) {
         this.showOrders();
-        String command = scanner.nextLine().trim();
-        if (getMatcher(command, "(?i)show order (\\S+)").matches()) {
-            if (!getMatcher(command.split("\\s")[2], "\\d+").matches()) {
-                View.printString("invalid order Id");
-            } else {
-                this.showOrderPage(Long.parseLong(command.split("\\s")[2]));
+        while (true) {
+            String command = scanner.nextLine().trim();
+            if (getMatcher(command, "(?i)show order (\\S+)").matches()) {
+                if (!getMatcher(command.split("\\s")[2], "\\d+").matches()) {
+                    View.printString("invalid order Id");
+                } else {
+                    this.showOrderPage(Long.parseLong(command.split("\\s")[2]));
+                }
+                this.run(lastCommand);
             }
+            if (getMatcher(command, "(?i)logout").matches()) {
+                Controller.logout();
+                View.printString("logout successful");
+                allMenus.get(0).run(lastCommand);
+                break;
+            }
+            if (getMatcher(command, "(?i)help").matches()) {
+                this.showMenu();
+                continue;
+            }
+            if (getMatcher(command, "(?i)back").matches()) {
+                break;
+            }
+            View.printString("invalid command");
             this.run(lastCommand);
         }
-        if (lastCommand.equals("logout")) {
-            Controller.logout();
-            View.printString("logout successful");
-            allMenus.get(0).run(lastCommand);
-        }
-        if (command.equals("back")) {
-            this.parentMenu.run(lastCommand);
-        }
-        View.printString("invalid command");
-        this.run(lastCommand);
+    }
+
+    private void showOrder(long orderId) {
+        String info = CostumerAreaController.getOrderInfoById(orderId);
+        View.printString("order Id: " + info.split("\\s")[0]);
+        View.printString("seller name: " + info.split("\\s")[1]);
+        View.printString("paid amount: " + info.split("\\s")[2]);
+        View.printString("receive status: " + info.split("\\s")[3]);
+        View.printString("bought products: " + info.split("\\s")[4]);
     }
 }

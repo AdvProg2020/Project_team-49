@@ -5,6 +5,7 @@ import Controller.ManagerAreaController;
 import View.Menu.Menu;
 import View.View;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ViewDiscountCodes extends Menu {
@@ -40,6 +41,8 @@ public class ViewDiscountCodes extends Menu {
             return "Logout";
         } else if (getMatcher(command, "(?i)back").matches()) {
             return "back";
+        } else if (getMatcher(command, "(?i)help").matches()) {
+            return "help";
         }
         View.printString("invalid command");
         return "invalid";
@@ -54,12 +57,30 @@ public class ViewDiscountCodes extends Menu {
         };
     }
 
-    //kamel nist
+    //kamel nist (allowed costumers)
     private Menu getEditDiscountCode() {
         return new Menu("Edit Discount Code", this) {
             @Override
             public void run(String lastCommand) {
-                ManagerAreaController.editDiscountCode(lastCommand.split("\\s")[3]);
+                while (true) {
+                    View.printString("enter field (available fields: percent, maximum amount):");
+                    String field = scanner.nextLine().trim();
+                    if (getMatcher(field, "(?i)back").matches()) {
+                        break;
+                    }
+                    if (!checkField(field.toLowerCase())) {
+                        View.printString("invalid field");
+                        continue;
+                    } else {
+                        View.printString("enter new content:");
+                        String content = scanner.nextLine().trim();
+                        if (getMatcher(content, "(?i)back").matches()) {
+                            break;
+                        }
+                        View.printString(ManagerAreaController.editDiscountCode(lastCommand.split("\\s")[3], field, content));
+                    }
+                }
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -84,9 +105,19 @@ public class ViewDiscountCodes extends Menu {
         };
     }
 
-    //kamel nist
+    //kamel nist(allowed costumers)
     private void showDiscountCodes() {
-
+        ArrayList<String> discountCodes = ManagerAreaController.showDiscountCodes();
+        View.printString("Discount Codes:");
+        for (String discountCode : discountCodes) {
+            View.printString("discount Id: " + discountCode.split("\\s")[0]);
+            View.printString("start time: " + discountCode.split("\\s")[1]);
+            View.printString("end time: " + discountCode.split("\\s")[2]);
+            View.printString("discount percent: " + discountCode.split("\\s")[3]);
+            View.printString("maximum discount amount: " + discountCode.split("\\s")[4]);
+            View.printString("acceptable using times: " + discountCode.split("\\s")[5]);
+            View.printString("______________________________________");
+        }
     }
 
     @Override
@@ -101,5 +132,15 @@ public class ViewDiscountCodes extends Menu {
             return false;
         }
         return true;
+    }
+
+    private boolean checkField(String field) {
+        if (field.equals("percent")) {
+            return true;
+        }
+        if (field.equals("maximum amount")) {
+            return true;
+        }
+        return false;
     }
 }

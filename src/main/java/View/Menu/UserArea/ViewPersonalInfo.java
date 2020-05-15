@@ -23,6 +23,15 @@ public class ViewPersonalInfo extends Menu {
     }
 
     @Override
+    public void showMenu() {
+        View.printString(this.getName() + ":");
+        View.printString("edit");
+        View.printString("logout");
+        View.printString("help");
+        View.printString("back");
+    }
+
+    @Override
     public void run(String lastCommand) {
         this.showPersonalInfo(Controller.getPersonalInfo());
         while (true) {
@@ -39,7 +48,11 @@ public class ViewPersonalInfo extends Menu {
                 allMenus.get(0).run(lastCommand);
                 break;
             }
-            if (command.equals("back")) {
+            if (getMatcher(command, "(?i)help").matches()) {
+                this.showMenu();
+                continue;
+            }
+            if (getMatcher(command, "(?i)back").matches()) {
                 break;
             }
             View.printString("invalid command");

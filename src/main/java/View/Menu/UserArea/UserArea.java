@@ -20,19 +20,21 @@ public class UserArea extends Menu {
     }
 
     @Override
-    public String getCommandKey(String command) {
+    public void run(String lastCommand) {
+        if (getMatcher(lastCommand, "(?i)back").matches()) {
+            this.parentMenu.run(lastCommand);
+        }
         if (Controller.getCurrentUserType().equals("Guest")) {
-            return  "Guest Area";
+            subMenus.get("Guest Area").run(lastCommand);
         }
         if (Controller.getCurrentUserType().equals("Costumer")) {
-            return  "Costumer Area";
+            subMenus.get("Costumer Area").run(lastCommand);
         }
         if (Controller.getCurrentUserType().equals("Seller")) {
-            return  "Seller Area";
+            subMenus.get("Seller Area").run(lastCommand);
         }
         if (Controller.getCurrentUserType().equals("Manager")) {
-            return  "Manager Area";
+            subMenus.get("Manager Area").run(lastCommand);
         }
-        return null;
     }
 }

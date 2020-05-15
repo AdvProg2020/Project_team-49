@@ -38,6 +38,8 @@ public class ViewOffs extends Menu {
             return "Logout";
         } else if (getMatcher(command, "(?i)back").matches()) {
             return "back";
+        } else if (getMatcher(command, "(?i)help").matches()) {
+            return "help";
         }
         View.printString("invalid command");
         return "invalid";
@@ -84,7 +86,7 @@ public class ViewOffs extends Menu {
         };
     }
 
-    //kamel nist
+    //kamel nist (date format)
     private Menu getAddOff() {
         return new Menu("Add Off", this) {
             @Override
@@ -103,7 +105,15 @@ public class ViewOffs extends Menu {
     }
 
     private void showOffs(){
-        SellerAreaController.showOffs();
+        ArrayList<String> offs = SellerAreaController.showOffs();
+        View.printString("Offs:");
+        for (String off : offs) {
+            View.printString("off Id:" + off.split("\\s")[0]);
+            View.printString("off amount:" + off.split("\\s")[1]);
+            View.printString("start time:" + off.split("\\s")[2]);
+            View.printString("end time:" + off.split("\\s")[3]);
+            View.printString("____________________________________");
+        }
     }
 
     private Menu getLogout() {

@@ -9,15 +9,18 @@ import java.util.ArrayList;
 public class Manager extends User implements Serializable {
     private static ArrayList<Request> allActiveRequests = new ArrayList<>();
     private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
+    private static ArrayList<Request> answeredRequests = new ArrayList<>();
 
     public Manager(String username, String firstName, String lastName, String eMail, long phoneNumber, String password) {
         super(username, firstName, lastName, eMail, phoneNumber, password);
     }
 
     public static void answerRequest(String answer, long requestId) {
+        getRequestById(requestId).setManagerAnswer(answer);
         if (answer.equals("accept")) {
             getRequestById(requestId).run();
         }
+        answeredRequests.add(getRequestById(requestId));
         allActiveRequests.remove(getRequestById(requestId));
     }
 
@@ -57,6 +60,10 @@ public class Manager extends User implements Serializable {
                 return;
             }
         }
+    }
+
+    public static ArrayList<DiscountCode> getAllDiscountCodes() {
+        return allDiscountCodes;
     }
 
     @Override

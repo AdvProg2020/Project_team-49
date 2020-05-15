@@ -22,6 +22,7 @@ public class AddProductRequest extends Request {
                 '}';
     }
 
+    //kamel nist
     @Override
     public void run() {
         this.product.setStatus("accepted");

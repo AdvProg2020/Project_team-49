@@ -13,20 +13,25 @@ public class ManageCategories extends Menu {
         super("Manage Categories", parentMenu);
     }
 
+    //field ha kaman
     private void doEditCategory(String category) {
         while (true) {
-            View.printString("enter field for edit (edit [field]):");
-            String command = scanner.nextLine().trim();
-            if (getMatcher(command, "(?i)edit (\\S+)").matches()) {
-                View.printString("enter new content:");
-                String newContent = scanner.nextLine().trim();
-                ManagerAreaController.editCategory(category, command.split("\\s")[1], newContent);
-                continue;
-            }
-            if (getMatcher(command, "(?i)back").matches()) {
+            View.printString("enter field (available fields: attribute, name):");
+            String field = scanner.nextLine().trim();
+            if (getMatcher(field, "(?i)back").matches()) {
                 break;
             }
-            View.printString("invalid command");
+            if (!checkField(field.toLowerCase())) {
+                View.printString("invalid field");
+                continue;
+            } else {
+                View.printString("enter new content:");
+                String newContent = scanner.nextLine().trim();
+                if (getMatcher(newContent, "(?i)back").matches()) {
+                    break;
+                }
+                View.printString(ManagerAreaController.editCategory(category, field, newContent));
+            }
         }
     }
 
@@ -45,9 +50,26 @@ public class ManageCategories extends Menu {
         ManagerAreaController.addCategory(info);
     }
 
-    //kamel nist
-    private void showCategories() {
+    public static void showCategories() {
+        ArrayList<String> categories = ManagerAreaController.showCategories();
+        View.printString("Categories:");
+        for (String category : categories) {
+            View.printString("name: " + category.split("\\s")[0]);
+            View.printString("attributes: " + category.split("\\s")[1]);
+            View.printString("parent category: " + category.split("\\s")[2]);
+            View.printString("________________________________________");
+        }
+    }
 
+    @Override
+    public void showMenu() {
+        View.printString(this.getName() + " help:");
+        View.printString("remove");
+        View.printString("add");
+        View.printString("edit");
+        View.printString("logout");
+        View.printString("help");
+        View.printString("back");
     }
 
     @Override
@@ -76,15 +98,20 @@ public class ManageCategories extends Menu {
                 this.doEditCategory(command.split("\\s")[1]);
                 continue;
             }
-            if (lastCommand.equals("logout")) {
+            if (getMatcher(command, "(?i)logout").matches()) {
                 Controller.logout();
                 View.printString("logout successful");
                 allMenus.get(0).run(lastCommand);
                 break;
             }
-            if (command.equals("back")){
+            if (getMatcher(command, "(?i)help").matches()) {
+                this.showMenu();
+                continue;
+            }
+            if (getMatcher(command, "(?i)back").matches()) {
                 break;
             }
+            View.printString("invalid command");
         }
         this.parentMenu.run(lastCommand);
     }
@@ -95,5 +122,15 @@ public class ManageCategories extends Menu {
             return false;
         }
         return true;
+    }
+
+    private boolean checkField(String field) {
+        if (field.equals("name")) {
+            return true;
+        }
+        if (field.equals("attribute")) {
+            return true;
+        }
+        return false;
     }
 }

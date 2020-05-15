@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Costumer extends User implements Serializable {
-    private HashMap<Product, Integer> cart;
+    private Cart cart;
     private ArrayList<BuyLog> buyHistory;
     private ArrayList<DiscountCode> discountCodes;
     private double credit;
 
     public Costumer(String username, String firstName, String lastName, String eMail, long phoneNumber, String password) {
         super(username, firstName, lastName, eMail, phoneNumber, password);
-        this.cart = new HashMap<Product,Integer>();
+        this.cart = new Cart();
         this.buyHistory = new ArrayList<BuyLog>();
         this.discountCodes = new ArrayList<DiscountCode>();
         this.credit = 0;
@@ -34,7 +34,7 @@ public class Costumer extends User implements Serializable {
         return buyHistory;
     }
 
-    public HashMap<Product, Integer> getCart() {
+    public Cart getCart() {
         return cart;
     }
 

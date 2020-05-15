@@ -6,16 +6,16 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class Guest extends User implements Serializable {
-    private HashMap<Product, Integer> cart;
+    private Cart cart;
 
     public Guest() {
         super(null, null, null, null, 0, null);
-        this.cart = new HashMap<Product,Integer>(   );
+        this.cart = new Cart();
     }
 
     public void addProductToCart(Product product,Seller seller,int Count){}
 
-    public HashMap<Product, Integer> getCart() {
+    public Cart getCart() {
         return cart;
     }
 
