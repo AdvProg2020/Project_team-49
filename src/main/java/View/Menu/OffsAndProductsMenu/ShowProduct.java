@@ -1,6 +1,7 @@
 package View.Menu.OffsAndProductsMenu;
 
 import Controller.Controller;
+import Controller.OffAndProductMenuController;
 import Controller.ShowProductDetail;
 import View.Menu.Menu;
 import View.Menu.UserArea.UserArea;
@@ -16,7 +17,7 @@ public class ShowProduct extends Menu {
 
     @Override
     public void run(String lastCommand) {
-        View.printString("Show Product Menu:");
+        View.printString("\"Show Product Menu:\"");
         long productId = Long.parseLong(lastCommand.split("\\s")[2]);
 
         while (true) {
@@ -28,7 +29,7 @@ public class ShowProduct extends Menu {
                         ShowProductDetail.getPrice(productId), ShowProductDetail.getCategory(productId),
                         ShowProductDetail.getAverageScore(productId));
 
-                new Digest(this);
+                new Digest(this).run(lastCommand);
                 this.run(lastCommand);
             }
 
@@ -43,6 +44,16 @@ public class ShowProduct extends Menu {
             }
 
             if (command.equalsIgnoreCase("compare [productID]")) {
+                String productIdString = command.split("\\s")[1];
+                if (!productIdString.matches("\\d+")){
+                    View.printString("Please Enter Number For Product Id.");
+                    this.run(lastCommand);
+                }
+                if (!OffAndProductMenuController.isProductWithId(Long.parseLong(productIdString))){
+                    View.printString("There Is No Product With This Id.");
+                    this.run(lastCommand);
+                }
+
                 long secondProductId = Long.parseLong(command.split("\\s")[1]);
                 View.printCompareProduct(ShowProductDetail.getName(productId), ShowProductDetail.getOffPercentage(productId),
                         ShowProductDetail.getExplanation(productId), ShowProductDetail.getPrice(productId),
@@ -57,7 +68,7 @@ public class ShowProduct extends Menu {
             }
 
             if (command.equalsIgnoreCase("Comments")) {
-                new Comments(this, productId);
+                new Comments(this, productId).run(lastCommand);
                 this.run(lastCommand);
             }
 

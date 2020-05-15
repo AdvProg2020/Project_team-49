@@ -4,6 +4,7 @@ import Controller.Controller;
 import View.Menu.Menu;
 import View.Menu.UserArea.UserArea;
 import View.View;
+import Controller.OffAndProductMenuController;
 
 import java.util.HashMap;
 
@@ -12,7 +13,7 @@ public class OffsPage extends Menu {
     public OffsPage(Menu parentMenu) {
         super("Offs", parentMenu);
         HashMap<String, Menu> subMenus = new HashMap<String, Menu>();
-        subMenus.put("Show All Off Products", new ShowOffProducts(this));
+        subMenus.put("Show Off Products", new ShowOffProducts(this));
         subMenus.put("Show Categories", new ShowCategories(this));
         subMenus.put("Filtering", new Filtering(this));
         subMenus.put("Sorting", new Sorting(this));
@@ -22,6 +23,63 @@ public class OffsPage extends Menu {
         subMenus.put("Log Out",getLogout());
         //bara show Product bayad havasam bashe commond ba id pass bedam
         this.setSubMenus(subMenus);
+    }
+
+    @Override
+    public void run(String lastCommand) {
+        View.printOffsPage();
+        boolean showed=false;
+        //bayad faghat ye br neshon bedim?
+        View.printAllOffProduct(OffAndProductMenuController.getCurrentId(),
+                OffAndProductMenuController.getCurrentName(),
+                OffAndProductMenuController.getCurrentPrice(),
+                OffAndProductMenuController.getCurrentOffPercentage());
+        super.run(lastCommand);
+    }
+
+    @Override
+    public String getCommandKey(String command) {
+
+        if (command.equalsIgnoreCase("Show Off Products")){
+            return "Show Off Products";
+        }
+        if (command.equalsIgnoreCase("Show Categories")){
+            return "Show Categories";
+        }
+        if (command.equalsIgnoreCase("Filtering")){
+            return "Filtering";
+        }
+        if (command.equalsIgnoreCase("Sorting")){
+            return "Sorting";
+        }
+        //ignore case ro che konam?
+        if (command.toLowerCase().startsWith("show product")){
+            String productIdString = command.split("\\s")[2];
+            if (!productIdString.matches("^\\d+$")){
+                View.printString("Please Enter Number For Product Id.");
+                return "invalid";
+            }
+            if (!OffAndProductMenuController.isProductWithId(Long.parseLong(productIdString))){
+                View.printString("There Is No Product With This Id.");
+                return "invalid";
+            }
+            return "Show Product";
+        }
+        if (command.equalsIgnoreCase("Log In")){
+            return "Log In";
+        }
+        if (command.equalsIgnoreCase("Log Out")){
+            return "Log Out";
+        }
+        if (command.equalsIgnoreCase("Help")){
+            return "Help";
+        }
+        if (command.equalsIgnoreCase("Back")){
+            return "Back";
+        }
+        View.printString("invalid command");
+        return "invalid";
+
     }
 
     private Menu getLogout() {
@@ -34,37 +92,4 @@ public class OffsPage extends Menu {
         };
     }
 
-    @Override
-    public void run(String lastCommand) {
-        View.printOffsPage();
-        super.run(lastCommand);
-    }
-
-    @Override
-    public String getCommandKey(String command) {
-
-        if (command.equalsIgnoreCase("Show All Product")){
-            return "Show All Product";
-        }
-        if (command.equalsIgnoreCase("Show Categories")){
-            return "Show Categories";
-        }
-        if (command.equalsIgnoreCase("Filtering")){
-            return "Filtering";
-        }
-        if (command.equalsIgnoreCase("Sorting")){
-            return "Sorting";
-        }
-        if (command.equalsIgnoreCase("Show Product")){
-            return "Show Product";
-        }
-        if (command.equalsIgnoreCase("Log In")){
-            return "Log In";
-        }
-        if (command.equalsIgnoreCase("Log Out")){
-            return "Log Out";
-        }
-        View.printString("invalid command");
-        return "invalid";
-    }
 }

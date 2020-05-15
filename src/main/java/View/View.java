@@ -22,6 +22,7 @@ public class View {
                                        ArrayList<Double> productPrice,
                                        ArrayList<Double> offPercentage,
                                        ArrayList<Boolean> doesItHaveOff) {
+        System.out.println("All Products:");
         for (int i = 0; i <productsId.size() ; i++) {
             String off="";
             if (doesItHaveOff.get(i)){
@@ -35,6 +36,7 @@ public class View {
                                           ArrayList<String> productName,
                                           ArrayList<Double> productPrice,
                                           ArrayList<Double> offPercentage) {
+        System.out.println("All Of Offs Products:");
         for (int i = 0; i <productsId.size() ; i++) {
             String off="%OFF%"+offPercentage.get(i)+"%";
             System.out.printf("%d. %-30s  %-9.2f $  %-15s Id:%d\n",i,productName.get(i),productPrice.get(i),off,productsId.get(i));
@@ -48,7 +50,7 @@ public class View {
                                             ArrayList<Double> productPrice,
                                             ArrayList<Double> offPercentage,
                                             ArrayList<Boolean> doesItHaveOff) {
-        System.out.println("Filtered Product");
+        System.out.println("Filtered Product:");
         for (int i = 0; i <productsId.size() ; i++) {
             String off="";
             if (doesItHaveOff.get(i)){
@@ -60,8 +62,8 @@ public class View {
 
     public static void printCurrentFilter(ArrayList<String> filters) {
         System.out.println("Current Filter's are:");
-        for (int i = 0; i < filters.size(); i++) {
-            System.out.println(i+". "+filters.get(i));
+        for (int i = 1; i <= filters.size(); i++) {
+            System.out.println(i+". "+filters.get(i-1));
         }
     }
 
@@ -71,7 +73,7 @@ public class View {
                                           ArrayList<Double> productPrice,
                                           ArrayList<Double> offPercentage,
                                           ArrayList<Boolean> doesItHaveOff) {
-        System.out.println("Sorted Product");
+        System.out.println("Sorted Product:");
         for (int i = 0; i <productsId.size() ; i++) {
             String off="";
             if (doesItHaveOff.get(i)){
@@ -81,32 +83,34 @@ public class View {
         }
     }
 
-    public static void printCurrentSort(ArrayList<String> sort){
-        System.out.println("Current Sort's are");
-        for (int i = 0; i < sort.size(); i++) {
-            System.out.println(i+". "+sort.get(i));
+    public static void printCurrentSort(String sort){
+        if (sort.isEmpty()){
+            System.out.println("There Is No Entered Sort");
+
         }
+        System.out.println("Current Sort Is:\n" +
+                sort);
     }
     //in ba printAllProduct fargh dare ya na?
 
     public static void printCategories(ArrayList<String> categoriesName) {
-        System.out.println("Available Categories are:");
-        for (int i = 0; i < categoriesName.size(); i++) {
-            System.out.println(i+". "+categoriesName.get(i));
+        System.out.println("Available Categories Are:");
+        for (int i = 1; i <= categoriesName.size(); i++) {
+            System.out.println(i+". "+categoriesName.get(i-1));
         }
     }
 
     public static void printAvailableFilters(ArrayList<String> filters) {
         System.out.println("Available Filters are:");
-        for (int i = 0; i < filters.size(); i++) {
-            System.out.println(i+". "+filters.get(i));
+        for (int i = 1; i <= filters.size(); i++) {
+            System.out.println(i+". "+filters.get(i-1));
         }
     }
 
     public static void printAvailableSorting(ArrayList<String> sorting) {
         System.out.println("Available Sort's are:");
-        for (int i = 0; i < sorting.size(); i++) {
-            System.out.println(i+". "+sorting.get(i));
+        for (int i = 1; i <= sorting.size(); i++) {
+            System.out.println(i+". "+sorting.get(i-1));
         }
     }
 
@@ -203,25 +207,27 @@ public class View {
     }
 
     public static void printProductsPage(){
-        System.out.println("Products Page:\n"+
-                "1. Show All Product\n"+
-                "2. Show Categories\n"+
-                "3. Filtering Menu \n"+
-                "4. Sorting Menu \n"+
-                "5. Show Product\n"+
-                "6. Log In\n"+
-                "7. Log Out");
+//        System.out.println("Products Page:\n"+
+//                "1. Show All Product\n"+
+//                "2. Show Categories\n"+
+//                "3. Filtering Menu \n"+
+//                "4. Sorting Menu \n"+
+//                "5. Show Product\n"+
+//                "6. Log In\n"+
+//                "7. Log Out");
+        System.out.println("\"Products Page:\"");
     }
 
     public static void printOffsPage(){
-        System.out.println("Offs Page:\n"+
-                "1. Show All Product\n"+
-                "2. Show Categories\n"+
-                "3. Filtering Menu \n"+
-                "4. Sorting Menu \n"+
-                "5. Show Product\n"+
-                "6. Log In\n"+
-                "7. Log Out");
+//        System.out.println("Offs Page:\n"+
+//                "1. Show All Product\n"+
+//                "2. Show Categories\n"+
+//                "3. Filtering Menu \n"+
+//                "4. Sorting Menu \n"+
+//                "5. Show Product\n"+
+//                "6. Log In\n"+
+//                "7. Log Out");
+        System.out.println("\"Offs Page:\"");
     }
 
     public static void printCommentsMenu(){
@@ -253,7 +259,7 @@ public class View {
                 "6. Log In\n"+
                 "7. Log Out\n"+
                 "8. Help\n"+
-                "9. Back\n");
+                "9. Back");
     }
 
     public static void printSortingMenu(){
@@ -267,6 +273,7 @@ public class View {
                 "7. Help\n" +
                 "8. Back");
     }
+
     public static void printShowProductMenu(){
         System.out.println("Show Product Instruction:\n" +
                 "1. Digest\n" +
@@ -277,5 +284,23 @@ public class View {
                 "6. Log Out\n" +
                 "7. Help\n" +
                 "8. Back");
+    }
+
+    public static void printFilterSthMenu(){
+        System.out.println("Choose One Of these Filtering:\n" +
+                "1. Name\n" +
+                "2. Brand\n" +
+                "3. Price\n" +
+                "4. Availability\n" +
+                "5. Off\n" +
+                "6. Categories\n" +
+                "7. Back");
+    }
+
+    public static void printAllSeller(ArrayList<String> seller){
+        System.out.println("Available Seller For This Price Are:");
+        for (int i = 1; i <= seller.size(); i++) {
+            System.out.println(i+". "+seller.get(i-1));
+        }
     }
 }

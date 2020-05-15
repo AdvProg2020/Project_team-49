@@ -18,40 +18,43 @@ public class Comments extends Menu {
 
     @Override
     public void run(String lastCommand) {
-        View.printString("Comments Menu:");
-        String command = scanner.nextLine().trim();
 
-        if (command.equalsIgnoreCase("Add comment")) {
-            View.printString("Title:");
-            String title = scanner.nextLine();
-            View.printString("Content:");
-            String content = scanner.nextLine();
-            OffAndProductMenuController.addCommentsById(productId, title, content);
-            View.printString("Comment Added Successfully.");
-            this.parentMenu.run(lastCommand);
-        }
+        while (true) {
+            View.printString("\"Comments Menu:\"");
+            String command = scanner.nextLine().trim();
 
-        if (command.equalsIgnoreCase("Log In")){
-            new UserArea(this);
+            if (command.equalsIgnoreCase("Add comment")) {
+                View.printString("Title:");
+                String title = scanner.nextLine();
+                View.printString("Content:");
+                String content = scanner.nextLine();
+                OffAndProductMenuController.addCommentsById(productId, title, content);
+                View.printString("Comment Added Successfully.");
+                this.parentMenu.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("Log In")) {
+                new UserArea(this);
+                this.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("Log Out")) {
+                Controller.logout();
+                allMenus.get(0).run("");
+                this.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("back")) {
+                this.parentMenu.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("help")) {
+                View.printCommentsMenu();
+                this.run(lastCommand);
+            }
+
+            View.printString("invalid command");
             this.run(lastCommand);
         }
-
-        if (command.equalsIgnoreCase("Log Out")){
-            Controller.logout();
-            allMenus.get(0).run("");
-            this.run(lastCommand);
-        }
-
-        if (command.equalsIgnoreCase("back")) {
-            this.parentMenu.run(lastCommand);
-        }
-
-        if (command.equalsIgnoreCase("help")) {
-            View.printCommentsMenu();
-            this.run(lastCommand);
-        }
-
-        View.printString("invalid command");
-        this.run(lastCommand);
     }
 }

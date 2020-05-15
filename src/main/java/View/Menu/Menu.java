@@ -65,19 +65,21 @@ public abstract class Menu {
     public void run(String lastCommand) {
         String command = scanner.nextLine().trim();
         Menu nextMenu = null;
-        if (getCommandKey(command).equals("invalid")) {
+
+        String key=getCommandKey(command);
+        if (key.equalsIgnoreCase("invalid")) {
             nextMenu = this;
-        } else if (getCommandKey(command).equals("back")) {
+        } else if (key.equalsIgnoreCase("back")) {
             if (this.parentMenu == null) {
                 return;
             } else {
                 nextMenu = this.parentMenu;
             }
-        } else if (getCommandKey(command).equals("help")) {
+        } else if (key.equalsIgnoreCase("help")) {
             this.showMenu();
             nextMenu = this;
         } else {
-            nextMenu = this.subMenus.get(getCommandKey(command));
+            nextMenu = this.subMenus.get(key);
         }
         nextMenu.run(command);
     }

@@ -19,15 +19,16 @@ public class Sorting extends Menu {
 
     @Override
     public void run(String lastCommand) {
-        View.printString("Sorting Menu:");
+        View.printString("\"Sorting Menu:\"");
         while (true) {
             String command = scanner.nextLine().trim();
 
-            if (command.equalsIgnoreCase("Show Available Sorts")) {
+            if (command.equalsIgnoreCase("Show Available Sort")) {
                 View.printAvailableSorting(OffAndProductMenuController.getAllAvailableSorting());
                 this.run(lastCommand);
             }
 
+            // to current nemire
             if (command.equalsIgnoreCase("Sort")) {
                 View.printString("Enter Your Sort:");
                 String sort;
@@ -40,7 +41,7 @@ public class Sorting extends Menu {
                         this.run(lastCommand);
                     }
                     View.printString("Please Insert Valid Sorting\n" +
-                            "You Can Check Available Sorts By Go Back And Typing (Show Available Sorts)");
+                            "You Can Check Available Sorts By Go Back By Typing (Back) And Typing (Show Available Sorts)");
                 }
                 OffAndProductMenuController.sorting(sort);
 
@@ -55,7 +56,6 @@ public class Sorting extends Menu {
 
             if (command.equalsIgnoreCase("current sort")) {
                 View.printCurrentSort(OffAndProductMenuController.getCurrentSort());
-
                 this.run(lastCommand);
             }
 

@@ -74,6 +74,14 @@ public class OffAndProductMenuController {
         return allAvailableSorting;
     }
 
+    public static ArrayList<String> getAllSellerOfProductWithId(long productId){
+        return Controller.getProductById(productId).getAllSellerName();
+    }
+
+    public static String getCurrentSort() {
+        return Sort.getCurrentSort();
+    }
+
     public static void sorting(String sort) {
         if (sort.equalsIgnoreCase("View")){
             Sort.sortByView();
@@ -86,26 +94,8 @@ public class OffAndProductMenuController {
         }
     }
 
-    public static ArrayList<String> getCurrentSort() {
-        return null;
-    }
-
     public static void disableSort() {
         Sort.disableSort();
-    }
-
-    public static boolean checkRemainCountForBuy(long productId,String userName,int count){
-        Seller seller;
-        if (userName==null){
-            seller=Controller.getProductById(productId).getDefaultSeller();
-        }else {
-            seller=Controller.getProductById(productId).getSellerByUsername(userName);
-        }
-
-        if (Controller.getProductById(productId).getRemainingItemsForSeller(seller)<count){
-            return false;
-        }
-        return true;
     }
     //Test ino chi kar konam?
     public static void addCommentsById(long productId, String title, String content) {
@@ -123,6 +113,20 @@ public class OffAndProductMenuController {
         }
     }
 
+    public static boolean checkRemainCountForBuy(long productId,String userName,int count){
+        Seller seller;
+        if (userName==null){
+            seller=Controller.getProductById(productId).getDefaultSeller();
+        }else {
+            seller=Controller.getProductById(productId).getSellerByUsername(userName);
+        }
+
+        if (Controller.getProductById(productId).getRemainingItemsForSeller(seller)<count){
+            return false;
+        }
+        return true;
+    }
+
     public static boolean isCurrentUserGuestOrUser(){
         if (Controller.currentUser.getType().equals("Guest")||Controller.currentUser.getType().equals("Costumer"))
             return true;
@@ -132,6 +136,42 @@ public class OffAndProductMenuController {
     public static boolean checkSortingInput(String sort){
         if (sort.equalsIgnoreCase("View")||sort.equalsIgnoreCase("Time")||sort.equalsIgnoreCase("Score")){
             return true;
+        }
+        return false;
+    }
+
+    public static boolean checkFilteringByBrand(String brand){
+        for (String availableBrand : Filter.getAvailableBrands()) {
+            if (availableBrand.equalsIgnoreCase(brand)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkFilteringByCategory(String category){
+        for (String subCategory : Filter.showSubCategories()) {
+            if (subCategory.equalsIgnoreCase(category)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isProductWithId(long productId){
+        for (Product allProduct : allProducts) {
+            if (allProduct.getProductId()==productId){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isSellerWithNameForProduct(long productId,String sellerName){
+        for (String seller : Controller.getProductById(productId).getAllSellerName()) {
+            if (seller.equalsIgnoreCase(seller)){
+                return true;
+            }
         }
         return false;
     }
