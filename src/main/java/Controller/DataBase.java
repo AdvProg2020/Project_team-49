@@ -32,9 +32,9 @@ public class DataBase {
     static ArrayList<String> allAvailableSorting = new ArrayList<String>();
     public static long createdProductsCount = 0;
 
-    private static ArrayList<Request> allActiveRequests = new ArrayList<>();
-    private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
-    private static ArrayList<Request> answeredRequests = new ArrayList<>();
+    public static ArrayList<Request> allActiveRequests = new ArrayList<>();
+    public static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
+    public static ArrayList<Request> answeredRequests = new ArrayList<>();
 
     public static User getUserByUsername(String username) {
         for (User user : allUsers) {
