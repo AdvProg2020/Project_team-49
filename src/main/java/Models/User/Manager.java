@@ -6,10 +6,9 @@ import Models.User.Request.Request;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static Controller.DataBase.*;
+
 public class Manager extends User implements Serializable {
-    private static ArrayList<Request> allActiveRequests = new ArrayList<>();
-    private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
-    private static ArrayList<Request> answeredRequests = new ArrayList<>();
 
     public Manager(String username, String firstName, String lastName, String eMail, long phoneNumber, String password) {
         super(username, firstName, lastName, eMail, phoneNumber, password);
