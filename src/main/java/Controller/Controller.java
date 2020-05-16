@@ -105,10 +105,6 @@ public class Controller {
         setCurrentUser(new Guest());
     }
 
-    public static boolean hasDiscountCode(String code) {
-        return false;
-    }
-
     public static ArrayList<String> getPersonalInfo() {
         ArrayList<String> info = new ArrayList<String>();
         info.add(currentUser.getUsername());

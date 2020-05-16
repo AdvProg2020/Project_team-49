@@ -75,6 +75,10 @@ public class Seller extends User implements Serializable {
         this.companyName = companyName;
     }
 
+    public void addSellLog(SellLog sellLog) {
+        sellHistory.add(sellLog);
+    }
+
     public void setCredit(double credit) {
         this.credit = credit;
     }
