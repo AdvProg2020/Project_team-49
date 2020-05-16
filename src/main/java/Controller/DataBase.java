@@ -2,7 +2,9 @@ package Controller;
 
 
 import Models.Category;
+import Models.DiscountCode;
 import Models.Product;
+import Models.User.Request.Request;
 import Models.User.Seller;
 import Models.User.User;
 import View.View;
@@ -29,6 +31,10 @@ public class DataBase {
     static ArrayList<String> allAvailableFilters = new ArrayList<String>();
     static ArrayList<String> allAvailableSorting = new ArrayList<String>();
     public static long createdProductsCount = 0;
+
+    public static ArrayList<Request> allActiveRequests = new ArrayList<>();
+    public static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
+    public static ArrayList<Request> answeredRequests = new ArrayList<>();
 
     public static User getUserByUsername(String username) {
         for (User user : allUsers) {
@@ -131,6 +137,12 @@ public class DataBase {
                 usersFile.createNewFile();
                 File categoriesFile = new File("src/main/resources/DataBase/categories.txt");
                 categoriesFile.createNewFile();
+                File activeRequestsFile = new File("src/main/resources/DataBase/activeRequests.txt");
+                productsFile.createNewFile();
+                File answeredRequestsFile = new File("src/main/resources/DataBase/answeredRequests.txt");
+                usersFile.createNewFile();
+                File discountCodesFile = new File("src/main/resources/DataBase/discountCodes.txt");
+                categoriesFile.createNewFile();
 
             } catch (Exception e) {
                 System.out.println("sorry we can't create DataBase directory");
@@ -152,6 +164,45 @@ public class DataBase {
         loadAllProducts();
         loadAllCategories();
         loadAllUsers();
+        loadAllActiveRequests();
+        loadAllAnsweredRequests();
+        loadAllDiscountCodes();
+    }
+
+    public static void loadAllAnsweredRequests() {
+        try {
+            inputStream = new FileInputStream("src/main/resources/DataBase/answeredRequests.txt");
+            objectInputStream = new ObjectInputStream(inputStream);
+            answeredRequests = (ArrayList<Request>) objectInputStream.readObject();
+            objectInputStream.close();
+            inputStream.close();
+        } catch (Exception e) {
+            System.out.println("still no files in dataBase/answeredRequests");
+        }
+    }
+
+    public static void loadAllActiveRequests() {
+        try {
+            inputStream = new FileInputStream("src/main/resources/DataBase/activeRequests.txt");
+            objectInputStream = new ObjectInputStream(inputStream);
+            allActiveRequests = (ArrayList<Request>) objectInputStream.readObject();
+            objectInputStream.close();
+            inputStream.close();
+        } catch (Exception e) {
+            System.out.println("still no files in dataBase/activeRequests");
+        }
+    }
+
+    public static void loadAllDiscountCodes() {
+        try {
+            inputStream = new FileInputStream("src/main/resources/DataBase/discountCodes.txt");
+            objectInputStream = new ObjectInputStream(inputStream);
+            allDiscountCodes = (ArrayList<DiscountCode>) objectInputStream.readObject();
+            objectInputStream.close();
+            inputStream.close();
+        } catch (Exception e) {
+            System.out.println("still no files in dataBase/discountCodes");
+        }
     }
 
     public static void loadAllProducts() {
@@ -194,6 +245,9 @@ public class DataBase {
         saveAllProducts();
         saveAllCategories();
         saveAllUsers();
+        saveAllActiveRequests();
+        saveAllAnsweredRequests();
+        saveAllDiscountCodes();
     }
 
     public static void saveAllProducts() {
@@ -231,4 +285,44 @@ public class DataBase {
             System.out.println("can't save categories");
         }
     }
+
+    //    private static ArrayList<Request> allActiveRequests = new ArrayList<>();
+//    private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
+//    private static ArrayList<Request> answeredRequests = new ArrayList<>();
+    public static void saveAllActiveRequests() {
+        try {
+            OutputStream outputStream = new FileOutputStream("src/main/resources/DataBase/activeRequests.txt");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+            objectOutputStream.writeObject(allActiveRequests);
+            objectOutputStream.close();
+            outputStream.close();
+        } catch (Exception e) {
+            System.out.println("can't save active requests");
+        }
+    }
+
+    public static void saveAllDiscountCodes() {
+        try {
+            OutputStream outputStream = new FileOutputStream("src/main/resources/DataBase/discountCodes.txt");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+            objectOutputStream.writeObject(allDiscountCodes);
+            objectOutputStream.close();
+            outputStream.close();
+        } catch (Exception e) {
+            System.out.println("can't save discount codes");
+        }
+    }
+
+    public static void saveAllAnsweredRequests() {
+        try {
+            OutputStream outputStream = new FileOutputStream("src/main/resources/DataBase/answeredRequests.txt");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+            objectOutputStream.writeObject(answeredRequests);
+            objectOutputStream.close();
+            outputStream.close();
+        } catch (Exception e) {
+            System.out.println("can't save answered requests");
+        }
+    }
+//
 }

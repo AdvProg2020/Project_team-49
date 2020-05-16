@@ -34,8 +34,25 @@ public class Costumer extends User implements Serializable {
         return buyHistory;
     }
 
+    public DiscountCode getDiscountCodeById(String Id) {
+        for (DiscountCode discountCode : discountCodes) {
+            if (discountCode.getDiscountId().equals(Id)) {
+                return discountCode;
+            }
+        }
+        return null;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
     public Cart getCart() {
         return cart;
+    }
+
+    public void addCredit(long credit) {
+        this.credit += credit;
     }
 
     public BuyLog getBuyLogById(Long Id) {

@@ -3,13 +3,18 @@ package Controller;
 
 import Models.DiscountCode;
 import Models.Log.BuyLog;
+import Models.Log.SellLog;
 import Models.Product;
 import Models.Score;
 import Models.User.Cart;
 import Models.User.Costumer;
 import Models.User.Guest;
+import Models.User.Seller;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CostumerAreaController {
 
@@ -63,9 +68,40 @@ public class CostumerAreaController {
         return 0;
     }
 
-    //kamel nist
+    //kamel nist (log ID va off handle nashode va kam shodan credit)
     public static String finishPayment(ArrayList<String> receiverInfo) {
-        return "";
+        Costumer costumer = (Costumer) Controller.currentUser;
+        Set<Seller> sellers = new HashSet<>();
+        Cart cart = costumer.getCart();
+        for (Product product : cart.getProducts()) {
+            sellers.add(cart.getSellerByProductId(product.getProductId()));
+        }
+        int discount = 0;
+        if (!receiverInfo.get(2).equals("no")) {
+            discount = costumer.getDiscountCodeById(receiverInfo.get(2)).getDiscountPercent();
+        }
+        for (Seller seller : sellers) {
+            double paidAmount = 0;
+            ArrayList<Product> products = new ArrayList<>();
+            for (Product product : cart.getProducts()) {
+                if (cart.getSellerByProductId(product.getProductId()).equals(seller)) {
+                    paidAmount += (product.getPrice(seller) * cart.getItemsByProductId(product.getProductId()));
+                    products.add(product);
+                }
+            }
+            costumer.addBuyLog(new BuyLog(paidAmount * (1 - discount), discount, products, seller.getUsername(), 1, new Date()));
+            seller.addSellLog(new SellLog(paidAmount, 1, products, costumer.getUsername(), 1, new Date()));
+        }
+        //costumer.addCredit((getTotalPrice() * -1));
+        costumer.setCart(new Cart());
+        return "payment done";
+    }
+
+    public static boolean hasDiscountCode(String discountCode) {
+        if (((Costumer) Controller.currentUser).getDiscountCodeById(discountCode) == null) {
+            return false;
+        }
+        return true;
     }
 
     public static boolean hasOrderWithId(Long Id) {
@@ -107,5 +143,10 @@ public class CostumerAreaController {
         DataBase.getProductById(productId).addScore(new Score(Controller.currentUser, score, DataBase.getProductById(productId)));
         DataBase.getProductById(productId).resetAverageScore();
         return "product rated";
+    }
+
+    public static String increaseCredit(long credit) {
+        ((Costumer) Controller.currentUser).addCredit(credit);
+        return "credit increased";
     }
 }

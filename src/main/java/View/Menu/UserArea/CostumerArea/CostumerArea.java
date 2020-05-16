@@ -6,6 +6,7 @@ import View.Menu.Menu;
 import View.Menu.UserArea.ViewPersonalInfo;
 import View.View;
 
+import javax.swing.plaf.nimbus.AbstractRegionPainter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,6 +16,7 @@ public class CostumerArea extends Menu {
         super("Costumer Area", parentMenu);
         HashMap<String, Menu> subMenus = new HashMap<>();
         subMenus.put("View Balance", getViewBalance());
+        subMenus.put("Increase Balance", getIncreaseBalance());
         subMenus.put("View Discount Codes", getViewDiscountCodes());
         subMenus.put("View Personal Info", new ViewPersonalInfo(this));
         subMenus.put("View Cart", new ViewCart(this));
@@ -31,6 +33,8 @@ public class CostumerArea extends Menu {
             return "View Cart";
         } else if (getMatcher(command, "(?i)view orders").matches()) {
             return "View Orders";
+        } else if (getMatcher(command, "(?i)increase balance").matches()) {
+            return "Increase Balance";
         } else if (getMatcher(command, "(?i)view balance").matches()) {
             return "View Balance";
         } else if (getMatcher(command, "(?i)view discount codes").matches()) {
@@ -51,6 +55,27 @@ public class CostumerArea extends Menu {
             @Override
             public void run(String lastCommand) {
                 View.printString("current balance: " + Controller.getBalance());
+                this.parentMenu.run(lastCommand);
+            }
+        };
+    }
+
+    private Menu getIncreaseBalance() {
+        return new Menu("Increase Balance", this) {
+            @Override
+            public void run(String lastCommand) {
+                while (true) {
+                    View.printString("enter increase  in tomans (back to exit):");
+                    String credit = scanner.nextLine().trim();
+                    if (getMatcher(credit, "(?i)back").matches()) {
+                        break;
+                    }
+                    if (!getMatcher(credit, "\\d+").matches()) {
+                        View.printString("invalid amount");
+                        continue;
+                    }
+                    View.printString(CostumerAreaController.increaseCredit(Long.parseLong(credit)));
+                }
                 this.parentMenu.run(lastCommand);
             }
         };
