@@ -64,7 +64,10 @@ public class Controller {
         return hasHeadManager;
     }
 
-    public static boolean isPasswordCorrect(String password) {
+    public static boolean isPasswordCorrect(String password, String username) {
+        if (DataBase.getUserByUsername(username).getPassword().equals(password)) {
+            return true;
+        }
         return false;
     }
 

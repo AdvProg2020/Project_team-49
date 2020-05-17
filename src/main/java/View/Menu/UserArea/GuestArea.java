@@ -31,7 +31,7 @@ public class GuestArea extends Menu {
                         if (getMatcher(input, "(?i)back").matches()) {
                             this.parentMenu.run(lastCommand);
                         }
-                        if (!Controller.isPasswordCorrect(input)) {
+                        if (Controller.isPasswordCorrect(input , command[1])) {
                             break;
                         }
                         View.printString("invalid password");

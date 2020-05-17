@@ -77,7 +77,7 @@ public class SellerAreaController {
             }
             products.add(DataBase.getProductById(Long.parseLong(Id)));
         }
-        if (!info.get(1).matches("date structure")) {
+        if (!info.get(1).matches("dd/MM/yyyy HH:mm:ss")) {
             return "invalid end date";
         }
         if (!info.get(2).matches("\\d+")) {

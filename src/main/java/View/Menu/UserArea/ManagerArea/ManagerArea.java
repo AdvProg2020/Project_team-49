@@ -60,9 +60,9 @@ public class ManagerArea extends Menu {
                 ArrayList<String> info = getDiscountCodeInfo();
                 if (!getMatcher(info.get(0), "\\w+").matches()) {
                     View.printString("invalid Id");
-                } else if (!getMatcher(info.get(1), "time regex").matches()) {
+                } else if (!getMatcher(info.get(1), "dd/MM/yyyy HH:mm:ss").matches()) {
                     View.printString("invalid start time");
-                } else if (!getMatcher(info.get(2), "time regex").matches()) {
+                } else if (!getMatcher(info.get(2), "dd/MM/yyyy HH:mm:ss").matches()) {
                     View.printString("invalid end time");
                 } else if (!getMatcher(info.get(3), "\\d+").matches()) {
                     View.printString("invalid percentage");
@@ -106,9 +106,9 @@ public class ManagerArea extends Menu {
         ArrayList<String> info = new ArrayList<>();
         View.printString("enter discount Id:");
         info.add(scanner.nextLine().trim());
-        View.printString("enter start time(instruction):");
+        View.printString("enter start time(dd/MM/yyyy HH:mm:ss):");
         info.add(scanner.nextLine().trim());
-        View.printString("enter end time(instruction):");
+        View.printString("enter end time(dd/MM/yyyy HH:mm:ss):");
         info.add(scanner.nextLine().trim());
         View.printString("enter discount percentage:");
         info.add(scanner.nextLine().trim());

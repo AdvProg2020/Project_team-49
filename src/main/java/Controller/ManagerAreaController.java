@@ -59,8 +59,8 @@ public class ManagerAreaController {
         Date dateS;
         Date dateE;
         try {
-            dateS = new SimpleDateFormat("date structure").parse(info.get(1));
-            dateE = new SimpleDateFormat("date structure").parse(info.get(2));
+            dateS = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(info.get(1));
+            dateE = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(info.get(2));
         } catch (Exception ParseException) {
             return "invalid start date";
         }
