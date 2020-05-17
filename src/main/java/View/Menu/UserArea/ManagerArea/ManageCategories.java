@@ -47,7 +47,7 @@ public class ManageCategories extends Menu {
         info.add(scanner.nextLine().trim());
         View.printString("enter parent category (if doesnt have enter null word):");
         info.add(scanner.nextLine().trim());
-        ManagerAreaController.addCategory(info);
+        View.printString(ManagerAreaController.addCategory(info));
     }
 
     public static void showCategories() {
@@ -82,7 +82,7 @@ public class ManageCategories extends Menu {
                 if (!checkCategory(command.split("\\s")[1])) {
                     continue;
                 }
-                ManagerAreaController.removeCategory(command.split("\\s")[1]);
+                View.printString(ManagerAreaController.removeCategory(command.split("\\s")[1]));
                 continue;
             }
             if (getMatcher(command, "(?i)add (\\S+)").matches()) {

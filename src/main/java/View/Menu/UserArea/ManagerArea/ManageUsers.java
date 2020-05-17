@@ -78,8 +78,7 @@ public class ManageUsers extends Menu {
                 if (!Controller.hasUserWithUsername(command[2])) {
                     View.printString("user not exist");
                 } else {
-                    ManagerAreaController.deleteUser(command[2]);
-                    View.printString("user deleted");
+                    View.printString(ManagerAreaController.deleteUser(command[2]));
                 }
                 this.parentMenu.run(lastCommand);
             }
@@ -97,8 +96,7 @@ public class ManageUsers extends Menu {
                 } else if (Controller.getCurrentUserType().equals(command[3].toLowerCase())) {
                     View.printString("user type is the same");
                 } else {
-                    ManagerAreaController.changeUserType(command[4], command[3].toLowerCase());
-                    View.printString("user type changed");
+                    View.printString(ManagerAreaController.changeUserType(command[4], command[3].toLowerCase()));
                 }
                 this.parentMenu.run(lastCommand);
             }
@@ -112,7 +110,7 @@ public class ManageUsers extends Menu {
             public void run(String lastCommand) {
                 ArrayList<String> info = getManagerInformation();
                 if (info.size() != 0) {
-                    Controller.createAccount(info, "manager");
+                    View.printString(Controller.createAccount(info, "manager"));
                 }
                 this.parentMenu.run(lastCommand);
             }

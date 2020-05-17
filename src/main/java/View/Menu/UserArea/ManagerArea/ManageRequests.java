@@ -35,6 +35,7 @@ public class ManageRequests extends Menu {
         View.printString("back");
     }
 
+    //??????
     @Override
     public void run(String lastCommand) {
         this.showRequests();
@@ -52,14 +53,14 @@ public class ManageRequests extends Menu {
                 if (!checkRequestId(command.split("\\s")[1])) {
                     continue;
                 }
-                ManagerAreaController.acceptRequest(Long.parseLong(command.split("\\s")[1]));
+                View.printString(ManagerAreaController.acceptRequest(Long.parseLong(command.split("\\s")[1])));
                 continue;
             }
             if (getMatcher(command, "(?i)decline (\\S+)").matches()) {
                 if (!checkRequestId(command.split("\\s")[1])) {
                     continue;
                 }
-                ManagerAreaController.declineRequest(Long.parseLong(command.split("\\s")[1]));
+                View.printString(ManagerAreaController.declineRequest(Long.parseLong(command.split("\\s")[1])));
                 continue;
             }
             if (getMatcher(command, "(?i)logout").matches()) {

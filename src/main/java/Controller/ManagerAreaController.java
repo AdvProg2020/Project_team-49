@@ -33,8 +33,9 @@ public class ManagerAreaController {
         return info;
     }
 
-    public static void deleteUser(String username) {
+    public static String deleteUser(String username) {
         DataBase.removeUser(username);
+        return "user deleted";
     }
 
     public static String deleteProduct(long productId) {
@@ -73,39 +74,41 @@ public class ManagerAreaController {
         return "discount code created";
     }
 
-    public static void removeDiscountCode(String code) {
+    public static String  removeDiscountCode(String code) {
         if (Manager.getDiscountCodeById(code) == null) {
-            View.printString("discount code not exist");
+            return "discount code not exist";
         } else {
             Manager.removeDiscountCode(code);
-            View.printString("discount code removed");
+            return  "discount code removed";
         }
     }
 
-    public static void requestDetails(long requestId) {
+    //?????
+    public static String requestDetails(long requestId) {
         if (Manager.getRequestById(requestId) == null) {
-            View.printString("request not exist");
+            return  "request not exist";
         } else {
             View.printString(Manager.getRequestById(requestId).getType());
             View.printString(Manager.getRequestById(requestId).toString());
         }
+        return "";
     }
 
-    public static void acceptRequest(long requestId) {
+    public static String acceptRequest(long requestId) {
         if (Manager.getRequestById(requestId) == null) {
-            View.printString("request not exist");
+            return "request not exist";
         } else {
             Manager.answerRequest("accept", requestId);
-            View.printString("request" + requestId + "accepted");
+            return "request " + requestId + " accepted";
         }
     }
 
-    public static void declineRequest(long requestId) {
+    public static String declineRequest(long requestId) {
         if (Manager.getRequestById(requestId) == null) {
-            View.printString("request not exist");
+            return "request not exist";
         } else {
             Manager.answerRequest("decline", requestId);
-            View.printString("request" + requestId + "declined");
+            return "request" + requestId + "declined";
         }
     }
 
@@ -127,33 +130,33 @@ public class ManagerAreaController {
         return "field edited";
     }
 
-    public static void addCategory(ArrayList<String> info) {
+    public static String addCategory(ArrayList<String> info) {
         if (DataBase.getCategoryByName(info.get(0)) != null) {
-            View.printString("category exist with this name");
+            return "category exist with this name";
         } else if ((!info.get(2).matches("(?i)null")) && (DataBase.getCategoryByName(info.get(0)) == null)) {
-            View.printString("invalid parent category");
+            return "invalid parent category";
         } else if (info.get(2).matches("(?i)null")) {
             DataBase.addCategory(new Category(info.get(0), info.get(1), null));
         } else {
             DataBase.addCategory(new Category(info.get(0), info.get(1), DataBase.getCategoryByName(info.get(2))));
         }
-        View.printString("category added");
+        return "category added";
     }
 
-    public static void removeCategory(String name) {
+    public static String removeCategory(String name) {
         if (DataBase.getCategoryByName(name) == null) {
-            View.printString("category not exist");
+            return "category not exist";
         } else {
             DataBase.removeCategory(name);
-            View.printString(name + "category removed");
+            return name + "category removed";
         }
     }
 
-    public static void viewDiscountCode(String code) {
+    public static ArrayList<String> viewDiscountCode(String code) {
+        ArrayList<String> info = new ArrayList<>();
         if (Manager.getDiscountCodeById(code) == null) {
-            View.printString("discount code not exist");
+            info.add("discount code not exist");
         } else {
-            ArrayList<String> info = new ArrayList<>();
             DiscountCode discountCode = Manager.getDiscountCodeById(code);
             info.add(code);
             info.add(discountCode.getStartDate().toString());
@@ -162,8 +165,8 @@ public class ManagerAreaController {
             info.add(String.valueOf(discountCode.getMaximumDiscountAmount()));
             info.add(String.valueOf(discountCode.getDiscountCount()));
             info.add(discountCode.getAllowedCostumers().toString());
-            View.printArrayList(info);
         }
+        return info;
     }
 
     public static ArrayList<String> showAllUsers() {
@@ -230,8 +233,8 @@ public class ManagerAreaController {
     }
 
     //kamel nist
-    public static void changeUserType(String username, String newType) {
-
+    public static String changeUserType(String username, String newType) {
+        return "";
     }
     
     public static ArrayList<String> showCategories() {

@@ -52,7 +52,19 @@ public class ViewDiscountCodes extends Menu {
         return new Menu("View Discount Code", this) {
             @Override
             public void run(String lastCommand) {
-                ManagerAreaController.viewDiscountCode(lastCommand.split("\\s")[3]);
+                ArrayList<String> info =  ManagerAreaController.viewDiscountCode(lastCommand.split("\\s")[3]);
+                if (info.size() == 1) {
+                    View.printString(info.get(0));
+                } else {
+                    View.printString("discount Id: " + info.get(0));
+                    View.printString("start date: " + info.get(1));
+                    View.printString("end date: " + info.get(2));
+                    View.printString("discount percent: " + info.get(3));
+                    View.printString("maximum amount: " + info.get(4));
+                    View.printString("accepted use times: " + info.get(5));
+                    View.printString("allowed costumers: " + info.get(6));
+                    View.printString("_______________________________________________");
+                }
             }
         };
     }
@@ -89,7 +101,7 @@ public class ViewDiscountCodes extends Menu {
         return new Menu("Remove Discount Code", this) {
             @Override
             public void run(String lastCommand) {
-                ManagerAreaController.removeDiscountCode(lastCommand.split("\\s")[3]);
+                View.printString(ManagerAreaController.removeDiscountCode(lastCommand.split("\\s")[3]));
             }
         };
     }

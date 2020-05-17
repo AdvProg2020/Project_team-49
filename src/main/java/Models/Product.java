@@ -35,19 +35,16 @@ public class Product implements Serializable {
 
     public Product(String name, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems) {
         this.allSellers = new ArrayList<>();
-        this.allSellers.add(seller);
         this.availableItems = new ArrayList<>();
-        this.availableItems.add(remainingItems);
+        this.price = new ArrayList<>();
         this.brand = brand;
-        this.addItem(seller, remainingItems);
+        this.addItem(seller, remainingItems, price);
         this.defaultSeller = seller;
         this.allComments = new ArrayList<>();
         this.explanation = explanation;
         this.status = ProductStatus.REVIEWFORMAKE;
         this.parentCategory = parentCategory;
         this.name = name;
-        this.price = new ArrayList<>();
-        this.price.add(price);
         this.productDate = new Date();
     }
 
@@ -170,10 +167,11 @@ public class Product implements Serializable {
         this.allScores.add(score);
     }
 
-    public void addItem(Seller seller, int remainingItems) {
+    public void addItem(Seller seller, int remainingItems, double price) {
         if (!allSellers.contains(seller)) {
             allSellers.add(seller);
             availableItems.add(remainingItems);
+            this.price.add(price);
         } else {
             availableItems.set(allSellers.indexOf(seller), availableItems.get(allSellers.indexOf(seller)) + remainingItems);
         }

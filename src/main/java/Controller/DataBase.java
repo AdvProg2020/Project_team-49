@@ -63,9 +63,21 @@ public class DataBase {
     }
 
     public static void addNewProduct(Product product) {
+        for (Product allProduct : allProducts) {
+            if (!allProduct.getName().equals(product.getName())) {
+                continue;
+            }
+            if (!allProduct.getBrand().equals(product.getBrand())) {
+                continue;
+            }
+            allProduct.addItem(product.getDefaultSeller(), product.remainingItems(), product.getPrice(product.getDefaultSeller()));
+            product.getDefaultSeller().addProduct(allProduct);
+            return;
+        }
         createdProductsCount++;
         product.setProductId(createdProductsCount);
         allProducts.add(product);
+        product.getDefaultSeller().addProduct(product);
     }
 
     public static void removeProduct(long productId) {
