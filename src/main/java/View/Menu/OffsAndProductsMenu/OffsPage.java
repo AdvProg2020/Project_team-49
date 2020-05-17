@@ -28,7 +28,6 @@ public class OffsPage extends Menu {
     @Override
     public void run(String lastCommand) {
         View.printOffsPage();
-        boolean showed=false;
         //bayad faghat ye br neshon bedim?
         View.printAllOffProduct(OffAndProductMenuController.getCurrentId(),
                 OffAndProductMenuController.getCurrentName(),
@@ -53,7 +52,7 @@ public class OffsPage extends Menu {
             return "Sorting";
         }
         //ignore case ro che konam?
-        if (command.toLowerCase().startsWith("show product")){
+        if (command.toLowerCase().startsWith("show product ")&&command.split("\\s").length==3){
             String productIdString = command.split("\\s")[2];
             if (!productIdString.matches("^\\d+$")){
                 View.printString("Please Enter Number For Product Id.");
@@ -72,10 +71,10 @@ public class OffsPage extends Menu {
             return "Log Out";
         }
         if (command.equalsIgnoreCase("Help")){
-            return "Help";
+            return "help";
         }
         if (command.equalsIgnoreCase("Back")){
-            return "Back";
+            return "back";
         }
         View.printString("invalid command");
         return "invalid";

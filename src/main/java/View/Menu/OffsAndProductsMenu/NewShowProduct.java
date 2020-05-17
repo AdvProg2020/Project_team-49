@@ -7,11 +7,13 @@ import View.Menu.Menu;
 import View.Menu.UserArea.UserArea;
 import View.View;
 
+import java.lang.management.MemoryUsage;
+
 
 // bad az alireza bayad in ke chan bar baz shode har kala ro to controller ezafe konam.
-public class ShowProduct extends Menu {
+public class NewShowProduct extends Menu {
 
-    public ShowProduct(Menu parentMenu) {
+    public NewShowProduct(Menu parentMenu) {
         super("Show product", parentMenu);
     }
 
@@ -40,7 +42,7 @@ public class ShowProduct extends Menu {
                         ShowProductDetail.getPrice(productId), ShowProductDetail.getCategory(productId),
                         ShowProductDetail.getAverageScore(productId), ShowProductDetail.getAllSeller(productId),
                         ShowProductDetail.getRemainedNumber(productId));
-                new Digest(this).run(lastCommand);
+
                 this.run(lastCommand);
             }
 
@@ -95,6 +97,7 @@ public class ShowProduct extends Menu {
                     "You Can Instruction By Typing Help");
         }
     }
+
     private Menu digest(long productId){
         return new Menu("Pre Digest",this) {
             @Override
@@ -103,8 +106,6 @@ public class ShowProduct extends Menu {
                         ShowProductDetail.getOffPercentage(productId), ShowProductDetail.getExplanation(productId),
                         ShowProductDetail.getPrice(productId), ShowProductDetail.getCategory(productId),
                         ShowProductDetail.getAverageScore(productId));
-                new Digest(this).run(lastCommand);
-                this.run(lastCommand);
             }
         };
     }

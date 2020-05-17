@@ -47,7 +47,7 @@ public class ProductsPage extends Menu {
         if (command.equalsIgnoreCase("Sorting")){
             return "Sorting";
         }
-        if (command.toLowerCase().startsWith("show product ")){
+        if (command.toLowerCase().startsWith("show product ")&&command.split("\\s").length==3){
             String productIdString = command.split("\\s")[2];
             if (!productIdString.matches("^\\d+$")){
                 View.printString("Please Enter Number For Product Id.");
@@ -67,10 +67,10 @@ public class ProductsPage extends Menu {
             return "Log Out";
         }
         if (command.equalsIgnoreCase("Help")){
-            return "Help";
+            return "help";
         }
         if (command.equalsIgnoreCase("Back")){
-            return "Back";
+            return "back";
         }
         View.printString("invalid command");
         return "invalid";

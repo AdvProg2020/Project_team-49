@@ -107,18 +107,18 @@ public class GuestArea extends Menu {
     private ArrayList<String> getAccountInformation(String username, String type) {
         ArrayList<String> info = new ArrayList<String>();
         info.add(username);
-        View.printString("enter password:");
+        View.printString("Enter Password:");
         info.add(scanner.nextLine().trim());
-        View.printString("enter first name:");
+        View.printString("Enter First Name:");
         info.add(scanner.nextLine().trim());
-        View.printString("enter last name");
+        View.printString("Enter Last Name:");
         info.add(scanner.nextLine().trim());
-        View.printString("enter Email:");
+        View.printString("Enter Email:");
         info.add(scanner.nextLine().trim());
-        View.printString("enter phone number:");
+        View.printString("Enter Phone Number:");
         info.add(scanner.nextLine().trim());
         if (type.toLowerCase().equals("seller")) {
-            View.printString("enter company name:");
+            View.printString("Enter Company Name:");
             info.add(scanner.nextLine().trim());
         }
         return info;
