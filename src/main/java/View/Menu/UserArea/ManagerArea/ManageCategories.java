@@ -16,6 +16,7 @@ public class ManageCategories extends Menu {
     //field ha kaman
     private void doEditCategory(String category) {
         while (true) {
+            View.printString(this.getName().toUpperCase() + ":");
             View.printString("enter field (available fields: attribute, name):");
             String field = scanner.nextLine().trim();
             if (getMatcher(field, "(?i)back").matches()) {
@@ -37,8 +38,7 @@ public class ManageCategories extends Menu {
 
     private void doAddCategory(String category) {
         ArrayList<String> info = new ArrayList<>();
-        View.printString("enter name:");
-        info.add(scanner.nextLine().trim());
+        info.add(category);
         if (!getMatcher(info.get(0), "\\w+").matches()) {
             View.printString("invalid name");
             return;
@@ -76,6 +76,7 @@ public class ManageCategories extends Menu {
     public void run(String lastCommand) {
         this.showCategories();
         while (true) {
+            View.printString(this.getName().toUpperCase() + ":");
             String command = scanner.nextLine().trim();
             if (getMatcher(command, "(?i)remove (\\S+)").matches()) {
                 if (!checkCategory(command.split("\\s")[1])) {

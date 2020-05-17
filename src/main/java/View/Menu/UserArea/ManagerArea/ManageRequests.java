@@ -39,6 +39,7 @@ public class ManageRequests extends Menu {
     public void run(String lastCommand) {
         this.showRequests();
         while (true) {
+            View.printString(this.getName().toUpperCase() + ":");
             String command = scanner.nextLine().trim();
             if (getMatcher(command, "(?i)details (\\S+)").matches()) {
                 if (!checkRequestId(command.split("\\s")[1])) {

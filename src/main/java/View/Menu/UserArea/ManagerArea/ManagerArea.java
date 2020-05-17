@@ -71,7 +71,7 @@ public class ManagerArea extends Menu {
                 } else if (!getMatcher(info.get(5), "\\d+").matches()) {
                     View.printString("invalid repeat times");
                 } else {
-                    //View.printString(ManagerAreaController.createDiscountCode(info));
+                    View.printString(ManagerAreaController.createDiscountCode(info));
                 }
                 this.parentMenu.run(lastCommand);
             }

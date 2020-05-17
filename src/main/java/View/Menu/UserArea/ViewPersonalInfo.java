@@ -35,6 +35,7 @@ public class ViewPersonalInfo extends Menu {
     public void run(String lastCommand) {
         this.showPersonalInfo(Controller.getPersonalInfo());
         while (true) {
+            View.printString(this.getName().toUpperCase() + ":");
             String command = scanner.nextLine().trim();
             if (getMatcher(command, "(?i)edit (\\S+)").matches()) {
                 View.printString("enter new" + lastCommand.split("\\s")[1] + ":");

@@ -11,7 +11,7 @@ import Models.User.User;
 import View.View;
 import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,8 +46,7 @@ public class ManagerAreaController {
         }
     }
 
-    //date structure
-    public static String createDiscountCode(ArrayList<String> info) throws ParseException {
+    public static String createDiscountCode(ArrayList<String> info) {
         ArrayList<String> allowedCostumersNames = new ArrayList<String>(Arrays.asList(info.get(6).split("\\s")));
         ArrayList<Costumer> allowedCostumers = new ArrayList<Costumer>();
         for (String allowedCostumersName : allowedCostumersNames) {
@@ -56,9 +55,17 @@ public class ManagerAreaController {
             }
             allowedCostumers.add((Costumer) DataBase.getUserByUsername(allowedCostumersName));
         }
+        Date dateS;
+        Date dateE;
+        try {
+            dateS = new SimpleDateFormat("date structure").parse(info.get(1));
+            dateE = new SimpleDateFormat("date structure").parse(info.get(2));
+        } catch (Exception ParseException) {
+            return "invalid start date";
+        }
         DiscountCode.addDiscountCode(new DiscountCode(info.get(0),
-                new SimpleDateFormat("date structure").parse(info.get(1)),
-                new SimpleDateFormat("date structure").parse(info.get(2)),
+                dateS,
+                dateE,
                 Integer.parseInt(info.get(3)),
                 Long.parseLong(info.get(4)),
                 Integer.parseInt(info.get(5)),

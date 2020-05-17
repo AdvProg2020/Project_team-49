@@ -57,6 +57,7 @@ public class ViewOrders extends Menu {
     public void run(String lastCommand) {
         this.showOrders();
         while (true) {
+            View.printString(this.getName().toUpperCase() + ":");
             String command = scanner.nextLine().trim();
             if (getMatcher(command, "(?i)show order (\\S+)").matches()) {
                 if (!getMatcher(command.split("\\s")[2], "\\d+").matches()) {

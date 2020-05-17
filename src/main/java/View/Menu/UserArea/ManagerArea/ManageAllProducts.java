@@ -41,6 +41,7 @@ public class ManageAllProducts extends Menu {
     public void run(String lastCommand) {
         this.showAllProducts();
         while (true) {
+            View.printString(this.getName().toUpperCase() + ":");
             String command = scanner.nextLine().trim();
             if (getMatcher(command, "(?i)remove (\\S+)").matches()) {
                 if (!getMatcher(command.split("\\s")[1], "\\d+").matches()) {

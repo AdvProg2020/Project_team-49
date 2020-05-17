@@ -86,7 +86,7 @@ public class ViewOffs extends Menu {
         };
     }
 
-    //kamel nist (date format)
+    //kamel nist
     private Menu getAddOff() {
         return new Menu("Add Off", this) {
             @Override
@@ -98,7 +98,7 @@ public class ViewOffs extends Menu {
                 info.add(scanner.nextLine().trim());
                 View.printString("enter off percentage:");
                 info.add(scanner.nextLine().trim());
-                //SellerAreaController.addOff(info);
+                SellerAreaController.addOff(info);
                 this.parentMenu.run(lastCommand);
             }
         };

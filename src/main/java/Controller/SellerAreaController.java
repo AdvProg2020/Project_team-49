@@ -65,7 +65,7 @@ public class SellerAreaController {
     }
 
     //kamel nist
-    public static String addOff(ArrayList<String> info) throws ParseException {
+    public static String addOff(ArrayList<String> info) {
         Seller seller = (Seller) Controller.currentUser;
         ArrayList<Product> products = new ArrayList<>();
         for (String Id : info.get(0).split("\\s")) {
@@ -86,7 +86,13 @@ public class SellerAreaController {
         if (Integer.parseInt(info.get(2)) >= 100) {
             return "invalid percentage";
         }
-        Manager.addRequest(new AddOffRequest(new Off(products, OffStatus.inProgressToBuild, new Date(), new SimpleDateFormat("date structure").parse(info.get(1)), Integer.parseInt(info.get(2))), (Seller) Controller.currentUser));
+        Date date;
+        try {
+            date = new SimpleDateFormat("date structure").parse(info.get(1));
+        } catch (Exception ParseException) {
+            return "invalid end date";
+        }
+        Manager.addRequest(new AddOffRequest(new Off(products, OffStatus.inProgressToBuild, new Date(), date, Integer.parseInt(info.get(2))), (Seller) Controller.currentUser));
         return "request sent";
     }
 
