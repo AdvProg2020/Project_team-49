@@ -1,5 +1,6 @@
 package View.Menu;
 
+import Controller.OffAndProductMenuController;
 import View.Menu.OffsAndProductsMenu.OffsPage;
 import View.Menu.OffsAndProductsMenu.ProductsPage;
 import View.Menu.UserArea.UserArea;
@@ -23,8 +24,10 @@ public class MainMenu extends Menu {
         if (getMatcher(command, "(?i)User Area").matches()) {
             return "User Area";
         } else if (getMatcher(command, "(?i)Products Page").matches()) {
+            OffAndProductMenuController.clearAndRestoreProduct();
             return "Products Page";
         } else if (getMatcher(command, "(?i)Offs").matches()) {
+            OffAndProductMenuController.clearAndRestoreProduct();
             return "Offs";
         } else if (getMatcher(command, "(?i)help").matches()) {
             return "help";

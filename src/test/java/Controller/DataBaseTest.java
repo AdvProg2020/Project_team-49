@@ -27,17 +27,19 @@ public class DataBaseTest {
     static Category shirt = new Category("nike", "", father);
     static Category car = new Category("bmw", "", father);
     static Category child = new Category("child", null, car);
-    static Product a = new Product("phone", "apple", 1000.0, "nothing", phone, null, 1000);
-    static Product b = new Product("plakolang", "iran", 10.0, "nothing", car, null, 0);
-    static Product c = new Product("S9", "samsung", 7000.0, "nothing", phone, null, 1000);
-    static Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", shirt, null, 1000);
-    static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, null, 0);
+
+
     static Costumer costumer1 = new Costumer("alim1379", "ali", "mehrabani", "alim1379@gmail.com", 1288888, "alialiali");
     static Costumer costumer2 = new Costumer("alireza_hr", "alireza", "heidari", "alireza@gmail.com", 1777, "alirezaalireza");
     static Costumer costumer3 = new Costumer("hamid_Tala", "hamid", "yaghobi", "yaghobi@gmail.com", 12338, "hamidhamid");
     static Manager manager1 = new Manager("izadiii", "mohammad", "izadi", "izadi@gmail.com", 12, "izadizad");
     static Manager manager2 = new Manager("AbaM", "jj", "abam", "abam@gmail.com", 13, "abamiad");
     static Seller seller1 = new Seller("amiri77", "amir", "amiri", "amiri@gmail.com", 3, "amiri", "amiriI");
+    static Product a = new Product("phone", "apple", 1000.0, "nothing", phone, seller1, 1000);
+    static Product b = new Product("plakolang", "iran", 10.0, "nothing", car, seller1, 0);
+    static Product c = new Product("S9", "samsung", 7000.0, "nothing", phone, seller1, 1000);
+    static Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", shirt, seller1, 1000);
+    static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, seller1, 0);
 
     public void initialise() {
         costumer1.setCredit(1.1);
