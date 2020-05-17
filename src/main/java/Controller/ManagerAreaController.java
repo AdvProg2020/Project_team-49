@@ -123,7 +123,7 @@ public class ManagerAreaController {
     public static void addCategory(ArrayList<String> info) {
         if (DataBase.getCategoryByName(info.get(0)) != null) {
             View.printString("category exist with this name");
-        } else if ((!info.get(2).matches("(?i)null")) || (DataBase.getCategoryByName(info.get(0)) == null)) {
+        } else if ((!info.get(2).matches("(?i)null")) && (DataBase.getCategoryByName(info.get(0)) == null)) {
             View.printString("invalid parent category");
         } else if (info.get(2).matches("(?i)null")) {
             DataBase.addCategory(new Category(info.get(0), info.get(1), null));

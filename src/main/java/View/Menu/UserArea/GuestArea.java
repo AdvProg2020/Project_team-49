@@ -125,6 +125,6 @@ public class GuestArea extends Menu {
     }
 
     private void doLogin() {
-        subMenus.get("User Area").run("");
+        this.parentMenu.run("back");
     }
 }

@@ -88,7 +88,7 @@ public class DataBase {
 
     public static Category getCategoryByName(String name) {
         for (Category category : allCategories) {
-            if (category.getName().equals(name.toLowerCase())) {
+            if (category.getName().equals(name)) {
                 return category;
             }
         }
