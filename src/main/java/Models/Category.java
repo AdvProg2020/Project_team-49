@@ -10,25 +10,22 @@ public class Category implements Serializable {
     private String specialAttributes;
     private ArrayList<Category> subCategories;
     private Category parentCategory;
-    private ArrayList<Product> allProducts;
+    private ArrayList<Product> subProducts;
 
     public Category(String name, String specialAttributes , Category parentCategory) {
         this.name = name;
         this.specialAttributes = specialAttributes;
         subCategories = new ArrayList<>();
-        allProducts = new ArrayList<Product>();
+        subProducts = new ArrayList<Product>();
         this.parentCategory = parentCategory;
     }
 
-
-
-
-    public ArrayList<Product> getAllProducts() {
-        return allProducts;
+    public ArrayList<Product> getSubProducts() {
+        return subProducts;
     }
 
-    public void setAllProducts(ArrayList<Product> allProducts) {
-        this.allProducts = allProducts;
+    public void setSubProducts(ArrayList<Product> subProducts) {
+        this.subProducts = subProducts;
     }
 
     public String getName() {
@@ -43,16 +40,18 @@ public class Category implements Serializable {
         this.name = name;
     }
 
+
+
     public void setSpecialAttributes(String specialAttributes) {
         this.specialAttributes = specialAttributes;
     }
 
     public void addProduct(Product product){
-        allProducts.add(product);
+        subProducts.add(product);
     }
 
     public void removeProduct(Product product){
-        allProducts.remove(product);
+        subProducts.remove(product);
     }
 
     public Category getParentCategory() {
@@ -65,28 +64,20 @@ public class Category implements Serializable {
 
     public void addSubCategory(Category category){
         subCategories.add(category);
+        category.setParentCategory(this);
     }
 
     public void removeSubCategory(Category category){
         subCategories.remove(category);
+        category.setParentCategory(null);
     }
 
     public ArrayList<String> showCategories(){
         return null;
     }
 
-    public Category getCategoryByName(String name) {
-        return null;
-    }
-
     public ArrayList<Category> getSubCategories() {
         return subCategories;
     }
-
-    public void setSubCategories(ArrayList<Category> subCategories) {
-        this.subCategories = subCategories;
-    }
-
-
 
 }

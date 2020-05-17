@@ -16,6 +16,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.ArrayList;
 
@@ -24,17 +25,19 @@ public class DataBase {
     private static OutputStream outputStream;
     private static ObjectInputStream objectInputStream;
     private static ObjectOutputStream objectOutputStream;
+
     static ArrayList<User> allUsers = new ArrayList<User>();
     static ArrayList<Product> allProducts = new ArrayList<Product>();
     static ArrayList<Product> sortedOrFilteredProduct = new ArrayList<Product>();
     static ArrayList<Category> allCategories = new ArrayList<Category>();
-    static ArrayList<String> allAvailableFilters = new ArrayList<String>();
-    static ArrayList<String> allAvailableSorting = new ArrayList<String>();
-    public static long createdProductsCount = 0;
-
     public static ArrayList<Request> allActiveRequests = new ArrayList<>();
     public static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
     public static ArrayList<Request> answeredRequests = new ArrayList<>();
+
+    public static long createdProductsCount = 0;
+    static ArrayList<String> allAvailableFilters = new ArrayList<String>();
+    static ArrayList<String> allAvailableSorting = new ArrayList<String>();
+
 
     public static User getUserByUsername(String username) {
         for (User user : allUsers) {
@@ -87,12 +90,27 @@ public class DataBase {
         allProducts.remove(getProductById(productId));
     }
 
-    //kamel nist
-    public static void removeCategory(String name) {
-        //bayad kol derakht ro remove kard
 
-        allCategories.remove(getCategoryByName(name));
+    public static void removeCategory(String name) {
+        Category category = getCategoryByName(name);
+        if(category.getParentCategory() != null){
+            category.getParentCategory().removeSubCategory(category);
+        }
+        removeCategoryRecursive(category);
     }
+
+    public static void removeCategoryRecursive(Category category) {
+        allCategories.remove(category);
+        for (Product subProduct : category.getSubProducts()) {
+            removeProduct((Long) subProduct.getProductId());
+        }
+
+        for (Category subCategory : category.getSubCategories()) {
+            removeCategoryRecursive(subCategory);
+        }
+        return;
+    }
+
 
     public static void addCategory(Category category) {
         allCategories.add(category);
@@ -100,18 +118,16 @@ public class DataBase {
 
     public static Category getCategoryByName(String name) {
         for (Category category : allCategories) {
-            if (category.getName().equals(name)) {
+            if (category.getName().equalsIgnoreCase(name))
                 return category;
-            }
         }
         return null;
     }
 
     public static boolean isThereAnyCategoryWithName(String name) {
         for (Category category : allCategories) {
-            if (category.getName().equals(name.toLowerCase())) {
+            if (category.getName().equalsIgnoreCase(name))
                 return true;
-            }
         }
         return false;
     }
@@ -128,6 +144,11 @@ public class DataBase {
     }
 
     public static void startProgram() {
+        dataBaseRun();
+        View.run();
+    }
+
+    public static void dataBaseRun() {
         Path resourcesPath = Paths.get("src/main/resources");
         if (!Files.exists(resourcesPath)) {
             try {
@@ -150,11 +171,11 @@ public class DataBase {
                 File categoriesFile = new File("src/main/resources/DataBase/categories.txt");
                 categoriesFile.createNewFile();
                 File activeRequestsFile = new File("src/main/resources/DataBase/activeRequests.txt");
-                productsFile.createNewFile();
+                activeRequestsFile.createNewFile();
                 File answeredRequestsFile = new File("src/main/resources/DataBase/answeredRequests.txt");
-                usersFile.createNewFile();
+                answeredRequestsFile.createNewFile();
                 File discountCodesFile = new File("src/main/resources/DataBase/discountCodes.txt");
-                categoriesFile.createNewFile();
+                discountCodesFile.createNewFile();
 
             } catch (Exception e) {
                 System.out.println("sorry we can't create DataBase directory");
@@ -164,12 +185,15 @@ public class DataBase {
         loadAllData();
         allAvailableFilters = Filter.getAvailableFilters();
         allAvailableSorting = Sort.getAvailableSorts();
-        View.run();
     }
 
     public static void endProgram() {
-        saveAllData();
+        dataBaseEnd();
         System.exit(0);
+    }
+
+    public static void dataBaseEnd() {
+        saveAllData();
     }
 
     public static void loadAllData() {
@@ -298,9 +322,6 @@ public class DataBase {
         }
     }
 
-    //    private static ArrayList<Request> allActiveRequests = new ArrayList<>();
-//    private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
-//    private static ArrayList<Request> answeredRequests = new ArrayList<>();
     public static void saveAllActiveRequests() {
         try {
             OutputStream outputStream = new FileOutputStream("src/main/resources/DataBase/activeRequests.txt");
@@ -336,5 +357,5 @@ public class DataBase {
             System.out.println("can't save answered requests");
         }
     }
-//
+
 }

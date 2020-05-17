@@ -1,7 +1,11 @@
 package Controller;
 
+import org.apache.commons.io.FileUtils;
+
 import Models.Category;
 import Models.Product;
+import Models.User.Request.EditProductRequest;
+import Models.User.Request.Request;
 import Models.User.User;
 import Models.User.*;
 import org.junit.Assert;
@@ -19,7 +23,7 @@ import static Controller.DataBase.*;
 import static org.junit.Assert.*;
 
 public class DataBaseTest {
-
+    static Seller seller1 = new Seller("amiri77", "amir", "amiri", "amiri@gmail.com", 3, "amiri", "amiriI");
     static Category mother = new Category("xx", null, null);
     static Category father = new Category("xxlx", null, null);
     static Category phone = new Category("mobile", "", mother);
@@ -27,17 +31,17 @@ public class DataBaseTest {
     static Category shirt = new Category("nike", "", father);
     static Category car = new Category("bmw", "", father);
     static Category child = new Category("child", null, car);
-    static Product a = new Product("phone", "apple", 1000.0, "nothing", phone, null, 1000);
-    static Product b = new Product("plakolang", "iran", 10.0, "nothing", car, null, 0);
-    static Product c = new Product("S9", "samsung", 7000.0, "nothing", phone, null, 1000);
-    static Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", shirt, null, 1000);
-    static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, null, 0);
+    static Product a = new Product("phone", "apple", 1000.0, "nothing", phone, seller1, 1000);
+    static Product b = new Product("plakolang", "iran", 10.0, "nothing", car, seller1, 0);
+    static Product c = new Product("S9", "samsung", 7000.0, "nothing", phone, seller1, 1000);
+    static Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", shirt, seller1, 1000);
+    static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, seller1, 0);
     static Costumer costumer1 = new Costumer("alim1379", "ali", "mehrabani", "alim1379@gmail.com", 1288888, "alialiali");
     static Costumer costumer2 = new Costumer("alireza_hr", "alireza", "heidari", "alireza@gmail.com", 1777, "alirezaalireza");
     static Costumer costumer3 = new Costumer("hamid_Tala", "hamid", "yaghobi", "yaghobi@gmail.com", 12338, "hamidhamid");
     static Manager manager1 = new Manager("izadiii", "mohammad", "izadi", "izadi@gmail.com", 12, "izadizad");
     static Manager manager2 = new Manager("AbaM", "jj", "abam", "abam@gmail.com", 13, "abamiad");
-    static Seller seller1 = new Seller("amiri77", "amir", "amiri", "amiri@gmail.com", 3, "amiri", "amiriI");
+
 
     public void initialise() {
         costumer1.setCredit(1.1);
@@ -58,6 +62,11 @@ public class DataBaseTest {
         allUsers.add(costumer3);
         allUsers.add(manager2);
 
+        a.setProductId(1);
+        b.setProductId(2);
+        c.setProductId(3);
+        d.setProductId(4);
+        e.setProductId(5);
 
         allCategories.clear();
         father.getSubCategories().clear();
@@ -68,6 +77,9 @@ public class DataBaseTest {
         father.addSubCategory(car);
         mother.addSubCategory(phone);
         car.addSubCategory(child);
+        mother.addProduct(a);
+        phone.addProduct(c);
+        father.addProduct(b);
 
         allCategories.add(phone);
         allCategories.add(makeup);
@@ -88,7 +100,7 @@ public class DataBaseTest {
     }
 
     public void makeResources() {
-        try{
+        try {
             File dataBaseDir = new File("src/main/resources/DataBase");
             dataBaseDir.mkdir();
             File productsFile = new File("src/main/resources/DataBase/products.txt");
@@ -97,18 +109,60 @@ public class DataBaseTest {
             usersFile.createNewFile();
             File categoriesFile = new File("src/main/resources/DataBase/categories.txt");
             categoriesFile.createNewFile();
-        }catch (Exception e){
+            File activeRequestsFile = new File("src/main/resources/DataBase/activeRequests.txt");
+            activeRequestsFile.createNewFile();
+            File answeredRequestsFile = new File("src/main/resources/DataBase/answeredRequests.txt");
+            answeredRequestsFile.createNewFile();
+            File discountCodesFile = new File("src/main/resources/DataBase/discountCodes.txt");
+            discountCodesFile.createNewFile();
+        } catch (Exception e) {
             System.out.println("not exist");
         }
     }
 
-    public void deleteOrMake(){
+
+    public void deleteOrMake() {
         Path path = Paths.get("src/main/resources/DataBase");
-        if(Files.exists(path)){
+        if (Files.exists(path)) {
             clearResources();
-        }else
+        } else
             makeResources();
     }
+
+    @Test
+    public void TestExceptions() {
+
+        allCategories.clear();
+        allProducts.clear();
+        allUsers.clear();
+        allActiveRequests.clear();
+        answeredRequests.clear();
+        allDiscountCodes.clear();
+
+        File file = new File("src/main/resources/DataBase");
+        try {
+            FileUtils.cleanDirectory(file);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        loadAllData();
+        assertEquals(0, allUsers.size());
+        saveAllData();
+        loadAllData();
+
+        File file2 = new File("src/main/resources");
+        try {
+            FileUtils.cleanDirectory(file2);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        file2.delete();
+        dataBaseEnd();
+        dataBaseRun();
+        assertEquals(0, allProducts.size());
+        assertEquals(0, allActiveRequests.size());
+    }
+
 
     @Test
     public void TestGetUserByUserName() {
@@ -124,7 +178,6 @@ public class DataBaseTest {
 
     @Test
     public void TestSaveAndLoadAllCategories() {
-        makeResources();
         initialise();
         saveAllCategories();
         allCategories.clear();
@@ -136,41 +189,41 @@ public class DataBaseTest {
         loadAllCategories();
         assertEquals(allCategories.get(1).getParentCategory().getName(), "xxlx");
         assertEquals(7, allCategories.size());
-        deleteOrMake();
+
+        allCategories.clear();
         saveAllCategories();
         allCategories.clear();
         loadAllCategories();
-        assertEquals( 0 , allCategories.size());
-        deleteOrMake();
+        assertEquals(0, allCategories.size());
+
     }
 
     @Test
     public void TestSaveAndLoadAllProducts() {
+
         initialise();
         saveAllProducts();
         allProducts.clear();
         loadAllProducts();
         assertEquals(allProducts.size(), 5);
         assertEquals("phone", allProducts.get(0).getName());
-        assertEquals(10.0, allProducts.get(1).getPrice(allProducts.get(1).getDefaultSeller()), 0.0001);
         allProducts.clear();
         loadAllProducts();
         loadAllProducts();
         assertEquals(allProducts.get(4).getBrand(), "LMV");
         assertEquals(5, allProducts.size());
-        deleteOrMake();
         allProducts.clear();
         saveAllProducts();
         loadAllProducts();
-        assertEquals( 0 , allProducts.size());
-        deleteOrMake();
+        assertEquals(0, allProducts.size());
+
     }
 
     @Test
     public void TestSaveAndLoadAllUsers() {
-//        deleteOrMake();
+
         initialise();
-        assertEquals(6 , allUsers.size());
+        assertEquals(6, allUsers.size());
         saveAllUsers();
         allUsers.clear();
         loadAllUsers();
@@ -181,18 +234,19 @@ public class DataBaseTest {
         assertEquals("Seller", allUsers.get(1).getType());
         assertEquals("Manager", allUsers.get(5).getType());
         assertEquals("Costumer", allUsers.get(4).getType());
-        deleteOrMake();
+
         allUsers.clear();
         saveAllUsers();
         loadAllUsers();
-        assertEquals( 0 , allUsers.size());
-        deleteOrMake();
+        assertEquals(0, allUsers.size());
+
     }
 
     @Test
     public void TestSaveAndLoadAllData() {
         initialise();
         saveAllData();
+
         allUsers.clear();
         allProducts.clear();
         allCategories.clear();
@@ -208,7 +262,6 @@ public class DataBaseTest {
 
         assertEquals(allProducts.size(), 5);
         assertEquals("phone", allProducts.get(0).getName());
-        assertEquals(10.0, allProducts.get(1).getPrice(allProducts.get(1).getDefaultSeller()), 0.0001);
         assertEquals(allProducts.get(4).getBrand(), "LMV");
         assertEquals(5, allProducts.size());
 
@@ -216,14 +269,89 @@ public class DataBaseTest {
         assertEquals("mobile", allCategories.get(0).getName());
         assertEquals(allCategories.get(1).getParentCategory().getName(), "xxlx");
         assertEquals(7, allCategories.size());
-        deleteOrMake();
-        allUsers.clear();
-        allProducts.clear();
+
+    }
+
+    @Test
+    public void TestIsProductInThisCategory() {
+        initialise();
+        assertTrue(isProductInThisCategory("xx", a));
+        assertFalse(isProductInThisCategory("xxlx", a));
+    }
+
+    @Test
+    public void TestIsThereAnyCategoryWithName() {
+        initialise();
+        assertFalse(isThereAnyCategoryWithName("akusdafkas"));
+        assertTrue(isThereAnyCategoryWithName("xxlx"));
+    }
+
+    @Test
+    public void TestGetCategoryByName() {
+        initialise();
+        Category category = null;
+        category = getCategoryByName("xx");
+        assertEquals(mother, category);
+        category = getCategoryByName("asdfsafas");
+        assertEquals(null, category);
+    }
+
+    @Test
+    public void TestAddCategory() {
+        initialise();
+        Category category = null;
+        category = new Category("ali", null, mother);
+        addCategory(category);
+
+        assertEquals(8, allCategories.size());
+    }
+
+    @Test
+    public void TestRemoveCategory() {
+        initialise();
+        removeCategory("xx");
+        assertEquals(allProducts.size(), 3);
+        initialise();
+        removeCategory("nike");
+        assertEquals(allCategories.size(), 6);
+    }
+
+//    @Test
+//    public void TestGetProductById() {
+//        initialise();
+//        assertEquals(getProductById(1) , a);
+//    }
+
+
+    @Test
+    public void clearDataBase() throws IOException {
         allCategories.clear();
-        loadAllData();
+        allProducts.clear();
+        allUsers.clear();
+        allActiveRequests.clear();
+        answeredRequests.clear();
+        allDiscountCodes.clear();
+        File file = new File("src/main/resources/DataBase");
+        try {
+            FileUtils.cleanDirectory(file);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        File dataBaseDir = new File("src/main/resources/DataBase");
+        dataBaseDir.mkdir();
+        File productsFile = new File("src/main/resources/DataBase/products.txt");
+        productsFile.createNewFile();
+        File usersFile = new File("src/main/resources/DataBase/users.txt");
+        usersFile.createNewFile();
+        File categoriesFile = new File("src/main/resources/DataBase/categories.txt");
+        categoriesFile.createNewFile();
+        File activeRequestsFile = new File("src/main/resources/DataBase/activeRequests.txt");
+        activeRequestsFile.createNewFile();
+        File answeredRequestsFile = new File("src/main/resources/DataBase/answeredRequests.txt");
+        answeredRequestsFile.createNewFile();
+        File discountCodesFile = new File("src/main/resources/DataBase/discountCodes.txt");
+        discountCodesFile.createNewFile();
         assertEquals(0, allProducts.size());
-        assertEquals(0, allUsers.size());
-        assertEquals(0, allCategories.size());
-        deleteOrMake();
+        assertEquals(0, activeRequestsFile.length(), .0001);
     }
 }
