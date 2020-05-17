@@ -180,4 +180,9 @@ public class OffAndProductMenuController {
         }
         return false;
     }
+
+    public static void clearAndRestoreProduct(){
+        sortedOrFilteredProduct.clear();
+        sortedOrFilteredProduct.addAll(allProducts);
+    }
 }

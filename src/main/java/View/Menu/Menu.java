@@ -70,13 +70,13 @@ public abstract class Menu {
         String key = getCommandKey(command);
         if (key.equals("invalid")) {
             nextMenu = this;
-        } else if (key.equals("back")) {
+        } else if (key.equalsIgnoreCase("back")) {
             if (this.parentMenu == null) {
                 DataBase.endProgram();
             } else {
                 nextMenu = this.parentMenu;
             }
-        } else if (key.equals("help")) {
+        } else if (key.equalsIgnoreCase("help")) {
             this.showMenu();
             nextMenu = this;
         } else {

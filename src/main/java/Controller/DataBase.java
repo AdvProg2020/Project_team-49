@@ -81,6 +81,8 @@ public class DataBase {
         product.setProductId(createdProductsCount);
         allProducts.add(product);
         product.getDefaultSeller().addProduct(product);
+        sortedOrFilteredProduct.clear();
+        sortedOrFilteredProduct.addAll(allProducts);
     }
 
     public static void removeProduct(long productId) {

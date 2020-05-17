@@ -9,49 +9,65 @@ import static Controller.DataBase.*;
 public class ShowProductDetail {
     public static String getName(long productId){
         for (Product product : allProducts) {
-            return product.getName();
+            if (product.getProductId()==productId){
+                return product.getName();
+            }
         }
         return null;
     }
     public static Double getOffPercentage(long productId){
         for (Product product : allProducts) {
-            return product.getOffPercentage();
+            if (product.getProductId()==productId){
+                return product.getOffPercentage();
+            }
         }
         return null;
     }
     public static String getExplanation(long productId){
         for (Product product : allProducts) {
-            return product.getExplanation();
+            if (product.getProductId()==productId){
+                return product.getExplanation();
+            }
         }
         return null;
     }
     public static Double getPrice(long productId){
         for (Product product : allProducts) {
-            return product.getPrice(product.getDefaultSeller());
+            if (productId==product.getProductId()) {
+                return product.getPrice(product.getDefaultSeller());
+            }
         }
         return null;
     }
     public static String getCategory(long productId){
         for (Product product : allProducts) {
-            return product.getParentCategory().getName();
+            if (productId==product.getProductId()) {
+                return product.getParentCategory().getName();
+            }
         }
         return null;
     }
     public static Double getAverageScore(long productId){
         for (Product product : allProducts) {
-            return product.getAverageScore();
+            if (productId==product.getProductId()) {
+                return product.getAverageScore();
+            }
         }
         return null;
     }
     public static ArrayList<String> getAllSeller(long productId){
         for (Product product : allProducts) {
-            return product.getAllSellerName();
+            if (productId==product.getProductId()) {
+                return product.getAllSellerName();
+            }
         }
         return null;
     }
     public static int getRemainedNumber(long productId){
         for (Product product : allProducts) {
-            return product.remainingItems();
+            if (productId==product.getProductId()) {
+                return product.remainingItems();
+            }
         }
         return 0;
     }

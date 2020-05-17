@@ -18,6 +18,7 @@ public class ProductsPage extends Menu {
         subMenus.put("Filtering", new Filtering(this));
         subMenus.put("Sorting", new Sorting(this));
         subMenus.put("Show Product", new ShowProduct(this));
+        subMenus.put("Restore All",restoreAll());
         subMenus.put("Log In",new UserArea(this));
         subMenus.put("Log Out",getLogout());
         //bara show Product bayad havasam bashe commond ba id pass bedam
@@ -60,6 +61,10 @@ public class ProductsPage extends Menu {
             return "Show Product";
         }
 
+        if (command.equalsIgnoreCase("Restore All")){
+            return "Restore All";
+        }
+
         if (command.equalsIgnoreCase("Log In")){
             return "Log In";
         }
@@ -83,6 +88,16 @@ public class ProductsPage extends Menu {
             public void run(String lastCommand) {
                 Controller.logout();
                 allMenus.get(0).run("");
+            }
+        };
+    }
+
+    private Menu restoreAll(){
+        return new Menu("Restore All",this) {
+            @Override
+            public void run(String lastCommand) {
+                OffAndProductMenuController.clearAndRestoreProduct();
+                this.run(lastCommand);
             }
         };
     }
