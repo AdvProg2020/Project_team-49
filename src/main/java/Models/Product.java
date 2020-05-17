@@ -52,6 +52,26 @@ public class Product implements Serializable {
         this.numberOfView = numberOfView;
     }
 
+    public double getMaximumPrice() {
+        double max = this.price.get(0);
+        for (Double aDouble : this.price) {
+            if (aDouble > max) {
+                max = aDouble;
+            }
+        }
+        return max;
+    }
+
+    public double getMinimumPrice() {
+        double min = this.price.get(0);
+        for (Double aDouble : this.price) {
+            if (aDouble < min) {
+                min = aDouble;
+            }
+        }
+        return min;
+    }
+
     public Product(double averageScore) {
         this.averageScore = averageScore;
     }

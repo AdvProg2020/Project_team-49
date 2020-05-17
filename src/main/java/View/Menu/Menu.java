@@ -1,5 +1,6 @@
 package View.Menu;
 
+import Controller.DataBase;
 import View.View;
 
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public abstract class Menu {
             nextMenu = this;
         } else if (key.equals("back")) {
             if (this.parentMenu == null) {
-                return;
+                DataBase.endProgram();
             } else {
                 nextMenu = this.parentMenu;
             }
