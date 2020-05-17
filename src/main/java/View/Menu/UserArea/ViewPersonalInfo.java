@@ -13,18 +13,18 @@ public class ViewPersonalInfo extends Menu {
     }
 
     private void showPersonalInfo(ArrayList<String> info) {
-        String line = "username:" + info.get(0) + "\n";
-        line += "first name" + info.get(1) + "\n";
-        line += "last name" + info.get(2) + "\n";
-        line += "Email" + info.get(3) + "\n";
-        line += "phone number" + info.get(4) + "\n";
-        line += "password" + info.get(5) + "\n";
+        String line = "username: " + info.get(0) + "\n";
+        line += "first name: " + info.get(1) + "\n";
+        line += "last name: " + info.get(2) + "\n";
+        line += "Email: " + info.get(3) + "\n";
+        line += "phone number: " + info.get(4) + "\n";
+        line += "password: " + info.get(5);
         View.printString(line);
     }
 
     @Override
     public void showMenu() {
-        View.printString(this.getName() + ":");
+        View.printString(this.getName() + " help:");
         View.printString("edit");
         View.printString("logout");
         View.printString("help");
@@ -37,10 +37,9 @@ public class ViewPersonalInfo extends Menu {
         while (true) {
             View.printString(this.getName().toUpperCase() + ":");
             String command = scanner.nextLine().trim();
-            if (getMatcher(command, "(?i)edit (\\S+)").matches()) {
-                View.printString("enter new" + lastCommand.split("\\s")[1] + ":");
-                Controller.editField(lastCommand.split("\\s")[1], scanner.nextLine().trim());
-                View.printString(lastCommand.split("\\s")[1] + "edited");
+            if (getMatcher(command, "(?i)edit (.+)").matches()) {
+                View.printString("enter new content:");
+                View.printString(Controller.editField(getMatcher(command, "(?i)edit (.+)").group(1), scanner.nextLine().trim()));
                 continue;
             }
             if (getMatcher(command, "(?i)logout").matches()) {

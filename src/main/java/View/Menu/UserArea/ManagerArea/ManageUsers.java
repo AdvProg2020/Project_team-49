@@ -60,10 +60,15 @@ public class ManageUsers extends Menu {
                     View.printString("user not exist");
                 } else {
                     String info = ManagerAreaController.viewUser(command[1]);
-                    String[] line = info.split("\\s");
-                    for (String s : line) {
-                        View.printString(s);
+                    View.printString("username: " + info.split("\\s")[0]);
+                    View.printString("first name: " + info.split("\\s")[1]);
+                    View.printString("last name: " + info.split("\\s")[2]);
+                    View.printString("Email: " + info.split("\\s")[3]);
+                    View.printString("phone number: " + info.split("\\s")[4]);
+                    if (Controller.getCurrentUserType().equals("Seller")) {
+                        View.printString("company name: " + info.split("\\s")[5]);
                     }
+                    View.printString("_________________________________________");
                 }
                 this.parentMenu.run(lastCommand);
             }
@@ -171,12 +176,12 @@ public class ManageUsers extends Menu {
     //kamel nist
     private ArrayList<String> getManagerInformation() {
         ArrayList<String> info = new ArrayList<>();
-        String command = "";
         while(true) {
-            info.clear();
-            if (getMatcher(command, "(?i)back").matches()) {
+            if (getMatcher(info.get(info.size() - 1), "(?i)back").matches()) {
+                info.clear();
                 break;
             }
+            info.clear();
             View.printString("inter username:");
             info.add(scanner.nextLine().trim());
             if (Controller.hasUserWithUsername(info.get(0))) {
@@ -185,7 +190,7 @@ public class ManageUsers extends Menu {
             }
             View.printString("inter password:");
             info.add(scanner.nextLine().trim());
-            if (getMatcher(info.get(1), "\\w+").matches()) {
+            if (!getMatcher(info.get(1), "\\w+").matches()) {
                 View.printString("invalid password");
                 continue;
             }
@@ -197,9 +202,15 @@ public class ManageUsers extends Menu {
             info.add(scanner.nextLine().trim());
             View.printString("inter phone number:");
             info.add(scanner.nextLine().trim());
-            if (getMatcher(info.get(5), "\\d+").matches()) {
+            if (!getMatcher(info.get(5), "\\d+").matches()) {
                 View.printString("invalid phone number");
                 continue;
+            }
+            for (String s : info) {
+                if (getMatcher(s, "(?i)back").matches()) {
+                    info.clear();
+                    break;
+                }
             }
             break;
         }

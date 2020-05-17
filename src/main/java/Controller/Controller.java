@@ -15,11 +15,36 @@ public class Controller {
 
     }
 
-    //???
+    //new content shart dare?
     public static String editField(String field, String newContent) {
-        currentUser.setFirstName(newContent);
-        currentUser.setLastName(newContent);
-        return "";
+        if (field.equalsIgnoreCase("first name")) {
+            currentUser.setFirstName(newContent);
+            return "first name edited";
+        } else if (field.equalsIgnoreCase("last name")) {
+            currentUser.setLastName(newContent);
+            return "last name edited";
+        } else if (field.equalsIgnoreCase("email")) {
+            if (!newContent.matches("(\\S+)@(\\S+)")) {
+                return "invalid new email";
+            }
+            currentUser.setEMail(newContent);
+            return "Email edited";
+        } else if (field.equalsIgnoreCase("phone number")) {
+            if (!newContent.matches("\\d+")) {
+                return "invalid new phone number";
+            }
+            currentUser.setPhoneNumber(Long.parseLong(newContent));
+        } else if (field.equalsIgnoreCase("password")) {
+            if (!newContent.matches("\\w+")) {
+                return "invalid new password";
+            }
+            currentUser.setPassword(newContent);
+            return "password edited";
+        } else if (field.equalsIgnoreCase("company") && currentUser.getType().equalsIgnoreCase("Seller")) {
+            ((Seller) currentUser).setCompanyName(newContent);
+            return "company edited";
+        }
+        return "invalid field";
     }
 
     public static String getCurrentUserType() {
