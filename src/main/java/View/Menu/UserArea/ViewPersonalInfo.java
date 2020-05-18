@@ -30,6 +30,8 @@ public class ViewPersonalInfo extends Menu {
         View.printString("logout");
         View.printString("help");
         View.printString("back");
+        View.printString("exit");
+        View.printString("______________");
     }
 
     @Override

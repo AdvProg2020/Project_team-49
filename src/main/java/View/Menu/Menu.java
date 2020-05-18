@@ -41,16 +41,13 @@ public abstract class Menu {
     }
 
     public void showMenu() {
-        String show = this.name + " help:\n";
+        String show = this.name + " Help:\n";
         for (String key : this.subMenus.keySet()) {
             show += subMenus.get(key).getName() + "\n";
         }
         show += "help\n";
-        if (this.parentMenu == null) {
-            show += "exit";
-        } else {
-            show += "back";
-        }
+        show += "back\n";
+        show += "exit";
         View.printString(show);
     }
 
