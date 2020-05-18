@@ -93,32 +93,32 @@ public class ControllerTest {
 
     @Test
     public void TestEditField() {
-        currentUser =seller1 ;
-        editField("first name","hamidreza");
-        assertEquals("hamidreza",currentUser.getFirstName());
+        currentUser = seller1;
+        editField("first name", "hamidreza");
+        assertEquals("hamidreza", currentUser.getFirstName());
 
-        editField("last name","hamidreza");
-        assertEquals("hamidreza",currentUser.getLastName());
+        editField("last name", "hamidreza");
+        assertEquals("hamidreza", currentUser.getLastName());
 
-        editField("phone number","9123");
-        assertEquals(9123,currentUser.getPhoneNumber());
+        editField("phone number", "9123");
+        assertEquals(9123, currentUser.getPhoneNumber());
 
-        Assert.assertEquals("invalid new phone number",Controller.editField("phone number","asdasd"));
+        Assert.assertEquals("invalid new phone number", Controller.editField("phone number", "asdasd"));
 
-        editField("email","email@as.com");
-        assertEquals("email@as.com",currentUser.getEMail());
+        editField("email", "email@as.com");
+        assertEquals("email@as.com", currentUser.getEMail());
 
-        editField("email","email@as.com");
-        Assert.assertEquals("invalid new email",Controller.editField("email","asds.com"));
+        editField("email", "email@as.com");
+        Assert.assertEquals("invalid new email", Controller.editField("email", "asds.com"));
 
-        editField("password","123");
-        assertEquals("123",currentUser.getPassword());
+        editField("password", "123");
+        assertEquals("123", currentUser.getPassword());
 
-        Assert.assertEquals("invalid new password",Controller.editField("password","ads asd"));
+        Assert.assertEquals("invalid new password", Controller.editField("password", "ads asd"));
 
-        assertEquals("company edited",Controller.editField("company","mihan"));
+        assertEquals("company edited", Controller.editField("company", "mihan"));
 
-        assertEquals("invalid field",Controller.editField("compaasdsadny","mihan"));
+        assertEquals("invalid field", Controller.editField("compaasdsadny", "mihan"));
 
     }
 
@@ -140,6 +140,7 @@ public class ControllerTest {
 
     @Test
     public void TestGetHasHeadManager() {
+        Controller controller;
         setHasHeadManager(true);
         assertTrue(getHasHeadManager());
         setHasHeadManager(false);
@@ -150,23 +151,26 @@ public class ControllerTest {
     public void TestCreateAccount() {
         // we should edit return content of this method
         String type = "costumer";
-        ArrayList<String> infos = new ArrayList<>();
-        infos.add("alirezahr79");
-        infos.add("aa a  a");
-        infos.add("alireza");
-        infos.add("heidari");
-        infos.add("heidari@gmail.com");
-        infos.add("8dd55");
-        assertEquals("invalid password", createAccount(infos, type));
-        infos.set(1, "aaa");
-        assertEquals("invalid phone number", createAccount(infos, type));
-        infos.set(5, "4332434");
-        assertEquals("account created", createAccount(infos, type));
+        ArrayList<String> infosTest = new ArrayList<>();
+        infosTest.add("alirezahr79");
+        infosTest.add("aa a  a");
+        infosTest.add("alireza");
+        infosTest.add("heidari");
+        infosTest.add("heidarigmail.com");
+        infosTest.add("8dd55");
+        infosTest.add(".065");
+        assertEquals("invalid password", createAccount(infosTest, type));
+        infosTest.set(1, "aaa");
+        assertEquals("invalid Email", createAccount(infosTest, type));
+        infosTest.set(4, "heidari@gmail.com");
+        assertEquals("invalid phone number", createAccount(infosTest, type));
+        infosTest.set(5, "4332434");
+        assertEquals("account created", createAccount(infosTest, type));
         type = "manager";
-        assertEquals("account created", createAccount(infos, type));
+        assertEquals("account created", createAccount(infosTest, type));
         type = "seller";
-        infos.add("nike");
-        assertEquals("account created", createAccount(infos, type));
+        infosTest.set(6, "nike");
+        assertEquals("account created", createAccount(infosTest, type));
     }
 
     @Test
@@ -179,15 +183,17 @@ public class ControllerTest {
     public void TestGetBalance() {
         initialise();
         setCurrentUser(costumer1);
-        assertEquals(22.1 , getBalance() , .001);
+        costumer1.setCredit(22.1);
+        assertEquals(22.1, getBalance(), .001);
         setCurrentUser(seller1);
-        assertEquals(320.2 , getBalance() , .001);
+        seller1.setCredit(320.2);
+        assertEquals(320.2, getBalance(), .001);
     }
 
     @Test
     public void TestLogout() {
         logout();
-        assertEquals("Guest" , currentUser.getType());
+        assertEquals("Guest", currentUser.getType());
     }
 
     @Test
@@ -200,15 +206,15 @@ public class ControllerTest {
         infos.add("alim1379@gmail.com");
         infos.add("1288888");
         infos.add("alialiali");
-        assertEquals(infos , getPersonalInfo());
+        assertEquals(infos, getPersonalInfo());
     }
 
     @Test
-    public void TestIsPasswordCorrect(){
+    public void TestIsPasswordCorrect() {
         initialise();
-        currentUser =seller1 ;
-        editField("password","123");
-        assertTrue(Controller.isPasswordCorrect("123","amiri77"));
+        currentUser = seller1;
+        editField("password", "123");
+        assertTrue(Controller.isPasswordCorrect("123", "amiri77"));
     }
 
 

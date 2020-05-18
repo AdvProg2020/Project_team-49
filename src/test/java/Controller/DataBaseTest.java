@@ -48,6 +48,11 @@ public class DataBaseTest {
         allCategories.clear();
         allProducts.clear();
         allUsers.clear();
+        phone.addProduct(a);
+        phone.addProduct(c);
+        car.addProduct(b);
+        shirt.addProduct(d);
+        makeup.addProduct(e);
 
         allProducts.add(a);
         allProducts.add(b);
@@ -67,6 +72,8 @@ public class DataBaseTest {
         c.setProductId(3);
         d.setProductId(4);
         e.setProductId(5);
+
+
 
         allCategories.clear();
 
