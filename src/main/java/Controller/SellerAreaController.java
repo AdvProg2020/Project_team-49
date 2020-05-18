@@ -47,19 +47,19 @@ public class SellerAreaController {
         }
     }
 
-    //kamel nist
+    //kamel nist (invalid field bayad bere!)
     public static String editOff(String field, String newContent, long offId) {
         Seller seller = (Seller) Controller.currentUser;
         if (seller.getOffById(offId) == null) {
             return "off not exist";
-        } else if (field.toLowerCase().equals("enddate")) {
-            Manager.addRequest(new EditOffRequest("endDate", newContent, seller.getOffById(offId)));
+        } else if (field.toLowerCase().equals("end date")) {
+            Manager.addRequest(new EditOffRequest("end date", newContent, seller.getOffById(offId)));
             return "request sent";
         } else if (field.toLowerCase().equals("amount")) {
             if (!newContent.matches("\\d+")) {
                 return "invalid new content";
             }
-            Manager.addRequest(new EditOffRequest("amount", newContent, seller.getOffById(offId)));
+            Manager.addRequest(new EditOffRequest("percent", newContent, seller.getOffById(offId)));
             return "request sent";
         }
         return "invalid field";
@@ -150,16 +150,16 @@ public class SellerAreaController {
         if (DataBase.getProductById(productId) == null) {
             return "product not exist";
         } else if (field.toLowerCase().equals("name")) {
-            Manager.addRequest(new EditProductRequest("name", newContent, DataBase.getProductById(productId)));
+            Manager.addRequest(new EditProductRequest("name", newContent, DataBase.getProductById(productId), (Seller) Controller.currentUser));
         } else if (field.toLowerCase().equals("brand")) {
-            Manager.addRequest(new EditProductRequest("brand", newContent, DataBase.getProductById(productId)));
+            Manager.addRequest(new EditProductRequest("brand", newContent, DataBase.getProductById(productId), (Seller) Controller.currentUser));
         } else if (field.toLowerCase().equals("price")) {
             if (!newContent.matches("(\\d+)(\\.?)(\\d*)")) {
                 return "invalid new content";
             }
-            Manager.addRequest(new EditProductRequest("price", newContent, DataBase.getProductById(productId)));
+            Manager.addRequest(new EditProductRequest("price", newContent, DataBase.getProductById(productId), (Seller) Controller.currentUser));
         } else if (field.toLowerCase().equals("explanation")) {
-            Manager.addRequest(new EditProductRequest("explanation", newContent, DataBase.getProductById(productId)));
+            Manager.addRequest(new EditProductRequest("explanation", newContent, DataBase.getProductById(productId), (Seller) Controller.currentUser));
         }
         return "request sent";
     }
