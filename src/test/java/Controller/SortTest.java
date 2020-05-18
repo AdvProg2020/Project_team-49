@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static Controller.DataBase.*;
+import static Controller.DataBase.allDiscountCodes;
 import static Controller.Sort.*;
 
 import java.util.ArrayList;
@@ -149,6 +151,13 @@ public class SortTest {
         actual.add("sort by view");
         ArrayList<String> expected = getAvailableSorts();
         Assert.assertEquals(expected, actual);
+        allCategories.clear();
+        allProducts.clear();
+        allUsers.clear();
+        allActiveRequests.clear();
+        answeredRequests.clear();
+        allDiscountCodes.clear();
+
     }
 }
 

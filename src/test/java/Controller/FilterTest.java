@@ -439,6 +439,12 @@ public class FilterTest {
         setCategoryName("bmw");
         actual = showSubCategories();
         assertEquals(expected, actual);
+        allCategories.clear();
+        allProducts.clear();
+        allUsers.clear();
+        allActiveRequests.clear();
+        answeredRequests.clear();
+        allDiscountCodes.clear();
     }
 
 }

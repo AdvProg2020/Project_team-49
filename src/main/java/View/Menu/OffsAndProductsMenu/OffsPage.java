@@ -18,6 +18,7 @@ public class OffsPage extends Menu {
         subMenus.put("Filtering", new Filtering(this));
         subMenus.put("Sorting", new Sorting(this));
         subMenus.put("Show Product", new ShowProduct(this));
+        subMenus.put("Restore All",restoreAll());
 //        new ShowOffProducts(this).run("");
         subMenus.put("Log In",new UserArea(this));
         subMenus.put("Log Out",getLogout());
@@ -64,9 +65,15 @@ public class OffsPage extends Menu {
             }
             return "Show Product";
         }
+
+        if (command.equalsIgnoreCase("Restore All")){
+            return "Restore All";
+        }
+
         if (command.equalsIgnoreCase("Log In")){
             return "Log In";
         }
+
         if (command.equalsIgnoreCase("Log Out")){
             return "Log Out";
         }
@@ -87,6 +94,16 @@ public class OffsPage extends Menu {
             public void run(String lastCommand) {
                 Controller.logout();
                 allMenus.get(0).run("");
+            }
+        };
+    }
+
+    private Menu restoreAll(){
+        return new Menu("Restore All",this) {
+            @Override
+            public void run(String lastCommand) {
+                OffAndProductMenuController.clearAndRestoreProduct();
+                this.run(lastCommand);
             }
         };
     }
