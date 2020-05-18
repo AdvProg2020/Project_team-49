@@ -47,7 +47,7 @@ public class ViewOrders extends Menu {
         ArrayList<String> orders = CostumerAreaController.getOrders();
         View.printString("Orders:");
         for (String order : orders) {
-            showOrder(Long.parseLong(order.split("\\s")[0]));
+            showOrder(Long.parseLong(order.split(",")[0]));
             View.printString("______________________________________");
         }
     }
@@ -89,10 +89,10 @@ public class ViewOrders extends Menu {
 
     private void showOrder(long orderId) {
         String info = CostumerAreaController.getOrderInfoById(orderId);
-        View.printString("order Id: " + info.split("\\s")[0]);
-        View.printString("seller name: " + info.split("\\s")[1]);
-        View.printString("paid amount: " + info.split("\\s")[2]);
-        View.printString("receive status: " + info.split("\\s")[3]);
-        View.printString("bought products: " + info.split("\\s")[4]);
+        View.printString("order Id: " + info.split(",")[0]);
+        View.printString("seller name: " + info.split(",")[1]);
+        View.printString("paid amount: " + info.split(",")[2]);
+        View.printString("receive status: " + info.split(",")[3]);
+        View.printString("bought products: " + info.split(",")[4]);
     }
 }

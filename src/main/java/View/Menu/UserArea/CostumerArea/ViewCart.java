@@ -67,12 +67,12 @@ public class ViewCart extends Menu {
                 ArrayList<String> products = CostumerAreaController.showProducts();
                 View.printString("Products In Cart:");
                 for (String product : products) {
-                    View.printString("product name:" + product.split("\\s")[0]);
-                    View.printString("product Id:" + product.split("\\s")[1]);
-                    View.printString("product brand:" + product.split("\\s")[2]);
-                    View.printString("product price:" + product.split("\\s")[3]);
-                    View.printString("count:" + product.split("\\s")[4]);
-                    View.printString("product seller:" + product.split("\\s")[5]);
+                    View.printString("product name:" + product.split(",")[0]);
+                    View.printString("product Id:" + product.split(",")[1]);
+                    View.printString("product brand:" + product.split(",")[2]);
+                    View.printString("product price:" + product.split(",")[3]);
+                    View.printString("count:" + product.split(",")[4]);
+                    View.printString("product seller:" + product.split(",")[5]);
                     View.printString("________________________________________________");
                 }
                 this.parentMenu.run(lastCommand);

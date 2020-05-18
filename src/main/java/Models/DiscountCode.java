@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class DiscountCode implements Serializable {
-    private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
     private String DiscountId;
     private Date startDate;
     private Date endDate;
@@ -93,9 +92,5 @@ public class DiscountCode implements Serializable {
     public void addAllowedCustomer(Costumer costumer){
         this.allowedCostumers.add(costumer);
         this.allowedCostumers = allowedCostumers;
-    }
-
-    public static void addDiscountCode(DiscountCode discountCode) {
-
     }
 }

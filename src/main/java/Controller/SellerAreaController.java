@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class SellerAreaController {
 
@@ -38,9 +39,9 @@ public class SellerAreaController {
             return "off not exist";
         } else {
             String info = "";
-            info += seller.getOffById(offId).getOffId() + " ";
-            info += seller.getOffById(offId).getStartDate() + " ";
-            info += seller.getOffById(offId).getEndDate() + " ";
+            info += seller.getOffById(offId).getOffId() + ",";
+            info += seller.getOffById(offId).getStartDate() + ",";
+            info += seller.getOffById(offId).getEndDate() + ",";
             info += seller.getOffById(offId).getOffAmount();
             return info;
         }
@@ -88,7 +89,7 @@ public class SellerAreaController {
         }
         Date date;
         try {
-            date = new SimpleDateFormat("date structure").parse(info.get(1));
+            date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(info.get(1));
         } catch (Exception ParseException) {
             return "invalid end date";
         }
@@ -105,9 +106,9 @@ public class SellerAreaController {
         Seller seller = (Seller) Controller.currentUser;
         ArrayList<String> products = new ArrayList<>();
         for (Product product : seller.getProductsForSale()) {
-            String info = product.getName() + " " + product.getProductId();
-            info += " " + product.getBrand() + " " + product.getPrice(product.getDefaultSeller());
-            info += " " + product.getAverageScore() + " " + product.getExplanation();
+            String info = product.getName() + "," + product.getProductId();
+            info += "," + product.getBrand() + "," + product.getPrice(product.getDefaultSeller());
+            info += "," + product.getAverageScore() + "," + product.getExplanation();
             products.add(info);
         }
         return products;
@@ -119,10 +120,10 @@ public class SellerAreaController {
         ArrayList<SellLog> salesHistory = seller.getSellHistory();
         ArrayList<String> logs = new ArrayList<>();
         for (SellLog sellLog : salesHistory) {
-            logs.add(sellLog.getLogId() + " " +
-                    sellLog.getLogDate() + " " +
-                    sellLog.getBuyerName() + " " +
-                    sellLog.getReceivedAmount() + " " +
+            logs.add(sellLog.getLogId() + "," +
+                    sellLog.getLogDate() + "," +
+                    sellLog.getBuyerName() + "," +
+                    sellLog.getReceivedAmount() + "," +
                     sellLog.getReducedAmountForOff());
         }
         return logs;
@@ -185,8 +186,8 @@ public class SellerAreaController {
         Seller seller = (Seller) Controller.currentUser;
         ArrayList<String> offs = new ArrayList<>();
         for (Off off : seller.getOffs()) {
-            String info = off.getOffId() + " " + off.getOffAmount();
-            info += " " + off.getStartDate() + " " + off.getEndDate();
+            String info = off.getOffId() + "," + off.getOffAmount();
+            info += "," + off.getStartDate() + "," + off.getEndDate();
             offs.add(info);
         }
         return offs;
@@ -197,9 +198,9 @@ public class SellerAreaController {
             return "product not exist";
         } else {
             String info = DataBase.getProductById(productId).getName();
-            info += " " + DataBase.getProductById(productId).getProductId();
-            info += " " + DataBase.getProductById(productId).getBrand();
-            info += " " + DataBase.getProductById(productId).getExplanation();
+            info += "," + DataBase.getProductById(productId).getProductId();
+            info += "," + DataBase.getProductById(productId).getBrand();
+            info += "," + DataBase.getProductById(productId).getExplanation();
             return info;
         }
     }
