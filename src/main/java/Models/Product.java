@@ -25,7 +25,7 @@ public class Product implements Serializable {
 
     private Off off;
     private boolean doesItHaveOff;
-    private Double offPercentage;
+    private double offPercentage;
 
     private DiscountCode discountCode;
     private boolean doesItHaveDiscount;
@@ -46,6 +46,7 @@ public class Product implements Serializable {
         this.parentCategory = parentCategory;
         this.name = name;
         this.productDate = new Date();
+        this.offPercentage = 0.0;
     }
 
 
