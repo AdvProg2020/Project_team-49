@@ -12,10 +12,6 @@ public class Controller {
     public static User currentUser = new Guest();
     private static boolean hasHeadManager = false;
 
-    public Controller() {
-
-    }
-
     //new content shart dare?
     public static String editField(String field, String newContent) {
         if (field.equalsIgnoreCase("first name")) {
