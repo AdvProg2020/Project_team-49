@@ -44,6 +44,8 @@ public class Product implements Serializable {
         this.explanation = explanation;
         this.status = ProductStatus.REVIEWFORMAKE;
         this.parentCategory = parentCategory;
+        if(parentCategory != null)
+            parentCategory.addProduct(this);
         this.name = name;
         this.productDate = new Date();
     }

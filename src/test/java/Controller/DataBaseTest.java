@@ -70,17 +70,6 @@ public class DataBaseTest {
         e.setProductId(5);
 
         allCategories.clear();
-        father.getSubCategories().clear();
-        mother.getSubCategories().clear();
-        car.getSubCategories().clear();
-        father.addSubCategory(makeup);
-        father.addSubCategory(shirt);
-        father.addSubCategory(car);
-        mother.addSubCategory(phone);
-        car.addSubCategory(child);
-        mother.addProduct(a);
-        phone.addProduct(c);
-        father.addProduct(b);
 
         allCategories.add(phone);
         allCategories.add(makeup);
@@ -134,12 +123,9 @@ public class DataBaseTest {
     @Order(0)
     public void TestRemoveCategory() {
         initialise();
-
-        removeCategory("xx");
-        assertEquals(allProducts.size(), 3);
-        initialise();
-        removeCategory("nike");
-        assertEquals(allCategories.size(), 6);
+        removeCategory("xxlx");
+        assertEquals(allCategories.size(), 2);
+        assertEquals(allProducts.size(), 2);
     }
 
     @Test
