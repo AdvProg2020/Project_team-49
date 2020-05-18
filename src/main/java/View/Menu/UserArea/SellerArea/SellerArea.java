@@ -34,6 +34,8 @@ public class SellerArea extends Menu {
             return "View Company Information";
         } else if (getMatcher(command, "(?i)view sales history").matches()) {
             return "View Sales History";
+        } else if (getMatcher(command, "(?i)view personal info").matches()) {
+            return "View Personal Info";
         } else if (getMatcher(command, "(?i)manage products").matches()) {
             return "Manage Products";
         } else if (getMatcher(command, "(?i)add product").matches()) {
@@ -67,7 +69,7 @@ public class SellerArea extends Menu {
         return new Menu("View Company Information", this) {
             @Override
             public void run(String lastCommand) {
-                View .printString(SellerAreaController.viewCompanyInfo());
+                View.printString("company information: " + SellerAreaController.viewCompanyInfo());
                 this.parentMenu.run(lastCommand);
             }
         };

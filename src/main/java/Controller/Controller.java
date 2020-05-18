@@ -4,6 +4,7 @@ import Models.Product;
 
 import Models.User.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -85,6 +86,9 @@ public class Controller {
         if (!info.get(1).matches("\\w+"))
             return "invalid password";
 
+        if (!info.get(4).matches("(\\S+)@(\\S+)")) {
+            return "invalid Email";
+        }
         if (!info.get(5).matches("\\d+"))
             return "invalid phone number";
 

@@ -96,11 +96,13 @@ public class ViewOffs extends Menu {
                 ArrayList<String> info = new ArrayList<>();
                 View.printString("enter products Ids (separate them with space):");
                 info.add(scanner.nextLine().trim());
+                View.printString("enter start date (dd/MM/yyyy HH:mm:ss):");
+                info.add(scanner.nextLine().trim());
                 View.printString("enter end date (dd/MM/yyyy HH:mm:ss):");
                 info.add(scanner.nextLine().trim());
                 View.printString("enter off percentage:");
                 info.add(scanner.nextLine().trim());
-                SellerAreaController.addOff(info);
+                View.printString(SellerAreaController.addOff(info));
                 this.parentMenu.run(lastCommand);
             }
         };

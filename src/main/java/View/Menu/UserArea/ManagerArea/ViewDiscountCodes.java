@@ -67,6 +67,7 @@ public class ViewDiscountCodes extends Menu {
                     View.printString("allowed costumers: " + info.get(6));
                     View.printString("_______________________________________________");
                 }
+                this.parentMenu.run(lastCommand);
             }
         };
     }
@@ -104,6 +105,7 @@ public class ViewDiscountCodes extends Menu {
             @Override
             public void run(String lastCommand) {
                 View.printString(ManagerAreaController.removeDiscountCode(lastCommand.split("\\s")[3]));
+                this.parentMenu.run(lastCommand);
             }
         };
     }

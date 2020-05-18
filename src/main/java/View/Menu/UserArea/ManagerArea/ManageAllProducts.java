@@ -35,6 +35,8 @@ public class ManageAllProducts extends Menu {
         View.printString("Logout");
         View.printString("help");
         View.printString("back");
+        View.printString("exit");
+        View.printString("______________");
     }
 
     @Override

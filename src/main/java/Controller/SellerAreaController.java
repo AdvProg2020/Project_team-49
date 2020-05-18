@@ -4,6 +4,7 @@ import Models.Log.SellLog;
 import Models.Off;
 import Models.OffStatus;
 import Models.Product;
+import Models.ProductStatus;
 import Models.User.Manager;
 import Models.User.Request.AddOffRequest;
 import Models.User.Request.AddProductRequest;
@@ -47,19 +48,19 @@ public class SellerAreaController {
         }
     }
 
-    //kamel nist
+    //kamel nist (invalid field bayad bere!)
     public static String editOff(String field, String newContent, long offId) {
         Seller seller = (Seller) Controller.currentUser;
         if (seller.getOffById(offId) == null) {
             return "off not exist";
-        } else if (field.toLowerCase().equals("enddate")) {
-            Manager.addRequest(new EditOffRequest("endDate", newContent, seller.getOffById(offId)));
+        } else if (field.toLowerCase().equals("end date")) {
+            Manager.addRequest(new EditOffRequest("end date", newContent, seller.getOffById(offId)));
             return "request sent";
         } else if (field.toLowerCase().equals("amount")) {
             if (!newContent.matches("\\d+")) {
                 return "invalid new content";
             }
-            Manager.addRequest(new EditOffRequest("amount", newContent, seller.getOffById(offId)));
+            Manager.addRequest(new EditOffRequest("percent", newContent, seller.getOffById(offId)));
             return "request sent";
         }
         return "invalid field";
@@ -71,29 +72,32 @@ public class SellerAreaController {
         ArrayList<Product> products = new ArrayList<>();
         for (String Id : info.get(0).split("\\s")) {
             if (!Id.matches("\\d+")) {
-                return "invalid Id";
+                return "invalid product Id";
             }
             if (seller.getProductById(Long.parseLong(Id)) == null) {
                 return "product not exist";
             }
             products.add(DataBase.getProductById(Long.parseLong(Id)));
         }
-        if (!info.get(1).matches("dd/MM/yyyy HH:mm:ss")) {
-            return "invalid end date";
-        }
-        if (!info.get(2).matches("\\d+")) {
+        if (!info.get(3).matches("\\d+")) {
             return "invalid percentage";
         }
-        if (Integer.parseInt(info.get(2)) >= 100) {
+        if (Integer.parseInt(info.get(3)) >= 100) {
             return "invalid percentage";
         }
-        Date date;
+        Date dateE;
+        Date dateS;
         try {
-            date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(info.get(1));
+            dateS = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(info.get(1));
+        } catch (Exception ParseException) {
+            return "invalid start date";
+        }
+        try {
+            dateE = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(info.get(2));
         } catch (Exception ParseException) {
             return "invalid end date";
         }
-        Manager.addRequest(new AddOffRequest(new Off(products, OffStatus.inProgressToBuild, new Date(), date, Integer.parseInt(info.get(2))), (Seller) Controller.currentUser));
+        Manager.addRequest(new AddOffRequest(new Off(products, OffStatus.inProgressToBuild, dateS, dateE, Integer.parseInt(info.get(3))), (Seller) Controller.currentUser));
         return "request sent";
     }
 
@@ -147,17 +151,18 @@ public class SellerAreaController {
         if (DataBase.getProductById(productId) == null) {
             return "product not exist";
         } else if (field.toLowerCase().equals("name")) {
-            Manager.addRequest(new EditProductRequest("name", newContent, DataBase.getProductById(productId)));
+            Manager.addRequest(new EditProductRequest("name", newContent, DataBase.getProductById(productId), (Seller) Controller.currentUser));
         } else if (field.toLowerCase().equals("brand")) {
-            Manager.addRequest(new EditProductRequest("brand", newContent, DataBase.getProductById(productId)));
+            Manager.addRequest(new EditProductRequest("brand", newContent, DataBase.getProductById(productId), (Seller) Controller.currentUser));
         } else if (field.toLowerCase().equals("price")) {
             if (!newContent.matches("(\\d+)(\\.?)(\\d*)")) {
                 return "invalid new content";
             }
-            Manager.addRequest(new EditProductRequest("price", newContent, DataBase.getProductById(productId)));
+            Manager.addRequest(new EditProductRequest("price", newContent, DataBase.getProductById(productId), (Seller) Controller.currentUser));
         } else if (field.toLowerCase().equals("explanation")) {
-            Manager.addRequest(new EditProductRequest("explanation", newContent, DataBase.getProductById(productId)));
+            Manager.addRequest(new EditProductRequest("explanation", newContent, DataBase.getProductById(productId), (Seller) Controller.currentUser));
         }
+        DataBase.getProductById(productId).setStatus("edit");
         return "request sent";
     }
 

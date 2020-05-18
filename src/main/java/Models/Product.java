@@ -25,7 +25,7 @@ public class Product implements Serializable {
 
     private Off off;
     private boolean doesItHaveOff;
-    private double offPercentage;
+    private Double offPercentage;
 
     private DiscountCode discountCode;
     private boolean doesItHaveDiscount;
@@ -44,8 +44,6 @@ public class Product implements Serializable {
         this.explanation = explanation;
         this.status = ProductStatus.REVIEWFORMAKE;
         this.parentCategory = parentCategory;
-        if(parentCategory != null)
-            parentCategory.addProduct(this);
         this.name = name;
         this.productDate = new Date();
     }
@@ -193,7 +191,7 @@ public class Product implements Serializable {
         }
     }
 
-    public void setOffPercentage(double discountPercentage) {
+    public void setOffPercentage(Double discountPercentage) {
         this.offPercentage = discountPercentage;
     }
 
@@ -287,10 +285,4 @@ public class Product implements Serializable {
     public ArrayList<Double> getAllSellerPrice(){
         return price;
     }
-}
-
-enum ProductStatus implements Serializable {
-    REVIEWFORMAKE,
-    REVIEWFOREDIT,
-    ACCEPTED
 }

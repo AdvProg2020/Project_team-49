@@ -76,7 +76,7 @@ public class CostumerArea extends Menu {
                         View.printString("invalid amount");
                         continue;
                     }
-                    View.printString(CostumerAreaController.increaseCredit(Long.parseLong(credit)));
+                    View.printString(CostumerAreaController.increaseCredit(Double.parseDouble(credit)));
                 }
                 this.parentMenu.run(lastCommand);
             }
