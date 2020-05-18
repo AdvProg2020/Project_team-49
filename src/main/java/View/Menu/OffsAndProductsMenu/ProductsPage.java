@@ -39,6 +39,7 @@ public class ProductsPage extends Menu {
     public String getCommandKey(String command) {
 
         if (command.equalsIgnoreCase("Show All Products")){
+
             return "Show All Products";
         }
         if (command.equalsIgnoreCase("Show Categories")){

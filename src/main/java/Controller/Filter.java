@@ -357,6 +357,7 @@ public class Filter {
         for (Product product : DataBase.allProducts) {
             DataBase.sortedOrFilteredProduct.add(product);
         }
+        Sort.setCurrentSort("view");
         Sort.sort();
     }
 

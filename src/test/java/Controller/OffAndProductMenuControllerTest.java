@@ -250,7 +250,7 @@ public class OffAndProductMenuControllerTest {
     public void TestDisableSort(){
         OffAndProductMenuController.sorting("time");
         OffAndProductMenuController.disableSort();
-        Assert.assertEquals("",OffAndProductMenuController.getCurrentSort());
+        Assert.assertEquals("view",OffAndProductMenuController.getCurrentSort());
     }
 
     @Test
@@ -290,7 +290,7 @@ public class OffAndProductMenuControllerTest {
     @Test
     public void TestCheckFilteringByBrand(){
         initialise();
-        Assert.assertFalse(OffAndProductMenuController.checkFilteringByBrand("apple"));
+        Assert.assertTrue(OffAndProductMenuController.checkFilteringByBrand("apple"));
         Assert.assertFalse(OffAndProductMenuController.checkFilteringByBrand("bennnz"));
     }
 

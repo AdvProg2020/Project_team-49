@@ -160,8 +160,7 @@ public class OffAndProductMenuController {
         return false;
     }
     public static void clearAndRestoreProduct(){
-        sortedOrFilteredProduct.clear();
-        sortedOrFilteredProduct.addAll(allProducts);
+        Filter.restartFilters();
     }
     public static void increaseView(long productId){
         for (Product product : allProducts) {
