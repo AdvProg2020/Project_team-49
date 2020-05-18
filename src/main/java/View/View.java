@@ -233,10 +233,11 @@ public class View {
     public static void printCommentsMenu(){
         System.out.println("Comment Menu Instruction:\n"+
                 "1. Add Comment\n"+
-                "2. Log In\n"+
-                "3. Log out\n"+
-                "4. Help\n"+
-                "5. back");
+                "2. Show Comments\n"+
+                "3. Log In\n"+
+                "4. Log out\n"+
+                "5. Help\n"+
+                "6. back");
     }
 
     public static void printDigestMenu(){
@@ -307,8 +308,17 @@ public class View {
     }
 
     public static void printComments(ArrayList<String> userName,ArrayList<String> title,ArrayList<String> note){
+        if (userName.isEmpty()){
+            System.out.println("There Is No Comments For This Product\n"+
+                    "Be The First One Who Comment :)");
+        }
         for (int i = 1; i <= userName.size(); i++) {
-            System.out.println(i+"UserName: "+userName.get(i-1)+"\n"+
+            if (userName.get(i-1)==null){
+                System.out.println(i+". UserName: Guest\n"+
+                        " ~Title: "+title.get(i-1)+"\n"+
+                        " ~Note: "+note.get(i-1));
+            }else
+            System.out.println(i+". UserName: "+userName.get(i-1)+"\n"+
             " ~Title: "+title.get(i-1)+"\n"+
             " ~Note: "+note.get(i-1));
         }

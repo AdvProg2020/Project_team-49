@@ -40,7 +40,7 @@ public class Comments extends Menu {
             }
 
             if (command.equalsIgnoreCase("Log In")) {
-                new UserArea(this);
+                new UserArea(this).run(lastCommand);
                 this.run(lastCommand);
             }
 

@@ -149,8 +149,8 @@ public class FilterTest {
         sortedOrFilteredProduct.remove(a);
         sortedOrFilteredProduct.remove(b);
         ArrayList<String> expected = new ArrayList<>();
-        expected.add("samsung");
-        expected.add("nikooTanPoosh");
+        expected.add("apple");
+        expected.add("iran");
         expected.add("LMV");
         updateAvailableBrands();
         assertEquals(expected, getAvailableBrands());
@@ -181,6 +181,7 @@ public class FilterTest {
         expected.add(b);
         filterByName("P");
         assertEquals(expected, sortedOrFilteredProduct);
+
     }
 
     @Test

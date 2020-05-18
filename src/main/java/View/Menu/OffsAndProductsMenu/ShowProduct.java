@@ -75,7 +75,7 @@ public class ShowProduct extends Menu {
             }
 
             if (command.equalsIgnoreCase("log in")) {
-                new UserArea(this);
+                new UserArea(this).run(lastCommand);
                 this.run(lastCommand);
             }
 
@@ -88,7 +88,7 @@ public class ShowProduct extends Menu {
                 View.printShowProductMenu();
             }
 
-            if (command.equals("back")) {
+            if (command.equalsIgnoreCase("back")) {
                 this.parentMenu.run(lastCommand);
             }
 

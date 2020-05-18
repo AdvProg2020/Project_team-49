@@ -122,7 +122,7 @@ public class Filtering extends Menu {
             }
 
             if (command.equalsIgnoreCase("log in")) {
-                new UserArea(this);
+                new UserArea(this).run(lastCommand);
                 this.run(lastCommand);
             }
 

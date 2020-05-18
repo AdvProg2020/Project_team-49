@@ -35,7 +35,7 @@ public class Controller {
             }
             currentUser.setPhoneNumber(Long.parseLong(newContent));
         } else if (field.equalsIgnoreCase("password")) {
-            if (!newContent.matches("\\w+")) {
+            if (!newContent.matches("^\\w+$")) {
                 return "invalid new password";
             }
             currentUser.setPassword(newContent);

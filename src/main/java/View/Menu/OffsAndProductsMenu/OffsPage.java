@@ -84,6 +84,9 @@ public class OffsPage extends Menu {
         if (command.equalsIgnoreCase("Back")){
             return "back";
         }
+        if (command.equalsIgnoreCase("Exit")){
+            return "exit";
+        }
         View.printString("invalid command");
         return "invalid";
 
@@ -104,7 +107,7 @@ public class OffsPage extends Menu {
             @Override
             public void run(String lastCommand) {
                 OffAndProductMenuController.clearAndRestoreProduct();
-                this.run(lastCommand);
+                parentMenu.run(lastCommand);
             }
         };
     }
