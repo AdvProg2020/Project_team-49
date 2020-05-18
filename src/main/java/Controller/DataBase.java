@@ -19,10 +19,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.PublicKey;
+import java.util.*;
 import java.util.ArrayList;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
 
 public class DataBase {
     private static InputStream inputStream;
@@ -436,7 +434,7 @@ public class DataBase {
         }
         for (Costumer allowedCostumer : allowedCostumers) {
             allowedCostumer.addDiscountCode(new DiscountCode("monthly gift"
-                    , new Date(), new Date(monthPeriod), 10
+                    , new Date(), new Date(monthPeriod + new Date().getTime()), 10
                     , 50000, 2, allowedCostumers));
         }
         allowedCostumers.clear();
