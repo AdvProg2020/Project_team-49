@@ -153,17 +153,18 @@ public class ManagerAreaController {
 
     public static ArrayList<String> viewDiscountCode(String code) {
         ArrayList<String> info = new ArrayList<>();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         if (Manager.getDiscountCodeById(code) == null) {
             info.add("discount code not exist");
         } else {
             DiscountCode discountCode = Manager.getDiscountCodeById(code);
             info.add(code);
-            info.add(discountCode.getStartDate().toString());
-            info.add(discountCode.getEndDate().toString());
+            info.add(formatter.format(discountCode.getStartDate()));
+            info.add(formatter.format(discountCode.getEndDate()));
             info.add(String.valueOf(discountCode.getDiscountPercent()));
             info.add(String.valueOf(discountCode.getMaximumDiscountAmount()));
             info.add(String.valueOf(discountCode.getDiscountCount()));
-            info.add(discountCode.getAllowedCostumers().toString());
+            info.add(discountCode.getAllowedCostumers().toString());//???
         }
         return info;
     }
@@ -193,9 +194,10 @@ public class ManagerAreaController {
     //allowed costumers
     public static ArrayList<String> showDiscountCodes() {
         ArrayList<String> discountCodes = new ArrayList<>();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         for (DiscountCode discountCode : Manager.getAllDiscountCodes()) {
-            String info = discountCode.getDiscountId() + "," + discountCode.getStartDate();
-            info += "," + discountCode.getEndDate() + "," + discountCode.getDiscountPercent();
+            String info = discountCode.getDiscountId() + "," + formatter.format(discountCode.getStartDate());
+            info += "," + formatter.format(discountCode.getEndDate()) + "," + discountCode.getDiscountPercent();
             info += "," + discountCode.getMaximumDiscountAmount() + "," + discountCode.getDiscountCount();
             discountCodes.add(info);
         }

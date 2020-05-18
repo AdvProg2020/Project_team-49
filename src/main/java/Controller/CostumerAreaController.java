@@ -12,6 +12,7 @@ import Models.User.Costumer;
 import Models.User.Guest;
 import Models.User.Seller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -21,9 +22,10 @@ public class CostumerAreaController {
 
     public static ArrayList<String> viewCostumerDiscountCodes() {
         ArrayList<String> discountCodes = new ArrayList<>();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         for (DiscountCode discountCode : ((Costumer) Controller.currentUser).getDiscountCodes()) {
             String info = discountCode.getDiscountId();
-            info += "," + discountCode.getStartDate() + "," + discountCode.getEndDate();
+            info += "," + formatter.format(discountCode.getStartDate()) + "," + formatter.format(discountCode.getEndDate());
             info += "," + discountCode.getDiscountPercent() + "," + discountCode.getMaximumDiscountAmount();
             info += "," + discountCode.getDiscountCount() + "," + discountCode.getUsageCount();
             discountCodes.add(info);
@@ -71,7 +73,6 @@ public class CostumerAreaController {
         return "product is not in the cart for this seller";
     }
 
-    //kamel nist
     public static double getTotalPrice() {
         Cart cart = ((Costumer) Controller.currentUser).getCart();
         double totalPrice = 0;
@@ -81,7 +82,6 @@ public class CostumerAreaController {
         return totalPrice;
     }
 
-    //kamel nist (log ID va off handle nashode va kam shodan credit)
     public static String finishPayment(ArrayList<String> receiverInfo) {
         Costumer costumer = (Costumer) Controller.currentUser;
         Cart cart = costumer.getCart();

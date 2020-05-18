@@ -140,6 +140,17 @@ public class Product implements Serializable {
         return productId;
     }
 
+    public void removeSeller (Seller seller) {
+        for (int i = 0; i < allSellers.size(); i++) {
+            if (allSellers.get(i).equals(seller)) {
+                price.remove(i);
+                availableItems.remove(i);
+                allSellers.remove(i);
+                break;
+            }
+        }
+    }
+
     public String getName() {
         return name;
     }
