@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.Comment;
 import Models.Product;
 
 import java.util.ArrayList;
@@ -63,6 +64,14 @@ public class ShowProductDetail {
         }
         return null;
     }
+    public static ArrayList<Double> getAllSellerPrice(long productId){
+        for (Product product : allProducts) {
+            if (productId==product.getProductId()){
+                return product.getAllSellerPrice();
+            }
+        }
+        return null;
+    }
     public static int getRemainedNumber(long productId){
         for (Product product : allProducts) {
             if (productId==product.getProductId()) {
@@ -70,5 +79,38 @@ public class ShowProductDetail {
             }
         }
         return 0;
+    }
+    public static ArrayList<String> getTitleOfComment(long productId){
+        ArrayList<String> titles=new ArrayList<String>();
+        for (Product product : allProducts) {
+            if (product.getProductId()==productId){
+                for (Comment allComment : product.getAllComments()) {
+                    titles.add(allComment.getTitle());
+                }
+            }
+        }
+        return titles;
+    }
+    public static ArrayList<String> getNoteOfComment(long productId){
+        ArrayList<String> notes=new ArrayList<String>();
+        for (Product product : allProducts) {
+            if (product.getProductId()==productId){
+                for (Comment allComment : product.getAllComments()) {
+                    notes.add(allComment.getNote());
+                }
+            }
+        }
+        return notes;
+    }
+    public static ArrayList<String> getUserOfComment(long productId){
+        ArrayList<String> users=new ArrayList<String>();
+        for (Product product : allProducts) {
+            if (product.getProductId()==productId){
+                for (Comment allComment : product.getAllComments()) {
+                    users.add(allComment.getUserWhoComment().getUsername());
+                }
+            }
+        }
+        return users;
     }
 }

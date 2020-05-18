@@ -2,6 +2,7 @@ package View.Menu.OffsAndProductsMenu;
 
 import Controller.Controller;
 import Controller.OffAndProductMenuController;
+import Controller.ShowProductDetail;
 import View.Menu.Menu;
 import View.Menu.UserArea.UserArea;
 import View.View;
@@ -31,6 +32,11 @@ public class Comments extends Menu {
                 OffAndProductMenuController.addCommentsById(productId, title, content);
                 View.printString("Comment Added Successfully.");
                 this.parentMenu.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("Show Comments")){
+                View.printComments(ShowProductDetail.getUserOfComment(productId),ShowProductDetail.getTitleOfComment(productId),ShowProductDetail.getNoteOfComment(productId));
+                this.run(lastCommand);
             }
 
             if (command.equalsIgnoreCase("Log In")) {

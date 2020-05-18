@@ -59,10 +59,10 @@ public class ManageProducts extends Menu {
                 if (info.equals("product not exist")) {
                     View.printString(info);
                 } else {
-                    View.printString("product name: " + info.split("\\s")[0]);
-                    View.printString("product Id: " + info.split("\\s")[1]);
-                    View.printString("product brand: " + info.split("\\s")[2]);
-                    View.printString("product explanation: " + info.split("\\s")[3]);
+                    View.printString("product name: " + info.split(",")[0]);
+                    View.printString("product Id: " + info.split(",")[1]);
+                    View.printString("product brand: " + info.split(",")[2]);
+                    View.printString("product explanation: " + info.split(",")[3]);
                     View.printString("_____________________________________________");
                 }
                 this.parentMenu.run(lastCommand);
@@ -126,12 +126,12 @@ public class ManageProducts extends Menu {
         ArrayList<String> products = SellerAreaController.viewSellerProducts();
         View.printString("Products:");
         for (String product : products) {
-            View.printString("product name: " + product.split("\\s")[0]);
-            View.printString("product Id: " + product.split("\\s")[1]);
-            View.printString("product brand: " + product.split("\\s")[2]);
-            View.printString("product price: " + product.split("\\s")[3]);
-            View.printString("product average score: " + product.split("\\s")[4]);
-            View.printString("product explanation: " + product.split("\\s")[5]);
+            View.printString("product name: " + product.split(",")[0]);
+            View.printString("product Id: " + product.split(",")[1]);
+            View.printString("product brand: " + product.split(",")[2]);
+            View.printString("product price: " + product.split(",")[3]);
+            View.printString("product average score: " + product.split(",")[4]);
+            View.printString("product explanation: " + product.split(",")[5]);
             View.printString("_____________________________________________________");
         }
     }

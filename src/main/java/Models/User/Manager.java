@@ -37,6 +37,11 @@ public class Manager extends User implements Serializable {
     }
 
     public static DiscountCode getDiscountCodeById(String Id) {
+        for (DiscountCode discountCode : allDiscountCodes) {
+            if (discountCode.getDiscountId().equals(Id)) {
+                return discountCode;
+            }
+        }
         return null;
     }
 
@@ -46,10 +51,6 @@ public class Manager extends User implements Serializable {
 
     public static void addDiscountCode(DiscountCode discountCode) {
         allDiscountCodes.add(discountCode);
-    }
-
-    public static void  editDiscountCode() {
-
     }
 
     public static void removeDiscountCode(String code) {

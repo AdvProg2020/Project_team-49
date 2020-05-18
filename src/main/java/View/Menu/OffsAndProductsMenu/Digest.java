@@ -1,6 +1,7 @@
 package View.Menu.OffsAndProductsMenu;
 
 import Controller.Controller;
+import Controller.DataBase;
 import Controller.OffAndProductMenuController;
 import View.Menu.Menu;
 import View.Menu.UserArea.GuestArea;
@@ -118,6 +119,12 @@ public class Digest extends Menu {
             if (command.equalsIgnoreCase("back")) {
                 this.parentMenu.run(lastCommand);
             }
+
+            if (command.equalsIgnoreCase("Exit")){
+                DataBase.endProgram();
+            }
+
+            View.printString("Please Enter Valid Command.You Can Check Instruction By Type (Help)");
         }
     }
 }

@@ -82,15 +82,15 @@ public class SellerArea extends Menu {
                 View.printString("____________________");
                 for (String log : logs) {
                     View.printString("log Id:");
-                    View.printString(log.split("\\s")[0]);
+                    View.printString(log.split(",")[0]);
                     View.printString("log Date:");
-                    View.printString(log.split("\\s")[1]);
+                    View.printString(log.split(",")[1]);
                     View.printString("buyer name:");
-                    View.printString(log.split("\\s")[2]);
+                    View.printString(log.split(",")[2]);
                     View.printString("received amount:");
-                    View.printString(log.split("\\s")[3]);
+                    View.printString(log.split(",")[3]);
                     View.printString("off amount:");
-                    View.printString(log.split("\\s")[4]);
+                    View.printString(log.split(",")[4]);
                     View.printString("____________________");
                 }
                 this.parentMenu.run("");
@@ -163,10 +163,14 @@ public class SellerArea extends Menu {
     }
 
     public void showSpecifications() {
-        String[] info = Controller.getCurrentUserSpecifications().split("\\s");
-        for (int i = 0; i < info.length - 1; i++) {
-            View.printString(info[i]);
-        }
+        String[] info = Controller.getCurrentUserSpecifications().split(",");
+        View.printString("username: " + info[0]);
+        View.printString("first name: " + info[1]);
+        View.printString("last name: " + info[2]);
+        View.printString("Email: " + info[3]);
+        View.printString("phone number: " + info[4]);
+        View.printString("company name: " + info[5]);
+        View.printString("___________________________________________");
     }
 
     @Override

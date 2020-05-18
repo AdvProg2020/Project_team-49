@@ -22,9 +22,9 @@ public class CostumerAreaController {
         ArrayList<String> discountCodes = new ArrayList<>();
         for (DiscountCode discountCode : ((Costumer) Controller.currentUser).getDiscountCodes()) {
             String info = discountCode.getDiscountId();
-            info += " " + discountCode.getStartDate() + " " + discountCode.getEndDate();
-            info += " " + discountCode.getDiscountPercent() + " " + discountCode.getMaximumDiscountAmount();
-            info += " " + discountCode.getDiscountCount() + " " + discountCode.getUsageCount();
+            info += "," + discountCode.getStartDate() + "," + discountCode.getEndDate();
+            info += "," + discountCode.getDiscountPercent() + "," + discountCode.getMaximumDiscountAmount();
+            info += "," + discountCode.getDiscountCount() + "," + discountCode.getUsageCount();
             discountCodes.add(info);
         }
         return discountCodes;
@@ -34,9 +34,9 @@ public class CostumerAreaController {
         ArrayList<String> products = new ArrayList<>();
         Cart cart = ((Costumer) Controller.currentUser).getCart();
         for (Product product : cart.getProducts()) {
-            String info = product.getName() + " " + product.getProductId();
-            info += " " + product.getBrand() + " " + product.getPrice(product.getDefaultSeller());
-            info += " " + cart.getItemsByProductId(product.getProductId()) + " " + cart.getSellerByProductId(product.getProductId());
+            String info = product.getName() + "," + product.getProductId();
+            info += "," + product.getBrand() + "," + product.getPrice(product.getDefaultSeller());
+            info += "," + cart.getItemsByProductId(product.getProductId()) + "," + cart.getSellerByProductId(product.getProductId());
             products.add(info);
         }
         return products;
@@ -122,8 +122,8 @@ public class CostumerAreaController {
     public static String getOrderInfoById(long Id) {
         BuyLog order = ((Costumer) Controller.currentUser).getBuyLogById(Id);
         String info = "" + order.getLogId();
-        info += " " + order.getSellerName() + " " + order.getPaidAmount();
-        info += " " + order.getReceiveStatus() + " ";
+        info += "," + order.getSellerName() + "," + order.getPaidAmount();
+        info += "," + order.getReceiveStatus() + ",";
         for (Product product : order.getBoughtProduct()) {
             info += product.getName() + "_" + product.getProductId() + "/";
         }

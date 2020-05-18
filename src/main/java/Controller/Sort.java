@@ -32,7 +32,7 @@ public class Sort {
     }
 
     public static void disableSort() {
-        currentSort = "view";
+        currentSort = "";
         sort();
     }
 

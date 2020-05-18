@@ -4,6 +4,7 @@ import Controller.Controller;
 import View.Menu.Menu;
 import View.View;
 
+import java.awt.image.VolatileImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -121,6 +122,10 @@ public class GuestArea extends Menu {
         info.add(scanner.nextLine().trim());
         if (type.toLowerCase().equals("seller")) {
             View.printString("Enter Company Name:");
+            info.add(scanner.nextLine().trim());
+        }
+        if (type.toLowerCase().equals("costumer")) {
+            View.printString("Enter initial credit:");
             info.add(scanner.nextLine().trim());
         }
         return info;

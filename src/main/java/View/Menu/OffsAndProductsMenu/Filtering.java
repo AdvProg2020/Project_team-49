@@ -3,6 +3,7 @@ package View.Menu.OffsAndProductsMenu;
 import Controller.Controller;
 import Controller.Filter;
 import Controller.OffAndProductMenuController;
+import Controller.DataBase;
 import View.Menu.Menu;
 import View.Menu.UserArea.UserArea;
 import View.View;
@@ -138,6 +139,11 @@ public class Filtering extends Menu {
             if (command.equalsIgnoreCase("back")) {
                 this.parentMenu.run(lastCommand);
             }
+
+            if (command.equalsIgnoreCase("Exit")){
+                DataBase.endProgram();
+            }
+
             View.printString("invalid command");
         }
     }

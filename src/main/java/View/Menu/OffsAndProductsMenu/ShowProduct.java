@@ -3,6 +3,7 @@ package View.Menu.OffsAndProductsMenu;
 import Controller.Controller;
 import Controller.OffAndProductMenuController;
 import Controller.ShowProductDetail;
+import Controller.DataBase;
 import View.Menu.Menu;
 import View.Menu.UserArea.UserArea;
 import View.View;
@@ -19,7 +20,7 @@ public class ShowProduct extends Menu {
     public void run(String lastCommand) {
         View.printString("\"Show Product Menu:\"");
         long productId = Long.parseLong(lastCommand.split("\\s")[2]);
-
+        OffAndProductMenuController.increaseView(productId);
         while (true) {
 
             String command = scanner.nextLine().trim();
@@ -39,12 +40,12 @@ public class ShowProduct extends Menu {
                         ShowProductDetail.getOffPercentage(productId), ShowProductDetail.getExplanation(productId),
                         ShowProductDetail.getPrice(productId), ShowProductDetail.getCategory(productId),
                         ShowProductDetail.getAverageScore(productId), ShowProductDetail.getAllSeller(productId),
-                        ShowProductDetail.getRemainedNumber(productId));
-                new Digest(this).run(lastCommand);
+                        ShowProductDetail.getAllSellerPrice(productId),ShowProductDetail.getRemainedNumber(productId));
+//                new Digest(this).run(lastCommand);
                 this.run(lastCommand);
             }
 
-            if (command.equalsIgnoreCase("compare [productID]")) {
+            if (command.toLowerCase().startsWith("compare")) {
                 String productIdString = command.split("\\s")[1];
                 if (!productIdString.matches("\\d+")){
                     View.printString("Please Enter Number For Product Id.");
@@ -89,6 +90,10 @@ public class ShowProduct extends Menu {
 
             if (command.equals("back")) {
                 this.parentMenu.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("Exit")){
+                DataBase.endProgram();
             }
 
             View.printString("Please enter valid Instruction\n" +

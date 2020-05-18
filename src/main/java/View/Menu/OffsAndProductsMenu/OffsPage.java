@@ -5,6 +5,7 @@ import View.Menu.Menu;
 import View.Menu.UserArea.UserArea;
 import View.View;
 import Controller.OffAndProductMenuController;
+import Controller.DataBase;
 
 import java.util.HashMap;
 
@@ -107,5 +108,12 @@ public class OffsPage extends Menu {
             }
         };
     }
-
+    private Menu exit(){
+        return new Menu("Exit",this) {
+            @Override
+            public void run(String lastCommand) {
+                DataBase.endProgram();
+            }
+        };
+    }
 }

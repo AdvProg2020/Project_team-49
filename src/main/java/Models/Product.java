@@ -221,7 +221,6 @@ public class Product implements Serializable {
         return doesItHaveOff;
     }
 
-
     public void setDiscountCode(DiscountCode discountCode) {
         this.discountCode = discountCode;
     }
@@ -245,7 +244,6 @@ public class Product implements Serializable {
     public boolean getDoesItHaveDiscount() {
         return doesItHaveDiscount;
     }
-
 
     public void setNumberOfView(int numberOfView) {
         this.numberOfView = numberOfView;
@@ -273,7 +271,13 @@ public class Product implements Serializable {
     }
 
     public int getRemainingItemsForSeller(Seller seller) {
-        return availableItems.get(allSellers.indexOf(seller));
+        for (int i = 0; i < allSellers.size(); i++) {
+            if (allSellers.get(i).getUsername()==seller.getUsername()){
+                return availableItems.get(i);
+            }
+        }
+//        return availableItems.get(allSellers.indexOf(seller));
+        return 0;
     }
 
     public ArrayList<String> getAllSellerName() {
@@ -282,6 +286,10 @@ public class Product implements Serializable {
             allSellerName.add(seller.getCompanyName());
         }
         return allSellerName;
+    }
+
+    public ArrayList<Double> getAllSellerPrice(){
+        return price;
     }
 }
 

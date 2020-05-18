@@ -131,6 +131,14 @@ public class DataBase {
         return null;
     }
 
+    public static void addDiscountCode(DiscountCode discountCode) {
+        for (Costumer allowedCostumer : discountCode.getAllowedCostumers()) {
+            allowedCostumer.addDiscountCode(discountCode);
+        }
+        allDiscountCodes.add(discountCode);
+        //؟
+    }
+
     public static boolean isThereAnyCategoryWithName(String name) {
         for (Category category : allCategories) {
             if (category.getName().equalsIgnoreCase(name))
@@ -404,7 +412,7 @@ public class DataBase {
         }
     }
 
-
+    //?????
     public static void setRandomDiscountCode() {  // for maximum 10 costumers
         long monthPeriod = 2592000000L;
         Date everyRunCurrentDate = new Date();
@@ -420,14 +428,21 @@ public class DataBase {
             if (user instanceof Costumer)
                 costumers.add((Costumer) user);
         }
+        ArrayList<Costumer> allowedCostumers = new ArrayList<>();
         if (costumers.size() < 10) {
             n = costumers.size();
         }
         Random random = new Random();
         for (int i = 0; i < n; i++) {
             int index = random.nextInt(n);
-            // give costumer.get(index) discount code
+            allowedCostumers.add(costumers.get(index));
         }
+        for (Costumer allowedCostumer : allowedCostumers) {
+            allowedCostumer.addDiscountCode(new DiscountCode("monthly gift"
+                    , new Date(), new Date(monthPeriod), 10
+                    , 50000, 2, allowedCostumers));
+        }
+        allowedCostumers.clear();
         costumers.clear();
     }
 }

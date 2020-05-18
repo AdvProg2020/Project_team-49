@@ -55,9 +55,9 @@ public class ManageCategories extends Menu {
         ArrayList<String> categories = ManagerAreaController.showCategories();
         View.printString("Categories:");
         for (String category : categories) {
-            View.printString("name: " + category.split("\\s")[0]);
-            View.printString("attributes: " + category.split("\\s")[1]);
-            View.printString("parent category: " + category.split("\\s")[2]);
+            View.printString("name: " + category.split(",")[0]);
+            View.printString("attributes: " + category.split(",")[1]);
+            View.printString("parent category: " + category.split(",")[2]);
             View.printString("________________________________________");
         }
     }
