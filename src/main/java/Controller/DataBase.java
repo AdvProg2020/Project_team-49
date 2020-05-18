@@ -97,7 +97,6 @@ public class DataBase {
         allProducts.remove(getProductById(productId));
     }
 
-
     public static void removeCategory(String name) {
         Category category = getCategoryByName(name);
         if (category.getParentCategory() != null) {
@@ -117,7 +116,6 @@ public class DataBase {
         }
         return;
     }
-
 
     public static void addCategory(Category category) {
         allCategories.add(category);
@@ -403,7 +401,6 @@ public class DataBase {
             System.out.println("can't save long Variables");
         }
     }
-
 
     public static void setRandomDiscountCode() {  // for maximum 10 costumers
         long monthPeriod = 2592000000L;

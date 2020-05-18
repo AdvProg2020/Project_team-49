@@ -2,6 +2,7 @@ package View.Menu.OffsAndProductsMenu;
 
 import Controller.Controller;
 import Controller.OffAndProductMenuController;
+import Controller.DataBase;
 import View.Menu.Menu;
 import View.Menu.UserArea.UserArea;
 import View.View;
@@ -88,6 +89,10 @@ public class Sorting extends Menu {
 
             if (command.equalsIgnoreCase("back")) {
                 this.parentMenu.run(lastCommand);
+            }
+
+            if (command.equalsIgnoreCase("Exit")){
+                DataBase.endProgram();
             }
 
             View.printString("Please Insert Valid Instruction\n" +

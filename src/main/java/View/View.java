@@ -23,12 +23,12 @@ public class View {
                                        ArrayList<Double> offPercentage,
                                        ArrayList<Boolean> doesItHaveOff) {
         System.out.println("All Products:");
-        for (int i = 0; i <productsId.size() ; i++) {
+        for (int i = 1; i <=productsId.size() ; i++) {
             String off="";
-            if (doesItHaveOff.get(i)){
-                off="%OFF%"+offPercentage.get(i)+"%";
+            if (doesItHaveOff.get(i-1)){
+                off="%OFF%"+offPercentage.get(i-1)+"%";
             }
-            System.out.printf("%d. %-30s  %-9.2f $  %-15s Id:%d\n",i,productName.get(i),productPrice.get(i),off,productsId.get(i));
+            System.out.printf("%d. %-30s  %-9.2f $  %-15s Id:%d\n",i,productName.get(i-1),productPrice.get(i-1),off,productsId.get(i-1));
         }
     }
 
@@ -86,7 +86,7 @@ public class View {
     public static void printCurrentSort(String sort){
         if (sort.isEmpty()){
             System.out.println("There Is No Entered Sort");
-
+            return;
         }
         System.out.println("Current Sort Is:\n" +
                 sort);
@@ -137,7 +137,7 @@ public class View {
                                        double offPercentage,String explanation,
                                        double productPrice,String category,
                                        double productAverageScore,ArrayList<String> allSeller,
-                                       int remainedNumber) {
+                                       ArrayList<Double> allSellerPrice,int remainedNumber) {
         String offDetail="";
         if (offPercentage==0){
             offDetail="This product is not on OFF(。﹏。*)";
@@ -153,8 +153,8 @@ public class View {
                 "Category: "+category+"\n"+
                 "More Detail:\n"+explanation);
         System.out.println("you can buy this Product from:");
-        for (int i = 0; i < allSeller.size(); i++) {
-            System.out.println(" ~"+i+". "+allSeller.get(i));
+        for (int i = 1; i <= allSeller.size(); i++) {
+            System.out.println(" ~"+i+". "+allSeller.get(i-1)+" With Price: "+allSellerPrice.get(i-1));
         }
     }
 
@@ -165,7 +165,7 @@ public class View {
                                            String secondProductName, double secondOffPercentage,
                                            String secondExplanation, double secondProductPrice,
                                            double secondProductAverageScore) {
-        System.out.println("~~~~~~~~ Comparing "+firstProductName+"Vs. "+secondProductName+" ~~~~~~~~");
+        System.out.println("~~~~~~~~ Comparing "+firstProductName+" Vs. "+secondProductName+" ~~~~~~~~");
         String firstProductOffDetail="";
         String secondProductOffDetail="";
         if (firstOffPercentage!=0){
@@ -271,19 +271,21 @@ public class View {
                 "5. Log In\n" +
                 "6. Log Out\n" +
                 "7. Help\n" +
-                "8. Back");
+                "8. Back\n"+
+                "9. Exit");
     }
 
     public static void printShowProductMenu(){
         System.out.println("Show Product Instruction:\n" +
                 "1. Digest\n" +
-                "2. Attribute\n" +
+                "2. Attributes\n" +
                 "3. Compare [productID]\n" +
                 "4. Comments\n" +
                 "5. Log In\n" +
                 "6. Log Out\n" +
                 "7. Help\n" +
-                "8. Back");
+                "8. Back\n"+
+                "9. Exit");
     }
 
     public static void printFilterSthMenu(){
@@ -301,6 +303,14 @@ public class View {
         System.out.println("Available Seller For This Price Are:");
         for (int i = 1; i <= seller.size(); i++) {
             System.out.println(i+". "+seller.get(i-1));
+        }
+    }
+
+    public static void printComments(ArrayList<String> userName,ArrayList<String> title,ArrayList<String> note){
+        for (int i = 1; i <= userName.size(); i++) {
+            System.out.println(i+"UserName: "+userName.get(i-1)+"\n"+
+            " ~Title: "+title.get(i-1)+"\n"+
+            " ~Note: "+note.get(i-1));
         }
     }
 }
