@@ -98,17 +98,16 @@ public class DataBase {
 
     public static void removeCategory(String name) {
         Category category = getCategoryByName(name);
-        if (category.getParentCategory() != null) {
+        if (category.getParentCategory() != null)
             category.getParentCategory().removeSubCategory(category);
-        }
         removeCategoryRecursive(category);
     }
 
     public static void removeCategoryRecursive(Category category) {
-        System.out.println("category name : "+ category.getName());
+        System.out.println("category name : " + category.getName());
         allCategories.remove(category);
         for (Product subProduct : category.getSubProducts()) {
-            System.out.println("   product name = "+ subProduct.getName() + subProduct.getProductId() + "  in category " + category.getName());
+            System.out.println("   product name = " + subProduct.getName() + subProduct.getProductId() + "  in category " + category.getName());
             removeProduct(subProduct.getProductId());
         }
 
@@ -419,10 +418,10 @@ public class DataBase {
         if (everyRunCurrentDate.getTime() < referenceTime * monthPeriod)
             return;
         referenceTime++;
-        giveDiscountCode(10 , monthPeriod);
+        giveDiscountCode(10, monthPeriod);
     }
 
-    public static void giveDiscountCode(int n , long monthPeriod) {
+    public static void giveDiscountCode(int n, long monthPeriod) {
         ArrayList<Costumer> costumers = new ArrayList<>();
         for (User user : allUsers) {
             if (user instanceof Costumer)

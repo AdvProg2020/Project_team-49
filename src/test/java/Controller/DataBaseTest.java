@@ -10,7 +10,6 @@ import Models.User.User;
 import Models.User.*;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.Order;
 
 import java.io.File;
 import java.io.IOException;
@@ -120,7 +119,6 @@ public class DataBaseTest {
     }
 
     @Test
-    @Order(0)
     public void TestRemoveCategory() {
         initialise();
         removeCategory("xxlx");
@@ -303,20 +301,20 @@ public class DataBaseTest {
         assertEquals(8, allCategories.size());
     }
 
+    @Test
+    public void TestGetProductById() {
+        initialise();
+        assertEquals(getProductById(1), a);
+        assertEquals(getProductById(333) , null);
+    }
 
-
-    //    @Test
-//    public void TestGetProductById() {
-//        initialise();
-//        assertEquals(getProductById(1) , a);
-//    }
     @Test
     public void TestAddNewUser() {
         initialise();
         allUsers.remove(manager2);
         allUsers.remove(seller1);
         addNewUser(seller1);
-        assertEquals(5 ,allUsers.size());
+        assertEquals(5, allUsers.size());
     }
 
     @Test
@@ -349,4 +347,34 @@ public class DataBaseTest {
         assertEquals(0, allProducts.size());
         assertEquals(0, activeRequestsFile.length(), .0001);
     }
+
+    @Test
+    public void TestSetRandomDiscountCode() {
+        initialise();
+        referenceTime = 0;
+        setRandomDiscountCode();
+        assertEquals(1, referenceTime);
+        referenceTime = 50000;
+        assertEquals(50000, referenceTime);
+    }
+
+    @Test
+    public void TestStartProgram() {
+        initialise();
+        saveAllData();
+        allProducts.clear();
+        dataBaseRun();
+        assertEquals(allProducts.size(), 5);
+    }
+
+    @Test
+    public void TestRemoveUser() {
+        initialise();
+        removeUser("alireza_hr79");
+        assertEquals(allUsers.size(), 6);
+        removeUser("alireza_hr");
+        assertEquals(allUsers.size(), 5);
+
+    }
+
 }

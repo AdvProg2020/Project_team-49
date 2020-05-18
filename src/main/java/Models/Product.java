@@ -50,9 +50,6 @@ public class Product implements Serializable {
         this.productDate = new Date();
     }
 
-    public Product(int numberOfView) {
-        this.numberOfView = numberOfView;
-    }
 
     public double getMaximumPrice() {
         double max = this.price.get(0);
@@ -74,9 +71,6 @@ public class Product implements Serializable {
         return min;
     }
 
-    public Product(double averageScore) {
-        this.averageScore = averageScore;
-    }
 
     public int remainingProductForSeller(Seller seller) {
         for (int i = 0; i < allSellers.size(); i++) {
