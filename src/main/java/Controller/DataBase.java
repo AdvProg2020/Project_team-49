@@ -411,7 +411,10 @@ public class DataBase {
         if (everyRunCurrentDate.getTime() < referenceTime * monthPeriod)
             return;
         referenceTime++;
-        int n = 10;
+        giveDiscountCode(10);
+    }
+
+    public static void giveDiscountCode(int n) {
         ArrayList<Costumer> costumers = new ArrayList<>();
         for (User user : allUsers) {
             if (user instanceof Costumer)
