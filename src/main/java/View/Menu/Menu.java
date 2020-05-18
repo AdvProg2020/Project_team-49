@@ -71,11 +71,9 @@ public abstract class Menu {
         if (key.equals("invalid")) {
             nextMenu = this;
         } else if (key.equals("back")) {
-            if (this.parentMenu == null) {
-                DataBase.endProgram();
-            } else {
-                nextMenu = this.parentMenu;
-            }
+            nextMenu = this.parentMenu;
+        } else if (key.equals("exit")) {
+            DataBase.endProgram();
         } else if (key.equals("help")) {
             this.showMenu();
             nextMenu = this;

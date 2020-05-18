@@ -1,11 +1,11 @@
 package View.Menu.UserArea.ManagerArea;
 
 import Controller.Controller;
+import Controller.DataBase;
 import Controller.ManagerAreaController;
 import View.Menu.Menu;
 import View.View;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 public class ManageRequests extends Menu {
@@ -75,6 +75,9 @@ public class ManageRequests extends Menu {
             }
             if (getMatcher(command, "(?i)back").matches()) {
                 break;
+            }
+            if (getMatcher(command, "(?i)exit").matches()) {
+                DataBase.endProgram();
             }
             View.printString("invalid command");
         }

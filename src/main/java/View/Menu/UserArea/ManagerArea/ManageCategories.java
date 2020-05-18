@@ -1,6 +1,7 @@
 package View.Menu.UserArea.ManagerArea;
 
 import Controller.Controller;
+import Controller.DataBase;
 import Controller.ManagerAreaController;
 import View.Menu.Menu;
 import View.View;
@@ -111,6 +112,9 @@ public class ManageCategories extends Menu {
             }
             if (getMatcher(command, "(?i)back").matches()) {
                 break;
+            }
+            if (getMatcher(command, "(?i)exit").matches()) {
+                DataBase.endProgram();
             }
             View.printString("invalid command");
         }

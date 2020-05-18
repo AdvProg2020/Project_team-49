@@ -29,7 +29,9 @@ public class MainMenu extends Menu {
         } else if (getMatcher(command, "(?i)help").matches()) {
             return "help";
         } else if (getMatcher(command, "(?i)exit").matches()) {
-            return "back";
+            return "exit";
+        } else if (getMatcher(command, "(?i)back").matches()) {
+            return "exit";
         }
         View.printString("invalid command");
         return "invalid";

@@ -1,6 +1,7 @@
 package View.Menu.UserArea;
 
 import Controller.Controller;
+import Controller.DataBase;
 import View.Menu.Menu;
 import View.View;
 
@@ -54,6 +55,9 @@ public class ViewPersonalInfo extends Menu {
             }
             if (getMatcher(command, "(?i)back").matches()) {
                 break;
+            }
+            if (getMatcher(command, "(?i)exit").matches()) {
+                DataBase.endProgram();
             }
             View.printString("invalid command");
         }

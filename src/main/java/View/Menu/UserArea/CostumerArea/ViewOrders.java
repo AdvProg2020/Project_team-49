@@ -1,12 +1,11 @@
 package View.Menu.UserArea.CostumerArea;
 
 import Controller.Controller;
+import Controller.DataBase;
 import Controller.CostumerAreaController;
 import View.Menu.Menu;
 import View.View;
 
-import javax.naming.ldap.SortResponseControl;
-import java.awt.image.VolatileImage;
 import java.util.ArrayList;
 
 public class ViewOrders extends Menu {
@@ -79,6 +78,9 @@ public class ViewOrders extends Menu {
             }
             if (getMatcher(command, "(?i)back").matches()) {
                 break;
+            }
+            if (getMatcher(command, "(?i)exit").matches()) {
+                DataBase.endProgram();
             }
             View.printString("invalid command");
             this.run(lastCommand);

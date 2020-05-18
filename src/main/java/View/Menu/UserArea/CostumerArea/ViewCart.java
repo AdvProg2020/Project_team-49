@@ -53,6 +53,8 @@ public class ViewCart extends Menu {
             return "help";
         } else if (getMatcher(command, "(?i)back").matches()) {
             return "back";
+        } else if (getMatcher(command, "(?i)exit").matches()) {
+            return "exit";
         }
         View.printString("invalid command");
         return "invalid";

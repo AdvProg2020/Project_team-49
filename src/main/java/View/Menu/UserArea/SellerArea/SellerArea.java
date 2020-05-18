@@ -56,6 +56,8 @@ public class SellerArea extends Menu {
             return "Logout";
         } else if (getMatcher(command, "(?i)help").matches()) {
             return "help";
+        } else if (getMatcher(command, "(?i)exit").matches()) {
+            return "exit";
         }
         View.printString("invalid command");
         return "invalid";
