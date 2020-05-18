@@ -4,6 +4,7 @@ package Controller;
 import Models.Category;
 import Models.DiscountCode;
 import Models.Product;
+import Models.User.Costumer;
 import Models.User.Request.Request;
 import Models.User.Seller;
 import Models.User.User;
@@ -12,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,6 +21,8 @@ import java.nio.file.Paths;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 public class DataBase {
     private static InputStream inputStream;
@@ -34,10 +38,11 @@ public class DataBase {
     public static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
     public static ArrayList<Request> answeredRequests = new ArrayList<>();
 
-    public static long createdProductsCount = 0;
     static ArrayList<String> allAvailableFilters = new ArrayList<String>();
     static ArrayList<String> allAvailableSorting = new ArrayList<String>();
 
+    static long referenceTime;
+    public static long createdProductsCount;
 
     public static User getUserByUsername(String username) {
         for (User user : allUsers) {
@@ -95,7 +100,7 @@ public class DataBase {
 
     public static void removeCategory(String name) {
         Category category = getCategoryByName(name);
-        if(category.getParentCategory() != null){
+        if (category.getParentCategory() != null) {
             category.getParentCategory().removeSubCategory(category);
         }
         removeCategoryRecursive(category);
@@ -104,7 +109,7 @@ public class DataBase {
     public static void removeCategoryRecursive(Category category) {
         allCategories.remove(category);
         for (Product subProduct : category.getSubProducts()) {
-            removeProduct((Long) subProduct.getProductId());
+            removeProduct(subProduct.getProductId());
         }
 
         for (Category subCategory : category.getSubCategories()) {
@@ -178,13 +183,21 @@ public class DataBase {
                 answeredRequestsFile.createNewFile();
                 File discountCodesFile = new File("src/main/resources/DataBase/discountCodes.txt");
                 discountCodesFile.createNewFile();
-
+                File longVariablesFile = new File("src/main/resources/DataBase/longVariables.txt");
+                longVariablesFile.createNewFile();
+                Date firstRunDate = new Date();
+                referenceTime = (Long) firstRunDate.getTime() / 2592000000L;
+                createdProductsCount = 0;
+                allAvailableFilters = Filter.getAvailableFilters();
+                allAvailableSorting = Sort.getAvailableSorts();
+                return;
             } catch (Exception e) {
                 System.out.println("sorry we can't create DataBase directory");
                 System.exit(0);
             }
         }
         loadAllData();
+        setRandomDiscountCode();
         allAvailableFilters = Filter.getAvailableFilters();
         allAvailableSorting = Sort.getAvailableSorts();
     }
@@ -205,6 +218,7 @@ public class DataBase {
         loadAllActiveRequests();
         loadAllAnsweredRequests();
         loadAllDiscountCodes();
+        loadLongVariables();
     }
 
     public static void loadAllAnsweredRequests() {
@@ -279,6 +293,21 @@ public class DataBase {
         }
     }
 
+    public static void loadLongVariables() {
+        try {
+            FileReader fileReader = new FileReader("src/main/resources/DataBase/longVariables.txt");
+            BufferedReader in = new BufferedReader(fileReader);
+            String a = in.readLine();
+            referenceTime = Long.parseLong(a);
+            a = in.readLine();
+            createdProductsCount = Long.parseLong(a);
+            in.close();
+            fileReader.close();
+        } catch (Exception e) {
+            System.out.println("still no files in dataBase/longVariables");
+        }
+    }
+
     public static void saveAllData() {
         saveAllProducts();
         saveAllCategories();
@@ -286,6 +315,7 @@ public class DataBase {
         saveAllActiveRequests();
         saveAllAnsweredRequests();
         saveAllDiscountCodes();
+        saveLongVariables();
     }
 
     public static void saveAllProducts() {
@@ -360,4 +390,41 @@ public class DataBase {
         }
     }
 
+    public static void saveLongVariables() {
+        try {
+            FileWriter fileWriter = new FileWriter("src/main/resources/DataBase/longVariables.txt");
+            BufferedWriter out = new BufferedWriter(fileWriter);
+            out.write(String.valueOf(referenceTime));
+            out.newLine();
+            out.write(String.valueOf(createdProductsCount));
+            out.close();
+            fileWriter.close();
+        } catch (Exception e) {
+            System.out.println("can't save long Variables");
+        }
+    }
+
+
+    public static void setRandomDiscountCode() {  // for maximum 10 costumers
+        long monthPeriod = 2592000000L;
+        Date everyRunCurrentDate = new Date();
+        if (everyRunCurrentDate.getTime() < referenceTime * monthPeriod)
+            return;
+        referenceTime++;
+        int n = 10;
+        ArrayList<Costumer> costumers = new ArrayList<>();
+        for (User user : allUsers) {
+            if (user instanceof Costumer)
+                costumers.add((Costumer) user);
+        }
+        if (costumers.size() < 10) {
+            n = costumers.size();
+        }
+        Random random = new Random();
+        for (int i = 0; i < n; i++) {
+            int index = random.nextInt(n);
+            // give costumer.get(index) discount code
+        }
+        costumers.clear();
+    }
 }

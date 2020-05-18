@@ -130,6 +130,16 @@ public class DataBaseTest {
     }
 
     @Test
+    public void TestRemoveCategory() {
+        initialise();
+        removeCategory("xx");
+        assertEquals(allProducts.size(), 3);
+        initialise();
+        removeCategory("nike");
+        assertEquals(allCategories.size(), 6);
+    }
+
+    @Test
     public void TestExceptions() {
 
         allCategories.clear();
@@ -306,22 +316,21 @@ public class DataBaseTest {
         assertEquals(8, allCategories.size());
     }
 
-    @Test
-    public void TestRemoveCategory() {
-        initialise();
-        removeCategory("xx");
-        assertEquals(allProducts.size(), 3);
-        initialise();
-        removeCategory("nike");
-        assertEquals(allCategories.size(), 6);
-    }
 
-//    @Test
+
+    //    @Test
 //    public void TestGetProductById() {
 //        initialise();
 //        assertEquals(getProductById(1) , a);
 //    }
-
+    @Test
+    public void TestAddNewUser() {
+        initialise();
+        allUsers.remove(manager2);
+        allUsers.remove(seller1);
+        addNewUser(seller1);
+        assertEquals(5 ,allUsers.size());
+    }
 
     @Test
     public void clearDataBase() throws IOException {
@@ -337,8 +346,7 @@ public class DataBaseTest {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        File dataBaseDir = new File("src/main/resources/DataBase");
-        dataBaseDir.mkdir();
+
         File productsFile = new File("src/main/resources/DataBase/products.txt");
         productsFile.createNewFile();
         File usersFile = new File("src/main/resources/DataBase/users.txt");

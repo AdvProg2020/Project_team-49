@@ -12,7 +12,7 @@ public class Category implements Serializable {
     private Category parentCategory;
     private ArrayList<Product> subProducts;
 
-    public Category(String name, String specialAttributes , Category parentCategory) {
+    public Category(String name, String specialAttributes, Category parentCategory) {
         this.name = name;
         this.specialAttributes = specialAttributes;
         subCategories = new ArrayList<>();
@@ -40,17 +40,15 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-
-
     public void setSpecialAttributes(String specialAttributes) {
         this.specialAttributes = specialAttributes;
     }
 
-    public void addProduct(Product product){
+    public void addProduct(Product product) {
         subProducts.add(product);
     }
 
-    public void removeProduct(Product product){
+    public void removeProduct(Product product) {
         subProducts.remove(product);
     }
 
@@ -62,22 +60,21 @@ public class Category implements Serializable {
         this.parentCategory = parentCategory;
     }
 
-    public void addSubCategory(Category category){
+    public void addSubCategory(Category category) {
         subCategories.add(category);
         category.setParentCategory(this);
     }
 
-    public void removeSubCategory(Category category){
+    public void removeSubCategory(Category category) {
         subCategories.remove(category);
         category.setParentCategory(null);
     }
 
-    public ArrayList<String> showCategories(){
+    public ArrayList<String> showCategories() {
         return null;
     }
 
     public ArrayList<Category> getSubCategories() {
         return subCategories;
     }
-
 }
