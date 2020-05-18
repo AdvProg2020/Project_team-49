@@ -136,6 +136,7 @@ public class DataBase {
             allowedCostumer.addDiscountCode(discountCode);
         }
         allDiscountCodes.add(discountCode);
+        //؟
     }
 
     public static boolean isThereAnyCategoryWithName(String name) {
