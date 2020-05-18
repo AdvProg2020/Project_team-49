@@ -19,10 +19,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.PublicKey;
+import java.util.*;
 import java.util.ArrayList;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
 
 public class DataBase {
     private static InputStream inputStream;
@@ -107,8 +105,10 @@ public class DataBase {
     }
 
     public static void removeCategoryRecursive(Category category) {
+        System.out.println("category name : "+ category.getName());
         allCategories.remove(category);
         for (Product subProduct : category.getSubProducts()) {
+            System.out.println("   product name = "+ subProduct.getName() + subProduct.getProductId() + "  in category " + category.getName());
             removeProduct(subProduct.getProductId());
         }
 
@@ -419,7 +419,10 @@ public class DataBase {
         if (everyRunCurrentDate.getTime() < referenceTime * monthPeriod)
             return;
         referenceTime++;
-        int n = 10;
+        giveDiscountCode(10 , monthPeriod);
+    }
+
+    public static void giveDiscountCode(int n , long monthPeriod) {
         ArrayList<Costumer> costumers = new ArrayList<>();
         for (User user : allUsers) {
             if (user instanceof Costumer)
@@ -436,7 +439,7 @@ public class DataBase {
         }
         for (Costumer allowedCostumer : allowedCostumers) {
             allowedCostumer.addDiscountCode(new DiscountCode("monthly gift"
-                    , new Date(), new Date(monthPeriod), 10
+                    , new Date(), new Date(monthPeriod + new Date().getTime()), 10
                     , 50000, 2, allowedCostumers));
         }
         allowedCostumers.clear();
