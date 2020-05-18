@@ -1,6 +1,9 @@
 package Models.User.Request;
 
+import Controller.DataBase;
 import Models.Off;
+import Models.OffStatus;
+import Models.Product;
 import Models.User.Seller;
 
 import java.io.Serializable;
@@ -30,6 +33,12 @@ public class AddOffRequest extends Request  implements Serializable {
 
     @Override
     public void run() {
+        DataBase.createdOffsCount++;
+        off.setOffId(DataBase.createdOffsCount);
+        off.setOffStatus(OffStatus.confirmed);
+        for (Product product : off.getProducts()) {
+            
+        }
         seller.addOff(off);
     }
 }

@@ -40,7 +40,8 @@ public class DataBase {
     static ArrayList<String> allAvailableSorting = new ArrayList<String>();
 
     static long referenceTime;
-    public static long createdProductsCount;
+    public static long createdProductsCount = 0;
+    public static long createdOffsCount = 0;
 
     public static User getUserByUsername(String username) {
         for (User user : allUsers) {
