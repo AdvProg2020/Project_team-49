@@ -44,6 +44,8 @@ public class Product implements Serializable {
         this.explanation = explanation;
         this.status = ProductStatus.REVIEWFORMAKE;
         this.parentCategory = parentCategory;
+        if(parentCategory != null)
+            parentCategory.addProduct(this);
         this.name = name;
         this.productDate = new Date();
     }
@@ -271,7 +273,13 @@ public class Product implements Serializable {
     }
 
     public int getRemainingItemsForSeller(Seller seller) {
-        return availableItems.get(allSellers.indexOf(seller));
+        for (int i = 0; i < allSellers.size(); i++) {
+            if (allSellers.get(i).getUsername()==seller.getUsername()){
+                return availableItems.get(i);
+            }
+        }
+//        return availableItems.get(allSellers.indexOf(seller));
+        return 0;
     }
 
     public ArrayList<String> getAllSellerName() {

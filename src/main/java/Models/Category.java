@@ -18,6 +18,8 @@ public class Category implements Serializable {
         subCategories = new ArrayList<>();
         subProducts = new ArrayList<Product>();
         this.parentCategory = parentCategory;
+        if (parentCategory != null)
+            parentCategory.addSubCategory(this);
     }
 
     public ArrayList<Product> getSubProducts() {
@@ -45,11 +47,13 @@ public class Category implements Serializable {
     }
 
     public void addProduct(Product product) {
-        subProducts.add(product);
+        if (!subProducts.contains(product))
+            subProducts.add(product);
     }
 
     public void removeProduct(Product product) {
-        subProducts.remove(product);
+        if (subProducts.contains(product))
+            subProducts.remove(product);
     }
 
     public Category getParentCategory() {
@@ -61,11 +65,16 @@ public class Category implements Serializable {
     }
 
     public void addSubCategory(Category category) {
+        if (subCategories.contains(category))
+            return;
+
         subCategories.add(category);
         category.setParentCategory(this);
     }
 
     public void removeSubCategory(Category category) {
+        if (!subCategories.contains(category))
+            return;
         subCategories.remove(category);
         category.setParentCategory(null);
     }

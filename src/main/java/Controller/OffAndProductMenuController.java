@@ -1,16 +1,10 @@
 package Controller;
 
-import Models.Category;
 import Models.Comment;
 import Models.Product;
 import Models.User.Seller;
-
 import static Controller.DataBase.*;
-
-import java.nio.file.Files;
 import java.util.ArrayList;
-
-
 
 public class OffAndProductMenuController {
 
@@ -23,7 +17,6 @@ public class OffAndProductMenuController {
         }
         return productName;
     }
-
     public static ArrayList<String> getCurrentName(){
         ArrayList<String> productName=new ArrayList<String>();
         for (Product product : sortedOrFilteredProduct) {
@@ -31,7 +24,6 @@ public class OffAndProductMenuController {
         }
         return productName;
     }
-
     public static ArrayList<Long> getCurrentId(){
         ArrayList<Long> productId=new ArrayList<Long>();
         for (Product product : sortedOrFilteredProduct) {
@@ -39,7 +31,6 @@ public class OffAndProductMenuController {
         }
         return productId;
     }
-
     public static ArrayList<Double> getCurrentOffPercentage(){
         ArrayList<Double> productOffPercentage=new ArrayList<Double>();
         for (Product product : sortedOrFilteredProduct) {
@@ -47,7 +38,6 @@ public class OffAndProductMenuController {
         }
         return productOffPercentage;
     }
-
     public static ArrayList<Double> getCurrentPrice(){
         ArrayList<Double> productPrice=new ArrayList<Double>();
         for (Product product : sortedOrFilteredProduct) {
@@ -55,7 +45,6 @@ public class OffAndProductMenuController {
         }
         return productPrice;
     }
-
     public static ArrayList<Boolean> doesCurrentOff(){
         ArrayList<Boolean> isIfOff=new ArrayList<Boolean>();
         for (Product product : sortedOrFilteredProduct) {
@@ -63,47 +52,43 @@ public class OffAndProductMenuController {
         }
         return isIfOff;
     }
-
     public static ArrayList<String> getAllAvailableFilters() {
         return Filter.getAvailableFilters();
     }
-
     public static ArrayList<String> getCategoriesName(){
         return Filter.showSubCategories();
     }
-
     public static ArrayList<String> getAllAvailableSorting() {
         return allAvailableSorting;
     }
-
     public static ArrayList<String> getAllSellerOfProductWithId(long productId){
         return Controller.getProductById(productId).getAllSellerName();
     }
-
     public static String getCurrentSort() {
         return Sort.getCurrentSort();
     }
-
     public static void sorting(String sort) {
         if (sort.equalsIgnoreCase("View")){
             Sort.sortByView();
+            Sort.setCurrentSort("View");
+            return;
         }
         if (sort.equalsIgnoreCase("Time")){
             Sort.sortByTime();
+            Sort.setCurrentSort("Time");
+            return;
         }
         if (sort.equalsIgnoreCase("Score")){
             Sort.sortByScore();
+            Sort.setCurrentSort("Score");
         }
     }
-
     public static void disableSort() {
         Sort.disableSort();
     }
-    //Test ino chi kar konam?
     public static void addCommentsById(long productId, String title, String content) {
         Controller.getProductById(productId).addAComment(new Comment(Controller.currentUser,Controller.getProductById(productId),title,content));
     }
-
     public static void addToCartById(long productId, boolean commonSeller,String sellerUserName,int count){
         for (Product product : allProducts) {
             if (product.getProductId()==productId){
@@ -114,7 +99,6 @@ public class OffAndProductMenuController {
             }
         }
     }
-
     public static boolean checkRemainCountForBuy(long productId,String userName,int count){
         Seller seller;
         if (userName==null){
@@ -128,20 +112,17 @@ public class OffAndProductMenuController {
         }
         return true;
     }
-
     public static boolean isCurrentUserGuestOrUser(){
         if (Controller.currentUser.getType().equals("Guest")||Controller.currentUser.getType().equals("Costumer"))
             return true;
         return false;
     }
-
     public static boolean checkSortingInput(String sort){
         if (sort.equalsIgnoreCase("View")||sort.equalsIgnoreCase("Time")||sort.equalsIgnoreCase("Score")){
             return true;
         }
         return false;
     }
-
     public static boolean checkFilteringByBrand(String brand){
         for (String availableBrand : Filter.getAvailableBrands()) {
             if (availableBrand.equalsIgnoreCase(brand)){
@@ -150,7 +131,6 @@ public class OffAndProductMenuController {
         }
         return false;
     }
-
     public static boolean checkFilteringByCategory(String category){
         for (String subCategory : Filter.showSubCategories()) {
             if (subCategory.equalsIgnoreCase(category)){
@@ -159,7 +139,6 @@ public class OffAndProductMenuController {
         }
         return false;
     }
-
     public static boolean isProductWithId(long productId){
         if (allProducts.isEmpty()){
             return false;
@@ -171,21 +150,18 @@ public class OffAndProductMenuController {
         }
         return false;
     }
-
     public static boolean isSellerWithNameForProduct(long productId,String sellerName){
         for (String seller : Controller.getProductById(productId).getAllSellerName()) {
-            if (seller.equalsIgnoreCase(seller)){
+            if (seller.equalsIgnoreCase(sellerName)){
                 return true;
             }
         }
         return false;
     }
-
     public static void clearAndRestoreProduct(){
         sortedOrFilteredProduct.clear();
         sortedOrFilteredProduct.addAll(allProducts);
     }
-
     public static void increaseView(long productId){
         for (Product product : allProducts) {
             if (product.getProductId()==productId){

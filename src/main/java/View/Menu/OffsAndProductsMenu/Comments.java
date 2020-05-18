@@ -35,7 +35,7 @@ public class Comments extends Menu {
             }
 
             if (command.equalsIgnoreCase("Show Comments")){
-                View.printComments(ShowProductDetail.getUserOfComment(productId),ShowProductDetail.getTitleOfComment(productId),ShowProductDetail.getTitleOfComment(productId));
+                View.printComments(ShowProductDetail.getUserOfComment(productId),ShowProductDetail.getTitleOfComment(productId),ShowProductDetail.getNoteOfComment(productId));
                 this.run(lastCommand);
             }
 

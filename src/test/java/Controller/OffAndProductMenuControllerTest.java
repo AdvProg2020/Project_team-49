@@ -8,11 +8,13 @@ import Models.User.Seller;
 import org.junit.Assert;
 import org.junit.Test;
 
+
 import java.util.ArrayList;
 
 import static Controller.DataBase.*;
 import static Controller.DataBase.allCategories;
 import static Controller.OffAndProductMenuController.*;
+import static Controller.ShowProductDetail.*;
 import static org.junit.Assert.*;
 
 public class OffAndProductMenuControllerTest {
@@ -23,17 +25,17 @@ public class OffAndProductMenuControllerTest {
     static Category shirt = new Category("nike", "", father);
     static Category car = new Category("bmw", "", father);
     static Category child = new Category("child", null, car);
-    static Product a = new Product("phone", "apple", 1000.0, "nothing", phone, null, 1000);
-    static Product b = new Product("plakolang", "iran", 10.0, "nothing", car, null, 0);
-    static Product c = new Product("S9", "samsung", 7000.0, "nothing", phone, null, 1000);
-    static Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", shirt, null, 1000);
-    static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, null, 0);
     static Costumer costumer1 = new Costumer("alim1379", "ali", "mehrabani", "alim1379@gmail.com", 1288888, "alialiali", 0);
     static Costumer costumer2 = new Costumer("alireza_hr", "alireza", "heidari", "alireza@gmail.com", 1777, "alirezaalireza", 0);
     static Costumer costumer3 = new Costumer("hamid_Tala", "hamid", "yaghobi", "yaghobi@gmail.com", 12338, "hamidhamid", 0);
     static Manager manager1 = new Manager("izadiii", "mohammad", "izadi", "izadi@gmail.com", 12, "izadizad");
     static Manager manager2 = new Manager("AbaM", "jj", "abam", "abam@gmail.com", 13, "abamiad");
     static Seller seller1 = new Seller("amiri77", "amir", "amiri", "amiri@gmail.com", 3, "amiri", "amiriI");
+    static Product a = new Product("phone", "apple", 1000.0, "nothing", phone, seller1, 1000);
+    static Product b = new Product("plakolang", "iran", 10.0, "nothing", car, seller1, 0);
+    static Product c = new Product("S9", "samsung", 7000.0, "nothing", phone, seller1, 1000);
+    static Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", shirt, seller1, 1000);
+    static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, seller1, 0);
 
     public void initialise() {
         costumer1.setCredit(1.1);
@@ -178,5 +180,153 @@ public class OffAndProductMenuControllerTest {
         availableFilters.add("Filter by Off");
         availableFilters.add("Filter by Availability");
         assertEquals(availableFilters , getAllAvailableFilters());
+    }
+
+    @Test
+    public void TestGetCurrentPrice(){
+        initialise();
+        sortedOrFilteredProduct.add(a);
+        sortedOrFilteredProduct.add(b);
+        sortedOrFilteredProduct.add(c);
+        sortedOrFilteredProduct.add(d);
+        sortedOrFilteredProduct.add(e);
+        ArrayList<Double> priceExcepted=new ArrayList<Double>();
+        priceExcepted.add( 1000.0);
+        priceExcepted.add( 10.0);
+        priceExcepted.add( 7000.0);
+        priceExcepted.add( 5.0);
+        priceExcepted.add( 500.0);
+        assertEquals(priceExcepted,OffAndProductMenuController.getCurrentPrice());
+
+    }
+
+    @Test
+    public void TestGetCategoriesName(){
+        initialise();
+        ArrayList<String> exceptedCategoriesName=new ArrayList<String>();
+        exceptedCategoriesName.add("xx");
+        exceptedCategoriesName.add("xxlx");
+        Assert.assertEquals(exceptedCategoriesName,OffAndProductMenuController.getCategoriesName());
+    }
+
+    @Test
+    public void TestGetAllAvailableSorting(){
+        initialise();
+        allAvailableSorting.add("view");
+        allAvailableSorting.add("time");
+        allAvailableSorting.add("score");
+        ArrayList<String> exceptedSorting=new ArrayList<String>();
+        exceptedSorting.add("view");
+        exceptedSorting.add("time");
+        exceptedSorting.add("score");
+        Assert.assertEquals(exceptedSorting,OffAndProductMenuController.getAllAvailableSorting());
+    }
+
+    @Test
+    public void TestGetAllSellerOfProductWithId(){
+        initialise();
+        ArrayList<String> excepted=new ArrayList<String>();
+        excepted.add("amiriI");
+        Assert.assertEquals(excepted,OffAndProductMenuController.getAllSellerOfProductWithId(1111));
+    }
+
+    @Test
+    public void TestGetCurrentSort(){
+        OffAndProductMenuController.sorting("time");
+        Assert.assertEquals("Time",OffAndProductMenuController.getCurrentSort());
+    }
+
+    @Test
+    public void TestSorting(){
+        OffAndProductMenuController.sorting("time");
+        Assert.assertEquals("Time",OffAndProductMenuController.getCurrentSort());
+        OffAndProductMenuController.sorting("score");
+        Assert.assertEquals("Score",OffAndProductMenuController.getCurrentSort());
+        OffAndProductMenuController.sorting("view");
+        Assert.assertEquals("View",OffAndProductMenuController.getCurrentSort());
+    }
+
+    @Test
+    public void TestDisableSort(){
+        OffAndProductMenuController.sorting("time");
+        OffAndProductMenuController.disableSort();
+        Assert.assertEquals("",OffAndProductMenuController.getCurrentSort());
+    }
+
+    @Test
+    public void TestAddCommentById(){
+        initialise();
+        OffAndProductMenuController.addCommentsById(1111,"title","content");
+    }
+
+    @Test
+    public void TestAddToCartById(){
+        initialise();
+        OffAndProductMenuController.addToCartById(1111,true,null,1);
+        OffAndProductMenuController.addToCartById(1111,false,"amiriI",1);
+    }
+
+    @Test
+    public void TestCheckRemainCountForBuy(){
+        initialise();
+        OffAndProductMenuController.checkRemainCountForBuy(1111,null,1);
+        OffAndProductMenuController.checkRemainCountForBuy(1111,"amiri77",1);
+        OffAndProductMenuController.checkRemainCountForBuy(1111,"amiri77",10000);
+    }
+
+    @Test
+    public void TestIsCurrentUserGuestOrUser(){
+        Assert.assertTrue(OffAndProductMenuController.isCurrentUserGuestOrUser());
+        Controller.currentUser=seller1;
+        Assert.assertFalse(OffAndProductMenuController.isCurrentUserGuestOrUser());
+    }
+
+    @Test
+    public void TestCheckSortingInput(){
+        Assert.assertTrue(OffAndProductMenuController.checkSortingInput("View"));
+        Assert.assertFalse(OffAndProductMenuController.checkSortingInput("Viewww"));
+    }
+
+    @Test
+    public void TestCheckFilteringByBrand(){
+        initialise();
+        Assert.assertFalse(OffAndProductMenuController.checkFilteringByBrand("apple"));
+        Assert.assertFalse(OffAndProductMenuController.checkFilteringByBrand("bennnz"));
+    }
+
+    @Test
+    public void TestCheckFilteringByCategory(){
+        initialise();
+        Assert.assertFalse(OffAndProductMenuController.checkFilteringByCategory("asdas"));
+        Assert.assertTrue(OffAndProductMenuController.checkFilteringByCategory("xx"));
+    }
+
+    @Test
+    public void TestIsProductWithId(){
+        Assert.assertFalse(OffAndProductMenuController.isProductWithId(1111));
+        initialise();
+        Assert.assertTrue(OffAndProductMenuController.isProductWithId(1111));
+        Assert.assertFalse(OffAndProductMenuController.isProductWithId(11131));
+    }
+
+    @Test
+    public void TestIsSellerWithNameForProduct(){
+        initialise();
+        Assert.assertTrue(OffAndProductMenuController.isSellerWithNameForProduct(1111,"amiriI"));
+        Assert.assertFalse(OffAndProductMenuController.isSellerWithNameForProduct(1111,"asd"));
+    }
+
+    @Test
+    public void TestClearAndRestoreProduct(){
+        initialise();
+        OffAndProductMenuController.clearAndRestoreProduct();
+        Assert.assertEquals(sortedOrFilteredProduct,allProducts);
+    }
+
+    @Test
+    public void TestIncreaseView(){
+        initialise();
+        OffAndProductMenuController.increaseView(1111);
+        Assert.assertEquals(1,a.getNumberOfView());
     }
 }
