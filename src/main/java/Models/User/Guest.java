@@ -13,14 +13,12 @@ public class Guest extends User implements Serializable {
         this.cart = new Cart();
     }
 
-    public void addProductToCart(Product product,Seller seller,int Count){}
+    public void addProductToCart(Product product,Seller seller,int count){
+        cart.addProduct(product, seller, count);
+    }
 
     public Cart getCart() {
         return cart;
-    }
-
-    public void removeProductFromCart(Product product) {
-
     }
 
     @Override

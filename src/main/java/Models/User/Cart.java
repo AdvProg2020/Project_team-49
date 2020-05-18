@@ -16,25 +16,63 @@ public class Cart  implements Serializable {
         this.items = new ArrayList<>();
     }
 
-    public Seller getSellerByProductId(long productId) {
-        for (Product product : products) {
-            if (product.getProductId() == productId) {
-                return sellers.get(products.indexOf(product));
-            }
-        }
-        return null;
-    }
-
     public ArrayList<Product> getProducts() {
         return products;
     }
 
-    public int getItemsByProductId(long productId) {
-        for (Product product : products) {
-            if (product.getProductId() == productId) {
-                return items.get(products.indexOf(product));
+    public ArrayList<Seller> getSellers() {
+        return sellers;
+    }
+
+    public int getItemsByProductId(long productId, Seller seller) {
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getProductId() == productId) {
+                if (sellers.get(i).equals(seller)) {
+                    return items.get(i);
+                }
             }
         }
         return -1;
+    }
+
+    private void addItem(int item, Product product, Seller seller) {
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).equals(product)) {
+                if (sellers.get(i).equals(seller)) {
+                    items.set(i, items.get(i) + item);
+                    return;
+                }
+            }
+        }
+    }
+
+    private void removeItem(Product product, Seller seller) {
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).equals(product)) {
+                if (sellers.get(i).equals(seller)) {
+                    products.remove(i);
+                    sellers.remove(i);
+                    items.remove(i);
+                    return;
+                }
+            }
+        }
+    }
+
+    public void addProduct(Product product, Seller seller, int items) {
+        for (int i = 0; i < this.products.size(); i++) {
+            if (products.get(i).equals(product)) {
+                if (sellers.get(i).equals(seller)) {
+                    addItem(items, product, seller);
+                    if (getItemsByProductId(product.getProductId(), seller) == 0) {
+                        removeItem(product, seller);
+                    }
+                    return;
+                }
+            }
+        }
+        products.add(product);
+        sellers.add(seller);
+        this.items.add(items);
     }
 }

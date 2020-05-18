@@ -28,6 +28,9 @@ public class AddProductRequest extends Request  implements Serializable {
     @Override
     public void run() {
         this.product.setStatus("accepted");
+        if(product.getParentCategory() != null) {
+            product.getParentCategory().addProduct(product);
+        }
         DataBase.addNewProduct(product);
     }
 }

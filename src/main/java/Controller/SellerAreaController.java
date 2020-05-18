@@ -4,6 +4,7 @@ import Models.Log.SellLog;
 import Models.Off;
 import Models.OffStatus;
 import Models.Product;
+import Models.ProductStatus;
 import Models.User.Manager;
 import Models.User.Request.AddOffRequest;
 import Models.User.Request.AddProductRequest;
@@ -161,6 +162,7 @@ public class SellerAreaController {
         } else if (field.toLowerCase().equals("explanation")) {
             Manager.addRequest(new EditProductRequest("explanation", newContent, DataBase.getProductById(productId), (Seller) Controller.currentUser));
         }
+        DataBase.getProductById(productId).setStatus("edit");
         return "request sent";
     }
 

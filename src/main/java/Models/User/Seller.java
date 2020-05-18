@@ -87,6 +87,10 @@ public class Seller extends User implements Serializable {
         return credit;
     }
 
+    public void addCredit(Double credit) {
+        this.credit += credit;
+    }
+
     @Override
     public String getType() {
         return "Seller";

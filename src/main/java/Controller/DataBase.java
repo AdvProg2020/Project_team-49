@@ -42,6 +42,7 @@ public class DataBase {
     static long referenceTime;
     public static long createdProductsCount = 0;
     public static long createdOffsCount = 0;
+    public static long createdLogs = 0;
 
     public static User getUserByUsername(String username) {
         for (User user : allUsers) {
@@ -63,6 +64,11 @@ public class DataBase {
 
     public static void addNewUser(User user) {
         allUsers.add(user);
+    }
+
+    public static long getLogId() {
+        createdLogs++;
+        return createdLogs;
     }
 
     public static void removeUser(String username) {

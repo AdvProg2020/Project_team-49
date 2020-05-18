@@ -84,7 +84,8 @@ public class ViewCart extends Menu {
         return new Menu("Increase Product", this) {
             @Override
             public void run(String lastCommand) {
-                View.printString(CostumerAreaController.IncreaseOrDecreaseProduct(Long.parseLong(lastCommand.split("\\s")[1]), 1));
+                String seller = getSellerUsername();
+                View.printString(CostumerAreaController.IncreaseOrDecreaseProduct(Long.parseLong(lastCommand.split("\\s")[1]), 1, seller));
                 this.parentMenu.run(lastCommand);
             }
         };
@@ -105,7 +106,8 @@ public class ViewCart extends Menu {
         return new Menu("Decrease Product", this) {
             @Override
             public void run(String lastCommand) {
-                View.printString(CostumerAreaController.IncreaseOrDecreaseProduct(Long.parseLong(lastCommand.split("\\s")[1]), -1));
+                String seller = getSellerUsername();
+                View.printString(CostumerAreaController.IncreaseOrDecreaseProduct(Long.parseLong(lastCommand.split("\\s")[1]), -1, seller));
                 this.parentMenu.run(lastCommand);
             }
         };
@@ -127,5 +129,10 @@ public class ViewCart extends Menu {
             return false;
         }
         return true;
+    }
+
+    private String getSellerUsername() {
+        View.printString("enter username of product's seller");
+        return scanner.nextLine().trim();
     }
 }

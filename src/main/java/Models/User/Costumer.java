@@ -51,7 +51,7 @@ public class Costumer extends User implements Serializable {
         return cart;
     }
 
-    public void addCredit(long credit) {
+    public void addCredit(Double credit) {
         this.credit += credit;
     }
 
@@ -69,15 +69,15 @@ public class Costumer extends User implements Serializable {
     }
 
     public void addProductToCart(Product product,Seller seller,int count) {
-
+        cart.addProduct(product, seller, count);
     }
 
     public void addBuyLog(BuyLog buyLog) {
-
+        this.buyHistory.add(buyLog);
     }
 
     public void addDiscountCode(DiscountCode discountCode) {
-
+        this.discountCodes.add(discountCode);
     }
 
     @Override

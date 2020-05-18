@@ -40,10 +40,10 @@ public class ManageCategories extends Menu {
     private void doAddCategory(String category) {
         ArrayList<String> info = new ArrayList<>();
         info.add(category);
-        if (!getMatcher(info.get(0), "\\w+").matches()) {
-            View.printString("invalid name");
-            return;
-        }
+        //if (!getMatcher(info.get(0), "(\\w").matches()) {
+            //View.printString("invalid name");
+            //return;
+        //}
         View.printString("enter special attributes:");
         info.add(scanner.nextLine().trim());
         View.printString("enter parent category (if doesnt have enter null word):");

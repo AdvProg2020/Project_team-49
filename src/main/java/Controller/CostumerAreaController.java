@@ -4,6 +4,7 @@ package Controller;
 import Models.DiscountCode;
 import Models.Log.BuyLog;
 import Models.Log.SellLog;
+import Models.Off;
 import Models.Product;
 import Models.Score;
 import Models.User.Cart;
@@ -33,66 +34,87 @@ public class CostumerAreaController {
     public static ArrayList<String> showProducts() {
         ArrayList<String> products = new ArrayList<>();
         Cart cart = ((Costumer) Controller.currentUser).getCart();
-        for (Product product : cart.getProducts()) {
-            String info = product.getName() + "," + product.getProductId();
-            info += "," + product.getBrand() + "," + product.getPrice(product.getDefaultSeller());
-            info += "," + cart.getItemsByProductId(product.getProductId()) + "," + cart.getSellerByProductId(product.getProductId());
+        for (int i = 0; i < cart.getProducts().size(); i++) {
+            String info = cart.getProducts().get(i).getName() + "," + cart.getProducts().get(i).getProductId();
+            info += "," + cart.getProducts().get(i).getBrand() + "," + cart.getProducts().get(i).getPrice(cart.getProducts().get(i).getDefaultSeller());
+            info += "," + cart.getItemsByProductId(cart.getProducts().get(i).getProductId(), cart.getSellers().get(i)) + "," + cart.getSellers().get(i);
             products.add(info);
         }
         return products;
     }
 
-    public static String IncreaseOrDecreaseProduct(long productId, int count) {
+    public static String IncreaseOrDecreaseProduct(long productId, int count, String sellerUsername) {
         if (DataBase.getProductById(productId) == null) {
             return "product not exist";
         }
-        Cart cart;
-        if (Controller.currentUser.getType().equals("guest")) {
-            cart = ((Guest) Controller.currentUser).getCart();
-        } else {
-            cart = ((Costumer) Controller.currentUser).getCart();
+        if (DataBase.getUserByUsername(sellerUsername) == null) {
+            return "seller not exist in users";
         }
+        if (!DataBase.getUserByUsername(sellerUsername).getType().equals("Seller")) {
+            return "seller not exist in sellers";
+        }
+        Cart cart = ((Costumer) Controller.currentUser).getCart();
         if (!cart.getProducts().contains(DataBase.getProductById(productId))) {
             return "product is not in the cart";
         }
-        Controller.addToCart(DataBase.getProductById(productId), cart.getSellerByProductId(productId), count);
-        if (count == 1) {
-            return "increased";
-        } else {
-            return "decreased";
+        Seller seller = (Seller) DataBase.getUserByUsername(sellerUsername);
+        for (int i = 0; i < cart.getProducts().size(); i++) {
+            if (cart.getSellers().get(i).equals(seller)) {
+                Controller.addToCart(DataBase.getProductById(productId), seller, count);
+                if (count == 1) {
+                    return "increased";
+                } else {
+                    return "decreased";
+                }
+            }
         }
+        return "product is not in the cart for this seller";
     }
 
     //kamel nist
     public static double getTotalPrice() {
-        return 0;
+        Cart cart = ((Costumer) Controller.currentUser).getCart();
+        double totalPrice = 0;
+        for (int i = 0; i < cart.getProducts().size(); i++) {
+            totalPrice += (cart.getProducts().get(i).getPrice(cart.getSellers().get(i)) * cart.getItemsByProductId(cart.getProducts().get(i).getProductId(), cart.getSellers().get(i)));
+        }
+        return totalPrice;
     }
 
     //kamel nist (log ID va off handle nashode va kam shodan credit)
     public static String finishPayment(ArrayList<String> receiverInfo) {
         Costumer costumer = (Costumer) Controller.currentUser;
-        Set<Seller> sellers = new HashSet<>();
         Cart cart = costumer.getCart();
-        for (Product product : cart.getProducts()) {
-            sellers.add(cart.getSellerByProductId(product.getProductId()));
-        }
+        Set<Seller> sellers = new HashSet<>(cart.getSellers());
         int discount = 0;
         if (!receiverInfo.get(2).equals("no")) {
             discount = costumer.getDiscountCodeById(receiverInfo.get(2)).getDiscountPercent();
         }
         for (Seller seller : sellers) {
             double paidAmount = 0;
+            double reducedAmountForOff = 0;
             ArrayList<Product> products = new ArrayList<>();
-            for (Product product : cart.getProducts()) {
-                if (cart.getSellerByProductId(product.getProductId()).equals(seller)) {
-                    paidAmount += (product.getPrice(seller) * cart.getItemsByProductId(product.getProductId()));
-                    products.add(product);
+            for (int i = 0; i < cart.getSellers().size(); i++) {
+                if (cart.getSellers().get(i).equals(seller)) {
+                    paidAmount += (cart.getProducts().get(i).getPrice(seller) * cart.getItemsByProductId(cart.getProducts().get(i).getProductId(), seller));
+                    products.add(cart.getProducts().get(i));
                 }
             }
-            costumer.addBuyLog(new BuyLog(paidAmount * (1 - discount), discount, products, seller.getUsername(), 1, new Date()));
-            seller.addSellLog(new SellLog(paidAmount, 1, products, costumer.getUsername(), 1, new Date()));
+            for (Product product : products) {
+                int offPercent = 0;
+                for (Off off : seller.getOffs()) {
+                    if (off.getProducts().contains(product)) {
+                        offPercent = off.getOffAmount();
+                    }
+                }
+                reducedAmountForOff += (product.getPrice(seller) / (1 - offPercent / 100)) - (product.getPrice(seller));
+            }
+            costumer.addBuyLog(new BuyLog(paidAmount * (1 - discount / 100), discount, products
+                    , seller.getUsername(), DataBase.getLogId(), new Date()));
+            seller.addSellLog(new SellLog(paidAmount, reducedAmountForOff, products, costumer.getUsername(), DataBase.getLogId(), new Date()));
+            seller.addCredit(getTotalPrice());
         }
-        //costumer.addCredit((getTotalPrice() * -1));
+        costumer.addCredit((getTotalPrice() * -1) * (1 - discount / 100));
         costumer.setCart(new Cart());
         return "payment done";
     }
@@ -145,7 +167,7 @@ public class CostumerAreaController {
         return "product rated";
     }
 
-    public static String increaseCredit(long credit) {
+    public static String increaseCredit(Double credit) {
         ((Costumer) Controller.currentUser).addCredit(credit);
         return "credit increased";
     }
