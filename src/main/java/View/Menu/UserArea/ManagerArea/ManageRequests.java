@@ -18,8 +18,8 @@ public class ManageRequests extends Menu {
         ArrayList<String> requests = ManagerAreaController.showRequests();
         View.printString("Requests:");
         for (String request : requests) {
-            View.printString("request Id: " + request.split("\\s")[0]);
-            View.printString("request type: " + request.split("\\s")[1]);
+            View.printString("request Id: " + request.split(",")[0]);
+            View.printString("request type: " + request.split(",")[1]);
             View.printString("________________________________________________");
         }
     }

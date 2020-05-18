@@ -82,15 +82,15 @@ public class SellerArea extends Menu {
                 View.printString("____________________");
                 for (String log : logs) {
                     View.printString("log Id:");
-                    View.printString(log.split("\\s")[0]);
+                    View.printString(log.split(",")[0]);
                     View.printString("log Date:");
-                    View.printString(log.split("\\s")[1]);
+                    View.printString(log.split(",")[1]);
                     View.printString("buyer name:");
-                    View.printString(log.split("\\s")[2]);
+                    View.printString(log.split(",")[2]);
                     View.printString("received amount:");
-                    View.printString(log.split("\\s")[3]);
+                    View.printString(log.split(",")[3]);
                     View.printString("off amount:");
-                    View.printString(log.split("\\s")[4]);
+                    View.printString(log.split(",")[4]);
                     View.printString("____________________");
                 }
                 this.parentMenu.run("");

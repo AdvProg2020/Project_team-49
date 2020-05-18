@@ -124,12 +124,12 @@ public class ViewDiscountCodes extends Menu {
         ArrayList<String> discountCodes = ManagerAreaController.showDiscountCodes();
         View.printString("Discount Codes:");
         for (String discountCode : discountCodes) {
-            View.printString("discount Id: " + discountCode.split("\\s")[0]);
-            View.printString("start time: " + discountCode.split("\\s")[1]);
-            View.printString("end time: " + discountCode.split("\\s")[2]);
-            View.printString("discount percent: " + discountCode.split("\\s")[3]);
-            View.printString("maximum discount amount: " + discountCode.split("\\s")[4]);
-            View.printString("acceptable using times: " + discountCode.split("\\s")[5]);
+            View.printString("discount Id: " + discountCode.split(",")[0]);
+            View.printString("start time: " + discountCode.split(",")[1]);
+            View.printString("end time: " + discountCode.split(",")[2]);
+            View.printString("discount percent: " + discountCode.split(",")[3]);
+            View.printString("maximum discount amount: " + discountCode.split(",")[4]);
+            View.printString("acceptable using times: " + discountCode.split(",")[5]);
             View.printString("______________________________________");
         }
     }

@@ -55,10 +55,10 @@ public class ViewOffs extends Menu {
                 if (answer.equals("off not exist")) {
                     View.printString(answer);
                 } else {
-                    View.printString("off Id: " + answer.split("\\s")[0]);
-                    View.printString("off started at: " + answer.split("\\s")[1]);
-                    View.printString("off ends at: " + answer.split("\\s")[2]);
-                    View.printString("off amount: " + answer.split("\\s")[3]);
+                    View.printString("off Id: " + answer.split(",")[0]);
+                    View.printString("off started at: " + answer.split(",")[1]);
+                    View.printString("off ends at: " + answer.split(",")[2]);
+                    View.printString("off amount: " + answer.split(",")[3]);
                     View.printString("_______________________________________");
                 }
                 this.parentMenu.run(lastCommand);
@@ -110,10 +110,10 @@ public class ViewOffs extends Menu {
         ArrayList<String> offs = SellerAreaController.showOffs();
         View.printString("Offs:");
         for (String off : offs) {
-            View.printString("off Id:" + off.split("\\s")[0]);
-            View.printString("off amount:" + off.split("\\s")[1]);
-            View.printString("start time:" + off.split("\\s")[2]);
-            View.printString("end time:" + off.split("\\s")[3]);
+            View.printString("off Id:" + off.split(",")[0]);
+            View.printString("off amount:" + off.split(",")[1]);
+            View.printString("start time:" + off.split(",")[2]);
+            View.printString("end time:" + off.split(",")[3]);
             View.printString("____________________________________");
         }
     }

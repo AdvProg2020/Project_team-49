@@ -22,15 +22,15 @@ public class ManagerAreaController {
 
     public static String viewUser(String username) {
         User user = DataBase.getUserByUsername(username);
-        String info = username + " ";
-        info += user.getFirstName() + " ";
-        info += user.getLastName() + " ";
-        info += user.getEMail() + " ";
-        info += user.getPhoneNumber() + " ";
+        String info = username + ",";
+        info += user.getFirstName() + ",";
+        info += user.getLastName() + ",";
+        info += user.getEMail() + ",";
+        info += user.getPhoneNumber();
         if (user.getType().equals("Seller")) {
-            info += ((Seller) user).getCompanyName() + " ";
+            info += "," + ((Seller) user).getCompanyName();
         }
-        info += user.getType() + " ";
+        info += "," + user.getType();
         return info;
     }
 
@@ -173,9 +173,9 @@ public class ManagerAreaController {
     public static ArrayList<String> showAllUsers() {
         ArrayList<String> users = new ArrayList<>();
         for (User user : DataBase.allUsers) {
-            String info = user.getUsername() + " " + user.getType();
-            info += " " + user.getFirstName() + " " + user.getLastName();
-            info += " " + user.getEMail() + " " + user.getPhoneNumber();
+            String info = user.getUsername() + "," + user.getType();
+            info += "," + user.getFirstName() + "," + user.getLastName();
+            info += "," + user.getEMail() + "," + user.getPhoneNumber();
             users.add(info);
         }
         return users;
@@ -184,9 +184,9 @@ public class ManagerAreaController {
     public static ArrayList<String> showAllProducts() {
         ArrayList<String> products = new ArrayList<>();
         for (Product product : DataBase.allProducts) {
-            String info = product.getName() + " " + product.getProductId();
-            info += " " + product.getBrand() + " " + product.getPrice(product.getDefaultSeller());
-            info += " " + product.getAverageScore() + " " + product.getExplanation();
+            String info = product.getName() + "," + product.getProductId();
+            info += "," + product.getBrand() + "," + product.getPrice(product.getDefaultSeller());
+            info += "," + product.getAverageScore() + "," + product.getExplanation();
             products.add(info);
         }
         return products;
@@ -196,9 +196,9 @@ public class ManagerAreaController {
     public static ArrayList<String> showDiscountCodes() {
         ArrayList<String> discountCodes = new ArrayList<>();
         for (DiscountCode discountCode : Manager.getAllDiscountCodes()) {
-            String info = discountCode.getDiscountId() + " " + discountCode.getStartDate();
-            info += " " + discountCode.getEndDate() + " " + discountCode.getDiscountPercent();
-            info += " " + discountCode.getMaximumDiscountAmount() + " " + discountCode.getDiscountCount();
+            String info = discountCode.getDiscountId() + "," + discountCode.getStartDate();
+            info += "," + discountCode.getEndDate() + "," + discountCode.getDiscountPercent();
+            info += "," + discountCode.getMaximumDiscountAmount() + "," + discountCode.getDiscountCount();
             discountCodes.add(info);
         }
         return discountCodes;
@@ -227,7 +227,7 @@ public class ManagerAreaController {
     public static ArrayList<String> showRequests() {
         ArrayList<String> requests = new ArrayList<>();
         for (Request request : Manager.getAllActiveRequests()) {
-            String info = request.getRequestId() + " " + request.getType();
+            String info = request.getRequestId() + "," + request.getType();
             requests.add(info);
         }
         return requests;
@@ -241,11 +241,11 @@ public class ManagerAreaController {
     public static ArrayList<String> showCategories() {
         ArrayList<String> categories = new ArrayList<>();
         for (Category category : DataBase.allCategories) {
-            String info = category.getName() + " " + category.getSpecialAttributes();
+            String info = category.getName() + "," + category.getSpecialAttributes();
             if (category.getParentCategory() == null) {
                 info += " null";
             } else {
-                info += " " + category.getParentCategory().getName();
+                info += "," + category.getParentCategory().getName();
             }
             categories.add(info);
         }

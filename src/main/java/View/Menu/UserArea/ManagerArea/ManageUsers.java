@@ -63,13 +63,13 @@ public class ManageUsers extends Menu {
                     View.printString("user not exist");
                 } else {
                     String info = ManagerAreaController.viewUser(command[1]);
-                    View.printString("username: " + info.split("\\s")[0]);
-                    View.printString("first name: " + info.split("\\s")[1]);
-                    View.printString("last name: " + info.split("\\s")[2]);
-                    View.printString("Email: " + info.split("\\s")[3]);
-                    View.printString("phone number: " + info.split("\\s")[4]);
+                    View.printString("username: " + info.split(",")[0]);
+                    View.printString("first name: " + info.split(",")[1]);
+                    View.printString("last name: " + info.split(",")[2]);
+                    View.printString("Email: " + info.split(",")[3]);
+                    View.printString("phone number: " + info.split(",")[4]);
                     if (Controller.getCurrentUserType().equals("Seller")) {
-                        View.printString("company name: " + info.split("\\s")[5]);
+                        View.printString("company name: " + info.split(",")[5]);
                     }
                     View.printString("_________________________________________");
                 }
@@ -140,12 +140,12 @@ public class ManageUsers extends Menu {
         ArrayList<String> users = ManagerAreaController.showAllUsers();
         View.printString("Users:");
         for (String user : users) {
-            View.printString("username: " + user.split("\\s")[0]);
-            View.printString("user type: " + user.split("\\s")[1]);
-            View.printString("first name: " + user.split("\\s")[2]);
-            View.printString("last name: " + user.split("\\s")[3]);
-            View.printString("Email: " + user.split("\\s")[4]);
-            View.printString("phone number: " + user.split("\\s")[5]);
+            View.printString("username: " + user.split(",")[0]);
+            View.printString("user type: " + user.split(",")[1]);
+            View.printString("first name: " + user.split(",")[2]);
+            View.printString("last name: " + user.split(",")[3]);
+            View.printString("Email: " + user.split(",")[4]);
+            View.printString("phone number: " + user.split(",")[5]);
             View.printString("______________________________________");
         }
     }

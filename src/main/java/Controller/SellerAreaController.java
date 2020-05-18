@@ -39,9 +39,9 @@ public class SellerAreaController {
             return "off not exist";
         } else {
             String info = "";
-            info += seller.getOffById(offId).getOffId() + " ";
-            info += seller.getOffById(offId).getStartDate() + " ";
-            info += seller.getOffById(offId).getEndDate() + " ";
+            info += seller.getOffById(offId).getOffId() + ",";
+            info += seller.getOffById(offId).getStartDate() + ",";
+            info += seller.getOffById(offId).getEndDate() + ",";
             info += seller.getOffById(offId).getOffAmount();
             return info;
         }
@@ -106,9 +106,9 @@ public class SellerAreaController {
         Seller seller = (Seller) Controller.currentUser;
         ArrayList<String> products = new ArrayList<>();
         for (Product product : seller.getProductsForSale()) {
-            String info = product.getName() + " " + product.getProductId();
-            info += " " + product.getBrand() + " " + product.getPrice(product.getDefaultSeller());
-            info += " " + product.getAverageScore() + " " + product.getExplanation();
+            String info = product.getName() + "," + product.getProductId();
+            info += "," + product.getBrand() + "," + product.getPrice(product.getDefaultSeller());
+            info += "," + product.getAverageScore() + "," + product.getExplanation();
             products.add(info);
         }
         return products;
@@ -120,10 +120,10 @@ public class SellerAreaController {
         ArrayList<SellLog> salesHistory = seller.getSellHistory();
         ArrayList<String> logs = new ArrayList<>();
         for (SellLog sellLog : salesHistory) {
-            logs.add(sellLog.getLogId() + " " +
-                    sellLog.getLogDate() + " " +
-                    sellLog.getBuyerName() + " " +
-                    sellLog.getReceivedAmount() + " " +
+            logs.add(sellLog.getLogId() + "," +
+                    sellLog.getLogDate() + "," +
+                    sellLog.getBuyerName() + "," +
+                    sellLog.getReceivedAmount() + "," +
                     sellLog.getReducedAmountForOff());
         }
         return logs;
@@ -186,8 +186,8 @@ public class SellerAreaController {
         Seller seller = (Seller) Controller.currentUser;
         ArrayList<String> offs = new ArrayList<>();
         for (Off off : seller.getOffs()) {
-            String info = off.getOffId() + " " + off.getOffAmount();
-            info += " " + off.getStartDate() + " " + off.getEndDate();
+            String info = off.getOffId() + "," + off.getOffAmount();
+            info += "," + off.getStartDate() + "," + off.getEndDate();
             offs.add(info);
         }
         return offs;
@@ -198,9 +198,9 @@ public class SellerAreaController {
             return "product not exist";
         } else {
             String info = DataBase.getProductById(productId).getName();
-            info += " " + DataBase.getProductById(productId).getProductId();
-            info += " " + DataBase.getProductById(productId).getBrand();
-            info += " " + DataBase.getProductById(productId).getExplanation();
+            info += "," + DataBase.getProductById(productId).getProductId();
+            info += "," + DataBase.getProductById(productId).getBrand();
+            info += "," + DataBase.getProductById(productId).getExplanation();
             return info;
         }
     }
