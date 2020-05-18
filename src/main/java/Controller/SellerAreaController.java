@@ -21,14 +21,17 @@ import java.util.Locale;
 
 public class SellerAreaController {
 
-    //check beshe
     public static String removeProduct(long productId) {
         if (DataBase.getProductById(productId) == null) {
             return "product not exist";
         } else {
             Seller seller = (Seller) Controller.currentUser;
-            seller.removeProduct(productId);
-            DataBase.removeProduct(productId);
+            if (DataBase.getProductById(productId).getAllSellers().size() == 1) {
+                DataBase.removeProduct(productId);
+            } else {
+                seller.removeProduct(productId);
+                DataBase.getProductById(productId).removeSeller(seller);
+            }
             return "product removed";
         }
     }
@@ -36,13 +39,14 @@ public class SellerAreaController {
     //parameter ha ro mishe bishtear kard
     public static String viewOff(long offId) {
         Seller seller = (Seller) Controller.currentUser;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         if (seller.getOffById(offId) == null) {
             return "off not exist";
         } else {
             String info = "";
             info += seller.getOffById(offId).getOffId() + ",";
-            info += seller.getOffById(offId).getStartDate() + ",";
-            info += seller.getOffById(offId).getEndDate() + ",";
+            info += formatter.format(seller.getOffById(offId).getStartDate()) + ",";
+            info += formatter.format(seller.getOffById(offId).getEndDate()) + ",";
             info += seller.getOffById(offId).getOffAmount();
             return info;
         }
@@ -121,11 +125,12 @@ public class SellerAreaController {
     //logs mitone kamel tar beshe
     public static ArrayList<String> viewSalesHistory() {
         Seller seller = (Seller) Controller.currentUser;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         ArrayList<SellLog> salesHistory = seller.getSellHistory();
         ArrayList<String> logs = new ArrayList<>();
         for (SellLog sellLog : salesHistory) {
             logs.add(sellLog.getLogId() + "," +
-                    sellLog.getLogDate() + "," +
+                    formatter.format(sellLog.getLogDate()) + "," +
                     sellLog.getBuyerName() + "," +
                     sellLog.getReceivedAmount() + "," +
                     sellLog.getReducedAmountForOff());
@@ -166,7 +171,6 @@ public class SellerAreaController {
         return "request sent";
     }
 
-    //halate vojod dashtan product dar nazar gerefte nashode
     public static String addProduct(ArrayList<String> productInfo) {
         if (!productInfo.get(2).matches("(\\d+)(\\.?)(\\d*)")) {
             return "invalid price";
@@ -189,10 +193,11 @@ public class SellerAreaController {
     //check parameters
     public static ArrayList<String> showOffs() {
         Seller seller = (Seller) Controller.currentUser;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         ArrayList<String> offs = new ArrayList<>();
         for (Off off : seller.getOffs()) {
             String info = off.getOffId() + "," + off.getOffAmount();
-            info += "," + off.getStartDate() + "," + off.getEndDate();
+            info += "," + formatter.format(off.getStartDate()) + "," + formatter.format(off.getEndDate());
             offs.add(info);
         }
         return offs;
