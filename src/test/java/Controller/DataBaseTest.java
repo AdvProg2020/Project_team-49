@@ -203,17 +203,17 @@ public class DataBaseTest {
         saveAllProducts();
         allProducts.clear();
         loadAllProducts();
-//        assertEquals(allProducts.size(), 5);
-//        assertEquals("phone", allProducts.get(0).getName());
-//        allProducts.clear();
-//        loadAllProducts();
-//        loadAllProducts();
-//        assertEquals(allProducts.get(4).getBrand(), "LMV");
-//        assertEquals(5, allProducts.size());
-//        allProducts.clear();
-//        saveAllProducts();
-//        loadAllProducts();
-//        assertEquals(0, allProducts.size());
+        assertEquals(allProducts.size(), 5);
+        assertEquals("phone", allProducts.get(0).getName());
+        allProducts.clear();
+        loadAllProducts();
+        loadAllProducts();
+        assertEquals(allProducts.get(4).getBrand(), "LMV");
+        assertEquals(5, allProducts.size());
+        allProducts.clear();
+        saveAllProducts();
+        loadAllProducts();
+        assertEquals(0, allProducts.size());
     }
 
     @Test
