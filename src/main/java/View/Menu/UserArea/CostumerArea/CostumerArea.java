@@ -118,9 +118,12 @@ public class CostumerArea extends Menu {
 
     public void showSpecifications() {
         String[] info = Controller.getCurrentUserSpecifications().split(",");
-        for (int i = 0; i < info.length - 1; i++) {
-            View.printString(info[i]);
-        }
+        View.printString("username: " + info[0]);
+        View.printString("first name: " + info[1]);
+        View.printString("last name: " + info[2]);
+        View.printString("Email: " + info[3]);
+        View.printString("phone number: " + info[4]);
+        View.printString("___________________________________________");
     }
 
     @Override

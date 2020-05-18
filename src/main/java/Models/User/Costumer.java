@@ -14,12 +14,12 @@ public class Costumer extends User implements Serializable {
     private ArrayList<DiscountCode> discountCodes;
     private double credit;
 
-    public Costumer(String username, String firstName, String lastName, String eMail, long phoneNumber, String password) {
+    public Costumer(String username, String firstName, String lastName, String eMail, long phoneNumber, String password, double credit) {
         super(username, firstName, lastName, eMail, phoneNumber, password);
         this.cart = new Cart();
         this.buyHistory = new ArrayList<BuyLog>();
         this.discountCodes = new ArrayList<DiscountCode>();
-        this.credit = 0;
+        this.credit = credit;
     }
 
     public ArrayList<DiscountCode> getDiscountCodes() {
