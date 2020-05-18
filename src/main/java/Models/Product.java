@@ -221,7 +221,6 @@ public class Product implements Serializable {
         return doesItHaveOff;
     }
 
-
     public void setDiscountCode(DiscountCode discountCode) {
         this.discountCode = discountCode;
     }
@@ -245,7 +244,6 @@ public class Product implements Serializable {
     public boolean getDoesItHaveDiscount() {
         return doesItHaveDiscount;
     }
-
 
     public void setNumberOfView(int numberOfView) {
         this.numberOfView = numberOfView;
@@ -282,6 +280,10 @@ public class Product implements Serializable {
             allSellerName.add(seller.getCompanyName());
         }
         return allSellerName;
+    }
+
+    public ArrayList<Double> getAllSellerPrice(){
+        return price;
     }
 }
 

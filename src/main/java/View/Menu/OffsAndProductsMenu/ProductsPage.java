@@ -2,6 +2,7 @@ package View.Menu.OffsAndProductsMenu;
 
 import Controller.Controller;
 import Controller.OffAndProductMenuController;
+import Controller.DataBase;
 import View.Menu.Menu;
 import View.Menu.UserArea.UserArea;
 import View.View;
@@ -19,6 +20,7 @@ public class ProductsPage extends Menu {
         subMenus.put("Sorting", new Sorting(this));
         subMenus.put("Show Product", new ShowProduct(this));
         subMenus.put("Restore All",restoreAll());
+        subMenus.put("Exit",exit());
         subMenus.put("Log In",new UserArea(this));
         subMenus.put("Log Out",getLogout());
         //bara show Product bayad havasam bashe commond ba id pass bedam
@@ -98,6 +100,15 @@ public class ProductsPage extends Menu {
             public void run(String lastCommand) {
                 OffAndProductMenuController.clearAndRestoreProduct();
                 this.run(lastCommand);
+            }
+        };
+    }
+
+    private Menu exit(){
+        return new Menu("Exit",this) {
+            @Override
+            public void run(String lastCommand) {
+                DataBase.endProgram();
             }
         };
     }

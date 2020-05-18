@@ -19,6 +19,7 @@ public class Comment  implements Serializable {
         this.userWhoComment = user;
         this.product = product;
         this.note = note;
+        this.title=title;
         this.isUserBuyThisProduct = isUserBuyThisProduct();
     }
 
@@ -33,6 +34,8 @@ public class Comment  implements Serializable {
     public String getNote() {
         return note;
     }
+
+    public String getTitle(){return title;}
 
     public boolean isUserBuyThisProduct() {
         return isUserBuyThisProduct;

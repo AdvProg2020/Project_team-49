@@ -185,4 +185,12 @@ public class OffAndProductMenuController {
         sortedOrFilteredProduct.clear();
         sortedOrFilteredProduct.addAll(allProducts);
     }
+
+    public static void increaseView(long productId){
+        for (Product product : allProducts) {
+            if (product.getProductId()==productId){
+                product.setNumberOfView(product.getNumberOfView()+1);
+            }
+        }
+    }
 }
