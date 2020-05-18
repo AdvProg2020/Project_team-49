@@ -62,10 +62,6 @@ public class ManagerArea extends Menu {
                 ArrayList<String> info = getDiscountCodeInfo();
                 if (!getMatcher(info.get(0), "\\w+").matches()) {
                     View.printString("invalid Id");
-                } else if (!getMatcher(info.get(1), "dd/MM/yyyy HH:mm:ss").matches()) {
-                    View.printString("invalid start time");
-                } else if (!getMatcher(info.get(2), "dd/MM/yyyy HH:mm:ss").matches()) {
-                    View.printString("invalid end time");
                 } else if (!getMatcher(info.get(3), "\\d+").matches()) {
                     View.printString("invalid percentage");
                 } else if (!getMatcher(info.get(4), "\\d+").matches()) {

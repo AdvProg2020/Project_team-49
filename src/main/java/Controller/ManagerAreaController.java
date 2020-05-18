@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class ManagerAreaController {
 
@@ -59,12 +60,12 @@ public class ManagerAreaController {
         Date dateS;
         Date dateE;
         try {
-            dateS = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(info.get(1));
-            dateE = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(info.get(2));
+            dateS = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(info.get(1));
+            dateE = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(info.get(2));
         } catch (Exception ParseException) {
             return "invalid start date";
         }
-        DiscountCode.addDiscountCode(new DiscountCode(info.get(0),
+        DataBase.addDiscountCode(new DiscountCode(info.get(0),
                 dateS,
                 dateE,
                 Integer.parseInt(info.get(3)),

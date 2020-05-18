@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class SellerAreaController {
 
@@ -88,7 +89,7 @@ public class SellerAreaController {
         }
         Date date;
         try {
-            date = new SimpleDateFormat("date structure").parse(info.get(1));
+            date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(info.get(1));
         } catch (Exception ParseException) {
             return "invalid end date";
         }
