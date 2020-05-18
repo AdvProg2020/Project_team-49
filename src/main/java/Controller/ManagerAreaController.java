@@ -134,7 +134,7 @@ public class ManagerAreaController {
     public static String addCategory(ArrayList<String> info) {
         if (DataBase.getCategoryByName(info.get(0)) != null) {
             return "category exist with this name";
-        } else if ((!info.get(2).matches("(?i)null")) && (DataBase.getCategoryByName(info.get(0)) == null)) {
+        } else if ((!info.get(2).matches("(?i)null")) && (DataBase.getCategoryByName(info.get(2)) == null)) {
             return "invalid parent category";
         } else if (info.get(2).matches("(?i)null")) {
             DataBase.addCategory(new Category(info.get(0), info.get(1), null));
@@ -243,7 +243,7 @@ public class ManagerAreaController {
         for (Category category : DataBase.allCategories) {
             String info = category.getName() + "," + category.getSpecialAttributes();
             if (category.getParentCategory() == null) {
-                info += " null";
+                info += ",null";
             } else {
                 info += "," + category.getParentCategory().getName();
             }

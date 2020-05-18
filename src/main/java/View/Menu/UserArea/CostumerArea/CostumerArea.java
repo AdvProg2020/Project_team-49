@@ -117,7 +117,7 @@ public class CostumerArea extends Menu {
     }
 
     public void showSpecifications() {
-        String[] info = Controller.getCurrentUserSpecifications().split("\\s");
+        String[] info = Controller.getCurrentUserSpecifications().split(",");
         for (int i = 0; i < info.length - 1; i++) {
             View.printString(info[i]);
         }
