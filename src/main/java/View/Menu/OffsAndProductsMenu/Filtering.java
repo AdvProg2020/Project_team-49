@@ -90,11 +90,11 @@ public class Filtering extends Menu {
                         Filter.disableCategoryFilter();
                         break;
                     }
-                    if (type.equalsIgnoreCase("AgainPlease")){
+                    if (type.equalsIgnoreCase("AgainPlease")) {
                         View.printCurrentFilter(Filter.showCurrentFilters());
                         continue;
                     }
-                    if (type.equalsIgnoreCase("Back")){
+                    if (type.equalsIgnoreCase("Back")) {
                         this.run(lastCommand);
                     }
                     View.printString("Please Enter Valid Filter\n" +
@@ -140,7 +140,7 @@ public class Filtering extends Menu {
                 this.parentMenu.run(lastCommand);
             }
 
-            if (command.equalsIgnoreCase("Exit")){
+            if (command.equalsIgnoreCase("Exit")) {
                 DataBase.endProgram();
             }
 
@@ -155,7 +155,9 @@ public class Filtering extends Menu {
             public void run(String lastCommand) {
                 View.printString("Type Your Name For Filter");
                 String nameForFilter = scanner.nextLine().trim();
-                Filter.filterByName(nameForFilter);
+                Filter.setIsItFilteredByName(true);
+                Filter.setName(nameForFilter);
+                Filter.filter();
 
                 View.printFilteredProduct(OffAndProductMenuController.getCurrentId(),
                         OffAndProductMenuController.getCurrentName(),
@@ -177,17 +179,17 @@ public class Filtering extends Menu {
                 while (true) {
                     View.printString("Type Min Price:");
                     String minPriceString = scanner.nextLine();
-                    if (minPriceString.trim().equalsIgnoreCase("Back")){
+                    if (minPriceString.trim().equalsIgnoreCase("Back")) {
                         parentMenu.run(lastCommand);
                     }
-                    if (minPriceString.matches("^(-|)\\d+$")){
-                        if (Double.parseDouble(minPriceString)<0){
+                    if (minPriceString.matches("^(-|)\\d+$")) {
+                        if (Double.parseDouble(minPriceString) < 0) {
                             View.printString("HA HA That Was SOO FUNNY\n" +
                                     "Now Enter Sth More Than Zero!\n" +
                                     "You Can even Go Back By Typing (Back)");
                             continue;
                         }
-                        minPrice=Double.parseDouble(minPriceString);
+                        minPrice = Double.parseDouble(minPriceString);
                         break;
                     }
                     View.printString("Really?!\n" +
@@ -196,22 +198,22 @@ public class Filtering extends Menu {
                 while (true) {
                     View.printString("Type Max Price:");
                     String maxPriceString = scanner.nextLine();
-                    if (maxPriceString.trim().equalsIgnoreCase("Back")){
+                    if (maxPriceString.trim().equalsIgnoreCase("Back")) {
                         parentMenu.run(lastCommand);
                     }
-                    if (maxPriceString.trim().equalsIgnoreCase("MinPrice")){
+                    if (maxPriceString.trim().equalsIgnoreCase("MinPrice")) {
                         this.run(lastCommand);
                     }
-                    if (maxPriceString.matches("^(-|)\\d+$")){
-                        if (Double.parseDouble(maxPriceString)<0){
+                    if (maxPriceString.matches("^(-|)\\d+$")) {
+                        if (Double.parseDouble(maxPriceString) < 0) {
                             View.printString("HA HA That Was SOO FUNNY\n" +
                                     "Now Enter Sth More Than Zero!\n" +
                                     "Or You Can Type (MinPrice) To Enter MinPrice Again.\n" +
                                     "You Can Even Go Back By Typing (Back)");
                             continue;
                         }
-                        maxPrice=Double.parseDouble(maxPriceString);
-                        if (maxPrice<minPrice){
+                        maxPrice = Double.parseDouble(maxPriceString);
+                        if (maxPrice < minPrice) {
                             View.printString("Oh What Just Happen?! Your Max Price Is Smaller Than Min Price!\n" +
                                     "Please Enter Max Price Again Or You Can Type (MinPrice) To Enter MinPrice Again.\n" +
                                     "You Can Even Go Back By Typing (Back)");
@@ -223,7 +225,10 @@ public class Filtering extends Menu {
                             "please Insert Number.You Can even Go Back By Typing (Back)\n" +
                             "You Can Type (MinPrice) To Enter MinPrice Again!");
                 }
-                Filter.filterByPrice(minPrice, maxPrice);
+                Filter.setIsItFilteredByPrice(true);
+                Filter.setMinPrice(minPrice);
+                Filter.setMaxPrice(maxPrice);
+                Filter.filter();
 
                 View.printFilteredProduct(OffAndProductMenuController.getCurrentId(),
                         OffAndProductMenuController.getCurrentName(),
@@ -240,25 +245,27 @@ public class Filtering extends Menu {
         return new Menu("FilterByBrand", this) {
             @Override
             public void run(String lastCommand) {
-                View.printAvailableBrand(Filter.getAvailableBrands());
+                View.printAvailableBrand(Filter.updateAvailableBrands());
                 String brandForFilter;
-                while (true){
+                while (true) {
                     brandForFilter = scanner.nextLine();
-                    if (brandForFilter.trim().equalsIgnoreCase("back")){
+                    if (brandForFilter.trim().equalsIgnoreCase("back")) {
                         parentMenu.run(lastCommand);
                     }
-                    if (brandForFilter.trim().equalsIgnoreCase("AgainPlease")){
+                    if (brandForFilter.trim().equalsIgnoreCase("AgainPlease")) {
                         View.printAvailableBrand(Filter.getAvailableBrands());
                         continue;
                     }
-                    if (!OffAndProductMenuController.checkFilteringByBrand(brandForFilter)){
+                    if (!OffAndProductMenuController.checkFilteringByBrand(brandForFilter)) {
                         View.printString("Please Enter Valid Brand\n" +
                                 "You Can even Go Back By Type (Back) Or Check Available Brand By Type (AgainPlease)");
                         continue;
                     }
                     break;
                 }
-                Filter.filterByBrand(brandForFilter);
+                Filter.setIsItFilteredByBrand(true);
+                Filter.addBrand(brandForFilter);
+                Filter.filter();
 
                 View.printFilteredProduct(OffAndProductMenuController.getCurrentId(),
                         OffAndProductMenuController.getCurrentName(),
@@ -275,7 +282,10 @@ public class Filtering extends Menu {
         return new Menu("FilterByAvailability", this) {
             @Override
             public void run(String lastCommand) {
-                Filter.filterByAvailability();
+
+                Filter.setIsItFilteredByAvailability(true);
+                Filter.filter();
+
                 View.printFilteredProduct(OffAndProductMenuController.getCurrentId(),
                         OffAndProductMenuController.getCurrentName(),
                         OffAndProductMenuController.getCurrentPrice(),
@@ -291,7 +301,8 @@ public class Filtering extends Menu {
         return new Menu("FilterByOff", this) {
             @Override
             public void run(String lastCommand) {
-                Filter.filterByOffs();
+                Filter.setIsItFilteredByOffs(true);
+                Filter.filter();
                 View.printFilteredProduct(OffAndProductMenuController.getCurrentId(),
                         OffAndProductMenuController.getCurrentName(),
                         OffAndProductMenuController.getCurrentPrice(),
@@ -309,24 +320,26 @@ public class Filtering extends Menu {
             public void run(String lastCommand) {
                 View.printCategories(Filter.showSubCategories());
                 String categoryForFilter;
-                while (true){
+                while (true) {
                     View.printString("Please Type One Of Category");
                     categoryForFilter = scanner.nextLine();
-                    if (categoryForFilter.trim().equalsIgnoreCase("Back")){
+                    if (categoryForFilter.trim().equalsIgnoreCase("Back")) {
                         parentMenu.run(lastCommand);
                     }
-                    if (categoryForFilter.trim().equalsIgnoreCase("AgainPlease")){
+                    if (categoryForFilter.trim().equalsIgnoreCase("AgainPlease")) {
                         View.printCategories(Filter.showSubCategories());
                         continue;
                     }
-                    if (!OffAndProductMenuController.checkFilteringByCategory(categoryForFilter)){
+                    if (!OffAndProductMenuController.checkFilteringByCategory(categoryForFilter)) {
                         View.printString("Please Enter Valid Category\n" +
                                 "You Can even Go Back By Type (Back) Or Check Available Brand By Type (AgainPlease)");
                         continue;
                     }
                     break;
                 }
-                Filter.filterByCategory(categoryForFilter);
+                Filter.setIsItFilteredByCategory(true);
+                Filter.setCategoryName(categoryForFilter);
+                Filter.filter();
 
                 View.printFilteredProduct(OffAndProductMenuController.getCurrentId(),
                         OffAndProductMenuController.getCurrentName(),

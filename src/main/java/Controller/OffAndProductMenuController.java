@@ -124,6 +124,7 @@ public class OffAndProductMenuController {
         return false;
     }
     public static boolean checkFilteringByBrand(String brand){
+        Filter.updateAvailableBrands();
         for (String availableBrand : Filter.getAvailableBrands()) {
             if (availableBrand.equalsIgnoreCase(brand)){
                 return true;

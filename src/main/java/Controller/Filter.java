@@ -119,6 +119,14 @@ public class Filter {
         }
         selectedBrands.add(brand);
     }
+    public static void addBrandToAvailableBrands(String brand) {
+        for (String availableBrand : availableBrands) {
+            if (availableBrand.toLowerCase().equals(brand.toLowerCase())) {
+                return;
+            }
+        }
+        availableBrands.add(brand);
+    }
 
     public static void filterByName(String name) {
         setName(name);
@@ -161,8 +169,6 @@ public class Filter {
         temp.clear();
         return;
     }
-
-
 
     public static void filterByPrice(double minPrice, double maxPrice) {
         setMaxPrice(maxPrice);
@@ -359,6 +365,7 @@ public class Filter {
         for (Product product : DataBase.allProducts) {
             DataBase.sortedOrFilteredProduct.add(product);
         }
+
         if (isItFilteredByName)
             filterByName(productName);
         if (isItFilteredByBrand) {
@@ -378,8 +385,20 @@ public class Filter {
 
     public static ArrayList<String> updateAvailableBrands() {
         availableBrands.clear();
-        for (Product product : DataBase.sortedOrFilteredProduct) {
-            availableBrands.add(product.getBrand());
+        if(categoryName.equals("")){
+            for (Product product : DataBase.allProducts) {
+                addBrandToAvailableBrands(product.getBrand());
+            }
+            return availableBrands;
+        }
+
+        for (Product product : DataBase.allProducts) {
+            if(product.getParentCategory() == null){
+                addBrandToAvailableBrands(product.getBrand());
+                continue;
+            }
+            if(DataBase.isProductInThisCategory(categoryName,product))
+                addBrandToAvailableBrands(product.getBrand());
         }
         return availableBrands;
     }
