@@ -55,7 +55,7 @@ public class Seller extends User implements Serializable {
     }
 
     public void addProduct(Product product) {
-
+        this.productsForSale.add(product);
     }
 
     public void removeProduct(long productId) {
@@ -68,7 +68,7 @@ public class Seller extends User implements Serializable {
     }
 
     public void addOff(Off off) {
-
+        this.offs.add(off);
     }
 
     public void setCompanyName(String companyName) {

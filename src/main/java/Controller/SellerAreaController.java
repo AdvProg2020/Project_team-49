@@ -71,7 +71,7 @@ public class SellerAreaController {
         ArrayList<Product> products = new ArrayList<>();
         for (String Id : info.get(0).split("\\s")) {
             if (!Id.matches("\\d+")) {
-                return "invalid Id";
+                return "invalid product Id";
             }
             if (seller.getProductById(Long.parseLong(Id)) == null) {
                 return "product not exist";
