@@ -31,6 +31,8 @@ public class EditOffRequest extends Request  implements Serializable {
 
     @Override
     public void run() {
-
+        if (field.equalsIgnoreCase("amount")) {
+            off.setOffAmount(Integer.parseInt(newContent));
+        }
     }
 }

@@ -25,7 +25,7 @@ public class Product implements Serializable {
 
     private Off off;
     private boolean doesItHaveOff;
-    private double offPercentage;
+    private int offPercentage;
 
     private DiscountCode discountCode;
     private boolean doesItHaveDiscount;
@@ -199,7 +199,7 @@ public class Product implements Serializable {
         }
     }
 
-    public void setOffPercentage(double discountPercentage) {
+    public void setOffPercentage(int discountPercentage) {
         this.offPercentage = discountPercentage;
     }
 
