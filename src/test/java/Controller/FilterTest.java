@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import javax.lang.model.type.ArrayType;
+import javax.swing.*;
 import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -15,8 +16,7 @@ import java.util.Date;
 import static Controller.Filter.*;
 import static Controller.DataBase.*;
 import static Controller.Sort.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class FilterTest {
     static ArrayList<Product> temp = new ArrayList<>();
@@ -31,6 +31,7 @@ public class FilterTest {
     static Product b = new Product("plakolang", "iran", 10.0, "nothing", car, null, 0);
     static Product c = new Product("S9", "samsung", 7000.0, "nothing", phone, null, 1000);
     static Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", shirt, null, 1000);
+    static Product ff = new Product("GLX", "GLX", 5.0, "nothing", null, null, 1000);
     static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, null, 0);
 
     public void initialise() {
@@ -145,16 +146,28 @@ public class FilterTest {
     @Test
     public void TestGetAvailableBrands() {
         addProductsToList(allProducts);
+        allProducts.add(ff);
         addProductsToList(sortedOrFilteredProduct);
         sortedOrFilteredProduct.remove(a);
         sortedOrFilteredProduct.remove(b);
+        setCategoryName("");
         ArrayList<String> expected = new ArrayList<>();
         expected.add("apple");
         expected.add("iran");
+        expected.add("samsung");
+        expected.add("nikooTanPoosh");
         expected.add("LMV");
+        expected.add("GLX");
         updateAvailableBrands();
+        addBrandToAvailableBrands("apple");
         assertEquals(expected, getAvailableBrands());
-
+        setCategoryName("xx");
+        updateAvailableBrands();
+        expected.clear();
+        expected.add("apple");
+        expected.add("samsung");
+        expected.add("GLX");
+        assertEquals(expected , getAvailableBrands());
     }
 
     @Test
@@ -181,7 +194,6 @@ public class FilterTest {
         expected.add(b);
         filterByName("P");
         assertEquals(expected, sortedOrFilteredProduct);
-
     }
 
     @Test
@@ -405,6 +417,9 @@ public class FilterTest {
         disableBrandFilter("apple");
         expected.remove("apple");
         assertEquals(expected, getSelectedBrands());
+        disableBrandFilter("iran");
+        assertFalse(isIsItFilteredByBrand());
+
     }
 
     @Test

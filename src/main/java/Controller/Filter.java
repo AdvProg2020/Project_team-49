@@ -5,6 +5,7 @@ import Models.Product;
 
 import javax.xml.crypto.Data;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Filter {
 
@@ -14,14 +15,16 @@ public class Filter {
     private static boolean isItFilteredByAvailability = false;
     private static boolean isItFilteredByBrand = false;
     private static boolean isItFilteredByOffs = false;
-    private static ArrayList<String> selectedBrands = new ArrayList<String>();
+
     private static double minPrice = -1;
     private static double maxPrice = -1;
     private static String productName = "";
     private static String categoryName = "";
+
     private static ArrayList<String> availableBrands = new ArrayList<>();
     private static ArrayList<String> currentFilters = new ArrayList<>();
-
+    private static ArrayList<String> availableCategories = new ArrayList<>();
+    private static ArrayList<String> selectedBrands = new ArrayList<String>();
 
     public static boolean isIsItFilteredByName() {
         return isItFilteredByName;
@@ -64,6 +67,7 @@ public class Filter {
     }
 
     public static ArrayList<String> getAvailableBrands() {
+        updateAvailableBrands();
         return availableBrands;
     }
 
@@ -113,12 +117,12 @@ public class Filter {
 
     public static void addBrand(String brand) {
         for (String selectedBrand : selectedBrands) {
-            if (selectedBrand.toLowerCase().equals(brand.toLowerCase())) {
+            if (selectedBrand.toLowerCase().equals(brand.toLowerCase()))
                 return;
-            }
         }
         selectedBrands.add(brand);
     }
+
     public static void addBrandToAvailableBrands(String brand) {
         for (String availableBrand : availableBrands) {
             if (availableBrand.toLowerCase().equals(brand.toLowerCase())) {
@@ -133,7 +137,6 @@ public class Filter {
         isItFilteredByName = true;
         if (DataBase.sortedOrFilteredProduct.size() == 0)
             return;
-
         ArrayList<Product> temp = new ArrayList<Product>();
         for (Product product : DataBase.sortedOrFilteredProduct) {
             if (!product.getName().toLowerCase().startsWith(name.toLowerCase())) {
@@ -155,11 +158,10 @@ public class Filter {
         isItFilteredByCategory = true;
         ArrayList<Product> temp = new ArrayList<Product>();
         for (Product product : DataBase.sortedOrFilteredProduct) {
-            if(!DataBase.isProductInThisCategory(categoryName , product)){
+            if (!DataBase.isProductInThisCategory(categoryName, product)) {
                 temp.add(product);
             }
         }
-
         if (temp.size() == 0)
             return;
 
@@ -191,7 +193,6 @@ public class Filter {
         temp.clear();
         return;
     }
-
 
 
     public static void filterByAvailability() {
@@ -271,7 +272,7 @@ public class Filter {
     }
 
     public static ArrayList<String> showCurrentFilters() {
-       currentFilters.clear();
+        currentFilters.clear();
         if (isItFilteredByAvailability)
             currentFilters.add("Availability filter is on");
         if (isItFilteredByBrand)
@@ -284,9 +285,8 @@ public class Filter {
             currentFilters.add("Price filter is on");
         if (isItFilteredByOffs)
             currentFilters.add("Off filter is on");
-        if (currentFilters.size() == 0) {
+        if (currentFilters.size() == 0)
             currentFilters.add("there are no filters on");
-        }
         return currentFilters;
     }
 
@@ -321,7 +321,7 @@ public class Filter {
 
     public static void disableBrandFilter(String brand) {
         int i = -10;
-        if(selectedBrands.size() == 0) {
+        if (selectedBrands.size() == 0) {
             isItFilteredByBrand = false;
             return;
         }
@@ -331,12 +331,12 @@ public class Filter {
                 break;
             }
         }
-        if(i == -10)
+        if (i == -10)
             return;
         selectedBrands.remove(i);
-        if (selectedBrands.size() == 0) {
+        if (selectedBrands.size() == 0)
             isItFilteredByBrand = false;
-        }
+
         filter();
     }
 
@@ -385,42 +385,37 @@ public class Filter {
 
     public static ArrayList<String> updateAvailableBrands() {
         availableBrands.clear();
-        if(categoryName.equals("")){
+        if (categoryName.equals("")) {
             for (Product product : DataBase.allProducts) {
                 addBrandToAvailableBrands(product.getBrand());
             }
             return availableBrands;
         }
-
         for (Product product : DataBase.allProducts) {
-            if(product.getParentCategory() == null){
+            if (product.getParentCategory() == null) {
                 addBrandToAvailableBrands(product.getBrand());
                 continue;
             }
-            if(DataBase.isProductInThisCategory(categoryName,product))
+            if (DataBase.isProductInThisCategory(categoryName, product))
                 addBrandToAvailableBrands(product.getBrand());
         }
         return availableBrands;
     }
 
-    public static ArrayList<String> showSubCategories(){
-        ArrayList<String> subCategories = new ArrayList<>();
-
-        for (Category category : DataBase.allCategories) {
-            if(category.getName().toLowerCase().equals(categoryName.toLowerCase())){
-                for (Category subCategory : category.getSubCategories()) {
-                    subCategories.add(subCategory.getName());
-                }
-            }
-        }
-        if(subCategories.size() == 0 && categoryName.equals("")){
+    public static ArrayList<String> showSubCategories() {
+        availableCategories.clear();
+        if (categoryName.equals("")) {
             for (Category category : DataBase.allCategories) {
-                if(category.getParentCategory() == null){
-                    subCategories.add(category.getName());
+                if (category.getParentCategory() == null) {
+                    availableCategories.add(category.getName());
                 }
             }
+            return availableCategories;
         }
-        return subCategories;
+        Category category = DataBase.getCategoryByName(categoryName);
+        for (Category subCategory : category.getSubCategories()) {
+            availableCategories.add(subCategory.getName());
+        }
+        return availableCategories;
     }
-
 }
