@@ -216,8 +216,6 @@ public class ControllerTest {
         editField("password", "123");
         assertTrue(Controller.isPasswordCorrect("123", "amiri77"));
     }
-
-
 }
 
 
