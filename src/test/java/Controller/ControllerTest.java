@@ -151,6 +151,7 @@ public class ControllerTest {
 
     @Test
     public void TestGetHasHeadManager() {
+        Controller controller;
         setHasHeadManager(true);
         assertTrue(getHasHeadManager());
         setHasHeadManager(false);
@@ -159,25 +160,28 @@ public class ControllerTest {
 
     @Test
     public void TestCreateAccount() {
-//        // we should edit return content of this method
-//        String type = "costumer";
-//        ArrayList<String> infos = new ArrayList<>();
-//        infos.add("alirezahr79");
-//        infos.add("alireza");
-//        infos.add("yaghobi");
-//        infos.add("heidari@gmail.com");
-//        infos.add("9123");
-//        infos.add("8d d55");
-//        assertEquals("invalid password", createAccount(infos, type));
-//        infos.set(1, "aaa");
-//        assertEquals("invalid phone number", createAccount(infos, type));
-//        infos.set(5, "4332434");
-//        assertEquals("account created", createAccount(infos, type));
-//        type = "manager";
-//        assertEquals("account created", createAccount(infos, type));
-//        type = "seller";
-//        infos.add("nike");
-//        assertEquals("account created", createAccount(infos, type));
+        // we should edit return content of this method
+        String type = "costumer";
+        ArrayList<String> infosTest = new ArrayList<>();
+        infosTest.add("alirezahr79");
+        infosTest.add("aa a  a");
+        infosTest.add("alireza");
+        infosTest.add("heidari");
+        infosTest.add("heidarigmail.com");
+        infosTest.add("8dd55");
+        infosTest.add(".065");
+        assertEquals("invalid password", createAccount(infosTest, type));
+        infosTest.set(1, "aaa");
+        assertEquals("invalid Email", createAccount(infosTest, type));
+        infosTest.set(4, "heidari@gmail.com");
+        assertEquals("invalid phone number", createAccount(infosTest, type));
+        infosTest.set(5, "4332434");
+        assertEquals("account created", createAccount(infosTest, type));
+        type = "manager";
+        assertEquals("account created", createAccount(infosTest, type));
+        type = "seller";
+        infosTest.set(6, "nike");
+        assertEquals("account created", createAccount(infosTest, type));
     }
 
     @Test
@@ -191,8 +195,12 @@ public class ControllerTest {
         initialise();
         setCurrentUser(costumer1);
         assertEquals(1.1 , getBalance() , .001);
+        costumer1.setCredit(22.1);
+        assertEquals(22.1, getBalance(), .001);
         setCurrentUser(seller1);
         assertEquals(0 , getBalance() , .001);
+        seller1.setCredit(320.2);
+        assertEquals(320.2, getBalance(), .001);
     }
 
     @Test
