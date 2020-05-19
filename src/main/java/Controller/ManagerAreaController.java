@@ -107,7 +107,7 @@ public class ManagerAreaController {
             return "request not exist";
         } else {
             Manager.answerRequest("decline", requestId);
-            return "request" + requestId + "declined";
+            return "request " + requestId + " declined";
         }
     }
 
@@ -118,7 +118,7 @@ public class ManagerAreaController {
         if (field.toLowerCase().equals("attribute")) {
             DataBase.getCategoryByName(name).setSpecialAttributes(newContent);
         } else if (field.toLowerCase().equals("name")) {
-            if (!newContent.matches("\\w+")) {
+            if (!newContent.matches("^\\w+$")) {
                 return "invalid new name";
             } else if (DataBase.getCategoryByName(newContent) != null) {
                 return "category exist with this new name";
@@ -147,7 +147,7 @@ public class ManagerAreaController {
             return "category not exist";
         } else {
             DataBase.removeCategory(name);
-            return name + "category removed";
+            return name + " category removed";
         }
     }
 
@@ -210,13 +210,13 @@ public class ManagerAreaController {
             return "discount code not exist";
         }
         if (field.toLowerCase().equals("percent")) {
-            if (!newContent.matches("\\d+")) {
+            if (!newContent.matches("^\\d+$")) {
                 return "invalid percent";
             }
             Manager.getDiscountCodeById(code).setDiscountPercent(Integer.parseInt(newContent));
         }
         if (field.toLowerCase().equals("maximum amount")) {
-            if (!newContent.matches("\\d+")) {
+            if (!newContent.matches("^\\d+$")) {
                 return "invalid amount";
             }
             Manager.getDiscountCodeById(code).setMaximumDiscountAmount(Long.parseLong(newContent));

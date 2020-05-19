@@ -129,6 +129,8 @@ public class ShowProductDetailTest {
 
     @Test
     public void TestGetAverageScore(){
+        initialise();
+        ShowProductDetail.getAverageScore(1111);
         Assert.assertEquals(0.0,ShowProductDetail.getAverageScore(1111),0);
         Assert.assertNull(ShowProductDetail.getAverageScore(123233123));
     }

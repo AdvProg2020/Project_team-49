@@ -34,6 +34,7 @@ public class ControllerTest {
     static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, seller1, 0);
 
     public void initialise() {
+        reset();
         costumer1.setCredit(1.1);
         allCategories.clear();
         allProducts.clear();
@@ -91,6 +92,16 @@ public class ControllerTest {
         e.setDoesItHaveOff(true);
     }
 
+    public void reset(){
+        allActiveRequests.clear();
+        allCategories.clear();
+        allProducts.clear();
+        allUsers.clear();
+        allDiscountCodes.clear();
+        allAvailableSorting.clear();
+        allAvailableFilters.clear();
+    }
+
     @Test
     public void TestEditField() {
         currentUser =seller1 ;
@@ -140,6 +151,7 @@ public class ControllerTest {
 
     @Test
     public void TestGetHasHeadManager() {
+        Controller controller;
         setHasHeadManager(true);
         assertTrue(getHasHeadManager());
         setHasHeadManager(false);
@@ -150,23 +162,26 @@ public class ControllerTest {
     public void TestCreateAccount() {
         // we should edit return content of this method
         String type = "costumer";
-        ArrayList<String> infos = new ArrayList<>();
-        infos.add("alirezahr79");
-        infos.add("aa a  a");
-        infos.add("alireza");
-        infos.add("heidari");
-        infos.add("heidari@gmail.com");
-        infos.add("8dd55");
-        assertEquals("invalid password", createAccount(infos, type));
-        infos.set(1, "aaa");
-        assertEquals("invalid phone number", createAccount(infos, type));
-        infos.set(5, "4332434");
-        assertEquals("account created", createAccount(infos, type));
+        ArrayList<String> infosTest = new ArrayList<>();
+        infosTest.add("alirezahr79");
+        infosTest.add("aa a  a");
+        infosTest.add("alireza");
+        infosTest.add("heidari");
+        infosTest.add("heidarigmail.com");
+        infosTest.add("8dd55");
+        infosTest.add(".065");
+        assertEquals("invalid password", createAccount(infosTest, type));
+        infosTest.set(1, "aaa");
+        assertEquals("invalid Email", createAccount(infosTest, type));
+        infosTest.set(4, "heidari@gmail.com");
+        assertEquals("invalid phone number", createAccount(infosTest, type));
+        infosTest.set(5, "4332434");
+        assertEquals("account created", createAccount(infosTest, type));
         type = "manager";
-        assertEquals("account created", createAccount(infos, type));
+        assertEquals("account created", createAccount(infosTest, type));
         type = "seller";
-        infos.add("nike");
-        assertEquals("account created", createAccount(infos, type));
+        infosTest.set(6, "nike");
+        assertEquals("account created", createAccount(infosTest, type));
     }
 
     @Test
@@ -179,9 +194,13 @@ public class ControllerTest {
     public void TestGetBalance() {
         initialise();
         setCurrentUser(costumer1);
-        assertEquals(22.1 , getBalance() , .001);
+        assertEquals(1.1 , getBalance() , .001);
+        costumer1.setCredit(22.1);
+        assertEquals(22.1, getBalance(), .001);
         setCurrentUser(seller1);
-        assertEquals(320.2 , getBalance() , .001);
+        assertEquals(0 , getBalance() , .001);
+        seller1.setCredit(320.2);
+        assertEquals(320.2, getBalance(), .001);
     }
 
     @Test
@@ -209,9 +228,67 @@ public class ControllerTest {
         currentUser =seller1 ;
         editField("password","123");
         assertTrue(Controller.isPasswordCorrect("123","amiri77"));
+        assertFalse(Controller.isPasswordCorrect("123223","amiri77"));
     }
 
+    @Test
+    public void TestSetCurrentUser(){
+        initialise();
+        currentUser=seller1;
+    }
 
+    @Test
+    public void TestGetCurrentUserSpecifications(){
+        initialise();
+        currentUser=seller1;
+        Assert.assertEquals("amiri77,amir,amiri,amiri@gmail.com,3,amiriI,Seller",Controller.getCurrentUserSpecifications());
+    }
+
+    @Test
+    public void TestHasUserWithUsername(){
+        initialise();
+        Assert.assertTrue(Controller.hasUserWithUsername("amiri77"));
+        Assert.assertFalse(Controller.hasUserWithUsername("amiri77asd"));
+    }
+
+    @Test
+    public void TestAddToCart(){
+        initialise();
+        currentUser=costumer1;
+        Controller.addToCart(a,seller1,1);
+        ArrayList<Product> exceptedCart=new ArrayList<Product>();
+        exceptedCart.add(a);
+        Assert.assertEquals(exceptedCart,costumer1.getCart().getProducts());
+        Controller.addToCart(b,seller1,1);
+        exceptedCart.add(b);
+        Assert.assertEquals(exceptedCart,costumer1.getCart().getProducts());
+        Controller.addToCart(c,seller1,1);
+        Controller.addToCart(d,seller1,1);
+        exceptedCart.add(c);
+        exceptedCart.add(d);
+        Assert.assertEquals(exceptedCart,costumer1.getCart().getProducts());
+        Guest test=new Guest();
+        currentUser=test;
+        Controller.addToCart(a,seller1,1);
+        ArrayList<Product> exceptedCartGuest=new ArrayList<Product>();
+        exceptedCartGuest.add(a);
+        Assert.assertEquals(exceptedCartGuest,test.getCart().getProducts());
+        Controller.addToCart(b,seller1,1);
+        exceptedCartGuest.add(b);
+        Assert.assertEquals(exceptedCartGuest,test.getCart().getProducts());
+        Controller.addToCart(c,seller1,1);
+        Controller.addToCart(d,seller1,1);
+        exceptedCartGuest.add(c);
+        exceptedCartGuest.add(d);
+        Assert.assertEquals(exceptedCartGuest,test.getCart().getProducts());
+    }
+
+    @Test
+    public void TestGetProductById(){
+        initialise();
+        Assert.assertEquals(a,Controller.getProductById(1111));
+        reset();
+    }
 }
 
 
