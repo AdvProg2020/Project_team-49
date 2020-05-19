@@ -7,6 +7,7 @@ import Models.Product;
 import Models.User.Seller;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
 public class AddOffRequest extends Request  implements Serializable {
     private Off off;
@@ -24,11 +25,17 @@ public class AddOffRequest extends Request  implements Serializable {
 
     @Override
     public String toString() {
-        return "AddOffRequest{" +
-                "off=" + off +
-                ", seller=" + seller +
-                ", requestId=" + requestId +
-                '}';
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String info = requestId + "\n";
+        info += getType() + "\n";
+        info += seller.getUsername() + "\n";
+        info += off.getOffAmount() + "\n";
+        info += formatter.format(off.getStartDate()) + "\n";
+        info += formatter.format(off.getEndDate()) + "\n";
+        for (Product product : off.getProducts()) {
+            info += product.getName() + "_" + product.getProductId() + "/";
+        }
+        return info;
     }
 
     @Override

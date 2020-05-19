@@ -142,8 +142,9 @@ public class CostumerAreaController {
     }
 
     public static String getOrderInfoById(long Id) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         BuyLog order = ((Costumer) Controller.currentUser).getBuyLogById(Id);
-        String info = "" + order.getLogId();
+        String info = "" + order.getLogId() + "," + formatter.format(order.getLogDate());
         info += "," + order.getSellerName() + "," + order.getPaidAmount();
         info += "," + order.getReceiveStatus() + ",";
         for (Product product : order.getBoughtProduct()) {
