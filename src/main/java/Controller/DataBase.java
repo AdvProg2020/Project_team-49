@@ -315,6 +315,10 @@ public class DataBase {
             referenceTime = Long.parseLong(a);
             a = in.readLine();
             createdProductsCount = Long.parseLong(a);
+            a = in.readLine();
+            createdOffsCount = Long.parseLong(a);
+            a = in.readLine();
+            createdLogs = Long.parseLong(a);
             in.close();
             fileReader.close();
         } catch (Exception e) {
@@ -411,6 +415,10 @@ public class DataBase {
             out.write(String.valueOf(referenceTime));
             out.newLine();
             out.write(String.valueOf(createdProductsCount));
+            out.newLine();
+            out.write(String.valueOf(createdOffsCount));
+            out.newLine();
+            out.write(String.valueOf(createdLogs));
             out.close();
             fileWriter.close();
         } catch (Exception e) {
