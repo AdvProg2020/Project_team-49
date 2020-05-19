@@ -12,14 +12,16 @@ import View.View;
 // bad az alireza bayad in ke chan bar baz shode har kala ro to controller ezafe konam.
 public class ShowProduct extends Menu {
 
+    private long productId;
     public ShowProduct(Menu parentMenu) {
         super("Show product", parentMenu);
     }
-
     @Override
     public void run(String lastCommand) {
         View.printString("\"Show Product Menu:\"");
-        long productId = Long.parseLong(lastCommand.split("\\s")[2]);
+        if (!lastCommand.equalsIgnoreCase("back")){
+            productId = Long.parseLong(lastCommand.split("\\s")[2]);
+        }
         OffAndProductMenuController.increaseView(productId);
         while (true) {
 

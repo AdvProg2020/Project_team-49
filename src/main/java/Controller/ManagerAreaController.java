@@ -82,15 +82,12 @@ public class ManagerAreaController {
         }
     }
 
-    //?????
     public static String requestDetails(long requestId) {
         if (Manager.getRequestById(requestId) == null) {
-            return  "request not exist";
+            return "request not exist";
         } else {
-            View.printString(Manager.getRequestById(requestId).getType());
-            View.printString(Manager.getRequestById(requestId).toString());
+            return Manager.getRequestById(requestId).toString();
         }
-        return "";
     }
 
     public static String acceptRequest(long requestId) {

@@ -24,6 +24,36 @@ public class ManageRequests extends Menu {
         }
     }
 
+    private void showRequestDetails(String details) {
+        View.printString("request Id: " + details.split("\\r?\\n")[0]);
+        View.printString("request type: " + details.split("\\r?\\n")[1]);
+        if (details.split("\\r?\\n")[1].equals("Add Off")) {
+            View.printString("seller username: " + details.split("\\r?\\n")[2]);
+            View.printString("off percent: " + details.split("\\r?\\n")[3]);
+            View.printString("off start date: " + details.split("\\r?\\n")[4]);
+            View.printString("off end date: " + details.split("\\r?\\n")[5]);
+            View.printString("products: " + details.split("\\r?\\n")[6]);
+        } else if (details.split("\\r?\\n")[1].equals("Add Product")) {
+            View.printString("product Id: " + details.split("\\r?\\n")[2]);
+            View.printString("product name: " + details.split("\\r?\\n")[3]);
+            View.printString("product brand: " + details.split("\\r?\\n")[4]);
+            View.printString("product explanation: " + details.split("\\r?\\n")[5]);
+            View.printString("product price: " + details.split("\\r?\\n")[6]);
+            View.printString("product seller: " + details.split("\\r?\\n")[7]);
+        } else if (details.split("\\r?\\n")[1].equals("Add Seller")) {
+            View.printString("seller username: " + details.split("\\r?\\n")[2]);
+            View.printString("company info: " + details.split("\\r?\\n")[3]);
+        } else if (details.split("\\r?\\n")[1].equals("Edit Off")) {
+            View.printString("edit field: " + details.split("\\r?\\n")[2]);
+            View.printString("old content: " + details.split("\\r?\\n")[3]);
+            View.printString("new content: " + details.split("\\r?\\n")[4]);
+        } else if (details.split("\\r?\\n")[1].equals("Edit Product")) {
+            View.printString("edit field: " + details.split("\\r?\\n")[2]);
+            View.printString("old content: " + details.split("\\r?\\n")[3]);
+            View.printString("new content: " + details.split("\\r?\\n")[4]);
+        }
+    }
+
     @Override
     public void showMenu() {
         View.printString(this.getName() + " help:");
@@ -37,7 +67,6 @@ public class ManageRequests extends Menu {
         View.printString("______________");
     }
 
-    //??????
     @Override
     public void run(String lastCommand) {
         this.showRequests();
@@ -48,7 +77,12 @@ public class ManageRequests extends Menu {
                 if (!checkRequestId(command.split("\\s")[1])) {
                     continue;
                 }
-                ManagerAreaController.requestDetails(Long.parseLong(command.split("\\s")[1]));
+                String details = ManagerAreaController.requestDetails(Long.parseLong(command.split("\\s")[1]));
+                if (details.startsWith("request")) {
+                    View.printString(details);
+                } else {
+                    showRequestDetails(details);
+                }
                 continue;
             }
             if (getMatcher(command, "(?i)accept (\\S+)").matches()) {

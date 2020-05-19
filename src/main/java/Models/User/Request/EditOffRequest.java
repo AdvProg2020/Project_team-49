@@ -20,15 +20,25 @@ public class EditOffRequest extends Request  implements Serializable {
         return "Edit Off";
     }
 
-    @Override
-    public String toString() {
-        return "EditOff{" +
-                "field='" + field + '\'' +
-                ", newContent='" + newContent + '\'' +
-                ", off=" + off +
-                '}';
+    //???
+    private String getOldContent() {
+        if (field.equalsIgnoreCase("amount")) {
+            return String.valueOf(off.getOffAmount());
+        }
+        return "";
     }
 
+    @Override
+    public String toString() {
+        String info = requestId + "\n";
+        info += getType() + "\n";
+        info += field.toLowerCase() + "\n";
+        info += getOldContent() + "\n";
+        info += newContent + "\n";
+        return info;
+    }
+
+    //????
     @Override
     public void run() {
         if (field.equalsIgnoreCase("amount")) {

@@ -24,13 +24,28 @@ public class EditProductRequest extends Request  implements Serializable {
         return "Edit Product";
     }
 
+    //?????
+    private String getOldContent() {
+        if (field.equalsIgnoreCase("name")) {
+            return String.valueOf(product.getName());
+        } else if (field.equalsIgnoreCase("brand")) {
+            return String.valueOf(product.getBrand());
+        } else if (field.equalsIgnoreCase("price")) {
+            return String.valueOf(product.getPrice(seller));
+        } else if (field.equalsIgnoreCase("explanation")) {
+            return String.valueOf(product.getExplanation());
+        }
+        return "";
+    }
+
     @Override
     public String toString() {
-        return "EditProduct{" +
-                "field='" + field + '\'' +
-                ", newContent='" + newContent + '\'' +
-                ", product=" + product +
-                '}';
+        String info = requestId + "\n";
+        info += getType() + "\n";
+        info += field.toLowerCase() + "\n";
+        info += getOldContent() + "\n";
+        info += newContent + "\n";
+        return info;
     }
 
     @Override

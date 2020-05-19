@@ -90,9 +90,10 @@ public class ViewOrders extends Menu {
     private void showOrder(long orderId) {
         String info = CostumerAreaController.getOrderInfoById(orderId);
         View.printString("order Id: " + info.split(",")[0]);
-        View.printString("seller name: " + info.split(",")[1]);
-        View.printString("paid amount: " + info.split(",")[2]);
-        View.printString("receive status: " + info.split(",")[3]);
-        View.printString("bought products: " + info.split(",")[4]);
+        View.printString("order date: " + info.split(",")[1]);
+        View.printString("seller name: " + info.split(",")[2]);
+        View.printString("paid amount: " + info.split(",")[3]);
+        View.printString("receive status: " + info.split(",")[4]);
+        View.printString("bought products: " + info.split(",")[5]);
     }
 }
