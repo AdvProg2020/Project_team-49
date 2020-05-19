@@ -33,6 +33,7 @@ public class Purchase extends Menu {
                 break;
             }
             getDiscountCode();
+            break;
         }
     }
 

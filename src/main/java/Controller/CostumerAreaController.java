@@ -126,7 +126,7 @@ public class CostumerAreaController {
                     , new Date(), new Date(2592000000L + new Date().getTime()), 10
                     , 50000, 2, allowed));
         }
-        costumer.addCredit((getTotalPrice() * -1) * (1 - discount / 100));
+        costumer.addCredit((getTotalPrice() * -1) * (1 - (discount / 100)));
         costumer.setCart(new Cart());
         return answer;
     }
