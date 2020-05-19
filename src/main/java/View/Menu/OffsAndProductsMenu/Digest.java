@@ -10,14 +10,17 @@ import View.View;
 
 public class Digest extends Menu {
 
+    private long productId;
     public Digest(Menu parentMenu) {
         super("Digest", parentMenu);
     }
 
     @Override
     public void run(String lastCommand) {
+        if (!lastCommand.equalsIgnoreCase("back")){
+            productId = Long.parseLong(lastCommand.split("\\s")[2]);
+        }
 
-        long productId = Long.parseLong(lastCommand.split("\\s")[2]);
         while (true) {
             View.printString("\"Digest Menu:\"");
             String command = scanner.nextLine().trim();
@@ -65,7 +68,7 @@ public class Digest extends Menu {
                     if (userName.equalsIgnoreCase("Back")){
                         this.run(lastCommand);
                     }
-                    if (!OffAndProductMenuController.isSellerWithNameForProduct(productId,userName)){
+                    if (OffAndProductMenuController.isSellerWithNameForProduct(productId,userName)){
                         break;
                     }
                     View.printString("Please Enter Valid Seller Name\n" +
