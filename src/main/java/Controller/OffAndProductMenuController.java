@@ -141,9 +141,6 @@ public class OffAndProductMenuController {
         return false;
     }
     public static boolean isProductWithId(long productId){
-        if (allProducts.isEmpty()){
-            return false;
-        }
         for (Product allProduct : allProducts) {
             if (allProduct.getProductId()==productId){
                 return true;

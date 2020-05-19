@@ -44,6 +44,7 @@ public class DataBaseTest {
 
 
     public void initialise() {
+        reset();
         costumer1.setCredit(1.1);
         allCategories.clear();
         allProducts.clear();
@@ -88,6 +89,16 @@ public class DataBaseTest {
         dir.delete();
     }
 
+    public void reset(){
+        allActiveRequests.clear();
+        allCategories.clear();
+        allProducts.clear();
+        allUsers.clear();
+        allDiscountCodes.clear();
+        allAvailableSorting.clear();
+        allAvailableFilters.clear();
+    }
+
     public void makeResources() {
         try {
             File dataBaseDir = new File("src/main/resources/DataBase");
@@ -123,7 +134,7 @@ public class DataBaseTest {
         initialise();
         removeCategory("xxlx");
         assertEquals(allCategories.size(), 2);
-        assertEquals(allProducts.size(), 2);
+        assertEquals(allProducts.size(), 5);
     }
 
     @Test
@@ -374,7 +385,7 @@ public class DataBaseTest {
         assertEquals(allUsers.size(), 6);
         removeUser("alireza_hr");
         assertEquals(allUsers.size(), 5);
-
+        reset();
     }
 
 }

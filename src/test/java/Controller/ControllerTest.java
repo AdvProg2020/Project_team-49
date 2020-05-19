@@ -34,6 +34,7 @@ public class ControllerTest {
     static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, seller1, 0);
 
     public void initialise() {
+        reset();
         costumer1.setCredit(1.1);
         allCategories.clear();
         allProducts.clear();
@@ -89,6 +90,16 @@ public class ControllerTest {
         a.setDoesItHaveOff(true);
         c.setDoesItHaveOff(true);
         e.setDoesItHaveOff(true);
+    }
+
+    public void reset(){
+        allActiveRequests.clear();
+        allCategories.clear();
+        allProducts.clear();
+        allUsers.clear();
+        allDiscountCodes.clear();
+        allAvailableSorting.clear();
+        allAvailableFilters.clear();
     }
 
     @Test
@@ -268,6 +279,7 @@ public class ControllerTest {
     public void TestGetProductById(){
         initialise();
         Assert.assertEquals(a,Controller.getProductById(1111));
+        reset();
     }
 }
 
