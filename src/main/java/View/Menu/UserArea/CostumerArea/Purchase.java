@@ -33,6 +33,7 @@ public class Purchase extends Menu {
                 break;
             }
             getDiscountCode();
+            break;
         }
     }
 
@@ -67,12 +68,8 @@ public class Purchase extends Menu {
                 break;
             }
             if (getMatcher(task, "(?i)pay").matches()) {
-                if (CostumerAreaController.getTotalPrice() > Controller.getBalance()) {
-                    View.printString("your credit is not enough. increase your credit.");
-                    break;
-                } else {
-                    View.printString(CostumerAreaController.finishPayment(receiverInfo));
-                }
+                View.printString(CostumerAreaController.finishPayment(receiverInfo));
+                break;
             }
             View.printString("invalid command");
         }

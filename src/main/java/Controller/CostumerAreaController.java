@@ -90,6 +90,9 @@ public class CostumerAreaController {
         if (!receiverInfo.get(2).equals("no")) {
             discount = costumer.getDiscountCodeById(receiverInfo.get(2)).getDiscountPercent();
         }
+        if ((getTotalPrice() * (1 - discount / 100)) > costumer.getCredit()) {
+            return "your credit is not enough";
+        }
         for (Seller seller : sellers) {
             double paidAmount = 0;
             double reducedAmountForOff = 0;
@@ -114,9 +117,18 @@ public class CostumerAreaController {
             seller.addSellLog(new SellLog(paidAmount, reducedAmountForOff, products, costumer.getUsername(), DataBase.getLogId(), new Date()));
             seller.addCredit(getTotalPrice());
         }
-        costumer.addCredit((getTotalPrice() * -1) * (1 - discount / 100));
+        String answer = "payment done";
+        if (getTotalPrice() > 1000000) {
+            answer += "\ngift discount code activated for your account";
+            ArrayList<Costumer> allowed = new ArrayList<>();
+            allowed.add(costumer);
+            costumer.addDiscountCode(new DiscountCode("monthly gift"
+                    , new Date(), new Date(2592000000L + new Date().getTime()), 10
+                    , 50000, 2, allowed));
+        }
+        costumer.addCredit((getTotalPrice() * -1) * (1 - (discount / 100)));
         costumer.setCart(new Cart());
-        return "payment done";
+        return answer;
     }
 
     public static boolean hasDiscountCode(String discountCode) {

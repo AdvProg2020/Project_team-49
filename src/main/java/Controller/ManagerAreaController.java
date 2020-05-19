@@ -59,9 +59,13 @@ public class ManagerAreaController {
         Date dateE;
         try {
             dateS = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(info.get(1));
-            dateE = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(info.get(2));
         } catch (Exception ParseException) {
             return "invalid start date";
+        }
+        try {
+            dateE = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(info.get(2));
+        } catch (Exception ParseException) {
+            return "invalid end date";
         }
         DataBase.addDiscountCode(new DiscountCode(info.get(0),
                 dateS,
