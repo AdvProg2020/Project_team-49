@@ -141,7 +141,7 @@ public class DataBaseTest {
         initialise();
         removeCategory("xxlx");
         assertEquals(allCategories.size(), 2);
-        assertEquals(allProducts.size(), 5);
+        assertEquals(allProducts.size(), 2);
     }
 
     @Test
