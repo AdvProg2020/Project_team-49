@@ -297,4 +297,13 @@ public class Product implements Serializable {
     public ArrayList<Double> getAllSellerPrice(){
         return price;
     }
+
+    public void addAvailableItemsForSeller(Seller seller, int count) {
+        for (int i = 0; i < allSellers.size(); i++) {
+            if (allSellers.get(i).equals(seller)) {
+                availableItems.set(i, availableItems.get(i) + count);
+                return;
+            }
+        }
+    }
 }

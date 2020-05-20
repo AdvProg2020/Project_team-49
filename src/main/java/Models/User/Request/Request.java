@@ -1,17 +1,17 @@
 package Models.User.Request;
 
+import Controller.DataBase;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public abstract class Request  implements Serializable {
-    private static ArrayList<Request> allRequests = new ArrayList<>();
     protected String managerAnswer;
     protected long requestId;
 
     public Request() {
         this.managerAnswer = null;
-        this.requestId = allRequests.size() + 1;
-        allRequests.add(this);
+        this.requestId = DataBase.getRequestId();
     }
 
     public void setManagerAnswer(String managerAnswer) {

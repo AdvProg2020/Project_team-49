@@ -52,6 +52,9 @@ public class Purchase extends Menu {
             if (!CostumerAreaController.hasDiscountCode(discountCode)) {
                 View.printString("invalid discount code");
                 continue;
+            } else if (CostumerAreaController.isDiscountAvailable(discountCode)) {
+                View.printString("discount code not available");
+                continue;
             } else {
                 receiverInfo.add(discountCode);
                 doPayment();
@@ -77,7 +80,11 @@ public class Purchase extends Menu {
 
     @Override
     public void run(String lastCommand) {
-        getReceiverInformation();
+        if (CostumerAreaController.getTotalPrice() == 0.0) {
+            View.printString("cart is empty");
+        } else {
+            getReceiverInformation();
+        }
         this.parentMenu.run(lastCommand);
     }
 }

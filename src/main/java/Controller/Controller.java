@@ -125,12 +125,16 @@ public class Controller {
         return true;
     }
 
-    public static void addToCart(Product product, Seller seller, int count) {
+    public static String addToCart(Product product, Seller seller, int count) {
+        if (product.remainingProductForSeller(seller) < count) {
+            return "available items for this seller is less than " + count + " (" + product.remainingProductForSeller(seller) + ")";
+        }
         if (currentUser.getType().equalsIgnoreCase("Guest")) {
             ((Guest) currentUser).addProductToCart(product, seller, count);
         } else {
             ((Costumer) currentUser).addProductToCart(product, seller, count);
         }
+        return "product added";
     }
 
     public static void logout() {
