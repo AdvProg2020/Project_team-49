@@ -9,7 +9,6 @@ import Models.Product;
 import Models.Score;
 import Models.User.Cart;
 import Models.User.Costumer;
-import Models.User.Guest;
 import Models.User.Seller;
 
 import java.text.SimpleDateFormat;
