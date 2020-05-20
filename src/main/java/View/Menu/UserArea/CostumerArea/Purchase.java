@@ -52,7 +52,7 @@ public class Purchase extends Menu {
             if (!CostumerAreaController.hasDiscountCode(discountCode)) {
                 View.printString("invalid discount code");
                 continue;
-            } else if (CostumerAreaController.isDiscountAvailable(discountCode)) {
+            } else if (!CostumerAreaController.isDiscountAvailable(discountCode)) {
                 View.printString("discount code not available");
                 continue;
             } else {
