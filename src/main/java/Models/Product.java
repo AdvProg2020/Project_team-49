@@ -20,7 +20,7 @@ public class Product implements Serializable {
     private double averageScore;
     private ArrayList<Score> allScores;
     private ArrayList<Comment> allComments;
-
+    private String imageAddress;
     private ProductStatus status;
 
     private Off off;
@@ -33,7 +33,7 @@ public class Product implements Serializable {
     private int numberOfView;
     private Date productDate;
 
-    public Product(String name, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems) {
+    public Product(String name, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems , String imageAddress) {
         this.allSellers = new ArrayList<>();
         this.availableItems = new ArrayList<>();
         this.price = new ArrayList<>();
@@ -47,8 +47,16 @@ public class Product implements Serializable {
         this.name = name;
         this.productDate = new Date();
         this.offPercentage = 0.0;
+        this.imageAddress = imageAddress;
     }
 
+    public String getImageAddress() {
+        return imageAddress;
+    }
+
+    public void setImageAddress(String imageAddress) {
+        this.imageAddress = imageAddress;
+    }
 
     public double getMaximumPrice() {
         double max = this.price.get(0);
