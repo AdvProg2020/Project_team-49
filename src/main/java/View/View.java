@@ -2,16 +2,30 @@ package View;
 
 import View.Menu.MainMenu;
 import View.Menu.Menu;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
 import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class View {
+public class View extends Application {
 
     public View() {
 
     }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        Parent parent = FXMLLoader.load(getClass().getResource("fxml.mainPage.fmxl"));
+
+        stage.show();
+    }
+
     public static void run() {
         Menu.setScanner(new Scanner(System.in));
         new MainMenu().run("");
