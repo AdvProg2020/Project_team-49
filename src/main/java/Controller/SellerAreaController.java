@@ -13,7 +13,6 @@ import Models.User.Request.EditProductRequest;
 import Models.User.Seller;
 import View.View;
 
-import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -173,29 +172,20 @@ public class SellerAreaController {
     }
 
     public static String addProduct(ArrayList<String> productInfo) {
-        File image = new File(productInfo.get(6));
         if (!productInfo.get(2).matches("(\\d+)(\\.?)(\\d*)")) {
             return "invalid price";
         } else if (DataBase.getCategoryByName(productInfo.get(4)) == null) {
             return "invalid category";
         } else if (!productInfo.get(5).matches("\\d+")) {
             return "invalid number of items";
-        } else if (!image.isFile()) {
-            return "image not found";
         } else {
-            if (productInfo.get(6).equalsIgnoreCase("empty")) {
-
-            } else {
-                File copyImage = new File("image.jpg");
-            }
             Manager.addRequest(new AddProductRequest(new Product(productInfo.get(0)
                     , productInfo.get(1)
                     , Double.parseDouble(productInfo.get(2))
                     , productInfo.get(3)
                     , DataBase.getCategoryByName(productInfo.get(4))
                     , (Seller) Controller.currentUser
-                    , Integer.parseInt(productInfo.get(5))
-                    , productInfo.get(6))));
+                    , Integer.parseInt(productInfo.get(5)), "") ));
             return "request sent";
         }
     }
