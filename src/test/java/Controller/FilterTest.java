@@ -27,12 +27,12 @@ public class FilterTest {
     static Category shirt = new Category("nike", "", father);
     static Category car = new Category("bmw", "", father);
     static Category child = new Category("child", null, car);
-    static Product a = new Product("phone", "apple", 1000.0, "nothing", phone, null, 1000);
-    static Product b = new Product("plakolang", "iran", 10.0, "nothing", car, null, 0);
-    static Product c = new Product("S9", "samsung", 7000.0, "nothing", phone, null, 1000);
-    static Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", shirt, null, 1000);
-    static Product ff = new Product("GLX", "GLX", 5.0, "nothing", null, null, 1000);
-    static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, null, 0);
+    static Product a = new Product("phone", "apple", 1000.0, "nothing", phone, null, 1000,"");
+    static Product b = new Product("plakolang", "iran", 10.0, "nothing", car, null, 0,"");
+    static Product c = new Product("S9", "samsung", 7000.0, "nothing", phone, null, 1000,"");
+    static Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", shirt, null, 1000,"");
+    static Product ff = new Product("GLX", "GLX", 5.0, "nothing", null, null, 1000,"");
+    static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, null, 0,"");
 
     public void initialise() {
         allCategories.clear();

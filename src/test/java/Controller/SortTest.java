@@ -25,17 +25,17 @@ public class SortTest {
     @Test
     public void testSortByTime() {
         setCurrentSort("time");
-        Product a = new Product("phone", "apple", 1000.0, "nothing", null, null, 1000);
+        Product a = new Product("phone", "apple", 1000.0, "nothing", null, null, 1000,"");
         for (long i = 0; i < 100000000; i++) ;
-        Product b = new Product("plakolang", "iran", 10.0, "nothing", null, null, 0);
+        Product b = new Product("plakolang", "iran", 10.0, "nothing", null, null, 0,"");
         for (long i = 0; i < 100000000; i++) ;
-        Product c = new Product("S9", "samsung", 7000.0, "nothing", null, null, 1000);
+        Product c = new Product("S9", "samsung", 7000.0, "nothing", null, null, 1000,"");
         for (long i = 0; i < 100000000; i++) ;
-        Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", null, null, 1000);
+        Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", null, null, 1000,"");
         for (long i = 0; i < 100000000; i++) ;
-        Product e = new Product("poster", "LMV", 500.0, "nothing", null, null, 0);
+        Product e = new Product("poster", "LMV", 500.0, "nothing", null, null, 0,"");
         for (long i = 0; i < 100000000; i++) ;
-        Product f = new Product("towelr", "LllV", 2500.0, "nothing", null, null, 0);
+        Product f = new Product("towelr", "LllV", 2500.0, "nothing", null, null, 0,"");
         DataBase.allProducts.clear();
         DataBase.sortedOrFilteredProduct.clear();
         DataBase.allProducts.add(a);
@@ -60,12 +60,12 @@ public class SortTest {
     @Test
     public void testSortByViews() {
         setCurrentSort("view");
-        Product a = new Product("phone", "apple", 1000.0, "nothing", null, null, 1000);
-        Product b = new Product("plakolang", "iran", 10.0, "nothing", null, null, 0);
-        Product c = new Product("S9", "samsung", 7000.0, "nothing", null, null, 1000);
-        Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", null, null, 1000);
-        Product e = new Product("poster", "LMV", 500.0, "nothing", null, null, 0);
-        Product f = new Product("towelr", "LllV", 2500.0, "nothing", null, null, 0);
+        Product a = new Product("phone", "apple", 1000.0, "nothing", null, null, 1000,"");
+        Product b = new Product("plakolang", "iran", 10.0, "nothing", null, null, 0,"");
+        Product c = new Product("S9", "samsung", 7000.0, "nothing", null, null, 1000,"");
+        Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", null, null, 1000,"");
+        Product e = new Product("poster", "LMV", 500.0, "nothing", null, null, 0,"");
+        Product f = new Product("towelr", "LllV", 2500.0, "nothing", null, null, 0,"");
         a.setNumberOfView(1000);
         b.setNumberOfView(500);
         c.setNumberOfView(200);
@@ -96,12 +96,12 @@ public class SortTest {
     @Test
     public void testSortByScore() {
         setCurrentSort("score");
-        Product a = new Product("phone", "apple", 1000.0, "nothing", null, null, 1000);
-        Product b = new Product("plakolang", "iran", 10.0, "nothing", null, null, 0);
-        Product c = new Product("S9", "samsung", 7000.0, "nothing", null, null, 1000);
-        Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", null, null, 1000);
-        Product e = new Product("poster", "LMV", 500.0, "nothing", null, null, 0);
-        Product f = new Product("towelr", "LllV", 2500.0, "nothing", null, null, 0);
+        Product a = new Product("phone", "apple", 1000.0, "nothing", null, null, 1000,"");
+        Product b = new Product("plakolang", "iran", 10.0, "nothing", null, null, 0,"");
+        Product c = new Product("S9", "samsung", 7000.0, "nothing", null, null, 1000,"");
+        Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", null, null, 1000,"");
+        Product e = new Product("poster", "LMV", 500.0, "nothing", null, null, 0,"");
+        Product f = new Product("towelr", "LllV", 2500.0, "nothing", null, null, 0,"");
         a.setAverageScore(4.99);
         b.setAverageScore(4.8);
         c.setAverageScore(4.82);

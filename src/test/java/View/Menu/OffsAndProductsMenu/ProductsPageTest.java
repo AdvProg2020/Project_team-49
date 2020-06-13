@@ -127,7 +127,7 @@ public class ProductsPageTest {
 
         //Show Product
         {
-            DataBase.addNewProduct(new Product("Test","TestBrand",200,"Just For Test",null,null,1));
+            DataBase.addNewProduct(new Product("Test","TestBrand",200,"Just For Test",null,null,1,""));
             outputs = productsPage.getCommandKey("show product 1");
             System.out.println(outputs);
             Assert.assertEquals( "Show Product",outputs);
