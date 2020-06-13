@@ -80,6 +80,10 @@ public class Costumer extends User implements Serializable {
         this.discountCodes.add(discountCode);
     }
 
+    public void removeDiscountCode(DiscountCode discountCode) {
+        discountCodes.remove(discountCode);
+    }
+
     @Override
     public String getType() {
         return "Costumer";

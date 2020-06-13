@@ -113,6 +113,7 @@ public class ManageCategories extends Menu {
                 continue;
             }
             if (getMatcher(command, "(?i)back").matches()) {
+                this.parentMenu.run(lastCommand);
                 break;
             }
             if (getMatcher(command, "(?i)exit").matches()) {

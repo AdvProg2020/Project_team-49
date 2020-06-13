@@ -9,7 +9,6 @@ import Models.Product;
 import Models.Score;
 import Models.User.Cart;
 import Models.User.Costumer;
-import Models.User.Guest;
 import Models.User.Seller;
 
 import java.text.SimpleDateFormat;
@@ -39,7 +38,7 @@ public class CostumerAreaController {
         for (int i = 0; i < cart.getProducts().size(); i++) {
             String info = cart.getProducts().get(i).getName() + "," + cart.getProducts().get(i).getProductId();
             info += "," + cart.getProducts().get(i).getBrand() + "," + cart.getProducts().get(i).getPrice(cart.getProducts().get(i).getDefaultSeller());
-            info += "," + cart.getItemsByProductId(cart.getProducts().get(i).getProductId(), cart.getSellers().get(i)) + "," + cart.getSellers().get(i);
+            info += "," + cart.getItemsByProductId(cart.getProducts().get(i).getProductId(), cart.getSellers().get(i)) + "," + cart.getSellers().get(i).getUsername();
             products.add(info);
         }
         return products;
@@ -104,6 +103,11 @@ public class CostumerAreaController {
                 }
             }
             for (Product product : products) {
+                if (product.remainingProductForSeller(seller) < cart.getItemsByProductId(product.getProductId(), seller)) {
+                    return product.getName() + " for seller " + seller.getUsername()
+                            + " not available for count " + cart.getItemsByProductId(product.getProductId(), seller);
+                }
+                product.addAvailableItemsForSeller(seller, cart.getItemsByProductId(product.getProductId(), seller) * -1);
                 int offPercent = 0;
                 for (Off off : seller.getOffs()) {
                     if (off.getProducts().contains(product)) {
@@ -140,6 +144,18 @@ public class CostumerAreaController {
 
     public static boolean hasOrderWithId(Long Id) {
         if (((Costumer) Controller.currentUser).getBuyLogById(Id) == null) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isDiscountAvailable(String discountCode) {
+        Costumer costumer = (Costumer) Controller.currentUser;
+        if (costumer.getDiscountCodeById(discountCode).getStartDate().getTime() > new Date().getTime()) {
+            return false;
+        }
+        if (costumer.getDiscountCodeById(discountCode).getEndDate().getTime() < new Date().getTime()) {
+            costumer.removeDiscountCode(costumer.getDiscountCodeById(discountCode));
             return false;
         }
         return true;

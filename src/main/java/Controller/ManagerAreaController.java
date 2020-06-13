@@ -53,7 +53,11 @@ public class ManagerAreaController {
             if (DataBase.getUserByUsername(allowedCostumersName) == null) {
                 return "invalid costumer name";
             }
-            allowedCostumers.add((Costumer) DataBase.getUserByUsername(allowedCostumersName));
+            try {
+                allowedCostumers.add((Costumer) DataBase.getUserByUsername(allowedCostumersName));
+            } catch (Exception ClassCastException) {
+                return allowedCostumersName + " is not a costumer";
+            }
         }
         Date dateS;
         Date dateE;

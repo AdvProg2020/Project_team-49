@@ -9,7 +9,7 @@ import View.View;
 import java.util.HashMap;
 
 public class MainMenu extends Menu {
-
+    
     public MainMenu() {
         super("Main Menu", null);
         HashMap<String, Menu> subMenus = new HashMap<>();
@@ -23,7 +23,7 @@ public class MainMenu extends Menu {
     public String getCommandKey(String command) {
         if (getMatcher(command, "(?i)User Area").matches()) {
             return "User Area";
-        } else if (getMatcher(command, "(?i)Products Page").matches()) {
+        } else if (getMatcher(command, "(?i)Products").matches()) {
             OffAndProductMenuController.clearAndRestoreProduct();
             return "Products Page";
         } else if (getMatcher(command, "(?i)Offs").matches()) {
