@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="922.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.MainMenu">
+   <children>
+      <Pane layoutX="-11.0" layoutY="-1.0" prefHeight="125.0" prefWidth="940.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="114.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <TextField focusTraversable="false" layoutX="142.0" layoutY="14.0" prefHeight="32.0" prefWidth="194.0" promptText="Search in Digikala" />
+            <Button layoutX="773.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="146.0" text="Customer Area" />
+            <MenuBar layoutX="48.0" layoutY="86.0" prefHeight="25.0" prefWidth="181.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Categories">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Offs">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

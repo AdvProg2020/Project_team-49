@@ -27,11 +27,11 @@ public class ControllerTest {
     static Manager manager1 = new Manager("izadiii", "mohammad", "izadi", "izadi@gmail.com", 12, "izadizad");
     static Manager manager2 = new Manager("AbaM", "jj", "abam", "abam@gmail.com", 13, "abamiad");
     static Seller seller1 = new Seller("amiri77", "amir", "amiri", "amiri@gmail.com", 3, "amiri", "amiriI");
-    static Product a = new Product("phone", "apple", 1000.0, "nothing", phone, seller1, 1000);
-    static Product b = new Product("plakolang", "iran", 10.0, "nothing", car, seller1, 0);
-    static Product c = new Product("S9", "samsung", 7000.0, "nothing", phone, seller1, 1000);
-    static Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", shirt, seller1, 1000);
-    static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, seller1, 0);
+    static Product a = new Product("phone", "apple", 1000.0, "nothing", phone, seller1, 1000, "");
+    static Product b = new Product("plakolang", "iran", 10.0, "nothing", car, seller1, 0, "");
+    static Product c = new Product("S9", "samsung", 7000.0, "nothing", phone, seller1, 1000, "");
+    static Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", shirt, seller1, 1000, "");
+    static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, seller1, 0, "");
 
     public void initialise() {
         reset();
@@ -92,7 +92,7 @@ public class ControllerTest {
         e.setDoesItHaveOff(true);
     }
 
-    public void reset(){
+    public void reset() {
         allActiveRequests.clear();
         allCategories.clear();
         allProducts.clear();
@@ -104,32 +104,32 @@ public class ControllerTest {
 
     @Test
     public void TestEditField() {
-        currentUser =seller1 ;
-        editField("first name","hamidreza");
-        assertEquals("hamidreza",currentUser.getFirstName());
+        currentUser = seller1;
+        editField("first name", "hamidreza");
+        assertEquals("hamidreza", currentUser.getFirstName());
 
-        editField("last name","hamidreza");
-        assertEquals("hamidreza",currentUser.getLastName());
+        editField("last name", "hamidreza");
+        assertEquals("hamidreza", currentUser.getLastName());
 
-        editField("phone number","9123");
-        assertEquals(9123,currentUser.getPhoneNumber());
+        editField("phone number", "9123");
+        assertEquals(9123, currentUser.getPhoneNumber());
 
-        Assert.assertEquals("invalid new phone number",Controller.editField("phone number","asdasd"));
+        Assert.assertEquals("invalid new phone number", Controller.editField("phone number", "asdasd"));
 
-        editField("email","email@as.com");
-        assertEquals("email@as.com",currentUser.getEMail());
+        editField("email", "email@as.com");
+        assertEquals("email@as.com", currentUser.getEMail());
 
-        editField("email","email@as.com");
-        Assert.assertEquals("invalid new email",Controller.editField("email","asds.com"));
+        editField("email", "email@as.com");
+        Assert.assertEquals("invalid new email", Controller.editField("email", "asds.com"));
 
-        editField("password","123");
-        assertEquals("123",currentUser.getPassword());
+        editField("password", "123");
+        assertEquals("123", currentUser.getPassword());
 
-        Assert.assertEquals("invalid new password",Controller.editField("password","ads asd"));
+        Assert.assertEquals("invalid new password", Controller.editField("password", "ads asd"));
 
-        assertEquals("company edited",Controller.editField("company","mihan"));
+        assertEquals("company edited", Controller.editField("company", "mihan"));
 
-        assertEquals("invalid field",Controller.editField("compaasdsadny","mihan"));
+        assertEquals("invalid field", Controller.editField("compaasdsadny", "mihan"));
 
     }
 
@@ -194,11 +194,11 @@ public class ControllerTest {
     public void TestGetBalance() {
         initialise();
         setCurrentUser(costumer1);
-        assertEquals(1.1 , getBalance() , .001);
+        assertEquals(1.1, getBalance(), .001);
         costumer1.setCredit(22.1);
         assertEquals(22.1, getBalance(), .001);
         setCurrentUser(seller1);
-        assertEquals(0 , getBalance() , .001);
+        assertEquals(0, getBalance(), .001);
         seller1.setCredit(320.2);
         assertEquals(320.2, getBalance(), .001);
     }
@@ -206,7 +206,7 @@ public class ControllerTest {
     @Test
     public void TestLogout() {
         logout();
-        assertEquals("Guest" , currentUser.getType());
+        assertEquals("Guest", currentUser.getType());
     }
 
     @Test
@@ -219,74 +219,74 @@ public class ControllerTest {
         infos.add("alim1379@gmail.com");
         infos.add("1288888");
         infos.add("alialiali");
-        assertEquals(infos , getPersonalInfo());
+        assertEquals(infos, getPersonalInfo());
     }
 
     @Test
-    public void TestIsPasswordCorrect(){
+    public void TestIsPasswordCorrect() {
         initialise();
-        currentUser =seller1 ;
-        editField("password","123");
-        assertTrue(Controller.isPasswordCorrect("123","amiri77"));
-        assertFalse(Controller.isPasswordCorrect("123223","amiri77"));
+        currentUser = seller1;
+        editField("password", "123");
+        assertTrue(Controller.isPasswordCorrect("123", "amiri77"));
+        assertFalse(Controller.isPasswordCorrect("123223", "amiri77"));
     }
 
     @Test
-    public void TestSetCurrentUser(){
+    public void TestSetCurrentUser() {
         initialise();
-        currentUser=seller1;
+        currentUser = seller1;
     }
 
     @Test
-    public void TestGetCurrentUserSpecifications(){
+    public void TestGetCurrentUserSpecifications() {
         initialise();
-        currentUser=seller1;
-        Assert.assertEquals("amiri77,amir,amiri,amiri@gmail.com,3,amiriI,Seller",Controller.getCurrentUserSpecifications());
+        currentUser = seller1;
+        Assert.assertEquals("amiri77,amir,amiri,amiri@gmail.com,3,amiriI,Seller", Controller.getCurrentUserSpecifications());
     }
 
     @Test
-    public void TestHasUserWithUsername(){
+    public void TestHasUserWithUsername() {
         initialise();
         Assert.assertTrue(Controller.hasUserWithUsername("amiri77"));
         Assert.assertFalse(Controller.hasUserWithUsername("amiri77asd"));
     }
 
     @Test
-    public void TestAddToCart(){
+    public void TestAddToCart() {
         initialise();
-        currentUser=costumer1;
-        Controller.addToCart(a,seller1,1);
-        ArrayList<Product> exceptedCart=new ArrayList<Product>();
+        currentUser = costumer1;
+        Controller.addToCart(a, seller1, 1);
+        ArrayList<Product> exceptedCart = new ArrayList<Product>();
         exceptedCart.add(a);
-        Assert.assertEquals(exceptedCart,costumer1.getCart().getProducts());
-        Controller.addToCart(b,seller1,1);
+        Assert.assertEquals(exceptedCart, costumer1.getCart().getProducts());
+        Controller.addToCart(b, seller1, 1);
         exceptedCart.add(b);
-        Assert.assertEquals(exceptedCart,costumer1.getCart().getProducts());
-        Controller.addToCart(c,seller1,1);
-        Controller.addToCart(d,seller1,1);
+        Assert.assertEquals(exceptedCart, costumer1.getCart().getProducts());
+        Controller.addToCart(c, seller1, 1);
+        Controller.addToCart(d, seller1, 1);
         exceptedCart.add(c);
         exceptedCart.add(d);
-        Assert.assertEquals(exceptedCart,costumer1.getCart().getProducts());
-        Guest test=new Guest();
-        currentUser=test;
-        Controller.addToCart(a,seller1,1);
-        ArrayList<Product> exceptedCartGuest=new ArrayList<Product>();
+        Assert.assertEquals(exceptedCart, costumer1.getCart().getProducts());
+        Guest test = new Guest();
+        currentUser = test;
+        Controller.addToCart(a, seller1, 1);
+        ArrayList<Product> exceptedCartGuest = new ArrayList<Product>();
         exceptedCartGuest.add(a);
-        Assert.assertEquals(exceptedCartGuest,test.getCart().getProducts());
-        Controller.addToCart(b,seller1,1);
+        Assert.assertEquals(exceptedCartGuest, test.getCart().getProducts());
+        Controller.addToCart(b, seller1, 1);
         exceptedCartGuest.add(b);
-        Assert.assertEquals(exceptedCartGuest,test.getCart().getProducts());
-        Controller.addToCart(c,seller1,1);
-        Controller.addToCart(d,seller1,1);
+        Assert.assertEquals(exceptedCartGuest, test.getCart().getProducts());
+        Controller.addToCart(c, seller1, 1);
+        Controller.addToCart(d, seller1, 1);
         exceptedCartGuest.add(c);
         exceptedCartGuest.add(d);
-        Assert.assertEquals(exceptedCartGuest,test.getCart().getProducts());
+        Assert.assertEquals(exceptedCartGuest, test.getCart().getProducts());
     }
 
     @Test
-    public void TestGetProductById(){
+    public void TestGetProductById() {
         initialise();
-        Assert.assertEquals(a,Controller.getProductById(1111));
+        Assert.assertEquals(a, Controller.getProductById(1111));
         reset();
     }
 }

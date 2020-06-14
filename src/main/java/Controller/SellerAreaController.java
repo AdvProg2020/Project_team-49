@@ -185,7 +185,7 @@ public class SellerAreaController {
                     , productInfo.get(3)
                     , DataBase.getCategoryByName(productInfo.get(4))
                     , (Seller) Controller.currentUser
-                    , Integer.parseInt(productInfo.get(5)))));
+                    , Integer.parseInt(productInfo.get(5)), "") ));
             return "request sent";
         }
     }

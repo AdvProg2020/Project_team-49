@@ -172,7 +172,7 @@ public class DataBase {
 
     public static void startProgram() {
         dataBaseRun();
-        View.run();
+        new View().run();
     }
 
     public static void dataBaseRun() {
