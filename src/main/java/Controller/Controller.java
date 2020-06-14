@@ -3,6 +3,8 @@ package Controller;
 import Models.Product;
 
 import Models.User.*;
+import javafx.scene.chart.XYChart;
+import javafx.scene.image.Image;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -150,5 +152,56 @@ public class Controller {
         info.add(String.valueOf(currentUser.getPhoneNumber()));
         info.add(currentUser.getPassword());
         return info;
+    }
+
+    public static int getHowMuchLeftForThisPage(long start){
+        if (DataBase.allProducts.size()-start>=20){
+            return 20;
+        }else {
+            return (int)(DataBase.allProducts.size()-start);
+        }
+    }
+
+    public static ArrayList<String> getProductNameForFxml(long start){
+        int counter=0;
+        ArrayList<String> returnValue=new ArrayList<String>();
+        if (DataBase.allProducts.size()-start>=20){
+            counter=20;
+        }else{
+            counter=DataBase.allProducts.size()-(int)start;
+        }
+        for (int i = (int)start; i < (int)start+counter; i++) {
+            returnValue.add(DataBase.allProducts.get(i).getName());
+        }
+        return returnValue;
+    }
+
+    public static ArrayList<String> getProductImageForFxml(long start){
+        int counter=0;
+        ArrayList<String> returnValue=new ArrayList<String>();
+        if (DataBase.allProducts.size()-start>=20){
+            counter=20;
+        }else{
+            counter=DataBase.allProducts.size()-(int)start;
+        }
+        for (int i = (int)start; i < (int)start+counter; i++) {
+            returnValue.add(DataBase.allProducts.get(i).getImageAddress());
+        }
+        return returnValue;
+    }
+
+    public static ArrayList<Double> getProductPriceForFxml(long start){
+        int counter=0;
+        ArrayList<Double> returnValue=new ArrayList<Double>();
+        if (DataBase.allProducts.size()-start>=20){
+            counter=20;
+        }else{
+            counter=DataBase.allProducts.size()-(int)start;
+        }
+        for (int i = (int)start; i < (int)start+counter; i++) {
+            Product product= DataBase.allProducts.get(i);
+            returnValue.add(product.getPrice(product.getDefaultSeller()));
+        }
+        return returnValue;
     }
 }
