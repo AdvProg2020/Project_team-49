@@ -3,12 +3,39 @@ package View.Menu.UserArea;
 import Controller.Controller;
 import View.Menu.Menu;
 import View.View;
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.awt.image.VolatileImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
-public class GuestArea extends Menu {
+public class GuestArea extends Menu implements Initializable {
+
+    public TextField usernameReg;
+    public PasswordField passReg;
+    public PasswordField rePassReg;
+    public TextField firstNameReg;
+    public TextField lastNameReg;
+    public TextField emailReg;
+    public TextField phoneReg;
+    public ComboBox accountTypeReg;
+    public TextField extraReg;
 
     public GuestArea(Menu parentMenu) {
         super("Guest Area", parentMenu);
@@ -109,29 +136,60 @@ public class GuestArea extends Menu {
 
     private ArrayList<String> getAccountInformation(String username, String type) {
         ArrayList<String> info = new ArrayList<String>();
-        info.add(username);
-        View.printString("Enter Password:");
-        info.add(scanner.nextLine().trim());
-        View.printString("Enter First Name:");
-        info.add(scanner.nextLine().trim());
-        View.printString("Enter Last Name:");
-        info.add(scanner.nextLine().trim());
-        View.printString("Enter Email:");
-        info.add(scanner.nextLine().trim());
-        View.printString("Enter Phone Number:");
-        info.add(scanner.nextLine().trim());
-        if (type.toLowerCase().equals("seller")) {
-            View.printString("Enter Company Name:");
-            info.add(scanner.nextLine().trim());
-        }
-        if (type.toLowerCase().equals("costumer")) {
-            View.printString("Enter initial credit:");
-            info.add(scanner.nextLine().trim());
+        info.add(usernameReg.getText());
+
+        info.add(passReg.getText());
+
+        info.add(firstNameReg.getText());
+
+        info.add(lastNameReg.getText());
+
+        info.add(emailReg.getText());
+
+        info.add(phoneReg.getText());
+        if (!type.toLowerCase().equals("manager")) {
+            info.add(extraReg.getText());
         }
         return info;
     }
 
     private void doLogin() {
         this.parentMenu.run("back");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        accountTypeReg.setValue("costumer");
+        accountTypeReg.getItems().add("costumer");
+        if (!Controller.getHasHeadManager()) {
+            accountTypeReg.getItems().add("manager");
+        }
+        accountTypeReg.getItems().add("seller");
+    }
+
+    public void goLogin(MouseEvent mouseEvent) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("fxml/LoginMenu.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        window.setTitle("Login Menu");
+        Scene scene = new Scene(root);
+        window.setScene(scene);
+        window.show();
+    }
+
+    public void registerButton(MouseEvent mouseEvent) {
+
+    }
+
+    public void loginButtonEnter(MouseEvent mouseEvent) {
+        ((Button) mouseEvent.getSource()).setStyle("-fx-background-color: #80dc9c");
+    }
+
+    public void loginButtonExit(MouseEvent mouseEvent) {
+        ((Button) mouseEvent.getSource()).setStyle("-fx-background-color: #85eca5");
     }
 }

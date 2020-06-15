@@ -1,16 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="View.Menu.UserArea.GuestArea"
-            prefHeight="400.0" prefWidth="600.0">
-<ScrollPane >
-
+<ScrollPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.UserArea.GuestArea">
+   <content>
+      <Pane prefHeight="799.0" prefWidth="999.0">
+         <children>
+            <GridPane layoutX="235.0" layoutY="141.0" prefHeight="547.0" prefWidth="530.0" style="-fx-border-radius: 5; -fx-border-color: gray; -fx-padding: 10;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="170.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="364.0" minWidth="10.0" prefWidth="360.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="usernameReg" prefHeight="30.0" prefWidth="280.0" promptText="username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="passReg" prefHeight="30.0" prefWidth="280.0" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="rePassReg" prefHeight="30.0" prefWidth="280.0" promptText="repeat password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="firstNameReg" prefHeight="30.0" prefWidth="280.0" promptText="first name" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="lastNameReg" prefHeight="30.0" prefWidth="280.0" promptText="last name" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="emailReg" prefHeight="30.0" prefWidth="280.0" promptText="example@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label prefHeight="31.0" prefWidth="105.0" text="username:" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Raleway Light Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="31.0" prefWidth="105.0" text="password:" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Raleway Light Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="31.0" prefWidth="132.0" text="repeat password:" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Raleway Light Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="31.0" prefWidth="132.0" text="first name:" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Raleway Light Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="31.0" prefWidth="132.0" text="last name:" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Raleway Light Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="31.0" prefWidth="132.0" text="E-mail:" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Raleway Light Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="phoneReg" prefHeight="30.0" prefWidth="280.0" promptText="phone number" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label prefHeight="31.0" prefWidth="132.0" text="phone number:" GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Raleway Light Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="accountTypeReg" editable="true" prefHeight="31.0" prefWidth="184.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <Label prefHeight="31.0" prefWidth="132.0" text="account type:" GridPane.rowIndex="8">
+                     <font>
+                        <Font name="Raleway Light Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="extraReg" prefHeight="30.0" prefWidth="280.0" promptText="credit" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <Label prefHeight="31.0" prefWidth="132.0" text="initial credit:" GridPane.rowIndex="9">
+                     <font>
+                        <Font name="Raleway Light Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#registerButton" prefHeight="34.0" prefWidth="127.0" style="-fx-background-color: #85eca5;" text="Register" GridPane.rowIndex="10" />
+                  <Label layoutX="10.0" layoutY="398.0" onMouseClicked="#goLogin" prefHeight="31.0" prefWidth="331.0" text="If have an active account login now." textFill="#1b00ff" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                     <font>
+                        <Font name="Raleway Light Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="40.0" prefWidth="267.0" text="Create New Account" GridPane.columnSpan="2">
+                     <font>
+                        <Font name="Raleway Light" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <ImageView fitHeight="67.0" fitWidth="285.0" layoutX="400.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../photos/digikalaLogo.png" />
+               </image></ImageView>
+         </children>
+      </Pane>
+   </content>
 </ScrollPane>
-</AnchorPane>
