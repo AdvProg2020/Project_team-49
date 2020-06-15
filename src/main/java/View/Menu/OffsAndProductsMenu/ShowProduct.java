@@ -32,7 +32,9 @@ public class ShowProduct extends Menu {
                         ShowProductDetail.getOffPercentage(productId), ShowProductDetail.getExplanation(productId),
                         ShowProductDetail.getPrice(productId), ShowProductDetail.getCategory(productId),
                         ShowProductDetail.getAverageScore(productId));
-
+                if (lastCommand.equalsIgnoreCase("back")){
+                    lastCommand="show product "+productId;
+                }
                 new Digest(this).run(lastCommand);
                 this.run(lastCommand);
             }
