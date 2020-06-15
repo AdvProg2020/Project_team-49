@@ -117,6 +117,8 @@ public class SellerArea extends Menu {
                 productInfo.add(scanner.nextLine().trim());
                 View.printString("enter available items for sale:");
                 productInfo.add(scanner.nextLine().trim());
+                View.printString("enter image address:");
+                productInfo.add(scanner.nextLine().trim());
                 View.printString(SellerAreaController.addProduct(productInfo));
                 this.parentMenu.run(lastCommand);
             }
