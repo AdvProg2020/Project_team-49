@@ -266,6 +266,9 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
     public void makeGridPaneCompareOff(MouseEvent mouseEvent) {
         GridPane gridPane=(GridPane) mouseEvent.getSource();
+        if (gridPaneToCheckBox.get(gridPane).isSelected()){
+            return;
+        }
         gridPaneToCheckBox.get(gridPane).setVisible(false);
         gridPaneToCheckBox.get(gridPane).setDisable(true);
         gridPane.setEffect(null);
