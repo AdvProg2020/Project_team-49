@@ -204,4 +204,18 @@ public class Controller {
         }
         return returnValue;
     }
+
+    public static ArrayList<Long> getProductIdForFxml(long start){
+        int counter=0;
+        ArrayList<Long> returnValue=new ArrayList<Long>();
+        if (DataBase.allProducts.size()-start>=20){
+            counter=20;
+        }else{
+            counter=DataBase.allProducts.size()-(int)start;
+        }
+        for (int i = (int)start; i < (int)start+counter; i++) {
+            returnValue.add(DataBase.allProducts.get(i).getProductId());
+        }
+        return returnValue;
+    }
 }

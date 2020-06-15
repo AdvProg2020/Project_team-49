@@ -5,6 +5,8 @@ import Controller.Filter;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -54,13 +56,23 @@ public class ProductsPageMenuFxmlController implements Initializable {
     public GridPane g30;public GridPane g31;public GridPane g32;public GridPane g33;
     public GridPane g40;public GridPane g41;public GridPane g42;public GridPane g43;
 
+    public CheckBox b00;public CheckBox b01;public CheckBox b02;public CheckBox b03;
+    public CheckBox b10;public CheckBox b11;public CheckBox b12;public CheckBox b13;
+    public CheckBox b20;public CheckBox b21;public CheckBox b22;public CheckBox b23;
+    public CheckBox b30;public CheckBox b31;public CheckBox b32;public CheckBox b33;
+    public CheckBox b40;public CheckBox b41;public CheckBox b42;public CheckBox b43;
+
 
     public HashMap<GridPane,ImageView> gridPaneToImageView =new HashMap<GridPane, ImageView>();
     public HashMap<GridPane,Label> gridPaneToPriceLabel =new HashMap<GridPane, Label>();
     public HashMap<GridPane,Label> gridPaneToNameLabel =new HashMap<GridPane, Label>();
     public HashMap<GridPane,Label> gridPaneToPriceAmount =new HashMap<GridPane, Label>();
     public HashMap<GridPane,Label> gridPaneToNameAmount =new HashMap<GridPane, Label>();
+    public HashMap<GridPane,CheckBox> gridPaneToCheckBox=new HashMap<GridPane, CheckBox>();
+    public HashMap<CheckBox,GridPane> checkBoxToGridPane=new HashMap<CheckBox, GridPane>();
+    public HashMap<GridPane,Long> gridPaneToProductId =new HashMap<GridPane, Long>();
     public List<GridPane> gridPanes=new ArrayList<GridPane>();
+    public List<CheckBox> checkBoxes=new ArrayList<CheckBox>();
 
     public ListView brandFilter;
     public TextField nameFilter;
@@ -68,6 +80,8 @@ public class ProductsPageMenuFxmlController implements Initializable {
     public CheckBox availabilityFilter;
     public ListView categoriesFilter;
     public long counter=0;
+    public int currentSize=0;
+    public Button compareButton;
 
     public void filter(MouseEvent mouseEvent) {
 
@@ -162,32 +176,36 @@ public class ProductsPageMenuFxmlController implements Initializable {
         gridPaneToNameAmount.put(g42,nA42);
         gridPaneToNameAmount.put(g43,nA43);
 
-        gridPaneToPriceAmount.put(g00,pA00);
-        gridPaneToPriceAmount.put(g01,pA01);
-        gridPaneToPriceAmount.put(g02,pA02);
-        gridPaneToPriceAmount.put(g03,pA03);
-        gridPaneToPriceAmount.put(g10,pA10);
-        gridPaneToPriceAmount.put(g11,pA11);
-        gridPaneToPriceAmount.put(g12,pA12);
-        gridPaneToPriceAmount.put(g13,pA13);
-        gridPaneToPriceAmount.put(g20,pA20);
-        gridPaneToPriceAmount.put(g21,pA21);
-        gridPaneToPriceAmount.put(g22,pA22);
-        gridPaneToPriceAmount.put(g23,pA23);
-        gridPaneToPriceAmount.put(g30,pA30);
-        gridPaneToPriceAmount.put(g31,pA31);
-        gridPaneToPriceAmount.put(g33,pA32);
-        gridPaneToPriceAmount.put(g33,pA33);
-        gridPaneToPriceAmount.put(g40,pA40);
-        gridPaneToPriceAmount.put(g41,pA41);
-        gridPaneToPriceAmount.put(g43,pA42);
-        gridPaneToPriceAmount.put(g43,pA43);
+        gridPaneToPriceAmount.put(g00,pA00);gridPaneToPriceAmount.put(g01,pA01);gridPaneToPriceAmount.put(g02,pA02);gridPaneToPriceAmount.put(g03,pA03);
+        gridPaneToPriceAmount.put(g10,pA10);gridPaneToPriceAmount.put(g11,pA11);gridPaneToPriceAmount.put(g12,pA12);gridPaneToPriceAmount.put(g13,pA13);
+        gridPaneToPriceAmount.put(g20,pA20);gridPaneToPriceAmount.put(g21,pA21);gridPaneToPriceAmount.put(g22,pA22);gridPaneToPriceAmount.put(g23,pA23);
+        gridPaneToPriceAmount.put(g30,pA30);gridPaneToPriceAmount.put(g31,pA31);gridPaneToPriceAmount.put(g33,pA32);gridPaneToPriceAmount.put(g33,pA33);
+        gridPaneToPriceAmount.put(g40,pA40);gridPaneToPriceAmount.put(g41,pA41);gridPaneToPriceAmount.put(g43,pA42);gridPaneToPriceAmount.put(g43,pA43);
+
+
+        gridPaneToCheckBox.put(g00,b00);gridPaneToCheckBox.put(g01,b01);gridPaneToCheckBox.put(g02,b02);gridPaneToCheckBox.put(g03,b03);
+        gridPaneToCheckBox.put(g10,b10);gridPaneToCheckBox.put(g11,b11);gridPaneToCheckBox.put(g12,b12);gridPaneToCheckBox.put(g13,b13);
+        gridPaneToCheckBox.put(g20,b20);gridPaneToCheckBox.put(g21,b21);gridPaneToCheckBox.put(g22,b22);gridPaneToCheckBox.put(g23,b23);
+        gridPaneToCheckBox.put(g30,b30);gridPaneToCheckBox.put(g31,b31);gridPaneToCheckBox.put(g33,b32);gridPaneToCheckBox.put(g33,b33);
+        gridPaneToCheckBox.put(g40,b40);gridPaneToCheckBox.put(g41,b41);gridPaneToCheckBox.put(g43,b42);gridPaneToCheckBox.put(g43,b43);
+
+        checkBoxToGridPane.put(b00,g00);checkBoxToGridPane.put(b01,g01);checkBoxToGridPane.put(b02,g02);checkBoxToGridPane.put(b03,g03);
+        checkBoxToGridPane.put(b10,g10);checkBoxToGridPane.put(b11,g11);checkBoxToGridPane.put(b12,g12);checkBoxToGridPane.put(b13,g13);
+        checkBoxToGridPane.put(b20,g20);checkBoxToGridPane.put(b21,g21);checkBoxToGridPane.put(b22,g22);checkBoxToGridPane.put(b23,g23);
+        checkBoxToGridPane.put(b30,g30);checkBoxToGridPane.put(b31,g31);checkBoxToGridPane.put(b33,g32);checkBoxToGridPane.put(b33,g33);
+        checkBoxToGridPane.put(b40,g40);checkBoxToGridPane.put(b41,g41);checkBoxToGridPane.put(b43,g42);checkBoxToGridPane.put(b43,g43);
 
         gridPanes.add(g00);gridPanes.add(g01);gridPanes.add(g02);gridPanes.add(g03);
         gridPanes.add(g10);gridPanes.add(g11);gridPanes.add(g12);gridPanes.add(g13);
         gridPanes.add(g20);gridPanes.add(g21);gridPanes.add(g22);gridPanes.add(g23);
         gridPanes.add(g30);gridPanes.add(g31);gridPanes.add(g32);gridPanes.add(g33);
         gridPanes.add(g40);gridPanes.add(g41);gridPanes.add(g42);gridPanes.add(g43);
+
+        checkBoxes.add(b00);checkBoxes.add(b01);checkBoxes.add(b02);checkBoxes.add(b03);
+        checkBoxes.add(b10);checkBoxes.add(b11);checkBoxes.add(b12);checkBoxes.add(b13);
+        checkBoxes.add(b20);checkBoxes.add(b21);checkBoxes.add(b22);checkBoxes.add(b23);
+        checkBoxes.add(b30);checkBoxes.add(b31);checkBoxes.add(b32);checkBoxes.add(b33);
+        checkBoxes.add(b40);checkBoxes.add(b41);checkBoxes.add(b42);checkBoxes.add(b43);
 
         g11.setVisible(false);
         g11.setDisable(true);
@@ -222,21 +240,61 @@ public class ProductsPageMenuFxmlController implements Initializable {
     public void loadProduct(long start){
         clear();
         int size=Controller.getHowMuchLeftForThisPage(counter);
-        ArrayList<String > images=new ArrayList<String >();
-        images=Controller.getProductImageForFxml(counter);
-        ArrayList<Double> prices=new ArrayList<Double>();
-        prices=Controller.getProductPriceForFxml(counter);
-        ArrayList<String> names=new ArrayList<String >();
-        names=Controller.getProductNameForFxml(counter);
+        ArrayList<String> images = Controller.getProductImageForFxml(counter);
+        ArrayList<Double> prices = Controller.getProductPriceForFxml(counter);
+        ArrayList<String> names = Controller.getProductNameForFxml(counter);
+        ArrayList<Long> productId=Controller.getProductIdForFxml(counter);
         for (int i = 0; i < size; i++) {
             gridPanes.get(i).setVisible(true);
             gridPanes.get(i).setDisable(false);
-            gridPaneToImageView.get(gridPanes).setImage(new Image(images.get(i)));
-            gridPaneToNameAmount.get(gridPanes).setText(names.get(i));
-            gridPaneToPriceAmount.get(gridPanes).setText(prices.get(i).toString());
+//            gridPaneToImageView.get(gridPanes).setImage(new Image(images.get(i)));
+            gridPaneToNameAmount.get(gridPanes.get(i)).setText(names.get(i));
+            gridPaneToPriceAmount.get(gridPanes.get(i)).setText(prices.get(i).toString());
+            gridPaneToProductId.put(gridPanes.get(i),productId.get(i));
         }
+        currentSize=size;
         counter=+size;
     }
 
+    public void makeGridPaneCompareOn(MouseEvent mouseEvent) {
+        GridPane gridPane=(GridPane) mouseEvent.getSource();
+        gridPaneToCheckBox.get(gridPane).setVisible(true);
+        gridPaneToCheckBox.get(gridPane).setDisable(false);
+        DropShadow dropShadow=new DropShadow();
+        gridPane.setEffect(dropShadow);
+    }
+
+    public void makeGridPaneCompareOff(MouseEvent mouseEvent) {
+        GridPane gridPane=(GridPane) mouseEvent.getSource();
+        gridPaneToCheckBox.get(gridPane).setVisible(false);
+        gridPaneToCheckBox.get(gridPane).setDisable(true);
+        gridPane.setEffect(null);
+    }
+
+    public void makeCompareVisible(MouseEvent mouseEvent) {
+        int selected=0;
+        for (int i = 0; i < currentSize; i++) {
+            if (checkBoxes.get(i).isSelected()){
+                selected++;
+            }
+        }
+        if (selected>=2){
+            compareButton.setVisible(true);
+            compareButton.setDisable(false);
+        }else {
+            compareButton.setVisible(false);
+            compareButton.setDisable(true);
+        }
+    }
+
+    public void compare(ActionEvent actionEvent){
+        List<Long> chosen=new ArrayList<Long>();
+        for (int i = 0; i < currentSize; i++) {
+            if (checkBoxes.get(i).isSelected()){
+                chosen.add(gridPaneToProductId.get(checkBoxToGridPane.get(checkBoxes.get(i))));
+            }
+        }
+        System.out.println(chosen);
+    }
 }
 

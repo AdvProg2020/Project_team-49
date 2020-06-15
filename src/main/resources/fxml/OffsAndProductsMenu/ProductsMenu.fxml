@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.OffsAndProductsMenu.ProductsPageMenu.ProductsPageMenuFxmlController">
+<AnchorPane fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.OffsAndProductsMenu.ProductsPageMenu.ProductsPageMenuFxmlController">
    <children>
    
        <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1500.0">
@@ -40,7 +41,7 @@
                                <SepiaTone />
                            </effect>
                            <children>
-                               <GridPane fx:id="g00" onMouseClicked="#click">
+                               <GridPane fx:id="g00" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff">
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
@@ -60,12 +61,17 @@
                                        <Label fx:id="p00" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA00" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA00" layoutX="63.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b00" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <cursor>
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g01" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" onMouseClicked="#click" GridPane.columnIndex="2">
+                               <GridPane fx:id="g01" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="2">
                                    <children>
                                        <ImageView fx:id="i01" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -76,6 +82,11 @@
                                        <Label fx:id="p01" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA01" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA01" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b01" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -90,7 +101,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g02" layoutX="261.0" layoutY="10.0" onMouseClicked="#click" GridPane.columnIndex="4">
+                               <GridPane fx:id="g02" layoutX="261.0" layoutY="10.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="4">
                                    <children>
                                        <ImageView fx:id="i02" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -101,6 +112,11 @@
                                        <Label fx:id="p02" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA02" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA02" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b02" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -115,7 +131,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g03" layoutX="511.0" layoutY="10.0" onMouseClicked="#click" GridPane.columnIndex="6">
+                               <GridPane fx:id="g03" layoutX="511.0" layoutY="10.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="6">
                                    <children>
                                        <ImageView fx:id="i03" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -126,6 +142,11 @@
                                        <Label fx:id="p03" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA03" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA03" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b03" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -140,7 +161,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g10" layoutX="761.0" layoutY="10.0" onMouseClicked="#click" GridPane.rowIndex="2">
+                               <GridPane fx:id="g10" layoutX="761.0" layoutY="10.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.rowIndex="2">
                                    <children>
                                        <ImageView fx:id="i10" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -151,6 +172,11 @@
                                        <Label fx:id="p10" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA10" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA10" layoutX="63.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b10" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -165,7 +191,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g11" layoutX="10.0" layoutY="254.0" onMouseClicked="#click" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                               <GridPane fx:id="g11" layoutX="10.0" layoutY="254.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                    <children>
                                        <ImageView fx:id="i11" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -176,6 +202,11 @@
                               <Label fx:id="nA11" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                        <Label fx:id="p11" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="pA11" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b11" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -190,7 +221,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g12" layoutX="261.0" layoutY="254.0" onMouseClicked="#click" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                               <GridPane fx:id="g12" layoutX="261.0" layoutY="254.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                    <children>
                                        <ImageView fx:id="i12" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -201,6 +232,11 @@
                                        <Label fx:id="p12" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA12" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA12" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b12" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -215,7 +251,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g13" layoutX="511.0" layoutY="254.0" onMouseClicked="#click" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                               <GridPane fx:id="g13" layoutX="511.0" layoutY="254.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="6" GridPane.rowIndex="2">
                                    <children>
                                        <ImageView fx:id="i13" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -226,6 +262,11 @@
                                        <Label fx:id="p13" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA13" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA13" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b13" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -240,7 +281,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g20" layoutX="761.0" layoutY="254.0" onMouseClicked="#click" GridPane.rowIndex="4">
+                               <GridPane fx:id="g20" layoutX="761.0" layoutY="254.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.rowIndex="4">
                                    <children>
                                        <ImageView fx:id="i20" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -251,6 +292,11 @@
                                        <Label fx:id="p20" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA20" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA20" layoutX="63.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b20" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -265,7 +311,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g21" layoutX="10.0" layoutY="498.0" onMouseClicked="#click" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                               <GridPane fx:id="g21" layoutX="10.0" layoutY="498.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                    <children>
                                        <ImageView fx:id="i21" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -276,6 +322,11 @@
                                        <Label fx:id="p21" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA21" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA21" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b21" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -290,7 +341,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g22" layoutX="261.0" layoutY="498.0" onMouseClicked="#click" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                               <GridPane fx:id="g22" layoutX="261.0" layoutY="498.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                    <children>
                                        <ImageView fx:id="i22" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -301,6 +352,11 @@
                                        <Label fx:id="p22" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA22" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA22" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b22" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -315,7 +371,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g23" layoutX="511.0" layoutY="498.0" onMouseClicked="#click" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                               <GridPane fx:id="g23" layoutX="511.0" layoutY="498.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="6" GridPane.rowIndex="4">
                                    <children>
                                        <ImageView fx:id="i23" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -326,6 +382,11 @@
                                        <Label fx:id="p23" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA23" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA23" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b23" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -340,7 +401,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g30" layoutX="761.0" layoutY="498.0" onMouseClicked="#click" GridPane.rowIndex="6">
+                               <GridPane fx:id="g30" layoutX="761.0" layoutY="498.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.rowIndex="6">
                                    <children>
                                        <ImageView fx:id="i30" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -351,6 +412,11 @@
                                        <Label fx:id="p30" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA30" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA30" layoutX="63.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b30" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -365,7 +431,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g31" layoutX="10.0" layoutY="742.0" onMouseClicked="#click" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                               <GridPane fx:id="g31" layoutX="10.0" layoutY="742.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="2" GridPane.rowIndex="6">
                                    <children>
                                        <ImageView fx:id="i31" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -376,6 +442,11 @@
                                        <Label fx:id="p31" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA31" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA31" layoutX="62.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b31" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -390,7 +461,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g32" layoutX="261.0" layoutY="742.0" onMouseClicked="#click" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                               <GridPane fx:id="g32" layoutX="261.0" layoutY="742.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="4" GridPane.rowIndex="6">
                                    <children>
                                        <ImageView fx:id="i32" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -401,6 +472,11 @@
                                        <Label fx:id="p32" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA32" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA32" layoutX="62.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b32" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -415,7 +491,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g33" layoutX="511.0" layoutY="742.0" onMouseClicked="#click" GridPane.columnIndex="6" GridPane.rowIndex="6">
+                               <GridPane fx:id="g33" layoutX="511.0" layoutY="742.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="6" GridPane.rowIndex="6">
                                    <children>
                                        <ImageView fx:id="i33" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -426,6 +502,11 @@
                                        <Label fx:id="p33" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA33" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA33" layoutX="62.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b33" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -440,7 +521,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g40" layoutX="761.0" layoutY="742.0" onMouseClicked="#click" GridPane.rowIndex="8">
+                               <GridPane fx:id="g40" layoutX="761.0" layoutY="742.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.rowIndex="8">
                                    <children>
                                        <ImageView fx:id="i40" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -451,6 +532,11 @@
                                        <Label fx:id="p40" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA40" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA40" layoutX="63.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b40" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -465,7 +551,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g41" layoutX="10.0" layoutY="985.0" onMouseClicked="#click" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                               <GridPane fx:id="g41" layoutX="10.0" layoutY="985.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="2" GridPane.rowIndex="8">
                                    <children>
                                        <ImageView fx:id="i41" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -476,6 +562,11 @@
                                        <Label fx:id="p41" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA41" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA41" layoutX="62.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b42" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -490,7 +581,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g42" layoutX="261.0" layoutY="985.0" onMouseClicked="#click" GridPane.columnIndex="4" GridPane.rowIndex="8">
+                               <GridPane fx:id="g42" layoutX="261.0" layoutY="985.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="4" GridPane.rowIndex="8">
                                    <children>
                                        <ImageView fx:id="i42" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -501,6 +592,11 @@
                                        <Label fx:id="p42" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA42" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA42" layoutX="62.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b43" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -515,7 +611,7 @@
                                        <Cursor fx:constant="HAND" />
                                    </cursor>
                                </GridPane>
-                               <GridPane fx:id="g43" layoutX="511.0" layoutY="985.0" onMouseClicked="#click" GridPane.columnIndex="6" GridPane.rowIndex="8">
+                               <GridPane fx:id="g43" layoutX="511.0" layoutY="985.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" GridPane.columnIndex="6" GridPane.rowIndex="8">
                                    <children>
                                        <ImageView fx:id="i43" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                            <GridPane.margin>
@@ -526,6 +622,11 @@
                                        <Label fx:id="p43" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2" />
                               <Label fx:id="nA43" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="pA43" layoutX="62.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="b44" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" top="160.0" />
+                                 </GridPane.margin>
+                              </CheckBox>
                                    </children>
                                    <columnConstraints>
                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
@@ -576,6 +677,7 @@
                         <CheckBox fx:id="offFilter" mnemonicParsing="false" text="Off" GridPane.rowIndex="7" />
                            </children>
                        </GridPane>
+                  <Button fx:id="compareButton" disable="true" layoutX="1236.0" layoutY="790.0" mnemonicParsing="false" onAction="#compare" prefHeight="69.0" prefWidth="130.0" text="Compare" visible="false" />
                    </children>
                </Pane>
            </content>
