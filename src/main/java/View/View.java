@@ -26,10 +26,7 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
         Pane pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
-        System.out.println("deep shit");
-
         stage.setScene(new Scene(pane));
 
         stage.show();

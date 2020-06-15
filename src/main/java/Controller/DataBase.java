@@ -45,6 +45,10 @@ public class DataBase {
     public static long createdLogs = 0;
     public static long createdRequests = 0;
 
+    public static ArrayList<Category> getAllCategories() {
+        return allCategories;
+    }
+
     public static User getUserByUsername(String username) {
         for (User user : allUsers) {
             if (user.getUsername().equalsIgnoreCase(username)) {
