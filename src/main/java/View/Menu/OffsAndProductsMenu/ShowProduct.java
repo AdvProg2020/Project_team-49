@@ -1,9 +1,11 @@
 package View.Menu.OffsAndProductsMenu;
 
-import Controller.Controller;
+//import Controller.Controller;
+//import Controller.OffAndProductMenuController;
+//import Controller.ShowProductDetail;
+//import Controller.DataBase;
 import Controller.OffAndProductMenuController;
 import Controller.ShowProductDetail;
-import Controller.DataBase;
 import View.Menu.Menu;
 import View.Menu.UserArea.UserArea;
 import View.View;
@@ -84,7 +86,7 @@ public class ShowProduct extends Menu {
             }
 
             if (command.equalsIgnoreCase("log Out")) {
-                Controller.logout();
+                Controller.Controller.logout();
                 this.run(lastCommand);
             }
 
@@ -97,7 +99,7 @@ public class ShowProduct extends Menu {
             }
 
             if (command.equalsIgnoreCase("Exit")){
-                DataBase.endProgram();
+                Controller.DataBase.endProgram();
             }
 
             View.printString("Please enter valid Instruction\n" +

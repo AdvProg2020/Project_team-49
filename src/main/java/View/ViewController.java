@@ -34,6 +34,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.scene.control.Tooltip;
 
+import javax.xml.crypto.Data;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -88,17 +89,14 @@ public class ViewController implements Initializable {
     public Label category9;
     public GridPane subCategoryPain;
     public GridPane wholeCategoryPane;
-    public Label azmayesh;
     public Label subcategory00;
     public Label subcategory01;
     public Label subcategory02;
     public Label subcategory03;
     public Label subcategory04;
     public Label subcategory05;
-    public Label subcategory10;
     public Label subcategory11;
     public Label subcategory12;
-    public Label subcategory20;
     public Label subcategory21;
     public Label subcategory06;
     public Label subcategory15;
@@ -116,7 +114,6 @@ public class ViewController implements Initializable {
     public Label subcategory25;
     public Label subcategory27;
     public Label subcategory28;
-    public Label subcategory30;
     public Label subcategory31;
     public Label subcategory32;
     public Label subcategory33;
@@ -125,7 +122,7 @@ public class ViewController implements Initializable {
     public Label subcategory36;
     public Label subcategory37;
     public Label subcategory38;
-
+    private static int added = 0;
 
     private ArrayList<Label> categoryLabels = new ArrayList<>();
 
@@ -150,14 +147,56 @@ public class ViewController implements Initializable {
     private void setCategories() {
         int i = 0;
         for (Category category : DataBase.getAllCategories()) {
-            if(category.getParentCategory() == null){
+            if (category.getParentCategory() == null) {
                 categoryLabels.get(i).setText(category.getName());
                 categoryLabels.get(i).setVisible(true);
                 categoryLabels.get(i).setDisable(false);
                 i++;
             }
         }
+    }
 
+    private void setSubCategoriesContent(String categoryName) {
+        Category category = DataBase.getCategoryByName(categoryName);
+        subcategory00.setDisable(false);
+        int n = 9660;
+        char c = (char) n;
+        subcategory00.setText("All categories in " + categoryName + " " + c);
+        subcategory00.setVisible(true);
+        added = 1;
+        setSubCategories(category, 0);
+    }
+
+    private void clearSubCategoryLabels() {
+        for (Label label : subCategoryLabels) {
+            label.setText("");
+            label.setVisible(false);
+            label.setDisable(true);
+        }
+    }
+
+    private void setSubCategories(Category category, int howMuchInside) {
+        int n = 9679;
+        char c = (char) n;
+        for (Category subCategory : category.getSubCategories()) {
+            if (howMuchInside == 0) {
+                int m = 12297;
+                char M = (char) m;
+                subCategoryLabels.get(added).setText(subCategory.getName() + " " + M);
+                subCategoryLabels.get(added).setStyle("-fx-font-size: 17");
+            } else if (howMuchInside == 1) {
+
+                subCategoryLabels.get(added).setText(" " + c + " " + subCategory.getName());
+            } else if (howMuchInside == 2) {
+                subCategoryLabels.get(added).setText("  " + c + c + " " + subCategory.getName());
+            } else {
+                subCategoryLabels.get(added).setText("   " + c + c + c + " " + subCategory.getName());
+            }
+            subCategoryLabels.get(added).setVisible(true);
+            subCategoryLabels.get(added).setDisable(false);
+            added++;
+            setSubCategories(subCategory, howMuchInside + 1);
+        }
     }
 
     private void setAllCategories() {
@@ -171,22 +210,48 @@ public class ViewController implements Initializable {
         categoryLabels.add(category8);
         categoryLabels.add(category9);
 
-        subCategoryLabels.add(subcategory00);subCategoryLabels.add(subcategory01);subCategoryLabels.add(subcategory02);subCategoryLabels.add(subcategory03);
-        subCategoryLabels.add(subcategory04);subCategoryLabels.add(subcategory05);subCategoryLabels.add(subcategory06);subCategoryLabels.add(subcategory07);
-        subCategoryLabels.add(subcategory08);subCategoryLabels.add(subcategory10);subCategoryLabels.add(subcategory11);subCategoryLabels.add(subcategory12);
-        subCategoryLabels.add(subcategory13);subCategoryLabels.add(subcategory14);subCategoryLabels.add(subcategory15);subCategoryLabels.add(subcategory16);
-        subCategoryLabels.add(subcategory17);subCategoryLabels.add(subcategory18);subCategoryLabels.add(subcategory20);subCategoryLabels.add(subcategory21);
-        subCategoryLabels.add(subcategory22);subCategoryLabels.add(subcategory23);subCategoryLabels.add(subcategory24);subCategoryLabels.add(subcategory25);
-        subCategoryLabels.add(subcategory26);subCategoryLabels.add(subcategory27);subCategoryLabels.add(subcategory28);subCategoryLabels.add(subcategory30);
-        subCategoryLabels.add(subcategory31);subCategoryLabels.add(subcategory32);subCategoryLabels.add(subcategory33);subCategoryLabels.add(subcategory34);
-        subCategoryLabels.add(subcategory35);subCategoryLabels.add(subcategory36);subCategoryLabels.add(subcategory37);subCategoryLabels.add(subcategory38);
+        subCategoryLabels.add(subcategory00);
+        subCategoryLabels.add(subcategory01);
+        subCategoryLabels.add(subcategory02);
+        subCategoryLabels.add(subcategory03);
+        subCategoryLabels.add(subcategory04);
+        subCategoryLabels.add(subcategory05);
+        subCategoryLabels.add(subcategory06);
+        subCategoryLabels.add(subcategory07);
+        subCategoryLabels.add(subcategory08);
+
+
+        subCategoryLabels.add(subcategory11);
+        subCategoryLabels.add(subcategory12);
+        subCategoryLabels.add(subcategory13);
+        subCategoryLabels.add(subcategory14);
+        subCategoryLabels.add(subcategory15);
+        subCategoryLabels.add(subcategory16);
+        subCategoryLabels.add(subcategory17);
+        subCategoryLabels.add(subcategory18);
+
+        subCategoryLabels.add(subcategory21);
+        subCategoryLabels.add(subcategory22);
+        subCategoryLabels.add(subcategory23);
+        subCategoryLabels.add(subcategory24);
+        subCategoryLabels.add(subcategory25);
+        subCategoryLabels.add(subcategory26);
+        subCategoryLabels.add(subcategory27);
+        subCategoryLabels.add(subcategory28);
+
+        subCategoryLabels.add(subcategory31);
+        subCategoryLabels.add(subcategory32);
+        subCategoryLabels.add(subcategory33);
+        subCategoryLabels.add(subcategory34);
+        subCategoryLabels.add(subcategory35);
+        subCategoryLabels.add(subcategory36);
+        subCategoryLabels.add(subcategory37);
+        subCategoryLabels.add(subcategory38);
 
         allCategoryLabels.addAll(categoryLabels);
         allCategoryLabels.addAll(subCategoryLabels);
 
     }
-
-
 
     private void arrangeTooltips() {
 
@@ -245,7 +310,6 @@ public class ViewController implements Initializable {
         if (mouseEvent.getSource().equals(offersLabel)) {
             offsRectangle.setFill(Color.RED);
         }
-
     }
 
     public void outOption(MouseEvent mouseEvent) {
@@ -257,7 +321,6 @@ public class ViewController implements Initializable {
         offsRectangle.setFill(Color.WHITE);
         productsRectangle.setFill(Color.WHITE);
     }
-
 
     public void clickOnMovingPictures(MouseEvent mouseEvent) {
         timeForChangeImages = 0;
@@ -352,13 +415,19 @@ public class ViewController implements Initializable {
     }
 
     public void onCategory(MouseEvent mouseEvent) {
+        clearSubCategoryLabels();
         Label label = (Label) mouseEvent.getSource();
-        label.setStyle("-fx-background-color: aliceblue");
+        label.toFront();
+        label.setStyle("-fx-background-color: #ffffff");
+        label.setTextFill(Color.RED);
+        setSubCategoriesContent(label.getText());
     }
 
     public void outCategory(MouseEvent mouseEvent) {
         Label label = (Label) mouseEvent.getSource();
+        label.toBack();
         label.setStyle("-fx-background-color:  #C0C0C0");
+        label.setTextFill(Color.BLACK);
     }
 
     public void categoryAndProductsClicked(MouseEvent mouseEvent) {
@@ -376,7 +445,6 @@ public class ViewController implements Initializable {
             subCategoryPain.setDisable(false);
             wholeCategoryPane.setVisible(true);
             wholeCategoryPane.setDisable(false);
-
         }
     }
 
@@ -395,13 +463,16 @@ public class ViewController implements Initializable {
 
     public void enteredToSubCategory(MouseEvent mouseEvent) {
         Label label = (Label) mouseEvent.getSource();
-        label.setTextFill(Color.RED);
-
+        if (!label.equals(subcategory00)) {
+            label.setTextFill(Color.RED);
+        }
     }
 
     public void exitedFromSubCategory(MouseEvent mouseEvent) {
         Label label = (Label) mouseEvent.getSource();
-        label.setTextFill(Color.BLACK);
+        if (!label.equals(subcategory00)) {
+            label.setTextFill(Color.BLACK);
+        }
     }
 }
 

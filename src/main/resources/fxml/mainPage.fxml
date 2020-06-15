@@ -26,18 +26,21 @@
                                 <Image url="@../photos/MainMenu/mainBarImages/digikalaLogo.png" />
                             </image>
                         </ImageView>
-                        <TextField fx:id="searchField" focusTraversable="false" layoutX="232.0" layoutY="30.0" onKeyPressed="#searched" prefHeight="51.0" prefWidth="539.0" promptText="Search in Digikala ...">
+                        <TextField fx:id="searchField" focusTraversable="false" layoutX="232.0" layoutY="30.0" onKeyPressed="#searched" opacity="0.62" prefHeight="51.0" prefWidth="539.0" promptText="Search in Digikala ...">
                             <font>
-                                <Font name="Candara Light" size="16.0" />
+                                <Font name="Raleway ExtraLight" size="16.0" />
                             </font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
                         </TextField>
                         <ImageView fx:id="costumerAreaButton" fitHeight="93.0" fitWidth="93.0" layoutX="1326.0" layoutY="23.0" pickOnBounds="true">
                             <image>
                                 <Image url="@../photos/MainMenu/mainBarImages/user.png" />
                             </image>
                         </ImageView>
-                        <Rectangle fx:id="productsRectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="2.0" layoutX="29.0" layoutY="134.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="172.0" />
-                        <Rectangle fx:id="offsRectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="2.0" layoutX="222.0" layoutY="133.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="151.0" />
+                        <Rectangle fx:id="productsRectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="4.0" layoutX="29.0" layoutY="132.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="201.0" />
+                        <Rectangle fx:id="offsRectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="4.0" layoutX="249.0" layoutY="132.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="172.0" />
                         <ImageView fx:id="searchButton" fitHeight="29.0" fitWidth="28.0" layoutX="734.0" layoutY="42.0" onMouseClicked="#searchedWithSearchImage" opacity="0.27" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../photos/MainMenu/mainBarImages/search.png" />
@@ -127,28 +130,28 @@
                                 </ImageView>
                             </children>
                         </Pane>
-                        <Label fx:id="categoriesLabel" layoutX="53.0" layoutY="101.0" onMouseClicked="#categoryAndProductsClicked" onMouseEntered="#onOptions" onMouseExited="#outOption" prefHeight="29.0" prefWidth="155.0" text="Categories And Products">
+                        <Label fx:id="categoriesLabel" layoutX="53.0" layoutY="101.0" onMouseClicked="#categoryAndProductsClicked" onMouseEntered="#onOptions" onMouseExited="#outOption" prefHeight="29.0" prefWidth="181.0" text="Categories And Products">
                             <font>
-                                <Font name="Goudy Old Style" size="15.0" />
+                                <Font name="Raleway Medium" size="15.0" />
                             </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                         </Label>
-                        <ImageView fitHeight="20.0" fitWidth="27.0" layoutX="29.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="27.0" layoutX="29.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../photos/MainMenu/options/grid.png" />
                             </image>
                         </ImageView>
-                        <Label fx:id="offersLabel" layoutX="245.0" layoutY="101.0" onMouseEntered="#onOptions" onMouseExited="#outOption" prefHeight="29.0" prefWidth="140.0" text="Offers and Discounts">
+                        <Label fx:id="offersLabel" layoutX="273.0" layoutY="100.0" onMouseEntered="#onOptions" onMouseExited="#outOption" prefHeight="29.0" prefWidth="165.0" text="Offers and Discounts">
                             <font>
-                                <Font name="Goudy Old Style" size="15.0" />
+                                <Font name="Raleway Medium" size="15.0" />
                             </font>
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Label>
-                        <ImageView fitHeight="20.0" fitWidth="27.0" layoutX="222.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="27.0" layoutX="248.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../photos/MainMenu/options/percent.png" />
                             </image>
@@ -255,7 +258,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <GridPane fx:id="categoryPain" prefHeight="592.0" prefWidth="240.0" style="-fx-background-color: #C0C0C0; -fx-background-radius: 5; -fx-border-radius: 5;">
+                        <GridPane fx:id="categoryPain" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="246.0" style="-fx-background-color: #C0C0C0; -fx-background-radius: 5; -fx-border-radius: 5;" visible="false">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
@@ -271,87 +274,138 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Label fx:id="category1" alignment="CENTER" disable="true" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="53.0" prefWidth="216.0" style="-fx-border-radius: 8; -fx-background-radius: 8;" visible="false">
+                                <Label fx:id="category1" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="69.0" prefWidth="209.0" visible="false">
                                     <GridPane.margin>
-                                        <Insets left="35.0" />
+                                        <Insets left="37.0" />
                                     </GridPane.margin>
                                     <font>
-                                        <Font name="Goudy Old Style" size="12.0" />
+                                        <Font name="Raleway" size="21.0" />
                                     </font>
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
                                 </Label>
-                                <Label fx:id="category2" alignment="CENTER" disable="true" layoutX="40.0" layoutY="15.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="53.0" prefWidth="216.0" style="-fx-background-radius: 8; -fx-border-radius: 8;" visible="false" GridPane.rowIndex="1">
+                                <Label fx:id="category2" disable="true" layoutX="40.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="71.0" prefWidth="208.0" visible="false" GridPane.rowIndex="1">
                                     <GridPane.margin>
-                                        <Insets left="35.0" />
+                                        <Insets left="37.0" />
                                     </GridPane.margin>
                                     <font>
-                                        <Font name="Goudy Old Style" size="12.0" />
+                                        <Font name="Raleway" size="21.0" />
                                     </font>
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
                                 </Label>
-                                <Label fx:id="category3" alignment="CENTER" disable="true" layoutX="40.0" layoutY="63.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="53.0" prefWidth="216.0" style="-fx-border-radius: 8; -fx-background-radius: 8;" visible="false" GridPane.rowIndex="2">
+                                <Label fx:id="category3" disable="true" layoutX="40.0" layoutY="63.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="71.0" prefWidth="208.0" visible="false" GridPane.rowIndex="2">
                                     <GridPane.margin>
-                                        <Insets left="35.0" />
+                                        <Insets left="37.0" />
                                     </GridPane.margin>
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
+                           <font>
+                              <Font name="Raleway" size="21.0" />
+                           </font>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
                                 </Label>
-                                <Label fx:id="category4" alignment="CENTER" disable="true" layoutX="40.0" layoutY="111.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="53.0" prefWidth="216.0" style="-fx-background-radius: 8; -fx-border-radius: 8;" visible="false" GridPane.rowIndex="3">
+                                <Label fx:id="category4" disable="true" layoutX="40.0" layoutY="111.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="71.0" prefWidth="208.0" visible="false" GridPane.rowIndex="3">
                                     <GridPane.margin>
-                                        <Insets left="35.0" />
+                                        <Insets left="37.0" />
                                     </GridPane.margin>
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
+                           <font>
+                              <Font name="Raleway" size="21.0" />
+                           </font>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
                                 </Label>
-                                <Label fx:id="category5" alignment="CENTER" disable="true" layoutX="40.0" layoutY="111.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="53.0" prefWidth="216.0" style="-fx-background-radius: 8; -fx-border-radius: 8;" visible="false" GridPane.rowIndex="4">
+                                <Label fx:id="category5" disable="true" layoutX="40.0" layoutY="111.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="71.0" prefWidth="208.0" visible="false" GridPane.rowIndex="4">
                                     <GridPane.margin>
-                                        <Insets left="35.0" />
+                                        <Insets left="37.0" />
                                     </GridPane.margin>
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
+                           <font>
+                              <Font name="Raleway" size="21.0" />
+                           </font>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
                                 </Label>
-                                <Label fx:id="category6" alignment="CENTER" disable="true" layoutX="40.0" layoutY="111.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="53.0" prefWidth="216.0" style="-fx-background-radius: 8; -fx-border-radius: 8;" visible="false" GridPane.rowIndex="5">
+                                <Label fx:id="category6" disable="true" layoutX="40.0" layoutY="111.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="71.0" prefWidth="208.0" visible="false" GridPane.rowIndex="5">
                                     <GridPane.margin>
-                                        <Insets left="35.0" />
+                                        <Insets left="37.0" />
                                     </GridPane.margin>
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
+                           <font>
+                              <Font name="Raleway" size="21.0" />
+                           </font>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
                                 </Label>
-                                <Label fx:id="category7" alignment="CENTER" disable="true" layoutX="10.0" layoutY="159.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="53.0" prefWidth="216.0" style="-fx-background-radius: 8; -fx-border-radius: 8;" visible="false" GridPane.rowIndex="6">
+                                <Label fx:id="category7" disable="true" layoutX="10.0" layoutY="159.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="71.0" prefWidth="208.0" visible="false" GridPane.rowIndex="6">
                                     <GridPane.margin>
-                                        <Insets left="35.0" />
+                                        <Insets left="37.0" />
                                     </GridPane.margin>
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
+                           <font>
+                              <Font name="Raleway" size="21.0" />
+                           </font>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
                                 </Label>
-                                <Label fx:id="category8" alignment="CENTER" disable="true" layoutX="10.0" layoutY="255.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="53.0" prefWidth="216.0" style="-fx-background-radius: 8; -fx-border-radius: 8;" visible="false" GridPane.rowIndex="7">
+                                <Label fx:id="category8" disable="true" layoutX="10.0" layoutY="255.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="71.0" prefWidth="208.0" visible="false" GridPane.rowIndex="7">
                                     <GridPane.margin>
-                                        <Insets left="35.0" />
+                                        <Insets left="37.0" />
                                     </GridPane.margin>
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
+                           <font>
+                              <Font name="Raleway" size="21.0" />
+                           </font>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
                                 </Label>
-                                <Label fx:id="category9" alignment="CENTER" disable="true" layoutX="40.0" layoutY="63.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="53.0" prefWidth="216.0" style="-fx-background-radius: 8; -fx-border-radius: 8;" visible="false" GridPane.rowIndex="8">
+                                <Label fx:id="category9" disable="true" layoutX="40.0" layoutY="63.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickedOnACategory" onMouseEntered="#onCategory" onMouseExited="#outCategory" prefHeight="71.0" prefWidth="208.0" visible="false" GridPane.rowIndex="8">
                                     <GridPane.margin>
-                                        <Insets left="35.0" />
+                                        <Insets left="37.0" />
                                     </GridPane.margin>
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
+                           <font>
+                              <Font name="Raleway" size="21.0" />
+                           </font>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
                                 </Label>
                             </children>
                         </GridPane>
-                        <GridPane fx:id="subCategoryPain" prefHeight="90.0" prefWidth="318.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1">
+                        <GridPane fx:id="subCategoryPain" disable="true" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="624.0" prefWidth="804.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-background-radius: 5;" visible="false" GridPane.columnIndex="1">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -370,188 +424,269 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Label fx:id="subcategory00" disable="true" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false">
+                                <Label fx:id="subcategory00" disable="true" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="56.0" prefWidth="511.0" visible="false">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
                                     <font>
-                                        <Font size="18.0" />
+                                        <Font name="Raleway SemiBold" size="18.0" />
                                     </font>
                                 </Label>
                                 <Label fx:id="subcategory01" disable="true" layoutX="10.0" layoutY="22.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.rowIndex="1">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory02" disable="true" layoutX="10.0" layoutY="22.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.rowIndex="2">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory03" disable="true" layoutX="10.0" layoutY="22.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.rowIndex="3">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory04" disable="true" layoutX="10.0" layoutY="22.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.rowIndex="4">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory05" disable="true" layoutX="10.0" layoutY="22.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.rowIndex="5">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
-                                </Label>
-                                <Label fx:id="subcategory10" disable="true" layoutX="10.0" layoutY="371.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="1">
-                                    <padding>
-                                        <Insets left="13.0" />
-                                    </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory11" disable="true" layoutX="10.0" layoutY="22.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory12" disable="true" layoutX="215.0" layoutY="92.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
-                                </Label>
-                                <Label fx:id="subcategory20" disable="true" layoutX="10.0" layoutY="92.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="2">
-                                    <padding>
-                                        <Insets left="13.0" />
-                                    </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory21" disable="true" layoutX="420.0" layoutY="22.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory06" disable="true" layoutX="10.0" layoutY="371.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.rowIndex="6">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory15" disable="true" layoutX="10.0" layoutY="440.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory14" disable="true" layoutX="215.0" layoutY="162.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory13" disable="true" layoutX="215.0" layoutY="162.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory24" disable="true" layoutX="10.0" layoutY="22.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory22" disable="true" layoutX="420.0" layoutY="92.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory23" disable="true" layoutX="420.0" layoutY="162.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory07" disable="true" layoutX="10.0" layoutY="440.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.rowIndex="7">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory08" disable="true" layoutX="10.0" layoutY="509.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.rowIndex="8">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory16" disable="true" layoutX="215.0" layoutY="371.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory17" disable="true" layoutX="215.0" layoutY="371.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory18" disable="true" layoutX="215.0" layoutY="440.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory26" disable="true" layoutX="215.0" layoutY="578.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="6">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory25" disable="true" layoutX="420.0" layoutY="440.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="5">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory27" disable="true" layoutX="420.0" layoutY="371.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="7">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory28" disable="true" layoutX="420.0" layoutY="509.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="8">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
-                                </Label>
-                                <Label fx:id="subcategory30" disable="true" layoutX="420.0" layoutY="578.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="3">
-                                    <padding>
-                                        <Insets left="13.0" />
-                                    </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory31" disable="true" layoutX="420.0" layoutY="578.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory32" disable="true" layoutX="625.0" layoutY="92.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory33" disable="true" layoutX="625.0" layoutY="162.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="3">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory35" disable="true" layoutX="625.0" layoutY="232.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="5">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory34" disable="true" layoutX="625.0" layoutY="371.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="4">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory36" disable="true" layoutX="625.0" layoutY="371.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="6">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory37" disable="true" layoutX="625.0" layoutY="440.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="7">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                                 <Label fx:id="subcategory38" disable="true" layoutX="625.0" layoutY="509.0" onMouseClicked="#clickedOnACategory" onMouseEntered="#enteredToSubCategory" onMouseExited="#exitedFromSubCategory" prefHeight="46.0" prefWidth="169.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="8">
                                     <padding>
                                         <Insets left="13.0" />
                                     </padding>
+                           <font>
+                              <Font name="Raleway" size="16.0" />
+                           </font>
                                 </Label>
                             </children>
                         </GridPane>
