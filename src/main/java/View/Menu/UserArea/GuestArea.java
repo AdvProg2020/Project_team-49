@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -182,5 +183,13 @@ public class GuestArea extends Menu implements Initializable {
 
     public void registerButton(MouseEvent mouseEvent) {
 
+    }
+
+    public void loginButtonEnter(MouseEvent mouseEvent) {
+        ((Button) mouseEvent.getSource()).setStyle("-fx-background-color: #80dc9c");
+    }
+
+    public void loginButtonExit(MouseEvent mouseEvent) {
+        ((Button) mouseEvent.getSource()).setStyle("-fx-background-color: #85eca5");
     }
 }

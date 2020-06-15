@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<ScrollPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.UserArea.GuestArea">
+<ScrollPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.UserArea.GuestArea">
    <content>
       <Pane prefHeight="799.0" prefWidth="999.0">
          <children>
@@ -82,7 +83,7 @@
                         <Font name="Raleway Light Italic" size="15.0" />
                      </font>
                   </Label>
-                  <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#registerButton" prefHeight="34.0" prefWidth="127.0" text="Register" GridPane.rowIndex="10" />
+                  <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#registerButton" prefHeight="34.0" prefWidth="127.0" style="-fx-background-color: #85eca5;" text="Register" GridPane.rowIndex="10" />
                   <Label layoutX="10.0" layoutY="398.0" onMouseClicked="#goLogin" prefHeight="31.0" prefWidth="331.0" text="If have an active account login now." textFill="#1b00ff" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="10">
                      <font>
                         <Font name="Raleway Light Italic" size="15.0" />
@@ -95,7 +96,7 @@
                   </Label>
                </children>
             </GridPane>
-            <ImageView fitHeight="109.0" fitWidth="370.0" layoutX="338.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="67.0" fitWidth="285.0" layoutX="400.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../photos/digikalaLogo.png" />
                </image></ImageView>
