@@ -172,7 +172,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
             gridPane.setDisable(true);
         }
     }
-
+    //
     public void loadProduct(long start){
         clear();
         ArrayList<String> brands=new ArrayList<String>(Filter.getAvailableBrands());
