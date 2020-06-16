@@ -1,5 +1,10 @@
 package View.Menu.OffsAndProductsMenu.ProductsPageMenu;
 
+import Controller.Controller;
+import Models.Product;
+import Models.Score;
+import Models.User.Guest;
+import Models.User.User;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -41,9 +46,34 @@ public class ProductPageController implements Initializable {
     public Rectangle emptyBar2;
     public Rectangle emptyBar1;
     private ArrayList<ImageView> stars = new ArrayList<>();
+    private Product product = Controller.getSelectedProduct();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        product.addScore(new Score(new Guest(), 4.6, product));
+        product.addScore(new Score(new Guest(), 1.6, product));
+        product.addScore(new Score(new Guest(), 2.6, product));
+        product.addScore(new Score(new Guest(), .6, product));
+        product = Controller.getSelectedProduct();
+        product.setAverageScore(4.8);
+        setScoreLabels();
+        setStars();
+    }
+
+    private void setScoreLabels() {
+        String averageScore = String.valueOf(product.getAverageScore());
+        averageScore = averageScore.substring(0, 3);
+        averageScoreNumber.setText(String.valueOf(averageScore));
+        scoresNumber.setText(String.valueOf(product.getAllScores().size()));
+    }
+
+    private void setStars() {
+        double n = product.getAverageScore();
+        emptyStar1.toFront();
+        emptyStar2.toFront();
+        emptyStar3.toFront();
+        emptyStar4.toFront();
+        emptyStar5.toFront();
         stars.add(emptyStar1);
         stars.add(emptyStar2);
         stars.add(emptyStar3);
@@ -59,6 +89,35 @@ public class ProductPageController implements Initializable {
         stars.add(fullStar3);
         stars.add(fullStar4);
         stars.add(fullStar5);
-       
+        if (n < 0.5) return;
+        if (n >= 0.5 && n < 1.0) {
+            halfStar1.toFront();
+            return;
+        }
+        fullStar1.toFront();
+        if (n >= 1 && n < 1.5) return;
+        if (n >= 1.5 && n < 2.0) {
+            halfStar2.toFront();
+            return;
+        }
+        fullStar2.toFront();
+        if (n >= 2 && n < 2.5) return;
+        if (n >= 2.5 && n < 3.0) {
+            halfStar3.toFront();
+            return;
+        }
+        fullStar3.toFront();
+        if (n >= 3 && n < 3.5) return;
+        if (n >= 3.5 && n < 4.0) {
+            halfStar4.toFront();
+            return;
+        }
+        fullStar4.toFront();
+        if (n >= 4 && n < 4.5) return;
+        if (n >= 4.5 && n < 5.0) {
+            halfStar5.toFront();
+            return;
+        }
+        fullStar5.toFront();
     }
 }

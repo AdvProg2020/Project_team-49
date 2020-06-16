@@ -25,9 +25,9 @@
                                 <ImageView fitHeight="368.0" fitWidth="357.0" layoutX="993.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
                                 <Pane layoutX="200.0" layoutY="60.0" prefHeight="470.0" prefWidth="742.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;">
                                     <children>
-                                        <Label fx:id="averageScoreNumber" alignment="CENTER" layoutX="67.0" layoutY="120.0" prefHeight="150.0" prefWidth="186.0" text="4.5">
+                                        <Label fx:id="averageScoreNumber" alignment="CENTER" layoutX="65.0" layoutY="134.0" prefHeight="150.0" prefWidth="186.0" text="4.5">
                                             <font>
-                                                <Font name="Raleway" size="120.0" />
+                                                <Font name="Lato Regular" size="120.0" />
                                             </font>
                                         </Label>
                                         <GridPane fx:id="starsPane" layoutX="70.0" layoutY="286.0" prefHeight="47.0" prefWidth="186.0" style="-fx-background-color: #f7f7f7; -fx-background-radius: 8;">
@@ -168,7 +168,7 @@
                                         </GridPane>
                                         <Label fx:id="scoresNumber" alignment="CENTER" contentDisplay="CENTER" layoutX="117.0" layoutY="347.0" prefHeight="32.0" prefWidth="82.0" text="1938">
                                             <font>
-                                                <Font name="Raleway SemiBold" size="15.0" />
+                                                <Font name="Lato Regular" size="15.0" />
                                             </font>
                                         </Label>
                                         <Label layoutX="79.0" layoutY="40.0" prefHeight="53.0" prefWidth="395.0" text="Rating and reviews">

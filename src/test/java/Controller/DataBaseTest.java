@@ -74,10 +74,7 @@ public class DataBaseTest {
         d.setProductId(4);
         e.setProductId(5);
 
-
-
         allCategories.clear();
-
         allCategories.add(phone);
         allCategories.add(makeup);
         allCategories.add(mother);
@@ -93,7 +90,6 @@ public class DataBaseTest {
         for (File file : listFiles) {
             file.delete();
         }
-        dir.delete();
     }
 
     public void reset(){
@@ -134,6 +130,7 @@ public class DataBaseTest {
             clearResources();
         } else
             makeResources();
+
     }
 
     @Test
