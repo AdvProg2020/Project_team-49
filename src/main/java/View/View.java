@@ -3,6 +3,7 @@ package View;
 import View.Menu.MainMenu;
 import View.Menu.Menu;
 
+import com.sun.tools.javac.Main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,7 +27,7 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Pane pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/OffsAndProductsMenu/ProductsMenu.fxml"));
+        Parent pane = FXMLLoader.load(getClass().getResource("fxml/RegisterMenu.fxml"));
         stage.setScene(new Scene(pane));
 
         stage.show();
