@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Controller;
 import Controller.DataBase;
 import Models.Category;
 import javafx.animation.KeyFrame;
@@ -102,8 +103,6 @@ public class MainBarController implements Initializable {
     public ImageView lightBlueButton;
     public ImageView lightGrayButton;
     public ImageView lightGreenButton;
-    public AnchorPane innerPane;
-    public AnchorPane mainPane;
     public ImageView costumerAreaButton;
     public Rectangle productsRectangle;
     public Rectangle offsRectangle;
@@ -239,17 +238,23 @@ public class MainBarController implements Initializable {
     public void changeBackGroundColor(MouseEvent mouseEvent) {
 
         if (mouseEvent.getSource().equals(lightBlueButton)) {
-            innerPane.setStyle("-fx-background-color: #cee8f0");
+            Controller.setColor("cee8f0");
+//            innerPane.setStyle("-fx-background-color: #");
         } else if (mouseEvent.getSource().equals(lightGrayButton)) {
-            innerPane.setStyle("-fx-background-color:  #f3f3f3");
+            Controller.setColor("f3f3f3");
+//            innerPane.setStyle("-fx-background-color:  #f3f3f3");
         } else if (mouseEvent.getSource().equals(lightGreenButton)) {
-            innerPane.setStyle("-fx-background-color: #cdeae0");
+            Controller.setColor("cdeae0");
+//            innerPane.setStyle("-fx-background-color: #cdeae0");
         } else if (mouseEvent.getSource().equals(lightRedButton)) {
-            innerPane.setStyle("-fx-background-color: #ff726f");
+            Controller.setColor("ff726f");
+//            innerPane.setStyle("-fx-background-color: #ff726f");
         } else if (mouseEvent.getSource().equals(lightOrangeButton)) {
-            innerPane.setStyle("-fx-background-color: #feddb6");
+            Controller.setColor("feddb6");
+//            innerPane.setStyle("-fx-background-color: #feddb6");
         } else if (mouseEvent.getSource().equals(lightWhiteButton)) {
-            innerPane.setStyle("-fx-background-color: #FFFFFF");
+            Controller.setColor("FFFFFF");
+//            innerPane.setStyle("-fx-background-color: #FFFFFF");
         }
     }
 

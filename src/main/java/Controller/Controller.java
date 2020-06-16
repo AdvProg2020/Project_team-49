@@ -3,8 +3,15 @@ package Controller;
 import Models.Product;
 
 import Models.User.*;
+import javafx.geometry.Insets;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,6 +21,26 @@ public class Controller {
     public static User currentUser = new Guest();
     private static boolean hasHeadManager = false;
     private static Product selectedProduct;
+    private static Pane currentPane;
+    private static String color;
+
+    public static String getColor() {
+        return color;
+    }
+
+    public static void setColor(String color) {
+        Controller.color = color;
+        currentPane.setBackground(new Background(new BackgroundFill(Color.web("#" + color), CornerRadii.EMPTY, Insets.EMPTY)));
+        currentPane.setStyle("-fx-background-color: #" + color);
+    }
+
+    public static Pane getCurrentPane() {
+        return currentPane;
+    }
+
+    public static void setCurrentPane(Pane currentPane) {
+        Controller.currentPane = currentPane;
+    }
 
     public static User getCurrentUser() {
         return currentUser;
@@ -171,66 +198,66 @@ public class Controller {
         return info;
     }
 
-    public static int getHowMuchLeftForThisPage(long start){
-        if (DataBase.allProducts.size()-start>=20){
+    public static int getHowMuchLeftForThisPage(long start) {
+        if (DataBase.allProducts.size() - start >= 20) {
             return 20;
-        }else {
-            return (int)(DataBase.allProducts.size()-start);
+        } else {
+            return (int) (DataBase.allProducts.size() - start);
         }
     }
 
-    public static ArrayList<String> getProductNameForFxml(long start){
-        int counter=0;
-        ArrayList<String> returnValue=new ArrayList<String>();
-        if (DataBase.allProducts.size()-start>=20){
-            counter=20;
-        }else{
-            counter=DataBase.allProducts.size()-(int)start;
+    public static ArrayList<String> getProductNameForFxml(long start) {
+        int counter = 0;
+        ArrayList<String> returnValue = new ArrayList<String>();
+        if (DataBase.allProducts.size() - start >= 20) {
+            counter = 20;
+        } else {
+            counter = DataBase.allProducts.size() - (int) start;
         }
-        for (int i = (int)start; i < (int)start+counter; i++) {
+        for (int i = (int) start; i < (int) start + counter; i++) {
             returnValue.add(DataBase.allProducts.get(i).getName());
         }
         return returnValue;
     }
 
-    public static ArrayList<String> getProductImageForFxml(long start){
-        int counter=0;
-        ArrayList<String> returnValue=new ArrayList<String>();
-        if (DataBase.allProducts.size()-start>=20){
-            counter=20;
-        }else{
-            counter=DataBase.allProducts.size()-(int)start;
+    public static ArrayList<String> getProductImageForFxml(long start) {
+        int counter = 0;
+        ArrayList<String> returnValue = new ArrayList<String>();
+        if (DataBase.allProducts.size() - start >= 20) {
+            counter = 20;
+        } else {
+            counter = DataBase.allProducts.size() - (int) start;
         }
-        for (int i = (int)start; i < (int)start+counter; i++) {
+        for (int i = (int) start; i < (int) start + counter; i++) {
             returnValue.add(DataBase.allProducts.get(i).getImageAddress());
         }
         return returnValue;
     }
 
-    public static ArrayList<Double> getProductPriceForFxml(long start){
-        int counter=0;
-        ArrayList<Double> returnValue=new ArrayList<Double>();
-        if (DataBase.allProducts.size()-start>=20){
-            counter=20;
-        }else{
-            counter=DataBase.allProducts.size()-(int)start;
+    public static ArrayList<Double> getProductPriceForFxml(long start) {
+        int counter = 0;
+        ArrayList<Double> returnValue = new ArrayList<Double>();
+        if (DataBase.allProducts.size() - start >= 20) {
+            counter = 20;
+        } else {
+            counter = DataBase.allProducts.size() - (int) start;
         }
-        for (int i = (int)start; i < (int)start+counter; i++) {
-            Product product= DataBase.allProducts.get(i);
+        for (int i = (int) start; i < (int) start + counter; i++) {
+            Product product = DataBase.allProducts.get(i);
             returnValue.add(product.getPrice(product.getDefaultSeller()));
         }
         return returnValue;
     }
 
-    public static ArrayList<Long> getProductIdForFxml(long start){
-        int counter=0;
-        ArrayList<Long> returnValue=new ArrayList<Long>();
-        if (DataBase.allProducts.size()-start>=20){
-            counter=20;
-        }else{
-            counter=DataBase.allProducts.size()-(int)start;
+    public static ArrayList<Long> getProductIdForFxml(long start) {
+        int counter = 0;
+        ArrayList<Long> returnValue = new ArrayList<Long>();
+        if (DataBase.allProducts.size() - start >= 20) {
+            counter = 20;
+        } else {
+            counter = DataBase.allProducts.size() - (int) start;
         }
-        for (int i = (int)start; i < (int)start+counter; i++) {
+        for (int i = (int) start; i < (int) start + counter; i++) {
             returnValue.add(DataBase.allProducts.get(i).getProductId());
         }
         return returnValue;

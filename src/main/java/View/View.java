@@ -1,12 +1,15 @@
 package View;
 
+import Controller.Controller;
 import View.Menu.MainMenu;
 import View.Menu.Menu;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -28,6 +31,7 @@ public class View extends Application {
     public void start(Stage stage) throws Exception {
         Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
         Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
+        Controller.setCurrentPane((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
         mainMenu.getChildren().add(mainBar);
         stage.setScene(new Scene(mainMenu));
 

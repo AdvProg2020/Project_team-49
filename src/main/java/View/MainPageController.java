@@ -1,5 +1,9 @@
 package View;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import Controller.DataBase;
 import Models.Category;
 import javafx.animation.KeyFrame;
@@ -38,7 +42,7 @@ import javax.xml.crypto.Data;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ViewController implements Initializable {
+public class MainPageController implements Initializable {
     public AnchorPane innerPane;
     public AnchorPane mainPane;
     public ImageView secondMovingPicture;
@@ -142,4 +146,3 @@ public class ViewController implements Initializable {
     }
 
 }
-

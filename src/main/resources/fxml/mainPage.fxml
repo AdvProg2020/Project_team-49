@@ -15,103 +15,135 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1467.0" style="-fx-background-color: #d3d3d3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ViewController">
-    <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1467.0">
-        <AnchorPane fx:id="innerPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1096.0" prefWidth="1467.0">
-            <children>
-                <Pane fx:id="movingPicturesPane" layoutX="600.0" layoutY="209.0" prefHeight="518.0" prefWidth="854.0" style="-fx-background-radius: 5; -fx-border-radius: 5;">
-                    <children>
-                        <ImageView fx:id="secondMovingPicture" fitHeight="518.0" fitWidth="854.0" layoutX="-1.0" pickOnBounds="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" visible="false">
-                            <image>
-                                <Image url="@../photos/MainMenu/movingPictures/second.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="thirdMovingPicture" fitHeight="518.0" fitWidth="854.0" layoutX="-1.0" pickOnBounds="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" visible="false">
-                            <image>
-                                <Image url="@../photos/MainMenu/movingPictures/third.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="firstMovingPicture" fitHeight="518.0" fitWidth="854.0" layoutX="-1.0" pickOnBounds="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" visible="false">
-                            <image>
-                                <Image url="@../photos/MainMenu/movingPictures/first.png" />
-                            </image>
-                        </ImageView>
-                        <GridPane fx:id="bulletsPane" alignment="CENTER" layoutX="393.0" layoutY="468.0" prefHeight="26.0" prefWidth="81.0">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            </rowConstraints>
-                            <children>
-                                <ImageView fx:id="secondWhiteBullet" fitHeight="24.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-                                    <image>
-                                        <Image url="@../photos/MainMenu/movingPictures/whiteBullet.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fx:id="firstWhiteBullet" fitHeight="24.0" fitWidth="18.0" layoutX="46.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../photos/MainMenu/movingPictures/whiteBullet.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fx:id="thirdWhiteBullet" fitHeight="24.0" fitWidth="18.0" layoutX="10.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                                    <image>
-                                        <Image url="@../photos/MainMenu/movingPictures/whiteBullet.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fx:id="secondBlueBullet" fitHeight="24.0" fitWidth="18.0" layoutX="37.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1">
-                                    <image>
-                                        <Image url="@../photos/MainMenu/movingPictures/blueButton.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fx:id="firstBlueBullet" fitHeight="24.0" fitWidth="18.0" layoutX="10.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                    <image>
-                                        <Image url="@../photos/MainMenu/movingPictures/blueButton.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fx:id="thirdBlueBullet" fitHeight="24.0" fitWidth="18.0" layoutX="64.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2">
-                                    <image>
-                                        <Image url="@../photos/MainMenu/movingPictures/blueButton.png" />
-                                    </image>
-                                </ImageView>
-                            </children>
-                            <cursor>
-                                <Cursor fx:constant="DISAPPEAR" />
-                            </cursor>
-                        </GridPane>
-                        <ImageView fx:id="leftArrow" fitHeight="32.0" fitWidth="40.0" layoutX="14.0" layoutY="228.0" onMouseClicked="#clickOnMovingPictures" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../photos/MainMenu/movingPictures/leftArrow.png" />
-                            </image>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </ImageView>
-                        <ImageView fx:id="rightArrow" fitHeight="32.0" fitWidth="40.0" focusTraversable="true" layoutX="808.0" layoutY="228.0" onMouseClicked="#clickOnMovingPictures" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../photos/MainMenu/movingPictures/rightArrow.png" />
-                            </image>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </ImageView>
-                    </children>
-                </Pane>
-                <ImageView fitHeight="245.0" fitWidth="462.0" layoutX="30.0" layoutY="482.0" pickOnBounds="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
-                    <image>
-                        <Image url="@../photos/MainMenu/commercials/xbox1.png" />
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="245.0" fitWidth="462.0" layoutX="30.0" layoutY="209.0" pickOnBounds="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
-                    <image>
-                        <Image url="@../photos/MainMenu/commercials/ps5.jpg" />
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="186.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
-            </children>
-        </AnchorPane>
-
-    </ScrollPane>
+<AnchorPane fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="800.0" prefWidth="1467.0" style="-fx-background-color: #d3d3d3;"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="View.MainPageController">
+    <children>
+        <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+                    minWidth="-Infinity" prefHeight="800.0" prefWidth="1467.0">
+            <AnchorPane fx:id="innerPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                        minHeight="-Infinity" minWidth="-Infinity" prefHeight="1096.0" prefWidth="1467.0">
+                <children>
+                    <Pane fx:id="movingPicturesPane" layoutX="600.0" layoutY="209.0" prefHeight="518.0"
+                          prefWidth="854.0" style="-fx-background-radius: 5; -fx-border-radius: 5;">
+                        <children>
+                            <ImageView fx:id="secondMovingPicture" fitHeight="518.0" fitWidth="854.0" layoutX="-1.0"
+                                       pickOnBounds="true"
+                                       style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);"
+                                       visible="false">
+                                <image>
+                                    <Image url="@../photos/MainMenu/movingPictures/second.png"/>
+                                </image>
+                            </ImageView>
+                            <ImageView fx:id="thirdMovingPicture" fitHeight="518.0" fitWidth="854.0" layoutX="-1.0"
+                                       pickOnBounds="true"
+                                       style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);"
+                                       visible="false">
+                                <image>
+                                    <Image url="@../photos/MainMenu/movingPictures/third.png"/>
+                                </image>
+                            </ImageView>
+                            <ImageView fx:id="firstMovingPicture" fitHeight="518.0" fitWidth="854.0" layoutX="-1.0"
+                                       pickOnBounds="true"
+                                       style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);"
+                                       visible="false">
+                                <image>
+                                    <Image url="@../photos/MainMenu/movingPictures/first.png"/>
+                                </image>
+                            </ImageView>
+                            <GridPane fx:id="bulletsPane" alignment="CENTER" layoutX="393.0" layoutY="468.0"
+                                      prefHeight="26.0" prefWidth="81.0">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                </rowConstraints>
+                                <children>
+                                    <ImageView fx:id="secondWhiteBullet" fitHeight="24.0" fitWidth="18.0"
+                                               pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                                        <image>
+                                            <Image url="@../photos/MainMenu/movingPictures/whiteBullet.png"/>
+                                        </image>
+                                    </ImageView>
+                                    <ImageView fx:id="firstWhiteBullet" fitHeight="24.0" fitWidth="18.0" layoutX="46.0"
+                                               layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../photos/MainMenu/movingPictures/whiteBullet.png"/>
+                                        </image>
+                                    </ImageView>
+                                    <ImageView fx:id="thirdWhiteBullet" fitHeight="24.0" fitWidth="18.0" layoutX="10.0"
+                                               layoutY="11.0" pickOnBounds="true" preserveRatio="true"
+                                               GridPane.columnIndex="2">
+                                        <image>
+                                            <Image url="@../photos/MainMenu/movingPictures/whiteBullet.png"/>
+                                        </image>
+                                    </ImageView>
+                                    <ImageView fx:id="secondBlueBullet" fitHeight="24.0" fitWidth="18.0" layoutX="37.0"
+                                               layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false"
+                                               GridPane.columnIndex="1">
+                                        <image>
+                                            <Image url="@../photos/MainMenu/movingPictures/blueButton.png"/>
+                                        </image>
+                                    </ImageView>
+                                    <ImageView fx:id="firstBlueBullet" fitHeight="24.0" fitWidth="18.0" layoutX="10.0"
+                                               layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                        <image>
+                                            <Image url="@../photos/MainMenu/movingPictures/blueButton.png"/>
+                                        </image>
+                                    </ImageView>
+                                    <ImageView fx:id="thirdBlueBullet" fitHeight="24.0" fitWidth="18.0" layoutX="64.0"
+                                               layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false"
+                                               GridPane.columnIndex="2">
+                                        <image>
+                                            <Image url="@../photos/MainMenu/movingPictures/blueButton.png"/>
+                                        </image>
+                                    </ImageView>
+                                </children>
+                                <cursor>
+                                    <Cursor fx:constant="DISAPPEAR"/>
+                                </cursor>
+                            </GridPane>
+                            <ImageView fx:id="leftArrow" fitHeight="32.0" fitWidth="40.0" layoutX="14.0" layoutY="228.0"
+                                       onMouseClicked="#clickOnMovingPictures" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../photos/MainMenu/movingPictures/leftArrow.png"/>
+                                </image>
+                                <cursor>
+                                    <Cursor fx:constant="HAND"/>
+                                </cursor>
+                            </ImageView>
+                            <ImageView fx:id="rightArrow" fitHeight="32.0" fitWidth="40.0" focusTraversable="true"
+                                       layoutX="808.0" layoutY="228.0" onMouseClicked="#clickOnMovingPictures"
+                                       pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../photos/MainMenu/movingPictures/rightArrow.png"/>
+                                </image>
+                                <cursor>
+                                    <Cursor fx:constant="HAND"/>
+                                </cursor>
+                            </ImageView>
+                        </children>
+                    </Pane>
+                    <ImageView fitHeight="245.0" fitWidth="462.0" layoutX="30.0" layoutY="482.0" pickOnBounds="true"
+                               style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
+                        <image>
+                            <Image url="@../photos/MainMenu/commercials/xbox1.png"/>
+                        </image>
+                    </ImageView>
+                    <ImageView fitHeight="245.0" fitWidth="462.0" layoutX="30.0" layoutY="209.0" pickOnBounds="true"
+                               style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
+                        <image>
+                            <Image url="@../photos/MainMenu/commercials/ps5.jpg"/>
+                        </image>
+                    </ImageView>
+                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="186.0" layoutY="379.0" pickOnBounds="true"
+                               preserveRatio="true"/>
+                </children>
+            </AnchorPane>
+        </ScrollPane>
+    </children>
 </AnchorPane>
