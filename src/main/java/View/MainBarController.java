@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Controller;
 import Controller.DataBase;
 import Models.Category;
 import javafx.animation.KeyFrame;
@@ -38,36 +39,7 @@ import javax.xml.crypto.Data;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ViewController implements Initializable {
-
-    public ImageView digikalaImage;
-    public TextField searchField;
-    public ImageView lightRedButton;
-    public ImageView lightOrangeButton;
-    public ImageView lightWhiteButton;
-    public ImageView lightBlueButton;
-    public ImageView lightGrayButton;
-    public ImageView lightGreenButton;
-    public AnchorPane innerPane;
-    public AnchorPane mainPane;
-    public ImageView costumerAreaButton;
-    public Rectangle productsRectangle;
-    public Rectangle offsRectangle;
-    public ImageView secondMovingPicture;
-    public ImageView thirdMovingPicture;
-    public ImageView firstMovingPicture;
-    public ImageView rightArrow;
-    public ImageView leftArrow;
-    public GridPane bulletsPane;
-    public ImageView secondWhiteBullet;
-    public ImageView firstWhiteBullet;
-    public ImageView thirdWhiteBullet;
-    public ImageView firstBlueBullet;
-    public ImageView secondBlueBullet;
-    public ImageView thirdBlueBullet;
-    public Pane upBarPane;
-    public Pane movingPicturesPane;
-    private static int timeForChangeImages = 0;
+public class MainBarController implements Initializable {
     public ImageView colorWheel;
     public ImageView muteButton;
     public ImageView playMusicButton;
@@ -122,6 +94,19 @@ public class ViewController implements Initializable {
     public Label subcategory36;
     public Label subcategory37;
     public Label subcategory38;
+    public Pane upBarPane;
+    public ImageView digikalaImage;
+    public TextField searchField;
+    public ImageView lightRedButton;
+    public ImageView lightOrangeButton;
+    public ImageView lightWhiteButton;
+    public ImageView lightBlueButton;
+    public ImageView lightGrayButton;
+    public ImageView lightGreenButton;
+    public ImageView costumerAreaButton;
+    public Rectangle productsRectangle;
+    public Rectangle offsRectangle;
+
     private static int added = 0;
 
     private ArrayList<Label> categoryLabels = new ArrayList<>();
@@ -129,19 +114,10 @@ public class ViewController implements Initializable {
     private ArrayList<Label> subCategoryLabels = new ArrayList<>();
 
     private ArrayList<Label> allCategoryLabels = new ArrayList<>();
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         setAllCategories();
         setCategories();
-        firstMovingPicture.setVisible(true);
-        firstBlueBullet.setVisible(true);
-        arrangeTooltips();
-        Timeline timeline;
-        timeline = new Timeline(new KeyFrame(Duration.millis(3000), e -> run()));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
     }
 
     private void setCategories() {
@@ -253,33 +229,6 @@ public class ViewController implements Initializable {
 
     }
 
-    private void arrangeTooltips() {
-
-        Tooltip firstMovingPictureTooltip = new Tooltip("buy Call of Duty Soon");
-        firstMovingPictureTooltip.setStyle("-fx-font: normal bold 10 Langdon; "
-                + "-fx-base: #AE3522; "
-                + "-fx-text-fill: orange;");
-        Tooltip.install(firstMovingPicture, firstMovingPictureTooltip);
-        Tooltip secondMovingPictureTooltip = new Tooltip("buy Mortal Combat Soon");
-        secondMovingPictureTooltip.setStyle("-fx-font: normal bold 10 Langdon; "
-                + "-fx-base: #AE3522; "
-                + "-fx-text-fill: blue;");
-        Tooltip.install(secondMovingPicture, secondMovingPictureTooltip);
-        Tooltip thirdMovingPictureTooltip = new Tooltip("buy God of War Soon");
-        thirdMovingPictureTooltip.setStyle("-fx-font: normal bold 10 Langdon; "
-                + "-fx-base: #AE3522; "
-                + "-fx-text-fill: red;");
-        Tooltip.install(thirdMovingPicture, thirdMovingPictureTooltip);
-    }
-
-    private void run() {
-        timeForChangeImages += 3;
-        if (timeForChangeImages % 6 == 0) {
-            movePicturesRight();
-            timeForChangeImages = 0;
-        }
-    }
-
     public void searched(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             searchField.clear();
@@ -289,17 +238,23 @@ public class ViewController implements Initializable {
     public void changeBackGroundColor(MouseEvent mouseEvent) {
 
         if (mouseEvent.getSource().equals(lightBlueButton)) {
-            innerPane.setStyle("-fx-background-color: #cee8f0");
+            Controller.setColor("cee8f0");
+//            innerPane.setStyle("-fx-background-color: #");
         } else if (mouseEvent.getSource().equals(lightGrayButton)) {
-            innerPane.setStyle("-fx-background-color:  #f3f3f3");
+            Controller.setColor("f3f3f3");
+//            innerPane.setStyle("-fx-background-color:  #f3f3f3");
         } else if (mouseEvent.getSource().equals(lightGreenButton)) {
-            innerPane.setStyle("-fx-background-color: #cdeae0");
+            Controller.setColor("cdeae0");
+//            innerPane.setStyle("-fx-background-color: #cdeae0");
         } else if (mouseEvent.getSource().equals(lightRedButton)) {
-            innerPane.setStyle("-fx-background-color: #ff726f");
+            Controller.setColor("ff726f");
+//            innerPane.setStyle("-fx-background-color: #ff726f");
         } else if (mouseEvent.getSource().equals(lightOrangeButton)) {
-            innerPane.setStyle("-fx-background-color: #feddb6");
+            Controller.setColor("feddb6");
+//            innerPane.setStyle("-fx-background-color: #feddb6");
         } else if (mouseEvent.getSource().equals(lightWhiteButton)) {
-            innerPane.setStyle("-fx-background-color: #FFFFFF");
+            Controller.setColor("FFFFFF");
+//            innerPane.setStyle("-fx-background-color: #FFFFFF");
         }
     }
 
@@ -320,53 +275,6 @@ public class ViewController implements Initializable {
         }
         offsRectangle.setFill(Color.WHITE);
         productsRectangle.setFill(Color.WHITE);
-    }
-
-    public void clickOnMovingPictures(MouseEvent mouseEvent) {
-        timeForChangeImages = 0;
-        if (mouseEvent.getSource().equals(rightArrow)) {
-            movePicturesRight();
-        } else if (mouseEvent.getSource().equals(leftArrow)) {
-            movePicturesLeft();
-        }
-    }
-
-    private void movePicturesRight() {
-        if (firstMovingPicture.isVisible()) {
-            firstMovingPicture.setVisible(false);
-            firstBlueBullet.setVisible(false);
-            secondMovingPicture.setVisible(true);
-            secondBlueBullet.setVisible(true);
-        } else if (secondMovingPicture.isVisible()) {
-            secondMovingPicture.setVisible(false);
-            secondBlueBullet.setVisible(false);
-            thirdBlueBullet.setVisible(true);
-            thirdMovingPicture.setVisible(true);
-        } else if (thirdMovingPicture.isVisible()) {
-            thirdMovingPicture.setVisible(false);
-            thirdBlueBullet.setVisible(false);
-            firstBlueBullet.setVisible(true);
-            firstMovingPicture.setVisible(true);
-        }
-    }
-
-    private void movePicturesLeft() {
-        if (firstMovingPicture.isVisible()) {
-            firstMovingPicture.setVisible(false);
-            firstBlueBullet.setVisible(false);
-            thirdBlueBullet.setVisible(true);
-            thirdMovingPicture.setVisible(true);
-        } else if (secondMovingPicture.isVisible()) {
-            secondMovingPicture.setVisible(false);
-            secondBlueBullet.setVisible(false);
-            firstBlueBullet.setVisible(true);
-            firstMovingPicture.setVisible(true);
-        } else if (thirdMovingPicture.isVisible()) {
-            thirdMovingPicture.setVisible(false);
-            thirdBlueBullet.setVisible(false);
-            secondMovingPicture.setVisible(true);
-            secondBlueBullet.setVisible(true);
-        }
     }
 
     public void playOrMuteMusic(MouseEvent mouseEvent) {
@@ -411,6 +319,7 @@ public class ViewController implements Initializable {
     }
 
     public void searchedWithSearchImage(MouseEvent mouseEvent) {
+
         searchField.clear();
     }
 
@@ -457,7 +366,6 @@ public class ViewController implements Initializable {
         subCategoryPain.setDisable(true);
     }
 
-
     public void clickedOnACategory(MouseEvent mouseEvent) {
     }
 
@@ -474,5 +382,5 @@ public class ViewController implements Initializable {
             label.setTextFill(Color.BLACK);
         }
     }
-}
 
+}

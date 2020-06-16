@@ -73,6 +73,9 @@ public class ProductsPageMenuFxmlController implements Initializable {
     public HashMap<GridPane,Long> gridPaneToProductId =new HashMap<GridPane, Long>();
     public List<GridPane> gridPanes=new ArrayList<GridPane>();
     public List<CheckBox> checkBoxes=new ArrayList<CheckBox>();
+    ArrayList<CheckBox> brandsCheckBoxes=new ArrayList<>();
+    ArrayList<CheckBox> categoriesCheckBoxes=new ArrayList<>();
+
 
     public ListView brandFilter;
     public TextField nameFilter;
@@ -92,89 +95,29 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        gridPaneToImageView.put(g00,i00);
-        gridPaneToImageView.put(g01,i01);
-        gridPaneToImageView.put(g02,i02);
-        gridPaneToImageView.put(g03,i03);
-        gridPaneToImageView.put(g10,i10);
-        gridPaneToImageView.put(g11,i11);
-        gridPaneToImageView.put(g12,i12);
-        gridPaneToImageView.put(g13,i13);
-        gridPaneToImageView.put(g20,i20);
-        gridPaneToImageView.put(g21,i21);
-        gridPaneToImageView.put(g22,i22);
-        gridPaneToImageView.put(g23,i23);
-        gridPaneToImageView.put(g30,i30);
-        gridPaneToImageView.put(g31,i31);
-        gridPaneToImageView.put(g32,i32);
-        gridPaneToImageView.put(g33,i33);
-        gridPaneToImageView.put(g40,i40);
-        gridPaneToImageView.put(g41,i41);
-        gridPaneToImageView.put(g42,i42);
-        gridPaneToImageView.put(g43,i43);
+        gridPaneToImageView.put(g00,i00);gridPaneToImageView.put(g01,i01);gridPaneToImageView.put(g02,i02);gridPaneToImageView.put(g03,i03);
+        gridPaneToImageView.put(g10,i10);gridPaneToImageView.put(g11,i11);gridPaneToImageView.put(g12,i12);gridPaneToImageView.put(g13,i13);
+        gridPaneToImageView.put(g20,i20);gridPaneToImageView.put(g21,i21);gridPaneToImageView.put(g22,i22);gridPaneToImageView.put(g23,i23);
+        gridPaneToImageView.put(g30,i30);gridPaneToImageView.put(g31,i31);gridPaneToImageView.put(g32,i32);gridPaneToImageView.put(g33,i33);
+        gridPaneToImageView.put(g40,i40);gridPaneToImageView.put(g41,i41);gridPaneToImageView.put(g42,i42);gridPaneToImageView.put(g43,i43);
 
-        gridPaneToNameLabel.put(g00,n00);
-        gridPaneToNameLabel.put(g01,n01);
-        gridPaneToNameLabel.put(g02,n02);
-        gridPaneToNameLabel.put(g03,n03);
-        gridPaneToNameLabel.put(g10,n10);
-        gridPaneToNameLabel.put(g11,n11);
-        gridPaneToNameLabel.put(g12,n12);
-        gridPaneToNameLabel.put(g13,n13);
-        gridPaneToNameLabel.put(g20,n20);
-        gridPaneToNameLabel.put(g21,n21);
-        gridPaneToNameLabel.put(g22,n22);
-        gridPaneToNameLabel.put(g23,n23);
-        gridPaneToNameLabel.put(g30,n30);
-        gridPaneToNameLabel.put(g31,n31);
-        gridPaneToNameLabel.put(g32,n32);
-        gridPaneToNameLabel.put(g33,n33);
-        gridPaneToNameLabel.put(g40,n40);
-        gridPaneToNameLabel.put(g41,n41);
-        gridPaneToNameLabel.put(g42,n42);
-        gridPaneToNameLabel.put(g43,n43);
+        gridPaneToNameLabel.put(g00,n00);gridPaneToNameLabel.put(g01,n01);gridPaneToNameLabel.put(g02,n02);gridPaneToNameLabel.put(g03,n03);
+        gridPaneToNameLabel.put(g10,n10);gridPaneToNameLabel.put(g11,n11);gridPaneToNameLabel.put(g12,n12);gridPaneToNameLabel.put(g13,n13);
+        gridPaneToNameLabel.put(g20,n20);gridPaneToNameLabel.put(g21,n21);gridPaneToNameLabel.put(g22,n22);gridPaneToNameLabel.put(g23,n23);
+        gridPaneToNameLabel.put(g30,n30);gridPaneToNameLabel.put(g31,n31);gridPaneToNameLabel.put(g32,n32);gridPaneToNameLabel.put(g33,n33);
+        gridPaneToNameLabel.put(g40,n40);gridPaneToNameLabel.put(g41,n41);gridPaneToNameLabel.put(g42,n42);gridPaneToNameLabel.put(g43,n43);
 
-        gridPaneToPriceLabel.put(g00,p00);
-        gridPaneToPriceLabel.put(g01,p01);
-        gridPaneToPriceLabel.put(g02,p02);
-        gridPaneToPriceLabel.put(g03,p03);
-        gridPaneToPriceLabel.put(g10,p10);
-        gridPaneToPriceLabel.put(g11,p11);
-        gridPaneToPriceLabel.put(g12,p12);
-        gridPaneToPriceLabel.put(g13,p13);
-        gridPaneToPriceLabel.put(g20,p20);
-        gridPaneToPriceLabel.put(g21,p21);
-        gridPaneToPriceLabel.put(g22,p22);
-        gridPaneToPriceLabel.put(g23,p23);
-        gridPaneToPriceLabel.put(g30,p30);
-        gridPaneToPriceLabel.put(g31,p31);
-        gridPaneToPriceLabel.put(g32,p32);
-        gridPaneToPriceLabel.put(g33,p33);
-        gridPaneToPriceLabel.put(g40,p40);
-        gridPaneToPriceLabel.put(g41,p41);
-        gridPaneToPriceLabel.put(g42,p42);
-        gridPaneToPriceLabel.put(g43,p43);
+        gridPaneToPriceLabel.put(g00,p00);gridPaneToPriceLabel.put(g01,p01);gridPaneToPriceLabel.put(g02,p02);gridPaneToPriceLabel.put(g03,p03);
+        gridPaneToPriceLabel.put(g10,p10);gridPaneToPriceLabel.put(g11,p11);gridPaneToPriceLabel.put(g12,p12);gridPaneToPriceLabel.put(g13,p13);
+        gridPaneToPriceLabel.put(g20,p20);gridPaneToPriceLabel.put(g21,p21);gridPaneToPriceLabel.put(g22,p22);gridPaneToPriceLabel.put(g23,p23);
+        gridPaneToPriceLabel.put(g30,p30);gridPaneToPriceLabel.put(g31,p31);gridPaneToPriceLabel.put(g32,p32);gridPaneToPriceLabel.put(g33,p33);
+        gridPaneToPriceLabel.put(g40,p40);gridPaneToPriceLabel.put(g41,p41);gridPaneToPriceLabel.put(g42,p42);gridPaneToPriceLabel.put(g43,p43);
 
-        gridPaneToNameAmount.put(g00,nA00);
-        gridPaneToNameAmount.put(g01,nA01);
-        gridPaneToNameAmount.put(g02,nA02);
-        gridPaneToNameAmount.put(g03,nA03);
-        gridPaneToNameAmount.put(g10,nA10);
-        gridPaneToNameAmount.put(g11,nA11);
-        gridPaneToNameAmount.put(g12,nA12);
-        gridPaneToNameAmount.put(g13,nA13);
-        gridPaneToNameAmount.put(g20,nA20);
-        gridPaneToNameAmount.put(g21,nA21);
-        gridPaneToNameAmount.put(g22,nA22);
-        gridPaneToNameAmount.put(g23,nA23);
-        gridPaneToNameAmount.put(g30,nA30);
-        gridPaneToNameAmount.put(g31,nA31);
-        gridPaneToNameAmount.put(g32,nA32);
-        gridPaneToNameAmount.put(g33,nA33);
-        gridPaneToNameAmount.put(g40,nA40);
-        gridPaneToNameAmount.put(g41,nA41);
-        gridPaneToNameAmount.put(g42,nA42);
-        gridPaneToNameAmount.put(g43,nA43);
+        gridPaneToNameAmount.put(g00,nA00);gridPaneToNameAmount.put(g01,nA01);gridPaneToNameAmount.put(g02,nA02);gridPaneToNameAmount.put(g03,nA03);
+        gridPaneToNameAmount.put(g10,nA10);gridPaneToNameAmount.put(g11,nA11);gridPaneToNameAmount.put(g12,nA12);gridPaneToNameAmount.put(g13,nA13);
+        gridPaneToNameAmount.put(g20,nA20);gridPaneToNameAmount.put(g21,nA21);gridPaneToNameAmount.put(g22,nA22);gridPaneToNameAmount.put(g23,nA23);
+        gridPaneToNameAmount.put(g30,nA30);gridPaneToNameAmount.put(g31,nA31);gridPaneToNameAmount.put(g32,nA32);gridPaneToNameAmount.put(g33,nA33);
+        gridPaneToNameAmount.put(g40,nA40);gridPaneToNameAmount.put(g41,nA41);gridPaneToNameAmount.put(g42,nA42);gridPaneToNameAmount.put(g43,nA43);
 
         gridPaneToPriceAmount.put(g00,pA00);gridPaneToPriceAmount.put(g01,pA01);gridPaneToPriceAmount.put(g02,pA02);gridPaneToPriceAmount.put(g03,pA03);
         gridPaneToPriceAmount.put(g10,pA10);gridPaneToPriceAmount.put(g11,pA11);gridPaneToPriceAmount.put(g12,pA12);gridPaneToPriceAmount.put(g13,pA13);
@@ -207,19 +150,8 @@ public class ProductsPageMenuFxmlController implements Initializable {
         checkBoxes.add(b30);checkBoxes.add(b31);checkBoxes.add(b32);checkBoxes.add(b33);
         checkBoxes.add(b40);checkBoxes.add(b41);checkBoxes.add(b42);checkBoxes.add(b43);
 
-        g11.setVisible(false);
-        g11.setDisable(true);
-        g32.setVisible(false);
-        g32.setDisable(true);
 
-        ArrayList<String> brands=new ArrayList<String>(Filter.getAvailableBrands());
-        for (String brand : brands) {
-            brandFilter.getItems().add(brand);
-        }
-        ArrayList<String> categories=new ArrayList<String>(Filter.showSubCategories());
-        for (String category : categories) {
-            categoriesFilter.getItems().add(category);
-        }
+
 
         loadProduct(counter);
 
@@ -231,14 +163,34 @@ public class ProductsPageMenuFxmlController implements Initializable {
     }
 
     public void clear(){
+        categoriesCheckBoxes.clear();
+        brandsCheckBoxes.clear();
+        brandFilter.getItems().clear();
+        categoriesFilter.getItems().clear();
         for (GridPane gridPane : gridPanes) {
             gridPane.setVisible(false);
             gridPane.setDisable(true);
         }
     }
-
+    //
     public void loadProduct(long start){
         clear();
+        ArrayList<String> brands=new ArrayList<String>(Filter.getAvailableBrands());
+        for (String brand : brands) {
+            CheckBox checkBox=new CheckBox();
+            checkBox.setText(brand);
+            brandsCheckBoxes.add(checkBox);
+            brandFilter.getItems().add(checkBox);
+        }
+
+        ArrayList<String> categories=new ArrayList<String>(Filter.showSubCategories());
+        for (String category : categories) {
+            CheckBox checkBox=new CheckBox();
+            checkBox.setText(category);
+            categoriesCheckBoxes.add(checkBox);
+            categoriesFilter.getItems().add(checkBox);
+        }
+
         int size=Controller.getHowMuchLeftForThisPage(counter);
         ArrayList<String> images = Controller.getProductImageForFxml(counter);
         ArrayList<Double> prices = Controller.getProductPriceForFxml(counter);
