@@ -13,6 +13,23 @@ import java.util.ArrayList;
 public class Controller {
     public static User currentUser = new Guest();
     private static boolean hasHeadManager = false;
+    private static Product selectedProduct;
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static boolean isHasHeadManager() {
+        return hasHeadManager;
+    }
+
+    public static Product getSelectedProduct() {
+        return selectedProduct;
+    }
+
+    public static void setSelectedProduct(Product selectedProduct) {
+        Controller.selectedProduct = selectedProduct;
+    }
 
     //new content shart dare?
     public static String editField(String field, String newContent) {
