@@ -606,11 +606,6 @@
                                                         <Insets left="10.0" right="10.0" />
                                                     </padding>
                                                 </TextField>
-                                    <Label fx:id="thanksForYourComment" layoutX="20.0" prefHeight="93.0" prefWidth="369.0" text="Thanks for your Comment!" textFill="#fb3449">
-                                       <font>
-                                          <Font name="Raleway Bold" size="20.0" />
-                                       </font>
-                                    </Label>
                                             </children>
                                  <GridPane.margin>
                                     <Insets top="15.0" />
@@ -618,6 +613,11 @@
                                         </Pane>
                                     </children>
                                 </GridPane>
+                        <Label fx:id="thanksForYourComment" layoutX="48.0" layoutY="28.0" prefHeight="93.0" prefWidth="369.0" text="Thanks for your Comment!" textFill="#fb3449">
+                           <font>
+                              <Font name="Raleway Bold" size="20.0" />
+                           </font>
+                        </Label>
                                 <Pane fx:id="seeMoreCommentsPane" layoutX="321.0" layoutY="555.0" prefHeight="49.0" prefWidth="212.0">
                                     <children>
                                         <Label layoutX="14.0" layoutY="-5.0" prefHeight="54.0" prefWidth="157.0" text="See other comments">

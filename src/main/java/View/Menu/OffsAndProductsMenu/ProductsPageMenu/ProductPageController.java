@@ -35,8 +35,6 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 public class ProductPageController implements Initializable {
-
-
     public Label averageScoreNumber;
     public Label addressOfProduct;
     public ImageView emptyStar1;
@@ -117,7 +115,7 @@ public class ProductPageController implements Initializable {
     public Pane unavailablePane;
     public ImageView isAvailableImage;
     public ImageView notAvailableImage;
-    public Label discountPercentage1;
+
     public Label oldPrice;
     public Pane offerPane;
     public Label finalPrice;
@@ -158,20 +156,35 @@ public class ProductPageController implements Initializable {
     public ImageView rightGreen3;
     public ImageView rightGreen2;
     private int commentsIndex = 0;
-    private int commentBarRectangleHeight = 400;
     private ArrayList<ImageView> stars = new ArrayList<>();
     private ArrayList<ImageView> rateStars = new ArrayList<>();
     private ArrayList<ImageView> rateBar = new ArrayList<>();
 
-    private Product product = Controller.getSelectedProduct();
-    private boolean isBarShowed = false;
-    private int t = 0;
-    private static int sellerIndex = 0;
-
+    private Product product;
+    private int t ;
+    private static int sellerIndex ;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        product = Controller.getSelectedProduct();
+        sellerIndex = 0;
+        commentsIndex = 0;
+        t = 0;
+        doSomeDeepShit();
+        Controller.setCurrentUser(DataBase.getAllUsers().get(0));
+        product.setDoesItHaveOff(true);
 
+        setRatingStuff();
+        restartRateBar();
+        setUnavailableLabels();
+        setProductAttributes();
+        setStars();
+        setScoreLabels();
+        setCommentPane();
+        refreshScoreBar();
+    }
+
+    private void doSomeDeepShit(){
         product.addScore(new Score(new Guest(), 0, product));
         product.addScore(new Score(new Guest(), 1.6, product));
         product.addScore(new Score(new Guest(), 0.6, product));
@@ -197,22 +210,8 @@ public class ProductPageController implements Initializable {
         product.addAComment(new Comment(DataBase.getAllUsers().get(6), product, "", "it was fuck shit"));
         product.addAComment(new Comment(DataBase.getAllUsers().get(5), product, "", "deep shit"));
         product.addAComment(new Comment(DataBase.getAllUsers().get(1), product, "", "it shit"));
-        Controller.setCurrentUser(DataBase.getAllUsers().get(0));
-        product.setDoesItHaveOff(true);
 
-        commentsIndex = 0;
-        restartRateBar();
-        setRatingStuff();
-        setUnavailableLabels();
-        setProductAttributes();
-        setProductsImage();
-        setStars();
-        setScoreLabels();
-        setAddressOfProduct();
-        setCommentPane();
-        refreshScoreBar();
     }
-
 
     private void setRatingStuff() {
         rateStars.add(leftGreen1);
@@ -333,7 +332,8 @@ public class ProductPageController implements Initializable {
             e.printStackTrace();
         }
         discussionNumber.setText(String.valueOf(product.getAllComments().size()));
-
+        setProductsImage();
+        setAddressOfProduct();
     }
 
     private void setProductsImage() {
@@ -504,6 +504,7 @@ public class ProductPageController implements Initializable {
     }
 
     public void addProductToCart(MouseEvent mouseEvent) {
+
     }
 
     public void rate(MouseEvent mouseEvent) {
@@ -542,9 +543,10 @@ public class ProductPageController implements Initializable {
     }
 
     public void submitRate(MouseEvent mouseEvent) {
-        restartRateBar();
+        if(rateStarPane.isDisable()) return;
+        rateStarPane.setOpacity(0.6);
         messageTime = 0;
-
+        rateStarPane.setDisable(true);
         Boolean a = false;
         if (a) {
             buyProductFirstLabel.setVisible(true);
@@ -558,6 +560,7 @@ public class ProductPageController implements Initializable {
             timeline.setCycleCount(3);
             timeline.play();
         }
+
     }
 
     private void showDoneMessage(Label label) {
@@ -629,7 +632,6 @@ public class ProductPageController implements Initializable {
         commentRectangle.setVisible(false);
     }
 
-
     private void setAllComments() {
         disableAllCommentPanes();
         thanksForYourComment.setVisible(false);
@@ -643,7 +645,6 @@ public class ProductPageController implements Initializable {
             if (comment.getUserWhoComment().equals(Controller.getCurrentUser())) {
                 yourComment.setDisable(true);
                 yourComment.setVisible(false);
-
                 thanksForYourComment.setVisible(true);
                 submitCommentButton.setVisible(false);
                 submitCommentButton.setDisable(true);
