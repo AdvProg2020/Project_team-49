@@ -19,9 +19,9 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="808.0" prefWidth="1438.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.OffsAndProductsMenu.ProductsPageMenu.ProductPageController">
     <children>
-        <ScrollPane fx:id="mainScrollPane" layoutY="-2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="1440.0">
+        <ScrollPane fx:id="mainScrollPane" layoutY="-2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1437.0" prefWidth="1440.0">
             <content>
-                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1495.0" prefWidth="1451.0">
+                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1437.0" prefWidth="1451.0">
                     <children>
                         <Label fx:id="addressOfProduct" layoutX="14.0" layoutY="171.0" prefHeight="51.0" prefWidth="363.0" text="address">
                             <font>
@@ -248,7 +248,7 @@
                         <InnerShadow height="9.0" radius="4.5" width="11.0" />
                      </effect>
                         </Pane>
-                        <Pane layoutX="50.0" layoutY="760.0" onMouseClicked="#refreshScoreBar" prefHeight="294.0" prefWidth="492.0" style="-fx-background-color: #ffffff; -fx-border-color: #068361; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;">
+                        <Pane layoutX="6.0" layoutY="760.0" onMouseClicked="#refreshScoreBar" prefHeight="294.0" prefWidth="492.0" style="-fx-background-color: #ffffff; -fx-border-color: #068361; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;">
                             <children>
                                 <Label layoutX="18.0" layoutY="25.0" prefHeight="57.0" prefWidth="375.0" text="Rating and reviews">
                                     <font>
@@ -651,7 +651,7 @@
                         <InnerShadow height="9.0" radius="4.5" width="11.0" />
                      </effect>
                         </Pane>
-                        <Pane layoutX="50.0" layoutY="1065.0" prefHeight="133.0" prefWidth="377.0" style="-fx-background-color: #ffffff; -fx-border-color: #068361; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;">
+                        <Pane layoutX="7.0" layoutY="1076.0" prefHeight="133.0" prefWidth="377.0" style="-fx-background-color: #ffffff; -fx-border-color: #068361; -fx-border-radius: 15; -fx-background-radius: 15; -fx-border-width: 2;">
                             <children>
                                 <GridPane fx:id="rateStarPane" layoutX="27.0" layoutY="36.0" prefHeight="63.0" prefWidth="257.0" style="-fx-background-color: #f7f7f7; -fx-background-radius: 8;">
                                     <columnConstraints>

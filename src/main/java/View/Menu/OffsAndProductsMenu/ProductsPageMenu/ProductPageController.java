@@ -109,6 +109,7 @@ public class ProductPageController implements Initializable {
     public Label thanksForYourComment;
     public Label loginFirstForComment;
     public Rectangle commentRectangle;
+    public Pane yourRatingPane;
     private int messageTime = 0;
     private Random random = new Random();
     public Label discountPercentage11;
@@ -161,8 +162,8 @@ public class ProductPageController implements Initializable {
     private ArrayList<ImageView> rateBar = new ArrayList<>();
 
     private Product product;
-    private int t ;
-    private static int sellerIndex ;
+    private int t;
+    private static int sellerIndex;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -173,7 +174,7 @@ public class ProductPageController implements Initializable {
         doSomeDeepShit();
         Controller.setCurrentUser(DataBase.getAllUsers().get(0));
         product.setDoesItHaveOff(true);
-
+        setYourRate();
         setRatingStuff();
         restartRateBar();
         setUnavailableLabels();
@@ -184,7 +185,51 @@ public class ProductPageController implements Initializable {
         refreshScoreBar();
     }
 
-    private void doSomeDeepShit(){
+    private void setYourRate() {
+        boolean flag = false;
+        double n  = 0;
+        for (Score score : product.getAllScores()) {
+            if (score.getBuyer().equals(Controller.getCurrentUser())) {
+                rateStarPane.setDisable(true);
+                rateStarPane.setOpacity(0.6);
+                flag = true;
+                n = score.getScore();
+            }
+        }
+        if(flag){
+            if (n >= 0.5 && n < 1.0) {
+                leftGreen1.toFront();
+                return;
+            }
+            rightGreen1.toFront();
+            if (n >= 1 && n < 1.5) return;
+            if (n >= 1.5 && n < 2.0) {
+                leftGreen2.toFront();
+                return;
+            }
+            rightGreen2.toFront();
+            if (n >= 2 && n < 2.5) return;
+            if (n >= 2.5 && n < 3.0) {
+                leftGreen3.toFront();
+                return;
+            }
+            rightGreen3.toFront();
+            if (n >= 3 && n < 3.5) return;
+            if (n >= 3.5 && n < 4.0) {
+                leftGreen4.toFront();
+                return;
+            }
+            rightGreen4.toFront();
+            if (n >= 4 && n < 4.5) return;
+            if (n >= 4.5 && n < 5.0) {
+                leftGreen5.toFront();
+                return;
+            }
+            rightGreen5.toFront();
+        }
+    }
+
+    private void doSomeDeepShit() {
         product.addScore(new Score(new Guest(), 0, product));
         product.addScore(new Score(new Guest(), 1.6, product));
         product.addScore(new Score(new Guest(), 0.6, product));
@@ -543,7 +588,7 @@ public class ProductPageController implements Initializable {
     }
 
     public void submitRate(MouseEvent mouseEvent) {
-        if(rateStarPane.isDisable()) return;
+        if (rateStarPane.isDisable()) return;
         rateStarPane.setOpacity(0.6);
         messageTime = 0;
         rateStarPane.setDisable(true);
@@ -579,7 +624,7 @@ public class ProductPageController implements Initializable {
 
     public void seeMoreComments(MouseEvent mouseEvent) {
         commentsIndex += 4;
-        if(commentsIndex >= product.getAllComments().size()){
+        if (commentsIndex >= product.getAllComments().size()) {
             commentsIndex = 0;
         }
         setAllComments();
@@ -587,7 +632,7 @@ public class ProductPageController implements Initializable {
 
     public void submitComment(MouseEvent mouseEvent) {
         String message = userComment.getText();
-        if(message.equalsIgnoreCase("")) return;
+        if (message.equalsIgnoreCase("")) return;
         userComment.clear();
         if (Controller.getCurrentUserType().equalsIgnoreCase("guest")) {
             loginFirstForComment.setVisible(true);
@@ -712,16 +757,16 @@ public class ProductPageController implements Initializable {
         return Color.color(Math.random(), Math.random(), Math.random());
     }
 
-    private  void setCommentRectangle(){
+    private void setCommentRectangle() {
         commentRectangle.setVisible(true);
         int n = product.getAllComments().size();
-        if(n > commentsIndex + 3){
+        if (n > commentsIndex + 3) {
             commentRectangle.setHeight(400);
-        }else if(n > commentsIndex + 2){
+        } else if (n > commentsIndex + 2) {
             commentRectangle.setHeight(290);
-        }else if (n > commentsIndex + 1){
+        } else if (n > commentsIndex + 1) {
             commentRectangle.setHeight(180);
-        }else{
+        } else {
             commentRectangle.setHeight(80);
         }
     }
