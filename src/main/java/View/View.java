@@ -37,6 +37,8 @@ public class View extends Application {
         Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/productPage.fxml"));
         Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
         Controller.setCurrentPane((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+        ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
         mainMenu.getChildren().add(mainBar);
         stage.setScene(new Scene(mainMenu));
 

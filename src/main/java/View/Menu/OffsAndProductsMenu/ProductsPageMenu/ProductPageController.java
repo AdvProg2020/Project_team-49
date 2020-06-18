@@ -1,7 +1,9 @@
 package View.Menu.OffsAndProductsMenu.ProductsPageMenu;
 
 import Controller.Controller;
+import Controller.DataBase;
 import Models.Category;
+import Models.Comment;
 import Models.Product;
 import Models.Score;
 import Models.User.Guest;
@@ -10,14 +12,17 @@ import Models.User.User;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -26,6 +31,7 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class ProductPageController implements Initializable {
@@ -71,7 +77,42 @@ public class ProductPageController implements Initializable {
     public Label categoryLabel;
     public Label remainingItems;
     public ImageView rightArrow;
+    public ImageView submitCommentButton;
+    public ImageView nextComments;
+    public Pane seeMoreCommentsPane;
+    public TextField userComment;
+    public Label usernameFirstCharLabel0;
+    public Circle firstCharacterCircle0;
+    public Pane yourComment;
+    public Rectangle neverBoughtBar2;
+    public Label userNameLabel2;
+    public Label usernameFirstCharLabel2;
+    public Circle firstCharacterCircle2;
+    public Label commentContent2;
+    public Pane comment2;
+    public Rectangle neverBoughtBar3;
+    public Label userNameLabel3;
+    public Label usernameFirstCharLabel3;
+    public Circle firstCharacterCircle3;
+    public Label commentContent3;
+    public Rectangle neverBoughtBar4;
+    public Pane comment3;
+    public Label userNameLabel4;
+    public Label usernameFirstCharLabel4;
+    public Circle firstCharacterCircle4;
+    public Label commentContent4;
+    public Pane comment4;
+    public Rectangle neverBoughtBar1;
+    public Label userNameLabel1;
+    public Label usernameFirstCharLabel1;
+    public Circle firstCharacterCircle1;
+    public Label commentContent1;
+    public Pane comment1;
+    public Label thanksForYourComment;
+    public Label loginFirstForComment;
+    public Rectangle commentRectangle;
     private int messageTime = 0;
+    private Random random = new Random();
     public Label discountPercentage11;
     public Pane unavailablePane;
     public ImageView isAvailableImage;
@@ -93,21 +134,6 @@ public class ProductPageController implements Initializable {
     public Rectangle addToCartRectangle;
     public Label addToCartLabel;
     public GridPane rateStarPane;
-    public ImageView emptyRate1;
-    public ImageView halfRate1;
-    public ImageView fullRate1;
-    public ImageView emptyRate2;
-    public ImageView halfRate2;
-    public ImageView fullRate2;
-    public ImageView emptyRate3;
-    public ImageView halfRate3;
-    public ImageView fullRate3;
-    public ImageView emptyRate4;
-    public ImageView halfRate4;
-    public ImageView fullRate4;
-    public ImageView emptyRate5;
-    public ImageView halfRate5;
-    public ImageView fullRate5;
     public ImageView halfLeft1;
     public ImageView halfLeft5;
     public ImageView halfLeft4;
@@ -131,7 +157,8 @@ public class ProductPageController implements Initializable {
     public ImageView rightGreen4;
     public ImageView rightGreen3;
     public ImageView rightGreen2;
-
+    private int commentsIndex = 0;
+    private int commentBarRectangleHeight = 400;
     private ArrayList<ImageView> stars = new ArrayList<>();
     private ArrayList<ImageView> rateStars = new ArrayList<>();
     private ArrayList<ImageView> rateBar = new ArrayList<>();
@@ -157,7 +184,23 @@ public class ProductPageController implements Initializable {
         product.addScore(new Score(new Guest(), 4.6, product));
         product.addScore(new Score(new Guest(), 2.6, product));
         product.addScore(new Score(new Guest(), 4.6, product));
+
+        product.addAComment(new Comment(DataBase.getAllUsers().get(2), product, "", "it was shit"));
+        product.addAComment(new Comment(DataBase.getAllUsers().get(3), product, "", "it was deep "));
+        product.addAComment(new Comment(DataBase.getAllUsers().get(1), product, "", "it was fuck shit"));
+        product.addAComment(new Comment(DataBase.getAllUsers().get(4), product, "", "deep shit"));
+
+        product.addAComment(new Comment(DataBase.getAllUsers().get(5), product, "", "it was shit"));
+        product.addAComment(new Comment(DataBase.getAllUsers().get(3), product, "", "it was deep "));
+        product.addAComment(new Comment(DataBase.getAllUsers().get(5), product, "", "it was shit"));
+        product.addAComment(new Comment(DataBase.getAllUsers().get(3), product, "", "it was deep "));
+        product.addAComment(new Comment(DataBase.getAllUsers().get(6), product, "", "it was fuck shit"));
+        product.addAComment(new Comment(DataBase.getAllUsers().get(5), product, "", "deep shit"));
+        product.addAComment(new Comment(DataBase.getAllUsers().get(1), product, "", "it shit"));
+        Controller.setCurrentUser(DataBase.getAllUsers().get(0));
         product.setDoesItHaveOff(true);
+
+        commentsIndex = 0;
         restartRateBar();
         setRatingStuff();
         setUnavailableLabels();
@@ -166,8 +209,10 @@ public class ProductPageController implements Initializable {
         setStars();
         setScoreLabels();
         setAddressOfProduct();
+        setCommentPane();
         refreshScoreBar();
     }
+
 
     private void setRatingStuff() {
         rateStars.add(leftGreen1);
@@ -501,31 +546,183 @@ public class ProductPageController implements Initializable {
         messageTime = 0;
 
         Boolean a = false;
-        if(a){
+        if (a) {
             buyProductFirstLabel.setVisible(true);
             Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> showBuyProductMessage()));
             timeline.setCycleCount(3);
             timeline.play();
 
-        }else{
+        } else {
             submitDoneLabel.setVisible(true);
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> showDoneMessage()));
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> showDoneMessage(submitDoneLabel)));
             timeline.setCycleCount(3);
             timeline.play();
         }
     }
 
-    private void showDoneMessage() {
+    private void showDoneMessage(Label label) {
         messageTime++;
-        if(messageTime == 3){
-            submitDoneLabel.setVisible(false);
+        if (messageTime == 3) {
+            label.setVisible(false);
         }
     }
 
     private void showBuyProductMessage() {
         messageTime++;
-        if(messageTime == 3){
+        if (messageTime == 3) {
             buyProductFirstLabel.setVisible(false);
         }
     }
+
+    public void seeMoreComments(MouseEvent mouseEvent) {
+        commentsIndex += 4;
+        if(commentsIndex >= product.getAllComments().size()){
+            commentsIndex = 0;
+        }
+        setAllComments();
+    }
+
+    public void submitComment(MouseEvent mouseEvent) {
+        String message = userComment.getText();
+        if(message.equalsIgnoreCase("")) return;
+        userComment.clear();
+        if (Controller.getCurrentUserType().equalsIgnoreCase("guest")) {
+            loginFirstForComment.setVisible(true);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> showDoneMessage(loginFirstForComment)));
+            timeline.setCycleCount(3);
+            timeline.play();
+
+        } else {
+            Comment comment = new Comment(Controller.getCurrentUser(), product, "", message);
+            product.addAComment(comment);
+            yourComment.setDisable(true);
+            yourComment.setVisible(false);
+            submitCommentButton.setDisable(true);
+            submitCommentButton.setVisible(false);
+            thanksForYourComment.setVisible(true);
+            setAllComments();
+        }
+    }
+
+    private void setCommentPane() {
+        disableAllCommentPanes();
+        setAllComments();
+    }
+
+    private void disableAllCommentPanes() {
+        loginFirstForComment.setVisible(false);
+        comment1.setVisible(false);
+        comment2.setVisible(false);
+        comment3.setVisible(false);
+        comment4.setVisible(false);
+        comment1.setDisable(true);
+        comment2.setDisable(true);
+        comment3.setDisable(true);
+        comment4.setDisable(true);
+        yourComment.setVisible(false);
+        yourComment.setDisable(true);
+        thanksForYourComment.setVisible(false);
+        submitCommentButton.setDisable(true);
+        submitCommentButton.setVisible(false);
+        seeMoreCommentsPane.setDisable(true);
+        seeMoreCommentsPane.setVisible(false);
+        commentRectangle.setVisible(false);
+    }
+
+
+    private void setAllComments() {
+        disableAllCommentPanes();
+        thanksForYourComment.setVisible(false);
+        yourComment.setVisible(true);
+        yourComment.setDisable(false);
+        submitCommentButton.setVisible(true);
+        submitCommentButton.setDisable(false);
+        setCommentRectangle();
+        usernameFirstCharLabel0.setText(String.valueOf(Controller.getCurrentUser().getUsername().charAt(0)));
+        for (Comment comment : product.getAllComments()) {
+            if (comment.getUserWhoComment().equals(Controller.getCurrentUser())) {
+                yourComment.setDisable(true);
+                yourComment.setVisible(false);
+
+                thanksForYourComment.setVisible(true);
+                submitCommentButton.setVisible(false);
+                submitCommentButton.setDisable(true);
+            }
+        }
+        for (int i = commentsIndex; i < commentsIndex + 4 && i < product.getAllComments().size(); i++) {
+            Comment comment = product.getAllComments().get(i);
+            if (i == commentsIndex) {
+                comment1.setVisible(true);
+                comment1.setDisable(false);
+                userNameLabel1.setText(comment.getUserWhoComment().getUsername());
+                firstCharacterCircle1.setFill(generateRandomColor());
+                usernameFirstCharLabel1.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
+                commentContent1.setText(comment.getNote());
+                neverBoughtBar1.setVisible(true);
+                if (comment.isUserBuyThisProduct()) {
+                    neverBoughtBar1.setVisible(false);
+                }
+            } else if (i == commentsIndex + 1) {
+                comment2.setVisible(true);
+                comment2.setDisable(false);
+                userNameLabel2.setText(comment.getUserWhoComment().getUsername());
+                firstCharacterCircle2.setFill(generateRandomColor());
+                usernameFirstCharLabel2.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
+                commentContent2.setText(comment.getNote());
+                neverBoughtBar2.setVisible(true);
+                if (comment.isUserBuyThisProduct()) {
+                    neverBoughtBar2.setVisible(false);
+                }
+
+            } else if (i == commentsIndex + 2) {
+                comment3.setVisible(true);
+                comment3.setDisable(false);
+
+                userNameLabel3.setText(comment.getUserWhoComment().getUsername());
+
+                firstCharacterCircle3.setFill(generateRandomColor());
+                usernameFirstCharLabel3.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
+                commentContent3.setText(comment.getNote());
+                neverBoughtBar3.setVisible(true);
+                if (comment.isUserBuyThisProduct()) {
+                    neverBoughtBar3.setVisible(false);
+                }
+
+            } else if (i == commentsIndex + 3) {
+                comment4.setVisible(true);
+                comment4.setDisable(false);
+                userNameLabel4.setText(comment.getUserWhoComment().getUsername());
+                firstCharacterCircle4.setFill(generateRandomColor());
+                usernameFirstCharLabel4.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
+                commentContent4.setText(comment.getNote());
+                neverBoughtBar4.setVisible(true);
+                if (comment.isUserBuyThisProduct()) {
+                    neverBoughtBar4.setVisible(false);
+                }
+            }
+        }
+        if (product.getAllComments().size() > 4) {
+            seeMoreCommentsPane.setDisable(false);
+            seeMoreCommentsPane.setVisible(true);
+        }
+    }
+
+    private Color generateRandomColor() {
+        return Color.color(Math.random(), Math.random(), Math.random());
+    }
+
+    private  void setCommentRectangle(){
+        commentRectangle.setVisible(true);
+        int n = product.getAllComments().size();
+        if(n > commentsIndex + 3){
+            commentRectangle.setHeight(400);
+        }else if(n > commentsIndex + 2){
+            commentRectangle.setHeight(290);
+        }else if (n > commentsIndex + 1){
+            commentRectangle.setHeight(180);
+        }else{
+            commentRectangle.setHeight(80);
+        }
+    }
+
 }

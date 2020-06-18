@@ -58,6 +58,10 @@ public class DataBase {
         return null;
     }
 
+    public static ArrayList<User> getAllUsers() {
+        return allUsers;
+    }
+
     public static Product getProductById(long productId) {
         for (Product product : allProducts) {
             if (product.getProductId() == productId) {
