@@ -4,7 +4,11 @@ import Controller.Controller;
 import Controller.Filter;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
@@ -12,7 +16,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
+import java.awt.*;
+import java.awt.event.MouseListener;
 import java.net.URL;
+import java.nio.file.attribute.FileTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -150,9 +157,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         checkBoxes.add(b30);checkBoxes.add(b31);checkBoxes.add(b32);checkBoxes.add(b33);
         checkBoxes.add(b40);checkBoxes.add(b41);checkBoxes.add(b42);checkBoxes.add(b43);
 
-
-
-
+        Controller.restartSortedOrFilteredProduct();
         loadProduct(counter);
 
     }
@@ -175,10 +180,11 @@ public class ProductsPageMenuFxmlController implements Initializable {
     //
     public void loadProduct(long start){
         clear();
-        ArrayList<String> brands=new ArrayList<String>(Filter.getAvailableBrands());
+        ArrayList<String> brands=new ArrayList<String>(Filter.getAvailableBrands()  );
         for (String brand : brands) {
             CheckBox checkBox=new CheckBox();
             checkBox.setText(brand);
+            checkBox.setOnMouseClicked(this::filterByBrand);
             brandsCheckBoxes.add(checkBox);
             brandFilter.getItems().add(checkBox);
         }
@@ -186,13 +192,14 @@ public class ProductsPageMenuFxmlController implements Initializable {
         ArrayList<String> categories=new ArrayList<String>(Filter.showSubCategories());
         for (String category : categories) {
             CheckBox checkBox=new CheckBox();
+            checkBox.setOnMouseClicked(this::filterByCategory);
             checkBox.setText(category);
             categoriesCheckBoxes.add(checkBox);
             categoriesFilter.getItems().add(checkBox);
         }
 
         int size=Controller.getHowMuchLeftForThisPage(counter);
-        ArrayList<String> images = Controller.getProductImageForFxml(counter);
+//        ArrayList<String> images = Controller.getProductImageForFxml(counter);
         ArrayList<Double> prices = Controller.getProductPriceForFxml(counter);
         ArrayList<String> names = Controller.getProductNameForFxml(counter);
         ArrayList<Long> productId=Controller.getProductIdForFxml(counter);
@@ -251,5 +258,27 @@ public class ProductsPageMenuFxmlController implements Initializable {
         }
         System.out.println(chosen);
     }
+
+    public void filterByCategory(MouseEvent mouseEvent) {
+        for (CheckBox categoriesCheckBox : categoriesCheckBoxes) {
+            if (categoriesCheckBox.isSelected()){
+                Filter.filterByCategory(categoriesCheckBox.getText());
+            }
+        }
+        counter=0;
+        loadProduct(counter);
+    }
+
+    public void filterByBrand(MouseEvent mouseEvent) {
+        for (CheckBox brandsCheckBox : brandsCheckBoxes) {
+            if (brandsCheckBox.isSelected()){
+                Filter.filterByBrand(brandsCheckBox.getText());
+            }
+        }
+        counter=0;
+        loadProduct(counter);
+    }
+
+
 }
 

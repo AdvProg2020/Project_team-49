@@ -15,7 +15,6 @@
            <content>
                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2500.0" prefWidth="1490.0">
                    <children>
-                       <TextField fx:id="searchBox" layoutX="104.0" layoutY="58.0" onAction="#SearchFor" prefHeight="38.0" prefWidth="359.0" promptText="Search For ..." />
                        <GridPane layoutX="104.0" layoutY="296.0" prefHeight="1258.0" prefWidth="1031.0">
                            <columnConstraints>
                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -659,7 +658,7 @@
                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                               <ListView fx:id="brandFilter" onMouseClicked="#filter" prefHeight="86.0" prefWidth="249.0" GridPane.rowIndex="2">
+                               <ListView fx:id="brandFilter" onMouseClicked="#filterByBrand" prefHeight="86.0" prefWidth="249.0" GridPane.rowIndex="2">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></ListView>
@@ -669,7 +668,7 @@
                         <TextField fx:id="nameFilter" prefHeight="61.0" prefWidth="200.0" promptText="Type Name..." GridPane.rowIndex="4" />
                         <CheckBox fx:id="availabilityFilter" mnemonicParsing="false" text="Availability" GridPane.rowIndex="8" />
                         <Label prefHeight="114.0" prefWidth="301.0" text="Categories" GridPane.rowIndex="5" />
-                        <ListView fx:id="categoriesFilter" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+                        <ListView fx:id="categoriesFilter" onMouseClicked="#filterByCategory" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

@@ -30,7 +30,7 @@ public class View extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
-        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
+        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/OffsAndProductsMenu/ProductsMenu.fxml"));
         Controller.setCurrentPane((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
         mainMenu.getChildren().add(mainBar);
         stage.setScene(new Scene(mainMenu));
