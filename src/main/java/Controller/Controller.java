@@ -266,10 +266,15 @@ public class Controller {
     }
 
     public static void restartSortedOrFilteredProduct(){
-        DataBase.sortedOrFilteredProduct=allProducts;
+        DataBase.sortedOrFilteredProduct.clear();
+        DataBase.sortedOrFilteredProduct.addAll(allProducts);
     }
 
     public static void check(){
-        System.out.println(DataBase.sortedOrFilteredProduct);
+        for (Product product : allProducts) {
+            product.setImageAddress("./photos/MainMenu/commercials/xbox1.png");
+        }
     }
+
+
 }
