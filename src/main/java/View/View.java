@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Controller;
+import Models.Product;
 import View.Menu.MainMenu;
 import View.Menu.Menu;
 
@@ -20,6 +21,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static Controller.DataBase.getProductById;
+
 
 public class View extends Application {
 
@@ -29,9 +32,13 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Product product = getProductById(1);
+        Controller.setSelectedProduct(product);
+        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/productPage.fxml"));
         Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
-        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
         Controller.setCurrentPane((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+        ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
         mainMenu.getChildren().add(mainBar);
         stage.setScene(new Scene(mainMenu));
 

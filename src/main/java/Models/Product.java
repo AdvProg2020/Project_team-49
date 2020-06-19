@@ -33,7 +33,7 @@ public class Product implements Serializable {
     private int numberOfView;
     private Date productDate;
 
-    public Product(String name, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems , String imageAddress) {
+    public Product(String name, String brand, double price, String explanation, Category parentCategory, Seller seller, int remainingItems, String imageAddress) {
         this.allSellers = new ArrayList<>();
         this.availableItems = new ArrayList<>();
         this.price = new ArrayList<>();
@@ -48,6 +48,11 @@ public class Product implements Serializable {
         this.productDate = new Date();
         this.offPercentage = 0.0;
         this.imageAddress = imageAddress;
+        this.allScores = new ArrayList<>();
+    }
+
+    public ArrayList<Score> getAllScores() {
+        return allScores;
     }
 
     public String getImageAddress() {
@@ -149,7 +154,7 @@ public class Product implements Serializable {
         return productId;
     }
 
-    public void removeSeller (Seller seller) {
+    public void removeSeller(Seller seller) {
         for (int i = 0; i < allSellers.size(); i++) {
             if (allSellers.get(i).equals(seller)) {
                 price.remove(i);
@@ -182,6 +187,7 @@ public class Product implements Serializable {
     }
 
     public double getAverageScore() {
+        resetAverageScore();
         return averageScore;
     }
 
@@ -286,7 +292,7 @@ public class Product implements Serializable {
 
     public int getRemainingItemsForSeller(Seller seller) {
         for (int i = 0; i < allSellers.size(); i++) {
-            if (allSellers.get(i).getUsername()==seller.getUsername()){
+            if (allSellers.get(i).getUsername() == seller.getUsername()) {
                 return availableItems.get(i);
             }
         }
@@ -302,7 +308,7 @@ public class Product implements Serializable {
         return allSellerName;
     }
 
-    public ArrayList<Double> getAllSellerPrice(){
+    public ArrayList<Double> getAllSellerPrice() {
         return price;
     }
 
