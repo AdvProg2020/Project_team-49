@@ -78,6 +78,7 @@ public abstract class Menu {
         } else {
             nextMenu = this.subMenus.get(key);
         }
+
         nextMenu.run(command);
     }
 }

@@ -49,6 +49,10 @@ public class DataBase {
         return allCategories;
     }
 
+    public static ArrayList<Product> getAllProducts() {
+        return allProducts;
+    }
+
     public static User getUserByUsername(String username) {
         for (User user : allUsers) {
             if (user.getUsername().equalsIgnoreCase(username)) {
