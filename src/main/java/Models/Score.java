@@ -6,10 +6,10 @@ import java.io.Serializable;
 
 public class Score  implements Serializable {
     private User buyer;
-    private int score;
+    private double score;
     private Product product;
 
-    public Score(User buyer, int score, Product product) {
+    public Score(User buyer, double score, Product product) {
         this.buyer = buyer;
         this.score = score;
         this.product = product;
@@ -23,7 +23,7 @@ public class Score  implements Serializable {
         this.buyer = buyer;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 }
