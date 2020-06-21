@@ -87,7 +87,6 @@ public class CartPageController implements Initializable {
     public Pane finalPayment;
     public Circle purchaseCircle;
     public Rectangle inProgressRec;
-    public Label PurchaseLabel;
     public Label phoneNumberLabel;
     public Rectangle discountRec;
     public TextField discountTextField;
@@ -100,6 +99,7 @@ public class CartPageController implements Initializable {
     public Rectangle backToCartRectangle;
     public Rectangle confirmPurchaseRectangle;
     public Label confirmPurchaseLabel;
+    public Label purchaseLabel;
     private Cart cart;
     private int rectangleIndex = 1;
     private int productIndex = 0;
@@ -412,6 +412,9 @@ public class CartPageController implements Initializable {
             backToCartLabel.setVisible(true);
             backToCartRectangle.setDisable(false);
             backToCartRectangle.setVisible(true);
+            inProgressRec.setStyle("-fx-fill: #00bfd6");
+            purchaseCircle.setStyle("-fx-fill: #00bfd6");
+            purchaseLabel.setStyle("-fx-text-fill: #00bfd6");
 
         } else if (mouseEvent.getSource().equals(backToCartLabel) || mouseEvent.getSource().equals(backToCartRectangle)) {
             cartProductsStatusPane.setVisible(true);
@@ -421,6 +424,10 @@ public class CartPageController implements Initializable {
             confirmPurchaseLabel.setVisible(true);
             confirmPurchaseRectangle.setDisable(false);
             confirmPurchaseRectangle.setVisible(true);
+
+            inProgressRec.setStyle("-fx-fill: #959595");
+            purchaseCircle.setStyle("-fx-fill: #959595");
+            purchaseLabel.setStyle("-fx-text-fill: #959595");
         }
 
     }
@@ -442,6 +449,7 @@ public class CartPageController implements Initializable {
         phoneNumberTextField.clear();
         addressTextField.clear();
         explanationsTextField.clear();
+        discountTextField.clear();
         priceToPayLabel.setText(String.valueOf(cart.calculateFinalPrice()));
     }
 
