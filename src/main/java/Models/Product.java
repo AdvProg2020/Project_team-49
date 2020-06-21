@@ -171,7 +171,8 @@ public class Product implements Serializable {
 
     public double getPrice(Seller seller) {
         for (int i = 0; i < allSellers.size(); i++) {
-            if (allSellers.get(i).equals(seller)) {
+            if (allSellers.get(i).getUsername().equalsIgnoreCase(seller.getUsername()) && allSellers.get(i).getCompanyName().equalsIgnoreCase(seller.getCompanyName())
+            && allSellers.get(i).getEMail().equalsIgnoreCase(seller.getEMail())) {
                 return price.get(i);
             }
         }
@@ -291,11 +292,14 @@ public class Product implements Serializable {
     }
 
     public int getRemainingItemsForSeller(Seller seller) {
+
         for (int i = 0; i < allSellers.size(); i++) {
-            if (allSellers.get(i).getUsername() == seller.getUsername()) {
+            if (allSellers.get(i).getUsername().equals(seller.getUsername()) && allSellers.get(i).getCompanyName().equals(seller.getCompanyName())
+                && allSellers.get(i).getEMail().equals(seller.getEMail())) {
                 return availableItems.get(i);
             }
         }
+
 //        return availableItems.get(allSellers.indexOf(seller));
         return 0;
     }
@@ -314,7 +318,7 @@ public class Product implements Serializable {
 
     public void addAvailableItemsForSeller(Seller seller, int count) {
         for (int i = 0; i < allSellers.size(); i++) {
-            if (allSellers.get(i).equals(seller)) {
+            if (allSellers.get(i).getUsername().equals(seller.getUsername())) {
                 availableItems.set(i, availableItems.get(i) + count);
                 return;
             }
