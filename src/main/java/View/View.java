@@ -34,14 +34,14 @@ public class View extends Application {
     public void start(Stage stage) throws Exception {
         Product product = getProductById(1);
         Controller.setSelectedProduct(product);
-        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/productPage.fxml"));
-        Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml"));
+//        Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
         Controller.setCurrentPane((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
         ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
-        scrollPane.setPrefHeight(800);
-        mainMenu.getChildren().add(mainBar);
-        stage.setScene(new Scene(mainMenu));
-
+        scrollPane.setPrefHeight(700);
+//        mainMenu.getChildren().add(mainBar);
+        Scene scene =  new Scene(mainMenu);
+        stage.setScene(scene);
         stage.show();
     }
 

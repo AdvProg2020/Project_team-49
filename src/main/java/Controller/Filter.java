@@ -382,6 +382,8 @@ public class Filter {
             filterByCategory(categoryName);
         if (isItFilteredByAvailability)
             filterByAvailability();
+
+        updateAvailableBrands();
     }
 
     public static ArrayList<String> updateAvailableBrands() {

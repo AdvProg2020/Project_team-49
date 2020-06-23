@@ -34,10 +34,10 @@ public class DataBaseTest {
     static Category car = new Category("bmw", "", father);
     static Category child = new Category("child", null, car);
     static Product a = new Product("phone", "apple", 1000.0, "nothing", phone, seller1, 10 , "..");
-    static Product b = new Product("plakolang", "iran", 10.0, "nothing", car, seller1, 0,"..");
+    static Product b = new Product("plakolang", "iran", 10.0, "nothing", car, seller1, 5,"..");
     static Product c = new Product("S9", "samsung", 7000.0, "nothing", phone, seller1, 1000,"..");
     static Product d = new Product("yaghe7", "nikooTanPoosh", 5.0, "nothing", shirt, seller1, 1000,"..");
-    static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, seller1, 0,"..");
+    static Product e = new Product("poster", "LMV", 500.0, "nothing", makeup, seller1, 20,"..");
     static Costumer costumer1 = new Costumer("alim1379", "ali", "mehrabani", "alim1379@gmail.com", 1288888, "alialiali", 0);
     static Costumer costumer2 = new Costumer("alireza_hr", "alireza", "heidari", "alireza@gmail.com", 1777, "alirezaalireza", 0);
     static Costumer costumer3 = new Costumer("hamid_Tala", "hamid", "yaghobi", "yaghobi@gmail.com", 12338, "hamidhamid", 0);
