@@ -49,6 +49,34 @@ public class DataBase {
         return allCategories;
     }
 
+    public static ArrayList<Product> getAllProducts() {
+        return allProducts;
+    }
+    
+//    private void setReferences(){
+//        for (Product product : allProducts) {
+//            Category category = product.getParentCategory();
+//            ArrayList<Seller> sellers = product.getAllSellers();
+//            for (Category allCategory : allCategories) {
+//                if(allCategory.getName().equals(category) && allCategory.getSpecialAttributes().equals(category.getSpecialAttributes())){
+//                    category = allCategory;
+//                    break;
+//                }
+//            }
+//            for (Seller seller : sellers) {
+//                for (User allUser : allUsers) {
+//                    if(allUser.getType().equalsIgnoreCase("seller")){
+//                        Seller seller1 = (Seller) allUser;
+//                        if(seller1.getEMail().equals(seller.getEMail()) && seller.getUsername().equals(seller1.getUsername()) &&
+//                            seller.getCompanyName().equals(seller1.getCompanyName()) && seller.getFirstName().equals(seller1.getFirstName())){
+//                            seller = seller1;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+
     public static User getUserByUsername(String username) {
         for (User user : allUsers) {
             if (user.getUsername().equalsIgnoreCase(username)) {
