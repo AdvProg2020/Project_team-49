@@ -265,12 +265,27 @@ public class Controller {
         return returnValue;
     }
 
+    public static ArrayList<Boolean> getOffForFxml(long start) {
+        int counter = 0;
+        ArrayList<Boolean> returnValue = new ArrayList<Boolean>();
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
+            counter = 20;
+        } else {
+            counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
+        }
+        for (int i = (int) start; i < (int) start + counter; i++) {
+            returnValue.add(DataBase.sortedOrFilteredProduct.get(i).getDoesItHaveOff());
+        }
+        return returnValue;
+    }
+
     public static void restartSortedOrFilteredProduct(){
         DataBase.sortedOrFilteredProduct.clear();
         DataBase.sortedOrFilteredProduct.addAll(allProducts);
     }
 
     public static void check(){
+        allProducts.get(2).setDoesItHaveOff(true);
         for (Product product : allProducts) {
             product.setImageAddress("./photos/MainMenu/commercials/xbox1.png");
         }

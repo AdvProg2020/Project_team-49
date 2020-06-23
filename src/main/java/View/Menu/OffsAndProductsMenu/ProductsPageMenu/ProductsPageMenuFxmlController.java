@@ -2,38 +2,38 @@ package View.Menu.OffsAndProductsMenu.ProductsPageMenu;
 
 import Controller.Controller;
 import Controller.Filter;
+import Controller.Sort;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import org.jeasy.random.randomizers.net.UrlRandomizer;
 
-import java.awt.*;
-import java.awt.event.MouseListener;
 import java.net.URL;
-import java.nio.file.attribute.FileTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ProductsPageMenuFxmlController implements Initializable {
-    public TextField searchBox;
     public ImageView i00;public ImageView i01;public ImageView i02;public ImageView i03;
     public ImageView i10;public ImageView i11;public ImageView i12;public ImageView i13;
     public ImageView i20;public ImageView i21;public ImageView i22;public ImageView i23;
     public ImageView i30;public ImageView i31;public ImageView i32;public ImageView i33;
     public ImageView i40;public ImageView i41;public ImageView i42;public ImageView i43;
+
+    public ImageView off00;public ImageView off01;public ImageView off02;public ImageView off03;
+    public ImageView off10;public ImageView off11;public ImageView off12;public ImageView off13;
+    public ImageView off20;public ImageView off21;public ImageView off22;public ImageView off23;
+    public ImageView off30;public ImageView off31;public ImageView off32;public ImageView off33;
+    public ImageView off40;public ImageView off41;public ImageView off42;public ImageView off43;
 
     public Label n00;public Label n01;public Label n02;public Label n03;
     public Label n10;public Label n11;public Label n12;public Label n13;
@@ -80,15 +80,28 @@ public class ProductsPageMenuFxmlController implements Initializable {
     public HashMap<GridPane,CheckBox> gridPaneToCheckBox=new HashMap<GridPane, CheckBox>();
     public HashMap<CheckBox,GridPane> checkBoxToGridPane=new HashMap<CheckBox, GridPane>();
     public HashMap<GridPane,Long> gridPaneToProductId =new HashMap<GridPane, Long>();
+    public HashMap<GridPane,ImageView> gridPaneToOff =new HashMap<GridPane, ImageView>();
     public List<GridPane> gridPanes=new ArrayList<GridPane>();
     public List<CheckBox> checkBoxes=new ArrayList<CheckBox>();
-    public GridPane filteringGridPane;
-    public FlowPane filteringFlowPane;
     public Label categoriesLabel;
-    public ImageView viewButton;
-    public Label viewLable;
+    public FlowPane brandFlowPane;
+
+
     ArrayList<CheckBox> brandsCheckBoxes=new ArrayList<>();
     ArrayList<Label> categoriesCheckBoxes=new ArrayList<Label>();
+
+
+    public ImageView viewButton;
+    public Label viewLabel;
+    public ImageView timeButton;
+    public ImageView timeButtonClicked;
+    public Label timeLabel;
+    public ImageView scoreButton;
+    public Label scoreLabel;
+    public boolean timeClicked =false;
+    public boolean scoreClicked=false;
+    public boolean viewClicked=false;
+
 
 
     public ListView brandFilter;
@@ -98,7 +111,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
     public ListView categoriesFilter;
     public long counter=0;
     public int currentSize=0;
-    public Button compareButton;
+    public ImageView compareButton;
 
     public void filter(MouseEvent mouseEvent) {
 
@@ -149,8 +162,15 @@ public class ProductsPageMenuFxmlController implements Initializable {
         checkBoxToGridPane.put(b00,g00);checkBoxToGridPane.put(b01,g01);checkBoxToGridPane.put(b02,g02);checkBoxToGridPane.put(b03,g03);
         checkBoxToGridPane.put(b10,g10);checkBoxToGridPane.put(b11,g11);checkBoxToGridPane.put(b12,g12);checkBoxToGridPane.put(b13,g13);
         checkBoxToGridPane.put(b20,g20);checkBoxToGridPane.put(b21,g21);checkBoxToGridPane.put(b22,g22);checkBoxToGridPane.put(b23,g23);
-        checkBoxToGridPane.put(b30,g30);checkBoxToGridPane.put(b31,g31);checkBoxToGridPane.put(b33,g32);checkBoxToGridPane.put(b33,g33);
-        checkBoxToGridPane.put(b40,g40);checkBoxToGridPane.put(b41,g41);checkBoxToGridPane.put(b43,g42);checkBoxToGridPane.put(b43,g43);
+        checkBoxToGridPane.put(b30,g30);checkBoxToGridPane.put(b31,g31);checkBoxToGridPane.put(b32,g32);checkBoxToGridPane.put(b33,g33);
+        checkBoxToGridPane.put(b40,g40);checkBoxToGridPane.put(b41,g41);checkBoxToGridPane.put(b42,g42);checkBoxToGridPane.put(b43,g43);
+
+        gridPaneToOff.put(g00,off00);gridPaneToOff.put(g01,off01);gridPaneToOff.put(g02,off02);gridPaneToOff.put(g03,off03);
+        gridPaneToOff.put(g10,off10);gridPaneToOff.put(g11,off11);gridPaneToOff.put(g12,off12);gridPaneToOff.put(g13,off13);
+        gridPaneToOff.put(g20,off20);gridPaneToOff.put(g21,off21);gridPaneToOff.put(g22,off22);gridPaneToOff.put(g23,off23);
+        gridPaneToOff.put(g30,off30);gridPaneToOff.put(g31,off31);gridPaneToOff.put(g32,off32);gridPaneToOff.put(g33,off33);
+        gridPaneToOff.put(g40,off40);gridPaneToOff.put(g41,off41);gridPaneToOff.put(g42,off42);gridPaneToOff.put(g43,off43);
+
 
         gridPanes.add(g00);gridPanes.add(g01);gridPanes.add(g02);gridPanes.add(g03);
         gridPanes.add(g10);gridPanes.add(g11);gridPanes.add(g12);gridPanes.add(g13);
@@ -178,7 +198,12 @@ public class ProductsPageMenuFxmlController implements Initializable {
             brandsCheckBoxes.add(checkBox);
             brandFilter.getItems().add(checkBox);
         }
-        brandFilter.setPrefHeight(brandsCheckBoxes.size()*24);
+        if(brandsCheckBoxes.size()>4){
+            brandFilter.setPrefHeight(4*24);
+        }else {
+            brandFilter.setPrefHeight(brandsCheckBoxes.size() * 24);
+        }
+
     }
 
     public void click(MouseEvent mouseEvent) {
@@ -194,6 +219,8 @@ public class ProductsPageMenuFxmlController implements Initializable {
         for (GridPane gridPane : gridPanes) {
             gridPane.setVisible(false);
             gridPane.setDisable(true);
+            gridPaneToOff.get(gridPane).setVisible(false);
+            gridPaneToOff.get(gridPane).setDisable(true);
         }
     }
 
@@ -217,7 +244,11 @@ public class ProductsPageMenuFxmlController implements Initializable {
         }else {
             categoriesLabel.setDisable(false);
             categoriesLabel.setVisible(true);
-            categoriesFilter.setPrefHeight(categoriesCheckBoxes.size() * 25);
+            if (categoriesCheckBoxes.size()>3){
+                categoriesFilter.setPrefHeight(3 * 25);
+            }else {
+                categoriesFilter.setPrefHeight(categoriesCheckBoxes.size()* 25);
+            }
         }
 
         int size=Controller.getHowMuchLeftForThisPage(counter);
@@ -226,6 +257,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         ArrayList<Double> prices = Controller.getProductPriceForFxml(counter);
         ArrayList<String> names = Controller.getProductNameForFxml(counter);
         ArrayList<Long> productId=Controller.getProductIdForFxml(counter);
+        ArrayList<Boolean> isOff=Controller.getOffForFxml(counter);
         for (int i = 0; i < size; i++) {
             gridPanes.get(i).setVisible(true);
             gridPanes.get(i).setDisable(false);
@@ -234,10 +266,15 @@ public class ProductsPageMenuFxmlController implements Initializable {
             gridPaneToNameAmount.get(gridPanes.get(i)).setText(names.get(i));
             gridPaneToPriceAmount.get(gridPanes.get(i)).setText(prices.get(i).toString());
             gridPaneToProductId.put(gridPanes.get(i),productId.get(i));
+            if (isOff.get(i)){
+                gridPaneToOff.get(gridPanes.get(i)).setVisible(true);
+                gridPaneToOff.get(gridPanes.get(i)).setDisable(false);
+            }
         }
         currentSize=size;
         counter=+size;
     }
+
 
     public void makeGridPaneCompareOn(MouseEvent mouseEvent) {
         GridPane gridPane=(GridPane) mouseEvent.getSource();
@@ -273,7 +310,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         }
     }
 
-    public void compare(ActionEvent actionEvent){
+    public void compare(MouseEvent mouseEvent){
         List<Long> chosen=new ArrayList<Long>();
         for (int i = 0; i < currentSize; i++) {
             if (checkBoxes.get(i).isSelected()){
@@ -282,6 +319,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         }
         System.out.println(chosen);
     }
+
 
     public void filterByCategory(MouseEvent mouseEvent) {
 
@@ -296,6 +334,9 @@ public class ProductsPageMenuFxmlController implements Initializable {
             return;
         }
 
+        compareButton.setVisible(false);
+        compareButton.setDisable(true);
+
         brandsCheckBoxes.clear();
         brandFilter.getItems().clear();
 
@@ -309,6 +350,15 @@ public class ProductsPageMenuFxmlController implements Initializable {
             brandFilter.getItems().add(checkBox);
         }
         brandFilter.setPrefHeight(brandsCheckBoxes.size()*25);
+
+        for (int i = 0; i < checkBoxes.size(); i++) {
+            if (checkBoxes.get(i).isSelected()){
+                checkBoxToGridPane.get(checkBoxes.get(i)).setEffect(null);
+                checkBoxes.get(i).setVisible(false);
+                checkBoxes.get(i).setDisable(true);
+            }
+        }
+
         counter=0;
         loadProduct(counter);
     }
@@ -324,6 +374,9 @@ public class ProductsPageMenuFxmlController implements Initializable {
             }
 
         }
+
+        
+
         counter=0;
         loadProduct(counter);
     }
@@ -335,19 +388,6 @@ public class ProductsPageMenuFxmlController implements Initializable {
         }else {
             Filter.filterByName(nameFilter.getText());
         }
-        counter=0;
-        loadProduct(counter);
-    }
-
-    public void FilterByNameCheck(MouseEvent mouseEvent) {
-        if (nameFilter.getText().isEmpty()){
-            Filter.disableNameFilter();
-
-        }else {
-            Filter.filterByName(nameFilter.getText());
-        }
-        counter=0;
-        loadProduct(counter);
         counter=0;
         loadProduct(counter);
     }
@@ -372,18 +412,157 @@ public class ProductsPageMenuFxmlController implements Initializable {
         loadProduct(counter);
     }
 
-    public void ViewButtonOn(MouseEvent mouseEvent) {
-        viewButton.setDisable(false);
-        viewButton.setVisible(true);
-        viewLable.setDisable(true);
-        viewLable.setVisible(false);
+
+    public void scoreButtonClicked(MouseEvent mouseEvent) {
+        if (!scoreClicked){
+
+            scoreButton.setDisable(false);
+            scoreButton.setVisible(true);
+            scoreClicked=true;
+            viewClicked=false;
+            timeClicked=false;
+
+            timeButton.setDisable(true);
+            timeButton.setVisible(false);
+            timeLabel.setDisable(false);
+            timeLabel.setVisible(true);
+
+            viewButton.setDisable(true);
+            viewButton.setVisible(false);
+            viewLabel.setDisable(false);
+            viewLabel.setVisible(true);
+
+            Sort.sortByScore();
+
+            counter=0;
+            loadProduct(0);
+
+        }else {
+            Sort.disableSort();
+            counter=0;
+            loadProduct(0);
+            scoreClicked=false;
+        }
+
     }
 
-    public void ViewButtonOff(MouseEvent mouseEvent) {
-        viewButton.setDisable(true);
-        viewButton.setVisible(false);
-        viewLable.setDisable(false);
-        viewLable.setVisible(true);
+    public void scoreButtonOn(MouseEvent mouseEvent) {
+        scoreButton.setDisable(false);
+        scoreButton.setVisible(true);
+        scoreLabel.setDisable(true);
+        scoreLabel.setVisible(false);
+
     }
+
+    public void scoreButtonOff(MouseEvent mouseEvent) {
+        if (!scoreClicked) {
+            scoreButton.setDisable(true);
+            scoreButton.setVisible(false);
+            scoreLabel.setDisable(false);
+            scoreLabel.setVisible(true);
+        }
+    }
+
+    public void viewButtonClick(MouseEvent mouseEvent) {
+        if (!viewClicked){
+
+            viewButton.setDisable(false);
+            viewButton.setVisible(true);
+            viewClicked=true;
+            scoreClicked=false;
+            timeClicked=false;
+
+            timeButton.setDisable(true);
+            timeButton.setVisible(false);
+            timeLabel.setDisable(false);
+            timeLabel.setVisible(true);
+
+            scoreButton.setDisable(true);
+            scoreButton.setVisible(false);
+            scoreLabel.setDisable(false);
+            scoreLabel.setVisible(true);
+
+            Sort.sortByView();
+
+            counter=0;
+            loadProduct(0);
+        }else {
+            Sort.disableSort();
+            counter=0;
+            loadProduct(0);
+            viewClicked=false;
+        }
+
+    }
+
+    public void viewButtonOn(MouseEvent mouseEvent) {
+        viewButton.setDisable(false);
+        viewButton.setVisible(true);
+        viewLabel.setDisable(true);
+        viewLabel.setVisible(false);
+    }
+
+    public void viewButtonOff(MouseEvent mouseEvent) {
+        if (!viewClicked) {
+            viewButton.setDisable(true);
+            viewButton.setVisible(false);
+            viewLabel.setDisable(false);
+            viewLabel.setVisible(true);
+        }
+    }
+
+    public void timeButtonClick(MouseEvent mouseEvent) {
+        if (!timeClicked) {
+
+            timeButton.setDisable(false);
+            timeButton.setVisible(true);
+            timeClicked =true;
+            scoreClicked=false;
+            viewClicked=false;
+
+            viewButton.setDisable(true);
+            viewButton.setVisible(false);
+            viewLabel.setDisable(false);
+            viewLabel.setVisible(true);
+
+            scoreButton.setDisable(true);
+            scoreButton.setVisible(false);
+            scoreLabel.setDisable(false);
+            scoreLabel.setVisible(true);
+
+            Sort.sortByTime();
+
+            counter=0;
+            loadProduct(counter);
+
+        }else {
+            Sort.disableSort();
+            counter=0;
+            loadProduct(counter);
+            timeClicked =false;
+        }
+
+    }
+
+    public void timeButtonOn(MouseEvent mouseEvent) {
+        timeButton.setDisable(false);
+        timeButton.setVisible(true);
+        timeLabel.setDisable(true);
+        timeLabel.setVisible(false);
+    }
+
+    public void timeButtonOff(MouseEvent mouseEvent) {
+        if (!timeClicked) {
+            timeButton.setDisable(true);
+            timeButton.setVisible(false);
+            timeLabel.setDisable(false);
+            timeLabel.setVisible(true);
+        }
+
+    }
+
+
 }
+
+
 
