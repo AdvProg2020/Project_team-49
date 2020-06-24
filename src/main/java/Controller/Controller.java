@@ -125,15 +125,6 @@ public class Controller {
 
     public static String createAccount(ArrayList<String> info, String type) {
         //login beshe ya na
-        if (!info.get(1).matches("\\w+"))
-            return "invalid password";
-
-        if (!info.get(4).matches("(\\S+)@(\\S+)")) {
-            return "invalid Email";
-        }
-        if (!info.get(5).matches("\\d+"))
-            return "invalid phone number";
-
         if (type.toLowerCase().equals("costumer"))
             DataBase.addNewUser(new Costumer(info.get(0), info.get(2), info.get(3), info.get(4), Long.parseLong(info.get(5)), info.get(1), Double.parseDouble(info.get(6))));
 
