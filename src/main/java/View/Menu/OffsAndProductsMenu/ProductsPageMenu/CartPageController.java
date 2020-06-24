@@ -23,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CartPageController implements Initializable {
@@ -112,7 +113,6 @@ public class CartPageController implements Initializable {
         backToCartLabel.setVisible(false);
         backToCartRectangle.setDisable(true);
         backToCartRectangle.setVisible(false);
-
         confirmPurchaseLabel.setDisable(false);
         confirmPurchaseLabel.setVisible(true);
         confirmPurchaseRectangle.setDisable(false);
@@ -403,6 +403,7 @@ public class CartPageController implements Initializable {
         paymentPane.setVisible(false);
         paymentPane.setDisable(true);
         restartButtonsForChangingPane();
+
         if (mouseEvent.getSource().equals(confirmPurchaseRectangle) || mouseEvent.getSource().equals(confirmPurchaseLabel)) {
             restartPaymentTextFields();
             paymentPane.setVisible(true);

@@ -5,6 +5,7 @@ import Models.Log.BuyLog;
 import Models.Log.Log;
 import Models.Product;
 import Models.User.Costumer;
+import Controller.CostumerAreaController;
 import Models.User.Guest;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -23,7 +24,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class CostumerAreaController implements Initializable {
+import static Controller.CostumerAreaController.*;
+
+public class CostumerAreaGraphicController implements Initializable {
 
     public Pane goToEditInformationPane;
     public TextField firstNameTextField;
@@ -84,16 +87,41 @@ public class CostumerAreaController implements Initializable {
     public ImageView seeLessProductsImageLog2;
     public ImageView seeLessProductsImageLog1;
     public Pane buyHistoryIsEmptyPain;
+    public Label discountCodesLabel;
+    public Pane firstDiscountCode;
+    public Pane discountCodesPain;
+    public Label discountPercent1;
+    public Label maximumAmount1;
+    public Label countDiscount1;
+    public Label usageDiscount1;
+    public Label startDiscount1;
+    public Label endDiscount1;
+    public Pane secondDiscountCode;
+    public Label discountPercent2;
+    public Label maximumAmount2;
+    public Label countDiscount2;
+    public Label usageDiscount2;
+    public Label startDiscount2;
+    public Label endDiscount2;
+    public Pane arrowAndRecForDiscounts;
+    public ImageView downArrowDiscounts;
+    public ImageView upArrowDiscounts;
+    public Pane noDiscountsYet;
+    public Label discountId2;
+    public Label discountId1;
     private Costumer costumer;
+    private int discountCodesIndex = 0;
     private int imagesLog1Index = 0;
     private int imagesLog2Index = 0;
     private int logIndex = 0;
     ArrayList<BuyLog> logHistory = new ArrayList<>();
     private SimpleDateFormat formatter;
+    private ArrayList<String> discountCodes;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         closeALlPanes();
+        discountCodes = viewCostumerDiscountCodes();
         costumer = (Costumer) Controller.getCurrentUser();
         userInfoPane.setDisable(false);
         userInfoPane.setVisible(true);
@@ -269,6 +297,9 @@ public class CostumerAreaController implements Initializable {
     public void goToBuyHistoryPane(MouseEvent mouseEvent) {
         closeALlPanes();
         restartInsideOfBuyHistoryPane();
+        imagesLog1Index = 0;
+        imagesLog2Index = 0;
+        logIndex = 0;
         logHistory.clear();
         logHistory.addAll(costumer.getBuyHistory());
         buyHistoryLabel.setVisible(true);
@@ -294,8 +325,6 @@ public class CostumerAreaController implements Initializable {
         if (size == 0) {
             return;
         }
-
-
         BuyLog buyLog1 = logHistory.get(logIndex);
         firstLogPane.setVisible(true);
         firstLogPane.setDisable(false);
@@ -462,6 +491,9 @@ public class CostumerAreaController implements Initializable {
     private void closeALlPanes() {
         userInfoPane.setDisable(true);
         userInfoPane.setVisible(false);
+        discountCodesLabel.setVisible(false);
+        discountCodesPain.setVisible(false);
+        discountCodesPain.setDisable(true);
         editPersonalInfoPane.setDisable(true);
         editPersonalInfoPane.setVisible(false);
         editPersonalInfoLabel.setDisable(true);
@@ -472,8 +504,82 @@ public class CostumerAreaController implements Initializable {
         buyHistoryPane.setDisable(true);
         buyHistoryIsEmptyPain.setVisible(false);
         buyHistoryIsEmptyPain.setDisable(true);
+        noDiscountsYet.setVisible(false);
         imagesLog1Index = 0;
         imagesLog2Index = 0;
         logIndex = 0;
+        discountCodesIndex = 0;
+    }
+
+    public void goToDiscountCodesPain(MouseEvent mouseEvent) {
+        closeALlPanes();
+        restartInsideDiscountPain();
+        discountCodesLabel.setVisible(true);
+        discountCodesPain.setVisible(true);
+        discountCodesPain.setDisable(false);
+        discountCodesIndex = 0;
+        discountCodes = viewCostumerDiscountCodes();
+        int size = discountCodes.size();
+        if (size == 0) {
+            noDiscountsYet.setVisible(true);
+        }
+        if (size > 2) {
+            arrowAndRecForDiscounts.setDisable(false);
+            arrowAndRecForDiscounts.setVisible(true);
+        } else {
+            arrowAndRecForDiscounts.setDisable(true);
+            arrowAndRecForDiscounts.setVisible(false);
+        }
+
+        setDiscountCodesPaneContents();
+    }
+
+    private void setDiscountCodesPaneContents() {
+        restartInsideDiscountPain();
+        int size = discountCodes.size();
+        if (size == 0) {
+            return;
+        }
+        String[] first = discountCodes.get(discountCodesIndex).split(",");
+        firstDiscountCode.setVisible(true);
+        discountPercent1.setText(first[3]);
+        startDiscount1.setText(first[1]);
+        endDiscount1.setText(first[2]);
+        maximumAmount1.setText(first[4]);
+        usageDiscount1.setText(first[6]);
+        countDiscount1.setText(first[5]);
+        discountId1.setText(first[0]);
+
+        if (size == 1) return;
+        String[] second = discountCodes.get(discountCodesIndex + 1).split(",");
+        secondDiscountCode.setVisible(true);
+        discountPercent2.setText(second[3]);
+        startDiscount2.setText(second[1]);
+        endDiscount2.setText(second[2]);
+        maximumAmount2.setText(second[4]);
+        usageDiscount2.setText(second[6]);
+        countDiscount2.setText(second[5]);
+        discountId2.setText(second[0]);
+
+    }
+
+    private void restartInsideDiscountPain() {
+
+        firstDiscountCode.setVisible(false);
+        secondDiscountCode.setVisible(false);
+        noDiscountsYet.setVisible(false);
+    }
+
+
+    public void seeMoreDiscounts(MouseEvent mouseEvent) {
+        int size = discountCodes.size();
+        if (mouseEvent.getSource().equals(downArrowDiscounts)) {
+            if (discountCodesIndex >= size - 2) return;
+            discountCodesIndex += 2;
+        } else if (mouseEvent.getSource().equals(upArrowDiscounts)) {
+            if (discountCodesIndex == 0) return;
+            discountCodesIndex -= 2;
+        }
+        setDiscountCodesPaneContents();
     }
 }

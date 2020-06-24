@@ -24,7 +24,6 @@ public class Costumer extends User implements Serializable {
     }
 
 
-
     public ArrayList<DiscountCode> getDiscountCodes() {
         return discountCodes;
     }

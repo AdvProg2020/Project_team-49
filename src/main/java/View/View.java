@@ -41,7 +41,7 @@ public class View extends Application {
         Controller.setCurrentPane((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
         ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
         scrollPane.setPrefHeight(700);
-//        mainMenu.getChildren().add(mainBar);
+        mainMenu.getChildren().add(mainBar);
         Scene scene =  new Scene(mainMenu);
         stage.setScene(scene);
         stage.show();
