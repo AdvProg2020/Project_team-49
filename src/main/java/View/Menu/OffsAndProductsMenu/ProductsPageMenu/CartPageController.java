@@ -503,7 +503,7 @@ public class CartPageController implements Initializable {
         if (!discountTextField.getText().equals("")) {
             discountLabel.setVisible(true);
             discountLabel.setTextFill(gray);
-        } else if (explanationsTextField.getText().equals("")) {
+        } else if (discountTextField.getText().equals("")) {
             discountLabel.setVisible(false);
         }
         addressRec.setStrokeWidth(1.5);

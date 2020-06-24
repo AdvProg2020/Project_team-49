@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1438.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.OffsAndProductsMenu.ProductsPageMenu.CartPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1438.0" xmlns="http://javafx.com/javafx/14.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.OffsAndProductsMenu.ProductsPageMenu.CartPageController">
     <children>
         <ScrollPane layoutY="175.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1438.0">
             <content>
@@ -41,11 +41,11 @@
                                         <DropShadow color="#959595" height="10.0" radius="4.5" width="10.0" />
                                     </effect>
                                 </Pane>
-                                <Pane fx:id="isNotEmptyPane" disable="true" layoutX="156.0" layoutY="30.0" prefHeight="627.0" prefWidth="1136.0" visible="false">
+                                <Pane fx:id="isNotEmptyPane" disable="true" layoutX="158.0" layoutY="14.0" prefHeight="626.0" prefWidth="1136.0" visible="false">
                                     <children>
                                       <Pane fx:id="paymentPane" disable="true" layoutX="20.0" layoutY="27.0" prefHeight="567.0" prefWidth="793.0" visible="false">
                                           <children>
-                                              <Pane fx:id="informationPane" onMouseClicked="#mouseClicked" prefHeight="244.0" prefWidth="793.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5; -fx-border-radius: 5;">
+                                              <Pane fx:id="informationPane" onMouseClicked="#mouseClicked" prefHeight="244.0" prefWidth="793.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
                                                   <children>
                                                       <Label layoutX="11.0" layoutY="6.0" prefHeight="37.0" prefWidth="171.0" text="Information">
                                                           <font>
@@ -90,7 +90,7 @@
                                                       <DropShadow color="#959595" height="9.0" radius="4.25" width="10.0" />
                                                   </effect>
                                               </Pane>
-                                              <Pane fx:id="discountCodeLabel" layoutY="248.0" onMouseClicked="#mouseClicked" prefHeight="154.0" prefWidth="793.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5; -fx-border-radius: 5;">
+                                              <Pane fx:id="discountCodeLabel" layoutY="248.0" onMouseClicked="#mouseClicked" prefHeight="154.0" prefWidth="793.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
                                                   <children>
                                                       <Label layoutX="11.0" layoutY="6.0" prefHeight="37.0" prefWidth="171.0" text="Discount code">
                                                           <font>
@@ -113,7 +113,7 @@
                                                       <DropShadow color="#959595" height="9.0" radius="4.25" width="10.0" />
                                                   </effect>
                                               </Pane>
-                                              <Pane fx:id="finalPayment" layoutY="408.0" onMouseClicked="#mouseClicked" prefHeight="145.0" prefWidth="793.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5; -fx-border-radius: 5;">
+                                              <Pane fx:id="finalPayment" layoutY="408.0" onMouseClicked="#mouseClicked" prefHeight="145.0" prefWidth="793.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
                                                   <children>
                                                       <Label layoutX="11.0" layoutY="6.0" prefHeight="37.0" prefWidth="171.0" text="Pay">
                                                           <font>
@@ -153,7 +153,7 @@
                                               </Pane>
                                           </children>
                                       </Pane>
-                                        <Pane fx:id="cartProductsStatusPane" layoutX="20.0" layoutY="27.0" prefHeight="501.0" prefWidth="793.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;">
+                                        <Pane fx:id="cartProductsStatusPane" layoutX="20.0" layoutY="27.0" prefHeight="501.0" prefWidth="793.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
                                             <effect>
                                                 <DropShadow color="#959595" height="10.0" radius="4.5" width="10.0" />
                                             </effect>
