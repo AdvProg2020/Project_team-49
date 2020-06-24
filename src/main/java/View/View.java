@@ -34,7 +34,7 @@ public class View extends Application {
     public void start(Stage stage) throws Exception {
         Product product = getProductById(1);
         Controller.setSelectedProduct(product);
-        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/OffsAndProductsMenu/ProductsMenu.fxml"));
+        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/OffsAndProductsMenu/OffPageMenu.fxml"));
         Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
         Controller.setCurrentPane((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
         ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);

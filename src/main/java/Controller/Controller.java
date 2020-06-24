@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import static Controller.DataBase.allProducts;
+import static Controller.DataBase.sortedOrFilteredProduct;
 
 
 public class Controller {
@@ -277,6 +278,13 @@ public class Controller {
             returnValue.add(DataBase.sortedOrFilteredProduct.get(i).getDoesItHaveOff());
         }
         return returnValue;
+    }
+
+    public static int getAllPageNumber(){
+        if (sortedOrFilteredProduct.size()%20==0){
+            return sortedOrFilteredProduct.size()/20;
+        }
+        return sortedOrFilteredProduct.size()/20 +1;
     }
 
     public static void restartSortedOrFilteredProduct(){

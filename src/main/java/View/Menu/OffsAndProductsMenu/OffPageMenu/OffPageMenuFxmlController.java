@@ -1,13 +1,13 @@
-package View.Menu.OffsAndProductsMenu.ProductsPageMenu;
+package View.Menu.OffsAndProductsMenu.OffPageMenu;
 
 import Controller.Controller;
 import Controller.Filter;
 import Controller.Sort;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ProductsPageMenuFxmlController implements Initializable {
+public class OffPageMenuFxmlController implements Initializable {
     public ImageView i00;public ImageView i01;public ImageView i02;public ImageView i03;
     public ImageView i10;public ImageView i11;public ImageView i12;public ImageView i13;
     public ImageView i20;public ImageView i21;public ImageView i22;public ImageView i23;
@@ -607,6 +607,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
     public void prePage(MouseEvent mouseEvent) {
 
     }
+
 }
 
 

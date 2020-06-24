@@ -1,0 +1,1082 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.OffsAndProductsMenu.OffPageMenu.OffPageMenuFxmlController">
+    <children>
+
+        <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2500.0" prefWidth="1500.0">
+            <content>
+                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2500.0" prefWidth="1490.0">
+                    <children>
+                        <GridPane layoutX="104.0" layoutY="296.0" prefHeight="1258.0" prefWidth="1031.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <GridPane fx:id="g00" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <ImageView fx:id="i00" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n00" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p00" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA00" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA00" layoutX="63.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b00" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off00" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g01" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="2">
+                                    <children>
+                                        <ImageView fx:id="i01" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n01" prefHeight="30.0" prefWidth="96.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p01" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA01" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA01" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b01" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off01" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g02" layoutX="261.0" layoutY="10.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="4">
+                                    <children>
+                                        <ImageView fx:id="i02" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n02" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p02" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA02" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA02" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b02" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off02" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g03" layoutX="511.0" layoutY="10.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="6">
+                                    <children>
+                                        <ImageView fx:id="i03" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n03" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p03" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA03" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA03" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b03" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off03" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g10" layoutX="761.0" layoutY="10.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.rowIndex="2">
+                                    <children>
+                                        <ImageView fx:id="i10" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n10" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p10" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA10" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA10" layoutX="63.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b10" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off10" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g11" layoutX="10.0" layoutY="254.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                    <children>
+                                        <ImageView fx:id="i11" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n11" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA11" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="p11" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="pA11" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b11" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off11" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g12" layoutX="261.0" layoutY="254.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                    <children>
+                                        <ImageView fx:id="i12" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n12" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p12" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA12" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA12" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b12" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off12" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g13" layoutX="511.0" layoutY="254.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                                    <children>
+                                        <ImageView fx:id="i13" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n13" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p13" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA13" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA13" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b13" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off13" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g20" layoutX="761.0" layoutY="254.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.rowIndex="4">
+                                    <children>
+                                        <ImageView fx:id="i20" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n20" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p20" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA20" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA20" layoutX="63.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b20" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off20" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g21" layoutX="10.0" layoutY="498.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                    <children>
+                                        <ImageView fx:id="i21" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n21" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p21" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA21" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA21" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b21" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off21" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g22" layoutX="261.0" layoutY="498.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                    <children>
+                                        <ImageView fx:id="i22" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n22" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p22" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA22" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA22" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b22" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off22" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g23" layoutX="511.0" layoutY="498.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                                    <children>
+                                        <ImageView fx:id="i23" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n23" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p23" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA23" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA23" layoutX="62.0" layoutY="194.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b23" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off23" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g30" layoutX="761.0" layoutY="498.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.rowIndex="6">
+                                    <children>
+                                        <ImageView fx:id="i30" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n30" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p30" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA30" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA30" layoutX="63.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b30" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off30" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g31" layoutX="10.0" layoutY="742.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                    <children>
+                                        <ImageView fx:id="i31" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n31" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p31" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA31" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA31" layoutX="62.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b31" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off31" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g32" layoutX="261.0" layoutY="742.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                                    <children>
+                                        <ImageView fx:id="i32" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n32" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p32" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA32" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA32" layoutX="62.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b32" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off32" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g33" layoutX="511.0" layoutY="742.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="6" GridPane.rowIndex="6">
+                                    <children>
+                                        <ImageView fx:id="i33" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n33" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p33" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA33" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA33" layoutX="62.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b33" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off33" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g40" layoutX="761.0" layoutY="742.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.rowIndex="8">
+                                    <children>
+                                        <ImageView fx:id="i40" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n40" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p40" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA40" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA40" layoutX="63.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b40" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off40" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g41" layoutX="10.0" layoutY="985.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                                    <children>
+                                        <ImageView fx:id="i41" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n41" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p41" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA41" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA41" layoutX="62.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b41" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off41" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g42" layoutX="261.0" layoutY="985.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="4" GridPane.rowIndex="8">
+                                    <children>
+                                        <ImageView fx:id="i42" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n42" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p42" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA42" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA42" layoutX="62.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b42" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off42" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                                <GridPane fx:id="g43" layoutX="511.0" layoutY="985.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="6" GridPane.rowIndex="8">
+                                    <children>
+                                        <ImageView fx:id="i43" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                            <GridPane.margin>
+                                                <Insets top="-5.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                        <Label fx:id="n43" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="p43" prefHeight="48.0" prefWidth="134.0" text="Price:" GridPane.rowIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="8.0" />
+                                            </GridPane.margin></Label>
+                                        <Label fx:id="nA43" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="pA43" layoutX="62.0" layoutY="193.0" prefHeight="46.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <CheckBox fx:id="b43" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#makeCompareVisible" text="Compare" visible="false" GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="100.0" top="160.0" />
+                                            </GridPane.margin>
+                                        </CheckBox>
+                                        <ImageView fx:id="off43" disable="true" fitHeight="37.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                            <image>
+                                                <Image url="@../../photos/ProductsPage/Off.png" />
+                                            </image>
+                                            <GridPane.margin>
+                                                <Insets top="140.0" />
+                                            </GridPane.margin>
+                                        </ImageView>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="200.0" minHeight="100.0" prefHeight="188.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </GridPane>
+                            </children>
+                        </GridPane>
+                        <ImageView fx:id="timeButton" disable="true" fitHeight="30.0" fitWidth="30.0" layoutX="211.0" layoutY="236.0" onMouseClicked="#timeButtonClick" onMouseExited="#timeButtonOff" pickOnBounds="true" preserveRatio="true" visible="false">
+                            <image>
+                                <Image url="@../../photos/ProductsPage/Time.png" />
+                            </image></ImageView>
+                        <Label fx:id="timeLabel" layoutX="212.0" layoutY="241.0" onMouseEntered="#timeButtonOn" text="Time">
+                            <font>
+                                <Font size="13.0" />
+                            </font></Label>
+                        <ImageView fx:id="scoreButton" disable="true" fitHeight="43.0" fitWidth="43.0" layoutX="598.0" layoutY="238.0" onMouseClicked="#scoreButtonClicked" onMouseExited="#scoreButtonOff" pickOnBounds="true" preserveRatio="true" visible="false">
+                            <image>
+                                <Image url="@../../photos/ProductsPage/Score.png" />
+                            </image></ImageView>
+                        <Label fx:id="scoreLabel" layoutX="604.0" layoutY="241.0" onMouseEntered="#scoreButtonOn" text="Score">
+                            <font>
+                                <Font size="13.0" />
+                            </font></Label>
+                        <ImageView fx:id="viewButton" disable="true" fitHeight="35.0" fitWidth="35.0" layoutX="985.0" layoutY="233.0" onMouseClicked="#viewButtonClick" onMouseExited="#viewButtonOff" pickOnBounds="true" preserveRatio="true" visible="false">
+                            <image>
+                                <Image url="@../../photos/ProductsPage/View.png" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="viewLabel" layoutX="989.0" layoutY="241.0" onMouseEntered="#viewButtonOn" text="View">
+                            <font>
+                                <Font size="13.0" />
+                            </font></Label>
+                        <ImageView fx:id="timeButtonClicked" disable="true" fitHeight="30.0" fitWidth="30.0" layoutX="211.0" layoutY="236.0" onMouseClicked="#timeButtonClick" onMouseExited="#timeButtonOff" pickOnBounds="true" preserveRatio="true" visible="false">
+                            <image>
+                                <Image url="@../../photos/ProductsPage/Time.png" />
+                            </image>
+                        </ImageView>
+                  <GridPane layoutX="446.0" layoutY="1561.0" prefHeight="60.0" prefWidth="348.0" style="-fx-background-color: #44d3ff; -fx-border-color: 8; -fx-background-radius: 8;">
+                     <children>
+                        <Label fx:id="pageCounter" alignment="CENTER" contentDisplay="CENTER" prefHeight="72.0" prefWidth="158.0" text=".. Page: 1 of 1 .." GridPane.columnIndex="1" />
+                        <ImageView fx:id="nextPageImage" disable="true" fitHeight="45.0" fitWidth="40.0" onMouseClicked="#nextPage" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2">
+                           <image>
+                              <Image url="@../../photos/ProductsPage/NextPage.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <ImageView fx:id="prePageImage" disable="true" fitHeight="45.0" fitWidth="40.0" onMouseClicked="#prePage" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@../../photos/ProductsPage/PreviousPage.png" />
+                           </image>
+                           <GridPane.margin>
+                              <Insets left="75.0" />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                    </children>
+                </Pane>
+            </content>
+        </ScrollPane>
+        <FlowPane layoutX="1213.0" layoutY="160.0" prefHeight="493.0" prefWidth="240.0">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="11.0" prefWidth="240.0" text="..Filtering..">
+                    <FlowPane.margin>
+                        <Insets bottom="10.0" />
+                    </FlowPane.margin>
+                </Label>
+                <FlowPane fx:id="brandFlowPane" prefHeight="45.0" prefWidth="240.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="60.0" prefWidth="240.0" text="Brands" />
+                        <ListView fx:id="brandFilter" onMouseClicked="#filterByBrand" prefHeight="25.0" prefWidth="240.0">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                            <FlowPane.margin>
+                                <Insets bottom="10.0" />
+                            </FlowPane.margin>
+                        </ListView>
+                    </children>
+                    <FlowPane.margin>
+                        <Insets bottom="10.0" />
+                    </FlowPane.margin>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </FlowPane>
+                <FlowPane prefHeight="55.0" prefWidth="240.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="60.0" prefWidth="240.0" text="Name" />
+                        <TextField fx:id="nameFilter" onAction="#FilterByName" prefHeight="45.0" prefWidth="240.0" promptText="Type Name...">
+                            <FlowPane.margin>
+                                <Insets bottom="10.0" />
+                            </FlowPane.margin></TextField>
+                    </children>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                    <FlowPane.margin>
+                        <Insets bottom="10.0" />
+                    </FlowPane.margin>
+                </FlowPane>
+                <FlowPane prefHeight="79.0" prefWidth="240.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;">
+                    <children>
+                        <Label fx:id="categoriesLabel" alignment="CENTER" prefHeight="60.0" prefWidth="240.0" text="Categories" />
+                        <ListView fx:id="categoriesFilter" onMouseClicked="#filterByCategory" prefHeight="25.0" prefWidth="240.0">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                            <FlowPane.margin>
+                                <Insets bottom="10.0" />
+                            </FlowPane.margin>
+                        </ListView>
+                    </children>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </FlowPane>
+                <GridPane prefHeight="122.0" prefWidth="241.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="10.0" prefWidth="103.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0" minWidth="10.0" prefWidth="138.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="35.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <CheckBox fx:id="availabilityFilter" mnemonicParsing="false" onAction="#availabilityFilter" prefHeight="40.0" prefWidth="130.0" text="Availability" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="offFilter" mnemonicParsing="false" onAction="#offFilter" prefHeight="40.0" prefWidth="125.0" text="Off" />
+                        <ImageView fx:id="compareButton" disable="true" fitHeight="102.0" fitWidth="152.0" onMouseClicked="#compare" pickOnBounds="true" preserveRatio="true" visible="false" x="1350.0" y="525.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
+                            <image>
+                                <Image url="@../../photos/ProductsPage/Compare.png" />
+                            </image>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                    </children>
+                </GridPane>
+            </children>
+        </FlowPane>
+    </children>
+
+</AnchorPane>

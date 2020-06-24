@@ -2,6 +2,7 @@ package View;
 
 import Controller.Controller;
 import Controller.DataBase;
+import Controller.Filter;
 import Models.Category;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -367,6 +368,17 @@ public class MainBarController implements Initializable {
     }
 
     public void clickedOnACategory(MouseEvent mouseEvent) {
+        Label label=(Label) mouseEvent.getSource();
+        String category=label.getText();
+        if (category.endsWith("〉")){
+            category=category.split("\\s")[0];
+        }else if (category.startsWith("●")){
+            category=category.split("\\s")[1];
+
+        }
+        Filter.restartFilters();
+        Filter.filterByCategory(category);
+
     }
 
     public void enteredToSubCategory(MouseEvent mouseEvent) {
