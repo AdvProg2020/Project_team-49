@@ -151,8 +151,6 @@ public class CostumerAreaController implements Initializable {
         submitPersonalInformationPane.setDisable(false);
         submitPersonalInformationPane.setOpacity(1);
 
-
-
     }
 
     private void restartTextFieldRecsInEditPane() {
