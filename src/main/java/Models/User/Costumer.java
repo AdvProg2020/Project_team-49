@@ -14,6 +14,7 @@ public class Costumer extends User implements Serializable {
     private ArrayList<DiscountCode> discountCodes;
     private double credit;
 
+
     public Costumer(String username, String firstName, String lastName, String eMail, long phoneNumber, String password, double credit) {
         super(username, firstName, lastName, eMail, phoneNumber, password);
         this.cart = new Cart();
@@ -21,6 +22,8 @@ public class Costumer extends User implements Serializable {
         this.discountCodes = new ArrayList<DiscountCode>();
         this.credit = credit;
     }
+
+
 
     public ArrayList<DiscountCode> getDiscountCodes() {
         return discountCodes;
