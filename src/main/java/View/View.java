@@ -21,6 +21,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static Controller.DataBase.getAllUsers;
 import static Controller.DataBase.getProductById;
 
 
@@ -32,6 +33,7 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Controller.setCurrentUser(getAllUsers().get(0));
         Product product = getProductById(1);
         Controller.setSelectedProduct(product);
         Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/costumerArea.fxml"));
