@@ -24,6 +24,8 @@ public class BuyLog extends Log  implements Serializable {
         this.logDate = logDate;
     }
 
+
+
     private void setReceiveStatus(ReceiveStatus newReceiveStatus) {
         this.receiveStatus = newReceiveStatus;
     }

@@ -6,6 +6,7 @@ import Models.Category;
 import Models.Comment;
 import Models.Product;
 import Models.Score;
+import Models.User.Costumer;
 import Models.User.Guest;
 import Models.User.Seller;
 import Models.User.User;
@@ -183,6 +184,7 @@ public class ProductPageController implements Initializable {
         setScoreLabels();
         setCommentPane();
         refreshScoreBar();
+
     }
 
     private void setYourRate() {
@@ -351,6 +353,30 @@ public class ProductPageController implements Initializable {
         buyPane.setVisible(true);
     }
 
+    private void centerImage(ImageView imageView) {
+        Image img = imageView.getImage();
+        if (img != null) {
+            double w = 0;
+            double h = 0;
+
+            double ratioX = imageView.getFitWidth() / img.getWidth();
+            double ratioY = imageView.getFitHeight() / img.getHeight();
+
+            double reducCoeff = 0;
+            if (ratioX >= ratioY) {
+                reducCoeff = ratioY;
+            } else {
+                reducCoeff = ratioX;
+            }
+
+            w = img.getWidth() * reducCoeff;
+            h = img.getHeight() * reducCoeff;
+
+            imageView.setX((imageView.getFitWidth() - w) / 2);
+            imageView.setY((imageView.getFitHeight() - h) / 2);
+        }
+    }
+
     private void restartBuyPane() {
         rightArrow.setVisible(false);
         rightArrow.setDisable(true);
@@ -384,6 +410,7 @@ public class ProductPageController implements Initializable {
     private void setProductsImage() {
         try {
             productImage.setImage(new Image(new FileInputStream(product.getImageAddress())));
+            centerImage(productImage);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -592,7 +619,7 @@ public class ProductPageController implements Initializable {
         rateStarPane.setOpacity(0.6);
         messageTime = 0;
         rateStarPane.setDisable(true);
-        Boolean a = false;
+        boolean a = false;
         if (a) {
             buyProductFirstLabel.setVisible(true);
             Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> showBuyProductMessage()));

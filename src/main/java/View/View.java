@@ -32,6 +32,7 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Controller.setCurrentUser(getAllUsers().get(0));
         Product product = getProductById(1);
         Controller.setSelectedProduct(product);
         Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/OffsAndProductsMenu/OffPageMenu.fxml"));

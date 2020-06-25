@@ -52,7 +52,7 @@ public class DataBase {
     public static ArrayList<Product> getAllProducts() {
         return allProducts;
     }
-    
+
 //    private void setReferences(){
 //        for (Product product : allProducts) {
 //            Category category = product.getParentCategory();
@@ -489,8 +489,18 @@ public class DataBase {
             n = costumers.size();
         }
         Random random = new Random();
+        ArrayList<Integer> used = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             int index = random.nextInt(n);
+            boolean flag = false;
+            while (!flag) {
+                if (!used.contains(index)) {
+                    flag = true;
+                } else {
+                    index = random.nextInt(n);
+                }
+            }
+            used.add(index);
             allowedCostumers.add(costumers.get(index));
         }
         for (Costumer allowedCostumer : allowedCostumers) {
@@ -499,6 +509,7 @@ public class DataBase {
                     , 50000, 2, allowedCostumers));
         }
         allowedCostumers.clear();
+        used.clear();
         costumers.clear();
     }
 
