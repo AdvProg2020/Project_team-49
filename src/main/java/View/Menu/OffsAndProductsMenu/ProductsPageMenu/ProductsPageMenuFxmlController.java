@@ -6,7 +6,6 @@ import Controller.Sort;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
@@ -89,6 +88,151 @@ public class ProductsPageMenuFxmlController implements Initializable {
     public Label pageCounter;
     public ImageView nextPageImage;
     public ImageView prePageImage;
+
+    public Slider priceFilterMin;
+    public Slider priceFilterMax;
+    public Label minPrice;
+    public Label midPrice;
+    public Label maxPrice;
+    public double min;
+    public double max;
+    public double previousMinValue;
+    public double previousMaxValue;
+
+    public ImageView leftGreen5_00;public ImageView leftGreen5_01;public ImageView leftGreen5_02;public ImageView leftGreen5_03;
+    public ImageView leftGreen4_00;public ImageView leftGreen4_01;public ImageView leftGreen4_02;public ImageView leftGreen4_03;;
+    public ImageView leftGreen3_00;public ImageView leftGreen3_01;public ImageView leftGreen3_02;public ImageView leftGreen3_03;
+    public ImageView leftGreen2_00;public ImageView leftGreen2_01;public ImageView leftGreen2_02;public ImageView leftGreen2_03;
+    public ImageView leftGreen1_00;public ImageView leftGreen1_01;public ImageView leftGreen1_02;public ImageView leftGreen1_03;
+
+    public ImageView rightGreen5_00;public ImageView rightGreen5_01;public ImageView rightGreen5_02;public ImageView rightGreen5_03;
+    public ImageView rightGreen4_00;public ImageView rightGreen4_01;public ImageView rightGreen4_02;public ImageView rightGreen4_03;
+    public ImageView rightGreen3_00;public ImageView rightGreen3_01;public ImageView rightGreen3_02;public ImageView rightGreen3_03;
+    public ImageView rightGreen2_00;public ImageView rightGreen2_01;public ImageView rightGreen2_02;public ImageView rightGreen2_03;
+    public ImageView rightGreen1_00;public ImageView rightGreen1_01;public ImageView rightGreen1_02;public ImageView rightGreen1_03;
+
+    public ImageView halfLeft5_00;public ImageView halfLeft5_01;public ImageView halfLeft5_02;public ImageView halfLeft5_03;
+    public ImageView halfLeft4_00;public ImageView halfLeft4_01;public ImageView halfLeft4_02;public ImageView halfLeft4_03;
+    public ImageView halfLeft3_00;public ImageView halfLeft3_01;public ImageView halfLeft3_02;public ImageView halfLeft3_03;
+    public ImageView halfLeft2_00;public ImageView halfLeft2_01;public ImageView halfLeft2_02;public ImageView halfLeft2_03;
+    public ImageView halfLeft1_00;public ImageView halfLeft1_01;public ImageView halfLeft1_02;public ImageView halfLeft1_03;
+
+    public ImageView halfRight5_00;public ImageView halfRight5_01;public ImageView halfRight5_02;public ImageView halfRight5_03;
+    public ImageView halfRight4_00;public ImageView halfRight4_01;public ImageView halfRight4_02;public ImageView halfRight4_03;
+    public ImageView halfRight3_00;public ImageView halfRight3_01;public ImageView halfRight3_02;public ImageView halfRight3_03;
+    public ImageView halfRight2_00;public ImageView halfRight2_01;public ImageView halfRight2_02;public ImageView halfRight2_03;
+    public ImageView halfRight1_00;public ImageView halfRight1_01;public ImageView halfRight1_02;public ImageView halfRight1_03;
+
+
+    public ImageView leftGreen5_10;public ImageView leftGreen5_11;public ImageView leftGreen5_12;public ImageView leftGreen5_13;
+    public ImageView leftGreen4_10;public ImageView leftGreen4_11;public ImageView leftGreen4_12;public ImageView leftGreen4_13;
+    public ImageView leftGreen3_10;public ImageView leftGreen3_11;public ImageView leftGreen3_12;public ImageView leftGreen3_13;
+    public ImageView leftGreen2_10;public ImageView leftGreen2_11;public ImageView leftGreen2_12;public ImageView leftGreen2_13;
+    public ImageView leftGreen1_10;public ImageView leftGreen1_11;public ImageView leftGreen1_12;public ImageView leftGreen1_13;
+
+    public ImageView rightGreen5_10;public ImageView rightGreen5_11;public ImageView rightGreen5_12;public ImageView rightGreen5_13;
+    public ImageView rightGreen4_10;public ImageView rightGreen4_11;public ImageView rightGreen4_12;public ImageView rightGreen4_13;
+    public ImageView rightGreen3_10;public ImageView rightGreen3_11;public ImageView rightGreen3_12;public ImageView rightGreen3_13;
+    public ImageView rightGreen2_10;public ImageView rightGreen2_11;public ImageView rightGreen2_12;public ImageView rightGreen2_13;
+    public ImageView rightGreen1_10;public ImageView rightGreen1_11;public ImageView rightGreen1_12;public ImageView rightGreen1_13;
+
+    public ImageView halfLeft5_10;public ImageView halfLeft5_11;public ImageView halfLeft5_12;public ImageView halfLeft5_13;
+    public ImageView halfLeft4_10;public ImageView halfLeft4_11;public ImageView halfLeft4_12;public ImageView halfLeft4_13;
+    public ImageView halfLeft3_10;public ImageView halfLeft3_11;public ImageView halfLeft3_12;public ImageView halfLeft3_13;
+    public ImageView halfLeft2_10;public ImageView halfLeft2_11;public ImageView halfLeft2_12;public ImageView halfLeft2_13;
+    public ImageView halfLeft1_10;public ImageView halfLeft1_11;public ImageView halfLeft1_12;public ImageView halfLeft1_13;
+
+    public ImageView halfRight5_10;public ImageView halfRight5_11;public ImageView halfRight5_12;public ImageView halfRight5_13;
+    public ImageView halfRight4_10;public ImageView halfRight4_11;public ImageView halfRight4_12;public ImageView halfRight4_13;
+    public ImageView halfRight3_10;public ImageView halfRight3_11;public ImageView halfRight3_12;public ImageView halfRight3_13;
+    public ImageView halfRight2_10;public ImageView halfRight2_11;public ImageView halfRight2_12;public ImageView halfRight2_13;
+    public ImageView halfRight1_10;public ImageView halfRight1_11;public ImageView halfRight1_12;public ImageView halfRight1_13;
+
+
+    public ImageView leftGreen5_20;public ImageView leftGreen5_21;public ImageView leftGreen5_22;public ImageView leftGreen5_23;
+    public ImageView leftGreen4_20;public ImageView leftGreen4_21;public ImageView leftGreen4_22;public ImageView leftGreen4_23;
+    public ImageView leftGreen3_20;public ImageView leftGreen3_21;public ImageView leftGreen3_22;public ImageView leftGreen3_23;
+    public ImageView leftGreen2_20;public ImageView leftGreen2_21;public ImageView leftGreen2_22;public ImageView leftGreen2_23;
+    public ImageView leftGreen1_20;public ImageView leftGreen1_21;public ImageView leftGreen1_22;public ImageView leftGreen1_23;
+
+    public ImageView rightGreen5_20;public ImageView rightGreen5_21;public ImageView rightGreen5_22;public ImageView rightGreen5_23;
+    public ImageView rightGreen4_20;public ImageView rightGreen4_21;public ImageView rightGreen4_22;public ImageView rightGreen4_23;
+    public ImageView rightGreen3_20;public ImageView rightGreen3_21;public ImageView rightGreen3_22;public ImageView rightGreen3_23;
+    public ImageView rightGreen2_20;public ImageView rightGreen2_21;public ImageView rightGreen2_22;public ImageView rightGreen2_23;
+    public ImageView rightGreen1_20;public ImageView rightGreen1_21;public ImageView rightGreen1_22;public ImageView rightGreen1_23;
+
+    public ImageView halfLeft5_20;public ImageView halfLeft5_21;public ImageView halfLeft5_22;public ImageView halfLeft5_23;
+    public ImageView halfLeft4_20;public ImageView halfLeft4_21;public ImageView halfLeft4_22;public ImageView halfLeft4_23;
+    public ImageView halfLeft3_20;public ImageView halfLeft3_21;public ImageView halfLeft3_22;public ImageView halfLeft3_23;
+    public ImageView halfLeft2_20;public ImageView halfLeft2_21;public ImageView halfLeft2_22;public ImageView halfLeft2_23;
+    public ImageView halfLeft1_20;public ImageView halfLeft1_21;public ImageView halfLeft1_22;public ImageView halfLeft1_23;
+
+    public ImageView halfRight5_20;public ImageView halfRight5_21;public ImageView halfRight5_22;public ImageView halfRight5_23;
+    public ImageView halfRight4_20;public ImageView halfRight4_21;public ImageView halfRight4_22;public ImageView halfRight4_23;
+    public ImageView halfRight3_20;public ImageView halfRight3_21;public ImageView halfRight3_22;public ImageView halfRight3_23;
+    public ImageView halfRight2_20;public ImageView halfRight2_21;public ImageView halfRight2_22;public ImageView halfRight2_23;
+    public ImageView halfRight1_20;public ImageView halfRight1_21;public ImageView halfRight1_22;public ImageView halfRight1_23;
+
+
+    public ImageView leftGreen5_30;public ImageView leftGreen5_31;public ImageView leftGreen5_32;public ImageView leftGreen5_33;
+    public ImageView leftGreen4_30;public ImageView leftGreen4_31;public ImageView leftGreen4_32;public ImageView leftGreen4_33;
+    public ImageView leftGreen3_30;public ImageView leftGreen3_31;public ImageView leftGreen3_32;public ImageView leftGreen3_33;
+    public ImageView leftGreen2_30;public ImageView leftGreen2_31;public ImageView leftGreen2_32;public ImageView leftGreen2_33;
+    public ImageView leftGreen1_30;public ImageView leftGreen1_31;public ImageView leftGreen1_32;public ImageView leftGreen1_33;
+
+    public ImageView rightGreen5_30;public ImageView rightGreen5_31;public ImageView rightGreen5_32;public ImageView rightGreen5_33;
+    public ImageView rightGreen4_30;public ImageView rightGreen4_31;public ImageView rightGreen4_32;public ImageView rightGreen4_33;
+    public ImageView rightGreen3_30;public ImageView rightGreen3_31;public ImageView rightGreen3_32;public ImageView rightGreen3_33;
+    public ImageView rightGreen2_30;public ImageView rightGreen2_31;public ImageView rightGreen2_32;public ImageView rightGreen2_33;
+    public ImageView rightGreen1_30;public ImageView rightGreen1_31;public ImageView rightGreen1_32;public ImageView rightGreen1_33;
+
+    public ImageView halfLeft5_30;public ImageView halfLeft5_31;public ImageView halfLeft5_32;public ImageView halfLeft5_33;
+    public ImageView halfLeft4_30;public ImageView halfLeft4_31;public ImageView halfLeft4_32;public ImageView halfLeft4_33;
+    public ImageView halfLeft3_30;public ImageView halfLeft3_31;public ImageView halfLeft3_32;public ImageView halfLeft3_33;
+    public ImageView halfLeft2_30;public ImageView halfLeft2_31;public ImageView halfLeft2_32;public ImageView halfLeft2_33;
+    public ImageView halfLeft1_30;public ImageView halfLeft1_31;public ImageView halfLeft1_32;public ImageView halfLeft1_33;
+
+
+    public ImageView halfRight5_30;public ImageView halfRight5_31;public ImageView halfRight5_32;public ImageView halfRight5_33;
+    public ImageView halfRight4_30;public ImageView halfRight4_31;public ImageView halfRight4_32;public ImageView halfRight4_33;
+    public ImageView halfRight3_30;public ImageView halfRight3_31;public ImageView halfRight3_32;public ImageView halfRight3_33;
+    public ImageView halfRight2_30;public ImageView halfRight2_31;public ImageView halfRight2_32;public ImageView halfRight2_33;
+    public ImageView halfRight1_30;public ImageView halfRight1_31;public ImageView halfRight1_32;public ImageView halfRight1_33;
+
+
+    public ImageView leftGreen5_40;public ImageView leftGreen5_41;public ImageView leftGreen5_42;public ImageView leftGreen5_43;
+    public ImageView leftGreen4_40;public ImageView leftGreen4_41;public ImageView leftGreen4_42;public ImageView leftGreen4_43;
+    public ImageView leftGreen3_40;public ImageView leftGreen3_41;public ImageView leftGreen3_42;public ImageView leftGreen3_43;
+    public ImageView leftGreen2_40;public ImageView leftGreen2_41;public ImageView leftGreen2_42;public ImageView leftGreen2_43;
+    public ImageView leftGreen1_40;public ImageView leftGreen1_41;public ImageView leftGreen1_42;public ImageView leftGreen1_43;
+
+    public ImageView rightGreen5_40;public ImageView rightGreen5_41;public ImageView rightGreen5_42;public ImageView rightGreen5_43;
+    public ImageView rightGreen4_40;public ImageView rightGreen4_41;public ImageView rightGreen4_42;public ImageView rightGreen4_43;
+    public ImageView rightGreen3_40;public ImageView rightGreen3_41;public ImageView rightGreen3_42;public ImageView rightGreen3_43;
+    public ImageView rightGreen2_40;public ImageView rightGreen2_41;public ImageView rightGreen2_42;public ImageView rightGreen2_43;
+    public ImageView rightGreen1_40;public ImageView rightGreen1_41;public ImageView rightGreen1_42;public ImageView rightGreen1_43;
+
+    public ImageView halfLeft5_40;public ImageView halfLeft5_41;public ImageView halfLeft5_42;public ImageView halfLeft5_43;
+    public ImageView halfLeft4_40;public ImageView halfLeft4_41;public ImageView halfLeft4_42;public ImageView halfLeft4_43;
+    public ImageView halfLeft3_40;public ImageView halfLeft3_41;public ImageView halfLeft3_42;public ImageView halfLeft3_43;
+    public ImageView halfLeft2_40;public ImageView halfLeft2_41;public ImageView halfLeft2_42;public ImageView halfLeft2_43;
+    public ImageView halfLeft1_40;public ImageView halfLeft1_41;public ImageView halfLeft1_42;public ImageView halfLeft1_43;
+
+
+    public ImageView halfRight5_40;public ImageView halfRight5_41;public ImageView halfRight5_42;public ImageView halfRight5_43;
+    public ImageView halfRight4_40;public ImageView halfRight4_41;public ImageView halfRight4_42;public ImageView halfRight4_43;
+    public ImageView halfRight3_40;public ImageView halfRight3_41;public ImageView halfRight3_42;public ImageView halfRight3_43;
+    public ImageView halfRight2_40;public ImageView halfRight2_41;public ImageView halfRight2_42;public ImageView halfRight2_43;
+    public ImageView halfRight1_40;public ImageView halfRight1_41;public ImageView halfRight1_42;public ImageView halfRight1_43;
+
+    public ArrayList<ImageView> listOfRateStar00=new ArrayList<>();public ArrayList<ImageView> listOfRateStar01=new ArrayList<>();public ArrayList<ImageView> listOfRateStar02=new ArrayList<>();public ArrayList<ImageView> listOfRateStar03=new ArrayList<>();
+    public ArrayList<ImageView> listOfRateStar10=new ArrayList<>();public ArrayList<ImageView> listOfRateStar11=new ArrayList<>();public ArrayList<ImageView> listOfRateStar12=new ArrayList<>();public ArrayList<ImageView> listOfRateStar13=new ArrayList<>();
+    public ArrayList<ImageView> listOfRateStar20=new ArrayList<>();public ArrayList<ImageView> listOfRateStar21=new ArrayList<>();public ArrayList<ImageView> listOfRateStar22=new ArrayList<>();public ArrayList<ImageView> listOfRateStar23=new ArrayList<>();
+    public ArrayList<ImageView> listOfRateStar30=new ArrayList<>();public ArrayList<ImageView> listOfRateStar31=new ArrayList<>();public ArrayList<ImageView> listOfRateStar32=new ArrayList<>();public ArrayList<ImageView> listOfRateStar33=new ArrayList<>();
+    public ArrayList<ImageView> listOfRateStar40=new ArrayList<>();public ArrayList<ImageView> listOfRateStar41=new ArrayList<>();public ArrayList<ImageView> listOfRateStar42=new ArrayList<>();public ArrayList<ImageView> listOfRateStar43=new ArrayList<>();
+
+    public HashMap<GridPane,ArrayList<ImageView>> gridPaneToRate=new HashMap<GridPane, ArrayList<ImageView>>();
+
 
 
     ArrayList<CheckBox> brandsCheckBoxes=new ArrayList<>();
@@ -182,6 +326,116 @@ public class ProductsPageMenuFxmlController implements Initializable {
         checkBoxes.add(b40);checkBoxes.add(b41);checkBoxes.add(b42);checkBoxes.add(b43);
 
 
+        listOfRateStar00.add(leftGreen1_00);listOfRateStar00.add(leftGreen2_00);listOfRateStar00.add(leftGreen3_00);listOfRateStar00.add(leftGreen4_00);listOfRateStar00.add(leftGreen5_00);
+        listOfRateStar01.add(leftGreen1_01);listOfRateStar01.add(leftGreen2_01);listOfRateStar01.add(leftGreen3_01);listOfRateStar01.add(leftGreen4_01);listOfRateStar01.add(leftGreen5_01);
+        listOfRateStar02.add(leftGreen1_02);listOfRateStar02.add(leftGreen2_02);listOfRateStar02.add(leftGreen3_02);listOfRateStar02.add(leftGreen4_02);listOfRateStar02.add(leftGreen5_02);
+        listOfRateStar03.add(leftGreen1_03);listOfRateStar03.add(leftGreen2_03);listOfRateStar03.add(leftGreen3_03);listOfRateStar03.add(leftGreen4_03);listOfRateStar03.add(leftGreen5_03);
+
+        listOfRateStar10.add(leftGreen1_10);listOfRateStar10.add(leftGreen2_10);listOfRateStar10.add(leftGreen3_10);listOfRateStar10.add(leftGreen4_10);listOfRateStar10.add(leftGreen5_10);
+        listOfRateStar11.add(leftGreen1_11);listOfRateStar11.add(leftGreen2_11);listOfRateStar11.add(leftGreen3_11);listOfRateStar11.add(leftGreen4_11);listOfRateStar11.add(leftGreen5_11);
+        listOfRateStar12.add(leftGreen1_12);listOfRateStar12.add(leftGreen2_12);listOfRateStar12.add(leftGreen3_12);listOfRateStar12.add(leftGreen4_12);listOfRateStar12.add(leftGreen5_12);
+        listOfRateStar13.add(leftGreen1_13);listOfRateStar13.add(leftGreen2_13);listOfRateStar13.add(leftGreen3_13);listOfRateStar13.add(leftGreen4_13);listOfRateStar13.add(leftGreen5_13);
+
+        listOfRateStar20.add(leftGreen1_20);listOfRateStar20.add(leftGreen2_20);listOfRateStar20.add(leftGreen3_20);listOfRateStar20.add(leftGreen4_20);listOfRateStar20.add(leftGreen5_20);
+        listOfRateStar21.add(leftGreen1_21);listOfRateStar21.add(leftGreen2_21);listOfRateStar21.add(leftGreen3_21);listOfRateStar21.add(leftGreen4_21);listOfRateStar21.add(leftGreen5_21);
+        listOfRateStar22.add(leftGreen1_22);listOfRateStar22.add(leftGreen2_22);listOfRateStar22.add(leftGreen3_22);listOfRateStar22.add(leftGreen4_22);listOfRateStar22.add(leftGreen5_22);
+        listOfRateStar23.add(leftGreen1_23);listOfRateStar23.add(leftGreen2_23);listOfRateStar23.add(leftGreen3_23);listOfRateStar23.add(leftGreen4_23);listOfRateStar23.add(leftGreen5_23);
+
+        listOfRateStar30.add(leftGreen1_30);listOfRateStar30.add(leftGreen2_30);listOfRateStar30.add(leftGreen3_30);listOfRateStar30.add(leftGreen4_30);listOfRateStar30.add(leftGreen5_30);
+        listOfRateStar31.add(leftGreen1_31);listOfRateStar31.add(leftGreen2_31);listOfRateStar31.add(leftGreen3_31);listOfRateStar31.add(leftGreen4_31);listOfRateStar31.add(leftGreen5_31);
+        listOfRateStar32.add(leftGreen1_32);listOfRateStar32.add(leftGreen2_32);listOfRateStar32.add(leftGreen3_32);listOfRateStar32.add(leftGreen4_32);listOfRateStar32.add(leftGreen5_32);
+        listOfRateStar33.add(leftGreen1_33);listOfRateStar33.add(leftGreen2_33);listOfRateStar33.add(leftGreen3_33);listOfRateStar33.add(leftGreen4_33);listOfRateStar33.add(leftGreen5_33);
+
+        listOfRateStar40.add(leftGreen1_40);listOfRateStar40.add(leftGreen2_40);listOfRateStar40.add(leftGreen3_40);listOfRateStar40.add(leftGreen4_40);listOfRateStar40.add(leftGreen5_40);
+        listOfRateStar41.add(leftGreen1_41);listOfRateStar41.add(leftGreen2_41);listOfRateStar41.add(leftGreen3_41);listOfRateStar41.add(leftGreen4_41);listOfRateStar41.add(leftGreen5_41);
+        listOfRateStar42.add(leftGreen1_42);listOfRateStar42.add(leftGreen2_42);listOfRateStar42.add(leftGreen3_42);listOfRateStar42.add(leftGreen4_42);listOfRateStar42.add(leftGreen5_42);
+        listOfRateStar43.add(leftGreen1_43);listOfRateStar43.add(leftGreen2_43);listOfRateStar43.add(leftGreen3_43);listOfRateStar43.add(leftGreen4_43);listOfRateStar43.add(leftGreen5_43);
+
+
+        listOfRateStar00.add(rightGreen1_00);listOfRateStar00.add(rightGreen2_00);listOfRateStar00.add(rightGreen3_00);listOfRateStar00.add(rightGreen4_00);listOfRateStar00.add(rightGreen5_00);
+        listOfRateStar01.add(rightGreen1_01);listOfRateStar01.add(rightGreen2_01);listOfRateStar01.add(rightGreen3_01);listOfRateStar01.add(rightGreen4_01);listOfRateStar01.add(rightGreen5_01);
+        listOfRateStar02.add(rightGreen1_02);listOfRateStar02.add(rightGreen2_02);listOfRateStar02.add(rightGreen3_02);listOfRateStar02.add(rightGreen4_02);listOfRateStar02.add(rightGreen5_02);
+        listOfRateStar03.add(rightGreen1_03);listOfRateStar03.add(rightGreen2_03);listOfRateStar03.add(rightGreen3_03);listOfRateStar03.add(rightGreen4_03);listOfRateStar03.add(rightGreen5_03);
+
+        listOfRateStar10.add(rightGreen1_10);listOfRateStar10.add(rightGreen2_10);listOfRateStar10.add(rightGreen3_10);listOfRateStar10.add(rightGreen4_10);listOfRateStar10.add(rightGreen5_10);
+        listOfRateStar11.add(rightGreen1_11);listOfRateStar11.add(rightGreen2_11);listOfRateStar11.add(rightGreen3_11);listOfRateStar11.add(rightGreen4_11);listOfRateStar11.add(rightGreen5_11);
+        listOfRateStar12.add(rightGreen1_12);listOfRateStar12.add(rightGreen2_12);listOfRateStar12.add(rightGreen3_12);listOfRateStar12.add(rightGreen4_12);listOfRateStar12.add(rightGreen5_12);
+        listOfRateStar13.add(rightGreen1_13);listOfRateStar13.add(rightGreen2_13);listOfRateStar13.add(rightGreen3_13);listOfRateStar13.add(rightGreen4_13);listOfRateStar13.add(rightGreen5_13);
+
+        listOfRateStar20.add(rightGreen1_20);listOfRateStar20.add(rightGreen2_20);listOfRateStar20.add(rightGreen3_20);listOfRateStar20.add(rightGreen4_20);listOfRateStar20.add(rightGreen5_20);
+        listOfRateStar21.add(rightGreen1_21);listOfRateStar21.add(rightGreen2_21);listOfRateStar21.add(rightGreen3_21);listOfRateStar21.add(rightGreen4_21);listOfRateStar21.add(rightGreen5_21);
+        listOfRateStar22.add(rightGreen1_22);listOfRateStar22.add(rightGreen2_22);listOfRateStar22.add(rightGreen3_22);listOfRateStar22.add(rightGreen4_22);listOfRateStar22.add(rightGreen5_22);
+        listOfRateStar23.add(rightGreen1_23);listOfRateStar23.add(rightGreen2_23);listOfRateStar23.add(rightGreen3_23);listOfRateStar23.add(rightGreen4_23);listOfRateStar23.add(rightGreen5_23);
+
+        listOfRateStar30.add(rightGreen1_30);listOfRateStar30.add(rightGreen2_30);listOfRateStar30.add(rightGreen3_30);listOfRateStar30.add(rightGreen4_30);listOfRateStar30.add(rightGreen5_30);
+        listOfRateStar31.add(rightGreen1_31);listOfRateStar31.add(rightGreen2_31);listOfRateStar31.add(rightGreen3_31);listOfRateStar31.add(rightGreen4_31);listOfRateStar31.add(rightGreen5_31);
+        listOfRateStar32.add(rightGreen1_32);listOfRateStar32.add(rightGreen2_32);listOfRateStar32.add(rightGreen3_32);listOfRateStar32.add(rightGreen4_32);listOfRateStar32.add(rightGreen5_32);
+        listOfRateStar33.add(rightGreen1_33);listOfRateStar33.add(rightGreen2_33);listOfRateStar33.add(rightGreen3_33);listOfRateStar33.add(rightGreen4_33);listOfRateStar33.add(rightGreen5_33);
+
+        listOfRateStar40.add(rightGreen1_40);listOfRateStar40.add(rightGreen2_40);listOfRateStar40.add(rightGreen3_40);listOfRateStar40.add(rightGreen4_40);listOfRateStar40.add(rightGreen5_40);
+        listOfRateStar41.add(rightGreen1_41);listOfRateStar41.add(rightGreen2_41);listOfRateStar41.add(rightGreen3_41);listOfRateStar41.add(rightGreen4_41);listOfRateStar41.add(rightGreen5_41);
+        listOfRateStar42.add(rightGreen1_42);listOfRateStar42.add(rightGreen2_42);listOfRateStar42.add(rightGreen3_42);listOfRateStar42.add(rightGreen4_42);listOfRateStar42.add(rightGreen5_42);
+        listOfRateStar43.add(rightGreen1_43);listOfRateStar43.add(rightGreen2_43);listOfRateStar43.add(rightGreen3_43);listOfRateStar43.add(rightGreen4_43);listOfRateStar43.add(rightGreen5_43);
+
+
+        listOfRateStar00.add(halfLeft1_00);listOfRateStar00.add(halfLeft2_00);listOfRateStar00.add(halfLeft3_00);listOfRateStar00.add(halfLeft4_00);listOfRateStar00.add(halfLeft5_00);
+        listOfRateStar01.add(halfLeft1_01);listOfRateStar01.add(halfLeft2_01);listOfRateStar01.add(halfLeft3_01);listOfRateStar01.add(halfLeft4_01);listOfRateStar01.add(halfLeft5_01);
+        listOfRateStar02.add(halfLeft1_02);listOfRateStar02.add(halfLeft2_02);listOfRateStar02.add(halfLeft3_02);listOfRateStar02.add(halfLeft4_02);listOfRateStar02.add(halfLeft5_02);
+        listOfRateStar03.add(halfLeft1_03);listOfRateStar03.add(halfLeft2_03);listOfRateStar03.add(halfLeft3_03);listOfRateStar03.add(halfLeft4_03);listOfRateStar03.add(halfLeft5_03);
+
+        listOfRateStar10.add(halfLeft1_10);listOfRateStar10.add(halfLeft2_10);listOfRateStar10.add(halfLeft3_10);listOfRateStar10.add(halfLeft4_10);listOfRateStar10.add(halfLeft5_10);
+        listOfRateStar11.add(halfLeft1_11);listOfRateStar11.add(halfLeft2_11);listOfRateStar11.add(halfLeft3_11);listOfRateStar11.add(halfLeft4_11);listOfRateStar11.add(halfLeft5_11);
+        listOfRateStar12.add(halfLeft1_12);listOfRateStar12.add(halfLeft2_12);listOfRateStar12.add(halfLeft3_12);listOfRateStar12.add(halfLeft4_12);listOfRateStar12.add(halfLeft5_12);
+        listOfRateStar13.add(halfLeft1_13);listOfRateStar13.add(halfLeft2_13);listOfRateStar13.add(halfLeft3_13);listOfRateStar13.add(halfLeft4_13);listOfRateStar13.add(halfLeft5_13);
+
+        listOfRateStar20.add(halfLeft1_20);listOfRateStar20.add(halfLeft2_20);listOfRateStar20.add(halfLeft3_20);listOfRateStar20.add(halfLeft4_20);listOfRateStar20.add(halfLeft5_20);
+        listOfRateStar21.add(halfLeft1_21);listOfRateStar21.add(halfLeft2_21);listOfRateStar21.add(halfLeft3_21);listOfRateStar21.add(halfLeft4_21);listOfRateStar21.add(halfLeft5_21);
+        listOfRateStar22.add(halfLeft1_22);listOfRateStar22.add(halfLeft2_22);listOfRateStar22.add(halfLeft3_22);listOfRateStar22.add(halfLeft4_22);listOfRateStar22.add(halfLeft5_22);
+        listOfRateStar23.add(halfLeft1_23);listOfRateStar23.add(halfLeft2_23);listOfRateStar23.add(halfLeft3_23);listOfRateStar23.add(halfLeft4_23);listOfRateStar23.add(halfLeft5_23);
+
+        listOfRateStar30.add(halfLeft1_30);listOfRateStar30.add(halfLeft2_30);listOfRateStar30.add(halfLeft3_30);listOfRateStar30.add(halfLeft4_30);listOfRateStar30.add(halfLeft5_30);
+        listOfRateStar31.add(halfLeft1_31);listOfRateStar31.add(halfLeft2_31);listOfRateStar31.add(halfLeft3_31);listOfRateStar31.add(halfLeft4_31);listOfRateStar31.add(halfLeft5_31);
+        listOfRateStar32.add(halfLeft1_32);listOfRateStar32.add(halfLeft2_32);listOfRateStar32.add(halfLeft3_32);listOfRateStar32.add(halfLeft4_32);listOfRateStar32.add(halfLeft5_32);
+        listOfRateStar33.add(halfLeft1_33);listOfRateStar33.add(halfLeft2_33);listOfRateStar33.add(halfLeft3_33);listOfRateStar33.add(halfLeft4_33);listOfRateStar33.add(halfLeft5_33);
+
+        listOfRateStar40.add(halfLeft1_40);listOfRateStar40.add(halfLeft2_40);listOfRateStar40.add(halfLeft3_40);listOfRateStar40.add(halfLeft4_40);listOfRateStar40.add(halfLeft5_40);
+        listOfRateStar41.add(halfLeft1_41);listOfRateStar41.add(halfLeft2_41);listOfRateStar41.add(halfLeft3_41);listOfRateStar41.add(halfLeft4_41);listOfRateStar41.add(halfLeft5_41);
+        listOfRateStar42.add(halfLeft1_42);listOfRateStar42.add(halfLeft2_42);listOfRateStar42.add(halfLeft3_42);listOfRateStar42.add(halfLeft4_42);listOfRateStar42.add(halfLeft5_42);
+        listOfRateStar43.add(halfLeft1_43);listOfRateStar43.add(halfLeft2_43);listOfRateStar43.add(halfLeft3_43);listOfRateStar43.add(halfLeft4_43);listOfRateStar43.add(halfLeft5_43);
+
+
+        listOfRateStar00.add(halfRight1_00);listOfRateStar00.add(halfRight2_00);listOfRateStar00.add(halfRight3_00);listOfRateStar00.add(halfRight4_00);listOfRateStar00.add(halfRight5_00);
+        listOfRateStar01.add(halfRight1_01);listOfRateStar01.add(halfRight2_01);listOfRateStar01.add(halfRight3_01);listOfRateStar01.add(halfRight4_01);listOfRateStar01.add(halfRight5_01);
+        listOfRateStar02.add(halfRight1_02);listOfRateStar02.add(halfRight2_02);listOfRateStar02.add(halfRight3_02);listOfRateStar02.add(halfRight4_02);listOfRateStar02.add(halfRight5_02);
+        listOfRateStar03.add(halfRight1_03);listOfRateStar03.add(halfRight2_03);listOfRateStar03.add(halfRight3_03);listOfRateStar03.add(halfRight4_03);listOfRateStar03.add(halfRight5_03);
+
+        listOfRateStar10.add(halfRight1_10);listOfRateStar10.add(halfRight2_10);listOfRateStar10.add(halfRight3_10);listOfRateStar10.add(halfRight4_10);listOfRateStar10.add(halfRight5_10);
+        listOfRateStar11.add(halfRight1_11);listOfRateStar11.add(halfRight2_11);listOfRateStar11.add(halfRight3_11);listOfRateStar11.add(halfRight4_11);listOfRateStar11.add(halfRight5_11);
+        listOfRateStar12.add(halfRight1_12);listOfRateStar12.add(halfRight2_12);listOfRateStar12.add(halfRight3_12);listOfRateStar12.add(halfRight4_12);listOfRateStar12.add(halfRight5_12);
+        listOfRateStar13.add(halfRight1_13);listOfRateStar13.add(halfRight2_13);listOfRateStar13.add(halfRight3_13);listOfRateStar13.add(halfRight4_13);listOfRateStar13.add(halfRight5_13);
+
+        listOfRateStar20.add(halfRight1_20);listOfRateStar20.add(halfRight2_20);listOfRateStar20.add(halfRight3_20);listOfRateStar20.add(halfRight4_20);listOfRateStar20.add(halfRight5_20);
+        listOfRateStar21.add(halfRight1_21);listOfRateStar21.add(halfRight2_21);listOfRateStar21.add(halfRight3_21);listOfRateStar21.add(halfRight4_21);listOfRateStar21.add(halfRight5_21);
+        listOfRateStar22.add(halfRight1_22);listOfRateStar22.add(halfRight2_22);listOfRateStar22.add(halfRight3_22);listOfRateStar22.add(halfRight4_22);listOfRateStar22.add(halfRight5_22);
+        listOfRateStar23.add(halfRight1_23);listOfRateStar23.add(halfRight2_23);listOfRateStar23.add(halfRight3_23);listOfRateStar23.add(halfRight4_23);listOfRateStar23.add(halfRight5_23);
+
+        listOfRateStar30.add(halfRight1_30);listOfRateStar30.add(halfRight2_30);listOfRateStar30.add(halfRight3_30);listOfRateStar30.add(halfRight4_30);listOfRateStar30.add(halfRight5_30);
+        listOfRateStar31.add(halfRight1_31);listOfRateStar31.add(halfRight2_31);listOfRateStar31.add(halfRight3_31);listOfRateStar31.add(halfRight4_31);listOfRateStar31.add(halfRight5_31);
+        listOfRateStar32.add(halfRight1_32);listOfRateStar32.add(halfRight2_32);listOfRateStar32.add(halfRight3_32);listOfRateStar32.add(halfRight4_32);listOfRateStar32.add(halfRight5_32);
+        listOfRateStar33.add(halfRight1_33);listOfRateStar33.add(halfRight2_33);listOfRateStar33.add(halfRight3_33);listOfRateStar33.add(halfRight4_33);listOfRateStar33.add(halfRight5_33);
+
+        listOfRateStar40.add(halfRight1_40);listOfRateStar40.add(halfRight2_40);listOfRateStar40.add(halfRight3_40);listOfRateStar40.add(halfRight4_40);listOfRateStar40.add(halfRight5_40);
+        listOfRateStar41.add(halfRight1_41);listOfRateStar41.add(halfRight2_41);listOfRateStar41.add(halfRight3_41);listOfRateStar41.add(halfRight4_41);listOfRateStar41.add(halfRight5_41);
+        listOfRateStar42.add(halfRight1_42);listOfRateStar42.add(halfRight2_42);listOfRateStar42.add(halfRight3_42);listOfRateStar42.add(halfRight4_42);listOfRateStar42.add(halfRight5_42);
+        listOfRateStar43.add(halfRight1_43);listOfRateStar43.add(halfRight2_43);listOfRateStar43.add(halfRight3_43);listOfRateStar43.add(halfRight4_43);listOfRateStar43.add(halfRight5_43);
+
+        gridPaneToRate.put(g00,listOfRateStar00);gridPaneToRate.put(g01,listOfRateStar01);gridPaneToRate.put(g02,listOfRateStar02);gridPaneToRate.put(g03,listOfRateStar03);
+        gridPaneToRate.put(g10,listOfRateStar10);gridPaneToRate.put(g11,listOfRateStar11);gridPaneToRate.put(g12,listOfRateStar12);gridPaneToRate.put(g13,listOfRateStar13);
+        gridPaneToRate.put(g20,listOfRateStar20);gridPaneToRate.put(g21,listOfRateStar21);gridPaneToRate.put(g22,listOfRateStar22);gridPaneToRate.put(g23,listOfRateStar23);
+        gridPaneToRate.put(g30,listOfRateStar30);gridPaneToRate.put(g31,listOfRateStar31);gridPaneToRate.put(g32,listOfRateStar32);gridPaneToRate.put(g33,listOfRateStar33);
+        gridPaneToRate.put(g40,listOfRateStar40);gridPaneToRate.put(g41,listOfRateStar41);gridPaneToRate.put(g42,listOfRateStar42);gridPaneToRate.put(g43,listOfRateStar43);
+
+
         Controller.check();
         Controller.restartSortedOrFilteredProduct();
         loadProduct(counter);
@@ -221,6 +475,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
             gridPane.setEffect(null);
             gridPaneToOff.get(gridPane).setVisible(false);
             gridPaneToOff.get(gridPane).setDisable(true);
+            setStart(gridPane,-1);
         }
     }
 
@@ -252,24 +507,55 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
         int size=Controller.getHowMuchLeftForThisPage(counter);
 
+
         ArrayList<String> images = Controller.getProductImageForFxml(counter);
         ArrayList<Double> prices = Controller.getProductPriceForFxml(counter);
         ArrayList<String> names = Controller.getProductNameForFxml(counter);
         ArrayList<Long> productId=Controller.getProductIdForFxml(counter);
         ArrayList<Boolean> isOff=Controller.getOffForFxml(counter);
+        ArrayList<Double> score=Controller.getProductScoreForFxml(counter);
         for (int i = 0; i < size; i++) {
             gridPanes.get(i).setVisible(true);
             gridPanes.get(i).setDisable(false);
             Image image=new Image(images.get(i));
-            gridPaneToImageView.get(gridPanes.get(i)).setImage(image);
-            gridPaneToNameAmount.get(gridPanes.get(i)).setText(names.get(i));
-            gridPaneToPriceAmount.get(gridPanes.get(i)).setText(prices.get(i).toString());
-            gridPaneToProductId.put(gridPanes.get(i),productId.get(i));
+            GridPane gridPane=gridPanes.get(i);
+            gridPaneToImageView.get(gridPane).setImage(image);
+            gridPaneToNameAmount.get(gridPane).setText(names.get(i));
+            gridPaneToPriceAmount.get(gridPane).setText(prices.get(i).toString());
+            gridPaneToProductId.put(gridPane,productId.get(i));
+
+
+            setStart(gridPane,score.get(i));
+
+
             if (isOff.get(i)){
                 gridPaneToOff.get(gridPanes.get(i)).setVisible(true);
                 gridPaneToOff.get(gridPanes.get(i)).setDisable(false);
             }
         }
+
+        max=0;
+        for (Double price : prices) {
+            if (price>=max){
+                max=price;
+            }
+        }
+        min=max;
+        for (Double price : prices) {
+            if (price<=min){
+                min=price;
+            }
+        }
+
+
+        int mid= (int) ((max-min)/2);
+        minPrice.setText(String.valueOf(min));
+        if (mid==0){
+            midPrice.setText("");
+        }else {
+            midPrice.setText(String.valueOf(mid));
+        }
+        maxPrice.setText(String.valueOf(max));
 
         for (GridPane gridPane : gridPanes) {
 
@@ -301,6 +587,124 @@ public class ProductsPageMenuFxmlController implements Initializable {
         }else {
             nextPageImage.setDisable(true);
             nextPageImage.setVisible(false);
+        }
+
+
+    }
+
+    public void setStart(GridPane gridPane ,double score){
+        ImageView halfLeft1 = null;ImageView halfLeft2 = null;ImageView halfLeft3 = null;ImageView halfLeft4 = null;ImageView halfLeft5 = null;
+        ImageView halfRight1 = null;ImageView halfRight2 = null;ImageView halfRight3 = null;ImageView halfRight4 = null;ImageView halfRight5 = null;
+
+        ImageView leftGreen1 = null;ImageView leftGreen2 = null;ImageView leftGreen3 = null;ImageView leftGreen4 = null;ImageView leftGreen5 = null;
+        ImageView rightGreen1 = null;ImageView rightGreen2 = null;ImageView rightGreen3 = null;ImageView rightGreen4 = null;ImageView rightGreen5 = null;
+
+        ArrayList<ImageView> test =gridPaneToRate.get(gridPane);
+
+        for (ImageView imageView : gridPaneToRate.get(gridPane)) {
+            if (imageView.getId().startsWith("halfLeft1")){
+                halfLeft1=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfLeft2")){
+                halfLeft2=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfLeft3")){
+                halfLeft3=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfLeft4")){
+                halfLeft4=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfLeft5")){
+                halfLeft5=imageView;
+                continue;
+            }
+            if (imageView.getId().startsWith("halfRight1")){
+                halfRight1=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfRight2")){
+                halfRight2=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfRight3")){
+                halfRight3=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfRight4")){
+                halfRight4=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfRight5")){
+                halfRight5=imageView;
+                continue;
+            }
+            if (imageView.getId().startsWith("leftGreen1")){
+                leftGreen1=imageView;
+                continue;
+            }if (imageView.getId().startsWith("leftGreen2")){
+                leftGreen2=imageView;
+                continue;
+            }if (imageView.getId().startsWith("leftGreen3")){
+                leftGreen3=imageView;
+                continue;
+            }if (imageView.getId().startsWith("leftGreen4")){
+                leftGreen4=imageView;
+                continue;
+            }if (imageView.getId().startsWith("leftGreen5")){
+                leftGreen5=imageView;
+                continue;
+            }
+            if (imageView.getId().startsWith("rightGreen1")){
+                rightGreen1=imageView;
+                continue;
+            }if (imageView.getId().startsWith("rightGreen2")){
+                rightGreen2=imageView;
+                continue;
+            }if (imageView.getId().startsWith("rightGreen3")){
+                rightGreen3=imageView;
+                continue;
+            }if (imageView.getId().startsWith("rightGreen4")){
+                rightGreen4=imageView;
+                continue;
+            }if (imageView.getId().startsWith("rightGreen5")){
+                rightGreen5=imageView;
+                continue;
+            }
+        }
+        halfLeft1.toFront();halfRight1.toFront();
+        halfLeft2.toFront();halfRight2.toFront();
+        halfLeft3.toFront();halfRight3.toFront();
+        halfLeft4.toFront();halfRight4.toFront();
+        halfLeft5.toFront();halfRight5.toFront();
+        if (score==-1){
+            return;
+        }
+        System.out.println(gridPane.getId()+"="+score);
+        if (score>0){
+            leftGreen1.toFront();
+        }
+        if (score>=0.5){
+            rightGreen1.toFront();
+        }
+        if (score>=1){
+            leftGreen2.toFront();
+        }
+        if (score>=1.5){
+            rightGreen2.toFront();
+        }
+        if (score>=2){
+            leftGreen3.toFront();
+        }
+        if (score>=2.5){
+            rightGreen3.toFront();
+        }
+        if (score>=3){
+            leftGreen4.toFront();
+        }
+        if (score>=3.5){
+            rightGreen4.toFront();
+        }
+        if (score>=4){
+            leftGreen5.toFront();
+        }
+        if (score>=4.5){
+            rightGreen5.toFront();
         }
     }
 
@@ -601,11 +1005,57 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
 
     public void nextPage(MouseEvent mouseEvent) {
-
+        loadProduct(counter);
     }
 
     public void prePage(MouseEvent mouseEvent) {
+        counter=counter-currentSize;
+        loadProduct(counter);
+    }
 
+
+
+    public void scrollStarted(MouseEvent scrollEvent) {
+
+    }
+
+    public Label priceTag=new Label();
+
+    public void scrollFinished(MouseEvent mouseEvent) {
+        double minPercentage=priceFilterMin.getValue();
+        double maxPercentage=100-priceFilterMax.getValue();
+        if (minPercentage>maxPercentage){
+            priceFilterMin.setValue(previousMinValue);
+            priceFilterMax.setValue(previousMaxValue);
+            return;
+        }
+        System.out.println(minPercentage);
+        System.out.println(maxPercentage);
+        double maxPrice = (maxPercentage * max) / 100;
+        double minPrice = (minPercentage * max) / 100;
+
+        System.out.println(minPrice);
+        System.out.println(maxPrice);
+
+        if (maxPercentage==100){
+            maxPrice=999999999;
+        }
+        if (minPercentage==0){
+            minPrice=0;
+        }
+
+        Filter.disablePriceFilter();
+
+        Filter.setIsItFilteredByPrice(true);
+        Filter.setMinPrice(minPrice);
+        Filter.setMaxPrice(maxPrice);
+        Filter.filter();
+
+        previousMinValue=priceFilterMin.getValue();
+        previousMaxValue=priceFilterMax.getValue();
+
+        counter=counter-(long)currentSize;
+        loadProduct(counter);
     }
 }
 

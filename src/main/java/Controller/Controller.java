@@ -271,6 +271,21 @@ public class Controller {
         return returnValue;
     }
 
+    public static ArrayList<Double> getProductScoreForFxml(long start) {
+        int counter = 0;
+        ArrayList<Double> returnValue = new ArrayList<Double>();
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
+            counter = 20;
+        } else {
+            counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
+        }
+        for (int i = (int) start; i < (int) start + counter; i++) {
+            returnValue.add(DataBase.sortedOrFilteredProduct.get(i).getAverageScore());
+        }
+        return returnValue;
+    }
+
+
     public static int getAllPageNumber(){
         if (sortedOrFilteredProduct.size()%20==0){
             return sortedOrFilteredProduct.size()/20;

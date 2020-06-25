@@ -373,11 +373,16 @@ public class MainBarController implements Initializable {
         if (category.endsWith("〉")){
             category=category.split("\\s")[0];
         }else if (category.startsWith("●")){
-            category=category.split("\\s")[1];
-
+            int i=0;
+            while (category.split("\\s")[i].equals("●")){
+                i++;
+            }
+            category=category.split("\\s")[i];
         }
         Filter.restartFilters();
         Filter.filterByCategory(category);
+
+
 
     }
 
