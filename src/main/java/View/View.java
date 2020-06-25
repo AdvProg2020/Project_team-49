@@ -1,7 +1,9 @@
 package View;
 
 import Controller.Controller;
+import Controller.DataBase;
 import Models.Product;
+import Models.User.User;
 import View.Menu.MainMenu;
 import View.Menu.Menu;
 
@@ -19,6 +21,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 import static Controller.DataBase.getProductById;
@@ -44,6 +47,10 @@ public class View extends Application {
         stage.setScene(new Scene(mainMenu));
 
         stage.show();
+    }
+
+    private ArrayList<User> getAllUsers() {
+        return DataBase.getAllUsers();
     }
 
     public void run() {
