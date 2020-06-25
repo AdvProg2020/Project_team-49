@@ -193,7 +193,6 @@ public class Product implements Serializable {
     }
 
     public Double gettttAverageScore(){
-        resetAverageScore();
         return averageScore;
     }
 

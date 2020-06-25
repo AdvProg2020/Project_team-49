@@ -280,7 +280,7 @@ public class Controller {
             counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
         }
         for (int i = (int) start; i < (int) start + counter; i++) {
-            returnValue.add(DataBase.sortedOrFilteredProduct.get(i).getAverageScore());
+            returnValue.add(DataBase.sortedOrFilteredProduct.get(i).gettttAverageScore());
         }
         return returnValue;
     }
@@ -302,6 +302,7 @@ public class Controller {
         allProducts.get(2).setDoesItHaveOff(true);
         for (Product product : allProducts) {
             product.setImageAddress("./photos/MainMenu/commercials/xbox1.png");
+            product.setAverageScore(2.2);
         }
     }
 
