@@ -36,7 +36,7 @@ public class View extends Application {
         Controller.setCurrentUser(getAllUsers().get(0));
         Product product = getProductById(1);
         Controller.setSelectedProduct(product);
-        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/managerArea.fxml"));
+        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml"));
         Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
         Controller.setCurrentPane((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
         ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
