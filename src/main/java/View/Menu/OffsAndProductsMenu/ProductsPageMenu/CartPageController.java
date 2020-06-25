@@ -7,7 +7,9 @@ import Models.User.Cart;
 import Models.User.Costumer;
 import Models.User.Guest;
 import Models.User.Seller;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -101,6 +103,7 @@ public class CartPageController implements Initializable {
     public Rectangle confirmPurchaseRectangle;
     public Label confirmPurchaseLabel;
     public Label purchaseLabel;
+    public Button checkInformationButton;
     private Cart cart;
     private int rectangleIndex = 1;
     private int productIndex = 0;
@@ -553,5 +556,8 @@ public class CartPageController implements Initializable {
 
     public void Pay(MouseEvent mouseEvent) {
 
+    }
+
+    public void checkInformation(ActionEvent event) {
     }
 }

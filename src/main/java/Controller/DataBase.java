@@ -503,9 +503,7 @@ public class DataBase {
             used.add(index);
             allowedCostumers.add(costumers.get(index));
         }
-        int i= 0;
         for (Costumer allowedCostumer : allowedCostumers) {
-
             allowedCostumer.addDiscountCode(new DiscountCode("monthly gift"
                     , new Date(), new Date(monthPeriod + new Date().getTime()), 10
                     , 50000, 2, allowedCostumers));
