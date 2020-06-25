@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1467.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.UserArea.ManagerAreaGraphicController">
+<AnchorPane prefHeight="800.0" prefWidth="1467.0" xmlns="http://javafx.com/javafx/14.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.UserArea.ManagerAreaGraphicController">
    <children>
       <ScrollPane prefHeight="800.0" prefWidth="1467.0">
          <content>
@@ -683,7 +683,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </ImageView>
-                                    <ImageView fx:id="editTheChanges1" fitHeight="42.0" fitWidth="42.0" layoutX="765.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="editTheChanges1" fitHeight="42.0" fitWidth="42.0" layoutX="765.0" layoutY="35.0" onMouseClicked="#editCategory" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../photos/UserArea/personalInfo/checked.png" />
                                        </image>
@@ -750,7 +750,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </ImageView>
-                                    <ImageView fx:id="editTheChanges2" fitHeight="42.0" fitWidth="42.0" layoutX="767.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="editTheChanges2" fitHeight="42.0" fitWidth="42.0" layoutX="767.0" layoutY="38.0" onMouseClicked="#editCategory" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../photos/UserArea/personalInfo/checked.png" />
                                        </image>
