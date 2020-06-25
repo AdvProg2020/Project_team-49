@@ -114,6 +114,9 @@ public class Controller {
     }
 
     public static boolean isPasswordCorrect(String password, String username) {
+        if (DataBase.getUserByUsername(username) == null) {
+            return false;
+        }
         if (DataBase.getUserByUsername(username).getPassword().equals(password)) {
             return true;
         }
