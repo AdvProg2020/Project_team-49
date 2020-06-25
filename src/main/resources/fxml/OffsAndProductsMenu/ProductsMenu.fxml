@@ -265,6 +265,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <cursor>
@@ -488,6 +491,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -720,6 +726,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -952,6 +961,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -1125,7 +1137,7 @@
                                           <Insets left="13.0" />
                                        </GridPane.margin>
                                     </ImageView>
-                                    <ImageView fx:id="halfLeft22111" fitHeight="11.66" fitWidth="7.0" layoutX="10.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                                    <ImageView fx:id="halfLeft2_10" fitHeight="11.66" fitWidth="7.0" layoutX="10.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                                        <image>
                                           <Image url="@../../photos/ProductPage/rating/halfLeft.png" />
                                        </image>
@@ -1184,6 +1196,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -1317,7 +1332,7 @@
                                           <Insets left="19.0" />
                                        </GridPane.margin>
                                     </ImageView>
-                                    <ImageView fx:id="rightGreen221111" fitHeight="11.66" fitWidth="7.0" layoutX="10.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                                    <ImageView fx:id="rightGreen2_11" fitHeight="11.66" fitWidth="7.0" layoutX="10.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                                        <image>
                                           <Image url="@../../photos/ProductPage/rating/rightGreen.png" />
                                        </image>
@@ -1416,6 +1431,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -1648,6 +1666,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -1880,6 +1901,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -2112,6 +2136,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -2344,6 +2371,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -2576,6 +2606,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -2808,6 +2841,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -3041,6 +3077,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -3274,6 +3313,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -3506,6 +3548,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -3738,6 +3783,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -3971,6 +4019,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -4204,6 +4255,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -4437,6 +4491,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>
@@ -4670,6 +4727,9 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                                  </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets top="180.0" />
+                                 </GridPane.margin>
                               </GridPane>
                                     </children>
                                     <columnConstraints>

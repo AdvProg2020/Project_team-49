@@ -475,7 +475,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
             gridPane.setEffect(null);
             gridPaneToOff.get(gridPane).setVisible(false);
             gridPaneToOff.get(gridPane).setDisable(true);
-//            setStart(gridPane,-1);
+            setStart(gridPane,-1);
         }
     }
 
@@ -525,7 +525,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
             gridPaneToProductId.put(gridPane,productId.get(i));
 
 
-//            setStart(gridPane,score.get(i));
+            setStart(gridPane,score.get(i));
 
 
             if (isOff.get(i)){
@@ -592,121 +592,121 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
     }
 
-//    public void setStart(GridPane gridPane ,double score){
-//        ImageView halfLeft1 = null;ImageView halfLeft2 = null;ImageView halfLeft3 = null;ImageView halfLeft4 = null;ImageView halfLeft5 = null;
-//        ImageView halfRight1 = null;ImageView halfRight2 = null;ImageView halfRight3 = null;ImageView halfRight4 = null;ImageView halfRight5 = null;
-//
-//        ImageView leftGreen1 = null;ImageView leftGreen2 = null;ImageView leftGreen3 = null;ImageView leftGreen4 = null;ImageView leftGreen5 = null;
-//        ImageView rightGreen1 = null;ImageView rightGreen2 = null;ImageView rightGreen3 = null;ImageView rightGreen4 = null;ImageView rightGreen5 = null;
-//
-//        ArrayList<ImageView> test =gridPaneToRate.get(gridPane);
-//
-//        for (ImageView imageView : gridPaneToRate.get(gridPane)) {
-//            if (imageView.getId().startsWith("halfLeft1")){
-//                halfLeft1=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("halfLeft2")){
-//                halfLeft2=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("halfLeft3")){
-//                halfLeft3=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("halfLeft4")){
-//                halfLeft4=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("halfLeft5")){
-//                halfLeft5=imageView;
-//                continue;
-//            }
-//            if (imageView.getId().startsWith("halfRight1")){
-//                halfRight1=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("halfRight2")){
-//                halfRight2=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("halfRight3")){
-//                halfRight3=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("halfRight4")){
-//                halfRight4=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("halfRight5")){
-//                halfRight5=imageView;
-//                continue;
-//            }
-//            if (imageView.getId().startsWith("leftGreen1")){
-//                leftGreen1=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("leftGreen2")){
-//                leftGreen2=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("leftGreen3")){
-//                leftGreen3=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("leftGreen4")){
-//                leftGreen4=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("leftGreen5")){
-//                leftGreen5=imageView;
-//                continue;
-//            }
-//            if (imageView.getId().startsWith("rightGreen1")){
-//                rightGreen1=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("rightGreen2")){
-//                rightGreen2=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("rightGreen3")){
-//                rightGreen3=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("rightGreen4")){
-//                rightGreen4=imageView;
-//                continue;
-//            }if (imageView.getId().startsWith("rightGreen5")){
-//                rightGreen5=imageView;
-//                continue;
-//            }
-//        }
-//        halfLeft1.toFront();halfRight1.toFront();
-//        halfLeft2.toFront();halfRight2.toFront();
-//        halfLeft3.toFront();halfRight3.toFront();
-//        halfLeft4.toFront();halfRight4.toFront();
-//        halfLeft5.toFront();halfRight5.toFront();
-//        if (score==-1){
-//            return;
-//        }
-//        System.out.println(gridPane.getId()+"="+score);
-//        if (score>0){
-//            leftGreen1.toFront();
-//        }
-//        if (score>=0.5){
-//            rightGreen1.toFront();
-//        }
-//        if (score>=1){
-//            leftGreen2.toFront();
-//        }
-//        if (score>=1.5){
-//            rightGreen2.toFront();
-//        }
-//        if (score>=2){
-//            leftGreen3.toFront();
-//        }
-//        if (score>=2.5){
-//            rightGreen3.toFront();
-//        }
-//        if (score>=3){
-//            leftGreen4.toFront();
-//        }
-//        if (score>=3.5){
-//            rightGreen4.toFront();
-//        }
-//        if (score>=4){
-//            leftGreen5.toFront();
-//        }
-//        if (score>=4.5){
-//            rightGreen5.toFront();
-//        }
-//    }
+    public void setStart(GridPane gridPane ,double score){
+        ImageView halfLeft1 = null;ImageView halfLeft2 = null;ImageView halfLeft3 = null;ImageView halfLeft4 = null;ImageView halfLeft5 = null;
+        ImageView halfRight1 = null;ImageView halfRight2 = null;ImageView halfRight3 = null;ImageView halfRight4 = null;ImageView halfRight5 = null;
+
+        ImageView leftGreen1 = null;ImageView leftGreen2 = null;ImageView leftGreen3 = null;ImageView leftGreen4 = null;ImageView leftGreen5 = null;
+        ImageView rightGreen1 = null;ImageView rightGreen2 = null;ImageView rightGreen3 = null;ImageView rightGreen4 = null;ImageView rightGreen5 = null;
+
+        ArrayList<ImageView> test =gridPaneToRate.get(gridPane);
+
+        for (ImageView imageView : gridPaneToRate.get(gridPane)) {
+            if (imageView.getId().startsWith("halfLeft1")){
+                halfLeft1=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfLeft2")){
+                halfLeft2=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfLeft3")){
+                halfLeft3=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfLeft4")){
+                halfLeft4=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfLeft5")){
+                halfLeft5=imageView;
+                continue;
+            }
+            if (imageView.getId().startsWith("halfRight1")){
+                halfRight1=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfRight2")){
+                halfRight2=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfRight3")){
+                halfRight3=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfRight4")){
+                halfRight4=imageView;
+                continue;
+            }if (imageView.getId().startsWith("halfRight5")){
+                halfRight5=imageView;
+                continue;
+            }
+            if (imageView.getId().startsWith("leftGreen1")){
+                leftGreen1=imageView;
+                continue;
+            }if (imageView.getId().startsWith("leftGreen2")){
+                leftGreen2=imageView;
+                continue;
+            }if (imageView.getId().startsWith("leftGreen3")){
+                leftGreen3=imageView;
+                continue;
+            }if (imageView.getId().startsWith("leftGreen4")){
+                leftGreen4=imageView;
+                continue;
+            }if (imageView.getId().startsWith("leftGreen5")){
+                leftGreen5=imageView;
+                continue;
+            }
+            if (imageView.getId().startsWith("rightGreen1")){
+                rightGreen1=imageView;
+                continue;
+            }if (imageView.getId().startsWith("rightGreen2")){
+                rightGreen2=imageView;
+                continue;
+            }if (imageView.getId().startsWith("rightGreen3")){
+                rightGreen3=imageView;
+                continue;
+            }if (imageView.getId().startsWith("rightGreen4")){
+                rightGreen4=imageView;
+                continue;
+            }if (imageView.getId().startsWith("rightGreen5")){
+                rightGreen5=imageView;
+                continue;
+            }
+        }
+        halfLeft1.toFront();halfRight1.toFront();
+        halfLeft2.toFront();halfRight2.toFront();
+        halfLeft3.toFront();halfRight3.toFront();
+        halfLeft4.toFront();halfRight4.toFront();
+        halfLeft5.toFront();halfRight5.toFront();
+        if (score==-1){
+            return;
+        }
+        System.out.println(gridPane.getId()+"="+score);
+        if (score>0){
+            leftGreen1.toFront();
+        }
+        if (score>=0.5){
+            rightGreen1.toFront();
+        }
+        if (score>=1){
+            leftGreen2.toFront();
+        }
+        if (score>=1.5){
+            rightGreen2.toFront();
+        }
+        if (score>=2){
+            leftGreen3.toFront();
+        }
+        if (score>=2.5){
+            rightGreen3.toFront();
+        }
+        if (score>=3){
+            leftGreen4.toFront();
+        }
+        if (score>=3.5){
+            rightGreen4.toFront();
+        }
+        if (score>=4){
+            leftGreen5.toFront();
+        }
+        if (score>=4.5){
+            rightGreen5.toFront();
+        }
+    }
 
 
     ArrayList<Long> compareIds=new ArrayList<Long>();
