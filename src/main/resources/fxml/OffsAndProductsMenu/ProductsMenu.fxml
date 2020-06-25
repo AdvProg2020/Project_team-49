@@ -139,7 +139,7 @@
                                           <Image url="@../../photos/ProductPage/rating/rightGreen.png" />
                                        </image>
                                        <GridPane.margin>
-                                          <Insets left="19.0" />
+                                          <Insets left="18.0" />
                                        </GridPane.margin>
                                     </ImageView>
                                     <ImageView fx:id="rightGreen5_00" fitHeight="11.66" fitWidth="7.0" layoutX="10.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
@@ -147,7 +147,7 @@
                                           <Image url="@../../photos/ProductPage/rating/rightGreen.png" />
                                        </image>
                                        <GridPane.margin>
-                                          <Insets left="19.0" />
+                                          <Insets left="18.0" />
                                        </GridPane.margin>
                                     </ImageView>
                                     <ImageView fx:id="rightGreen4_00" fitHeight="11.66" fitWidth="7.0" layoutX="10.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
@@ -155,7 +155,7 @@
                                           <Image url="@../../photos/ProductPage/rating/rightGreen.png" />
                                        </image>
                                        <GridPane.margin>
-                                          <Insets left="19.0" />
+                                          <Insets left="18.0" />
                                        </GridPane.margin>
                                     </ImageView>
                                     <ImageView fx:id="rightGreen3_00" fitHeight="11.66" fitWidth="7.0" layoutX="10.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
@@ -163,7 +163,7 @@
                                           <Image url="@../../photos/ProductPage/rating/rightGreen.png" />
                                        </image>
                                        <GridPane.margin>
-                                          <Insets left="19.0" />
+                                          <Insets left="18.0" />
                                        </GridPane.margin>
                                     </ImageView>
                                     <ImageView fx:id="rightGreen2_00" fitHeight="11.66" fitWidth="7.0" layoutX="10.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
@@ -171,7 +171,7 @@
                                           <Image url="@../../photos/ProductPage/rating/rightGreen.png" />
                                        </image>
                                        <GridPane.margin>
-                                          <Insets left="19.0" />
+                                          <Insets left="18.0" />
                                        </GridPane.margin>
                                     </ImageView>
                                     <ImageView fx:id="halfLeft1_00" fitHeight="11.66" fitWidth="7.0" pickOnBounds="true" preserveRatio="true">
@@ -219,7 +219,7 @@
                                           <Image url="@../../photos/ProductPage/rating/halfRight.png" />
                                        </image>
                                        <GridPane.margin>
-                                          <Insets left="19.0" />
+                                          <Insets left="18.0" />
                                        </GridPane.margin>
                                     </ImageView>
                                     <ImageView fx:id="halfRight5_00" fitHeight="11.66" fitWidth="7.0" layoutX="49.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
@@ -227,7 +227,7 @@
                                           <Image url="@../../photos/ProductPage/rating/halfRight.png" />
                                        </image>
                                        <GridPane.margin>
-                                          <Insets left="19.0" />
+                                          <Insets left="18.0" />
                                        </GridPane.margin>
                                     </ImageView>
                                     <ImageView fx:id="halfRight4_00" fitHeight="11.66" fitWidth="7.0" layoutX="10.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
@@ -235,7 +235,7 @@
                                           <Image url="@../../photos/ProductPage/rating/halfRight.png" />
                                        </image>
                                        <GridPane.margin>
-                                          <Insets left="19.0" />
+                                          <Insets left="18.0" />
                                        </GridPane.margin>
                                     </ImageView>
                                     <ImageView fx:id="halfRight3_00" fitHeight="11.66" fitWidth="7.0" layoutX="10.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
@@ -243,7 +243,7 @@
                                           <Image url="@../../photos/ProductPage/rating/halfRight.png" />
                                        </image>
                                        <GridPane.margin>
-                                          <Insets left="19.0" />
+                                          <Insets left="18.0" />
                                        </GridPane.margin>
                                     </ImageView>
                                     <ImageView fx:id="halfRight2_00" fitHeight="11.66" fitWidth="7.0" layoutX="10.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
@@ -251,7 +251,7 @@
                                           <Image url="@../../photos/ProductPage/rating/halfRight.png" />
                                        </image>
                                        <GridPane.margin>
-                                          <Insets left="19.0" />
+                                          <Insets left="18.0" />
                                        </GridPane.margin>
                                     </ImageView>
                                  </children>
