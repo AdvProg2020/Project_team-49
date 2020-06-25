@@ -8,12 +8,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Bloom;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -247,7 +250,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
     public HashMap<GridPane,Label> gridPaneToOffRemain =new HashMap<>();
     public HashMap<GridPane,Label> gridPaneToOffPercent=new HashMap<>();
-
+    public Pane backpane;
 
 
     ArrayList<CheckBox> brandsCheckBoxes=new ArrayList<>();
@@ -265,6 +268,8 @@ public class ProductsPageMenuFxmlController implements Initializable {
     public boolean scoreClicked=false;
     public boolean viewClicked=false;
 
+    public Label saleLeft;
+    public Label saleRight;
 
 
     public ListView brandFilter;
@@ -467,6 +472,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         Controller.restartSortedOrFilteredProduct();
         loadProduct(counter);
 
+
         ArrayList<String> brands=new ArrayList<String>(Filter.getAvailableBrands()  );
         for (String brand : brands) {
             CheckBox checkBox=new CheckBox();
@@ -480,6 +486,18 @@ public class ProductsPageMenuFxmlController implements Initializable {
             brandFilter.setPrefHeight(4*24);
         }else {
             brandFilter.setPrefHeight(brandsCheckBoxes.size() * 24);
+        }
+
+        if (Controller.isDoesItOffPage()){
+            saleLeft.setVisible(true);
+            saleRight.setVisible(true);
+            saleRight.setDisable(false);
+            saleLeft.setDisable(false);
+        }else{
+            saleLeft.setVisible(false);
+            saleRight.setVisible(false);
+            saleRight.setDisable(true);
+            saleLeft.setDisable(true);
         }
 
     }
@@ -505,6 +523,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
             setStart(gridPane,-1);
             gridPaneToOffPercent.get(gridPane).setText("");
             gridPaneToOffRemain.get(gridPane).setText("");
+            gridPane.setOpacity(1);
         }
     }
 
@@ -545,6 +564,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         ArrayList<Double> score=Controller.getProductScoreForFxml(counter);
         ArrayList<Double> remainOffTimeLeft=Controller.getProductOffRemainForFxml(counter);
         ArrayList<Integer> offPercent=Controller.getProductOffPercentForFxml(counter);
+        ArrayList<Integer> remainingItems=Controller.getProductRemainForFxml(counter);
         for (int i = 0; i < size; i++) {
             gridPanes.get(i).setVisible(true);
             gridPanes.get(i).setDisable(false);
@@ -557,6 +577,9 @@ public class ProductsPageMenuFxmlController implements Initializable {
             if (remainOffTimeLeft.get(i)!=-1.0){
                 gridPaneToOffRemain.get(gridPane).setText(String.valueOf(remainOffTimeLeft.get(i)));
                 gridPaneToOffPercent.get(gridPane).setText(String.valueOf(offPercent.get(i))+"%");
+            }
+            if (remainingItems.get(i)==0){
+                gridPane.setOpacity(0.5);
             }
 
             setStart(gridPane,score.get(i));
@@ -744,10 +767,14 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
     ArrayList<Long> compareIds=new ArrayList<Long>();
 
+    private boolean fourCompareChecker=false;
+
     public void makeGridPaneCompareOn(MouseEvent mouseEvent) {
         GridPane gridPane=(GridPane) mouseEvent.getSource();
-        gridPaneToCheckBox.get(gridPane).setVisible(true);
-        gridPaneToCheckBox.get(gridPane).setDisable(false);
+        if (!fourCompareChecker) {
+            gridPaneToCheckBox.get(gridPane).setVisible(true);
+            gridPaneToCheckBox.get(gridPane).setDisable(false);
+        }
         DropShadow dropShadow=new DropShadow();
         gridPane.setEffect(dropShadow);
     }
@@ -768,6 +795,11 @@ public class ProductsPageMenuFxmlController implements Initializable {
             compareIds.add(gridPaneToProductId.get(checkBoxToGridPane.get(checkBox)));
         }else {
             compareIds.remove(gridPaneToProductId.get(checkBoxToGridPane.get(checkBox)));
+        }
+        if (compareIds.size()==4){
+            fourCompareChecker=true;
+        }else {
+            fourCompareChecker=false;
         }
 
         if (compareIds.size()>=2){
@@ -1047,12 +1079,9 @@ public class ProductsPageMenuFxmlController implements Initializable {
     }
 
 
-
     public void scrollStarted(MouseEvent scrollEvent) {
 
     }
-
-    public Label priceTag=new Label();
 
     public void scrollFinished(MouseEvent mouseEvent) {
         double minPercentage=priceFilterMin.getValue();

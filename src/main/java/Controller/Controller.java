@@ -29,6 +29,24 @@ public class Controller {
     private static Product selectedProduct;
     private static Pane currentPane;
     private static String color;
+    private static boolean doesItOffPage;
+    private static ArrayList<Long> compareIds=new ArrayList<>();
+
+    public static void setCompareIds(ArrayList<Long> compareIds) {
+        Controller.compareIds = compareIds;
+    }
+
+    public static ArrayList<Long> getCompareIds() {
+        return compareIds;
+    }
+
+    public static void setDoesItOffPage(boolean doesItOffPage) {
+        Controller.doesItOffPage = doesItOffPage;
+    }
+
+    public static boolean isDoesItOffPage() {
+        return doesItOffPage;
+    }
 
     public static String getColor() {
         return color;
@@ -287,6 +305,20 @@ public class Controller {
         }
         for (int i = (int) start; i < (int) start + counter; i++) {
             returnValue.add(DataBase.sortedOrFilteredProduct.get(i).gettttAverageScore());
+        }
+        return returnValue;
+    }
+
+    public static ArrayList<Integer> getProductRemainForFxml(long start) {
+        int counter = 0;
+        ArrayList<Integer> returnValue = new ArrayList<Integer>();
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
+            counter = 20;
+        } else {
+            counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
+        }
+        for (int i = (int) start; i < (int) start + counter; i++) {
+            returnValue.add(DataBase.sortedOrFilteredProduct.get(i).remainingItems());
         }
         return returnValue;
     }
