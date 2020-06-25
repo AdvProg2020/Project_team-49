@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.UserArea.SellerArea.SellerAreaGraphicController">
+   <children>
+      <ScrollPane prefHeight="800.0" prefWidth="1467.0">
+         <content>
+            <AnchorPane prefHeight="800.0" prefWidth="1467.0">
+               <children>
+                  <Pane layoutX="37.0" layoutY="187.0" prefHeight="440.0" prefWidth="290.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                     <children>
+                        <GridPane layoutX="52.0" layoutY="43.0" prefHeight="355.0" prefWidth="232.0">
+                           <children>
+                              <Label layoutX="30.0" layoutY="43.0" prefHeight="53.0" prefWidth="344.0" text="GO TO CART" GridPane.rowIndex="1">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Raleway" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="30.0" layoutY="120.0" onMouseClicked="#goToSellHistoryPane" prefHeight="53.0" prefWidth="334.0" text="SELL HISTORY" GridPane.rowIndex="2">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Raleway" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="30.0" layoutY="197.0" onMouseClicked="#goToManageOffs" prefHeight="53.0" prefWidth="268.0" text="MANAGE OFFS" GridPane.rowIndex="3">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Raleway" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Pane fx:id="editPersonalInfoLabel" disable="true" prefHeight="56.0" prefWidth="200.0" visible="false">
+                                 <children>
+                                    <Label layoutX="64.0" layoutY="11.0" prefHeight="40.0" prefWidth="136.0" text="Edit Personal Info" textFill="#959595">
+                                       <font>
+                                          <Font name="Raleway" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="goBackToPersonalInfoArrow" fitHeight="29.0" fitWidth="30.0" layoutX="14.0" layoutY="17.0" onMouseClicked="#goBackToPersonalInfo" pickOnBounds="true" preserveRatio="true">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <image>
+                                          <Image url="@../photos/UserArea/personalInfo/back.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#959595" height="40.0" layoutX="52.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1.0" />
+                                 </children>
+                              </Pane>
+                              <GridPane onMouseClicked="#goBackToPersonalInfo" prefHeight="54.0" prefWidth="229.0">
+                                 <children>
+                                    <Label fx:id="userNameLabel" contentDisplay="CENTER" prefHeight="24.0" prefWidth="321.0" text="USERNAME">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Raleway" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="TOP_LEFT" prefHeight="34.0" prefWidth="232.0" text="seller" textFill="#aaaaaa" GridPane.rowIndex="1">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Raleway" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets left="80.0" />
+                                 </padding>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </GridPane>
+                              <Label onMouseClicked="#goToManageProducts" prefHeight="53.0" prefWidth="268.0" text="MANAGE PRODUCTS" GridPane.rowIndex="4">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Raleway" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                        <ImageView fx:id="costumerProfileImage" fitHeight="98.0" fitWidth="103.0" layoutX="20.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                     <effect>
+                        <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
+                     </effect>
+                  </Pane>
+                  <Pane fx:id="editPersonalInfoPane" disable="true" layoutX="371.0" layoutY="187.0" prefHeight="439.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
+                     <children>
+                        <Label layoutX="21.0" layoutY="118.0" prefHeight="40.0" prefWidth="78.0" text="fisrt name" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="521.0" layoutY="118.0" prefHeight="40.0" prefWidth="77.0" text="last name" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="20.0" layoutY="200.0" prefHeight="40.0" prefWidth="105.0" text="Email address" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="17.0" layoutY="32.0" prefHeight="47.0" prefWidth="192.0" text="Personal account" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="21.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="21.0" layoutY="276.0" prefHeight="40.0" prefWidth="54.0" text="credit" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <Rectangle fx:id="firstNameRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="145.0" layoutY="113.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="342.0" />
+                        <TextField fx:id="firstNameTextField" focusTraversable="false" layoutX="154.0" layoutY="117.0" prefHeight="42.0" prefWidth="324.0" style="-fx-background-color: #ffffff;" stylesheets="@../cssFiles/textFieldProductPage.css">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </TextField>
+                        <Rectangle fx:id="lastNameRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="604.0" layoutY="113.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="342.0" />
+                        <TextField fx:id="lastNameTextField" focusTraversable="false" layoutX="611.0" layoutY="117.0" prefHeight="42.0" prefWidth="324.0" style="-fx-background-color: #ffffff;" stylesheets="@../cssFiles/textFieldProductPage.css">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </TextField>
+                        <Rectangle fx:id="emailRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="145.0" layoutY="195.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="801.0" />
+                        <TextField fx:id="emailTextField" focusTraversable="false" layoutX="154.0" layoutY="199.0" prefHeight="42.0" prefWidth="786.0" style="-fx-background-color: #ffffff;" stylesheets="@../cssFiles/textFieldProductPage.css">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </TextField>
+                        <Rectangle fx:id="creditRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="145.0" layoutY="271.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="342.0" />
+                        <TextField fx:id="creditTextField" focusTraversable="false" layoutX="154.0" layoutY="275.0" prefHeight="42.0" prefWidth="324.0" style="-fx-background-color: #ffffff;" stylesheets="@../cssFiles/textFieldProductPage.css">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="checkInformationButton" alignment="CENTER" layoutX="536.0" layoutY="271.0" mnemonicParsing="false" onAction="#checkInformation" prefHeight="50.0" prefWidth="151.0" style="-fx-background-color: #fb3449; -fx-background-radius: 8; -fx-border-radius: 8;" text="Check Information" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <font>
+                              <Font name="Raleway Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <ImageView fx:id="correctFormatEditImage" fitHeight="50.0" fitWidth="70.0" layoutX="708.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../photos/UserArea/personalInfo/checked.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="wrongFormatEditImage" disable="true" fitHeight="50.0" fitWidth="70.0" layoutX="708.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@../photos/UserArea/personalInfo/close.png" />
+                           </image>
+                        </ImageView>
+                        <Pane fx:id="submitPersonalInformationPane" layoutX="145.0" layoutY="349.0" onMouseClicked="#submitPersonalInformation" prefHeight="62.0" prefWidth="343.0">
+                           <children>
+                              <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#36cddf" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="343.0" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="8.0" prefHeight="47.0" prefWidth="253.0" text="Submit Personal Information" textFill="WHITE">
+                                 <font>
+                                    <Font name="Raleway Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="33.0" fitWidth="32.0" layoutX="23.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/UserArea/personalInfo/correct.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Pane>
+                     </children>
+                     <effect>
+                        <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
+                     </effect>
+                  </Pane>
+                  <Label fx:id="personalInfoLabel" layoutX="371.0" layoutY="138.0" prefHeight="36.0" prefWidth="102.0" text="Personal Info" textFill="#959595">
+                     <font>
+                        <Font name="Raleway" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="buyHistoryLabel" disable="true" layoutX="371.0" layoutY="138.0" prefHeight="36.0" prefWidth="102.0" text="Buy History" textFill="#959595" visible="false">
+                     <font>
+                        <Font name="Raleway" size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane fx:id="sellHistoryPane" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
+                     <children>
+                        <Pane fx:id="secondLogPane" layoutX="18.0" layoutY="233.0" prefHeight="193.0" prefWidth="922.0" style="-fx-border-color: #959595; -fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: #ffffff;">
+                           <children>
+                              <Rectangle fill="#9a9a9a" height="1.0" layoutX="34.0" layoutY="93.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="857.0" />
+                              <ImageView fx:id="image21" fitHeight="83.0" fitWidth="84.0" layoutX="32.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image22" fitHeight="83.0" fitWidth="84.0" layoutX="134.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image23" fitHeight="83.0" fitWidth="84.0" layoutX="234.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image24" fitHeight="83.0" fitWidth="84.0" layoutX="334.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image25" fitHeight="83.0" fitWidth="84.0" layoutX="434.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image26" fitHeight="83.0" fitWidth="84.0" layoutX="534.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image27" fitHeight="83.0" fitWidth="84.0" layoutX="634.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image28" fitHeight="83.0" fitWidth="84.0" layoutX="734.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="34.0" layoutY="53.0" prefHeight="24.0" prefWidth="78.0" text="Total Price: ">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="totalPriceLog2" layoutX="119.0" layoutY="49.0" prefHeight="31.0" prefWidth="114.0" text="13123">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="dateLabelLog2" layoutX="34.0" layoutY="22.0" prefHeight="22.0" prefWidth="99.0" text="Label">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="logIdLabelLog2" layoutX="233.0" layoutY="22.0" prefHeight="22.0" prefWidth="99.0" text="Label">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="178.0" layoutY="21.0" prefHeight="24.0" prefWidth="46.0" text="Log Id:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="332.0" layoutY="21.0" prefHeight="24.0" prefWidth="102.0" text="Receive Status:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="receiveStatusLog2" layoutX="436.0" layoutY="21.0" prefHeight="24.0" prefWidth="78.0" text="shit">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="seeMoreProductsImageLog2" fitHeight="23.0" fitWidth="27.0" layoutX="867.0" layoutY="126.0" onMouseClicked="#seeMorePictures" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/UserArea/costumerArea/arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="seeLessProductsImageLog2" fitHeight="23.0" fitWidth="27.0" layoutX="844.0" layoutY="126.0" onMouseClicked="#seeMorePictures" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                 <image>
+                                    <Image url="@../photos/UserArea/costumerArea/arrow.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="firstLogPane" layoutX="18.0" layoutY="14.0" prefHeight="193.0" prefWidth="922.0" style="-fx-border-color: #959595; -fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: #ffffff;">
+                           <children>
+                              <Rectangle fill="#9a9a9a" height="1.0" layoutX="34.0" layoutY="93.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="857.0" />
+                              <ImageView fx:id="image11" fitHeight="83.0" fitWidth="84.0" layoutX="32.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image12" fitHeight="83.0" fitWidth="84.0" layoutX="134.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image13" fitHeight="83.0" fitWidth="84.0" layoutX="234.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image14" fitHeight="83.0" fitWidth="84.0" layoutX="334.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image15" fitHeight="83.0" fitWidth="84.0" layoutX="434.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image16" fitHeight="83.0" fitWidth="84.0" layoutX="534.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image17" fitHeight="83.0" fitWidth="84.0" layoutX="634.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image18" fitHeight="83.0" fitWidth="84.0" layoutX="734.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="34.0" layoutY="53.0" prefHeight="24.0" prefWidth="78.0" text="Total Price: ">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="totalPriceLog1" layoutX="119.0" layoutY="49.0" prefHeight="31.0" prefWidth="114.0" text="13123">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="dateLabelLog1" layoutX="34.0" layoutY="22.0" prefHeight="22.0" prefWidth="99.0" text="Label">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="logIdLabelLog11" layoutX="233.0" layoutY="22.0" prefHeight="22.0" prefWidth="99.0" text="Label">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="178.0" layoutY="21.0" prefHeight="24.0" prefWidth="46.0" text="Log Id:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="332.0" layoutY="21.0" prefHeight="24.0" prefWidth="102.0" text="Receive Status:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="receiveStatusLog1" layoutX="436.0" layoutY="21.0" prefHeight="24.0" prefWidth="78.0" text="shit">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="seeMoreProductsImageLog1" fitHeight="23.0" fitWidth="27.0" layoutX="868.0" layoutY="127.0" onMouseClicked="#seeMorePictures" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/UserArea/costumerArea/arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="seeLessProductsImageLog1" fitHeight="23.0" fitWidth="27.0" layoutX="845.0" layoutY="127.0" onMouseClicked="#seeMorePictures" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                 <image>
+                                    <Image url="@../photos/UserArea/costumerArea/arrow.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <ImageView fx:id="downArrowLogs" fitHeight="50.0" fitWidth="37.0" layoutX="954.0" layoutY="389.0" onMouseClicked="#seeMoreLogs" pickOnBounds="true" preserveRatio="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <image>
+                              <Image url="@../photos/cart/downArrow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="upArrowLogs" fitHeight="50.0" fitWidth="37.0" layoutX="954.0" layoutY="14.0" onMouseClicked="#seeMoreLogs" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <image>
+                              <Image url="@../photos/cart/downArrow.png" />
+                           </image>
+                        </ImageView>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fb3449" height="383.0" layoutX="970.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="5.0" />
+                        <Pane fx:id="buyHistoryIsEmptyPain" disable="true" layoutX="90.0" layoutY="-2.0" prefHeight="418.0" prefWidth="777.0" visible="false">
+                           <children>
+                              <Label layoutX="470.0" layoutY="175.0" prefHeight="84.0" prefWidth="288.0" text="Buy History Is Empty" textFill="#7a7a7a">
+                                 <font>
+                                    <Font name="Raleway Light" size="29.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="344.0" fitWidth="396.0" layoutX="52.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/UserArea/costumerArea/408.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                     </children>
+                     <effect>
+                        <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
+                     </effect>
+                  </Pane>
+                  <Pane fx:id="userInfoPane" disable="true" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
+                     <children>
+                        <GridPane disable="true" layoutX="53.0" layoutY="15.0" prefHeight="331.0" prefWidth="933.0">
+                           <children>
+                              <GridPane>
+                                 <children>
+                                    <Label prefHeight="42.0" prefWidth="244.0" text="FIRST NAME:">
+                                       <font>
+                                          <Font name="Raleway" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="firstNameLabel" alignment="TOP_LEFT" layoutX="10.0" layoutY="13.0" prefHeight="42.0" prefWidth="244.0" text="FIRST NAME" textFill="#aaaaaa" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Raleway" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <GridPane GridPane.columnIndex="1">
+                                 <children>
+                                    <Label prefHeight="42.0" prefWidth="244.0" text="LAST NAME:">
+                                       <font>
+                                          <Font name="Raleway" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lastNameLabel" alignment="TOP_LEFT" layoutX="10.0" layoutY="13.0" prefHeight="40.0" prefWidth="244.0" text="LAST NAME" textFill="#aaaaaa" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Raleway" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <GridPane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label prefHeight="42.0" prefWidth="244.0" text="E-MAIL:">
+                                       <font>
+                                          <Font name="Raleway" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="emailLabel" alignment="TOP_LEFT" layoutX="10.0" layoutY="13.0" prefHeight="40.0" prefWidth="244.0" text="E-MAIL" textFill="#7a7a7a" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Raleway" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label prefHeight="44.0" prefWidth="317.0" text="PHONE NUMBER:">
+                                       <font>
+                                          <Font name="Raleway" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="phoneNumberLabel" alignment="TOP_LEFT" layoutX="10.0" layoutY="13.0" prefHeight="41.0" prefWidth="337.0" text="PHONE NUMBER" textFill="#aaaaaa" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Raleway" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <GridPane layoutX="26.0" layoutY="154.0" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label prefHeight="42.0" prefWidth="244.0" text="CREDIT:">
+                                       <font>
+                                          <Font name="Raleway" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="creditLabel" alignment="TOP_LEFT" layoutX="10.0" layoutY="13.0" prefHeight="39.0" prefWidth="244.0" text="CREDIT" textFill="#aaaaaa" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Raleway" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <Label alignment="CENTER" prefHeight="26.0" prefWidth="39.0" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="58.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="696.0" minWidth="10.0" prefWidth="512.8" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="548.9999389648438" minWidth="0.0" prefWidth="444.80000000000007" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                        <Rectangle arcHeight="1.0" arcWidth="1.0" fill="LIGHTGRAY" height="2.0" layoutY="345.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1008.0" />
+                        <Rectangle arcHeight="1.0" arcWidth="1.0" fill="LIGHTGRAY" height="2.0" layoutY="120.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1008.0" />
+                        <Rectangle arcHeight="1.0" arcWidth="1.0" fill="LIGHTGRAY" height="2.0" layoutY="230.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1008.0" />
+                        <Rectangle arcHeight="1.0" arcWidth="1.0" fill="LIGHTGRAY" height="345.0" layoutX="502.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="2.0" />
+                        <Pane fx:id="goToEditInformationPane" layoutX="372.0" layoutY="367.0" onMouseClicked="#goToEditPersonalInfo" prefHeight="49.0" prefWidth="295.0">
+                           <children>
+                              <Label layoutY="3.0" prefHeight="42.0" prefWidth="258.0" text="EDIT PERSONAL INFORMATION" textFill="#00bfd6">
+                                 <font>
+                                    <Font name="Raleway" size="17.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="33.0" fitWidth="29.0" layoutX="259.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/UserArea/personalInfo/edit.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Pane>
+                     </children>
+                     <effect>
+                        <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
+                     </effect>
+                  </Pane>
+                  <Label fx:id="discountCodesLabel" disable="true" layoutX="371.0" layoutY="138.0" prefHeight="36.0" prefWidth="121.0" text="Discount Codes" textFill="#959595" visible="false">
+                     <font>
+                        <Font name="Raleway" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
