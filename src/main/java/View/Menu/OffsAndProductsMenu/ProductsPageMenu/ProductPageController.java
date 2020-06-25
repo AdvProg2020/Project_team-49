@@ -1,6 +1,8 @@
 package View.Menu.OffsAndProductsMenu.ProductsPageMenu;
 
 import Controller.Controller;
+import Controller.CostumerAreaController;
+import Controller.OffAndProductMenuController;
 import Controller.DataBase;
 import Models.Category;
 import Models.Comment;
@@ -163,6 +165,7 @@ public class ProductPageController implements Initializable {
     private ArrayList<ImageView> rateBar = new ArrayList<>();
 
     private Product product;
+    private double score;
     private int t;
     private static int sellerIndex;
 
@@ -172,6 +175,7 @@ public class ProductPageController implements Initializable {
         sellerIndex = 0;
         commentsIndex = 0;
         t = 0;
+        score = 0;
         doSomeDeepShit();
         Controller.setCurrentUser(DataBase.getAllUsers().get(0));
         product.setDoesItHaveOff(true);
@@ -182,6 +186,7 @@ public class ProductPageController implements Initializable {
         setProductAttributes();
         setStars();
         setScoreLabels();
+        //reverse Order Comments
         setCommentPane();
         refreshScoreBar();
 
@@ -189,16 +194,17 @@ public class ProductPageController implements Initializable {
 
     private void setYourRate() {
         boolean flag = false;
-        double n  = 0;
+        double n = 0;
         for (Score score : product.getAllScores()) {
             if (score.getBuyer().equals(Controller.getCurrentUser())) {
                 rateStarPane.setDisable(true);
                 rateStarPane.setOpacity(0.6);
                 flag = true;
                 n = score.getScore();
+                break;
             }
         }
-        if(flag){
+        if (flag) {
             if (n >= 0.5 && n < 1.0) {
                 leftGreen1.toFront();
                 return;
@@ -584,33 +590,43 @@ public class ProductPageController implements Initializable {
         ImageView imageView = (ImageView) mouseEvent.getSource();
 
         leftGreen1.toFront();
+        score = 0.5;
         if (imageView.equals(halfLeft1) || imageView.equals(leftGreen1)) return;
 
         rightGreen1.toFront();
+        score = 1.0;
         if (imageView.equals(halfRight1) || imageView.equals(rightGreen1)) return;
 
         leftGreen2.toFront();
+        score = 1.5;
         if (imageView.equals(halfLeft2) || imageView.equals(leftGreen2)) return;
 
         rightGreen2.toFront();
+        score = 2.0;
         if (imageView.equals(halfRight2) || imageView.equals(rightGreen2)) return;
 
         leftGreen3.toFront();
+        score = 2.5;
         if (imageView.equals(halfLeft3) || imageView.equals(leftGreen3)) return;
 
         rightGreen3.toFront();
+        score = 3.0;
         if (imageView.equals(halfRight3) || imageView.equals(rightGreen3)) return;
 
         leftGreen4.toFront();
+        score = 3.5;
         if (imageView.equals(halfLeft4) || imageView.equals(leftGreen4)) return;
 
         rightGreen4.toFront();
+        score = 4.0;
         if (imageView.equals(halfRight4) || imageView.equals(rightGreen4)) return;
 
         leftGreen5.toFront();
+        score = 4.5;
         if (imageView.equals(halfLeft5) || imageView.equals(leftGreen5)) return;
 
         rightGreen5.toFront();
+        score = 5.0;
         if (imageView.equals(halfRight5) || imageView.equals(rightGreen5)) return;
     }
 
@@ -619,20 +635,32 @@ public class ProductPageController implements Initializable {
         rateStarPane.setOpacity(0.6);
         messageTime = 0;
         rateStarPane.setDisable(true);
-        boolean a = false;
-        if (a) {
+        if (!canRate(product.getProductId())) {
             buyProductFirstLabel.setVisible(true);
             Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> showBuyProductMessage()));
             timeline.setCycleCount(3);
             timeline.play();
 
         } else {
+            CostumerAreaController.rate(product.getProductId(), score);
             submitDoneLabel.setVisible(true);
             Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> showDoneMessage(submitDoneLabel)));
             timeline.setCycleCount(3);
             timeline.play();
         }
 
+    }
+
+    private boolean canRate(long productId) {
+        if (Controller.getCurrentUserType().equals("Guest") || Controller.getCurrentUserType().equals("Manager")) {
+            return false;
+        } else {
+            if (!CostumerAreaController.canRate(productId)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 
     private void showDoneMessage(Label label) {
@@ -668,8 +696,7 @@ public class ProductPageController implements Initializable {
             timeline.play();
 
         } else {
-            Comment comment = new Comment(Controller.getCurrentUser(), product, "", message);
-            product.addAComment(comment);
+            OffAndProductMenuController.addCommentsById(product.getProductId(), "title", userComment.getText());
             yourComment.setDisable(true);
             yourComment.setVisible(false);
             submitCommentButton.setDisable(true);

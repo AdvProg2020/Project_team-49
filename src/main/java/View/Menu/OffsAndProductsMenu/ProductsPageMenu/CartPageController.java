@@ -2,6 +2,10 @@ package View.Menu.OffsAndProductsMenu.ProductsPageMenu;
 
 import Controller.Controller;
 import Controller.DataBase;
+import Models.DiscountCode;
+import Models.Log.BuyLog;
+import Models.Log.SellLog;
+import Models.Off;
 import Models.Product;
 import Models.User.Cart;
 import Models.User.Costumer;
@@ -26,7 +30,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class CartPageController implements Initializable {
     public ImageView digikalaLogo;
@@ -462,22 +466,25 @@ public class CartPageController implements Initializable {
 
         if ((mouseEvent.getSource()).equals(addressTextField)) {
             addressLabel.setVisible(true);
+            addressLabel.setTextFill(Color.valueOf("#1a73e8"));
             addressRec.setStrokeWidth(2.5);
             addressRec.setStroke(Color.valueOf("#1a73e8"));
         }
         if ((mouseEvent.getSource()).equals(phoneNumberTextField)) {
             phoneNumberLabel.setVisible(true);
+            phoneNumberLabel.setTextFill(Color.valueOf("#1a73e8"));
             phoneNumberRec.setStrokeWidth(2.5);
             phoneNumberRec.setStroke(Color.valueOf("#1a73e8"));
-
         }
         if ((mouseEvent.getSource()).equals(explanationsTextField)) {
             explanationsLabel.setVisible(true);
+            explanationsLabel.setTextFill(Color.valueOf("#1a73e8"));
             explanationsRec.setStrokeWidth(2.5);
             explanationsRec.setStroke(Color.valueOf("#1a73e8"));
         }
         if ((mouseEvent.getSource()).equals(discountTextField)) {
             discountLabel.setVisible(true);
+            discountLabel.setTextFill(Color.valueOf("#1a73e8"));
             discountRec.setStrokeWidth(2.5);
             discountRec.setStroke(Color.valueOf("#1a73e8"));
         }
@@ -529,35 +536,170 @@ public class CartPageController implements Initializable {
         discountRec.setStroke(Color.valueOf("#7a7a7a"));
         discountTextField.selectEnd();
         discountTextField.deselect();
-
-        validateNumber();
-        checkDataForPay();
     }
 
-    private void validateNumber() {
+    private boolean validateData() {
+        boolean answer = true;
+        if (!phoneNumberTextField.getText().matches("\\d+")) {
+            phoneNumberRec.setStrokeWidth(2.5);
+            phoneNumberRec.setStroke(Color.valueOf("#fb3449"));
+            phoneNumberTextField.selectEnd();
+            phoneNumberTextField.deselect();
 
+            phoneNumberLabel.setTextFill(Color.valueOf("#fb3449"));
+            answer = false;
+        }
+        if (!addressTextField.getText().matches("(\\w|-)+")) {
+            addressRec.setStrokeWidth(2.5);
+            addressRec.setStroke(Color.valueOf("#fb3449"));
+            addressTextField.selectEnd();
+            addressTextField.deselect();
+
+            addressLabel.setTextFill(Color.valueOf("#fb3449"));
+            answer = false;
+        }
+        if (!explanationsTextField.getText().matches("(\\w|\\s)+")) {
+            explanationsRec.setStrokeWidth(2.5);
+            explanationsRec.setStroke(Color.valueOf("#fb3449"));
+            explanationsTextField.selectEnd();
+            explanationsTextField.deselect();
+
+            explanationsLabel.setTextFill(Color.valueOf("#fb3449"));
+            answer = false;
+        }
+        if (!isDiscountAvailable(discountTextField.getText())) {
+            discountRec.setStrokeWidth(2.5);
+            discountRec.setStroke(Color.valueOf("#fb3449"));
+            discountTextField.selectEnd();
+            discountTextField.deselect();
+
+            discountLabel.setTextFill(Color.valueOf("#fb3449"));
+            answer = false;
+        }
+        return answer;
     }
 
-    private void checkDataForPay() {
-        if (addressTextField.getText().equals("") || explanationsTextField.getText().equals("") || phoneNumberTextField.getText().equals("")) {
+    private boolean checkDataForPay() {
+        if (!validateData()) {
             payRec.setDisable(true);
             payRec.setOpacity(0.3);
             payRec.setStyle("-fx-cursor: default");
             payLabel.setStyle("-fx-cursor: default");
-        } else if (false) {               // validate discount code
-
+            return false;
         } else {
             payRec.setDisable(false);
             payRec.setOpacity(1);
             payRec.setStyle("-fx-cursor: hand");
             payLabel.setStyle("-fx-cursor: hand");
+            return true;
         }
     }
 
-    public void Pay(MouseEvent mouseEvent) {
+    public boolean isDiscountAvailable(String discountCode) {
+        if (discountCode.equals("")) {
+            return true;
+        }
+        Costumer costumer = (Costumer) Controller.currentUser;
+        if (((Costumer) Controller.currentUser).getDiscountCodeById(discountCode) == null) {
+            return false;
+        }
+        if (costumer.getDiscountCodeById(discountCode).getStartDate().getTime() > new Date().getTime()) {
+            return false;
+        }
+        if (costumer.getDiscountCodeById(discountCode).getEndDate().getTime() < new Date().getTime()) {
+            costumer.removeDiscountCode(costumer.getDiscountCodeById(discountCode));
+            return false;
+        }
+        return true;
+    }
 
+    //handle errors!!!
+    public void Pay(MouseEvent mouseEvent) {
+        String discountCode;
+        if (discountTextField.getText().equals("")) {
+            discountCode = "no";
+        } else {
+            discountCode = discountTextField.getText();
+        }
+        String payment = finishPayment(discountCode);
+        if (payment.equals("your credit is not enough")) {
+
+        }
+        if (payment.contains("not available for count")) {
+
+        }
+        if (payment.equals("payment done")) {
+
+        } else {
+
+        }
+    }
+
+    public static String finishPayment(String discountCode) {
+        Costumer costumer = (Costumer) Controller.currentUser;
+        Cart cart = costumer.getCart();
+        Set<Seller> sellers = new HashSet<>(cart.getSellers());
+        int discount = 0;
+        if (!discountCode.equals("no")) {
+            discount = costumer.getDiscountCodeById(discountCode).getDiscountPercent();
+        }
+        if ((getTotalPrice() * (1 - discount / 100)) > costumer.getCredit()) {
+            return "your credit is not enough";
+        }
+        for (Seller seller : sellers) {
+            double paidAmount = 0;
+            double reducedAmountForOff = 0;
+            ArrayList<Product> products = new ArrayList<>();
+            for (int i = 0; i < cart.getSellers().size(); i++) {
+                if (cart.getSellers().get(i).equals(seller)) {
+                    paidAmount += (cart.getProducts().get(i).getPrice(seller) * cart.getItemsByProductId(cart.getProducts().get(i).getProductId(), seller));
+                    products.add(cart.getProducts().get(i));
+                }
+            }
+            for (Product product : products) {
+                if (product.remainingProductForSeller(seller) < cart.getItemsByProductId(product.getProductId(), seller)) {
+                    return product.getName() + " for seller " + seller.getUsername()
+                            + " not available for count " + cart.getItemsByProductId(product.getProductId(), seller);
+                }
+                product.addAvailableItemsForSeller(seller, cart.getItemsByProductId(product.getProductId(), seller) * -1);
+                int offPercent = 0;
+                for (Off off : seller.getOffs()) {
+                    if (off.getProducts().contains(product)) {
+                        offPercent = off.getOffAmount();
+                    }
+                }
+                reducedAmountForOff += (product.getPrice(seller) / (1 - offPercent / 100)) - (product.getPrice(seller));
+            }
+            costumer.addBuyLog(new BuyLog(paidAmount * (1 - discount / 100), discount, products
+                    , seller.getUsername(), DataBase.getLogId(), new Date()));
+            seller.addSellLog(new SellLog(paidAmount, reducedAmountForOff, products, costumer.getUsername(), DataBase.getLogId(), new Date()));
+            seller.addCredit(getTotalPrice());
+        }
+        String answer = "payment done";
+        if (getTotalPrice() > 1000000) {
+            answer += "\ngift discount code activated for your account";
+            ArrayList<Costumer> allowed = new ArrayList<>();
+            allowed.add(costumer);
+            costumer.addDiscountCode(new DiscountCode("monthly gift"
+                    , new Date(), new Date(2592000000L + new Date().getTime()), 10
+                    , 50000, 2, allowed));
+        }
+        costumer.addCredit((getTotalPrice() * -1) * (1 - (discount / 100)));
+        costumer.setCart(new Cart());
+        return answer;
+    }
+
+    public static double getTotalPrice() {
+        Cart cart = ((Costumer) Controller.currentUser).getCart();
+        double totalPrice = 0;
+        for (int i = 0; i < cart.getProducts().size(); i++) {
+            totalPrice += (cart.getProducts().get(i).getPrice(cart.getSellers().get(i)) * cart.getItemsByProductId(cart.getProducts().get(i).getProductId(), cart.getSellers().get(i)));
+        }
+        return totalPrice;
     }
 
     public void checkInformation(ActionEvent event) {
+        restartTextFieldsWithRecs();
+        checkDataForPay();
     }
 }

@@ -181,7 +181,24 @@ public class CostumerAreaController {
         return info;
     }
 
-    public static String rateProduct(long productId, int score, long logId) {
+    public static boolean canRate(long productId) {
+        for (BuyLog buyLog : ((Costumer) Controller.currentUser).getBuyHistory()) {
+            for (Product product : buyLog.getBoughtProduct()) {
+                if (product.getProductId() == productId) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static String rate(long productId, double score) {
+        DataBase.getProductById(productId).addScore(new Score(Controller.currentUser, score, DataBase.getProductById(productId)));
+        DataBase.getProductById(productId).resetAverageScore();
+        return "product rated";
+    }
+
+    public static String rateProduct(long productId, double score, long logId) {
         if (DataBase.getProductById(productId) == null) {
             return "product not exist";
         }
