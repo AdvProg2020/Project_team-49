@@ -53,6 +53,9 @@ public class DataBase {
         return allProducts;
     }
 
+    public static ArrayList<Request> getAllActiveRequests() {
+        return allActiveRequests;
+    }
 //    private void setReferences(){
 //        for (Product product : allProducts) {
 //            Category category = product.getParentCategory();

@@ -3,8 +3,10 @@ package View.Menu.UserArea;
 import Controller.DataBase;
 import Controller.Controller;
 import Models.Category;
+import Models.Off;
 import Models.User.Manager;
 import Controller.ManagerAreaController;
+import Models.User.Request.*;
 import Models.User.Seller;
 import Models.User.User;
 import View.Menu.UserArea.ManagerArea.ManagerArea;
@@ -20,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import javax.xml.crypto.Data;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -111,9 +114,50 @@ public class ManagerAreaGraphicController implements Initializable {
     public Pane categoryArrowAndRec;
     public ImageView downArrowCategory;
     public ImageView upArrowCategory;
+    public Button checkInformationButtonForCreateCategory;
+    public Pane createNewCategoryPain;
+    public Rectangle newCategoryNameRec;
+    public TextField newCategoryNameTextField;
+    public Rectangle parentCategoryNameRec;
+    public Rectangle attributeRec;
+    public Pane submitNewCategoryButton;
+    public TextField newAttributeTextField;
+    public TextField newParentCategoryTextField;
+    public Pane ManageManagersPain;
+    public Button addManagerButton;
+    public Pane manageRequestsPane;
+    public Pane seeRequests;
+    public Pane requestPane;
+    public Label requestId;
+    public Pane editProductRequestPane;
+    public Label editProductFieldLabel;
+    public Label editProductOldContent;
+    public Label editProductNewContent;
+    public Pane addProductRequestPane;
+    public Label addProductIdLabel;
+    public Label addProductBrandLabel;
+    public Label addProductNameLabel;
+    public Label addProductPriceLabel;
+    public Label addProductExpLabel;
+    public Label addProductSellerLabel;
+    public Pane addOffRequestPane;
+    public Label addOffRequestAmountLabel;
+    public Label addOffRequestSellerLabel;
+    public Label addOffRequestStartLabel;
+    public Label addOffRequestEndLabel;
+    public Pane addSellerRequestPane;
+    public Label addSellerRequestCompanyLabel;
+    public Label addSellerRequestSellerLabel;
+    public Pane editOffRequestPane;
+    public Label editOffNewAmountLabel;
+    public Label editOffOldAmountLabel;
+    public Label editOffIdLabel;
+    public ImageView upArrowRequest;
+    public ImageView downArrowRequest;
     private Manager manager;
     private int usersIndex = 0;
     private int categoriesIndex = 0;
+    private int requestsIndex = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -126,7 +170,6 @@ public class ManagerAreaGraphicController implements Initializable {
         userInfoPane.setDisable(false);
 
     }
-
 
     private void setPersonalInfoLabels() {
         String[] info = Controller.getCurrentUserSpecifications().split(",");
@@ -239,6 +282,13 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     private void closeALlPanes() {
+        manageRequestsPane.setVisible(false);
+        manageRequestsPane.setDisable(true);
+        seeRequests.setDisable(true);
+        seeRequests.setVisible(false);
+        thereIsNoUsers.setVisible(false);
+        createNewCategoryPain.setDisable(true);
+        createNewCategoryPain.setVisible(false);
         usersArrowAndRec.setVisible(false);
         usersArrowAndRec.setDisable(true);
         userInfoPane.setDisable(true);
@@ -294,7 +344,16 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     public void goToEditCategoryPane(ActionEvent event) {
-
+        createNewCategoryPain.setVisible(false);
+        createNewCategoryPain.setDisable(true);
+        editCategoryPain1.setVisible(false);
+        editCategoryPain1.setDisable(true);
+        editCategoryPain2.setDisable(true);
+        editCategoryPain2.setVisible(false);
+        editTheChanges1.setVisible(false);
+        editTheChanges1.setDisable(true);
+        editTheChanges2.setDisable(true);
+        editTheChanges2.setVisible(false);
         categoryButtonsPane.setVisible(false);
         categoryButtonsPane.setDisable(true);
         goBackToCategoriesMenuImage.setDisable(false);
@@ -302,6 +361,28 @@ public class ManagerAreaGraphicController implements Initializable {
         editAndSeeCategoriesPane.setVisible(true);
         editAndSeeCategoriesPane.setDisable(false);
         setEditCategoryPainContents();
+    }
+
+    public void goToAddNewCategoryPane(ActionEvent event) {
+        closeALlPanes();
+        viewCategoriesPane.setDisable(false);
+        viewCategoriesPane.setVisible(true);
+        createNewCategoryPain.setVisible(true);
+        createNewCategoryPain.setDisable(false);
+        goBackToCategoriesMenuImage.setDisable(false);
+        goBackToCategoriesMenuImage.setVisible(true);
+        restartInsideCreateCategoriesTextField();
+    }
+
+    private void restartInsideCreateCategoriesTextField() {
+        newCategoryNameTextField.clear();
+        newAttributeTextField.clear();
+        newParentCategoryTextField.clear();
+        newCategoryNameRec.setStroke(Color.valueOf("#d3d3d3"));
+        parentCategoryNameRec.setStroke(Color.valueOf("#d3d3d3"));
+        attributeRec.setStroke(Color.valueOf("#d3d3d3"));
+        submitNewCategoryButton.setDisable(true);
+        submitNewCategoryButton.setOpacity(0.6);
     }
 
     private void setEditCategoryPainContents() {
@@ -352,21 +433,25 @@ public class ManagerAreaGraphicController implements Initializable {
         firstCategoryPane.setDisable(true);
         secondCategoryPane.setDisable(true);
         secondCategoryPane.setVisible(false);
-        editCategoryPain1.setVisible(false);
-        editCategoryPain1.setDisable(true);
-        editCategoryPain2.setDisable(true);
-        editCategoryPain2.setVisible(false);
+        createNewCategoryPain.setDisable(false);
+        createNewCategoryPain.setVisible(false);
 
-        editCategory1.setVisible(true);
-        editCategory1.setDisable(false);
-        editCategory2.setDisable(false);
-        editCategory2.setVisible(true);
 
-        editTheChanges1.setVisible(false);
-        editTheChanges1.setDisable(true);
+//        editCategoryPain1.setVisible(false);
+//        editCategoryPain1.setDisable(true);
+//        editCategoryPain2.setDisable(true);
+//        editCategoryPain2.setVisible(false);
 
-        editTheChanges2.setDisable(true);
-        editTheChanges2.setVisible(false);
+//        editCategory1.setVisible(true);
+//        editCategory1.setDisable(false);
+//        editCategory2.setDisable(false);
+//        editCategory2.setVisible(true);
+//
+//        editTheChanges1.setVisible(false);
+//        editTheChanges1.setDisable(true);
+//
+//        editTheChanges2.setDisable(true);
+//        editTheChanges2.setVisible(false);
 
         removeCategory1.setDisable(false);
         removeCategory1.setVisible(true);
@@ -381,7 +466,6 @@ public class ManagerAreaGraphicController implements Initializable {
         editAndSeeCategoriesPane.setVisible(false);
         categoryButtonsPane.setVisible(true);
         categoryButtonsPane.setDisable(false);
-        thereIsNoCategoriesPane.setVisible(false);
         categoryArrowAndRec.setVisible(false);
         categoryArrowAndRec.setDisable(true);
     }
@@ -409,10 +493,16 @@ public class ManagerAreaGraphicController implements Initializable {
             companyNamePane1.setVisible(true);
             companyNameLabel1.setText(((Seller) user).getCompanyName());
         }
-        if (user.getType().equalsIgnoreCase("seller") || user.getType().equalsIgnoreCase("costumer")) {
+        if ((user.getUsername().equals(manager.getUsername()) && user.getPassword().equals(manager.getPassword()))) {
+            removeUser1.setDisable(true);
+            removeUser1.setVisible(false);
+
+        } else {
             removeUser1.setDisable(false);
             removeUser1.setVisible(true);
         }
+
+
         if (usersIndex > size - 2) return;
         secondUserPane.setDisable(false);
         secondUserPane.setVisible(true);
@@ -428,10 +518,14 @@ public class ManagerAreaGraphicController implements Initializable {
             companyNamePane2.setVisible(true);
             companyNameLabel2.setText(((Seller) user2).getCompanyName());
         }
-        if (user2.getType().equalsIgnoreCase("seller") || user2.getType().equalsIgnoreCase("costumer")) {
+        if ((user2.getUsername().equals(manager.getUsername()) && user2.getPassword().equals(manager.getPassword()))) {
+            removeUser2.setDisable(true);
+            removeUser2.setVisible(false);
+        } else {
             removeUser2.setDisable(false);
             removeUser2.setVisible(true);
         }
+
     }
 
     public void seeUsers(MouseEvent mouseEvent) {
@@ -524,10 +618,18 @@ public class ManagerAreaGraphicController implements Initializable {
         setUsersPaneContents();
     }
 
-    public void goToAddNewCategoryPane(ActionEvent event) {
-    }
-
     public void goBackToCategoriesMenu(MouseEvent mouseEvent) {
+        editAndSeeCategoriesPane.setDisable(true);
+        editAndSeeCategoriesPane.setVisible(false);
+
+        createNewCategoryPain.setDisable(true);
+        createNewCategoryPain.setVisible(false);
+
+        goBackToCategoriesMenuImage.setVisible(false);
+        goBackToCategoriesMenuImage.setDisable(true);
+
+        categoryButtonsPane.setVisible(true);
+        categoryButtonsPane.setDisable(false);
     }
 
     public void removeCategory(MouseEvent mouseEvent) {
@@ -550,28 +652,166 @@ public class ManagerAreaGraphicController implements Initializable {
             editCategoryPain1.setDisable(false);
 
         } else if (mouseEvent.getSource().equals(editCategory2)) {
-
+            editCategory2.setVisible(false);
+            editCategory2.setDisable(true);
+            editTheChanges2.setDisable(false);
+            editTheChanges2.setVisible(true);
+            editCategoryPain2.setVisible(true);
+            editCategoryPain2.setDisable(false);
         } else if (mouseEvent.getSource().equals(editTheChanges1)) {
             editCategory1.setVisible(true);
             editCategory1.setDisable(false);
             editTheChanges1.setDisable(true);
             editTheChanges1.setVisible(false);
 
+            Category category = DataBase.getAllCategories().get(categoriesIndex);
+            if (!(newCategoryNameTextField1.getText().matches("") || newCategoryNameTextField1.getText().matches("(\\s)+"))) {
+                category.setName(newCategoryNameTextField1.getText());
+            }
+            if (!(newCategoryAttributeTextField1.getText().matches("") || newCategoryAttributeTextField1.getText().matches("(\\s)+"))) {
+                category.setSpecialAttributes(newCategoryAttributeTextField1.getText());
+            }
+
             editCategoryPain1.setVisible(false);
             editCategoryPain1.setDisable(true);
 
         } else if (mouseEvent.getSource().equals(editTheChanges2)) {
+            editCategory2.setVisible(true);
+            editCategory2.setDisable(false);
+            editTheChanges2.setDisable(true);
+            editTheChanges2.setVisible(false);
 
+            Category category = DataBase.getAllCategories().get(categoriesIndex + 1);
+            if (!(newCategoryNameTextField2.getText().matches("") || newCategoryNameTextField2.getText().matches("(\\s)+"))) {
+                category.setName(newCategoryNameTextField2.getText());
+            }
+            if (!(newCategoryAttributeTextField2.getText().matches("") || newCategoryAttributeTextField2.getText().matches("(\\s)+"))) {
+                category.setSpecialAttributes(newCategoryAttributeTextField2.getText());
+            }
+
+            editCategoryPain2.setVisible(false);
+            editCategoryPain2.setDisable(true);
         }
+        restartEditCategoryTextFields();
+        setEditCategoryPainContents();
+    }
+
+    private void restartEditCategoryTextFields() {
+        newCategoryAttributeTextField1.clear();
+        newCategoryAttributeTextField2.clear();
+        newCategoryNameTextField1.clear();
+        newCategoryNameTextField2.clear();
+        newCategoryAttributeTextField1.deselect();
+        newCategoryAttributeTextField2.deselect();
+        newCategoryNameTextField1.deselect();
+        newCategoryNameTextField2.deselect();
     }
 
     public void seeRequests(MouseEvent mouseEvent) {
+        closeALlPanes();
+        restartInsideOFManageRequest();
+        requestsIndex = 0;
+        manageRequestsPane.setVisible(true);
+        manageRequestsPane.setDisable(false);
+
+        int size = DataBase.getAllActiveRequests().size();
+        if (size == 0) {
+
+        } else if (size > 1) {
+            turnOnOrOffRequestsArrows(true);
+        }
+        setRequestsPaneContent();
+    }
+
+    private void setRequestsPaneContent() {
+        restartInsideOFManageRequest();
+        int size = DataBase.getAllActiveRequests().size();
+        if (size == 0) {
+            return;
+        }
+        if (size > 1) turnOnOrOffRequestsArrows(true);
+        requestPane.setDisable(false);
+        requestPane.setVisible(true);
+        Request request = DataBase.getAllActiveRequests().get(requestsIndex);
+        requestId.setText(String.valueOf(request.getRequestId()));
+        if (request.getType().equals("Edit Off")) {
+            editOffRequestPane.setVisible(true);
+            EditOffRequest info = ((EditOffRequest) request);
+            Off off = info.getOff();
+            editOffIdLabel.setText(String.valueOf(off.getOffId()));
+            editOffOldAmountLabel.setText(info.getOldContent());
+            editOffNewAmountLabel.setText(info.getNewContent());
+        } else if (request.getType().equals("Add Off")) {
+            String[] info = ((AddOffRequest) request).toString().split("\n");
+            addOffRequestPane.setVisible(true);
+            addOffRequestSellerLabel.setText(info[2]);
+            addOffRequestAmountLabel.setText(info[3]);
+            addOffRequestStartLabel.setText(info[4]);
+            addOffRequestEndLabel.setText(info[5]);
+        } else if (request.getType().equals("Add Product")) {
+            String[] info = ((AddProductRequest) request).toString().split("\n");
+            addProductRequestPane.setVisible(true);
+            addProductBrandLabel.setText(info[4]);
+            addProductExpLabel.setText(info[5]);
+            addProductIdLabel.setText(info[2]);
+            addProductNameLabel.setText(info[3]);
+            addProductPriceLabel.setText(info[6]);
+            addProductSellerLabel.setText(info[7]);
+        } else if (request.getType().equals("Add Seller")) {
+            String[] info = ((AddSellerRequest) request).toString().split("\n");
+            addSellerRequestPane.setVisible(true);
+            addSellerRequestCompanyLabel.setText(info[3]);
+            addSellerRequestSellerLabel.setText(info[2]);
+        } else if (request.getType().equals("Edit Product")) {
+            String[] info = ((EditProductRequest) request).toString().split("\n");
+            editProductRequestPane.setVisible(true);
+            editProductFieldLabel.setText(info[2]);
+            editProductOldContent.setText(info[3]);
+            editProductNewContent.setText(info[4]);
+        }
+
+    }
+
+    private void restartInsideOFManageRequest() {
+        editProductRequestPane.setVisible(false);
+        addProductRequestPane.setVisible(false);
+        editOffRequestPane.setVisible(false);
+        addOffRequestPane.setVisible(false);
+        addSellerRequestPane.setVisible(false);
+        turnOnOrOffRequestsArrows(false);
+    }
+
+    private void turnOnOrOffRequestsArrows(boolean flag) {
+        if (flag) {
+            upArrowRequest.setVisible(true);
+            upArrowRequest.setDisable(false);
+            downArrowRequest.setVisible(true);
+            downArrowRequest.setDisable(false);
+        } else {
+            upArrowRequest.setVisible(false);
+            upArrowRequest.setDisable(true);
+            downArrowRequest.setVisible(false);
+            downArrowRequest.setDisable(true);
+        }
     }
 
     public void manageManagers(MouseEvent mouseEvent) {
     }
 
     public void seeMoreCategory(MouseEvent mouseEvent) {
+        restartEditCategoryTextFields();
+        editTheChanges1.setVisible(false);
+        editTheChanges1.setDisable(true);
+        editTheChanges2.setDisable(true);
+        editTheChanges2.setVisible(false);
+        editCategory1.setVisible(true);
+        editCategory1.setDisable(false);
+        editCategory2.setDisable(false);
+        editCategory2.setVisible(true);
+        editCategoryPain1.setDisable(true);
+        editCategoryPain1.setVisible(false);
+        editCategoryPain2.setDisable(true);
+        editCategoryPain2.setVisible(false);
         int size = DataBase.getAllCategories().size();
         if (mouseEvent.getSource().equals(downArrowCategory)) {
             if (categoriesIndex >= size - 2) return;
@@ -581,5 +821,75 @@ public class ManagerAreaGraphicController implements Initializable {
             categoriesIndex -= 2;
         }
         setEditCategoryPainContents();
+    }
+
+    public void submitNewCategory(MouseEvent mouseEvent) {
+        if (newParentCategoryTextField.getText().equals("")) {
+            DataBase.addCategory(new Category(newCategoryNameTextField.getText(), newAttributeTextField.getText(),
+                    null));
+        } else {
+            DataBase.addCategory(new Category(newCategoryNameTextField.getText(), newAttributeTextField.getText(),
+                    DataBase.getCategoryByName(newParentCategoryTextField.getText())));
+        }
+
+        restartInsideCreateCategoriesTextField();
+        editAndSeeCategoriesPane.setDisable(true);
+        editAndSeeCategoriesPane.setVisible(false);
+        createNewCategoryPain.setDisable(true);
+        createNewCategoryPain.setVisible(false);
+        goBackToCategoriesMenuImage.setVisible(false);
+        goBackToCategoriesMenuImage.setDisable(true);
+        categoryButtonsPane.setVisible(true);
+        categoryButtonsPane.setDisable(false);
+    }
+
+    public void checkInformationForCreateCategory(ActionEvent event) {
+        if (DataBase.isThereAnyCategoryWithName(newParentCategoryTextField.getText()) && !newCategoryNameTextField.getText().equals("")
+                && !newCategoryNameTextField.getText().matches("(\\s)+") && !newAttributeTextField.getText().equals("") && !newAttributeTextField.getText().matches("(\\s)+")) {
+            parentCategoryNameRec.setStroke(Color.valueOf("#00ff00"));
+            submitNewCategoryButton.setDisable(false);
+            submitNewCategoryButton.setOpacity(1.0);
+        } else if (newParentCategoryTextField.getText().equals("") && !newAttributeTextField.getText().equals("") && !newAttributeTextField.getText().matches("(\\s)+")
+                && !newCategoryNameTextField.getText().equals("")
+                && !newCategoryNameTextField.getText().matches("(\\s)+")) {
+            parentCategoryNameRec.setStroke(Color.valueOf("#00ff00"));
+            submitNewCategoryButton.setDisable(false);
+            submitNewCategoryButton.setOpacity(1.0);
+        } else {
+            submitNewCategoryButton.setDisable(true);
+            submitNewCategoryButton.setOpacity(0.6);
+            parentCategoryNameRec.setStroke(Color.valueOf("#fb3449"));
+        }
+    }
+
+    public void goToAddManagerPane(ActionEvent event) {
+    }
+
+    public void acceptRequest(ActionEvent event) {
+
+
+
+        requestsIndex = 0;
+        setRequestsPaneContent();
+    }
+
+    public void rejectRequest(ActionEvent event) {
+
+
+
+        requestsIndex = 0;
+        setRequestsPaneContent();
+    }
+
+    public void seeMoreRequests(MouseEvent mouseEvent) {
+        int size = DataBase.getAllActiveRequests().size();
+        if (mouseEvent.getSource().equals(upArrowRequest)) {
+            if (requestsIndex == 0) return;
+            requestsIndex--;
+        } else if (mouseEvent.getSource().equals(downArrowRequest)) {
+            if (requestsIndex == size - 1) return;
+            requestsIndex++;
+        }
+        setRequestsPaneContent();
     }
 }

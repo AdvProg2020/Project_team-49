@@ -24,8 +24,13 @@ public class EditProductRequest extends Request  implements Serializable {
         return "Edit Product";
     }
 
+
+    public String getNewContent() {
+        return newContent;
+    }
+
     //?????
-    private String getOldContent() {
+    public String getOldContent() {
         if (field.equalsIgnoreCase("name")) {
             return String.valueOf(product.getName());
         } else if (field.equalsIgnoreCase("brand")) {
