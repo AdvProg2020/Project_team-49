@@ -32,6 +32,9 @@ public class GuestAreaGraphicsController implements Initializable {
     public Label extraLabel;
     public Button registerButton;
     public Label goLoginLabel;
+    public PasswordField passLogin;
+    public TextField userLogin;
+    public Button loginButton;
 
     public void mouseClicked(MouseEvent mouseEvent) {
         reset();
@@ -84,11 +87,6 @@ public class GuestAreaGraphicsController implements Initializable {
 
     private void register() {
         boolean errorFound = false;
-        if (extraReg.getText().equals("")) {
-            extraReg.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
-            extraLabel.setTextFill(Color.valueOf("#fb3449"));
-            errorFound = true;
-        }
         if (Controller.hasUserWithUsername(usernameReg.getText())) {
             usernameReg.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
             userLabel.setTextFill(Color.valueOf("#fb3449"));
@@ -230,6 +228,12 @@ public class GuestAreaGraphicsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (usernameReg == null) {
+            userLogin.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            passLogin.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            return;
+        }
+
         reset();
 
         if (!Controller.getHasHeadManager()) {
@@ -242,5 +246,43 @@ public class GuestAreaGraphicsController implements Initializable {
             accountTypeReg.getItems().add("Costumer");
             accountTypeReg.getItems().add("Seller");
         }
+    }
+
+    public void login(MouseEvent mouseEvent) {
+        userLogin.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+        passLogin.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+        boolean errorFound = false;
+        if (!userLogin.getText().matches("\\w+")) {
+            userLogin.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            errorFound = true;
+        } else if (!Controller.hasUserWithUsername(userLogin.getText())) {
+            userLogin.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            errorFound = true;
+        }
+        if (!passLogin.getText().matches("\\w+")) {
+            passLogin.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            errorFound = true;
+        } else if (!Controller.isPasswordCorrect(passLogin.getText(), userLogin.getText())) {
+            passLogin.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            errorFound = true;
+        }
+        if (!errorFound) {
+            Controller.loginAccount(userLogin.getText());
+        }
+    }
+
+    public void mouseClickedLogin(MouseEvent mouseEvent) {
+        userLogin.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+        passLogin.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+
+        if (mouseEvent.getSource().equals(userLogin)) {
+            userLogin.setStyle("-fx-border-color: #1a73e8;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+        }
+        if (mouseEvent.getSource().equals(passLogin)) {
+            passLogin.setStyle("-fx-border-color: #1a73e8;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+        }
+    }
+
+    public void goToRegister(MouseEvent mouseEvent) {
     }
 }
