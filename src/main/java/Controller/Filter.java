@@ -363,9 +363,10 @@ public class Filter {
 
     public static void filter() {
         DataBase.sortedOrFilteredProduct.clear();
-        for (Product product : DataBase.allProducts) {
-            DataBase.sortedOrFilteredProduct.add(product);
-        }
+//        for (Product product : DataBase.allProducts) {
+//            DataBase.sortedOrFilteredProduct.add(product);
+//        }
+        DataBase.sortedOrFilteredProduct.addAll(DataBase.allProducts);
 
         if (isItFilteredByName)
             filterByName(productName);

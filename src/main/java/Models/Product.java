@@ -192,6 +192,11 @@ public class Product implements Serializable {
         return averageScore;
     }
 
+    public Double gettttAverageScore(){
+        resetAverageScore();
+        return averageScore;
+    }
+
     public void resetAverageScore() {
         double average = 0;
         for (Score allScore : allScores) {
