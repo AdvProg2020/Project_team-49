@@ -1,5 +1,7 @@
 package Controller;
 
+import Models.Off;
+import Models.OffStatus;
 import Models.Product;
 
 import Models.User.*;
@@ -15,6 +17,10 @@ import javafx.scene.paint.Color;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+
+import static Controller.DataBase.allProducts;
+import static Controller.DataBase.sortedOrFilteredProduct;
 
 
 public class Controller {
@@ -108,6 +114,9 @@ public class Controller {
     }
 
     public static boolean isPasswordCorrect(String password, String username) {
+        if (DataBase.getUserByUsername(username) == null) {
+            return false;
+        }
         if (DataBase.getUserByUsername(username).getPassword().equals(password)) {
             return true;
         }
@@ -190,23 +199,23 @@ public class Controller {
     }
 
     public static int getHowMuchLeftForThisPage(long start) {
-        if (DataBase.allProducts.size() - start >= 20) {
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
             return 20;
         } else {
-            return (int) (DataBase.allProducts.size() - start);
+            return (int) (DataBase.sortedOrFilteredProduct.size() - start);
         }
     }
 
     public static ArrayList<String> getProductNameForFxml(long start) {
         int counter = 0;
         ArrayList<String> returnValue = new ArrayList<String>();
-        if (DataBase.allProducts.size() - start >= 20) {
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
             counter = 20;
         } else {
-            counter = DataBase.allProducts.size() - (int) start;
+            counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
         }
         for (int i = (int) start; i < (int) start + counter; i++) {
-            returnValue.add(DataBase.allProducts.get(i).getName());
+            returnValue.add(DataBase.sortedOrFilteredProduct.get(i).getName());
         }
         return returnValue;
     }
@@ -214,13 +223,13 @@ public class Controller {
     public static ArrayList<String> getProductImageForFxml(long start) {
         int counter = 0;
         ArrayList<String> returnValue = new ArrayList<String>();
-        if (DataBase.allProducts.size() - start >= 20) {
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
             counter = 20;
         } else {
-            counter = DataBase.allProducts.size() - (int) start;
+            counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
         }
         for (int i = (int) start; i < (int) start + counter; i++) {
-            returnValue.add(DataBase.allProducts.get(i).getImageAddress());
+            returnValue.add(DataBase.sortedOrFilteredProduct.get(i).getImageAddress());
         }
         return returnValue;
     }
@@ -228,13 +237,13 @@ public class Controller {
     public static ArrayList<Double> getProductPriceForFxml(long start) {
         int counter = 0;
         ArrayList<Double> returnValue = new ArrayList<Double>();
-        if (DataBase.allProducts.size() - start >= 20) {
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
             counter = 20;
         } else {
-            counter = DataBase.allProducts.size() - (int) start;
+            counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
         }
         for (int i = (int) start; i < (int) start + counter; i++) {
-            Product product = DataBase.allProducts.get(i);
+            Product product = DataBase.sortedOrFilteredProduct.get(i);
             returnValue.add(product.getPrice(product.getDefaultSeller()));
         }
         return returnValue;
@@ -243,14 +252,107 @@ public class Controller {
     public static ArrayList<Long> getProductIdForFxml(long start) {
         int counter = 0;
         ArrayList<Long> returnValue = new ArrayList<Long>();
-        if (DataBase.allProducts.size() - start >= 20) {
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
             counter = 20;
         } else {
-            counter = DataBase.allProducts.size() - (int) start;
+            counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
         }
         for (int i = (int) start; i < (int) start + counter; i++) {
-            returnValue.add(DataBase.allProducts.get(i).getProductId());
+            returnValue.add(DataBase.sortedOrFilteredProduct.get(i).getProductId());
         }
         return returnValue;
     }
+
+    public static ArrayList<Boolean> getOffForFxml(long start) {
+        int counter = 0;
+        ArrayList<Boolean> returnValue = new ArrayList<Boolean>();
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
+            counter = 20;
+        } else {
+            counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
+        }
+        for (int i = (int) start; i < (int) start + counter; i++) {
+            returnValue.add(DataBase.sortedOrFilteredProduct.get(i).getDoesItHaveOff());
+        }
+        return returnValue;
+    }
+
+    public static ArrayList<Double> getProductScoreForFxml(long start) {
+        int counter = 0;
+        ArrayList<Double> returnValue = new ArrayList<Double>();
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
+            counter = 20;
+        } else {
+            counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
+        }
+        for (int i = (int) start; i < (int) start + counter; i++) {
+            returnValue.add(DataBase.sortedOrFilteredProduct.get(i).gettttAverageScore());
+        }
+        return returnValue;
+    }
+
+    public static ArrayList<Double> getProductOffRemainForFxml(long start) {
+        int counter = 0;
+        ArrayList<Double> returnValue = new ArrayList<Double>();
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
+            counter = 20;
+        } else {
+            counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
+        }
+        for (int i = (int) start; i < (int) start + counter; i++) {
+            if (DataBase.sortedOrFilteredProduct.get(i).getDoesItHaveOff()) {
+                returnValue.add(OffAndProductMenuController.getOffTimeLeftById(DataBase.sortedOrFilteredProduct.get(i)));
+            }
+            returnValue.add(-1.0);
+        }
+        return returnValue;
+    }
+
+    public static ArrayList<Integer> getProductOffPercentForFxml(long start) {
+        int counter = 0;
+        ArrayList<Integer> returnValue = new ArrayList<Integer>();
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
+            counter = 20;
+        } else {
+            counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
+        }
+        for (int i = (int) start; i < (int) start + counter; i++) {
+            if (DataBase.sortedOrFilteredProduct.get(i).getDoesItHaveOff()) {
+                returnValue.add(DataBase.sortedOrFilteredProduct.get(i).getOff().getOffAmount());
+            }
+            returnValue.add(-1);
+
+        }
+        return returnValue;
+    }
+
+
+    public static int getAllPageNumber(){
+        if (sortedOrFilteredProduct.size()%20==0){
+            return sortedOrFilteredProduct.size()/20;
+        }
+        return sortedOrFilteredProduct.size()/20 +1;
+    }
+
+    public static void restartSortedOrFilteredProduct(){
+        DataBase.sortedOrFilteredProduct.clear();
+        DataBase.sortedOrFilteredProduct.addAll(allProducts);
+    }
+
+    public static void check(){
+//        allProducts.get(2).setDoesItHaveOff(true);
+        Date start=new Date();
+        Date end=new Date(start.getTime()+10*3600*1000*24);
+        ArrayList<Product> arrayList=new ArrayList<Product>();
+        arrayList.add(Controller.getProductById(2));
+        Off off =new Off(arrayList, OffStatus.confirmed,start,end,20);
+        allProducts.get(2).setOff(off);
+        allProducts.get(2).setDoesItHaveOff(true);
+        for (Product product : allProducts) {
+            product.setImageAddress("./photos/MainMenu/commercials/xbox1.png");
+            product.setAverageScore(3.7);
+        }
+    }
+
+
 }

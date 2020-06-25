@@ -5,6 +5,7 @@ import Models.Product;
 import Models.User.Seller;
 import static Controller.DataBase.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OffAndProductMenuController {
 
@@ -165,5 +166,11 @@ public class OffAndProductMenuController {
                 product.setNumberOfView(product.getNumberOfView()+1);
             }
         }
+    }
+
+    public static double  getOffTimeLeftById(Product product){
+        Date date=product.getOff().getEndDate();
+        Date today=new Date();
+        return (double) ((date.getTime()-today.getTime())/1000/60/60/365);
     }
 }

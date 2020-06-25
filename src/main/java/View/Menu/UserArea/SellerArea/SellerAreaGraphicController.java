@@ -83,14 +83,15 @@ public class SellerAreaGraphicController implements Initializable {
     public ImageView image11;
     public Pane firstLogPane;
     public Pane secondLogPane;
-    public Pane buyHistoryPane;
-    public Label buyHistoryLabel;
+    public Pane sellHistoryPane;
+    public Label sellHistoryLabel;
     public ImageView seeMoreProductsImageLog1;
     public ImageView seeMoreProductsImageLog2;
     public ImageView seeLessProductsImageLog2;
     public ImageView seeLessProductsImageLog1;
-    public Pane buyHistoryIsEmptyPain;
+    public Pane sellHistoryIsEmptyPain;
     public Label discountCodesLabel;
+    public ImageView costumerProfileImage;
     private Seller seller;
     private int discountCodesIndex = 0;
     private int imagesLog1Index = 0;
@@ -282,10 +283,10 @@ public class SellerAreaGraphicController implements Initializable {
         logIndex = 0;
         logHistory.clear();
         logHistory.addAll(seller.getSellHistory());
-        buyHistoryLabel.setVisible(true);
-        buyHistoryLabel.setOpacity(1);
-        buyHistoryPane.setDisable(false);
-        buyHistoryPane.setVisible(true);
+        sellHistoryLabel.setVisible(true);
+        sellHistoryLabel.setOpacity(1);
+        sellHistoryPane.setDisable(false);
+        sellHistoryPane.setVisible(true);
         int size = logHistory.size();
         if (size > 2) {
             upArrowLogs.setVisible(true);
@@ -293,8 +294,8 @@ public class SellerAreaGraphicController implements Initializable {
             downArrowLogs.setVisible(true);
             downArrowLogs.setDisable(false);
         } else if (size == 0) {
-            buyHistoryIsEmptyPain.setVisible(true);
-            buyHistoryIsEmptyPain.setDisable(false);
+            sellHistoryIsEmptyPain.setVisible(true);
+            sellHistoryIsEmptyPain.setDisable(false);
         }
         setLogPaneContents();
     }
@@ -477,11 +478,11 @@ public class SellerAreaGraphicController implements Initializable {
         editPersonalInfoLabel.setDisable(true);
         editPersonalInfoLabel.setVisible(false);
         personalInfoLabel.setVisible(false);
-        buyHistoryLabel.setVisible(false);
-        buyHistoryPane.setVisible(false);
-        buyHistoryPane.setDisable(true);
-        buyHistoryIsEmptyPain.setVisible(false);
-        buyHistoryIsEmptyPain.setDisable(true);
+        sellHistoryLabel.setVisible(false);
+        sellHistoryPane.setVisible(false);
+        sellHistoryPane.setDisable(true);
+        sellHistoryIsEmptyPain.setVisible(false);
+        sellHistoryIsEmptyPain.setDisable(true);
         imagesLog1Index = 0;
         imagesLog2Index = 0;
         logIndex = 0;

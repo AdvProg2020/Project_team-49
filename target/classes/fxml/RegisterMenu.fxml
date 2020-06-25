@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1467.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.UserArea.GuestAreaController">
+<AnchorPane prefHeight="800.0" prefWidth="1467.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.UserArea.GuestAreaGraphicsController">
    <children>
       <ScrollPane layoutX="0.6000000238418579" layoutY="0.6000000238418579" prefHeight="800.0" prefWidth="1467.0">
          <content>

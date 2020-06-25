@@ -1,7 +1,9 @@
 package View;
 
 import Controller.Controller;
+import Controller.DataBase;
 import Models.Product;
+import Models.User.User;
 import View.Menu.MainMenu;
 import View.Menu.Menu;
 
@@ -19,9 +21,9 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
-import static Controller.DataBase.getAllUsers;
 import static Controller.DataBase.getProductById;
 
 
@@ -33,18 +35,22 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Controller.setCurrentUser(getAllUsers().get(5));
+        Controller.setCurrentUser(getAllUsers().get(1));
         Product product = getProductById(1);
         Controller.setSelectedProduct(product);
-        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/managerArea.fxml"));
+        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/LoginMenu.fxml"));
         Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
         Controller.setCurrentPane((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
         ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
-        scrollPane.setPrefHeight(700);
+        scrollPane.setPrefHeight(800);
         mainMenu.getChildren().add(mainBar);
-        Scene scene =  new Scene(mainMenu);
-        stage.setScene(scene);
+        stage.setScene(new Scene(mainMenu));
+
         stage.show();
+    }
+
+    private ArrayList<User> getAllUsers() {
+        return DataBase.getAllUsers();
     }
 
     public void run() {
