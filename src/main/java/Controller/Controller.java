@@ -1,5 +1,7 @@
 package Controller;
 
+import Models.Off;
+import Models.OffStatus;
 import Models.Product;
 
 import Models.User.*;
@@ -15,6 +17,7 @@ import javafx.scene.paint.Color;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static Controller.DataBase.allProducts;
 import static Controller.DataBase.sortedOrFilteredProduct;
@@ -285,6 +288,41 @@ public class Controller {
         return returnValue;
     }
 
+    public static ArrayList<Double> getProductOffRemainForFxml(long start) {
+        int counter = 0;
+        ArrayList<Double> returnValue = new ArrayList<Double>();
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
+            counter = 20;
+        } else {
+            counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
+        }
+        for (int i = (int) start; i < (int) start + counter; i++) {
+            if (DataBase.sortedOrFilteredProduct.get(i).getDoesItHaveOff()) {
+                returnValue.add(OffAndProductMenuController.getOffTimeLeftById(DataBase.sortedOrFilteredProduct.get(i)));
+            }
+            returnValue.add(-1.0);
+        }
+        return returnValue;
+    }
+
+    public static ArrayList<Integer> getProductOffPercentForFxml(long start) {
+        int counter = 0;
+        ArrayList<Integer> returnValue = new ArrayList<Integer>();
+        if (DataBase.sortedOrFilteredProduct.size() - start >= 20) {
+            counter = 20;
+        } else {
+            counter = DataBase.sortedOrFilteredProduct.size() - (int) start;
+        }
+        for (int i = (int) start; i < (int) start + counter; i++) {
+            if (DataBase.sortedOrFilteredProduct.get(i).getDoesItHaveOff()) {
+                returnValue.add(DataBase.sortedOrFilteredProduct.get(i).getOff().getOffAmount());
+            }
+            returnValue.add(-1);
+
+        }
+        return returnValue;
+    }
+
 
     public static int getAllPageNumber(){
         if (sortedOrFilteredProduct.size()%20==0){
@@ -299,10 +337,17 @@ public class Controller {
     }
 
     public static void check(){
+//        allProducts.get(2).setDoesItHaveOff(true);
+        Date start=new Date();
+        Date end=new Date(start.getTime()+10*3600*1000*24);
+        ArrayList<Product> arrayList=new ArrayList<Product>();
+        arrayList.add(Controller.getProductById(2));
+        Off off =new Off(arrayList, OffStatus.confirmed,start,end,20);
+        allProducts.get(2).setOff(off);
         allProducts.get(2).setDoesItHaveOff(true);
         for (Product product : allProducts) {
             product.setImageAddress("./photos/MainMenu/commercials/xbox1.png");
-            product.setAverageScore(2.2);
+            product.setAverageScore(3.7);
         }
     }
 

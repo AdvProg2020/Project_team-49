@@ -8,6 +8,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -17,6 +21,7 @@ import javafx.scene.image.ImageView;
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -33,6 +38,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.control.Tooltip;
 
@@ -233,6 +239,9 @@ public class MainBarController implements Initializable {
     public void searched(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             searchField.clear();
+            Filter.restartFilters();
+            Filter.filterByName(searchField.getText());
+            //
         }
     }
 
@@ -320,7 +329,6 @@ public class MainBarController implements Initializable {
     }
 
     public void searchedWithSearchImage(MouseEvent mouseEvent) {
-
         searchField.clear();
     }
 
@@ -381,6 +389,20 @@ public class MainBarController implements Initializable {
         }
         Filter.restartFilters();
         Filter.filterByCategory(category);
+        AnchorPane loginMenu2 = null;
+        Pane mainBar = null;
+        try {
+            loginMenu2 = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/OffsAndProductsMenu/ProductsMenu.fxml"));
+            mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        loginMenu2.getChildren().add(mainBar);
+        Scene scene2 = new Scene(loginMenu2);
+        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+
+        window.show();
 
 
 
