@@ -550,7 +550,7 @@ public class CostumerAreaGraphicController implements Initializable {
         countDiscount1.setText(first[5]);
         discountId1.setText(first[0]);
 
-        if (size == 1) return;
+        if (discountCodesIndex > size + 2) return;
         String[] second = discountCodes.get(discountCodesIndex + 1).split(",");
         secondDiscountCode.setVisible(true);
         discountPercent2.setText(second[3]);
@@ -564,7 +564,6 @@ public class CostumerAreaGraphicController implements Initializable {
     }
 
     private void restartInsideDiscountPain() {
-
         firstDiscountCode.setVisible(false);
         secondDiscountCode.setVisible(false);
         noDiscountsYet.setVisible(false);
