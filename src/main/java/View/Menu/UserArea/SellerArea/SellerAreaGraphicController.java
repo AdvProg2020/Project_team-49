@@ -1291,7 +1291,7 @@ public class SellerAreaGraphicController implements Initializable {
                 Controller.startClickSound();
             }
         }).start();
-        goBackToManageProducts(mouseEvent);
+        goToManageProductsPain(mouseEvent);
     }
 
     public void addProduct(MouseEvent mouseEvent) {
