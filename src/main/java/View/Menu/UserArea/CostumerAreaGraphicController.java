@@ -8,9 +8,13 @@ import Models.User.Costumer;
 import Controller.CostumerAreaController;
 import Models.User.Guest;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,7 +22,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -587,5 +593,32 @@ public class CostumerAreaGraphicController implements Initializable {
             discountCodesIndex -= 2;
         }
         setDiscountCodesPaneContents();
+    }
+
+    public void goBackToLastPaneFromCostumerArea(MouseEvent mouseEvent) {
+        Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
+        Controller.setCurrentPane(Controller.getLastPane());
+        scene.setRoot(Controller.getCurrentPane());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void goToCostumersCart(MouseEvent mouseEvent) {
+        Scene scene = ((Label) mouseEvent.getSource()).getScene();
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Controller.setLastPane(Controller.getCurrentPane());
+        Pane pane = null;
+        try {
+            pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ScrollPane scrollPane = (ScrollPane) pane.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
+        Controller.setCurrentPane(pane);
+        scene.setRoot(pane);
+        stage.setScene(scene);
+        stage.show();
     }
 }

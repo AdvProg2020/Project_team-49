@@ -485,6 +485,7 @@ public class MainBarController implements Initializable {
         }).start();
         Filter.restartFilters();
         Filter.filterByCategory(category);
+        Controller.setDoesItOffPage(false);
         Scene scene = label.getScene();
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         AnchorPane loginMenu2 = null;
@@ -495,6 +496,8 @@ public class MainBarController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ScrollPane scrollPane = (ScrollPane) loginMenu2.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
         loginMenu2.getChildren().add(mainBar);
         Controller.setCurrentPane(loginMenu2);
         scene.setRoot(loginMenu2);
@@ -538,7 +541,13 @@ public class MainBarController implements Initializable {
     public void goToCustomerArea(MouseEvent mouseEvent) {
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Pane mainBar = null;
         Controller.setLastPane(Controller.getCurrentPane());
+        try {
+            mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Pane pane = null;
         if (Controller.getCurrentUserType().equalsIgnoreCase("guest")) {
             try {
@@ -549,29 +558,27 @@ public class MainBarController implements Initializable {
         } else if (Controller.getCurrentUserType().equalsIgnoreCase("costumer")) {
             try {
                 pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/costumerArea.fxml"));
+                pane.getChildren().add(mainBar);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (Controller.getCurrentUserType().equalsIgnoreCase("seller")) {
             try {
                 pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/SellerArea.fxml"));
+                pane.getChildren().add(mainBar);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (Controller.getCurrentUserType().equalsIgnoreCase("manager")) {
             try {
                 pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/ManagerArea.fxml"));
+                pane.getChildren().add(mainBar);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        Pane mainBar = null;
-        try {
-            mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        pane.getChildren().add(mainBar);
+
+
         Controller.setCurrentPane(pane);
         scene.setRoot(pane);
         stage.setScene(scene);
@@ -618,6 +625,18 @@ public class MainBarController implements Initializable {
         Controller.setCurrentPane(offPage);
         scene.setRoot(offPage);
         stage.setScene(scene);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(30), e -> runPopUp()));
+                timeline.setCycleCount(80);
+                timeline.play();
+            }
+        });
+        thread.start();
         stage.show();
+    }
+
+    private void runPopUp() {
     }
 }

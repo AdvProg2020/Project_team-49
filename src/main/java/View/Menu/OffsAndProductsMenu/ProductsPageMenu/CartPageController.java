@@ -721,10 +721,10 @@ public class CartPageController implements Initializable {
 
     public void goBackToLastPane(MouseEvent mouseEvent) {
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
-        System.out.println(Controller.getCurrentPane().getId());
-        System.out.println(Controller.getLastPane().getId());
+        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
         Controller.setCurrentPane(Controller.getLastPane());
-        stage.setScene(new Scene(Controller.getCurrentPane()));
+        scene.setRoot(Controller.getCurrentPane());
+        stage.setScene(scene);
         stage.show();
     }
 }

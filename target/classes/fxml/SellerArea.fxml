@@ -1169,6 +1169,132 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
+                  <Pane fx:id="editProductLabel" disable="true" layoutX="356.0" layoutY="126.0" prefHeight="56.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <Label layoutX="64.0" layoutY="11.0" prefHeight="40.0" prefWidth="136.0" text="Edit Product" textFill="#959595">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="goBackToManageProductsArrow" fitHeight="29.0" fitWidth="30.0" layoutX="14.0" layoutY="17.0" onMouseClicked="#goBackToManageProducts" pickOnBounds="true" preserveRatio="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <image>
+                              <Image url="@../photos/UserArea/personalInfo/back.png" />
+                           </image>
+                        </ImageView>
+                        <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#959595" height="40.0" layoutX="52.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1.0" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="editProductPane" layoutX="371.0" layoutY="187.0" prefHeight="439.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                     <children>
+                        <Label layoutX="21.0" layoutY="118.0" prefHeight="40.0" prefWidth="101.0" text="name" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="521.0" layoutY="118.0" prefHeight="40.0" prefWidth="77.0" text="brand" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="20.0" layoutY="200.0" prefHeight="40.0" prefWidth="105.0" text="price" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="17.0" layoutY="32.0" prefHeight="47.0" prefWidth="211.0" text="Product Information" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="21.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="21.0" layoutY="276.0" prefHeight="40.0" prefWidth="91.0" text="explanations" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <Rectangle fx:id="productNameRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="101.0" layoutY="113.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="342.0" />
+                        <TextField fx:id="productNameTextField" focusTraversable="false" layoutX="110.0" layoutY="117.0" prefHeight="42.0" prefWidth="324.0" style="-fx-background-color: #ffffff;" stylesheets="@../cssFiles/textFieldProductPage.css">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </TextField>
+                        <Rectangle fx:id="productBrandRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="604.0" layoutY="113.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="342.0" />
+                        <TextField fx:id="productBrandTextField" focusTraversable="false" layoutX="611.0" layoutY="117.0" prefHeight="42.0" prefWidth="324.0" style="-fx-background-color: #ffffff;" stylesheets="@../cssFiles/textFieldProductPage.css">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </TextField>
+                        <Rectangle fx:id="productPriceRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="101.0" layoutY="195.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="342.0" />
+                        <TextField fx:id="productPriceTextField" focusTraversable="false" layoutX="110.0" layoutY="199.0" prefHeight="42.0" prefWidth="324.0" style="-fx-background-color: #ffffff;" stylesheets="@../cssFiles/textFieldProductPage.css">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </TextField>
+                        <Rectangle fx:id="productExplanationRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="146.0" layoutY="271.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="799.0" />
+                        <TextField fx:id="productExplanationField" focusTraversable="false" layoutX="155.0" layoutY="275.0" prefHeight="42.0" prefWidth="782.0" style="-fx-background-color: #ffffff;" stylesheets="@../cssFiles/textFieldProductPage.css">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="checkProductInformationButton" alignment="CENTER" layoutX="622.0" layoutY="355.0" mnemonicParsing="false" onAction="#checkProductInformation" prefHeight="50.0" prefWidth="151.0" style="-fx-background-color: #fb3449; -fx-background-radius: 8; -fx-border-radius: 8;" text="Check Information" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <font>
+                              <Font name="Raleway Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <ImageView fx:id="correctFormatEditImageProduct" fitHeight="50.0" fitWidth="70.0" layoutX="794.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../photos/UserArea/personalInfo/checked.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="wrongFormatEditImageProduct" disable="true" fitHeight="50.0" fitWidth="70.0" layoutX="794.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@../photos/UserArea/personalInfo/close.png" />
+                           </image>
+                        </ImageView>
+                        <Pane fx:id="submitProductInformationPane" layoutX="145.0" layoutY="349.0" onMouseClicked="#submitProductInformation" prefHeight="62.0" prefWidth="343.0">
+                           <children>
+                              <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#36cddf" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="343.0" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="8.0" prefHeight="47.0" prefWidth="253.0" text="Submit Product Information" textFill="WHITE">
+                                 <font>
+                                    <Font name="Raleway Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="33.0" fitWidth="32.0" layoutX="23.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/UserArea/personalInfo/correct.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Pane>
+                        <TextField fx:id="emailTextField11" focusTraversable="false" layoutX="655.0" layoutY="199.0" prefHeight="42.0" prefWidth="324.0" style="-fx-background-color: #ffffff;" stylesheets="@../cssFiles/textFieldProductPage.css">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </TextField>
+                        <Rectangle fx:id="productCountRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="604.0" layoutY="195.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="342.0" />
+                        <Label layoutX="521.0" layoutY="200.0" prefHeight="40.0" prefWidth="105.0" text="count" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="productCountTextField" focusTraversable="false" layoutX="613.0" layoutY="199.0" prefHeight="42.0" prefWidth="324.0" style="-fx-background-color: #ffffff;" stylesheets="@../cssFiles/textFieldProductPage.css">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                     <effect>
+                        <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
+                     </effect>
+                  </Pane>
                </children>
             </AnchorPane>
          </content>
