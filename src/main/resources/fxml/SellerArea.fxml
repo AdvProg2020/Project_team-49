@@ -222,12 +222,12 @@
                         <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#959595" height="40.0" layoutX="52.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1.0" />
                      </children>
                   </Pane>
-                  <Label fx:id="sellHistoryLabel" disable="true" layoutX="371.0" layoutY="138.0" prefHeight="36.0" prefWidth="102.0" text="Buy History" textFill="#959595" visible="false">
+                  <Label fx:id="sellHistoryLabel" disable="true" layoutX="371.0" layoutY="138.0" prefHeight="36.0" prefWidth="102.0" text="Sell History" textFill="#959595" visible="false">
                      <font>
                         <Font name="Raleway" size="15.0" />
                      </font>
                   </Label>
-                  <Pane fx:id="sellHistoryPane" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
+                  <Pane fx:id="sellHistoryPane" disable="true" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
                      <children>
                         <Pane fx:id="secondLogPane" layoutX="18.0" layoutY="233.0" prefHeight="193.0" prefWidth="922.0" style="-fx-border-color: #959595; -fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: #ffffff;">
                            <children>
@@ -428,7 +428,7 @@
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fb3449" height="383.0" layoutX="970.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="5.0" />
                         <Pane fx:id="sellHistoryIsEmptyPain" disable="true" layoutX="90.0" layoutY="-2.0" prefHeight="418.0" prefWidth="777.0" visible="false">
                            <children>
-                              <Label layoutX="470.0" layoutY="175.0" prefHeight="84.0" prefWidth="288.0" text="Buy History Is Empty" textFill="#7a7a7a">
+                              <Label layoutX="470.0" layoutY="175.0" prefHeight="84.0" prefWidth="288.0" text="sell History Is Empty" textFill="#7a7a7a">
                                  <font>
                                     <Font name="Raleway Light" size="29.0" />
                                  </font>
@@ -602,6 +602,255 @@
                         <Font name="Raleway" size="15.0" />
                      </font>
                   </Label>
+                  <Pane fx:id="manageOffsPane" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                     <children>
+                        <Pane fx:id="firstOffPane" layoutX="18.0" layoutY="14.0" prefHeight="193.0" prefWidth="922.0" style="-fx-border-color: #959595; -fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: #ffffff;">
+                           <children>
+                              <Rectangle fill="#9a9a9a" height="1.0" layoutX="34.0" layoutY="93.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="857.0" />
+                              <ImageView fx:id="image41" fitHeight="83.0" fitWidth="84.0" layoutX="32.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image42" fitHeight="83.0" fitWidth="84.0" layoutX="134.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image43" fitHeight="83.0" fitWidth="84.0" layoutX="234.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image44" fitHeight="83.0" fitWidth="84.0" layoutX="334.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image45" fitHeight="83.0" fitWidth="84.0" layoutX="434.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image46" fitHeight="83.0" fitWidth="84.0" layoutX="534.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image47" fitHeight="83.0" fitWidth="84.0" layoutX="634.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image48" fitHeight="83.0" fitWidth="84.0" layoutX="734.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="34.0" layoutY="53.0" prefHeight="24.0" prefWidth="110.0" text="Off Percentage:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="offPercentage2" layoutX="152.0" layoutY="50.0" prefHeight="31.0" prefWidth="114.0" text="13123">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="offIdLabel2" layoutX="87.0" layoutY="22.0" prefHeight="22.0" prefWidth="99.0" text="Label">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="32.0" layoutY="21.0" prefHeight="24.0" prefWidth="46.0" text="Off Id:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="152.0" layoutY="21.0" prefHeight="24.0" prefWidth="72.0" text="Off Status:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="offStatus2" layoutX="233.0" layoutY="21.0" prefHeight="24.0" prefWidth="78.0" text="shit">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="seeMoreProductsImageOff2" fitHeight="23.0" fitWidth="27.0" layoutX="867.0" layoutY="126.0" onMouseClicked="#seeMorePicturesOff" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/UserArea/costumerArea/arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="seeLessProductsImageOff2" fitHeight="23.0" fitWidth="27.0" layoutX="844.0" layoutY="126.0" onMouseClicked="#seeMorePicturesOff" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                 <image>
+                                    <Image url="@../photos/UserArea/costumerArea/arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="285.0" layoutY="21.0" prefHeight="24.0" prefWidth="72.0" text="Started At:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="startTime2" layoutX="366.0" layoutY="21.0" prefHeight="24.0" prefWidth="78.0" text="start time">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="endTime2" layoutX="526.0" layoutY="21.0" prefHeight="24.0" prefWidth="78.0" text="end time">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="455.0" layoutY="21.0" prefHeight="24.0" prefWidth="60.0" text="Ends At:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="secondOffPane" layoutX="18.0" layoutY="233.0" prefHeight="193.0" prefWidth="922.0" style="-fx-border-color: #959595; -fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: #ffffff;">
+                           <children>
+                              <Rectangle fill="#9a9a9a" height="1.0" layoutX="34.0" layoutY="93.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="857.0" />
+                              <ImageView fx:id="image31" fitHeight="83.0" fitWidth="84.0" layoutX="32.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image32" fitHeight="83.0" fitWidth="84.0" layoutX="134.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image33" fitHeight="83.0" fitWidth="84.0" layoutX="234.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image34" fitHeight="83.0" fitWidth="84.0" layoutX="334.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image35" fitHeight="83.0" fitWidth="84.0" layoutX="434.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image36" fitHeight="83.0" fitWidth="84.0" layoutX="534.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image37" fitHeight="83.0" fitWidth="84.0" layoutX="634.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="image38" fitHeight="83.0" fitWidth="84.0" layoutX="734.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="34.0" layoutY="53.0" prefHeight="24.0" prefWidth="110.0" text="Off Percentage:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="offPercentage1" layoutX="152.0" layoutY="50.0" prefHeight="31.0" prefWidth="114.0" text="13123">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="offIdLabel1" layoutX="87.0" layoutY="22.0" prefHeight="22.0" prefWidth="99.0" text="Label">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="32.0" layoutY="21.0" prefHeight="24.0" prefWidth="46.0" text="Off Id:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="152.0" layoutY="21.0" prefHeight="24.0" prefWidth="72.0" text="Off Status:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="offStatus1" layoutX="233.0" layoutY="21.0" prefHeight="24.0" prefWidth="78.0" text="shit">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="seeMoreProductsImageOff1" fitHeight="23.0" fitWidth="27.0" layoutX="867.0" layoutY="126.0" onMouseClicked="#seeMorePicturesOff" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/UserArea/costumerArea/arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="seeLessProductsImageOff1" fitHeight="23.0" fitWidth="27.0" layoutX="844.0" layoutY="126.0" onMouseClicked="#seeMorePicturesOff" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                 <image>
+                                    <Image url="@../photos/UserArea/costumerArea/arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="285.0" layoutY="21.0" prefHeight="24.0" prefWidth="72.0" text="Started At:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="startTime1" layoutX="366.0" layoutY="21.0" prefHeight="24.0" prefWidth="78.0" text="start time">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="endTime1" layoutX="526.0" layoutY="21.0" prefHeight="24.0" prefWidth="78.0" text="end time">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="455.0" layoutY="21.0" prefHeight="24.0" prefWidth="60.0" text="Ends At:">
+                                 <font>
+                                    <Font name="Raleway" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fb3449" height="383.0" layoutX="970.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="5.0" />
+                        <ImageView fx:id="upArrowOffs" fitHeight="50.0" fitWidth="37.0" layoutX="954.0" layoutY="14.0" onMouseClicked="#seeMoreOffs" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <image>
+                              <Image url="@../photos/cart/downArrow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="downArrowOffs" fitHeight="50.0" fitWidth="37.0" layoutX="954.0" layoutY="389.0" onMouseClicked="#seeMoreOffs" pickOnBounds="true" preserveRatio="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <image>
+                              <Image url="@../photos/cart/downArrow.png" />
+                           </image>
+                        </ImageView>
+                        <Pane fx:id="offHistoryIsEmptyPain" disable="true" layoutX="90.0" layoutY="-2.0" prefHeight="418.0" prefWidth="777.0" visible="false">
+                           <children>
+                              <Label layoutX="470.0" layoutY="175.0" prefHeight="84.0" prefWidth="288.0" text="Offs History Is Empty" textFill="#7a7a7a">
+                                 <font>
+                                    <Font name="Raleway Light" size="29.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="344.0" fitWidth="396.0" layoutX="52.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/UserArea/costumerArea/408.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                     </children>
+                     <effect>
+                        <DropShadow color="#959595" height="9.94" radius="4.484999999999999" width="10.0" />
+                     </effect>
+                  </Pane>
                </children>
             </AnchorPane>
          </content>

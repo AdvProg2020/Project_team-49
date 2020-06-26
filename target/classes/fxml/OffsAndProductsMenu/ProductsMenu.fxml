@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.OffsAndProductsMenu.ProductsPageMenu.ProductsPageMenuFxmlController">
+<AnchorPane fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.OffsAndProductsMenu.ProductsPageMenu.ProductsPageMenuFxmlController">
     <children>
 
         <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2500.0" prefWidth="1500.0">
@@ -4904,34 +4903,29 @@
                         <DropShadow />
                     </effect>
                 </FlowPane>
-                <GridPane prefHeight="122.0" prefWidth="241.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="10.0" prefWidth="103.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0" minWidth="10.0" prefWidth="138.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="35.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <CheckBox fx:id="availabilityFilter" mnemonicParsing="false" onAction="#availabilityFilter" prefHeight="40.0" prefWidth="130.0" text="Availability" GridPane.rowIndex="2" />
-                        <CheckBox fx:id="offFilter" mnemonicParsing="false" onAction="#offFilter" prefHeight="40.0" prefWidth="125.0" text="Off" />
-                        <ImageView fx:id="compareButton" disable="true" fitHeight="102.0" fitWidth="152.0" onMouseClicked="#compare" pickOnBounds="true" preserveRatio="true" visible="false" x="1350.0" y="525.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
-                            <image>
-                                <Image url="@../../photos/ProductsPage/Compare.png" />
-                            </image>
-                            <effect>
-                                <DropShadow />
-                            </effect>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </ImageView>
-                    </children>
-                </GridPane>
+                  <CheckBox fx:id="offFilter" mnemonicParsing="false" onAction="#offFilter" prefHeight="40.0" prefWidth="115.0" text="Off">
+               <FlowPane.margin>
+                  <Insets left="5.0" />
+               </FlowPane.margin>
+            </CheckBox>
+                  <CheckBox fx:id="availabilityFilter" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#availabilityFilter" prefHeight="40.0" prefWidth="115.0" text="Availability">
+               <FlowPane.margin>
+                  <Insets right="5.0" />
+               </FlowPane.margin>
+            </CheckBox>
             </children>
         </FlowPane>
+            <ImageView fx:id="compareButton" disable="true" fitHeight="79.0" fitWidth="80.0" layoutX="-286.0" layoutY="57.0" onMouseClicked="#compare" pickOnBounds="true" preserveRatio="true" visible="false" x="300.0" y="600.0">
+                <image>
+                    <Image url="@../../photos/ProductsPage/Compare.png" />
+                </image>
+                <effect>
+                    <DropShadow />
+                </effect>
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </ImageView>
     </children>
 
 </AnchorPane>
