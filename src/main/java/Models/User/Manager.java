@@ -1,5 +1,6 @@
 package Models.User;
 
+import Controller.DataBase;
 import Models.DiscountCode;
 import Models.User.Request.Request;
 
@@ -56,6 +57,13 @@ public class Manager extends User implements Serializable {
     public static void removeDiscountCode(String code) {
         for (DiscountCode discountCode : allDiscountCodes) {
             if (discountCode.getDiscountId().equals(code)) {
+                for (User allUser : getAllUsers()) {
+                    if (allUser.getType().equals("Costumer")) {
+                        if (((Costumer) allUser).getDiscountCodeById(discountCode.getDiscountId()) != null) {
+                            ((Costumer) allUser).removeDiscountCode(((Costumer) allUser).getDiscountCodeById(discountCode.getDiscountId()));
+                        }
+                    }
+                }
                 allDiscountCodes.remove(discountCode);
                 return;
             }

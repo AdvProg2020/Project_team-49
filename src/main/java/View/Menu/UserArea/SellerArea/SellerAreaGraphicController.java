@@ -1,6 +1,7 @@
 package View.Menu.UserArea.SellerArea;
 
 import Controller.Controller;
+import Controller.SellerAreaController;
 import Models.Log.BuyLog;
 import Models.Log.Log;
 import Models.Log.SellLog;
@@ -12,10 +13,7 @@ import Models.User.Guest;
 import Models.User.Seller;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Control;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,8 +22,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static Controller.CostumerAreaController.*;
@@ -130,6 +131,19 @@ public class SellerAreaGraphicController implements Initializable {
     public ImageView image36;
     public ImageView image37;
     public ImageView image38;
+    public Button addOffButton;
+    public Pane addOffLabel;
+    public Pane addOffPane;
+    public Rectangle addOffProducts;
+    public Rectangle offPercentRec;
+    public Rectangle endDateRec;
+    public Rectangle startDateRec;
+    public TextField startDateTextField;
+    public Pane addOffButtonFinal;
+    public TextField endDateTextField;
+    public TextField offPercentTextField;
+    public ListView addOffProductsList;
+    public ImageView goBackToManageOffsArrow;
     private Seller seller;
     private int offsIndex = 0;
     private int imagesLog1Index = 0;
@@ -534,9 +548,16 @@ public class SellerAreaGraphicController implements Initializable {
         manageOffsPane.setDisable(true);
         offHistoryIsEmptyPain.setVisible(false);
         offHistoryIsEmptyPain.setDisable(true);
+        addOffButton.setDisable(true);
+        addOffButton.setVisible(false);
         imagesOff1Index = 0;
         imagesOff2Index = 0;
         offsIndex = 0;
+
+        addOffPane.setVisible(false);
+        addOffPane.setDisable(true);
+        addOffLabel.setVisible(false);
+        addOffLabel.setDisable(true);
     }
 
     public void goToManageOffsPain(MouseEvent mouseEvent) {
@@ -547,6 +568,8 @@ public class SellerAreaGraphicController implements Initializable {
         offsIndex = 0;
         offs.clear();
         offs.addAll(seller.getOffs());
+        addOffButton.setVisible(true);
+        addOffButton.setDisable(false);
         manageOffsLabel.setVisible(true);
         manageOffsLabel.setOpacity(1);
         manageOffsPane.setDisable(false);
@@ -748,6 +771,92 @@ public class SellerAreaGraphicController implements Initializable {
             imagesOff2Index--;
             setSecondImageOff();
         }
+    }
+
+    public void goToAddOffPane(MouseEvent mouseEvent) {
+        closeALlPanes();
+        restartInsideOfAddOffPain();
+
+        addOffLabel.setDisable(false);
+        addOffLabel.setVisible(true);
+        addOffPane.setDisable(false);
+        addOffPane.setVisible(true);
+
+        setAddOffPaneContents();
+    }
+
+    private void setAddOffPaneContents() {
+        for (String s : SellerAreaController.getAvailableProductsForOff(seller.getUsername())) {
+            CheckBox checkBox = new CheckBox();
+            checkBox.setText(s);
+            checkBox.setSelected(false);
+            addOffProductsList.getItems().add(checkBox);
+        }
+    }
+
+    private void restartInsideOfAddOffPain() {
+        startDateRec.setStroke(Color.valueOf("#959595"));
+        endDateRec.setStroke(Color.valueOf("#959595"));
+        offPercentRec.setStroke(Color.valueOf("#959595"));
+        addOffProducts.setStroke(Color.valueOf("#959595"));
+
+        startDateTextField.setText("");
+        endDateTextField.setText("");
+        offPercentTextField.setText("");
+        addOffProductsList.getItems().clear();
+
+
+    }
+
+    public void addOff(MouseEvent mouseEvent) {
+        Date date = null;
+        boolean errorFound = false;
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(startDateTextField.getText());
+        } catch (ParseException e) {
+            startDateRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(endDateTextField.getText());
+        } catch (ParseException e) {
+            endDateRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!offPercentTextField.getText().matches("\\d+") || offPercentTextField.getText().equals("")) {
+            offPercentRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        } else if ((Integer.parseInt(offPercentTextField.getText()) >= 100) || (Integer.parseInt(offPercentTextField.getText()) <= 0)) {
+            offPercentRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (getSelectedProductsId().equals("")) {
+            addOffProducts.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!errorFound) {
+            ArrayList<String> info = new ArrayList<>();
+            info.add(getSelectedProductsId());
+            info.add(startDateTextField.getText());
+            info.add(endDateTextField.getText());
+            info.add(offPercentTextField.getText());
+            SellerAreaController.addOff(info);
+        }
+        goToManageOffsPain(mouseEvent);
+    }
+
+    private String getSelectedProductsId() {
+        String products = "";
+        for (Object item : addOffProductsList.getItems()) {
+            if (((CheckBox) item).isSelected()) {
+                products += ((CheckBox) item).getText().split("_")[1] + " ";
+            }
+        }
+        return products.trim();
+    }
+
+    public void goBackToManageOffs(MouseEvent mouseEvent) {
+        goToManageOffsPain(mouseEvent);
     }
 
     public void goToManageProductsPain(MouseEvent mouseEvent) {

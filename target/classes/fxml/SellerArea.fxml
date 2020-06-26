@@ -199,7 +199,7 @@
                         <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
                      </effect>
                   </Pane>
-                  <Label fx:id="personalInfoLabel" layoutX="371.0" layoutY="138.0" prefHeight="36.0" prefWidth="102.0" text="Personal Info" textFill="#959595">
+                  <Label fx:id="personalInfoLabel" disable="true" layoutX="371.0" layoutY="138.0" prefHeight="36.0" prefWidth="102.0" text="Personal Info" textFill="#959595" visible="false">
                      <font>
                         <Font name="Raleway" size="15.0" />
                      </font>
@@ -602,7 +602,7 @@
                         <Font name="Raleway" size="15.0" />
                      </font>
                   </Label>
-                  <Pane fx:id="manageOffsPane" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                  <Pane fx:id="manageOffsPane" disable="true" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
                      <children>
                         <Pane fx:id="firstOffPane" layoutX="18.0" layoutY="14.0" prefHeight="193.0" prefWidth="922.0" style="-fx-border-color: #959595; -fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: #ffffff;">
                            <children>
@@ -851,6 +851,93 @@
                         <DropShadow color="#959595" height="9.94" radius="4.484999999999999" width="10.0" />
                      </effect>
                   </Pane>
+                  <Button fx:id="addOffButton" alignment="CENTER" layoutX="1256.0" layoutY="144.0" mnemonicParsing="false" onMouseClicked="#goToAddOffPane" prefHeight="38.0" prefWidth="54.0" style="-fx-background-color: #00bfd6;" text="Add" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font></Button>
+                  <Pane fx:id="addOffLabel" layoutX="356.0" layoutY="126.0" prefHeight="56.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="64.0" layoutY="11.0" prefHeight="40.0" prefWidth="136.0" text="Add Off" textFill="#959595">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="goBackToManageOffsArrow" fitHeight="29.0" fitWidth="30.0" layoutX="14.0" layoutY="17.0" onMouseClicked="#goBackToManageOffs" pickOnBounds="true" preserveRatio="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <image>
+                              <Image url="@../photos/UserArea/personalInfo/back.png" />
+                           </image>
+                        </ImageView>
+                        <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#959595" height="40.0" layoutX="52.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1.0" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="addOffPane" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <Rectangle fx:id="offPercentRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="226.0" layoutY="184.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
+                        <Rectangle fx:id="addOffProducts" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="144.0" layoutX="685.0" layoutY="184.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="204.0" />
+                        <Rectangle fx:id="endDateRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="681.0" layoutY="97.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
+                        <Rectangle fx:id="startDateRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="225.0" layoutY="97.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
+                        <Label layoutX="83.0" layoutY="189.0" prefHeight="40.0" prefWidth="80.0" text="off percent" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="33.0" layoutY="14.0" prefHeight="47.0" prefWidth="192.0" text="Off Information" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="21.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="533.0" layoutY="183.0" prefHeight="40.0" prefWidth="105.0" text="products" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="533.0" layoutY="102.0" prefHeight="40.0" prefWidth="77.0" text="end date" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="90.0" layoutY="102.0" prefHeight="40.0" prefWidth="78.0" text="start date" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <Pane fx:id="addOffButtonFinal" layoutX="233.0" layoutY="297.0" onMouseClicked="#addOff" prefHeight="62.0" prefWidth="200.0">
+                           <children>
+                              <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#36cddf" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="8.0" prefHeight="47.0" prefWidth="118.0" text="Add Off" textFill="WHITE">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="33.0" fitWidth="32.0" layoutX="23.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/UserArea/personalInfo/correct.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Pane>
+                        <TextField fx:id="startDateTextField" layoutX="234.0" layoutY="103.0" prefHeight="38.0" prefWidth="195.0" promptText="dd/mm/yyyy hh:mm:ss" style="-fx-background-color: #ffffff;">
+                           <font>
+                              <Font size="16.0" />
+                           </font></TextField>
+                        <TextField fx:id="endDateTextField" layoutX="690.0" layoutY="103.0" prefHeight="38.0" prefWidth="195.0" promptText="dd/mm/yyyy hh:mm:ss" style="-fx-background-color: #ffffff;">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="offPercentTextField" layoutX="235.0" layoutY="190.0" prefHeight="38.0" prefWidth="195.0" promptText="percent" style="-fx-background-color: #ffffff;">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <ListView fx:id="addOffProductsList" layoutX="686.0" layoutY="185.0" prefHeight="142.0" prefWidth="202.0" style="-fx-border-radius: 3; -fx-background-radius: 3;" />
+                     </children></Pane>
                </children>
             </AnchorPane>
          </content>
