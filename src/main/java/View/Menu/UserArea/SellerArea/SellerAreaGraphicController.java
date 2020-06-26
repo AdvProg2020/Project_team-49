@@ -173,6 +173,24 @@ public class SellerAreaGraphicController implements Initializable {
     public Pane manageProductsPane;
     public Pane secondProductPane;
     public Pane productsHistoryIsEmptyPain;
+    public Pane editProductLabel;
+    public ImageView goBackToManageProductsArrow;
+    public Pane editProductPane;
+    public TextField productNameTextField;
+    public Rectangle productBrandRec;
+    public TextField productBrandTextField;
+    public Rectangle productPriceRec;
+    public TextField productPriceTextField;
+    public Rectangle productExplanationRec;
+    public TextField productExplanationField;
+    public Button checkProductInformationButton;
+    public ImageView correctFormatEditImageProduct;
+    public Pane submitProductInformationPane;
+    public TextField emailTextField11;
+    public Rectangle productCountRec;
+    public TextField productCountTextField;
+    public Rectangle productNameRec;
+    public ImageView wrongFormatEditImageProduct;
     private Seller seller;
     private int offsIndex = 0;
     private int productsIndex = 0;
@@ -596,6 +614,11 @@ public class SellerAreaGraphicController implements Initializable {
         manageProductsPane.setDisable(true);
         addProductButton.setDisable(true);
         addProductButton.setVisible(false);
+
+        editPersonalInfoPane.setDisable(true);
+        editPersonalInfoPane.setVisible(false);
+        editPersonalInfoLabel.setVisible(false);
+        editPersonalInfoLabel.setDisable(true);
     }
 
     public void goToManageOffsPain(MouseEvent mouseEvent) {
@@ -987,12 +1010,87 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void goToEditProductPane(MouseEvent mouseEvent) {
+        closeALlPanes();
+        editPersonalInfoPane.setDisable(false);
+        editPersonalInfoPane.setVisible(true);
+        editPersonalInfoLabel.setVisible(true);
+        editPersonalInfoLabel.setDisable(false);
+        restartInsideOfEditProductPain();
+        if (mouseEvent.getSource().equals(editProduct1)) {
+            setInsideOfEditProductPain(productsIndex);
+        } else {
+            setInsideOfEditProductPain(productsIndex + 1);
+        }
+    }
 
+    private void setInsideOfEditProductPain(int index) {
+        productNameTextField.setText(products.get(index).getName());
+        productBrandTextField.setText(products.get(index).getBrand());
+        productPriceTextField.setText(String.valueOf(products.get(index).getPrice(seller)));
+        productCountTextField.setText(String.valueOf(products.get(index).getRemainingItemsForSeller(seller)));
+        productExplanationField.setText(products.get(index).getExplanation());
+    }
+
+    private void restartInsideOfEditProductPain() {
+        productNameRec.setStroke(Color.valueOf("LIGHTGRAY"));
+        productBrandRec.setStroke(Color.valueOf("LIGHTGRAY"));
+        productPriceRec.setStroke(Color.valueOf("LIGHTGRAY"));
+        productCountRec.setStroke(Color.valueOf("LIGHTGRAY"));
+        productExplanationRec.setStroke(Color.valueOf("LIGHTGRAY"));
+
+        submitProductInformationPane.setOpacity(0.5);
+        submitProductInformationPane.setDisable(true);
+        wrongFormatEditImageProduct.setVisible(false);
+        correctFormatEditImageProduct.setVisible(false);
+    }
+
+    public void submitProductInformation(MouseEvent mouseEvent) {
+    }
+
+    public void checkProductInformation(ActionEvent actionEvent) {
+        restartInsideOfEditProductPain();
+        boolean errorFound = false;
+        if (!productNameTextField.getText().matches("\\w+")) {
+            productNameRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        } else if (SellerAreaController.hasProductWithName(productNameTextField.getText())) {
+            productNameRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!productBrandTextField.getText().matches("\\w+")) {
+            productBrandRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!productPriceTextField.getText().matches("\\d+")) {
+            productPriceRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!productCountTextField.getText().matches("\\d+")) {
+            productCountRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!productExplanationField.getText().matches("(\\w|\\s)+")) {
+            productExplanationRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+
+        if (errorFound) {
+            wrongFormatEditImageProduct.setVisible(true);
+        } else {
+            submitProductInformationPane.setOpacity(1);
+            submitProductInformationPane.setDisable(false);
+            wrongFormatEditImageProduct.setVisible(false);
+            correctFormatEditImageProduct.setVisible(true);
+        }
     }
 
     public void doDeleteProduct(MouseEvent mouseEvent) {
     }
 
     public void goToAddProductPane(MouseEvent mouseEvent) {
+    }
+
+    public void goBackToManageProducts(MouseEvent mouseEvent) {
+        goBackToManageProducts(mouseEvent);
     }
 }
