@@ -194,6 +194,22 @@ public class SellerAreaGraphicController implements Initializable {
     public TextField productCountTextField;
     public Rectangle productNameRec;
     public ImageView wrongFormatEditImageProduct;
+    public Pane addProductLabel;
+    public Pane addProductPane;
+    public Rectangle priceRec;
+    public Rectangle imageRec;
+    public Rectangle countRec;
+    public Rectangle nameRec;
+    public Pane addProductButtonFinal;
+    public TextField nameTextField;
+    public TextField countTextField;
+    public TextField priceTextField;
+    public Rectangle brandRec;
+    public TextField brandTextField;
+    public Rectangle categoryRec;
+    public TextField categoryTextField;
+    public Rectangle explanationRec;
+    public TextField explanationTextField;
     private Seller seller;
     private int offsIndex = 0;
     private int productsIndex = 0;
@@ -1224,5 +1240,8 @@ public class SellerAreaGraphicController implements Initializable {
 
     public void goBackToManageProducts(MouseEvent mouseEvent) {
         goBackToManageProducts(mouseEvent);
+    }
+
+    public void addProduct(MouseEvent mouseEvent) {
     }
 }

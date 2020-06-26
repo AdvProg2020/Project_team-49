@@ -1313,12 +1313,12 @@
                         <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#959595" height="40.0" layoutX="52.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1.0" />
                      </children>
                   </Pane>
-                  <Pane fx:id="addOffPane1" layoutX="381.0" layoutY="197.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                  <Pane fx:id="addProductPane" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
                      <children>
-                        <Rectangle fx:id="offPercentRec1" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="127.0" layoutY="195.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
-                        <Rectangle fx:id="addOffProducts1" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="144.0" layoutX="685.0" layoutY="184.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="204.0" />
-                        <Rectangle fx:id="endDateRec1" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="681.0" layoutY="97.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
-                        <Rectangle fx:id="startDateRec1" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="127.0" layoutY="72.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
+                        <Rectangle fx:id="priceRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="127.0" layoutY="195.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
+                        <Rectangle fx:id="imageRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="200.0" layoutX="632.0" layoutY="200.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="200.0" />
+                        <Rectangle fx:id="countRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="629.0" layoutY="72.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
+                        <Rectangle fx:id="nameRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="127.0" layoutY="72.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
                         <Label layoutX="58.0" layoutY="200.0" prefHeight="40.0" prefWidth="48.0" text="price" textFill="#7a7a7a">
                            <font>
                               <Font name="Raleway" size="15.0" />
@@ -1329,12 +1329,12 @@
                               <Font name="Raleway" size="21.0" />
                            </font>
                         </Label>
-                        <Label layoutX="533.0" layoutY="183.0" prefHeight="40.0" prefWidth="105.0" text="products" textFill="#7a7a7a">
+                        <Label layoutX="518.0" layoutY="200.0" prefHeight="40.0" prefWidth="105.0" text="image" textFill="#7a7a7a">
                            <font>
                               <Font name="Raleway" size="15.0" />
                            </font>
                         </Label>
-                        <Label layoutX="533.0" layoutY="102.0" prefHeight="40.0" prefWidth="77.0" text="end date" textFill="#7a7a7a">
+                        <Label layoutX="509.0" layoutY="77.0" prefHeight="40.0" prefWidth="101.0" text="available Items" textFill="#7a7a7a">
                            <font>
                               <Font name="Raleway" size="15.0" />
                            </font>
@@ -1344,10 +1344,10 @@
                               <Font name="Raleway" size="15.0" />
                            </font>
                         </Label>
-                        <Pane fx:id="addOffButtonFinal1" layoutX="247.0" layoutY="344.0" onMouseClicked="#addOff" prefHeight="62.0" prefWidth="200.0">
+                        <Pane fx:id="addProductButtonFinal" layoutX="138.0" layoutY="335.0" onMouseClicked="#addProduct" prefHeight="62.0" prefWidth="277.0">
                            <children>
-                              <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#36cddf" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="8.0" prefHeight="47.0" prefWidth="118.0" text="Add Off" textFill="WHITE">
+                              <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#36cddf" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="276.0" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="8.0" prefHeight="47.0" prefWidth="194.0" text="Add Product" textFill="WHITE">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -1362,24 +1362,23 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Pane>
-                        <TextField fx:id="startDateTextField1" layoutX="136.0" layoutY="78.0" prefHeight="38.0" prefWidth="195.0" promptText="name" style="-fx-background-color: #ffffff;">
+                        <TextField fx:id="nameTextField" layoutX="136.0" layoutY="78.0" prefHeight="38.0" prefWidth="195.0" promptText="name" style="-fx-background-color: #ffffff;">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="endDateTextField1" layoutX="690.0" layoutY="103.0" prefHeight="38.0" prefWidth="195.0" promptText="dd/mm/yyyy hh:mm:ss" style="-fx-background-color: #ffffff;">
+                        <TextField fx:id="countTextField" layoutX="638.0" layoutY="78.0" prefHeight="38.0" prefWidth="195.0" promptText="available items" style="-fx-background-color: #ffffff;">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="offPercentTextField1" layoutX="136.0" layoutY="201.0" prefHeight="38.0" prefWidth="195.0" promptText="price" style="-fx-background-color: #ffffff;">
+                        <TextField fx:id="priceTextField" layoutX="136.0" layoutY="201.0" prefHeight="38.0" prefWidth="195.0" promptText="price" style="-fx-background-color: #ffffff;">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </TextField>
-                        <ListView fx:id="addOffProductsList1" layoutX="686.0" layoutY="185.0" prefHeight="142.0" prefWidth="202.0" style="-fx-border-radius: 3; -fx-background-radius: 3; -fx-border-color: #ffffff;" />
-                        <Rectangle fx:id="startDateRec11" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="127.0" layoutY="133.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
-                        <TextField fx:id="startDateTextField11" layoutX="136.0" layoutY="139.0" prefHeight="38.0" prefWidth="195.0" promptText="brand" style="-fx-background-color: #ffffff;">
+                        <Rectangle fx:id="brandRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="127.0" layoutY="133.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
+                        <TextField fx:id="brandTextField" layoutX="136.0" layoutY="139.0" prefHeight="38.0" prefWidth="195.0" promptText="brand" style="-fx-background-color: #ffffff;">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -1389,6 +1388,28 @@
                               <Font name="Raleway" size="15.0" />
                            </font>
                         </Label>
+                        <Rectangle fx:id="categoryRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="127.0" layoutY="256.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
+                        <Label layoutX="42.0" layoutY="261.0" prefHeight="40.0" prefWidth="63.0" text="category" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="categoryTextField" layoutX="136.0" layoutY="262.0" prefHeight="38.0" prefWidth="195.0" promptText="category" style="-fx-background-color: #ffffff;">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="417.0" layoutY="138.0" prefHeight="40.0" prefWidth="101.0" text="explanation" textFill="#7a7a7a">
+                           <font>
+                              <Font name="Raleway" size="15.0" />
+                           </font>
+                        </Label>
+                        <Rectangle fx:id="explanationRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="512.0" layoutY="133.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="440.0" />
+                        <TextField fx:id="explanationTextField" layoutX="518.0" layoutY="139.0" prefHeight="38.0" prefWidth="427.0" promptText="explanation" style="-fx-background-color: #ffffff;">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
                      </children>
                      <effect>
                         <DropShadow color="#959595" height="9.75" radius="4.4375" width="10.0" />
