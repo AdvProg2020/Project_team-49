@@ -916,14 +916,14 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     public void acceptRequest(ActionEvent event) {
-
+        ManagerAreaController.acceptRequest(DataBase.getAllActiveRequests().get(requestsIndex).getRequestId());
 
         requestsIndex = 0;
         setRequestsPaneContent();
     }
 
     public void rejectRequest(ActionEvent event) {
-
+        ManagerAreaController.declineRequest(DataBase.getAllActiveRequests().get(requestsIndex).getRequestId());
 
         requestsIndex = 0;
         setRequestsPaneContent();
@@ -1042,11 +1042,11 @@ public class ManagerAreaGraphicController implements Initializable {
     private ArrayList<String> getAccountInformation(String username, String type) {
         ArrayList<String> info = new ArrayList<>();
         info.add(username);
+        info.add(passReg.getText());
         info.add(firstNameReg.getText());
         info.add(lastNameReg.getText());
         info.add(emailReg.getText());
         info.add(phoneReg.getText());
-        info.add(passReg.getText());
         return info;
     }
 
@@ -1222,6 +1222,8 @@ public class ManagerAreaGraphicController implements Initializable {
     public void submitNewDiscount(MouseEvent mouseEvent) {
         if (submitNewDiscount.isDisable()) return;
 
+        ArrayList<String> info = new ArrayList<>();
+        ManagerAreaController.createDiscountCode(info);
 
         restartTextFieldForNewDiscount();
         restartInsideMainDiscountPane();
