@@ -12,6 +12,7 @@ import Controller.CostumerAreaController;
 import Models.User.Guest;
 import Models.User.Seller;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -27,6 +28,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -250,6 +252,7 @@ public class SellerAreaGraphicController implements Initializable {
 
 
     private void setPersonalInfoLabels() {
+        userNameLabel.setText(seller.getUsername());
         firstNameLabel.setText(seller.getFirstName());
         lastNameLabel.setText(seller.getLastName());
         emailLabel.setText(seller.getEMail());
@@ -1350,7 +1353,8 @@ public class SellerAreaGraphicController implements Initializable {
             info.add(categoryTextField.getText());
             info.add(countTextField.getText());
             info.add(imageTextField.getText());
-            SellerAreaController.addProduct(info);
+            System.out.println(SellerAreaController.addProduct(info));
+//            SellerAreaController.addProduct(info);
             goBackToManageProducts(mouseEvent);
         }
     }
@@ -1359,6 +1363,28 @@ public class SellerAreaGraphicController implements Initializable {
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
         Controller.setCurrentPane(Controller.getLastPane());
+        scene.setRoot(Controller.getCurrentPane());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void logoutSeller(MouseEvent mouseEvent) {
+        Controller.logout();
+        Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
+        Pane mainMenu = null;
+        Pane mainBar = null;
+        try {
+            mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
+            mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+        ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
+        mainMenu.getChildren().add(mainBar);
+        Controller.setCurrentPane(mainMenu);
         scene.setRoot(Controller.getCurrentPane());
         stage.setScene(scene);
         stage.show();

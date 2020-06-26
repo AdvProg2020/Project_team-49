@@ -8,10 +8,7 @@ import Models.Category;
 import Models.Comment;
 import Models.Product;
 import Models.Score;
-import Models.User.Costumer;
-import Models.User.Guest;
-import Models.User.Seller;
-import Models.User.User;
+import Models.User.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.Initializable;
@@ -459,7 +456,13 @@ public class ProductPageController implements Initializable {
     private void setScoreLabels() {
         String averageScore = String.valueOf(product.getAverageScore());
         averageScore = averageScore.substring(0, 3);
-        averageScoreNumber.setText(String.valueOf(averageScore));
+        int size = product.getAllScores().size();
+        if(size == 0){
+            averageScoreNumber.setText("0");
+        }else{
+            averageScoreNumber.setText(String.valueOf(averageScore));
+
+        }
         scoresNumber.setText(String.valueOf(product.getAllScores().size()));
     }
 
@@ -595,6 +598,10 @@ public class ProductPageController implements Initializable {
     }
 
     public void addProductToCart(MouseEvent mouseEvent) {
+        if (Controller.currentUser instanceof Manager || Controller.getCurrentUser() instanceof Seller){
+            return;
+        }
+        Controller.addToCart(Controller.getSelectedProduct(),Controller.getSelectedProduct().getSellerByUsername(sellerNameLabel.getText()),1);
 
     }
 

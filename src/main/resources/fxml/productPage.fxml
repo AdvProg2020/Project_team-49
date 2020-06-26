@@ -120,14 +120,6 @@
                                                 <Insets left="160.0" />
                                             </GridPane.margin>
                                         </Label>
-                                        <Label fx:id="discussionNumber" layoutX="17.0" layoutY="80.0" prefHeight="50.0" prefWidth="188.0" style="-fx-text-fill: #00008b;" text="Label">
-                                            <font>
-                                                <Font name="Lato Regular" size="17.0" />
-                                            </font>
-                                            <GridPane.margin>
-                                                <Insets left="120.0" />
-                                            </GridPane.margin>
-                                        </Label>
                                     </children>
                                 </GridPane>
                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="332.0" layoutX="458.0" layoutY="99.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke-width: 0; -fx-fill: #f9374f;" width="3.0" />
@@ -848,5 +840,10 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
+                <Label fx:id="discussionNumber" layoutX="355.0" layoutY="25.0" prefHeight="50.0" prefWidth="188.0" style="-fx-text-fill: #00008b;" text="Label">
+                    <font>
+                        <Font name="Lato Regular" size="17.0" />
+                    </font>
+                </Label>
     </children>
 </AnchorPane>

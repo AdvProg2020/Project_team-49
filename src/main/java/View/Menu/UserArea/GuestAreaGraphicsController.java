@@ -104,7 +104,7 @@ public class GuestAreaGraphicsController implements Initializable {
                     stage.setScene(scene);
                     stage.show();
                 }
-                System.out.println("shit");
+
 
             }
         }
@@ -308,6 +308,19 @@ public class GuestAreaGraphicsController implements Initializable {
                 Controller.startClickSound();
             }
         }).start();
+        Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((Node) mouseEvent.getSource()).getScene();
+        Pane register = null;
+        try {
+            register = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/LoginMenu.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Controller.setCurrentPane(register);
+        scene.setRoot(register);
+        stage.setScene(scene);
+        stage.show();
+
     }
 
     public void login(MouseEvent mouseEvent) {
@@ -364,6 +377,18 @@ public class GuestAreaGraphicsController implements Initializable {
                 Controller.startClickSound();
             }
         }).start();
+        Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((Node) mouseEvent.getSource()).getScene();
+        Pane register = null;
+        try {
+            register = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/RegisterMenu.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Controller.setCurrentPane(register);
+        scene.setRoot(register);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void goBackToLastPaneFromLogin(MouseEvent mouseEvent) {
