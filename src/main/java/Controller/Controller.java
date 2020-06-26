@@ -28,16 +28,33 @@ public class Controller {
     private static boolean hasHeadManager = false;
     private static Product selectedProduct;
     private static Pane currentPane;
-    private static String color;
-
+    private static String color ;
+    private static Pane lastPane;
     public static String getColor() {
         return color;
     }
-
+    private static Pane innerPaneForColor;
     public static void setColor(String color) {
         Controller.color = color;
-        currentPane.setBackground(new Background(new BackgroundFill(Color.web("#" + color), CornerRadii.EMPTY, Insets.EMPTY)));
-        currentPane.setStyle("-fx-background-color: #" + color);
+    }
+
+    public static Pane getInnerPaneForColor() {
+        return innerPaneForColor;
+    }
+
+    public static void setInnerPaneForColor(Pane innerPaneForColor) {
+        Controller.innerPaneForColor = innerPaneForColor;
+        System.out.println(color);
+        innerPaneForColor.setBackground(new Background(new BackgroundFill(Color.web("#" + color), CornerRadii.EMPTY, Insets.EMPTY)));
+        innerPaneForColor.setStyle("-fx-background-color: #" + color);
+    }
+
+    public static Pane getLastPane() {
+        return lastPane;
+    }
+
+    public static void setLastPane(Pane lastPane) {
+        Controller.lastPane = lastPane;
     }
 
     public static Pane getCurrentPane() {

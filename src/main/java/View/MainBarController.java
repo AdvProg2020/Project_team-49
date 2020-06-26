@@ -12,7 +12,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -29,7 +31,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -40,7 +41,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.scene.control.Tooltip;
 
 import javax.xml.crypto.Data;
 import java.net.URL;
@@ -115,6 +115,7 @@ public class MainBarController implements Initializable {
     public Rectangle offsRectangle;
 
     private static int added = 0;
+    public ImageView cartButton;
 
     private ArrayList<Label> categoryLabels = new ArrayList<>();
 
@@ -124,8 +125,18 @@ public class MainBarController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setCostumerAreaAndCartButtons();
         setAllCategories();
         setCategories();
+    }
+
+    private void setCostumerAreaAndCartButtons() {
+        cartButton.setDisable(true);
+        cartButton.setOpacity(0.5);
+        if (Controller.getCurrentUserType().equalsIgnoreCase("guest") || Controller.getCurrentUserType().equalsIgnoreCase("costumer")) {
+            cartButton.setOpacity(1.0);
+            cartButton.setDisable(false);
+        }
     }
 
     private void setCategories() {
@@ -135,7 +146,7 @@ public class MainBarController implements Initializable {
             categoryLabel.setDisable(true);
             categoryLabel.setVisible(false);
         }
-        if(DataBase.getAllCategories().size() == 0) return;
+        if (DataBase.getAllCategories().size() == 0) return;
         for (Category category : DataBase.getAllCategories()) {
             if (category.getParentCategory() == null) {
                 categoryLabels.get(i).setText(category.getName());
@@ -257,21 +268,25 @@ public class MainBarController implements Initializable {
 
         if (mouseEvent.getSource().equals(lightBlueButton)) {
             Controller.setColor("cee8f0");
-//            innerPane.setStyle("-fx-background-color: #");
+            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
         } else if (mouseEvent.getSource().equals(lightGrayButton)) {
             Controller.setColor("f3f3f3");
-//            innerPane.setStyle("-fx-background-color:  #f3f3f3");
+            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
         } else if (mouseEvent.getSource().equals(lightGreenButton)) {
             Controller.setColor("cdeae0");
+            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
 //            innerPane.setStyle("-fx-background-color: #cdeae0");
         } else if (mouseEvent.getSource().equals(lightRedButton)) {
             Controller.setColor("ff726f");
+            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
 //            innerPane.setStyle("-fx-background-color: #ff726f");
         } else if (mouseEvent.getSource().equals(lightOrangeButton)) {
             Controller.setColor("feddb6");
+            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
 //            innerPane.setStyle("-fx-background-color: #feddb6");
         } else if (mouseEvent.getSource().equals(lightWhiteButton)) {
             Controller.setColor("FFFFFF");
+            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
 //            innerPane.setStyle("-fx-background-color: #FFFFFF");
         }
     }
@@ -387,19 +402,21 @@ public class MainBarController implements Initializable {
     }
 
     public void clickedOnACategory(MouseEvent mouseEvent) {
-        Label label=(Label) mouseEvent.getSource();
-        String category=label.getText();
-        if (category.endsWith("〉")){
-            category=category.split("\\s")[0];
-        }else if (category.startsWith("●")){
-            int i=0;
-            while (category.split("\\s")[i].equals("●")){
+        Label label = (Label) mouseEvent.getSource();
+        String category = label.getText();
+        if (category.endsWith("〉")) {
+            category = category.split("\\s")[0];
+        } else if (category.startsWith("●")) {
+            int i = 0;
+            while (category.split("\\s")[i].equals("●")) {
                 i++;
             }
-            category=category.split("\\s")[i];
+            category = category.split("\\s")[i];
         }
         Filter.restartFilters();
         Filter.filterByCategory(category);
+        Scene scene = label.getScene();
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         AnchorPane loginMenu2 = null;
         Pane mainBar = null;
         try {
@@ -409,14 +426,10 @@ public class MainBarController implements Initializable {
             e.printStackTrace();
         }
         loginMenu2.getChildren().add(mainBar);
-        Scene scene2 = new Scene(loginMenu2);
-        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        window.setScene(scene2);
-
-        window.show();
-
-
-
+        Controller.setCurrentPane(loginMenu2);
+        scene.setRoot(loginMenu2);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void enteredToSubCategory(MouseEvent mouseEvent) {
@@ -433,4 +446,82 @@ public class MainBarController implements Initializable {
         }
     }
 
+    public void goToCart(MouseEvent mouseEvent) {
+        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Controller.setLastPane(Controller.getCurrentPane());
+        Pane pane = null;
+        try {
+            pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ScrollPane scrollPane = (ScrollPane) pane.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
+        Controller.setCurrentPane(pane);
+        scene.setRoot(pane);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void goToCustomerArea(MouseEvent mouseEvent) {
+        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Controller.setLastPane(Controller.getCurrentPane());
+        Pane pane = null;
+        if (Controller.getCurrentUserType().equalsIgnoreCase("guest")) {
+            try {
+                pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/LoginMenu.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (Controller.getCurrentUserType().equalsIgnoreCase("costumer")) {
+            try {
+                pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/costumerArea.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (Controller.getCurrentUserType().equalsIgnoreCase("seller")) {
+            try {
+                pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/SellerArea.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (Controller.getCurrentUserType().equalsIgnoreCase("manager")) {
+            try {
+                pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/ManagerArea.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Controller.setCurrentPane(pane);
+        scene.setRoot(pane);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    public void goToMainMenu(MouseEvent mouseEvent) {
+        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Pane pane = null;
+        try {
+            pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
+            Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+            pane.getChildren().add(mainBar);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ScrollPane scrollPane = (ScrollPane) pane.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
+        Controller.setCurrentPane(pane);
+        scene.setRoot(pane);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void goToOffsAndDiscountsPage(MouseEvent mouseEvent) {
+    }
 }
