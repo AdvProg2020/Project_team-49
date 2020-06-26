@@ -96,7 +96,7 @@ public class SellerAreaGraphicController implements Initializable {
     public ImageView seeLessProductsImageLog1;
     public Pane sellHistoryIsEmptyPain;
     public ImageView costumerProfileImage;
-    
+
     public Label manageOffsLabel;
     public Pane manageOffsPane;
     public ImageView image41;
@@ -194,6 +194,22 @@ public class SellerAreaGraphicController implements Initializable {
     public TextField productCountTextField;
     public Rectangle productNameRec;
     public ImageView wrongFormatEditImageProduct;
+    public Pane addProductLabel;
+    public Pane addProductPane;
+    public Rectangle priceRec;
+    public Rectangle imageRec;
+    public Rectangle countRec;
+    public Rectangle nameRec;
+    public Pane addProductButtonFinal;
+    public TextField nameTextField;
+    public TextField countTextField;
+    public TextField priceTextField;
+    public Rectangle brandRec;
+    public TextField brandTextField;
+    public Rectangle categoryRec;
+    public TextField categoryTextField;
+    public Rectangle explanationRec;
+    public TextField explanationTextField;
     private Seller seller;
     private int offsIndex = 0;
     private int productsIndex = 0;
@@ -202,10 +218,12 @@ public class SellerAreaGraphicController implements Initializable {
     private int imagesOff1Index = 0;
     private int imagesOff2Index = 0;
     private int logIndex = 0;
+    private int editProductIndex = 0;
     ArrayList<SellLog> logHistory = new ArrayList<>();
     ArrayList<Off> offs = new ArrayList<>();
     ArrayList<Product> products = new ArrayList<>();
     private SimpleDateFormat formatter;
+    private Alert deleteProductAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are You Sure?");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -668,6 +686,11 @@ public class SellerAreaGraphicController implements Initializable {
         editPersonalInfoPane.setVisible(false);
         editPersonalInfoLabel.setVisible(false);
         editPersonalInfoLabel.setDisable(true);
+
+        addProductLabel.setDisable(true);
+        addProductLabel.setVisible(false);
+        addProductPane.setVisible(false);
+        addProductPane.setDisable(true);
     }
 
     public void goToManageOffsPain(MouseEvent mouseEvent) {
@@ -1109,8 +1132,10 @@ public class SellerAreaGraphicController implements Initializable {
         restartInsideOfEditProductPain();
         if (mouseEvent.getSource().equals(editProduct1)) {
             setInsideOfEditProductPain(productsIndex);
+            editProductIndex = productsIndex;
         } else {
             setInsideOfEditProductPain(productsIndex + 1);
+            editProductIndex = productsIndex + 1;
         }
     }
 
@@ -1136,9 +1161,37 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void submitProductInformation(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
+        if (!products.get(editProductIndex).getName().equals(productNameTextField.getText())) {
+            SellerAreaController.editProduct("name", productNameTextField.getText(), products.get(editProductIndex).getProductId());
+        }
+        if (products.get(editProductIndex).getPrice(seller) != Integer.parseInt(productNameTextField.getText())) {
+            SellerAreaController.editProduct("price", productPriceTextField.getText(), products.get(editProductIndex).getProductId());
+        }
+        if (!products.get(editProductIndex).getBrand().equals(productBrandTextField.getText())) {
+            SellerAreaController.editProduct("brand", productBrandTextField.getText(), products.get(editProductIndex).getProductId());
+        }
+        if (products.get(editProductIndex).getRemainingItemsForSeller(seller) != Integer.parseInt(productCountTextField.getText())) {
+            SellerAreaController.editProduct("count", productCountTextField.getText(), products.get(editProductIndex).getProductId());
+        }
+        if (!products.get(editProductIndex).getExplanation().equals(productExplanationField.getText())) {
+            SellerAreaController.editProduct("explanation", productExplanationField.getText(), products.get(editProductIndex).getProductId());
+        }
+        goBackToManageProducts(mouseEvent);
     }
 
     public void checkProductInformation(ActionEvent actionEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         restartInsideOfEditProductPain();
         boolean errorFound = false;
         if (!productNameTextField.getText().matches("\\w+")) {
@@ -1182,6 +1235,16 @@ public class SellerAreaGraphicController implements Initializable {
                 Controller.startClickSound();
             }
         }).start();
+        deleteProductAlert.show();
+        if (deleteProductAlert.getResult().equals(ButtonType.CANCEL)) {
+            return;
+        }
+        if (mouseEvent.getSource().equals(deleteProduct1)) {
+            SellerAreaController.removeProduct(products.get(productsIndex).getProductId());
+        } else {
+            SellerAreaController.removeProduct(products.get(productsIndex + 1).getProductId());
+        }
+        goToManageProductsPain(mouseEvent);
     }
 
     public void goToAddProductPane(MouseEvent mouseEvent) {
@@ -1191,9 +1254,52 @@ public class SellerAreaGraphicController implements Initializable {
                 Controller.startClickSound();
             }
         }).start();
+        closeALlPanes();
+        restartInsideOfAddProductPain();
+
+        addProductLabel.setDisable(false);
+        addProductLabel.setVisible(true);
+        addProductPane.setVisible(true);
+        addProductPane.setDisable(false);
+
+    }
+
+    private void restartInsideOfAddProductPain() {
+        nameTextField.setText("");
+        brandTextField.setText("");
+        priceTextField.setText("");
+        categoryTextField.setText("");
+        countTextField.setText("");
+        explanationTextField.setText("");
+
+        nameRec.setStroke(Color.valueOf("#959595"));
+        brandRec.setStroke(Color.valueOf("#959595"));
+        priceRec.setStroke(Color.valueOf("#959595"));
+        categoryRec.setStroke(Color.valueOf("#959595"));
+        countRec.setStroke(Color.valueOf("#959595"));
+        explanationRec.setStroke(Color.valueOf("#959595"));
     }
 
     public void goBackToManageProducts(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         goBackToManageProducts(mouseEvent);
+    }
+
+    public void addProduct(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
+        boolean errorFound = false;
+        if (SellerAreaController.hasProductWithName(nameTextField.getText())) {
+
+        }
     }
 }

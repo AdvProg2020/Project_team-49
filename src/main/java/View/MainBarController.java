@@ -32,6 +32,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -44,6 +45,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.control.Tooltip;
 
 import javax.xml.crypto.Data;
 import java.net.URL;
@@ -463,13 +465,13 @@ public class MainBarController implements Initializable {
     }
 
     public void clickedOnACategory(MouseEvent mouseEvent) {
-        Label label = (Label) mouseEvent.getSource();
-        String category = label.getText();
-        if (category.endsWith("〉")) {
-            category = category.split("\\s")[0];
-        } else if (category.startsWith("●")) {
-            int i = 0;
-            while (category.split("\\s")[i].equals("●")) {
+        Label label=(Label) mouseEvent.getSource();
+        String category=label.getText();
+        if (category.endsWith("〉")){
+            category=category.split("\\s")[0];
+        }else if (category.contains("●")){
+            int i=0;
+            while (!category.split("\\s")[i].matches("\\w+")){
                 i++;
             }
             category = category.split("\\s")[i];

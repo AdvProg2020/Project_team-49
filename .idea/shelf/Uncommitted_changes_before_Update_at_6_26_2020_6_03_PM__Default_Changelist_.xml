@@ -1,0 +1,304 @@
+<changelist name="Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]" date="1593178418060" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 6/26/2020 6:03 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManageUsers$4.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManageUsers$4.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ManageUsers$4.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManageUsers$2.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManageUsers$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ManageUsers$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$4.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$4.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/SellerArea$4.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/CostumerArea$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/CostumerArea$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/CostumerArea$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/View.class" />
+    <option name="AFTER_PATH" value="target/classes/View/View.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/View.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Main.class" />
+    <option name="AFTER_PATH" value="target/classes/Main.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/Main.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$6.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$6.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/SellerArea$6.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/CostumerArea$3.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/CostumerArea$3.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/CostumerArea$3.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$6.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$6.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/Filtering$6.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ViewOffs$4.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ViewOffs$4.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewOffs$4.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$7.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$7.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/Filtering$7.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ViewOffs$3.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ViewOffs$3.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewOffs$3.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManagerArea$2.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManagerArea$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ManagerArea$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/main/resources/resources.zip" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/CostumerArea$4.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/CostumerArea$4.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/CostumerArea$4.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewCart$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewCart$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewCart$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPage$2.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPage$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ProductsPage$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewCart$2.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewCart$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewCart$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPage$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPage$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ProductsPage$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPage$3.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPage$3.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ProductsPage$3.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewCart$3.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewCart$3.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewCart$3.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManagerArea$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManagerArea$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ManagerArea$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ViewOffs$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ViewOffs$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewOffs$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewCart$4.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewCart$4.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewCart$4.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewCart$5.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewCart$5.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewCart$5.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ViewOffs$2.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ViewOffs$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewOffs$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ShowProduct$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ShowProduct$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ShowProduct$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManageUsers$5.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManageUsers$5.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ManageUsers$5.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManageUsers$3.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManageUsers$3.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ManageUsers$3.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$5.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$5.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/SellerArea$5.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManageUsers$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ManageUsers$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ManageUsers$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/resources.zip" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$5.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$5.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/Filtering$5.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPageMenu/ProductPageController.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPageMenu/ProductPageController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ProductPageController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$7.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$7.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/SellerArea$7.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/CostumerArea$2.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/CostumerArea$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/CostumerArea$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/OffsPage$3.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/OffsPage$3.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/OffsPage$3.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ManageProducts$2.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ManageProducts$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ManageProducts$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/OffsPage$2.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/OffsPage$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/OffsPage$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPageMenu/ProductsPageMenuFxmlController.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPageMenu/ProductsPageMenuFxmlController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ProductsPageMenuFxmlController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ManageProducts$4.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ManageProducts$4.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ManageProducts$4.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ManageProducts$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ManageProducts$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ManageProducts$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$4.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$4.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/Filtering$4.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewOrders.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewOrders.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewOrders.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ViewDiscountCodes$4.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ViewDiscountCodes$4.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewDiscountCodes$4.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Controller/Controller.class" />
+    <option name="AFTER_PATH" value="target/classes/Controller/Controller.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/Controller.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Controller/OffAndProductMenuController.class" />
+    <option name="AFTER_PATH" value="target/classes/Controller/OffAndProductMenuController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/OffAndProductMenuController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/OffsPage$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/OffsPage$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/OffsPage$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$3.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$3.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/Filtering$3.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$3.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$3.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/SellerArea$3.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$2.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/Filtering$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ViewDiscountCodes$2.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ViewDiscountCodes$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewDiscountCodes$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/Filtering$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/Filtering$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$2.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/SellerArea$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ViewDiscountCodes$3.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ViewDiscountCodes$3.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewDiscountCodes$3.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/SellerArea$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/SellerArea$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/MainBarController.class" />
+    <option name="AFTER_PATH" value="target/classes/View/MainBarController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/MainBarController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ViewDiscountCodes$1.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/ManagerArea/ViewDiscountCodes$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ViewDiscountCodes$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPageMenu/CartPageController.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPageMenu/CartPageController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/CartPageController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ManageProducts$3.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/SellerArea/ManageProducts$3.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_6_03_PM_[Default_Changelist]/ManageProducts$3.class" />
+  </binary>
+</changelist>
