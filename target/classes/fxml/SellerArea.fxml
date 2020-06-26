@@ -851,11 +851,11 @@
                         <DropShadow color="#959595" height="9.94" radius="4.484999999999999" width="10.0" />
                      </effect>
                   </Pane>
-                  <Button fx:id="addOffButton" alignment="CENTER" layoutX="1256.0" layoutY="144.0" mnemonicParsing="false" onMouseClicked="#goToAddOffPane" prefHeight="38.0" prefWidth="54.0" style="-fx-background-color: #00bfd6;" text="Add" textFill="WHITE">
+                  <Button fx:id="addOffButton" alignment="CENTER" disable="true" layoutX="1256.0" layoutY="144.0" mnemonicParsing="false" onMouseClicked="#goToAddOffPane" prefHeight="38.0" prefWidth="54.0" style="-fx-background-color: #00bfd6;" text="Add" textFill="WHITE" visible="false">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font></Button>
-                  <Pane fx:id="addOffLabel" layoutX="356.0" layoutY="126.0" prefHeight="56.0" prefWidth="200.0">
+                  <Pane fx:id="addOffLabel" disable="true" layoutX="356.0" layoutY="126.0" prefHeight="56.0" prefWidth="200.0" visible="false">
                      <children>
                         <Label layoutX="64.0" layoutY="11.0" prefHeight="40.0" prefWidth="136.0" text="Add Off" textFill="#959595">
                            <font>
@@ -873,7 +873,7 @@
                         <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#959595" height="40.0" layoutX="52.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1.0" />
                      </children>
                   </Pane>
-                  <Pane fx:id="addOffPane" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff;">
+                  <Pane fx:id="addOffPane" disable="true" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff;" visible="false">
                      <children>
                         <Rectangle fx:id="offPercentRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="226.0" layoutY="184.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
                         <Rectangle fx:id="addOffProducts" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="144.0" layoutX="685.0" layoutY="184.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="204.0" />
@@ -936,8 +936,9 @@
                               <Font size="16.0" />
                            </font>
                         </TextField>
-                        <ListView fx:id="addOffProductsList" layoutX="686.0" layoutY="185.0" prefHeight="142.0" prefWidth="202.0" style="-fx-border-radius: 3; -fx-background-radius: 3;" />
+                        <ListView fx:id="addOffProductsList" layoutX="686.0" layoutY="185.0" prefHeight="142.0" prefWidth="202.0" style="-fx-border-radius: 3; -fx-background-radius: 3; -fx-border-color: #ffffff;" />
                      </children></Pane>
+                  <Pane layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" />
                </children>
             </AnchorPane>
          </content>

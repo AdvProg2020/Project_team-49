@@ -13,9 +13,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.UserArea.SellerArea.SellerAreaGraphicController">
    <children>
-      <ScrollPane prefHeight="800.0" prefWidth="1467.0">
+      <ScrollPane prefHeight="800.0" prefWidth="1480.0">
          <content>
-            <AnchorPane prefHeight="800.0" prefWidth="1467.0">
+            <AnchorPane prefHeight="800.0" prefWidth="1480.0">
                <children>
                   <Pane layoutX="37.0" layoutY="187.0" prefHeight="440.0" prefWidth="290.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
                      <children>
@@ -851,11 +851,11 @@
                         <DropShadow color="#959595" height="9.94" radius="4.484999999999999" width="10.0" />
                      </effect>
                   </Pane>
-                  <Button fx:id="addOffButton" alignment="CENTER" layoutX="1256.0" layoutY="144.0" mnemonicParsing="false" onMouseClicked="#goToAddOffPane" prefHeight="38.0" prefWidth="54.0" style="-fx-background-color: #00bfd6;" text="Add" textFill="WHITE">
+                  <Button fx:id="addOffButton" alignment="CENTER" disable="true" layoutX="1256.0" layoutY="144.0" mnemonicParsing="false" onMouseClicked="#goToAddOffPane" prefHeight="38.0" prefWidth="54.0" style="-fx-background-color: #00bfd6;" text="Add" textFill="WHITE" visible="false">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font></Button>
-                  <Pane fx:id="addOffLabel" layoutX="356.0" layoutY="126.0" prefHeight="56.0" prefWidth="200.0">
+                  <Pane fx:id="addOffLabel" disable="true" layoutX="356.0" layoutY="126.0" prefHeight="56.0" prefWidth="200.0" visible="false">
                      <children>
                         <Label layoutX="64.0" layoutY="11.0" prefHeight="40.0" prefWidth="136.0" text="Add Off" textFill="#959595">
                            <font>
@@ -873,7 +873,7 @@
                         <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#959595" height="40.0" layoutX="52.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1.0" />
                      </children>
                   </Pane>
-                  <Pane fx:id="addOffPane" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff;">
+                  <Pane fx:id="addOffPane" disable="true" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
                      <children>
                         <Rectangle fx:id="offPercentRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="226.0" layoutY="184.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
                         <Rectangle fx:id="addOffProducts" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="144.0" layoutX="685.0" layoutY="184.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="204.0" />
@@ -936,8 +936,224 @@
                               <Font size="16.0" />
                            </font>
                         </TextField>
-                        <ListView fx:id="addOffProductsList" layoutX="686.0" layoutY="185.0" prefHeight="142.0" prefWidth="202.0" style="-fx-border-radius: 3; -fx-background-radius: 3;" />
+                        <ListView fx:id="addOffProductsList" layoutX="686.0" layoutY="185.0" prefHeight="142.0" prefWidth="202.0" style="-fx-border-radius: 3; -fx-background-radius: 3; -fx-border-color: #ffffff;" />
+                     </children>
+                     <effect>
+                        <DropShadow color="#959595" height="9.75" radius="4.4375" width="10.0" />
+                     </effect></Pane>
+                  <Pane layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                     <effect>
+                        <DropShadow color="#959595" height="9.75" radius="4.4375" width="10.0" />
+                     </effect>
+                     <children>
+                        <Pane fx:id="firstProductPane" layoutX="18.0" layoutY="14.0" prefHeight="193.0" prefWidth="922.0" style="-fx-border-color: #959595; -fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: #ffffff;">
+                           <children>
+                              <Rectangle fill="#fb3449" height="171.0" layoutX="199.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1.0" />
+                              <ImageView fx:id="productImage1" fitHeight="193.0" fitWidth="181.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="446.0" layoutY="55.0" prefHeight="24.0" prefWidth="49.0" text="Price:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productPrice1" layoutX="517.0" layoutY="52.0" prefHeight="31.0" prefWidth="159.0" text="13123">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="230.0" layoutY="17.0" prefHeight="25.0" prefWidth="113.0" text="Product Name:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productBrand1" layoutX="301.0" layoutY="54.0" prefHeight="22.0" prefWidth="115.0" text="brand">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="230.0" layoutY="54.0" prefHeight="25.0" prefWidth="53.0" text="Brand:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="230.0" layoutY="97.0" prefHeight="25.0" prefWidth="125.0" text="Available count:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productCount1" layoutX="374.0" layoutY="97.0" prefHeight="25.0" prefWidth="85.0" text="count">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productName1" layoutX="368.0" layoutY="17.0" prefHeight="22.0" prefWidth="109.0" text="name">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="506.0" layoutY="17.0" prefHeight="22.0" prefWidth="88.0" text="Product Id:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productId1" layoutX="612.0" layoutY="17.0" prefHeight="25.0" prefWidth="138.0" text="id">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="471.0" layoutY="97.0" prefHeight="25.0" prefWidth="70.0" text="Status:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productStatus1" layoutX="558.0" layoutY="97.0" prefHeight="25.0" prefWidth="201.0" text="status">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="230.0" layoutY="138.0" prefHeight="24.0" prefWidth="114.0" text="Explanations:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productExplanation1" layoutX="368.0" layoutY="138.0" prefHeight="25.0" prefWidth="389.0" text="explanation">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="editProduct1" fitHeight="50.0" fitWidth="50.0" layoutX="840.0" layoutY="27.0" onMouseClicked="#goToEditProductPane" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/UserArea/personalInfo/edit.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="deleteProduct1" fitHeight="50.0" fitWidth="50.0" layoutX="840.0" layoutY="110.0" onMouseClicked="#doDeleteProduct" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/delete.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="firstProductPane1" layoutX="18.0" layoutY="233.0" prefHeight="193.0" prefWidth="922.0" style="-fx-border-color: #959595; -fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: #ffffff;">
+                           <children>
+                              <Rectangle fill="#fb3449" height="171.0" layoutX="199.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1.0" />
+                              <ImageView fx:id="productImage2" fitHeight="193.0" fitWidth="181.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/down-arrow.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="446.0" layoutY="55.0" prefHeight="24.0" prefWidth="49.0" text="Price:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productPrice2" layoutX="517.0" layoutY="52.0" prefHeight="31.0" prefWidth="159.0" text="13123">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="230.0" layoutY="17.0" prefHeight="25.0" prefWidth="113.0" text="Product Name:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productBrand2" layoutX="301.0" layoutY="54.0" prefHeight="22.0" prefWidth="115.0" text="brand">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="230.0" layoutY="54.0" prefHeight="25.0" prefWidth="53.0" text="Brand:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="230.0" layoutY="97.0" prefHeight="25.0" prefWidth="125.0" text="Available count:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productCount2" layoutX="374.0" layoutY="97.0" prefHeight="25.0" prefWidth="85.0" text="count">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productName2" layoutX="368.0" layoutY="17.0" prefHeight="22.0" prefWidth="109.0" text="name">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="506.0" layoutY="17.0" prefHeight="22.0" prefWidth="88.0" text="Product Id:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productId2" layoutX="612.0" layoutY="17.0" prefHeight="25.0" prefWidth="138.0" text="id">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="471.0" layoutY="97.0" prefHeight="25.0" prefWidth="70.0" text="Status:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productStatus2" layoutX="558.0" layoutY="97.0" prefHeight="25.0" prefWidth="201.0" text="status">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="230.0" layoutY="138.0" prefHeight="24.0" prefWidth="114.0" text="Explanations:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="productExplanation2" layoutX="368.0" layoutY="138.0" prefHeight="25.0" prefWidth="389.0" text="explanation">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="editProduct2" fitHeight="50.0" fitWidth="50.0" layoutX="840.0" layoutY="27.0" onMouseClicked="#goToEditProductPane" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/UserArea/personalInfo/edit.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="deleteProduct2" fitHeight="50.0" fitWidth="50.0" layoutX="840.0" layoutY="110.0" onMouseClicked="#doDeleteProduct" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/cart/delete.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fb3449" height="383.0" layoutX="970.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="5.0" />
+                        <ImageView fx:id="upArrowProducts" fitHeight="50.0" fitWidth="37.0" layoutX="954.0" layoutY="14.0" onMouseClicked="#seeMoreLogs" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <image>
+                              <Image url="@../photos/cart/downArrow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="downArrowProducts" fitHeight="50.0" fitWidth="37.0" layoutX="954.0" layoutY="389.0" onMouseClicked="#seeMoreLogs" pickOnBounds="true" preserveRatio="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <image>
+                              <Image url="@../photos/cart/downArrow.png" />
+                           </image>
+                        </ImageView>
                      </children></Pane>
+                  <Label fx:id="manageProductsLabel" disable="true" layoutX="371.0" layoutY="145.0" prefHeight="36.0" prefWidth="129.0" text="Manage Products" textFill="#959595" visible="false">
+                     <font>
+                        <Font name="Raleway" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="addProductButton" alignment="CENTER" layoutX="1256.0" layoutY="144.0" mnemonicParsing="false" onMouseClicked="#goToAddProductPane" prefHeight="38.0" prefWidth="54.0" style="-fx-background-color: #00bfd6;" text="Add" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </content>

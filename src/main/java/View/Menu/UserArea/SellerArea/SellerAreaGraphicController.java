@@ -144,6 +144,32 @@ public class SellerAreaGraphicController implements Initializable {
     public TextField offPercentTextField;
     public ListView addOffProductsList;
     public ImageView goBackToManageOffsArrow;
+    public Pane firstProductPane;
+    public ImageView productImage1;
+    public Label productPrice1;
+    public Label productBrand1;
+    public Label productCount1;
+    public Label productName1;
+    public Label productId1;
+    public Label productStatus1;
+    public Label productExplanation1;
+    public ImageView editProduct1;
+    public ImageView deleteProduct1;
+    public Pane firstProductPane1;
+    public ImageView productImage2;
+    public Label productPrice2;
+    public Label productBrand2;
+    public Label productCount2;
+    public Label productName2;
+    public Label productId2;
+    public Label productStatus2;
+    public Label productExplanation2;
+    public ImageView editProduct2;
+    public ImageView deleteProduct2;
+    public ImageView upArrowProducts;
+    public ImageView downArrowProducts;
+    public Label manageProductsLabel;
+    public Button addProductButton;
     private Seller seller;
     private int offsIndex = 0;
     private int imagesLog1Index = 0;
@@ -870,5 +896,14 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     private void restartInsideOfManageProductsPain() {
+    }
+
+    public void goToEditProductPane(MouseEvent mouseEvent) {
+    }
+
+    public void doDeleteProduct(MouseEvent mouseEvent) {
+    }
+
+    public void goToAddProductPane(MouseEvent mouseEvent) {
     }
 }

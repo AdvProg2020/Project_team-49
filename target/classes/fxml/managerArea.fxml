@@ -72,7 +72,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Label>
-                                    <Label fx:id="managerRoleLabel" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="232.0" text="role" textFill="#aaaaaa" GridPane.rowIndex="1">
+                                    <Label fx:id="managerRoleLabel" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="232.0" text="manager" textFill="#aaaaaa" GridPane.rowIndex="1">
                                        <font>
                                           <Font name="Raleway" size="20.0" />
                                        </font>
@@ -1133,7 +1133,7 @@
                         </Pane>
                      </children>
                   </Pane>
-                  <Pane fx:id="addManagerPane" layoutX="371.0" layoutY="188.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                  <Pane fx:id="addManagerPane" disable="true" layoutX="371.0" layoutY="188.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
                      <effect>
                         <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
                      </effect>
@@ -1258,6 +1258,132 @@
                               </AnchorPane>
                            </children>
                         </GridPane>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="manageDiscountsPane" layoutX="371.0" layoutY="188.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                     <effect>
+                        <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
+                     </effect>
+                     <children>
+                        <Pane fx:id="discountButtonsPane" layoutX="32.0" layoutY="120.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="createDiscountButton" layoutX="-1.0" mnemonicParsing="false" onAction="#goToCreateDiscountPane" prefHeight="66.0" prefWidth="202.0" style="-fx-background-color: #36cddf; -fx-background-radius: 9; -fx-border-radius: 9;" text="Create Discount Code" textFill="WHITE">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button fx:id="viewDiscountsButton" layoutY="134.0" mnemonicParsing="false" onAction="#goToViewDiscountsPane" prefHeight="66.0" prefWidth="202.0" style="-fx-background-color: #36cddf; -fx-background-radius: 9; -fx-border-radius: 9;" text="View Discount Codes" textFill="WHITE">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </Pane>
+                        <ImageView fx:id="goBackToDiscountsMenuImage" fitHeight="37.0" fitWidth="38.0" layoutX="12.0" layoutY="14.0" onMouseClicked="#goBackToDiscountsMenu" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../photos/UserArea/managerArea/down-arrow.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Pane fx:id="viewDiscountsPane" layoutX="370.0" layoutY="14.0" prefHeight="408.0" prefWidth="615.0">
+                           <children>
+                              <Pane fx:id="firstDiscountCode" layoutX="110.0" layoutY="30.0" prefHeight="348.0" prefWidth="396.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;">
+                                 <effect>
+                                    <DropShadow color="#eb1c26" height="3.0" radius="1.0" spread="1.0" width="3.0" />
+                                 </effect>
+                                 <children>
+                                    <Label layoutX="22.0" layoutY="27.0" prefHeight="42.0" prefWidth="98.0" text="Started at:">
+                                       <font>
+                                          <Font name="Raleway" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="19.0" layoutY="85.0" prefHeight="42.0" prefWidth="104.0" text="Will end at:">
+                                       <font>
+                                          <Font name="Raleway" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="85.0" fitWidth="82.0" layoutX="123.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../photos/MainMenu/options/sale.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="47.0" fitWidth="48.0" layoutX="-42.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../photos/UserArea/costumerArea/discount.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="discountPercent1" layoutX="38.0" layoutY="160.0" prefHeight="81.0" prefWidth="115.0" text="30" textFill="#fb3449">
+                                       <font>
+                                          <Font name="Lato Regular" size="61.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="235.0" layoutY="159.0" prefHeight="42.0" prefWidth="136.0" text="Maximum Amount">
+                                       <font>
+                                          <Font name="Raleway" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="maximumAmount1" alignment="CENTER" layoutX="202.0" layoutY="201.0" prefHeight="37.0" prefWidth="202.0" text="Label" textFill="#fb3449">
+                                       <font>
+                                          <Font name="Lato Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="235.0" layoutY="247.0" prefHeight="42.0" prefWidth="48.0" text="Count:">
+                                       <font>
+                                          <Font name="Raleway" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="234.0" layoutY="292.0" prefHeight="42.0" prefWidth="50.0" text="Usage:">
+                                       <font>
+                                          <Font name="Raleway" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="countDiscount1" layoutX="303.0" layoutY="250.0" prefHeight="37.0" prefWidth="79.0" text="30" textFill="#fb3449">
+                                       <font>
+                                          <Font name="Lato Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="usageDiscount1" layoutX="303.0" layoutY="295.0" prefHeight="37.0" prefWidth="79.0" text="30" textFill="#fb3449">
+                                       <font>
+                                          <Font name="Lato Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="290.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" rotate="45.0">
+                                       <image>
+                                          <Image url="@../photos/UserArea/costumerArea/ribbon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="startDiscount1" layoutX="135.0" layoutY="30.0" prefHeight="37.0" prefWidth="178.0" text="Label" textFill="#fb3449">
+                                       <font>
+                                          <Font name="Lato Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="endDiscount1" layoutX="135.0" layoutY="88.0" prefHeight="37.0" prefWidth="178.0" text="Label" textFill="#fb3449">
+                                       <font>
+                                          <Font name="Lato Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="discountId1" layoutX="52.0" layoutY="254.0" prefHeight="67.0" prefWidth="165.0" text="30" textFill="#fb3449">
+                                       <font>
+                                          <Font name="Raleway" size="21.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="22.0" layoutY="268.0" prefHeight="42.0" prefWidth="29.0" text="ID:">
+                                       <font>
+                                          <Font name="Raleway" size="17.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
                </children>
