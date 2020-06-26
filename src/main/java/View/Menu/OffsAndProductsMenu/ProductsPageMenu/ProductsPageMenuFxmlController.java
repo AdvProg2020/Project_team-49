@@ -17,7 +17,10 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -499,12 +502,18 @@ public class ProductsPageMenuFxmlController implements Initializable {
             saleRight.setDisable(true);
             saleLeft.setDisable(true);
         }
-
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startSong("src/main/resources/Sound/ProductsMenu/BackGround.mp3");
+            }
+        }).start();
     }
 
     public void click(MouseEvent mouseEvent) {
         GridPane GridPane=(GridPane) mouseEvent.getSource();
         System.out.println(GridPane.getId());
+
     }
 
     public void clear(){
@@ -731,7 +740,6 @@ public class ProductsPageMenuFxmlController implements Initializable {
         if (score==-1){
             return;
         }
-        System.out.println(gridPane.getId()+"="+score);
         if (score>0){
             leftGreen1.toFront();
         }
@@ -777,6 +785,15 @@ public class ProductsPageMenuFxmlController implements Initializable {
         }
         DropShadow dropShadow=new DropShadow();
         gridPane.setEffect(dropShadow);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
+                Media sound=new Media(new File(file).toURI().toString());
+                MediaPlayer player=new MediaPlayer(sound);
+                player.play();
+            }
+        }).start();
     }
 
     public void makeGridPaneCompareOff(MouseEvent mouseEvent) {

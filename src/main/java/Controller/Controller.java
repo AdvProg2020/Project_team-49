@@ -13,8 +13,12 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
+import javax.print.attribute.standard.MediaPrintableArea;
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -380,10 +384,32 @@ public class Controller {
         Off off =new Off(arrayList, OffStatus.confirmed,start,end,20);
         allProducts.get(2).setOff(off);
         allProducts.get(2).setDoesItHaveOff(true);
+        allProducts.get(0).setAverageScore(0);
+        allProducts.get(1).setAverageScore(2.3);
+        allProducts.get(2).setAverageScore(0.2);
+        allProducts.get(3).setAverageScore(3.7);
+        allProducts.get(4).setAverageScore(4.5);
+
         for (Product product : allProducts) {
             product.setImageAddress("./photos/MainMenu/commercials/xbox1.png");
-            product.setAverageScore(3.7);
         }
+    }
+    private static Media media;
+    private static MediaPlayer mediaPlayer;
+
+    public static void startSong(String file){
+        media=new Media(new File(file).toURI().toString());
+        mediaPlayer=new MediaPlayer(media);
+        mediaPlayer.play();
+        mediaPlayer.setCycleCount(100);
+    }
+    public static void cancelSong(){
+        mediaPlayer.stop();
+    }
+    public static void resumeSong(){
+//        mediaPlayer=new MediaPlayer(media);
+        mediaPlayer.play();
+        mediaPlayer.setCycleCount(100);
     }
 
 

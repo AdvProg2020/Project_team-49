@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,6 +37,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -241,6 +244,15 @@ public class MainBarController implements Initializable {
             searchField.clear();
             Filter.restartFilters();
             Filter.filterByName(searchField.getText());
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String file="src/main/resources/Sound/ProductsMenu/click.mp3";
+                    Media sound=new Media(new File(file).toURI().toString());
+                    MediaPlayer player=new MediaPlayer(sound);
+                    player.play();
+                }
+            }).start();
             //
         }
     }
@@ -266,6 +278,15 @@ public class MainBarController implements Initializable {
             Controller.setColor("FFFFFF");
 //            innerPane.setStyle("-fx-background-color: #FFFFFF");
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
+                Media sound=new Media(new File(file).toURI().toString());
+                MediaPlayer player=new MediaPlayer(sound);
+                player.play();
+            }
+        }).start();
     }
 
     public void onOptions(MouseEvent mouseEvent) {
@@ -275,6 +296,7 @@ public class MainBarController implements Initializable {
         if (mouseEvent.getSource().equals(offersLabel)) {
             offsRectangle.setFill(Color.RED);
         }
+
     }
 
     public void outOption(MouseEvent mouseEvent) {
@@ -293,12 +315,24 @@ public class MainBarController implements Initializable {
             muteButton.setDisable(true);
             playMusicButton.setDisable(false);
             playMusicButton.setVisible(true);
+            Controller.resumeSong();
+
         } else {
+            Controller.cancelSong();
             muteButton.setVisible(true);
             muteButton.setDisable(false);
             playMusicButton.setDisable(true);
             playMusicButton.setVisible(false);
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
+                Media sound=new Media(new File(file).toURI().toString());
+                MediaPlayer player=new MediaPlayer(sound);
+                player.play();
+            }
+        }).start();
     }
 
     public void openColorBar(MouseEvent mouseEvent) {
@@ -309,6 +343,15 @@ public class MainBarController implements Initializable {
             colorsPane.setDisable(false);
             colorsPane.setVisible(true);
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
+                Media sound=new Media(new File(file).toURI().toString());
+                MediaPlayer player=new MediaPlayer(sound);
+                player.play();
+            }
+        }).start();
 
     }
 
@@ -320,6 +363,15 @@ public class MainBarController implements Initializable {
             settingPane.setDisable(false);
             settingPane.setVisible(true);
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
+                Media sound=new Media(new File(file).toURI().toString());
+                MediaPlayer player=new MediaPlayer(sound);
+                player.play();
+            }
+        }).start();
 
     }
 
@@ -364,6 +416,15 @@ public class MainBarController implements Initializable {
             wholeCategoryPane.setVisible(true);
             wholeCategoryPane.setDisable(false);
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
+                Media sound=new Media(new File(file).toURI().toString());
+                MediaPlayer player=new MediaPlayer(sound);
+                player.play();
+            }
+        }).start();
     }
 
     public void wholeCategoryExited(MouseEvent mouseEvent) {
@@ -387,6 +448,15 @@ public class MainBarController implements Initializable {
             }
             category=category.split("\\s")[i];
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
+                Media sound=new Media(new File(file).toURI().toString());
+                MediaPlayer player=new MediaPlayer(sound);
+                player.play();
+            }
+        }).start();
         Filter.restartFilters();
         Filter.filterByCategory(category);
         AnchorPane loginMenu2 = null;
