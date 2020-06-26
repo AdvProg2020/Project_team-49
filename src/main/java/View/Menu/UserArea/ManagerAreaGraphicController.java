@@ -1110,12 +1110,14 @@ public class ManagerAreaGraphicController implements Initializable {
 
     public void seeDiscountCodes(MouseEvent mouseEvent) {
         closeALlPanes();
-        restartInsideMainDiscountPane();
-        restartTextFieldForNewDiscount();
+
         discountIndex = 0;
         manageDiscountsPane.setDisable(false);
         manageDiscountsPane.setVisible(true);
+        manageDiscountsPane.toFront();
         setViewAndEditDiscountsPaneContent();
+        restartInsideMainDiscountPane();
+        restartTextFieldForNewDiscount();
     }
 
     private void setViewAndEditDiscountsPaneContent() {
@@ -1147,6 +1149,7 @@ public class ManagerAreaGraphicController implements Initializable {
     private void restartInsideMainDiscountPane() {
         newDiscountPane.setVisible(false);
         newDiscountPane.setDisable(true);
+
         discountButtonsPane.setDisable(false);
         discountButtonsPane.setVisible(true);
         goBackToDiscountsMenuImage.setDisable(true);
