@@ -1299,7 +1299,8 @@ public class SellerAreaGraphicController implements Initializable {
         }).start();
         boolean errorFound = false;
         if (SellerAreaController.hasProductWithName(nameTextField.getText())) {
-
+            nameRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
         }
     }
 }
