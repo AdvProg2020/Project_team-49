@@ -48,6 +48,7 @@ public class View extends Application {
         Scene scene = new Scene(mainMenu);
         stage.setScene(scene);
         stage.show();
+
     }
 
     private ArrayList<User> getAllUsers() {

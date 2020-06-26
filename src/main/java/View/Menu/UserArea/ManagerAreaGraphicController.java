@@ -216,6 +216,14 @@ public class ManagerAreaGraphicController implements Initializable {
         userInfoPane.setVisible(true);
         userInfoPane.setDisable(false);
 
+        Controller.cancelSong();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startSong("src/main/resources/Sound/ManagerArea/BackGround.mp3");
+            }
+        }).start();
+
     }
 
     private void setPersonalInfoLabels() {

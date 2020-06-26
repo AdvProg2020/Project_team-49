@@ -127,6 +127,13 @@ public class CostumerAreaGraphicController implements Initializable {
         userInfoPane.setVisible(true);
         setPersonalInfoLabels();
         formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Controller.cancelSong();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startSong("src/main/resources/Sound/CustomerArea/BackGround.mp3");
+            }
+        }).start();
     }
 
 

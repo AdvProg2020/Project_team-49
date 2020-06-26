@@ -424,12 +424,21 @@ public class Controller {
         mediaPlayer.setCycleCount(100);
     }
     public static void cancelSong(){
-        mediaPlayer.stop();
+        if (mediaPlayer!=null) {
+            mediaPlayer.stop();
+        }
     }
     public static void resumeSong(){
 //        mediaPlayer=new MediaPlayer(media);
         mediaPlayer.play();
         mediaPlayer.setCycleCount(100);
+    }
+
+    public static void startClickSound(){
+        String file="src/main/resources/Sound/ProductsMenu/click.mp3";
+        Media sound=new Media(new File(file).toURI().toString());
+        MediaPlayer player=new MediaPlayer(sound);
+        player.play();
     }
 
 

@@ -176,6 +176,15 @@ public class SellerAreaController {
         }
     }
 
+    public static boolean hasProductWithName(String name) {
+        for (Product allProduct : DataBase.getAllProducts()) {
+            if (allProduct.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static String editProduct(String field, String newContent, long productId) {
         if (DataBase.getProductById(productId) == null) {
             return "product not exist";
