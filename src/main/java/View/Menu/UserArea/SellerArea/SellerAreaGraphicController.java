@@ -90,10 +90,10 @@ public class SellerAreaGraphicController implements Initializable {
     public ImageView seeLessProductsImageLog2;
     public ImageView seeLessProductsImageLog1;
     public Pane sellHistoryIsEmptyPain;
-    public Label discountCodesLabel;
     public ImageView costumerProfileImage;
+    public Label manageOffsLabel;
     private Seller seller;
-    private int discountCodesIndex = 0;
+    private int offsIndex = 0;
     private int imagesLog1Index = 0;
     private int imagesLog2Index = 0;
     private int logIndex = 0;
@@ -277,7 +277,7 @@ public class SellerAreaGraphicController implements Initializable {
 
     public void goToSellHistoryPane(MouseEvent mouseEvent) {
         closeALlPanes();
-        restartInsideOfBuyHistoryPane();
+        restartInsideOfSellHistoryPane();
         imagesLog1Index = 0;
         imagesLog2Index = 0;
         logIndex = 0;
@@ -301,7 +301,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     private void setLogPaneContents() {
-        restartInsideOfBuyHistoryPane();
+        restartInsideOfSellHistoryPane();
         int size = logHistory.size();
         if (size == 0) {
             return;
@@ -454,7 +454,7 @@ public class SellerAreaGraphicController implements Initializable {
         }
     }
 
-    private void restartInsideOfBuyHistoryPane() {
+    private void restartInsideOfSellHistoryPane() {
         upArrowLogs.setVisible(false);
         upArrowLogs.setDisable(true);
         downArrowLogs.setVisible(false);
@@ -472,7 +472,7 @@ public class SellerAreaGraphicController implements Initializable {
     private void closeALlPanes() {
         userInfoPane.setDisable(true);
         userInfoPane.setVisible(false);
-        discountCodesLabel.setVisible(false);
+        manageOffsLabel.setVisible(false);
         editPersonalInfoPane.setDisable(true);
         editPersonalInfoPane.setVisible(false);
         editPersonalInfoLabel.setDisable(true);
@@ -486,13 +486,22 @@ public class SellerAreaGraphicController implements Initializable {
         imagesLog1Index = 0;
         imagesLog2Index = 0;
         logIndex = 0;
-        discountCodesIndex = 0;
+        offsIndex = 0;
     }
 
-    public void goToManageProducts(MouseEvent mouseEvent) {
+    public void goToManageOffsPain(MouseEvent mouseEvent) {
         closeALlPanes();
+        restartInsideOfManageOffsPain();
     }
 
-    public void goToManageOffs(MouseEvent mouseEvent) {
+    private void restartInsideOfManageOffsPain() {
+    }
+
+    public void goToManageProductsPain(MouseEvent mouseEvent) {
+        closeALlPanes();
+        restartInsideOfManageProductsPain();
+    }
+
+    private void restartInsideOfManageProductsPain() {
     }
 }
