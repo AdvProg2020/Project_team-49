@@ -24,11 +24,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -171,14 +174,16 @@ public class ProductPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         product = Controller.getSelectedProduct();
         sellerIndex = 0;
         commentsIndex = 0;
         t = 0;
         score = 0;
-        doSomeDeepShit();
+//        doSomeDeepShit();
         Controller.setCurrentUser(DataBase.getAllUsers().get(0));
-        product.setDoesItHaveOff(true);
+//        product.setDoesItHaveOff(true);
+        System.out.println(product.getImageAddress());
         setYourRate();
         setRatingStuff();
         restartRateBar();
@@ -189,6 +194,13 @@ public class ProductPageController implements Initializable {
         //reverse Order Comments
         setCommentPane();
         refreshScoreBar();
+        Controller.cancelSong();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startSong("src/main/resources/Sound/ProductsPage/BackGround.mp3");
+            }
+        }).start();
 
     }
 
@@ -414,12 +426,9 @@ public class ProductPageController implements Initializable {
     }
 
     private void setProductsImage() {
-        try {
-            productImage.setImage(new Image(new FileInputStream(product.getImageAddress())));
-            centerImage(productImage);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Image image=new Image(product.getImageAddress());
+        productImage.setImage(image);
+
         remainingItems.setText(String.valueOf(product.remainingItems()));
     }
 

@@ -46,6 +46,7 @@ public class View extends Application {
         mainMenu.getChildren().add(mainBar);
         stage.setScene(new Scene(mainMenu));
         stage.show();
+
     }
 
     private ArrayList<User> getAllUsers() {

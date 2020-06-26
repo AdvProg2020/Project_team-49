@@ -6,8 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -35,6 +38,34 @@ public class GuestAreaGraphicsController implements Initializable {
     public PasswordField passLogin;
     public TextField userLogin;
     public Button loginButton;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (usernameReg == null) {
+            userLogin.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            passLogin.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            return;
+        }
+
+        reset();
+
+        if (!Controller.getHasHeadManager()) {
+            accountTypeReg.setValue("Manager");
+            accountTypeReg.setDisable(true);
+            extraReg.setDisable(true);
+            extraReg.setVisible(false);
+        } else {
+            accountTypeReg.setValue("Costumer");
+            accountTypeReg.getItems().add("Costumer");
+            accountTypeReg.getItems().add("Seller");
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
+            }
+        }).start();
+    }
 
     public void mouseClicked(MouseEvent mouseEvent) {
         reset();
@@ -83,9 +114,16 @@ public class GuestAreaGraphicsController implements Initializable {
             extraLabel.setTextFill(Color.valueOf("#1a73e8"));
         }
 
+
     }
 
     private void register() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         boolean errorFound = false;
         if (Controller.hasUserWithUsername(usernameReg.getText())) {
             usernameReg.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
@@ -224,31 +262,22 @@ public class GuestAreaGraphicsController implements Initializable {
     }
 
     public void goLogin(MouseEvent mouseEvent) {
-    }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (usernameReg == null) {
-            userLogin.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
-            passLogin.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
-            return;
-        }
-
-        reset();
-
-        if (!Controller.getHasHeadManager()) {
-            accountTypeReg.setValue("Manager");
-            accountTypeReg.setDisable(true);
-            extraReg.setDisable(true);
-            extraReg.setVisible(false);
-        } else {
-            accountTypeReg.setValue("Costumer");
-            accountTypeReg.getItems().add("Costumer");
-            accountTypeReg.getItems().add("Seller");
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
     }
 
     public void login(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         userLogin.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
         passLogin.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
         boolean errorFound = false;
@@ -284,5 +313,11 @@ public class GuestAreaGraphicsController implements Initializable {
     }
 
     public void goToRegister(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
     }
 }

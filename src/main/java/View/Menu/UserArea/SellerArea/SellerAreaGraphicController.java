@@ -18,9 +18,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.io.File;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -212,6 +215,14 @@ public class SellerAreaGraphicController implements Initializable {
         userInfoPane.setVisible(true);
         setPersonalInfoLabels();
         formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
+            }
+        }).start();
+
     }
 
 
@@ -251,6 +262,12 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void goBackToPersonalInfo(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         closeALlPanes();
         personalInfoLabel.setVisible(true);
         editPersonalInfoLabel.setDisable(true);
@@ -263,6 +280,12 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void submitPersonalInformation(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         if (!creditTextField.getText().matches("(\\s+)?"))
             seller.setCredit(Double.parseDouble(creditTextField.getText()));
 
@@ -286,6 +309,12 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void checkInformation(ActionEvent event) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         boolean flag = false;
         restartTextFieldRecsInEditPane();
         if (!creditTextField.getText().matches("(\\d+)(.?)((\\d+)?)") && !creditTextField.getText().equals("")) {
@@ -331,6 +360,12 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void seeMoreLogs(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         int size = logHistory.size();
         if (mouseEvent.getSource().equals(upArrowLogs)) {
             logIndex--;
@@ -348,6 +383,13 @@ public class SellerAreaGraphicController implements Initializable {
 
     public void seeMorePictures(MouseEvent mouseEvent) {
         int size = 0;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
 
         if (mouseEvent.getSource().equals(seeMoreProductsImageLog1)) {
             SellLog sellLog = logHistory.get(logIndex);
@@ -380,6 +422,12 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void goToSellHistoryPane(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         closeALlPanes();
         restartInsideOfSellHistoryPane();
         imagesLog1Index = 0;
@@ -622,6 +670,12 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void goToManageOffsPain(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         closeALlPanes();
         restartInsideOfManageOffsPain();
         imagesOff1Index = 0;
@@ -786,6 +840,12 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void seeMoreOffs(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         int size = offs.size();
         if (mouseEvent.getSource().equals(upArrowOffs)) {
             offsIndex--;
@@ -803,6 +863,12 @@ public class SellerAreaGraphicController implements Initializable {
 
     public void seeMorePicturesOff(MouseEvent mouseEvent) {
         int size = 0;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
 
         if (mouseEvent.getSource().equals(seeMoreProductsImageOff2)) {
             Off off = offs.get(offsIndex);
@@ -835,6 +901,12 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void goToAddOffPane(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         closeALlPanes();
         restartInsideOfAddOffPain();
 
@@ -870,6 +942,12 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void addOff(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         startDateRec.setStroke(Color.valueOf("#959595"));
         endDateRec.setStroke(Color.valueOf("#959595"));
         offPercentRec.setStroke(Color.valueOf("#959595"));
@@ -983,6 +1061,12 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void seeMoreProducts(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         int size = products.size();
         if (mouseEvent.getSource().equals(upArrowProducts)) {
             productsIndex--;
@@ -1010,6 +1094,12 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void goToEditProductPane(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
         closeALlPanes();
         editPersonalInfoPane.setDisable(false);
         editPersonalInfoPane.setVisible(true);
@@ -1085,9 +1175,21 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void doDeleteProduct(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
     }
 
     public void goToAddProductPane(MouseEvent mouseEvent) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startClickSound();
+            }
+        }).start();
     }
 
     public void goBackToManageProducts(MouseEvent mouseEvent) {
