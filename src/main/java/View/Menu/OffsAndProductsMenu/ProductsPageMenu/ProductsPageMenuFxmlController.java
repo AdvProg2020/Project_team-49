@@ -510,6 +510,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         Controller.setSelectedProduct(Controller.getProductById(gridPaneToProductId.get(gridPane)));
         Scene scene=gridPane.getScene();
         Stage stage=(Stage) (scene.getWindow());
+        Controller.setLastPane(Controller.getCurrentPane());
         Pane pane = null;
         Pane minibar = null;
         try {
