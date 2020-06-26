@@ -1350,7 +1350,8 @@ public class SellerAreaGraphicController implements Initializable {
             info.add(categoryTextField.getText());
             info.add(countTextField.getText());
             info.add(imageTextField.getText());
-            SellerAreaController.addProduct(info);
+            System.out.println(SellerAreaController.addProduct(info));
+//            SellerAreaController.addProduct(info);
             goBackToManageProducts(mouseEvent);
         }
     }
