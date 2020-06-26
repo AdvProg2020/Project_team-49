@@ -36,7 +36,7 @@ public class View extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 //        cartAndBuyScene = new Scene( FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml")));
-//        Controller.setCurrentUser(getAllUsers().get(0));
+        Controller.setCurrentUser(getAllUsers().get(1));
 //        Product product = getProductById(1);
 //        Controller.setSelectedProduct(product);
 

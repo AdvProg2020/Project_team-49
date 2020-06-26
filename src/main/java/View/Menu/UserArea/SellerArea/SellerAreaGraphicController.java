@@ -1,5 +1,5 @@
 package View.Menu.UserArea.SellerArea;
-
+import static Controller.DataBase.*;
 import Controller.Controller;
 import Controller.SellerAreaController;
 import Models.Log.BuyLog;
@@ -13,6 +13,8 @@ import Models.User.Guest;
 import Models.User.Seller;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,6 +24,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -1278,6 +1281,8 @@ public class SellerAreaGraphicController implements Initializable {
         categoryRec.setStroke(Color.valueOf("#959595"));
         countRec.setStroke(Color.valueOf("#959595"));
         explanationRec.setStroke(Color.valueOf("#959595"));
+
+        addProductButtonFinal.setOpacity(0.5);
     }
 
     public void goBackToManageProducts(MouseEvent mouseEvent) {
@@ -1297,10 +1302,37 @@ public class SellerAreaGraphicController implements Initializable {
                 Controller.startClickSound();
             }
         }).start();
+        restartInsideOfAddProductPain();
         boolean errorFound = false;
         if (SellerAreaController.hasProductWithName(nameTextField.getText())) {
             nameRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
         }
+        if(!isThereAnyCategoryWithName(categoryTextField.getText())){
+            nameRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if(!countTextField.getText().matches("\\d+")){
+            countRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if(!priceTextField.getText().matches("(\\d+)(.\\d+)?")){
+            priceRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if(errorFound){
+
+        }else{
+            addProductButtonFinal.setOpacity(1.0);
+        }
+    }
+
+    public void goBackToLastPaneFromSellerArea(MouseEvent mouseEvent) {
+        Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
+        Controller.setCurrentPane(Controller.getLastPane());
+        scene.setRoot(Controller.getCurrentPane());
+        stage.setScene(scene);
+        stage.show();
     }
 }
