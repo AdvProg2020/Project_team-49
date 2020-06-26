@@ -459,7 +459,13 @@ public class ProductPageController implements Initializable {
     private void setScoreLabels() {
         String averageScore = String.valueOf(product.getAverageScore());
         averageScore = averageScore.substring(0, 3);
-        averageScoreNumber.setText(String.valueOf(averageScore));
+        int size = product.getAllScores().size();
+        if(size == 0){
+            averageScoreNumber.setText("0");
+        }else{
+            averageScoreNumber.setText(String.valueOf(averageScore));
+
+        }
         scoresNumber.setText(String.valueOf(product.getAllScores().size()));
     }
 

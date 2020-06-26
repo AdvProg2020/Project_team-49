@@ -36,10 +36,9 @@ public class View extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 //        cartAndBuyScene = new Scene( FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml")));
-        Controller.setCurrentUser(getAllUsers().get(1));
+        Controller.setCurrentUser(getAllUsers().get(5));
 //        Product product = getProductById(1);
 //        Controller.setSelectedProduct(product);
-
         Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
         Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
         Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
