@@ -134,6 +134,14 @@ public class CartPageController implements Initializable {
         setMainPains();
         if (cartIsEmpty.isVisible()) return;
         setProductsGridPane();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startSong("src/main/resources/Sound/ProductsMenu/BackGround.mp3");
+            }
+        }).start();
+
     }
 
     private void setProductsGridPane() {

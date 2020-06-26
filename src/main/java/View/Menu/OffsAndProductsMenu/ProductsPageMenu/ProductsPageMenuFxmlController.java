@@ -4,7 +4,10 @@ import Controller.Controller;
 import Controller.Filter;
 import Controller.Sort;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,8 +22,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -502,6 +507,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
             saleRight.setDisable(true);
             saleLeft.setDisable(true);
         }
+        Controller.cancelSong();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -511,8 +517,23 @@ public class ProductsPageMenuFxmlController implements Initializable {
     }
 
     public void click(MouseEvent mouseEvent) {
-        GridPane GridPane=(GridPane) mouseEvent.getSource();
-        System.out.println(GridPane.getId());
+        GridPane gridPane=(GridPane) mouseEvent.getSource();
+        Controller.setSelectedProduct(Controller.getProductById(gridPaneToProductId.get(gridPane)));
+        Scene scene=gridPane.getScene();
+        Stage stage=(Stage) (scene.getWindow());
+        Pane pane = null;
+        Pane minibar = null;
+        try {
+            pane= FXMLLoader.load(getClass().getClassLoader().getResource("fxml/ProductPage.fxml"));
+            minibar=FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        pane.getChildren().add(minibar);
+        Controller.setCurrentPane(pane);
+        scene.setRoot(pane);
+        stage.setScene(scene);
+        stage.show();
 
     }
 
@@ -788,10 +809,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
-                Media sound=new Media(new File(file).toURI().toString());
-                MediaPlayer player=new MediaPlayer(sound);
-                player.play();
+                Controller.startClickSound();
             }
         }).start();
     }
