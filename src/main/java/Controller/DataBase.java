@@ -369,6 +369,8 @@ public class DataBase {
             createdOffsCount = Long.parseLong(a);
             a = in.readLine();
             createdLogs = Long.parseLong(a);
+            a = in.readLine();
+            Controller.setHasHeadManager(Boolean.parseBoolean(a));
             in.close();
             fileReader.close();
         } catch (Exception e) {
@@ -469,6 +471,8 @@ public class DataBase {
             out.write(String.valueOf(createdOffsCount));
             out.newLine();
             out.write(String.valueOf(createdLogs));
+            out.newLine();
+            out.write(String.valueOf(Controller.getHasHeadManager()));
             out.close();
             fileWriter.close();
         } catch (Exception e) {

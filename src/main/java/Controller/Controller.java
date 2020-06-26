@@ -29,7 +29,7 @@ import static Controller.DataBase.sortedOrFilteredProduct;
 
 public class Controller {
     public static User currentUser = new Guest();
-    private static boolean hasHeadManager = false;
+    private static boolean hasHeadManager;
     private static Product selectedProduct;
     private static Pane currentPane;
     private static Pane lastPane;

@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Control;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -35,20 +36,35 @@ public class View extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 //        cartAndBuyScene = new Scene( FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml")));
-        Controller.setCurrentUser(getAllUsers().get(5));
+//        Controller.setCurrentUser(getAllUsers().get(0));
 //        Product product = getProductById(1);
 //        Controller.setSelectedProduct(product);
+
         Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
         Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
         Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
         ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
         scrollPane.setPrefHeight(800);
         mainMenu.getChildren().add(mainBar);
-        Controller.setCurrentPane(mainMenu);
-        Scene scene = new Scene(mainMenu);
+        if(Controller.getHasHeadManager()){
+            Controller.setCurrentPane(mainMenu);
+        }else{
+            Controller.setLastPane(mainMenu);
+            Pane register = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/RegisterMenu.fxml"));
+            Controller.setCurrentPane(register);
+        }
+//        Controller.setCurrentPane(mainMenu);
+        Scene scene = new Scene(Controller.getCurrentPane());
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(e -> {
+            e.consume();
+            closeProgram();
+        });
+    }
 
+    private void closeProgram() {
+        DataBase.endProgram();
     }
 
     private ArrayList<User> getAllUsers() {

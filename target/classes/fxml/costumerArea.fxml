@@ -23,7 +23,7 @@
          <content>
             <AnchorPane prefHeight="800.0" prefWidth="1467.0">
                <children>
-                  <Pane layoutX="37.0" layoutY="187.0" prefHeight="440.0" prefWidth="290.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                  <Pane layoutX="37.0" layoutY="200.0" prefHeight="440.0" prefWidth="290.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
                      <children>
                         <GridPane layoutX="52.0" layoutY="43.0" prefHeight="355.0" prefWidth="232.0">
                           <columnConstraints>
@@ -36,7 +36,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label layoutX="30.0" layoutY="43.0" prefHeight="53.0" prefWidth="344.0" text="GO TO CART" GridPane.rowIndex="1">
+                              <Label layoutX="30.0" layoutY="43.0" onMouseClicked="#goToCostumersCart" prefHeight="53.0" prefWidth="344.0" text="GO TO CART" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="Raleway" size="20.0" />
                                  </font>
@@ -104,7 +104,7 @@
                         <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
                      </effect>
                   </Pane>
-                  <Pane fx:id="editPersonalInfoPane" disable="true" layoutX="371.0" layoutY="187.0" prefHeight="439.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
+                  <Pane fx:id="editPersonalInfoPane" disable="true" layoutX="371.0" layoutY="200.0" prefHeight="439.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
                      <effect>
                         <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
                      </effect>
@@ -192,12 +192,12 @@
                         </Pane>
                      </children>
                   </Pane>
-                  <Label fx:id="personalInfoLabel" layoutX="371.0" layoutY="138.0" prefHeight="36.0" prefWidth="102.0" text="Personal Info" textFill="#959595">
+                  <Label fx:id="personalInfoLabel" layoutX="371.0" layoutY="157.0" prefHeight="36.0" prefWidth="102.0" text="Personal Info" textFill="#959595">
                      <font>
                         <Font name="Raleway" size="15.0" />
                      </font>
                   </Label>
-                  <Pane fx:id="editPersonalInfoLabel" disable="true" layoutX="356.0" layoutY="126.0" prefHeight="56.0" prefWidth="200.0" visible="false">
+                  <Pane fx:id="editPersonalInfoLabel" disable="true" layoutX="356.0" layoutY="145.0" prefHeight="56.0" prefWidth="200.0" visible="false">
                      <children>
                         <Label layoutX="64.0" layoutY="11.0" prefHeight="40.0" prefWidth="136.0" text="Edit Personal Info" textFill="#959595">
                            <font>
@@ -215,12 +215,12 @@
                         <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#959595" height="40.0" layoutX="52.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1.0" />
                      </children>
                   </Pane>
-                  <Label fx:id="buyHistoryLabel" disable="true" layoutX="371.0" layoutY="138.0" prefHeight="36.0" prefWidth="102.0" text="Buy History" textFill="#959595" visible="false">
+                  <Label fx:id="buyHistoryLabel" disable="true" layoutX="371.0" layoutY="157.0" prefHeight="36.0" prefWidth="102.0" text="Buy History" textFill="#959595" visible="false">
                      <font>
                         <Font name="Raleway" size="15.0" />
                      </font>
                   </Label>
-                  <Pane fx:id="buyHistoryPane" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
+                  <Pane fx:id="buyHistoryPane" layoutX="371.0" layoutY="200.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
                      <effect>
                         <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
                      </effect>
@@ -439,7 +439,7 @@
                         </Pane>
                      </children>
                   </Pane>
-                  <Pane fx:id="userInfoPane" disable="true" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
+                  <Pane fx:id="userInfoPane" disable="true" layoutX="371.0" layoutY="200.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
                      <children>
                         <GridPane disable="true" layoutX="53.0" layoutY="15.0" prefHeight="331.0" prefWidth="933.0">
                           <columnConstraints>
@@ -590,7 +590,7 @@
                         <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
                      </effect>
                   </Pane>
-                  <Pane fx:id="discountCodesPain" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                  <Pane fx:id="discountCodesPain" layoutX="371.0" layoutY="200.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
                      <effect>
                         <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
                      </effect>
@@ -805,11 +805,19 @@
                         </Pane>
                      </children>
                   </Pane>
-                  <Label fx:id="discountCodesLabel" disable="true" layoutX="371.0" layoutY="138.0" prefHeight="36.0" prefWidth="121.0" text="Discount Codes" textFill="#959595" visible="false">
+                  <Label fx:id="discountCodesLabel" disable="true" layoutX="371.0" layoutY="157.0" prefHeight="36.0" prefWidth="121.0" text="Discount Codes" textFill="#959595" visible="false">
                      <font>
                         <Font name="Raleway" size="15.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="50.0" fitWidth="49.0" layoutX="37.0" layoutY="151.0" onMouseClicked="#goBackToLastPaneFromCostumerArea" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../photos/UserArea/personalInfo/back.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
                </children>
             </AnchorPane>
          </content>

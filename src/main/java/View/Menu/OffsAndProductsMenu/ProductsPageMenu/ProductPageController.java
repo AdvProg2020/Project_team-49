@@ -15,6 +15,8 @@ import Models.User.User;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -29,6 +31,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -835,4 +838,12 @@ public class ProductPageController implements Initializable {
         }
     }
 
+    public void goBackToLastPaneFromProductPage(MouseEvent mouseEvent) {
+        Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
+        Controller.setCurrentPane(Controller.getLastPane());
+        scene.setRoot(Controller.getCurrentPane());
+        stage.setScene(scene);
+        stage.show();
+    }
 }

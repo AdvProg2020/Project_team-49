@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import static Controller.DataBase.*;
 
 public class Manager extends User implements Serializable {
-
     public Manager(String username, String firstName, String lastName, String eMail, long phoneNumber, String password) {
         super(username, firstName, lastName, eMail, phoneNumber, password);
     }
