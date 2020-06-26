@@ -80,7 +80,7 @@ public class GuestAreaGraphicsController implements Initializable {
 
         if (mouseEvent.getSource().equals(registerButton)) {
             ArrayList<Boolean> booleans = register();
-            if (booleans.get(1)) {
+            if (!booleans.get(1)) {
                 if (booleans.get(0)) {
                     Pane mainMenu = null;
                     Pane mainBar = null;
@@ -199,7 +199,7 @@ public class GuestAreaGraphicsController implements Initializable {
             lNameLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
         }
-        if (!emailReg.getText().matches("(\\w+)@(\\w+)")) {
+        if (!emailReg.getText().matches("(\\w+)@(\\w+)(\\.)(\\w+)")) {
             emailReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             emailLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
@@ -223,7 +223,7 @@ public class GuestAreaGraphicsController implements Initializable {
             }
         }
         if (!errorFound) {
-            Controller.createAccount(getAccountInformation(usernameReg.getText(), (String) accountTypeReg.getValue()), (String) accountTypeReg.getValue());
+            System.out.println(Controller.createAccount(getAccountInformation(usernameReg.getText(), (String) accountTypeReg.getValue()), (String) accountTypeReg.getValue()));
         }
         booleans.add(errorFound);
         return booleans;
@@ -232,11 +232,11 @@ public class GuestAreaGraphicsController implements Initializable {
     private ArrayList<String> getAccountInformation(String username, String type) {
         ArrayList<String> info = new ArrayList<>();
         info.add(username);
+        info.add(passReg.getText());
         info.add(firstNameReg.getText());
         info.add(lastNameReg.getText());
         info.add(emailReg.getText());
         info.add(phoneReg.getText());
-        info.add(passReg.getText());
         if (!type.equals("Manager")) {
             info.add(extraReg.getText());
         }
@@ -336,6 +336,12 @@ public class GuestAreaGraphicsController implements Initializable {
         }
         if (!errorFound) {
             Controller.loginAccount(userLogin.getText());
+            Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            Scene scene = ((Button) mouseEvent.getSource()).getScene();
+            Controller.setCurrentPane(Controller.getLastPane());
+            scene.setRoot(Controller.getCurrentPane());
+            stage.setScene(scene);
+            stage.show();
         }
     }
 
