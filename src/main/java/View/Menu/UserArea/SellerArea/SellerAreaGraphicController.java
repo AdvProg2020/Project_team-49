@@ -207,6 +207,7 @@ public class SellerAreaGraphicController implements Initializable {
     ArrayList<Off> offs = new ArrayList<>();
     ArrayList<Product> products = new ArrayList<>();
     private SimpleDateFormat formatter;
+    private Alert deleteProductAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are You Sure?");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -1200,6 +1201,16 @@ public class SellerAreaGraphicController implements Initializable {
                 Controller.startClickSound();
             }
         }).start();
+        deleteProductAlert.show();
+        if (deleteProductAlert.getResult().equals(ButtonType.CANCEL)) {
+            return;
+        }
+        if (mouseEvent.getSource().equals(deleteProduct1)) {
+            SellerAreaController.removeProduct(products.get(productsIndex).getProductId());
+        } else {
+            SellerAreaController.removeProduct(products.get(productsIndex + 1).getProductId());
+        }
+        goToManageProductsPain(mouseEvent);
     }
 
     public void goToAddProductPane(MouseEvent mouseEvent) {
