@@ -213,6 +213,7 @@ public class SellerAreaGraphicController implements Initializable {
     public TextField categoryTextField;
     public Rectangle explanationRec;
     public TextField explanationTextField;
+    public TextField imageTextField;
     private Seller seller;
     private int offsIndex = 0;
     private int productsIndex = 0;
@@ -1281,8 +1282,6 @@ public class SellerAreaGraphicController implements Initializable {
         categoryRec.setStroke(Color.valueOf("#959595"));
         countRec.setStroke(Color.valueOf("#959595"));
         explanationRec.setStroke(Color.valueOf("#959595"));
-
-        addProductButtonFinal.setOpacity(0.5);
     }
 
     public void goBackToManageProducts(MouseEvent mouseEvent) {
@@ -1302,28 +1301,57 @@ public class SellerAreaGraphicController implements Initializable {
                 Controller.startClickSound();
             }
         }).start();
-        restartInsideOfAddProductPain();
+        nameRec.setStroke(Color.valueOf("#959595"));
+        brandRec.setStroke(Color.valueOf("#959595"));
+        priceRec.setStroke(Color.valueOf("#959595"));
+        categoryRec.setStroke(Color.valueOf("#959595"));
+        countRec.setStroke(Color.valueOf("#959595"));
+        explanationRec.setStroke(Color.valueOf("#959595"));
+
         boolean errorFound = false;
-        if (SellerAreaController.hasProductWithName(nameTextField.getText())) {
+        if (!nameTextField.getText().matches("\\w+")) {
+            nameRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        } else if (SellerAreaController.hasProductWithName(nameTextField.getText())) {
             nameRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
         }
+        if (!brandTextField.getText().matches("\\w+")) {
+            brandRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
         if(!isThereAnyCategoryWithName(categoryTextField.getText())){
-            nameRec.setStroke(Color.valueOf("#fb3449"));
+            categoryRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
         }
         if(!countTextField.getText().matches("\\d+")){
             countRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
         }
-        if(!priceTextField.getText().matches("(\\d+)(.\\d+)?")){
+        if(!priceTextField.getText().matches("(\\d+)(\\.\\d+)?")){
             priceRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
         }
-        if(errorFound){
-
-        }else{
-            addProductButtonFinal.setOpacity(1.0);
+        if (!explanationTextField.getText().matches("(\\w|\\s)+")) {
+            explanationRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        ImageView image = new ImageView(imageTextField.getText());
+        if (image.getImage() == null) {
+            imageRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if(!errorFound){
+            ArrayList<String> info = new ArrayList<>();
+            info.add(nameTextField.getText());
+            info.add(brandTextField.getText());
+            info.add(priceTextField.getText());
+            info.add(explanationTextField.getText());
+            info.add(categoryTextField.getText());
+            info.add(countTextField.getText());
+            info.add(imageTextField.getText());
+            SellerAreaController.addProduct(info);
+            goBackToManageProducts(mouseEvent);
         }
     }
 
