@@ -1313,7 +1313,7 @@
                         <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#959595" height="40.0" layoutX="52.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1.0" />
                      </children>
                   </Pane>
-                  <Pane fx:id="addProductPane" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                  <Pane fx:id="addProductPane" disable="true" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
                      <children>
                         <Rectangle fx:id="priceRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="127.0" layoutY="195.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
                         <Rectangle fx:id="imageRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="200.0" layoutX="632.0" layoutY="200.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="200.0" />
