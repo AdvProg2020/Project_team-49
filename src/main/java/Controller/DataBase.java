@@ -56,7 +56,12 @@ public class DataBase {
     public static ArrayList<Request> getAllActiveRequests() {
         return allActiveRequests;
     }
-//    private void setReferences(){
+
+    public static ArrayList<DiscountCode> getAllDiscountCodes() {
+        return allDiscountCodes;
+    }
+
+    //    private void setReferences(){
 //        for (Product product : allProducts) {
 //            Category category = product.getParentCategory();
 //            ArrayList<Seller> sellers = product.getAllSellers();

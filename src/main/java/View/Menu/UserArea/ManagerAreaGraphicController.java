@@ -3,6 +3,7 @@ package View.Menu.UserArea;
 import Controller.DataBase;
 import Controller.Controller;
 import Models.Category;
+import Models.DiscountCode;
 import Models.Off;
 import Models.User.Manager;
 import Controller.ManagerAreaController;
@@ -12,6 +13,7 @@ import Models.User.User;
 import View.Menu.UserArea.ManagerArea.ManagerArea;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -24,6 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import javax.xml.crypto.Data;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -124,8 +127,6 @@ public class ManagerAreaGraphicController implements Initializable {
     public Pane submitNewCategoryButton;
     public TextField newAttributeTextField;
     public TextField newParentCategoryTextField;
-    public Pane ManageManagersPain;
-    public Button addManagerButton;
     public Pane manageRequestsPane;
     public Pane seeRequests;
     public Pane requestPane;
@@ -171,9 +172,38 @@ public class ManagerAreaGraphicController implements Initializable {
     public Label emailLabel3;
     public TextField phoneReg;
     public Label phoneLabel;
+    public Pane manageDiscountsPane;
+    public Pane discountButtonsPane;
+    public Button createDiscountButton;
+    public Button viewDiscountsButton;
+    public ImageView goBackToDiscountsMenuImage;
+    public Pane viewDiscountsPane;
+    public Pane firstDiscountCode;
+    public Label discountPercent;
+    public Label maximumAmount;
+    public Label countDiscount;
+    public Label usageDiscount;
+    public Label startDiscount;
+    public Label endDiscount;
+    public Label discountId;
+    public ImageView downArrowDiscount;
+    public ImageView upArrowDiscount;
+    public ImageView removeDiscountImage;
+    public Rectangle newDiscountDurationRec;
+    public TextField newDiscountDuration;
+    public Pane submitNewDiscount;
+    public Button checkInformationForNewDiscount;
+    public TextField newDiscountCount;
+    public Rectangle newDiscountCountRec;
+    public TextField newDiscountAmount;
+    public TextField newDiscountPercent;
+    public Rectangle newDiscountPercentRec;
+    public Pane newDiscountPane;
+    public Rectangle newDiscountAmountRec;
     private Manager manager;
     private int usersIndex = 0;
     private int categoriesIndex = 0;
+    private int discountIndex = 0;
     private int requestsIndex = 0;
 
     @Override
@@ -299,6 +329,8 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     private void closeALlPanes() {
+        manageDiscountsPane.setVisible(false);
+        manageDiscountsPane.setDisable(true);
         addManagerPane.setVisible(false);
         addManagerPane.setDisable(true);
         manageRequestsPane.setVisible(false);
@@ -586,9 +618,6 @@ public class ManagerAreaGraphicController implements Initializable {
         }
     }
 
-    public void seeDiscountCodes(MouseEvent mouseEvent) {
-    }
-
     private void setProductsImage(ImageView image, String address) {
         try {
             image.setImage(new Image(address));
@@ -814,9 +843,6 @@ public class ManagerAreaGraphicController implements Initializable {
         }
     }
 
-    public void manageManagers(MouseEvent mouseEvent) {
-    }
-
     public void seeMoreCategory(MouseEvent mouseEvent) {
         restartEditCategoryTextFields();
         editTheChanges1.setVisible(false);
@@ -884,13 +910,11 @@ public class ManagerAreaGraphicController implements Initializable {
     public void acceptRequest(ActionEvent event) {
 
 
-
         requestsIndex = 0;
         setRequestsPaneContent();
     }
 
     public void rejectRequest(ActionEvent event) {
-
 
 
         requestsIndex = 0;
@@ -956,49 +980,49 @@ public class ManagerAreaGraphicController implements Initializable {
     private void register() {
         boolean errorFound = false;
         if (Controller.hasUserWithUsername(usernameReg.getText())) {
-            usernameReg.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            usernameReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             userLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
         }
         if (!usernameReg.getText().matches("\\w+")) {
-            usernameReg.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            usernameReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             userLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
         }
         if (!passReg.getText().equals(rePassReg.getText())) {
-            passReg.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            passReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             passLabel.setTextFill(Color.valueOf("#fb3449"));
-            rePassReg.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            rePassReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             rePassLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
         }
         if (!passReg.getText().matches("\\w+")) {
-            passReg.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            passReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             passLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
         }
         if (!rePassReg.getText().matches("\\w+")) {
-            rePassReg.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            rePassReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             rePassLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
         }
         if (!firstNameReg.getText().matches("[a-zA-Z]+")) {
-            firstNameReg.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            firstNameReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             fNameLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
         }
         if (!lastNameReg.getText().matches("[a-zA-Z]+")) {
-            lastNameReg.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            lastNameReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             lNameLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
         }
         if (!emailReg.getText().matches("(\\w+)@(\\w+)")) {
-            emailReg.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            emailReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             emailLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
         }
         if (!phoneReg.getText().matches("\\d+")) {
-            phoneReg.setStyle("-fx-border-color: #fb3449;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+            phoneReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             phoneLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
         }
@@ -1050,20 +1074,186 @@ public class ManagerAreaGraphicController implements Initializable {
         emailLabel.setTextFill(Color.valueOf("#a9a9a9"));
         phoneLabel.setTextFill(Color.valueOf("#a9a9a9"));
 
-        usernameReg.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
-        passReg.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
-        rePassReg.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
-        firstNameReg.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
-        lastNameReg.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
-        emailReg.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
-        phoneReg.setStyle("-fx-border-color: darkgray;"+"-fx-border-radius: 8;"+"-fx-background-radius: 8");
+        usernameReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        passReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        rePassReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        firstNameReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        lastNameReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        emailReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        phoneReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
     }
 
     public void seeAddManagerPage(MouseEvent mouseEvent) {
-        System.out.println("oh fuck");
         closeALlPanes();
         addManagerPane.setDisable(false);
         addManagerPane.setVisible(true);
-        System.out.println("deep shit");
+    }
+
+
+    public void seeDiscountCodes(MouseEvent mouseEvent) {
+        closeALlPanes();
+        restartInsideMainDiscountPane();
+        restartTextFieldForNewDiscount();
+        discountIndex = 0;
+        manageDiscountsPane.setDisable(false);
+        manageDiscountsPane.setVisible(true);
+        setViewAndEditDiscountsPaneContent();
+    }
+
+    private void setViewAndEditDiscountsPaneContent() {
+        handleDiscountArrows();
+        restartInsideViewDiscounts();
+        int size = DataBase.getAllDiscountCodes().size();
+        if (size == 0) return;
+        firstDiscountCode.setDisable(false);
+        firstDiscountCode.setVisible(true);
+        removeDiscountImage.setVisible(true);
+        removeDiscountImage.setDisable(false);
+        DiscountCode discountCode = DataBase.getAllDiscountCodes().get(discountIndex);
+        ArrayList<String> info = ManagerAreaController.viewDiscountCode(discountCode.getDiscountId());
+        discountId.setText(discountCode.getDiscountId());
+        startDiscount.setText(info.get(1));
+        endDiscount.setText(info.get(2));
+        countDiscount.setText(info.get(5));
+        maximumAmount.setText(info.get(4));
+        discountPercent.setText(info.get(3));
+    }
+
+    private void restartInsideViewDiscounts() {
+        firstDiscountCode.setDisable(true);
+        firstDiscountCode.setVisible(false);
+        removeDiscountImage.setVisible(false);
+        removeDiscountImage.setDisable(true);
+    }
+
+    private void restartInsideMainDiscountPane() {
+        newDiscountPane.setVisible(false);
+        newDiscountPane.setDisable(true);
+        discountButtonsPane.setDisable(false);
+        discountButtonsPane.setVisible(true);
+        goBackToDiscountsMenuImage.setDisable(true);
+        goBackToDiscountsMenuImage.setVisible(false);
+        viewDiscountsPane.setVisible(false);
+        viewDiscountsPane.setDisable(true);
+    }
+
+    private void handleDiscountArrows() {
+        int size = DataBase.getAllDiscountCodes().size();
+        if (size == 0 || size == 1) {
+            upArrowDiscount.setVisible(false);
+            upArrowDiscount.setDisable(true);
+            downArrowDiscount.setVisible(false);
+            downArrowDiscount.setDisable(true);
+        } else {
+            upArrowDiscount.setVisible(true);
+            upArrowDiscount.setDisable(false);
+            downArrowDiscount.setVisible(true);
+            downArrowDiscount.setDisable(false);
+        }
+    }
+
+    public void goToCreateDiscountPane(ActionEvent event) {
+        restartInsideMainDiscountPane();
+        discountButtonsPane.setVisible(false);
+        discountButtonsPane.setDisable(true);
+        goBackToDiscountsMenuImage.setDisable(false);
+        goBackToDiscountsMenuImage.setVisible(true);
+        newDiscountPane.setVisible(true);
+        newDiscountPane.setDisable(false);
+        restartTextFieldForNewDiscount();
+    }
+
+    private void restartTextFieldForNewDiscount() {
+        newDiscountCount.clear();
+        newDiscountAmount.clear();
+        newDiscountDuration.clear();
+        newDiscountPercent.clear();
+        newDiscountCountRec.setStroke(Color.valueOf("d3d3d3"));
+        newDiscountAmountRec.setStroke(Color.valueOf("d3d3d3"));
+        newDiscountDurationRec.setStroke(Color.valueOf("d3d3d3"));
+        newDiscountPercentRec.setStroke(Color.valueOf("d3d3d3"));
+        submitNewDiscount.setOpacity(0.6);
+        submitNewDiscount.setDisable(true);
+    }
+
+    public void goToViewDiscountsPane(ActionEvent event) {
+        restartInsideMainDiscountPane();
+        goBackToDiscountsMenuImage.setVisible(true);
+        goBackToDiscountsMenuImage.setDisable(false);
+        discountButtonsPane.setVisible(false);
+        discountButtonsPane.setDisable(true);
+        viewDiscountsPane.setVisible(true);
+        viewDiscountsPane.setDisable(false);
+        restartInsideViewDiscounts();
+        setViewAndEditDiscountsPaneContent();
+    }
+
+    public void removeDiscountCode(MouseEvent mouseEvent) {
+        ManagerAreaController.removeDiscountCode(String.valueOf(DataBase.getAllDiscountCodes().get(discountIndex).getDiscountId()));
+        discountIndex = 0;
+        setViewAndEditDiscountsPaneContent();
+    }
+
+    public void goBackToDiscountsMenu(MouseEvent mouseEvent) {
+        restartTextFieldForNewDiscount();
+        restartInsideMainDiscountPane();
+    }
+
+    public void seeMoreDiscounts(MouseEvent mouseEvent) {
+        int size = DataBase.getAllDiscountCodes().size();
+        if (mouseEvent.getSource().equals(upArrowDiscount)) {
+            if (discountIndex == 0) return;
+            discountIndex--;
+        } else if (mouseEvent.getSource().equals(downArrowDiscount)) {
+            if (discountIndex == size - 1) return;
+            discountIndex++;
+        }
+        setViewAndEditDiscountsPaneContent();
+    }
+
+    public void submitNewDiscount(MouseEvent mouseEvent) {
+        if (submitNewDiscount.isDisable()) return;
+
+
+        restartTextFieldForNewDiscount();
+        restartInsideMainDiscountPane();
+    }
+
+    public void checkInformationForNewDiscount(ActionEvent event) {
+        boolean flag = true;
+        if (!newDiscountDuration.getText().matches("\\d+")) {
+            flag = false;
+            newDiscountDurationRec.setStroke(Color.valueOf("#fb3449"));
+        } else {
+            newDiscountDurationRec.setStroke(Color.valueOf("#00eb00"));
+        }
+        if (!newDiscountAmount.getText().matches("\\d+")) {
+            flag = false;
+            newDiscountAmountRec.setStroke(Color.valueOf("#fb3449"));
+        } else {
+            newDiscountAmountRec.setStroke(Color.valueOf("#00eb00"));
+        }
+
+        if (!newDiscountCount.getText().matches("\\d+")) {
+            flag = false;
+            newDiscountCountRec.setStroke(Color.valueOf("#fb3449"));
+        } else {
+            newDiscountCountRec.setStroke(Color.valueOf("#00eb00"));
+        }
+
+        if (!newDiscountPercent.getText().matches("\\d+")) {
+            flag = false;
+            newDiscountPercentRec.setStroke(Color.valueOf("#fb3449"));
+        } else {
+            newDiscountPercentRec.setStroke(Color.valueOf("#00eb00"));
+        }
+
+        if (flag) {
+            submitNewDiscount.setDisable(false);
+            submitNewDiscount.setOpacity(1.0);
+        } else {
+            submitNewDiscount.setOpacity(0.6);
+            submitNewDiscount.setDisable(true);
+        }
     }
 }
