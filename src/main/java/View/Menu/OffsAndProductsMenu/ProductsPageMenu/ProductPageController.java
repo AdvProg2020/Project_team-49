@@ -844,6 +844,8 @@ public class ProductPageController implements Initializable {
         Controller.setCurrentPane(Controller.getLastPane());
         scene.setRoot(Controller.getCurrentPane());
         stage.setScene(scene);
+        Controller.cancelSong();
+        Controller.startSong("src/main/resources/Sound/ProductsMenu/BackGround.mp3");
         stage.show();
     }
 }
