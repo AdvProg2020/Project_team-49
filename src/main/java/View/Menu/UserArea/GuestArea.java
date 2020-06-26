@@ -125,7 +125,27 @@ public class GuestArea extends Menu {
     }
 
     private ArrayList<String> getAccountInformation(String username, String type) {
-        return null;
+        ArrayList<String> info = new ArrayList<>();
+        info.add(username);
+        System.out.println("enter password:");
+        info.add(scanner.nextLine().trim());
+        System.out.println("enter first name:");
+        info.add(scanner.nextLine().trim());
+        System.out.println("enter last name:");
+        info.add(scanner.nextLine().trim());
+        System.out.println("enter email:");
+        info.add(scanner.nextLine().trim());
+        System.out.println("enter phone number:");
+        info.add(scanner.nextLine().trim());
+        if (type.equalsIgnoreCase("costumer")) {
+            System.out.println("enter initial credit:");
+            info.add(scanner.nextLine().trim());
+        }
+        if (type.equalsIgnoreCase("seller")) {
+            System.out.println("enter company name:");
+            info.add(scanner.nextLine().trim());
+        }
+        return info;
     }
 
     private void doLogin() {
