@@ -809,6 +809,11 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void addOff(MouseEvent mouseEvent) {
+        startDateRec.setStroke(Color.valueOf("#959595"));
+        endDateRec.setStroke(Color.valueOf("#959595"));
+        offPercentRec.setStroke(Color.valueOf("#959595"));
+        addOffProducts.setStroke(Color.valueOf("#959595"));
+
         Date date = null;
         boolean errorFound = false;
         try {
@@ -841,8 +846,8 @@ public class SellerAreaGraphicController implements Initializable {
             info.add(endDateTextField.getText());
             info.add(offPercentTextField.getText());
             SellerAreaController.addOff(info);
+            goToManageOffsPain(mouseEvent);
         }
-        goToManageOffsPain(mouseEvent);
     }
 
     private String getSelectedProductsId() {
