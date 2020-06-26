@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -18,7 +27,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1467.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.UserArea.ManagerAreaGraphicController">
+<AnchorPane prefHeight="800.0" prefWidth="1467.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.UserArea.ManagerAreaGraphicController">
     <children>
         <ScrollPane prefHeight="800.0" prefWidth="1467.0">
             <content>
@@ -1484,6 +1493,17 @@
                                     </Label>
                                     <Rectangle fx:id="newDiscountDurationRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="144.0" layoutY="118.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="116.0" />
                                     <TextField fx:id="newDiscountDuration" focusTraversable="false" layoutX="153.0" layoutY="122.0" prefHeight="42.0" prefWidth="99.0" style="-fx-background-color: #ffffff;" stylesheets="@../cssFiles/textFieldProductPage.css">
+                                       <font>
+                                          <Font name="Raleway" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label layoutX="292.0" layoutY="123.0" prefHeight="40.0" prefWidth="57.0" text="Id" textFill="#7a7a7a">
+                                       <font>
+                                          <Font name="Raleway" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Rectangle fx:id="newDiscountDurationRec1" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="321.0" layoutY="118.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="116.0" />
+                                    <TextField fx:id="newDiscountDuration1" focusTraversable="false" layoutX="330.0" layoutY="122.0" prefHeight="42.0" prefWidth="99.0" style="-fx-background-color: #ffffff;" stylesheets="@../cssFiles/textFieldProductPage.css">
                                        <font>
                                           <Font name="Raleway" size="15.0" />
                                        </font>
