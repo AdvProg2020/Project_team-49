@@ -477,7 +477,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
 
         Controller.check();
-        Controller.restartSortedOrFilteredProduct();
+//        Controller.restartSortedOrFilteredProduct();
         loadProduct(counter);
 
 

@@ -452,9 +452,9 @@ public class MainBarController implements Initializable {
         String category=label.getText();
         if (category.endsWith("〉")){
             category=category.split("\\s")[0];
-        }else if (category.startsWith("●")){
+        }else if (category.contains("●")){
             int i=0;
-            while (category.split("\\s")[i].equals("●")){
+            while (!category.split("\\s")[i].matches("\\w+")){
                 i++;
             }
             category=category.split("\\s")[i];
