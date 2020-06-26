@@ -233,6 +233,21 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
     public HashMap<GridPane,ArrayList<ImageView>> gridPaneToRate=new HashMap<GridPane, ArrayList<ImageView>>();
 
+    public Label offRemain_00;public Label offRemain_01;public Label offRemain_02;public Label offRemain_03;
+    public Label offRemain_10;public Label offRemain_11;public Label offRemain_12;public Label offRemain_13;
+    public Label offRemain_20;public Label offRemain_21;public Label offRemain_22;public Label offRemain_23;
+    public Label offRemain_30;public Label offRemain_31;public Label offRemain_32;public Label offRemain_33;
+    public Label offRemain_40;public Label offRemain_41;public Label offRemain_42;public Label offRemain_43;
+
+    public Label offPercent_00;public Label offPercent_01;public Label offPercent_02;public Label offPercent_03;
+    public Label offPercent_10;public Label offPercent_11;public Label offPercent_12;public Label offPercent_13;
+    public Label offPercent_20;public Label offPercent_21;public Label offPercent_22;public Label offPercent_23;
+    public Label offPercent_30;public Label offPercent_31;public Label offPercent_32;public Label offPercent_33;
+    public Label offPercent_40;public Label offPercent_41;public Label offPercent_42;public Label offPercent_43;
+
+    public HashMap<GridPane,Label> gridPaneToOffRemain =new HashMap<>();
+    public HashMap<GridPane,Label> gridPaneToOffPercent=new HashMap<>();
+
 
 
     ArrayList<CheckBox> brandsCheckBoxes=new ArrayList<>();
@@ -435,6 +450,18 @@ public class ProductsPageMenuFxmlController implements Initializable {
         gridPaneToRate.put(g30,listOfRateStar30);gridPaneToRate.put(g31,listOfRateStar31);gridPaneToRate.put(g32,listOfRateStar32);gridPaneToRate.put(g33,listOfRateStar33);
         gridPaneToRate.put(g40,listOfRateStar40);gridPaneToRate.put(g41,listOfRateStar41);gridPaneToRate.put(g42,listOfRateStar42);gridPaneToRate.put(g43,listOfRateStar43);
 
+        gridPaneToOffRemain.put(g00,offRemain_00);gridPaneToOffRemain.put(g01,offRemain_01);gridPaneToOffRemain.put(g02,offRemain_02);gridPaneToOffRemain.put(g03,offRemain_03);
+        gridPaneToOffRemain.put(g10,offRemain_10);gridPaneToOffRemain.put(g11,offRemain_11);gridPaneToOffRemain.put(g12,offRemain_12);gridPaneToOffRemain.put(g13,offRemain_13);
+        gridPaneToOffRemain.put(g20,offRemain_20);gridPaneToOffRemain.put(g21,offRemain_21);gridPaneToOffRemain.put(g22,offRemain_22);gridPaneToOffRemain.put(g23,offRemain_23);
+        gridPaneToOffRemain.put(g30,offRemain_30);gridPaneToOffRemain.put(g31,offRemain_31);gridPaneToOffRemain.put(g32,offRemain_32);gridPaneToOffRemain.put(g33,offRemain_33);
+        gridPaneToOffRemain.put(g40,offRemain_40);gridPaneToOffRemain.put(g41,offRemain_41);gridPaneToOffRemain.put(g42,offRemain_42);gridPaneToOffRemain.put(g43,offRemain_43);
+
+        gridPaneToOffPercent.put(g00,offPercent_00);gridPaneToOffPercent.put(g01,offPercent_01);gridPaneToOffPercent.put(g02,offPercent_02);gridPaneToOffPercent.put(g03,offPercent_03);
+        gridPaneToOffPercent.put(g10,offPercent_10);gridPaneToOffPercent.put(g11,offPercent_11);gridPaneToOffPercent.put(g12,offPercent_12);gridPaneToOffPercent.put(g13,offPercent_13);
+        gridPaneToOffPercent.put(g20,offPercent_20);gridPaneToOffPercent.put(g21,offPercent_21);gridPaneToOffPercent.put(g22,offPercent_22);gridPaneToOffPercent.put(g23,offPercent_23);
+        gridPaneToOffPercent.put(g30,offPercent_30);gridPaneToOffPercent.put(g31,offPercent_31);gridPaneToOffPercent.put(g32,offPercent_32);gridPaneToOffPercent.put(g33,offPercent_33);
+        gridPaneToOffPercent.put(g40,offPercent_40);gridPaneToOffPercent.put(g41,offPercent_41);gridPaneToOffPercent.put(g42,offPercent_42);gridPaneToOffPercent.put(g43,offPercent_43);
+
 
         Controller.check();
         Controller.restartSortedOrFilteredProduct();
@@ -476,6 +503,8 @@ public class ProductsPageMenuFxmlController implements Initializable {
             gridPaneToOff.get(gridPane).setVisible(false);
             gridPaneToOff.get(gridPane).setDisable(true);
             setStart(gridPane,-1);
+            gridPaneToOffPercent.get(gridPane).setText("");
+            gridPaneToOffRemain.get(gridPane).setText("");
         }
     }
 
@@ -514,6 +543,8 @@ public class ProductsPageMenuFxmlController implements Initializable {
         ArrayList<Long> productId=Controller.getProductIdForFxml(counter);
         ArrayList<Boolean> isOff=Controller.getOffForFxml(counter);
         ArrayList<Double> score=Controller.getProductScoreForFxml(counter);
+        ArrayList<Double> remainOffTimeLeft=Controller.getProductOffRemainForFxml(counter);
+        ArrayList<Integer> offPercent=Controller.getProductOffPercentForFxml(counter);
         for (int i = 0; i < size; i++) {
             gridPanes.get(i).setVisible(true);
             gridPanes.get(i).setDisable(false);
@@ -523,10 +554,12 @@ public class ProductsPageMenuFxmlController implements Initializable {
             gridPaneToNameAmount.get(gridPane).setText(names.get(i));
             gridPaneToPriceAmount.get(gridPane).setText(prices.get(i).toString());
             gridPaneToProductId.put(gridPane,productId.get(i));
-
+            if (remainOffTimeLeft.get(i)!=-1.0){
+                gridPaneToOffRemain.get(gridPane).setText(String.valueOf(remainOffTimeLeft.get(i)));
+                gridPaneToOffPercent.get(gridPane).setText(String.valueOf(offPercent.get(i))+"%");
+            }
 
             setStart(gridPane,score.get(i));
-
 
             if (isOff.get(i)){
                 gridPaneToOff.get(gridPanes.get(i)).setVisible(true);

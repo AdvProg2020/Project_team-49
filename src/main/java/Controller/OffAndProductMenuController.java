@@ -168,8 +168,8 @@ public class OffAndProductMenuController {
         }
     }
 
-    public static double  offTimeLeftById(long productID){
-        Date date=Controller.getProductById(productID).getOff().getEndDate();
+    public static double  getOffTimeLeftById(Product product){
+        Date date=product.getOff().getEndDate();
         Date today=new Date();
         return (double) ((date.getTime()-today.getTime())/1000/60/60/365);
     }
