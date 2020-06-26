@@ -553,6 +553,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         clear();
 
         if (Controller.isDoesItOffPage()){
+            Filter.filterByOffs();
             saleLeft.setVisible(true);
             saleRight.setVisible(true);
             saleRight.setDisable(false);

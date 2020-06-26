@@ -609,6 +609,7 @@ public class MainBarController implements Initializable {
     }
 
     public void goToOffsAndDiscountsPage(MouseEvent mouseEvent) {
+        Filter.restartFilters();
         Controller.setDoesItOffPage(true);
         Label label = (Label) mouseEvent.getSource();
         Scene scene = label.getScene();
