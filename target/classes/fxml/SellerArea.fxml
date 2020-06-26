@@ -941,7 +941,7 @@
                      <effect>
                         <DropShadow color="#959595" height="9.75" radius="4.4375" width="10.0" />
                      </effect></Pane>
-                  <Pane fx:id="manageProductsPane" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                  <Pane fx:id="manageProductsPane" disable="true" layoutX="371.0" layoutY="187.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
                      <effect>
                         <DropShadow color="#959595" height="9.75" radius="4.4375" width="10.0" />
                      </effect>
@@ -1159,12 +1159,12 @@
                            </children>
                         </Pane>
                      </children></Pane>
-                  <Label fx:id="manageProductsLabel" disable="true" layoutX="371.0" layoutY="145.0" prefHeight="36.0" prefWidth="129.0" text="Manage Products" textFill="#959595" visible="false">
+                  <Label fx:id="manageProductsLabel" disable="true" layoutX="371.0" layoutY="138.0" prefHeight="36.0" prefWidth="129.0" text="Manage Products" textFill="#959595" visible="false">
                      <font>
                         <Font name="Raleway" size="15.0" />
                      </font>
                   </Label>
-                  <Button fx:id="addProductButton" alignment="CENTER" layoutX="1256.0" layoutY="144.0" mnemonicParsing="false" onMouseClicked="#goToAddProductPane" prefHeight="38.0" prefWidth="54.0" style="-fx-background-color: #00bfd6;" text="Add" textFill="WHITE">
+                  <Button fx:id="addProductButton" alignment="CENTER" disable="true" layoutX="1256.0" layoutY="144.0" mnemonicParsing="false" onMouseClicked="#goToAddProductPane" prefHeight="38.0" prefWidth="54.0" style="-fx-background-color: #00bfd6;" text="Add" textFill="WHITE" visible="false">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>

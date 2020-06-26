@@ -280,10 +280,10 @@ public class MainBarController implements Initializable {
 
         if (mouseEvent.getSource().equals(lightBlueButton)) {
             Controller.setColor("cee8f0");
-            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
+//            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
         } else if (mouseEvent.getSource().equals(lightGrayButton)) {
             Controller.setColor("f3f3f3");
-            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
+//            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
         } else if (mouseEvent.getSource().equals(lightGreenButton)) {
             Controller.setColor("cdeae0");
             Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
@@ -565,7 +565,13 @@ public class MainBarController implements Initializable {
                 e.printStackTrace();
             }
         }
-
+        Pane mainBar = null;
+        try {
+            mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        pane.getChildren().add(mainBar);
         Controller.setCurrentPane(pane);
         scene.setRoot(pane);
         stage.setScene(scene);
@@ -580,6 +586,7 @@ public class MainBarController implements Initializable {
         try {
             pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
             Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+            Controller.setInnerPaneForColor((Pane) ((ScrollPane) pane.getChildren().get(0)).getContent());
             pane.getChildren().add(mainBar);
         } catch (IOException e) {
             e.printStackTrace();
@@ -593,5 +600,24 @@ public class MainBarController implements Initializable {
     }
 
     public void goToOffsAndDiscountsPage(MouseEvent mouseEvent) {
+        Controller.setDoesItOffPage(true);
+        Label label = (Label) mouseEvent.getSource();
+        Scene scene = label.getScene();
+        Stage stage = (Stage) scene.getWindow();
+        AnchorPane offPage = null;
+        Pane mainBar = null;
+        try {
+            offPage = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/OffsAndProductsMenu/ProductsMenu.fxml"));
+            mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+            offPage.getChildren().add(mainBar);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ScrollPane scrollPane = (ScrollPane) offPage.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
+        Controller.setCurrentPane(offPage);
+        scene.setRoot(offPage);
+        stage.setScene(scene);
+        stage.show();
     }
 }

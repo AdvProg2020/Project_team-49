@@ -183,7 +183,7 @@ public class OffPageMenuFxmlController implements Initializable {
 
 
         Controller.check();
-        Controller.restartSortedOrFilteredProduct();
+//        Controller.restartSortedOrFilteredProduct();
         loadProduct(counter);
 
         ArrayList<String> brands=new ArrayList<String>(Filter.getAvailableBrands()  );

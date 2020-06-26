@@ -32,7 +32,9 @@ public class Controller {
     private static boolean hasHeadManager = false;
     private static Product selectedProduct;
     private static Pane currentPane;
-    private static String color;
+    private static Pane lastPane;
+    private static String color = "f3f3f3";
+    private static Pane innerPaneForColor;
     private static boolean doesItOffPage;
     private static ArrayList<Long> compareIds=new ArrayList<>();
 
@@ -48,6 +50,14 @@ public class Controller {
         Controller.doesItOffPage = doesItOffPage;
     }
 
+    public static Pane getLastPane() {
+        return lastPane;
+    }
+
+    public static void setLastPane(Pane lastPane) {
+        Controller.lastPane = lastPane;
+    }
+
     public static boolean isDoesItOffPage() {
         return doesItOffPage;
     }
@@ -58,8 +68,18 @@ public class Controller {
 
     public static void setColor(String color) {
         Controller.color = color;
-        currentPane.setBackground(new Background(new BackgroundFill(Color.web("#" + color), CornerRadii.EMPTY, Insets.EMPTY)));
-        currentPane.setStyle("-fx-background-color: #" + color);
+        innerPaneForColor.setBackground(new Background(new BackgroundFill(Color.web("#" + color), CornerRadii.EMPTY, Insets.EMPTY)));
+        innerPaneForColor.setStyle("-fx-background-color: #" + color);
+    }
+
+    public static Pane getInnerPaneForColor() {
+        return innerPaneForColor;
+    }
+
+    public static void setInnerPaneForColor(Pane innerPaneForColor) {
+        Controller.innerPaneForColor = innerPaneForColor;
+        innerPaneForColor.setBackground(new Background(new BackgroundFill(Color.web("#" + color), CornerRadii.EMPTY, Insets.EMPTY)));
+        innerPaneForColor.setStyle("-fx-background-color: #" + color);
     }
 
     public static Pane getCurrentPane() {

@@ -160,6 +160,8 @@ public class CartPageController implements Initializable {
         }
     }
 
+
+
     private void setVRectangles() {
         firstRec.setVisible(false);
         secondRec.setVisible(false);
