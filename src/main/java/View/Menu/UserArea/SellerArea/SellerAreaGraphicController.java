@@ -202,6 +202,7 @@ public class SellerAreaGraphicController implements Initializable {
     private int imagesOff1Index = 0;
     private int imagesOff2Index = 0;
     private int logIndex = 0;
+    private int editProductIndex = 0;
     ArrayList<SellLog> logHistory = new ArrayList<>();
     ArrayList<Off> offs = new ArrayList<>();
     ArrayList<Product> products = new ArrayList<>();
@@ -1108,8 +1109,10 @@ public class SellerAreaGraphicController implements Initializable {
         restartInsideOfEditProductPain();
         if (mouseEvent.getSource().equals(editProduct1)) {
             setInsideOfEditProductPain(productsIndex);
+            editProductIndex = productsIndex;
         } else {
             setInsideOfEditProductPain(productsIndex + 1);
+            editProductIndex = productsIndex + 1;
         }
     }
 
@@ -1135,6 +1138,22 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void submitProductInformation(MouseEvent mouseEvent) {
+        if (!products.get(editProductIndex).getName().equals(productNameTextField.getText())) {
+            SellerAreaController.editProduct("name", productNameTextField.getText(), products.get(editProductIndex).getProductId());
+        }
+        if (products.get(editProductIndex).getPrice(seller) != Integer.parseInt(productNameTextField.getText())) {
+            SellerAreaController.editProduct("price", productPriceTextField.getText(), products.get(editProductIndex).getProductId());
+        }
+        if (!products.get(editProductIndex).getBrand().equals(productBrandTextField.getText())) {
+            SellerAreaController.editProduct("brand", productBrandTextField.getText(), products.get(editProductIndex).getProductId());
+        }
+        if (products.get(editProductIndex).getRemainingItemsForSeller(seller) != Integer.parseInt(productCountTextField.getText())) {
+            SellerAreaController.editProduct("count", productCountTextField.getText(), products.get(editProductIndex).getProductId());
+        }
+        if (!products.get(editProductIndex).getExplanation().equals(productExplanationField.getText())) {
+            SellerAreaController.editProduct("explanation", productExplanationField.getText(), products.get(editProductIndex).getProductId());
+        }
+        goBackToManageProducts(mouseEvent);
     }
 
     public void checkProductInformation(ActionEvent actionEvent) {
