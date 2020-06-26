@@ -257,4 +257,14 @@ public class ManagerAreaController {
         }
         return categories;
     }
+
+    public static String getAllCostumersForDiscount() {
+        String names = "";
+        for (User allUser : DataBase.getAllUsers()) {
+            if (allUser.getType().equals("Costumer")) {
+                names += allUser.getUsername() + " ";
+            }
+        }
+        return names.trim();
+    }
 }

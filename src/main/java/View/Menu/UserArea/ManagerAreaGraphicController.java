@@ -200,6 +200,11 @@ public class ManagerAreaGraphicController implements Initializable {
     public Rectangle newDiscountPercentRec;
     public Pane newDiscountPane;
     public Rectangle newDiscountAmountRec;
+    public Rectangle newDiscountIdRec;
+    public TextField newDiscountId;
+    public TextField newDiscountStartDate;
+    public Rectangle newDiscountDurationRec1;
+    public TextField newDiscountEndDate;
     private Manager manager;
     private int usersIndex = 0;
     private int categoriesIndex = 0;
@@ -1223,6 +1228,13 @@ public class ManagerAreaGraphicController implements Initializable {
         if (submitNewDiscount.isDisable()) return;
 
         ArrayList<String> info = new ArrayList<>();
+        info.add(newDiscountId.getText());
+        info.add(newDiscountStartDate.getText());
+        info.add(newDiscountEndDate.getText());
+        info.add(newDiscountPercent.getText());
+        info.add(newDiscountAmount.getText());
+        info.add(newDiscountCount.getText());
+        info.add(ManagerAreaController.getAllCostumersForDiscount());
         ManagerAreaController.createDiscountCode(info);
 
         restartTextFieldForNewDiscount();
