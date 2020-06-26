@@ -82,6 +82,8 @@ public class GuestAreaGraphicsController implements Initializable {
             ArrayList<Boolean> booleans = register();
             if (!booleans.get(1)) {
                 if (booleans.get(0)) {
+                    Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+                    Scene scene = ((Node) mouseEvent.getSource()).getScene();
                     Pane mainMenu = null;
                     Pane mainBar = null;
                     try {
@@ -95,6 +97,9 @@ public class GuestAreaGraphicsController implements Initializable {
                     ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
                     scrollPane.setPrefHeight(800);
                     mainMenu.getChildren().add(mainBar);
+                    scene.setRoot(mainMenu);
+                    stage.setScene(scene);
+                    stage.show();
 
                 }else{
                     Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
@@ -396,6 +401,27 @@ public class GuestAreaGraphicsController implements Initializable {
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
         Controller.setCurrentPane(Controller.getLastPane());
         scene.setRoot(Controller.getCurrentPane());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void goToMainMenuInRegisterAndLogin(MouseEvent mouseEvent) {
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((Node) mouseEvent.getSource()).getScene();
+        Pane mainMenu = null;
+        Pane mainBar = null;
+        try {
+            mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
+            mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+        ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
+        mainMenu.getChildren().add(mainBar);
+        scene.setRoot(mainMenu);
         stage.setScene(scene);
         stage.show();
     }

@@ -186,10 +186,13 @@
                         </AnchorPane>
                      </children>
                   </GridPane>
-                  <ImageView fitHeight="100.0" fitWidth="247.0" layoutX="610.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="100.0" fitWidth="247.0" layoutX="610.0" layoutY="33.0" onMouseClicked="#goToMainMenuInRegisterAndLogin" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../photos/MainMenu/mainBarImages/digikalaLogo.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="86.0" fitWidth="109.0" layoutX="290.0" layoutY="116.0" onMouseClicked="#goBackToLastPaneFromLogin" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -76,10 +76,13 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <ImageView fitHeight="167.0" fitWidth="398.0" layoutX="53.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="167.0" fitWidth="398.0" layoutX="53.0" layoutY="47.0" onMouseClicked="#goToMainMenuInRegisterAndLogin" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../photos/MainMenu/mainBarImages/digikalaLogo.png" />
                            </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ImageView>
                      </children>
                      <effect>
