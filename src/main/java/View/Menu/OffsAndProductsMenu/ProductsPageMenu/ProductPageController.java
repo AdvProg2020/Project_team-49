@@ -604,8 +604,8 @@ public class ProductPageController implements Initializable {
             return;
         }
 
-        Controller.addToCart(Controller.getSelectedProduct(),Controller.getSelectedProduct().getSellerByUsername(sellerNameLabel.getText()),1);
-
+//        Controller.addToCart(Controller.getSelectedProduct(),Controller.getSelectedProduct().getSellerByUsername(sellerNameLabel.getText()),1);
+        System.out.println(Controller.addToCart(Controller.getSelectedProduct(),Controller.getSelectedProduct().getSellerByUsername(sellerNameLabel.getText()),1));
         Scene scene = ((Node) mouseEvent.getSource()).getScene();
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Controller.setLastPane(Controller.getCurrentPane());

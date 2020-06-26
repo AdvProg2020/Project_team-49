@@ -206,6 +206,7 @@ public class OffPageMenuFxmlController implements Initializable {
     public void click(MouseEvent mouseEvent) {
         GridPane GridPane=(GridPane) mouseEvent.getSource();
         System.out.println(GridPane.getId());
+
     }
 
     public void clear(){
