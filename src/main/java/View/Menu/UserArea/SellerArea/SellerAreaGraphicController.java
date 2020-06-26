@@ -198,6 +198,7 @@ public class SellerAreaGraphicController implements Initializable {
         setPersonalInfoLabels();
         formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
+        Controller.cancelSong();
         new Thread(new Runnable() {
             @Override
             public void run() {

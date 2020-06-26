@@ -529,6 +529,8 @@ public class ProductsPageMenuFxmlController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ScrollPane scrollPane = (ScrollPane) pane.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
         pane.getChildren().add(minibar);
         Controller.setCurrentPane(pane);
         scene.setRoot(pane);

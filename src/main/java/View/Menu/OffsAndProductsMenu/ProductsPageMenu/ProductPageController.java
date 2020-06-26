@@ -194,6 +194,7 @@ public class ProductPageController implements Initializable {
         //reverse Order Comments
         setCommentPane();
         refreshScoreBar();
+
         Controller.cancelSong();
         new Thread(new Runnable() {
             @Override

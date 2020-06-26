@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Controller;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -69,6 +70,14 @@ public class MainPageController implements Initializable {
         timeline = new Timeline(new KeyFrame(Duration.millis(3000), e -> run()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+
+        Controller.cancelSong();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Controller.startSong("src/main/resources/Sound/MainPage/BackGround.mp3");
+            }
+        }).start();
     }
 
     private void arrangeTooltips() {

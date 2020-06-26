@@ -404,7 +404,9 @@ public class Controller {
         mediaPlayer.setCycleCount(100);
     }
     public static void cancelSong(){
-        mediaPlayer.stop();
+        if (mediaPlayer!=null) {
+            mediaPlayer.stop();
+        }
     }
     public static void resumeSong(){
 //        mediaPlayer=new MediaPlayer(media);
