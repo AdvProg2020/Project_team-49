@@ -82,6 +82,7 @@ public class ManagerAreaController {
     }
 
     public static String  removeDiscountCode(String code) {
+
         if (Manager.getDiscountCodeById(code) == null) {
             return "discount code not exist";
         } else {
