@@ -13,7 +13,7 @@
 
         <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2500.0" prefWidth="1500.0">
             <content>
-                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2500.0" prefWidth="1490.0">
+                <Pane fx:id="backpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2500.0" prefWidth="1490.0">
                     <children>
                         <GridPane layoutX="104.0" layoutY="296.0" prefHeight="1258.0" prefWidth="1031.0">
                             <columnConstraints>
@@ -48,9 +48,9 @@
                                         <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="26.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <ImageView fx:id="i00" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i00" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n00" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -275,9 +275,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g01" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="2">
                                     <children>
-                                        <ImageView fx:id="i01" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i01" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n01" prefHeight="30.0" prefWidth="96.0" text="Name:" GridPane.rowIndex="1">
@@ -510,9 +510,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g02" layoutX="261.0" layoutY="10.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="4">
                                     <children>
-                                        <ImageView fx:id="i02" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i02" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n02" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -745,9 +745,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g03" layoutX="511.0" layoutY="10.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="6">
                                     <children>
-                                        <ImageView fx:id="i03" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i03" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n03" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -980,9 +980,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g10" layoutX="761.0" layoutY="10.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.rowIndex="2">
                                     <children>
-                                        <ImageView fx:id="i10" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i10" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n10" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -1215,9 +1215,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g11" layoutX="10.0" layoutY="254.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                     <children>
-                                        <ImageView fx:id="i11" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i11" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n11" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -1450,9 +1450,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g12" layoutX="261.0" layoutY="254.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                     <children>
-                                        <ImageView fx:id="i12" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i12" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n12" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -1685,9 +1685,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g13" layoutX="511.0" layoutY="254.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="6" GridPane.rowIndex="2">
                                     <children>
-                                        <ImageView fx:id="i13" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i13" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n13" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -1920,9 +1920,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g20" layoutX="761.0" layoutY="254.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.rowIndex="4">
                                     <children>
-                                        <ImageView fx:id="i20" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i20" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n20" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -2155,9 +2155,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g21" layoutX="10.0" layoutY="498.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                     <children>
-                                        <ImageView fx:id="i21" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i21" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n21" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -2390,9 +2390,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g22" layoutX="261.0" layoutY="498.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                     <children>
-                                        <ImageView fx:id="i22" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i22" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n22" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -2625,9 +2625,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g23" layoutX="511.0" layoutY="498.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="6" GridPane.rowIndex="4">
                                     <children>
-                                        <ImageView fx:id="i23" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i23" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n23" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -2860,9 +2860,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g30" layoutX="761.0" layoutY="498.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.rowIndex="6">
                                     <children>
-                                        <ImageView fx:id="i30" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i30" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n30" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -3096,9 +3096,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g31" layoutX="10.0" layoutY="742.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="2" GridPane.rowIndex="6">
                                     <children>
-                                        <ImageView fx:id="i31" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i31" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n31" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -3332,9 +3332,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g32" layoutX="261.0" layoutY="742.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="4" GridPane.rowIndex="6">
                                     <children>
-                                        <ImageView fx:id="i32" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i32" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n32" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -3567,9 +3567,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g33" layoutX="511.0" layoutY="742.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="6" GridPane.rowIndex="6">
                                     <children>
-                                        <ImageView fx:id="i33" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i33" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n33" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -3802,9 +3802,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g40" layoutX="761.0" layoutY="742.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.rowIndex="8">
                                     <children>
-                                        <ImageView fx:id="i40" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i40" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n40" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -4038,9 +4038,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g41" layoutX="10.0" layoutY="985.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="2" GridPane.rowIndex="8">
                                     <children>
-                                        <ImageView fx:id="i41" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i41" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n41" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -4274,9 +4274,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g42" layoutX="261.0" layoutY="985.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="4" GridPane.rowIndex="8">
                                     <children>
-                                        <ImageView fx:id="i42" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i42" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n42" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -4510,9 +4510,9 @@
                                 </GridPane>
                                 <GridPane fx:id="g43" layoutX="511.0" layoutY="985.0" onMouseClicked="#click" onMouseEntered="#makeGridPaneCompareOn" onMouseExited="#makeGridPaneCompareOff" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-radius: 8;" GridPane.columnIndex="6" GridPane.rowIndex="8">
                                     <children>
-                                        <ImageView fx:id="i43" fitHeight="188.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
+                                        <ImageView fx:id="i43" fitHeight="188.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
                                             <GridPane.margin>
-                                                <Insets top="-5.0" />
+                                                <Insets left="5.0" top="-5.0" />
                                             </GridPane.margin>
                                         </ImageView>
                                         <Label fx:id="n43" prefHeight="46.0" prefWidth="134.0" text="Name:" GridPane.rowIndex="1">
@@ -4808,6 +4808,22 @@
                                 </ImageView>
                             </children>
                         </GridPane>
+                  <Label fx:id="saleLeft" layoutX="313.0" layoutY="196.0" prefHeight="106.0" prefWidth="267.0" text="Sale" textFill="RED">
+                     <font>
+                        <Font name="Cooper Black" size="96.0" />
+                     </font>
+                     <effect>
+                        <Glow level="0.16" />
+                     </effect>
+                  </Label>
+                  <Label fx:id="saleRight" layoutX="703.0" layoutY="196.0" prefHeight="106.0" prefWidth="267.0" text="Sale" textFill="RED">
+                     <font>
+                        <Font name="Cooper Black" size="96.0" />
+                     </font>
+                     <effect>
+                        <Glow level="0.16" />
+                     </effect>
+                  </Label>
                     </children>
                 </Pane>
             </content>

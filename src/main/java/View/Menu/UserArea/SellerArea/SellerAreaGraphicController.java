@@ -144,8 +144,38 @@ public class SellerAreaGraphicController implements Initializable {
     public TextField offPercentTextField;
     public ListView addOffProductsList;
     public ImageView goBackToManageOffsArrow;
+
+    public Pane firstProductPane;
+    public ImageView productImage1;
+    public Label productPrice1;
+    public Label productBrand1;
+    public Label productCount1;
+    public Label productName1;
+    public Label productId1;
+    public Label productStatus1;
+    public Label productExplanation1;
+    public ImageView editProduct1;
+    public ImageView deleteProduct1;
+    public ImageView productImage2;
+    public Label productPrice2;
+    public Label productBrand2;
+    public Label productCount2;
+    public Label productName2;
+    public Label productId2;
+    public Label productStatus2;
+    public Label productExplanation2;
+    public ImageView editProduct2;
+    public ImageView deleteProduct2;
+    public ImageView upArrowProducts;
+    public ImageView downArrowProducts;
+    public Label manageProductsLabel;
+    public Button addProductButton;
+    public Pane manageProductsPane;
+    public Pane secondProductPane;
+    public Pane productsHistoryIsEmptyPain;
     private Seller seller;
     private int offsIndex = 0;
+    private int productsIndex = 0;
     private int imagesLog1Index = 0;
     private int imagesLog2Index = 0;
     private int imagesOff1Index = 0;
@@ -153,6 +183,7 @@ public class SellerAreaGraphicController implements Initializable {
     private int logIndex = 0;
     ArrayList<SellLog> logHistory = new ArrayList<>();
     ArrayList<Off> offs = new ArrayList<>();
+    ArrayList<Product> products = new ArrayList<>();
     private SimpleDateFormat formatter;
 
     @Override
@@ -558,6 +589,13 @@ public class SellerAreaGraphicController implements Initializable {
         addOffPane.setDisable(true);
         addOffLabel.setVisible(false);
         addOffLabel.setDisable(true);
+
+        manageProductsLabel.setVisible(false);
+        manageProductsLabel.setDisable(true);
+        manageProductsPane.setVisible(false);
+        manageProductsPane.setDisable(true);
+        addProductButton.setDisable(true);
+        addProductButton.setVisible(false);
     }
 
     public void goToManageOffsPain(MouseEvent mouseEvent) {
@@ -867,8 +905,94 @@ public class SellerAreaGraphicController implements Initializable {
     public void goToManageProductsPain(MouseEvent mouseEvent) {
         closeALlPanes();
         restartInsideOfManageProductsPain();
+
+        manageProductsLabel.setVisible(true);
+        manageProductsLabel.setDisable(false);
+        manageProductsPane.setVisible(true);
+        manageProductsPane.setDisable(false);
+        addProductButton.setDisable(false);
+        addProductButton.setVisible(true);
+
+        productsIndex = 0;
+        products.clear();
+        products.addAll(seller.getProductsForSale());
+        int size = products.size();
+        if (size > 2) {
+            upArrowProducts.setVisible(true);
+            upArrowProducts.setDisable(false);
+            downArrowProducts.setVisible(true);
+            downArrowProducts.setDisable(false);
+        } else if (size == 0) {
+            productsHistoryIsEmptyPain.setVisible(true);
+            productsHistoryIsEmptyPain.setDisable(false);
+        }
+
+        setProductsPaneContents();
+    }
+
+    private void setProductsPaneContents() {
+        int size = products.size();
+        if (size == 0) {
+            return;
+        }
+        Product product1 = products.get(productsIndex);
+        firstProductPane.setVisible(true);
+        firstProductPane.setDisable(false);
+        productName1.setText(product1.getName());
+        productId1.setText(String.valueOf(product1.getProductId()));
+        productBrand1.setText(product1.getBrand());
+        productPrice1.setText(String.valueOf(product1.getPrice(seller)));
+        productCount1.setText(String.valueOf(product1.getRemainingItemsForSeller(seller)));
+        productExplanation1.setText(product1.getExplanation());
+        productImage1.setImage(new Image(product1.getImageAddress()));
+
+        if (size == 1) return;
+        Product product2 = products.get(productsIndex + 1);
+        secondProductPane.setVisible(true);
+        secondProductPane.setDisable(false);
+        productName2.setText(product2.getName());
+        productId2.setText(String.valueOf(product2.getProductId()));
+        productBrand2.setText(product2.getBrand());
+        productPrice2.setText(String.valueOf(product2.getPrice(seller)));
+        productCount2.setText(String.valueOf(product2.getRemainingItemsForSeller(seller)));
+        productExplanation2.setText(product2.getExplanation());
+        productImage2.setImage(new Image(product2.getImageAddress()));
+    }
+
+    public void seeMoreProducts(MouseEvent mouseEvent) {
+        int size = products.size();
+        if (mouseEvent.getSource().equals(upArrowProducts)) {
+            productsIndex--;
+            if (productsIndex > 0) {
+                productsIndex = 0;
+            }
+        } else if (mouseEvent.getSource().equals(downArrowProducts)) {
+            productsIndex++;
+            if (productsIndex >= size - 2) {
+                productsIndex--;
+            }
+        }
+        setProductsPaneContents();
     }
 
     private void restartInsideOfManageProductsPain() {
+        upArrowProducts.setVisible(false);
+        upArrowProducts.setDisable(true);
+        downArrowProducts.setVisible(false);
+        downArrowProducts.setDisable(true);
+        secondProductPane.setDisable(true);
+        secondProductPane.setVisible(false);
+        firstProductPane.setVisible(false);
+        firstProductPane.setDisable(true);
+    }
+
+    public void goToEditProductPane(MouseEvent mouseEvent) {
+
+    }
+
+    public void doDeleteProduct(MouseEvent mouseEvent) {
+    }
+
+    public void goToAddProductPane(MouseEvent mouseEvent) {
     }
 }
