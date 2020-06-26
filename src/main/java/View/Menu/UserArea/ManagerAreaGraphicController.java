@@ -12,20 +12,22 @@ import Models.User.Seller;
 import Models.User.User;
 import View.Menu.UserArea.ManagerArea.ManagerArea;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import javax.xml.crypto.Data;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
@@ -233,6 +235,7 @@ public class ManagerAreaGraphicController implements Initializable {
         emailLabel.setText(info[3]);
         roleLabelInPersonalInfo.setText("manager");
         phoneNumberLabel.setText(info[4]);
+        userNameLabel.setText(manager.getUsername());
     }
 
     public void goToEditPersonalInfo(MouseEvent mouseEvent) {
@@ -916,6 +919,8 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     public void acceptRequest(ActionEvent event) {
+        ManagerAreaController.acceptRequest(DataBase.getAllActiveRequests().get(requestsIndex).getRequestId());
+
 
 
         requestsIndex = 0;
@@ -923,7 +928,7 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     public void rejectRequest(ActionEvent event) {
-
+        ManagerAreaController.declineRequest(DataBase.getAllActiveRequests().get(requestsIndex).getRequestId());
 
         requestsIndex = 0;
         setRequestsPaneContent();
@@ -1042,11 +1047,11 @@ public class ManagerAreaGraphicController implements Initializable {
     private ArrayList<String> getAccountInformation(String username, String type) {
         ArrayList<String> info = new ArrayList<>();
         info.add(username);
+        info.add(passReg.getText());
         info.add(firstNameReg.getText());
         info.add(lastNameReg.getText());
         info.add(emailReg.getText());
         info.add(phoneReg.getText());
-        info.add(passReg.getText());
         return info;
     }
 
@@ -1222,6 +1227,8 @@ public class ManagerAreaGraphicController implements Initializable {
     public void submitNewDiscount(MouseEvent mouseEvent) {
         if (submitNewDiscount.isDisable()) return;
 
+        ArrayList<String> info = new ArrayList<>();
+        ManagerAreaController.createDiscountCode(info);
 
         restartTextFieldForNewDiscount();
         restartInsideMainDiscountPane();
@@ -1263,5 +1270,36 @@ public class ManagerAreaGraphicController implements Initializable {
             submitNewDiscount.setOpacity(0.6);
             submitNewDiscount.setDisable(true);
         }
+    }
+
+    public void goBackToLastPaneFromManagerArea(MouseEvent mouseEvent) {
+        Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
+        Controller.setCurrentPane(Controller.getLastPane());
+        scene.setRoot(Controller.getCurrentPane());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void logoutManager(MouseEvent mouseEvent) {
+        Controller.logout();
+        Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
+        Pane mainMenu = null;
+        Pane mainBar = null;
+        try {
+            mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
+            mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+        ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
+        mainMenu.getChildren().add(mainBar);
+        Controller.setCurrentPane(mainMenu);
+        scene.setRoot(Controller.getCurrentPane());
+        stage.setScene(scene);
+        stage.show();
     }
 }

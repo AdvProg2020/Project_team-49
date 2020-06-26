@@ -810,9 +810,17 @@
                         <Font name="Raleway" size="15.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="50.0" fitWidth="49.0" layoutX="37.0" layoutY="151.0" onMouseClicked="#goBackToLastPaneFromCostumerArea" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="37.0" layoutY="151.0" onMouseClicked="#goBackToLastPaneFromCostumerArea" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../photos/UserArea/personalInfo/back.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="43.0" layoutX="100.0" layoutY="152.0" onMouseClicked="#logoutCostumer" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../photos/UserArea/logout.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />

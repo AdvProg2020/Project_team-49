@@ -144,6 +144,7 @@ public class CostumerAreaGraphicController implements Initializable {
 
 
     private void setPersonalInfoLabels() {
+        userNameLabel.setText(costumer.getUsername());
         firstNameLabel.setText(costumer.getFirstName());
         lastNameLabel.setText(costumer.getLastName());
         emailLabel.setText(costumer.getEMail());
@@ -618,6 +619,28 @@ public class CostumerAreaGraphicController implements Initializable {
         scrollPane.setPrefHeight(800);
         Controller.setCurrentPane(pane);
         scene.setRoot(pane);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void logoutCostumer(MouseEvent mouseEvent) {
+        Controller.logout();
+        Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
+        Pane mainMenu = null;
+        Pane mainBar = null;
+        try {
+            mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
+            mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+        ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
+        mainMenu.getChildren().add(mainBar);
+        Controller.setCurrentPane(mainMenu);
+        scene.setRoot(Controller.getCurrentPane());
         stage.setScene(scene);
         stage.show();
     }
