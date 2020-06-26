@@ -477,7 +477,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
 
         Controller.check();
-        Controller.restartSortedOrFilteredProduct();
+//        Controller.restartSortedOrFilteredProduct();
         loadProduct(counter);
 
 
@@ -496,17 +496,6 @@ public class ProductsPageMenuFxmlController implements Initializable {
             brandFilter.setPrefHeight(brandsCheckBoxes.size() * 24);
         }
 
-        if (Controller.isDoesItOffPage()){
-            saleLeft.setVisible(true);
-            saleRight.setVisible(true);
-            saleRight.setDisable(false);
-            saleLeft.setDisable(false);
-        }else{
-            saleLeft.setVisible(false);
-            saleRight.setVisible(false);
-            saleRight.setDisable(true);
-            saleLeft.setDisable(true);
-        }
         Controller.cancelSong();
         new Thread(new Runnable() {
             @Override
@@ -529,6 +518,8 @@ public class ProductsPageMenuFxmlController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ScrollPane scrollPane = (ScrollPane) pane.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
         pane.getChildren().add(minibar);
         Controller.setCurrentPane(pane);
         scene.setRoot(pane);
@@ -559,6 +550,19 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
     public void loadProduct(long start){
         clear();
+
+        if (Controller.isDoesItOffPage()){
+            saleLeft.setVisible(true);
+            saleRight.setVisible(true);
+            saleRight.setDisable(false);
+            saleLeft.setDisable(false);
+            offFilter.setSelected(true);
+        }else{
+            saleLeft.setVisible(false);
+            saleRight.setVisible(false);
+            saleRight.setDisable(true);
+            saleLeft.setDisable(true);
+        }
 
         ArrayList<String> categories=new ArrayList<String>(Filter.showSubCategories());
         for (String category : categories) {
@@ -937,9 +941,12 @@ public class ProductsPageMenuFxmlController implements Initializable {
     public void offFilter(ActionEvent actionEvent) {
         if (offFilter.isSelected()){
             Filter.filterByOffs();
+            Controller.setDoesItOffPage(true);
         }else{
             Filter.disableOffsFilter();
+            Controller.setDoesItOffPage(false);
         }
+
         counter=0;
         loadProduct(counter);
     }

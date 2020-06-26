@@ -59,6 +59,7 @@ public class GuestAreaGraphicsController implements Initializable {
             accountTypeReg.getItems().add("Costumer");
             accountTypeReg.getItems().add("Seller");
         }
+        Controller.cancelSong();
         new Thread(new Runnable() {
             @Override
             public void run() {
