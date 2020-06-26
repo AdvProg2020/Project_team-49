@@ -30,21 +30,23 @@ import static Controller.DataBase.getProductById;
 public class View extends Application {
 
     public View() {
-
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        Controller.setCurrentUser(getAllUsers().get(1));
-        Product product = getProductById(1);
-        Controller.setSelectedProduct(product);
-        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/OffsAndProductsMenu/ProductsMenu.fxml"));
+//        cartAndBuyScene = new Scene( FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml")));
+        Controller.setCurrentUser(getAllUsers().get(5));
+//        Product product = getProductById(1);
+//        Controller.setSelectedProduct(product);
+        Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
         Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
-        Controller.setCurrentPane((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+        Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
         ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
         scrollPane.setPrefHeight(800);
         mainMenu.getChildren().add(mainBar);
-        stage.setScene(new Scene(mainMenu));
+        Controller.setCurrentPane(mainMenu);
+        Scene scene = new Scene(mainMenu);
+        stage.setScene(scene);
         stage.show();
 
     }

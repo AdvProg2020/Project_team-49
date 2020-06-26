@@ -12,7 +12,10 @@ import Models.User.Costumer;
 import Models.User.Guest;
 import Models.User.Seller;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -23,9 +26,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -130,7 +135,7 @@ public class CartPageController implements Initializable {
         } else if (Controller.getCurrentUser().getType().equalsIgnoreCase("guest")) {
             cart = ((Guest) Controller.getCurrentUser()).getCart();
         }
-        deepShitStuff();
+//        deepShitStuff();
         setMainPains();
         if (cartIsEmpty.isVisible()) return;
         setProductsGridPane();
@@ -163,6 +168,8 @@ public class CartPageController implements Initializable {
             downArrow.setDisable(false);
         }
     }
+
+
 
     private void setVRectangles() {
         firstRec.setVisible(false);
@@ -710,5 +717,14 @@ public class CartPageController implements Initializable {
     public void checkInformation(ActionEvent event) {
         restartTextFieldsWithRecs();
         checkDataForPay();
+    }
+
+    public void goBackToLastPane(MouseEvent mouseEvent) {
+        Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
+        System.out.println(Controller.getCurrentPane().getId());
+        System.out.println(Controller.getLastPane().getId());
+        Controller.setCurrentPane(Controller.getLastPane());
+        stage.setScene(new Scene(Controller.getCurrentPane()));
+        stage.show();
     }
 }
