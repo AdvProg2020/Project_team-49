@@ -1,5 +1,6 @@
 package Models.User;
 
+import Controller.DataBase;
 import Models.DiscountCode;
 import Models.Log.BuyLog;
 import Models.Product;
@@ -79,6 +80,7 @@ public class Costumer extends User implements Serializable {
     }
 
     public void addDiscountCode(DiscountCode discountCode) {
+//        DataBase.getAllDiscountCodes().add(discountCode);
         this.discountCodes.add(discountCode);
     }
 

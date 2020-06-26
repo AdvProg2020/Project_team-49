@@ -1,9 +1,11 @@
 package View.Menu.UserArea.SellerArea;
 
 import Controller.Controller;
+import Controller.SellerAreaController;
 import Models.Log.BuyLog;
 import Models.Log.Log;
 import Models.Log.SellLog;
+import Models.Off;
 import Models.Product;
 import Models.User.Costumer;
 import Controller.CostumerAreaController;
@@ -11,10 +13,7 @@ import Models.User.Guest;
 import Models.User.Seller;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Control;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -23,8 +22,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static Controller.CostumerAreaController.*;
@@ -90,14 +92,93 @@ public class SellerAreaGraphicController implements Initializable {
     public ImageView seeLessProductsImageLog2;
     public ImageView seeLessProductsImageLog1;
     public Pane sellHistoryIsEmptyPain;
-    public Label discountCodesLabel;
     public ImageView costumerProfileImage;
+    
+    public Label manageOffsLabel;
+    public Pane manageOffsPane;
+    public ImageView image41;
+    public ImageView image42;
+    public ImageView image43;
+    public ImageView image44;
+    public ImageView image45;
+    public ImageView image46;
+    public ImageView image47;
+    public ImageView image48;
+    public Label offPercentage2;
+    public Label offIdLabel2;
+    public Label offStatus2;
+    public ImageView seeMoreProductsImageOff2;
+    public ImageView seeLessProductsImageOff2;
+    public Label startTime2;
+    public Label endTime2;
+    public ImageView image31;
+    public ImageView image32;
+    public ImageView image33;
+    public ImageView image34;
+    public ImageView image35;
+    public Label offPercentage1;
+    public Label offIdLabel1;
+    public Label offStatus1;
+    public ImageView seeMoreProductsImageOff1;
+    public ImageView seeLessProductsImageOff1;
+    public Label startTime1;
+    public Label endTime1;
+    public ImageView upArrowOffs;
+    public ImageView downArrowOffs;
+    public Pane offHistoryIsEmptyPain;
+    public Pane secondOffPane;
+    public Pane firstOffPane;
+    public ImageView image36;
+    public ImageView image37;
+    public ImageView image38;
+    public Button addOffButton;
+    public Pane addOffLabel;
+    public Pane addOffPane;
+    public Rectangle addOffProducts;
+    public Rectangle offPercentRec;
+    public Rectangle endDateRec;
+    public Rectangle startDateRec;
+    public TextField startDateTextField;
+    public Pane addOffButtonFinal;
+    public TextField endDateTextField;
+    public TextField offPercentTextField;
+    public ListView addOffProductsList;
+    public ImageView goBackToManageOffsArrow;
+    public Pane firstProductPane;
+    public ImageView productImage1;
+    public Label productPrice1;
+    public Label productBrand1;
+    public Label productCount1;
+    public Label productName1;
+    public Label productId1;
+    public Label productStatus1;
+    public Label productExplanation1;
+    public ImageView editProduct1;
+    public ImageView deleteProduct1;
+    public Pane firstProductPane1;
+    public ImageView productImage2;
+    public Label productPrice2;
+    public Label productBrand2;
+    public Label productCount2;
+    public Label productName2;
+    public Label productId2;
+    public Label productStatus2;
+    public Label productExplanation2;
+    public ImageView editProduct2;
+    public ImageView deleteProduct2;
+    public ImageView upArrowProducts;
+    public ImageView downArrowProducts;
+    public Label manageProductsLabel;
+    public Button addProductButton;
     private Seller seller;
-    private int discountCodesIndex = 0;
+    private int offsIndex = 0;
     private int imagesLog1Index = 0;
     private int imagesLog2Index = 0;
+    private int imagesOff1Index = 0;
+    private int imagesOff2Index = 0;
     private int logIndex = 0;
     ArrayList<SellLog> logHistory = new ArrayList<>();
+    ArrayList<Off> offs = new ArrayList<>();
     private SimpleDateFormat formatter;
 
     @Override
@@ -277,7 +358,7 @@ public class SellerAreaGraphicController implements Initializable {
 
     public void goToSellHistoryPane(MouseEvent mouseEvent) {
         closeALlPanes();
-        restartInsideOfBuyHistoryPane();
+        restartInsideOfSellHistoryPane();
         imagesLog1Index = 0;
         imagesLog2Index = 0;
         logIndex = 0;
@@ -301,7 +382,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     private void setLogPaneContents() {
-        restartInsideOfBuyHistoryPane();
+        restartInsideOfSellHistoryPane();
         int size = logHistory.size();
         if (size == 0) {
             return;
@@ -454,7 +535,7 @@ public class SellerAreaGraphicController implements Initializable {
         }
     }
 
-    private void restartInsideOfBuyHistoryPane() {
+    private void restartInsideOfSellHistoryPane() {
         upArrowLogs.setVisible(false);
         upArrowLogs.setDisable(true);
         downArrowLogs.setVisible(false);
@@ -472,12 +553,13 @@ public class SellerAreaGraphicController implements Initializable {
     private void closeALlPanes() {
         userInfoPane.setDisable(true);
         userInfoPane.setVisible(false);
-        discountCodesLabel.setVisible(false);
+        manageOffsLabel.setVisible(false);
         editPersonalInfoPane.setDisable(true);
         editPersonalInfoPane.setVisible(false);
         editPersonalInfoLabel.setDisable(true);
         editPersonalInfoLabel.setVisible(false);
         personalInfoLabel.setVisible(false);
+
         sellHistoryLabel.setVisible(false);
         sellHistoryPane.setVisible(false);
         sellHistoryPane.setDisable(true);
@@ -486,13 +568,342 @@ public class SellerAreaGraphicController implements Initializable {
         imagesLog1Index = 0;
         imagesLog2Index = 0;
         logIndex = 0;
-        discountCodesIndex = 0;
+
+        manageOffsLabel.setVisible(false);
+        manageOffsPane.setVisible(false);
+        manageOffsPane.setDisable(true);
+        offHistoryIsEmptyPain.setVisible(false);
+        offHistoryIsEmptyPain.setDisable(true);
+        addOffButton.setDisable(true);
+        addOffButton.setVisible(false);
+        imagesOff1Index = 0;
+        imagesOff2Index = 0;
+        offsIndex = 0;
+
+        addOffPane.setVisible(false);
+        addOffPane.setDisable(true);
+        addOffLabel.setVisible(false);
+        addOffLabel.setDisable(true);
     }
 
-    public void goToManageProducts(MouseEvent mouseEvent) {
+    public void goToManageOffsPain(MouseEvent mouseEvent) {
         closeALlPanes();
+        restartInsideOfManageOffsPain();
+        imagesOff1Index = 0;
+        imagesOff2Index = 0;
+        offsIndex = 0;
+        offs.clear();
+        offs.addAll(seller.getOffs());
+        addOffButton.setVisible(true);
+        addOffButton.setDisable(false);
+        manageOffsLabel.setVisible(true);
+        manageOffsLabel.setOpacity(1);
+        manageOffsPane.setDisable(false);
+        manageOffsPane.setVisible(true);
+        int size = offs.size();
+        if (size > 2) {
+            upArrowOffs.setVisible(true);
+            upArrowOffs.setDisable(false);
+            downArrowOffs.setVisible(true);
+            downArrowOffs.setDisable(false);
+        } else if (size == 0) {
+            offHistoryIsEmptyPain.setVisible(true);
+            offHistoryIsEmptyPain.setDisable(false);
+        }
+        setOffPaneContents();
     }
 
-    public void goToManageOffs(MouseEvent mouseEvent) {
+    private void setOffPaneContents() {
+        restartInsideOfManageOffsPain();
+        int size = offs.size();
+        if (size == 0) {
+            return;
+        }
+        Off off1 = offs.get(offsIndex);
+        firstOffPane.setVisible(true);
+        firstOffPane.setDisable(false);
+        startTime2.setText(formatter.format(off1.getStartDate()));
+        endTime2.setText(formatter.format(off1.getEndDate()));
+        offPercentage2.setText(String.valueOf(off1.getOffAmount()));
+        offIdLabel2.setText(String.valueOf(off1.getOffId()));
+        offStatus2.setText(String.valueOf(off1.getOffStatus()));
+        if (off1.getProducts().size() < 9) {
+            seeMoreProductsImageOff2.setDisable(true);
+            seeMoreProductsImageOff2.setVisible(false);
+            seeLessProductsImageOff2.setVisible(false);
+            seeLessProductsImageOff2.setDisable(true);
+        } else {
+            seeMoreProductsImageOff2.setDisable(false);
+            seeMoreProductsImageOff2.setVisible(true);
+            seeLessProductsImageOff2.setVisible(true);
+            seeLessProductsImageOff2.setDisable(false);
+        }
+        setFirstImageOff();
+
+        if (size == 1) return;
+        Off off2 = offs.get(offsIndex + 1);
+        secondOffPane.setVisible(true);
+        secondOffPane.setDisable(false);
+        startTime1.setText(formatter.format(off2.getStartDate()));
+        endTime1.setText(formatter.format(off2.getEndDate()));
+        offPercentage1.setText(String.valueOf(off2.getOffAmount()));
+        offIdLabel1.setText(String.valueOf(off2.getOffId()));
+        offStatus1.setText(String.valueOf(off2.getOffStatus()));
+        if (off2.getProducts().size() < 9) {
+            seeMoreProductsImageOff1.setDisable(true);
+            seeMoreProductsImageOff1.setVisible(false);
+            seeLessProductsImageOff1.setVisible(false);
+            seeLessProductsImageOff1.setDisable(true);
+        } else {
+            seeMoreProductsImageOff1.setDisable(false);
+            seeMoreProductsImageOff1.setVisible(true);
+            seeLessProductsImageOff1.setVisible(true);
+            seeLessProductsImageOff1.setDisable(false);
+        }
+        setSecondImageOff();
+    }
+
+    private void setSecondImageOff() {
+        clearOffImages2();
+        ArrayList<Product> products = offs.get(offsIndex + 1).getProducts();
+        for (int i = 0; i < 8 && i < products.size() - 1; i++) {
+            Product product = products.get(i);
+            if (i == 0) {
+                setProductsImage(image31, product.getImageAddress());
+            } else if (i == 1) {
+                setProductsImage(image32, product.getImageAddress());
+            } else if (i == 2) {
+                setProductsImage(image33, product.getImageAddress());
+            } else if (i == 3) {
+                setProductsImage(image34, product.getImageAddress());
+            } else if (i == 4) {
+                setProductsImage(image35, product.getImageAddress());
+            } else if (i == 5) {
+                setProductsImage(image36, product.getImageAddress());
+            } else if (i == 6) {
+                setProductsImage(image37, product.getImageAddress());
+            } else if (i == 7) {
+                setProductsImage(image38, product.getImageAddress());
+            }
+        }
+    }
+
+    private void clearOffImages2() {
+        image31.setImage(null);
+        image32.setImage(null);
+        image33.setImage(null);
+        image34.setImage(null);
+        image35.setImage(null);
+        image36.setImage(null);
+        image37.setImage(null);
+        image38.setImage(null);
+    }
+
+    private void setFirstImageOff() {
+        clearOffImages1();
+        ArrayList<Product> products = offs.get(offsIndex).getProducts();
+        for (int i = 0; i < 8 && i < products.size() - 1; i++) {
+            Product product = products.get(i);
+            if (i == 0) {
+                setProductsImage(image41, product.getImageAddress());
+            } else if (i == 1) {
+                setProductsImage(image42, product.getImageAddress());
+            } else if (i == 2) {
+                setProductsImage(image43, product.getImageAddress());
+            } else if (i == 3) {
+                setProductsImage(image44, product.getImageAddress());
+            } else if (i == 4) {
+                setProductsImage(image45, product.getImageAddress());
+            } else if (i == 5) {
+                setProductsImage(image46, product.getImageAddress());
+            } else if (i == 6) {
+                setProductsImage(image47, product.getImageAddress());
+            } else if (i == 7) {
+                setProductsImage(image48, product.getImageAddress());
+            }
+        }
+    }
+
+    private void clearOffImages1() {
+        image41.setImage(null);
+        image42.setImage(null);
+        image43.setImage(null);
+        image44.setImage(null);
+        image45.setImage(null);
+        image46.setImage(null);
+        image47.setImage(null);
+        image48.setImage(null);
+    }
+
+    private void restartInsideOfManageOffsPain() {
+        upArrowOffs.setVisible(false);
+        upArrowOffs.setDisable(true);
+        downArrowOffs.setVisible(false);
+        downArrowOffs.setDisable(true);
+        seeMoreProductsImageOff1.setDisable(true);
+        seeMoreProductsImageOff1.setVisible(false);
+        seeMoreProductsImageOff2.setDisable(true);
+        seeMoreProductsImageOff2.setVisible(false);
+        secondOffPane.setDisable(true);
+        secondOffPane.setVisible(false);
+        firstOffPane.setVisible(false);
+        firstOffPane.setDisable(true);
+    }
+
+    public void seeMoreOffs(MouseEvent mouseEvent) {
+        int size = offs.size();
+        if (mouseEvent.getSource().equals(upArrowOffs)) {
+            offsIndex--;
+            if (offsIndex > 0) {
+                offsIndex = 0;
+            }
+        } else if (mouseEvent.getSource().equals(downArrowOffs)) {
+            offsIndex++;
+            if (offsIndex >= size - 2) {
+                offsIndex--;
+            }
+        }
+        setOffPaneContents();
+    }
+
+    public void seeMorePicturesOff(MouseEvent mouseEvent) {
+        int size = 0;
+
+        if (mouseEvent.getSource().equals(seeMoreProductsImageOff2)) {
+            Off off = offs.get(offsIndex);
+            size = off.getProducts().size();
+            if (imagesOff1Index + 8 >= size + 1) return;
+            imagesOff1Index++;
+            setFirstImageOff();
+
+        } else if (mouseEvent.getSource().equals(seeMoreProductsImageOff1)) {
+            Off off = offs.get(offsIndex + 1);
+            size = off.getProducts().size();
+            if (imagesOff2Index + 8 >= size + 1) return;
+            imagesOff2Index++;
+            setSecondImageOff();
+
+        } else if (mouseEvent.getSource().equals(seeLessProductsImageOff2)) {
+            Off off = offs.get(offsIndex);
+            size = off.getProducts().size();
+            if (imagesOff1Index == 0) return;
+            imagesOff1Index--;
+            setFirstImageOff();
+
+        } else if (mouseEvent.getSource().equals(seeLessProductsImageOff1)) {
+            Off off = offs.get(offsIndex + 1);
+            size = off.getProducts().size();
+            if (imagesOff2Index == 0) return;
+            imagesOff2Index--;
+            setSecondImageOff();
+        }
+    }
+
+    public void goToAddOffPane(MouseEvent mouseEvent) {
+        closeALlPanes();
+        restartInsideOfAddOffPain();
+
+        addOffLabel.setDisable(false);
+        addOffLabel.setVisible(true);
+        addOffPane.setDisable(false);
+        addOffPane.setVisible(true);
+
+        setAddOffPaneContents();
+    }
+
+    private void setAddOffPaneContents() {
+        for (String s : SellerAreaController.getAvailableProductsForOff(seller.getUsername())) {
+            CheckBox checkBox = new CheckBox();
+            checkBox.setText(s);
+            checkBox.setSelected(false);
+            addOffProductsList.getItems().add(checkBox);
+        }
+    }
+
+    private void restartInsideOfAddOffPain() {
+        startDateRec.setStroke(Color.valueOf("#959595"));
+        endDateRec.setStroke(Color.valueOf("#959595"));
+        offPercentRec.setStroke(Color.valueOf("#959595"));
+        addOffProducts.setStroke(Color.valueOf("#959595"));
+
+        startDateTextField.setText("");
+        endDateTextField.setText("");
+        offPercentTextField.setText("");
+        addOffProductsList.getItems().clear();
+
+
+    }
+
+    public void addOff(MouseEvent mouseEvent) {
+        startDateRec.setStroke(Color.valueOf("#959595"));
+        endDateRec.setStroke(Color.valueOf("#959595"));
+        offPercentRec.setStroke(Color.valueOf("#959595"));
+        addOffProducts.setStroke(Color.valueOf("#959595"));
+
+        Date date = null;
+        boolean errorFound = false;
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(startDateTextField.getText());
+        } catch (ParseException e) {
+            startDateRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH).parse(endDateTextField.getText());
+        } catch (ParseException e) {
+            endDateRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!offPercentTextField.getText().matches("\\d+") || offPercentTextField.getText().equals("")) {
+            offPercentRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        } else if ((Integer.parseInt(offPercentTextField.getText()) >= 100) || (Integer.parseInt(offPercentTextField.getText()) <= 0)) {
+            offPercentRec.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (getSelectedProductsId().equals("")) {
+            addOffProducts.setStroke(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!errorFound) {
+            ArrayList<String> info = new ArrayList<>();
+            info.add(getSelectedProductsId());
+            info.add(startDateTextField.getText());
+            info.add(endDateTextField.getText());
+            info.add(offPercentTextField.getText());
+            SellerAreaController.addOff(info);
+            goToManageOffsPain(mouseEvent);
+        }
+    }
+
+    private String getSelectedProductsId() {
+        String products = "";
+        for (Object item : addOffProductsList.getItems()) {
+            if (((CheckBox) item).isSelected()) {
+                products += ((CheckBox) item).getText().split("_")[1] + " ";
+            }
+        }
+        return products.trim();
+    }
+
+    public void goBackToManageOffs(MouseEvent mouseEvent) {
+        goToManageOffsPain(mouseEvent);
+    }
+
+    public void goToManageProductsPain(MouseEvent mouseEvent) {
+        closeALlPanes();
+        restartInsideOfManageProductsPain();
+    }
+
+    private void restartInsideOfManageProductsPain() {
+    }
+
+    public void goToEditProductPane(MouseEvent mouseEvent) {
+    }
+
+    public void doDeleteProduct(MouseEvent mouseEvent) {
+    }
+
+    public void goToAddProductPane(MouseEvent mouseEvent) {
     }
 }

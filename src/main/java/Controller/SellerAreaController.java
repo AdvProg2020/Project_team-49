@@ -138,6 +138,30 @@ public class SellerAreaController {
         return logs;
     }
 
+    public static ArrayList<String> getAvailableProductsForOff(String sellerUsername) {
+        Seller seller = (Seller) DataBase.getUserByUsername(sellerUsername);
+        ArrayList<String> productsName = new ArrayList<>();
+        boolean isAvailable = true;
+        for (Product product : seller.getProductsForSale()) {
+            isAvailable = true;
+            for (Off off : seller.getOffs()) {
+                for (Product offProduct : off.getProducts()) {
+                    if (offProduct.getProductId() == product.getProductId()) {
+                        isAvailable = false;
+                        break;
+                    }
+                }
+                if (!isAvailable) {
+                    break;
+                }
+            }
+            if (isAvailable) {
+                productsName.add(product.getName() + "_" + product.getProductId());
+            }
+        }
+        return productsName;
+    }
+
     public static String viewProductBuyers(long productId) {
         if (DataBase.getProductById(productId) == null) {
             return "product not exist";

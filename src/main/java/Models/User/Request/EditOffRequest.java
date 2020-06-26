@@ -21,11 +21,19 @@ public class EditOffRequest extends Request  implements Serializable {
     }
 
     //???
-    private String getOldContent() {
+    public String getOldContent() {
         if (field.equalsIgnoreCase("amount")) {
             return String.valueOf(off.getOffAmount());
         }
         return "";
+    }
+
+    public Off getOff() {
+        return off;
+    }
+
+    public String getNewContent() {
+        return newContent;
     }
 
     @Override

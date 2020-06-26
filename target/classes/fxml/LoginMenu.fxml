@@ -57,7 +57,7 @@
                               <Font name="Raleway Light" size="18.0" />
                            </font>
                         </Button>
-                        <Label prefHeight="49.0" prefWidth="410.0" text="Don't have an active account? Register now!" textFill="#4800ff" underline="true" GridPane.columnSpan="2" GridPane.rowIndex="6">
+                        <Label onMouseClicked="#goToRegister" prefHeight="49.0" prefWidth="410.0" text="Don't have an active account? Register now!" textFill="#4800ff" underline="true" GridPane.columnSpan="2" GridPane.rowIndex="6">
                            <font>
                               <Font name="Raleway Light" size="18.0" />
                            </font>

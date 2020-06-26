@@ -124,6 +124,7 @@ public class MainBarController implements Initializable {
     private ArrayList<Label> subCategoryLabels = new ArrayList<>();
 
     private ArrayList<Label> allCategoryLabels = new ArrayList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setAllCategories();
@@ -132,6 +133,12 @@ public class MainBarController implements Initializable {
 
     private void setCategories() {
         int i = 0;
+        for (Label categoryLabel : categoryLabels) {
+            categoryLabel.setText("");
+            categoryLabel.setDisable(true);
+            categoryLabel.setVisible(false);
+        }
+        if(DataBase.getAllCategories().size() == 0) return;
         for (Category category : DataBase.getAllCategories()) {
             if (category.getParentCategory() == null) {
                 categoryLabels.get(i).setText(category.getName());
@@ -165,6 +172,7 @@ public class MainBarController implements Initializable {
         int n = 9679;
         char c = (char) n;
         for (Category subCategory : category.getSubCategories()) {
+            if (subCategory == null) continue;
             if (howMuchInside == 0) {
                 int m = 12297;
                 char M = (char) m;
@@ -401,6 +409,8 @@ public class MainBarController implements Initializable {
     }
 
     public void categoryAndProductsClicked(MouseEvent mouseEvent) {
+        setCategories();
+        clearSubCategoryLabels();
         if (wholeCategoryPane.isVisible()) {
             wholeCategoryPane.setVisible(false);
             wholeCategoryPane.setDisable(true);
@@ -416,6 +426,7 @@ public class MainBarController implements Initializable {
             wholeCategoryPane.setVisible(true);
             wholeCategoryPane.setDisable(false);
         }
+        setCategories();
         new Thread(new Runnable() {
             @Override
             public void run() {

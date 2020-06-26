@@ -1,6 +1,7 @@
 package Models.User.Request;
 
 import Controller.DataBase;
+import javafx.scene.Scene;
 
 import java.io.Serializable;
 import java.util.ArrayList;
