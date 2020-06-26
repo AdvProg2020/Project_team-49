@@ -11,6 +11,7 @@ import Models.Score;
 import Models.User.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -34,6 +35,7 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -601,8 +603,25 @@ public class ProductPageController implements Initializable {
         if (Controller.currentUser instanceof Manager || Controller.getCurrentUser() instanceof Seller){
             return;
         }
+
         Controller.addToCart(Controller.getSelectedProduct(),Controller.getSelectedProduct().getSellerByUsername(sellerNameLabel.getText()),1);
 
+        Scene scene = ((Node) mouseEvent.getSource()).getScene();
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Controller.setLastPane(Controller.getCurrentPane());
+        Pane pane = null;
+        try {
+            pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ScrollPane scrollPane = (ScrollPane) pane.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
+        Controller.setCurrentPane(pane);
+        scene.setRoot(pane);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void rate(MouseEvent mouseEvent) {
