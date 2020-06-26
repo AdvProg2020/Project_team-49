@@ -1,0 +1,24 @@
+<changelist name="Uncommitted_changes_before_Update_at_6_26_2020_7_33_PM_[Default_Changelist]" date="1593183845358" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_7_33_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 6/26/2020 7:33 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Controller/Controller.class" />
+    <option name="AFTER_PATH" value="target/classes/Controller/Controller.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_7_33_PM_[Default_Changelist]/Controller.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/MainBarController.class" />
+    <option name="AFTER_PATH" value="target/classes/View/MainBarController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_7_33_PM_[Default_Changelist]/MainBarController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/View.class" />
+    <option name="AFTER_PATH" value="target/classes/View/View.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_7_33_PM_[Default_Changelist]/View.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPageMenu/CartPageController.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPageMenu/CartPageController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_26_2020_7_33_PM_[Default_Changelist]/CartPageController.class" />
+  </binary>
+</changelist>
