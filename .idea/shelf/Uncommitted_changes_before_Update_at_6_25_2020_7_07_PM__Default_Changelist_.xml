@@ -1,0 +1,24 @@
+<changelist name="Uncommitted_changes_before_Update_at_6_25_2020_7_07_PM_[Default_Changelist]" date="1593095853110" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_25_2020_7_07_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 6/25/2020 7:07 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPageMenu/ProductPageController.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPageMenu/ProductPageController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_25_2020_7_07_PM_[Default_Changelist]/ProductPageController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/ManagerAreaGraphicController.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/ManagerAreaGraphicController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_25_2020_7_07_PM_[Default_Changelist]/ManagerAreaGraphicController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPageMenu/CartPageController.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/OffsAndProductsMenu/ProductsPageMenu/CartPageController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_25_2020_7_07_PM_[Default_Changelist]/CartPageController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewOrders.class" />
+    <option name="AFTER_PATH" value="target/classes/View/Menu/UserArea/CostumerArea/ViewOrders.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_25_2020_7_07_PM_[Default_Changelist]/ViewOrders.class" />
+  </binary>
+</changelist>
