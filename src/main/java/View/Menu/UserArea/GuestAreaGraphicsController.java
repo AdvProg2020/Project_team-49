@@ -228,7 +228,7 @@ public class GuestAreaGraphicsController implements Initializable {
             }
         }
         if (!errorFound) {
-            System.out.println(Controller.createAccount(getAccountInformation(usernameReg.getText(), (String) accountTypeReg.getValue()), (String) accountTypeReg.getValue()));
+            Controller.createAccount(getAccountInformation(usernameReg.getText(), (String) accountTypeReg.getValue()), (String) accountTypeReg.getValue());
         }
         booleans.add(errorFound);
         return booleans;

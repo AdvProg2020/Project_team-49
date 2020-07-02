@@ -9,8 +9,6 @@ import Models.User.Request.Request;
 import Models.User.Seller;
 import Models.User.User;
 import View.View;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import javax.swing.*;
 import javax.xml.crypto.Data;
