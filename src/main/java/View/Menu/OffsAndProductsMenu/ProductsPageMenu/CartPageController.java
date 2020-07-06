@@ -135,7 +135,7 @@ public class CartPageController implements Initializable {
         } else if (Controller.getCurrentUser().getType().equalsIgnoreCase("guest")) {
             cart = ((Guest) Controller.getCurrentUser()).getCart();
         }
-//        deepShitStuff();
+        //deepShitStuff();
         setMainPains();
         if (cartIsEmpty.isVisible()) return;
         setProductsGridPane();

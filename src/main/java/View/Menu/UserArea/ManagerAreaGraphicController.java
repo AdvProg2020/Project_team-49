@@ -793,6 +793,8 @@ public class ManagerAreaGraphicController implements Initializable {
         if (size == 0) {
             return;
         }
+        seeRequests.setVisible(true);
+        seeRequests.setDisable(false);
         if (size > 1) turnOnOrOffRequestsArrows(true);
         requestPane.setDisable(false);
         requestPane.setVisible(true);

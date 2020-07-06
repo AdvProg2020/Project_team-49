@@ -689,10 +689,10 @@ public class SellerAreaGraphicController implements Initializable {
         addProductButton.setDisable(true);
         addProductButton.setVisible(false);
 
-        editPersonalInfoPane.setDisable(true);
-        editPersonalInfoPane.setVisible(false);
-        editPersonalInfoLabel.setVisible(false);
-        editPersonalInfoLabel.setDisable(true);
+        editProductPane.setDisable(true);
+        editProductPane.setVisible(false);
+        editProductLabel.setVisible(false);
+        editProductLabel.setDisable(true);
 
         addProductLabel.setDisable(true);
         addProductLabel.setVisible(false);
@@ -1132,10 +1132,10 @@ public class SellerAreaGraphicController implements Initializable {
             }
         }).start();
         closeALlPanes();
-        editPersonalInfoPane.setDisable(false);
-        editPersonalInfoPane.setVisible(true);
-        editPersonalInfoLabel.setVisible(true);
-        editPersonalInfoLabel.setDisable(false);
+        editProductPane.setDisable(false);
+        editProductPane.setVisible(true);
+        editProductLabel.setVisible(true);
+        editProductLabel.setDisable(false);
         restartInsideOfEditProductPain();
         if (mouseEvent.getSource().equals(editProduct1)) {
             setInsideOfEditProductPain(productsIndex);
@@ -1204,15 +1204,17 @@ public class SellerAreaGraphicController implements Initializable {
         if (!productNameTextField.getText().matches("\\w+")) {
             productNameRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
-        } else if (SellerAreaController.hasProductWithName(productNameTextField.getText())) {
-            productNameRec.setStroke(Color.valueOf("#fb3449"));
-            errorFound = true;
+        } else if (!productNameTextField.getText().equals(products.get(editProductIndex).getName())) {
+            if (SellerAreaController.hasProductWithName(productNameTextField.getText())) {
+                productNameRec.setStroke(Color.valueOf("#fb3449"));
+                errorFound = true;
+            }
         }
         if (!productBrandTextField.getText().matches("\\w+")) {
             productBrandRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
         }
-        if (!productPriceTextField.getText().matches("\\d+")) {
+        if (!productPriceTextField.getText().matches("\\d+\\.\\d+")) {
             productPriceRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
         }

@@ -191,7 +191,9 @@ public class Controller {
 
     public static String loginAccount(String username) {
         if (DataBase.getUserByUsername(username).getType().equals("Costumer")) {
-            ((Costumer) DataBase.getUserByUsername(username)).setCart(((Guest) currentUser).getCart());
+            if (((Guest) currentUser).getCart().getProducts().size() != 0) {
+                ((Costumer) DataBase.getUserByUsername(username)).setCart(((Guest) currentUser).getCart());
+            }
         }
         setCurrentUser(DataBase.getUserByUsername(username));
         return "login successful";

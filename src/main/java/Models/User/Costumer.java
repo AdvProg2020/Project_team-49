@@ -18,7 +18,9 @@ public class Costumer extends User implements Serializable {
 
     public Costumer(String username, String firstName, String lastName, String eMail, long phoneNumber, String password, double credit) {
         super(username, firstName, lastName, eMail, phoneNumber, password);
-        this.cart = new Cart();
+        if (this.cart == null) {
+            this.cart = new Cart();
+        }
         this.buyHistory = new ArrayList<BuyLog>();
         this.discountCodes = new ArrayList<DiscountCode>();
         this.credit = credit;
