@@ -476,7 +476,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         gridPaneToOffPercent.put(g40,offPercent_40);gridPaneToOffPercent.put(g41,offPercent_41);gridPaneToOffPercent.put(g42,offPercent_42);gridPaneToOffPercent.put(g43,offPercent_43);
 
 
-        Controller.check();
+//        Controller.check();
 //        Controller.restartSortedOrFilteredProduct();
         loadProduct(counter);
 
