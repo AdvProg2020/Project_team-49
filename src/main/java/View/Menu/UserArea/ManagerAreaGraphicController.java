@@ -930,8 +930,6 @@ public class ManagerAreaGraphicController implements Initializable {
     public void acceptRequest(ActionEvent event) {
         ManagerAreaController.acceptRequest(DataBase.getAllActiveRequests().get(requestsIndex).getRequestId());
 
-
-
         requestsIndex = 0;
         setRequestsPaneContent();
     }
