@@ -325,7 +325,6 @@ public class GuestAreaGraphicsController implements Initializable {
         scene.setRoot(register);
         stage.setScene(scene);
         stage.show();
-
     }
 
     public void login(MouseEvent mouseEvent) {
@@ -356,7 +355,25 @@ public class GuestAreaGraphicsController implements Initializable {
             Controller.loginAccount(userLogin.getText());
             Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             Scene scene = ((Button) mouseEvent.getSource()).getScene();
+            if(Controller.getLastPane().getId().equals("mainPane")){
+                try {
+                    System.out.println(Controller.getCurrentUser().getType());
+                    Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
+                    Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+                    Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+                    ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
+                    scrollPane.setPrefHeight(800);
+                    mainMenu.getChildren().add(mainBar);
+                    Controller.setLastPane(mainMenu);
+                    System.out.println("shit");
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
             Controller.setCurrentPane(Controller.getLastPane());
+
             scene.setRoot(Controller.getCurrentPane());
             stage.setScene(scene);
             stage.show();

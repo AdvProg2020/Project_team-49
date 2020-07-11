@@ -445,10 +445,10 @@ public class Controller {
 
 
     public static void checkBuy() {
-        Cart cart=new Cart();
-        cart.addItem(2,allProducts.get(1),allProducts.get(1).getDefaultSeller());
-        Costumer costumer=(Costumer) currentUser;
-        costumer.setCart(cart);
+//        Cart cart=new Cart();
+//        cart.addItem(2,allProducts.get(1),allProducts.get(1).getDefaultSeller());
+//        Costumer costumer=(Costumer) currentUser;
+//        costumer.setCart(cart);
 
     }
 }
