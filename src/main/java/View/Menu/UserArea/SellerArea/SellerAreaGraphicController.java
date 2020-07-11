@@ -1,6 +1,7 @@
 package View.Menu.UserArea.SellerArea;
 import static Controller.DataBase.*;
 import Controller.Controller;
+import Controller.DataBase;
 import Controller.SellerAreaController;
 import Models.Log.BuyLog;
 import Models.Log.Log;
@@ -25,11 +26,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1341,12 +1344,18 @@ public class SellerAreaGraphicController implements Initializable {
             explanationRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
         }
-        ImageView image = new ImageView(imageTextField.getText());
+
+        ImageView image = new ImageView(new File(imageTextField.getText()).toURI().toString());
         if (image.getImage() == null) {
             imageRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
         }
+
         if(!errorFound){
+            File file = new File(imageTextField.getText());
+            String path = "resources\\photos\\productPhotos\\PR"
+                    + DataBase.getCreatedRequests()
+                    + imageTextField.getText().substring(imageTextField.getText().length() - 4);
             ArrayList<String> info = new ArrayList<>();
             info.add(nameTextField.getText());
             info.add(brandTextField.getText());
@@ -1390,5 +1399,18 @@ public class SellerAreaGraphicController implements Initializable {
         scene.setRoot(Controller.getCurrentPane());
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void browseImage(MouseEvent mouseEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+        File image = fileChooser.showOpenDialog(((Node) mouseEvent.getSource()).getScene().getWindow());
+        if (image != null) {
+            imageTextField.setText(image.getAbsolutePath());
+        }
     }
 }

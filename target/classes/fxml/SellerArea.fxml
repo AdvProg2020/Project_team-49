@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -18,7 +27,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.UserArea.SellerArea.SellerAreaGraphicController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Menu.UserArea.SellerArea.SellerAreaGraphicController">
    <children>
       <ScrollPane prefHeight="800.0" prefWidth="1480.0">
          <content>
@@ -54,7 +63,7 @@
                                           <Font name="Raleway" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Label alignment="TOP_LEFT" prefHeight="34.0" prefWidth="232.0" text="costumer" textFill="#aaaaaa" GridPane.rowIndex="1">
+                                    <Label alignment="TOP_LEFT" prefHeight="34.0" prefWidth="232.0" text="seller" textFill="#aaaaaa" GridPane.rowIndex="1">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -1311,10 +1320,10 @@
                         <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#959595" height="40.0" layoutX="52.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1.0" />
                      </children>
                   </Pane>
-                  <Pane fx:id="addProductPane" disable="true" layoutX="371.0" layoutY="207.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;" visible="false">
+                  <Pane fx:id="addProductPane" layoutX="371.0" layoutY="207.0" prefHeight="440.0" prefWidth="1005.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
                      <children>
                         <Rectangle fx:id="priceRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="127.0" layoutY="195.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
-                        <Rectangle fx:id="imageRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="200.0" layoutX="632.0" layoutY="200.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="200.0" />
+                        <Rectangle fx:id="imageRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="512.0" layoutY="202.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="440.0" />
                         <Rectangle fx:id="countRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="629.0" layoutY="72.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
                         <Rectangle fx:id="nameRec" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="50.0" layoutX="127.0" layoutY="72.0" stroke="LIGHTGRAY" strokeType="INSIDE" strokeWidth="2.0" width="212.0" />
                         <Label layoutX="58.0" layoutY="200.0" prefHeight="40.0" prefWidth="48.0" text="price" textFill="#7a7a7a">
@@ -1327,7 +1336,7 @@
                               <Font name="Raleway" size="21.0" />
                            </font>
                         </Label>
-                        <Label layoutX="518.0" layoutY="200.0" prefHeight="40.0" prefWidth="105.0" text="image" textFill="#7a7a7a">
+                        <Label layoutX="439.0" layoutY="207.0" prefHeight="40.0" prefWidth="58.0" text="image" textFill="#7a7a7a">
                            <font>
                               <Font name="Raleway" size="15.0" />
                            </font>
@@ -1408,6 +1417,15 @@
                               <Font size="16.0" />
                            </font>
                         </TextField>
+                        <TextField fx:id="imageTextField" layoutX="518.0" layoutY="207.0" prefHeight="39.0" prefWidth="427.0" promptText="image address (from resources)" style="-fx-background-color: #ffffff;">
+                           <font>
+                              <Font size="16.0" />
+                           </font></TextField>
+                        <Button layoutX="830.0" layoutY="262.0" mnemonicParsing="false" onMouseClicked="#browseImage" prefHeight="42.0" prefWidth="122.0" text="Browse Image">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
                      </children>
                      <effect>
                         <DropShadow color="#959595" height="9.75" radius="4.4375" width="10.0" />
