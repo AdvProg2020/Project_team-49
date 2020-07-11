@@ -268,9 +268,9 @@ public class MainBarController implements Initializable {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    String file="src/main/resources/Sound/ProductsMenu/click.mp3";
-                    Media sound=new Media(new File(file).toURI().toString());
-                    MediaPlayer player=new MediaPlayer(sound);
+                    String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+                    Media sound = new Media(new File(file).toURI().toString());
+                    MediaPlayer player = new MediaPlayer(sound);
                     player.play();
                 }
             }).start();
@@ -306,9 +306,9 @@ public class MainBarController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
-                Media sound=new Media(new File(file).toURI().toString());
-                MediaPlayer player=new MediaPlayer(sound);
+                String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+                Media sound = new Media(new File(file).toURI().toString());
+                MediaPlayer player = new MediaPlayer(sound);
                 player.play();
             }
         }).start();
@@ -352,9 +352,9 @@ public class MainBarController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
-                Media sound=new Media(new File(file).toURI().toString());
-                MediaPlayer player=new MediaPlayer(sound);
+                String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+                Media sound = new Media(new File(file).toURI().toString());
+                MediaPlayer player = new MediaPlayer(sound);
                 player.play();
             }
         }).start();
@@ -371,9 +371,9 @@ public class MainBarController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
-                Media sound=new Media(new File(file).toURI().toString());
-                MediaPlayer player=new MediaPlayer(sound);
+                String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+                Media sound = new Media(new File(file).toURI().toString());
+                MediaPlayer player = new MediaPlayer(sound);
                 player.play();
             }
         }).start();
@@ -391,9 +391,9 @@ public class MainBarController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
-                Media sound=new Media(new File(file).toURI().toString());
-                MediaPlayer player=new MediaPlayer(sound);
+                String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+                Media sound = new Media(new File(file).toURI().toString());
+                MediaPlayer player = new MediaPlayer(sound);
                 player.play();
             }
         }).start();
@@ -447,9 +447,9 @@ public class MainBarController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
-                Media sound=new Media(new File(file).toURI().toString());
-                MediaPlayer player=new MediaPlayer(sound);
+                String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+                Media sound = new Media(new File(file).toURI().toString());
+                MediaPlayer player = new MediaPlayer(sound);
                 player.play();
             }
         }).start();
@@ -465,13 +465,13 @@ public class MainBarController implements Initializable {
     }
 
     public void clickedOnACategory(MouseEvent mouseEvent) {
-        Label label=(Label) mouseEvent.getSource();
-        String category=label.getText();
-        if (category.endsWith("〉")){
-            category=category.split("\\s")[0];
-        }else if (category.contains("●")){
-            int i=0;
-            while (!category.split("\\s")[i].matches("\\w+")){
+        Label label = (Label) mouseEvent.getSource();
+        String category = label.getText();
+        if (category.endsWith("〉")) {
+            category = category.split("\\s")[0];
+        } else if (category.contains("●")) {
+            int i = 0;
+            while (!category.split("\\s")[i].matches("\\w+")) {
                 i++;
             }
             category = category.split("\\s")[i];
@@ -479,9 +479,9 @@ public class MainBarController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String file="src/main/resources/Sound/ProductsMenu/click.mp3";
-                Media sound=new Media(new File(file).toURI().toString());
-                MediaPlayer player=new MediaPlayer(sound);
+                String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+                Media sound = new Media(new File(file).toURI().toString());
+                MediaPlayer player = new MediaPlayer(sound);
                 player.play();
             }
         }).start();
@@ -525,13 +525,12 @@ public class MainBarController implements Initializable {
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Controller.setLastPane(Controller.getCurrentPane());
-        Pane pane = null;
+        AnchorPane pane = null;
         try {
             pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         ScrollPane scrollPane = (ScrollPane) pane.getChildren().get(0);
         scrollPane.setPrefHeight(800);
         Controller.setCurrentPane(pane);

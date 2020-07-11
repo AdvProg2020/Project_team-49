@@ -404,8 +404,8 @@ public class ManagerAreaGraphicController implements Initializable {
         categoryButtonsPane.setDisable(false);
         int size = DataBase.getAllCategories().size();
         if (size == 0) {
-            thereIsNoCategoriesPane.setVisible(true);
-            thereIsNoCategoriesPane.setDisable(false);
+//            thereIsNoCategoriesPane.setDisable(false);
+//            thereIsNoCategoriesPane.setVisible(true);
             return;
         }
     }
@@ -779,6 +779,7 @@ public class ManagerAreaGraphicController implements Initializable {
         manageRequestsPane.setDisable(false);
 
         int size = DataBase.getAllActiveRequests().size();
+        System.out.println(size);
         if (size == 0) {
 
         } else if (size > 1) {
@@ -799,15 +800,16 @@ public class ManagerAreaGraphicController implements Initializable {
         requestPane.setDisable(false);
         requestPane.setVisible(true);
         Request request = DataBase.getAllActiveRequests().get(requestsIndex);
+        System.out.println("salam"+request);
         requestId.setText(String.valueOf(request.getRequestId()));
-        if (request.getType().equals("Edit Off")) {
+        if (request.getType().equalsIgnoreCase("Edit Off")) {
             editOffRequestPane.setVisible(true);
             EditOffRequest info = ((EditOffRequest) request);
             Off off = info.getOff();
             editOffIdLabel.setText(String.valueOf(off.getOffId()));
             editOffOldAmountLabel.setText(info.getOldContent());
             editOffNewAmountLabel.setText(info.getNewContent());
-        } else if (request.getType().equals("Add Off")) {
+        } else if (request.getType().equalsIgnoreCase("Add Off")) {
             String[] info = ((AddOffRequest) request).toString().split("\n");
             addOffRequestPane.setVisible(true);
             addOffRequestSellerLabel.setText(info[2]);
@@ -823,12 +825,12 @@ public class ManagerAreaGraphicController implements Initializable {
             addProductNameLabel.setText(info[3]);
             addProductPriceLabel.setText(info[6]);
             addProductSellerLabel.setText(info[7]);
-        } else if (request.getType().equals("Add Seller")) {
+        } else if (request.getType().equalsIgnoreCase("Add Seller")) {
             String[] info = ((AddSellerRequest) request).toString().split("\n");
             addSellerRequestPane.setVisible(true);
             addSellerRequestCompanyLabel.setText(info[3]);
             addSellerRequestSellerLabel.setText(info[2]);
-        } else if (request.getType().equals("Edit Product")) {
+        } else if (request.getType().equalsIgnoreCase("Edit Product")) {
             String[] info = ((EditProductRequest) request).toString().split("\n");
             editProductRequestPane.setVisible(true);
             editProductFieldLabel.setText(info[2]);
@@ -1119,7 +1121,7 @@ public class ManagerAreaGraphicController implements Initializable {
         manageDiscountsPane.toFront();
         setViewAndEditDiscountsPaneContent();
         restartInsideMainDiscountPane();
-        restartTextFieldForNewDiscount();
+//        restartTextFieldForNewDiscount();
     }
 
     private void setViewAndEditDiscountsPaneContent() {
@@ -1183,7 +1185,7 @@ public class ManagerAreaGraphicController implements Initializable {
         goBackToDiscountsMenuImage.setVisible(true);
         newDiscountPane.setVisible(true);
         newDiscountPane.setDisable(false);
-        restartTextFieldForNewDiscount();
+//        restartTextFieldForNewDiscount();
     }
 
     private void restartTextFieldForNewDiscount() {
@@ -1247,8 +1249,8 @@ public class ManagerAreaGraphicController implements Initializable {
         info.add(ManagerAreaController.getAllCostumersForDiscount());
         ManagerAreaController.createDiscountCode(info);
 
-        restartTextFieldForNewDiscount();
-        restartInsideMainDiscountPane();
+//        restartTextFieldForNewDiscount();
+//        restartInsideMainDiscountPane();
     }
 
     public void checkInformationForNewDiscount(ActionEvent event) {

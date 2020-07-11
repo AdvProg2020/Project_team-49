@@ -119,6 +119,8 @@ public class CartPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Controller.checkBuy();
+
         productIndex = 0;
         rectangleIndex = 1;
         backToCartLabel.setDisable(true);
@@ -135,6 +137,7 @@ public class CartPageController implements Initializable {
         } else if (Controller.getCurrentUser().getType().equalsIgnoreCase("guest")) {
             cart = ((Guest) Controller.getCurrentUser()).getCart();
         }
+//        System.out.println(cart + " this is cart");
         //deepShitStuff();
         setMainPains();
         if (cartIsEmpty.isVisible()) return;
@@ -723,7 +726,7 @@ public class CartPageController implements Initializable {
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
         Controller.setCurrentPane(Controller.getLastPane());
-        scene.setRoot(Controller.getCurrentPane());
+        scene.setRoot(Controller.getLastPane());
         stage.setScene(scene);
         stage.show();
     }
