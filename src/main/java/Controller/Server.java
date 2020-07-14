@@ -64,11 +64,15 @@ public class Server {
                 }
                 dataOutputStream.writeUTF(Base64.getEncoder().encodeToString(key));
                 dataOutputStream.flush();
-                dataOutputStream.writeUTF(ed.encrypt("alireza is 19 years old"));
+                dataOutputStream.writeUTF(ed.generateToken());
                 dataOutputStream.flush();
+
+
                 while(true){
+                    String command = dataInputStream.readUTF();
+                    if(command.startsWith("setCostumerAreaAndCartButtons")){
 
-
+                    }
 
                 }
             } catch (IOException e) {
@@ -134,7 +138,14 @@ public class Server {
 
             public String generateToken(){
                 try {
-                    SecretKey key = KeyGenerator.getInstance("DES").generateKey();
+                    boolean flag = true;
+                    while (true){
+                        SecretKey key = KeyGenerator.getInstance("DES").generateKey();
+                        if(onlineUsers.keySet().contains(key.toString())) flag = false;
+                        if(!flag){
+                            break;
+                        }
+                    }
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }

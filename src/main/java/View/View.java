@@ -35,6 +35,10 @@ public class View extends Application {
 
     }
 
+    public static Client getClient() {
+        return client;
+    }
+
     public static void setClient(Client client1) {
         client = client1;
     }

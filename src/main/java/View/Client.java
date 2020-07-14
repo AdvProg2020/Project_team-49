@@ -19,9 +19,22 @@ public class Client {
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
     private ED ed;
+    private String type;
+    public String getToken() {
+        return token;
+    }
+
+    public DataInputStream getDataInputStream() {
+        return dataInputStream;
+    }
+
+    public DataOutputStream getDataOutputStream() {
+        return dataOutputStream;
+    }
 
     public void Client() {
         this.token = "";
+        this.type = "guest";
         this.socket = null;
         this.dataInputStream = null;
         this.dataOutputStream = null;
@@ -35,15 +48,12 @@ public class Client {
 
     public void run() {
         try {
-            //mishe kari kard ke ta start shodan server sabr kone!
             this.socket = new Socket("127.0.0.1", 8888);
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
             this.dataInputStream = new DataInputStream(socket.getInputStream());
             String key = dataInputStream.readUTF();
             ed = new ED(key);
-            String in = dataInputStream.readUTF();
-            System.out.println(ed.decrypt(in));
-            //View.run();
+            View.run();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -109,4 +119,23 @@ public class Client {
             return null;
         }
     }
+
+
+    public String setCostumerAreaAndCartButtons() {
+        String type;
+        try {
+            dataOutputStream.writeUTF("setCostumerAreaAndCartButtons!@"+this.type);
+            dataOutputStream.flush();
+            type = dataInputStream.readUTF();
+            return type;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    // !@
+    // #$   BETWEEN OBJECTS
+
 }

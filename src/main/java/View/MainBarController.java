@@ -138,7 +138,8 @@ public class MainBarController implements Initializable {
     private void setCostumerAreaAndCartButtons() {
         cartButton.setDisable(true);
         cartButton.setOpacity(0.5);
-        if (Controller.getCurrentUserType().equalsIgnoreCase("guest") || Controller.getCurrentUserType().equalsIgnoreCase("costumer")) {
+        String type = View.getClient().setCostumerAreaAndCartButtons();
+        if (type.equalsIgnoreCase("guest") || type.equalsIgnoreCase("costumer")) {
             cartButton.setOpacity(1.0);
             cartButton.setDisable(false);
         }
