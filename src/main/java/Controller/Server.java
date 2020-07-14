@@ -1,13 +1,27 @@
 package Controller;
 
+import Models.User.User;
+import com.sun.mail.util.BASE64DecoderStream;
+import com.sun.mail.util.BASE64EncoderStream;
+
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.xml.crypto.Data;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
+import java.util.HashMap;
 
 public class Server {
+    public static HashMap<String , User> onlineUsers = new HashMap<>();
     public static void main(String[] args) throws Exception {
+        DataBase.dataBaseRun();
         new ServerImp().run();
     }
 
@@ -25,23 +39,107 @@ public class Server {
     }
 
     static class ClientHandler extends Thread {
+
         private Socket socket;
         private DataOutputStream dataOutputStream;
         private DataInputStream dataInputStream;
+        private ED ed;
 
         public ClientHandler(Socket socket, DataOutputStream dataOutputStream, DataInputStream dataInputStream) {
             this.socket = socket;
             this.dataOutputStream = dataOutputStream;
             this.dataInputStream = dataInputStream;
+            ed = new ED();
         }
 
         private void handleClient() {
+            try {
+                byte[] key = ed.getKey().getEncoded();
+                for (int i = 0; i < key.length; i++) {
+                    if (i % 2 == 0) {
+                        key[i] = (byte) (key[i] - 1);
+                    } else {
+                        key[i] = (byte) (key[i] + 1);
+                    }
+                }
+                dataOutputStream.writeUTF(Base64.getEncoder().encodeToString(key));
+                dataOutputStream.flush();
+                dataOutputStream.writeUTF(ed.encrypt("alireza is 19 years old"));
+                dataOutputStream.flush();
+                while(true){
 
+
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
         public void run() {
             handleClient();
+        }
+
+        class ED {
+            private Cipher ecipher;
+            private Cipher dcipher;
+            private SecretKey key;
+            public ED() {
+                try {
+                    key = KeyGenerator.getInstance("DES").generateKey();
+                    ecipher = Cipher.getInstance("DES");
+                    dcipher = Cipher.getInstance("DES");
+                    ecipher.init(Cipher.ENCRYPT_MODE, key);
+                    dcipher.init(Cipher.DECRYPT_MODE, key);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            public Cipher getEcipher() {
+                return ecipher;
+            }
+
+            public Cipher getDcipher() {
+                return dcipher;
+            }
+
+            public SecretKey getKey() {
+                return key;
+            }
+
+            public String encrypt(String str) {
+                try {
+                    byte[] utf8 = str.getBytes("UTF8");
+                    byte[] enc = ecipher.doFinal(utf8);
+                    enc = BASE64EncoderStream.encode(enc);
+                    return new String(enc);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            public  String decrypt(String str) {
+                try {
+                    byte[] dec = BASE64DecoderStream.decode(str.getBytes());
+                    byte[] utf8 = dcipher.doFinal(dec);
+                    return new String(utf8, "UTF8");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            public String generateToken(){
+                try {
+                    SecretKey key = KeyGenerator.getInstance("DES").generateKey();
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+                return key.toString();
+            }
         }
     }
 }

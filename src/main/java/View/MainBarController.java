@@ -163,6 +163,7 @@ public class MainBarController implements Initializable {
     }
 
     private void setSubCategoriesContent(String categoryName) {
+
         Category category = DataBase.getCategoryByName(categoryName);
         subcategory00.setDisable(false);
         int n = 9660;

@@ -142,7 +142,7 @@ public class DataBase {
         createdProductsCount++;
         product.setProductId(createdProductsCount);
         allProducts.add(product);
-        if(product.getParentCategory() != null) {
+        if (product.getParentCategory() != null) {
             product.getParentCategory().addProduct(product);
         }
         product.getDefaultSeller().addProduct(product);
@@ -221,7 +221,7 @@ public class DataBase {
 
     public static void startProgram() {
         dataBaseRun();
-        new View().run();
+        View.run();
     }
 
     public static void dataBaseRun() {

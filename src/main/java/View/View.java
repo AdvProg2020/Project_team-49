@@ -32,6 +32,11 @@ public class View extends Application {
     public static Client client = new Client();
 
     public View() {
+
+    }
+
+    public static void setClient(Client client1) {
+        client = client1;
     }
 
     @Override
@@ -46,9 +51,9 @@ public class View extends Application {
         ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
         scrollPane.setPrefHeight(800);
         mainMenu.getChildren().add(mainBar);
-        if(Controller.getHasHeadManager()){
+        if (Controller.getHasHeadManager()) {
             Controller.setCurrentPane(mainMenu);
-        }else{
+        } else {
             Controller.setLastPane(mainMenu);
             Pane register = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/RegisterMenu.fxml"));
             Controller.setCurrentPane(register);
@@ -71,8 +76,8 @@ public class View extends Application {
         return DataBase.getAllUsers();
     }
 
-    public void run() {
-        this.launch();
+    public static void run() {
+        View.launch();
         Menu.setScanner(new Scanner(System.in));
         new MainMenu().run("");
     }
