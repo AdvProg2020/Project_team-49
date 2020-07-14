@@ -50,6 +50,29 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/javax.xml.crypto/jsr105-api -->
+        <dependency>
+            <groupId>javax.xml.crypto</groupId>
+            <artifactId>jsr105-api</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+        <!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.4.4</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/javax.security.enterprise/javax.security.enterprise-api -->
+        <dependency>
+            <groupId>javax.security.enterprise</groupId>
+            <artifactId>javax.security.enterprise-api</artifactId>
+            <version>1.0-b07</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.apache.commons</groupId>
