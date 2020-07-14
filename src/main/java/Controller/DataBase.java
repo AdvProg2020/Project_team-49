@@ -47,6 +47,10 @@ public class DataBase {
         return allCategories;
     }
 
+    public static long getCreatedRequests() {
+        return createdRequests;
+    }
+
     public static ArrayList<Product> getAllProducts() {
         return allProducts;
     }
@@ -138,6 +142,9 @@ public class DataBase {
         createdProductsCount++;
         product.setProductId(createdProductsCount);
         allProducts.add(product);
+        if(product.getParentCategory() != null) {
+            product.getParentCategory().addProduct(product);
+        }
         product.getDefaultSeller().addProduct(product);
         sortedOrFilteredProduct.clear();
         sortedOrFilteredProduct.addAll(allProducts);

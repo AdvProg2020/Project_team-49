@@ -29,6 +29,7 @@ import static Controller.DataBase.getProductById;
 
 
 public class View extends Application {
+    public static Client client = new Client();
 
     public View() {
     }
