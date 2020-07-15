@@ -72,13 +72,24 @@ public class Client {
 
     public String setCategoriesInMainBar() {
         try {
-            dataOutputStream.writeUTF("setCategoriesInMainBar");
+            dataOutputStream.writeUTF(ed.encrypt("setCategoriesInMainBar"));
             dataOutputStream.flush();
             return ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void setMainPaneColor(String color) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("setMainPaneColor"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(color));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<String> getSubCategories(){

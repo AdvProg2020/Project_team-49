@@ -1,5 +1,7 @@
 package View;
+
 import static View.View.*;
+
 import Controller.Controller;
 import Controller.DataBase;
 import Controller.Filter;
@@ -159,7 +161,7 @@ public class MainBarController implements Initializable {
             allCategoriesInformation.add(s);
         }
         if (allCategoriesInformation.size() == 0) return;
-        for (String category :allCategoriesInformation) {
+        for (String category : allCategoriesInformation) {
             String[] separate = category.split("!@");
             if (separate[2].equals("null")) {
                 categoryLabels.get(i).setText(separate[0]);
@@ -172,14 +174,13 @@ public class MainBarController implements Initializable {
 
     private void setSubCategoriesContent(String categoryName) {
 
-        Category category = DataBase.getCategoryByName(categoryName);
         subcategory00.setDisable(false);
         int n = 9660;
         char c = (char) n;
         subcategory00.setText("All categories in " + categoryName + " " + c);
         subcategory00.setVisible(true);
         added = 1;
-        setSubCategories(category, 0);
+        setSubCategories(categoryName, 0);
     }
 
     private void clearSubCategoryLabels() {
@@ -190,23 +191,26 @@ public class MainBarController implements Initializable {
         }
     }
 
-    private void setSubCategories(Category category, int howMuchInside) {
+    private void setSubCategories(String category, int howMuchInside) {
         int n = 9679;
         char c = (char) n;
-        for (Category subCategory : category.getSubCategories()) {
+        for (String subCategory : allCategoriesInformation) {
+            String[] info = subCategory.split("!@");
+            if (!info[2].equals(category))
+                continue;
+
             if (subCategory == null) continue;
             if (howMuchInside == 0) {
                 int m = 12297;
                 char M = (char) m;
-                subCategoryLabels.get(added).setText(subCategory.getName() + " " + M);
+                subCategoryLabels.get(added).setText(info[0] + " " + M);
                 subCategoryLabels.get(added).setStyle("-fx-font-size: 17");
             } else if (howMuchInside == 1) {
-
-                subCategoryLabels.get(added).setText(" " + c + " " + subCategory.getName());
+                subCategoryLabels.get(added).setText(" " + c + " " + info[0]);
             } else if (howMuchInside == 2) {
-                subCategoryLabels.get(added).setText("  " + c + c + " " + subCategory.getName());
+                subCategoryLabels.get(added).setText("  " + c + c + " " + info[0]);
             } else {
-                subCategoryLabels.get(added).setText("   " + c + c + c + " " + subCategory.getName());
+                subCategoryLabels.get(added).setText("   " + c + c + c + " " + info[0]);
             }
             subCategoryLabels.get(added).setVisible(true);
             subCategoryLabels.get(added).setDisable(false);
@@ -270,47 +274,37 @@ public class MainBarController implements Initializable {
     }
 
     public void searched(KeyEvent keyEvent) {
-        if (keyEvent.getCode() == KeyCode.ENTER) {
-            searchField.clear();
-            Filter.restartFilters();
-            Filter.filterByName(searchField.getText());
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
-                    Media sound = new Media(new File(file).toURI().toString());
-                    MediaPlayer player = new MediaPlayer(sound);
-                    player.play();
-                }
-            }).start();
-            //
-        }
+//        if (keyEvent.getCode() == KeyCode.ENTER) {
+//            searchField.clear();
+//            Filter.restartFilters();
+//            Filter.filterByName(searchField.getText());
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+//                    Media sound = new Media(new File(file).toURI().toString());
+//                    MediaPlayer player = new MediaPlayer(sound);
+//                    player.play();
+//                }
+//            }).start();
+//            //
+//        }
     }
 
     public void changeBackGroundColor(MouseEvent mouseEvent) {
 
         if (mouseEvent.getSource().equals(lightBlueButton)) {
-            Controller.setColor("cee8f0");
-//            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
+            View.getClient().setMainPaneColor("cee8f0");
         } else if (mouseEvent.getSource().equals(lightGrayButton)) {
-            Controller.setColor("f3f3f3");
-//            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
+            View.getClient().setMainPaneColor("f3f3f3");
         } else if (mouseEvent.getSource().equals(lightGreenButton)) {
-            Controller.setColor("cdeae0");
-            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
-//            innerPane.setStyle("-fx-background-color: #cdeae0");
+            View.getClient().setMainPaneColor("cdeae0");
         } else if (mouseEvent.getSource().equals(lightRedButton)) {
-            Controller.setColor("ff726f");
-            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
-//            innerPane.setStyle("-fx-background-color: #ff726f");
+            View.getClient().setMainPaneColor("ff726f");
         } else if (mouseEvent.getSource().equals(lightOrangeButton)) {
-            Controller.setColor("feddb6");
-            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
-//            innerPane.setStyle("-fx-background-color: #feddb6");
+            View.getClient().setMainPaneColor("feddb6");
         } else if (mouseEvent.getSource().equals(lightWhiteButton)) {
-            Controller.setColor("FFFFFF");
-            Controller.setInnerPaneForColor(Controller.getInnerPaneForColor());
-//            innerPane.setStyle("-fx-background-color: #FFFFFF");
+            View.getClient().setMainPaneColor("FFFFFF");
         }
         new Thread(new Runnable() {
             @Override
