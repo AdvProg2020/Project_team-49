@@ -20,7 +20,8 @@ import java.util.Base64;
 import java.util.HashMap;
 
 public class Server {
-    public static HashMap<String , User> onlineUsers = new HashMap<>();
+    public static HashMap<String, User> onlineUsers = new HashMap<>();
+
     public static void main(String[] args) throws Exception {
         DataBase.dataBaseRun();
         new ServerImp().run();
@@ -65,12 +66,19 @@ public class Server {
                 }
                 dataOutputStream.writeUTF(Base64.getEncoder().encodeToString(key));
                 dataOutputStream.flush();
-                while(true){
-                    String command = dataInputStream.readUTF();
-                    if(command.startsWith("setCategoriesInMainBar")){
+                while (true) {
+                    String command = ed.decrypt(dataInputStream.readUTF());
+                    if (command.startsWith("setCategoriesInMainBar")) {
                         dataOutputStream.writeUTF(ed.encrypt(Controller.getAllCategories()));
                         dataOutputStream.flush();
+                        continue;
                     }
+                    if (command.startsWith("setMainPaneColor")) {
+                        String color = ed.decrypt(dataInputStream.readUTF());
+                        Controller.setColor(color);
+                        continue;
+                    }
+
 
                 }
             } catch (IOException e) {
@@ -87,6 +95,7 @@ public class Server {
             private Cipher ecipher;
             private Cipher dcipher;
             private SecretKey key;
+
             public ED() {
                 try {
                     key = KeyGenerator.getInstance("DES").generateKey();
@@ -123,7 +132,7 @@ public class Server {
                 return null;
             }
 
-            public  String decrypt(String str) {
+            public String decrypt(String str) {
                 try {
                     byte[] dec = BASE64DecoderStream.decode(str.getBytes());
                     byte[] utf8 = dcipher.doFinal(dec);
@@ -134,13 +143,13 @@ public class Server {
                 return null;
             }
 
-            public String generateToken(){
+            public String generateToken() {
                 try {
                     boolean flag = true;
-                    while (true){
+                    while (true) {
                         SecretKey key = KeyGenerator.getInstance("DES").generateKey();
-                        if(onlineUsers.keySet().contains(key.toString())) flag = false;
-                        if(!flag){
+                        if (onlineUsers.keySet().contains(key.toString())) flag = false;
+                        if (!flag) {
                             break;
                         }
                     }
