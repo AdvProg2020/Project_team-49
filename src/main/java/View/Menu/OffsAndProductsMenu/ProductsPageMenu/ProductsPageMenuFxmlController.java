@@ -3,6 +3,8 @@ package View.Menu.OffsAndProductsMenu.ProductsPageMenu;
 import Controller.Controller;
 import Controller.Filter;
 import Controller.Sort;
+import View.Client;
+import View.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -496,13 +498,8 @@ public class ProductsPageMenuFxmlController implements Initializable {
             brandFilter.setPrefHeight(brandsCheckBoxes.size() * 24);
         }
 
-        Controller.cancelSong();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Controller.startSong("src/main/resources/Sound/ProductsMenu/BackGround.mp3");
-            }
-        }).start();
+        View.client.cancelSong();
+        View.client.startSong("src/main/resources/Sound/ProductsMenu/BackGround.mp3");
     }
 
     public void click(MouseEvent mouseEvent) {
@@ -552,7 +549,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
     public void loadProduct(long start){
         clear();
 
-        if (Controller.isDoesItOffPage()){
+        if (View.client.getIsDoesItOffPage()){
             Filter.filterByOffs();
             saleLeft.setVisible(true);
             saleRight.setVisible(true);
@@ -566,7 +563,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
             saleLeft.setDisable(true);
         }
 
-        ArrayList<String> categories=new ArrayList<String>(Filter.showSubCategories());
+        ArrayList<String> categories=new ArrayList<String>(View.client.getSubCategories());
         for (String category : categories) {
             Label label=new Label();
             label.setOnMouseClicked(this::filterByCategory);
@@ -589,18 +586,36 @@ public class ProductsPageMenuFxmlController implements Initializable {
             }
         }
 
-        int size=Controller.getHowMuchLeftForThisPage(counter);
+
+        int size=View.client.getHowMuchLeftForThisPage(counter);
 
 
-        ArrayList<String> images = Controller.getProductImageForFxml(counter);
-        ArrayList<Double> prices = Controller.getProductPriceForFxml(counter);
-        ArrayList<String> names = Controller.getProductNameForFxml(counter);
-        ArrayList<Long> productId=Controller.getProductIdForFxml(counter);
-        ArrayList<Boolean> isOff=Controller.getOffForFxml(counter);
-        ArrayList<Double> score=Controller.getProductScoreForFxml(counter);
-        ArrayList<Double> remainOffTimeLeft=Controller.getProductOffRemainForFxml(counter);
-        ArrayList<Integer> offPercent=Controller.getProductOffPercentForFxml(counter);
-        ArrayList<Integer> remainingItems=Controller.getProductRemainForFxml(counter);
+//        ArrayList<String> images = Controller.getProductImageForFxml(counter);
+        ArrayList<String> images = View.client.getProductImageForFxml(counter);
+
+//        ArrayList<Double> prices = Controller.getProductPriceForFxml(counter);
+        ArrayList<Double> prices=View.client.getProductPriceForFxml(counter);
+
+//        ArrayList<String> names = Controller.getProductNameForFxml(counter);
+        ArrayList<String> names =View.client.getProductNameForFxml(counter);
+
+//        ArrayList<Long> productId=Controller.getProductIdForFxml(counter);
+        ArrayList<Long> productId=View.getClient().getProductIdForFxml(counter);
+
+//        ArrayList<Boolean> isOff=Controller.getOffForFxml(counter);
+        ArrayList<Boolean> isOff=View.getClient().getOffForFxml(counter);
+
+//        ArrayList<Double> score=Controller.getProductScoreForFxml(counter);
+        ArrayList<Double> score=View.client.getProductScoreForFxml(counter);
+
+//        ArrayList<Double> remainOffTimeLeft=Controller.getProductOffRemainForFxml(counter);
+        ArrayList<Double> remainOffTimeLeft=View.getClient().getProductOffRemainForFxml(counter);
+
+//        ArrayList<Integer> offPercent=Controller.getProductOffPercentForFxml(counter);
+        ArrayList<Integer> offPercent=View.getClient().getProductOffPercentForFxml(counter);
+
+//        ArrayList<Integer> remainingItems=Controller.getProductRemainForFxml(counter);
+        ArrayList<Integer> remainingItems=View.getClient().getProductRemainForFxml(counter);
         for (int i = 0; i < size; i++) {
             gridPanes.get(i).setVisible(true);
             gridPanes.get(i).setDisable(false);
