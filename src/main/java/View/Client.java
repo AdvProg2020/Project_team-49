@@ -15,12 +15,28 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 public class Client {
+
     private String token;
     private Socket socket;
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
     private ED ed;
     private String type;
+
+    public Client() {
+        this.token = "";
+        this.type = "guest";
+        this.socket = null;
+        this.dataInputStream = null;
+        this.dataOutputStream = null;
+        System.out.println("yea");
+        View.setClient(this);
+    }
+
+    public static void main(String[] args) {
+        Client client = new Client();
+        client.run();
+    }
 
     public String getToken() {
         return token;
@@ -34,19 +50,10 @@ public class Client {
         return dataOutputStream;
     }
 
-    public void Client() {
-        this.token = "";
-        this.type = "guest";
-        this.socket = null;
-        this.dataInputStream = null;
-        this.dataOutputStream = null;
-        View.setClient(this);
+    public String getType() {
+        return type;
     }
 
-    public static void main(String[] args) {
-        Client client = new Client();
-        client.run();
-    }
 
     public void run() {
         try {
@@ -54,6 +61,7 @@ public class Client {
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
             this.dataInputStream = new DataInputStream(socket.getInputStream());
             String key = dataInputStream.readUTF();
+            System.out.println(this.type);
             ed = new ED(key);
             View.run();
         } catch (IOException e) {
@@ -85,8 +93,10 @@ public class Client {
         }
         request += type;
         try {
+            dataOutputStream.writeUTF(ed.encrypt("setCategoriesInMainBar"));
             dataOutputStream.writeUTF(ed.encrypt(request));
             dataOutputStream.flush();
+            return ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -112,6 +122,17 @@ public class Client {
     public void loginAccount(String username) {
         try {
             dataOutputStream.writeUTF(ed.encrypt("loginAccount!@" + username));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setMainPaneColor(String color) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("setMainPaneColor"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(color));
             dataOutputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();

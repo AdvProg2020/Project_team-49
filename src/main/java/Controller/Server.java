@@ -3,6 +3,7 @@ package Controller;
 import Models.User.User;
 import com.sun.mail.util.BASE64DecoderStream;
 import com.sun.mail.util.BASE64EncoderStream;
+import javafx.scene.control.Control;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -77,12 +78,17 @@ public class Server {
                     }
                     if (command.startsWith("hasHeadManager")) {
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getHasHeadManager())));
+                while (true) {
+                    String command = ed.decrypt(dataInputStream.readUTF());
+                    if (command.startsWith("setCategoriesInMainBar")) {
+                        dataOutputStream.writeUTF(ed.encrypt(Controller.getAllCategories()));
                         dataOutputStream.flush();
                         continue;
                     }
                     if (command.startsWith("hasUserWithUsername")) {
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.hasUserWithUsername(command.split("!@")[1]))));
                         dataOutputStream.flush();
+                        continue;
                         continue;
                     }
                     if (command.startsWith("isPasswordCorrect")) {
@@ -105,6 +111,13 @@ public class Server {
                         Controller.createAccount(accountInfo, info[info.length - 1]);
                         continue;
                     }
+                    if (command.startsWith("setMainPaneColor")) {
+                        String color = ed.decrypt(dataInputStream.readUTF());
+                        Controller.setColor(color);
+                        continue;
+                    }
+
+
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -120,6 +133,7 @@ public class Server {
             private Cipher ecipher;
             private Cipher dcipher;
             private SecretKey key;
+
             public ED() {
                 try {
                     key = KeyGenerator.getInstance("DES").generateKey();
