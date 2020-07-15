@@ -3,7 +3,6 @@ package Controller;
 import Models.User.User;
 import com.sun.mail.util.BASE64DecoderStream;
 import com.sun.mail.util.BASE64EncoderStream;
-import javafx.scene.control.Control;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -16,11 +15,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 
 public class Server {
-    public static HashMap<String , User> onlineUsers = new HashMap<>();
+    public static HashMap<String, User> onlineUsers = new HashMap<>();
+
     public static void main(String[] args) throws Exception {
         DataBase.dataBaseRun();
         new ServerImp().run();
@@ -65,13 +66,45 @@ public class Server {
                 }
                 dataOutputStream.writeUTF(Base64.getEncoder().encodeToString(key));
                 dataOutputStream.flush();
-                while(true){
-                    String command = dataInputStream.readUTF();
-                    if(command.startsWith("setCategoriesInMainBar")){
-                        dataOutputStream.writeUTF(ed.encrypt(Controller.getAllCategories()));
-                        dataOutputStream.flush();
-                    }
+                dataOutputStream.writeUTF(ed.generateToken());
+                dataOutputStream.flush();
 
+
+                while (true) {
+                    String command = dataInputStream.readUTF();
+                    if (command.startsWith("setCostumerAreaAndCartButtons")) {
+
+                    }
+                    if (command.startsWith("hasHeadManager")) {
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getHasHeadManager())));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if (command.startsWith("hasUserWithUsername")) {
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.hasUserWithUsername(command.split("!@")[1]))));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if (command.startsWith("isPasswordCorrect")) {
+                        String password = command.split("!@")[2];
+                        String username = command.split("!@")[1];
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.isPasswordCorrect(password, username))));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if (command.startsWith("loginAccount")) {
+                        Controller.loginAccount(command.split("!@")[1]);
+                        continue;
+                    }
+                    if (command.startsWith("createAccount")) {
+                        String[] info = command.split("!@");
+                        ArrayList<String> accountInfo = new ArrayList<>();
+                        for (int i = 1; i < info.length - 1; i++) {
+                            accountInfo.add(info[i]);
+                        }
+                        Controller.createAccount(accountInfo, info[info.length - 1]);
+                        continue;
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

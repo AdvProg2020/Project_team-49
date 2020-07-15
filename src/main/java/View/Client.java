@@ -11,31 +11,16 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Base64;
 
 public class Client {
-
     private String token;
     private Socket socket;
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
     private ED ed;
     private String type;
-
-    public Client() {
-        this.token = "";
-        this.type = "guest";
-        this.socket = null;
-        this.dataInputStream = null;
-        this.dataOutputStream = null;
-        System.out.println("yea");
-        View.setClient(this);
-    }
-
-    public static void main(String[] args) {
-        Client client = new Client();
-        client.run();
-    }
 
     public String getToken() {
         return token;
@@ -49,10 +34,19 @@ public class Client {
         return dataOutputStream;
     }
 
-    public String getType() {
-        return type;
+    public void Client() {
+        this.token = "";
+        this.type = "guest";
+        this.socket = null;
+        this.dataInputStream = null;
+        this.dataOutputStream = null;
+        View.setClient(this);
     }
 
+    public static void main(String[] args) {
+        Client client = new Client();
+        client.run();
+    }
 
     public void run() {
         try {
@@ -60,7 +54,6 @@ public class Client {
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
             this.dataInputStream = new DataInputStream(socket.getInputStream());
             String key = dataInputStream.readUTF();
-            System.out.println(this.type);
             ed = new ED(key);
             View.run();
         } catch (IOException e) {
@@ -68,15 +61,61 @@ public class Client {
         }
     }
 
-    public String setCategoriesInMainBar() {
+    public boolean hasUserWithUsername(String username) {
+        String answer = "";
         try {
-            dataOutputStream.writeUTF("setCategoriesInMainBar");
+            dataOutputStream.writeUTF(ed.encrypt("hasUserWithUsername!@" + username));
             dataOutputStream.flush();
-            return ed.decrypt(dataInputStream.readUTF());
+            answer = ed.decrypt(dataInputStream.readUTF());
+            if (answer.equalsIgnoreCase("true")) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return true;
+    }
+
+    public void createAccount(ArrayList<String> accountInformation, String type) {
+        String request = "createAccount!@";
+        for (String s : accountInformation) {
+            request += s + "!@";
+        }
+        request += type;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(request));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isPasswordCorrect(String password, String username) {
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("isPasswordCorrect!@" + username + "!@" + password));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+            if (answer.equalsIgnoreCase("true")) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public void loginAccount(String username) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("loginAccount!@" + username));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     class ED {
@@ -140,6 +179,36 @@ public class Client {
         }
     }
 
+
+    public String setCostumerAreaAndCartButtons() {
+        String type;
+        try {
+            dataOutputStream.writeUTF("setCostumerAreaAndCartButtons!@" + this.type);
+            dataOutputStream.flush();
+            type = dataInputStream.readUTF();
+            return type;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean hasHeadManager() {
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("hasHeadManager"));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+            if (answer.equalsIgnoreCase("true")) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
     // !@
     // #$   BETWEEN OBJECTS
 }
