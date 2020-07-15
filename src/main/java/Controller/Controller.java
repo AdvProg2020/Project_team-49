@@ -417,6 +417,7 @@ public class Controller {
         }
     }
     private static Media media;
+
     private static MediaPlayer mediaPlayer;
 
     public static void startSong(String file){
@@ -443,11 +444,15 @@ public class Controller {
         player.play();
     }
 
-
-    public static void checkBuy() {
-//        Cart cart=new Cart();
-//        cart.addItem(2,allProducts.get(1),allProducts.get(1).getDefaultSeller());
-//        Costumer costumer=(Costumer) currentUser;
-//        costumer.setCart(cart);
+    public static String getAllCategories(){
+        String allCategories = "";
+        for (int i = 0; i < DataBase.getAllCategories().size(); i++) {
+            allCategories = allCategories.concat(DataBase.getAllCategories().get(i).toString());
+            if(i != DataBase.getAllCategories().size() - 1){
+                allCategories = allCategories.concat("#$");
+            }
+        }
+        return allCategories;
     }
+
 }

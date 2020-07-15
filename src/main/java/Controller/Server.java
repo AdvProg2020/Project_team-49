@@ -3,6 +3,7 @@ package Controller;
 import Models.User.User;
 import com.sun.mail.util.BASE64DecoderStream;
 import com.sun.mail.util.BASE64EncoderStream;
+import javafx.scene.control.Control;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -64,14 +65,11 @@ public class Server {
                 }
                 dataOutputStream.writeUTF(Base64.getEncoder().encodeToString(key));
                 dataOutputStream.flush();
-                dataOutputStream.writeUTF(ed.generateToken());
-                dataOutputStream.flush();
-
-
                 while(true){
                     String command = dataInputStream.readUTF();
-                    if(command.startsWith("setCostumerAreaAndCartButtons")){
-
+                    if(command.startsWith("setCategoriesInMainBar")){
+                        dataOutputStream.writeUTF(ed.encrypt(Controller.getAllCategories()));
+                        dataOutputStream.flush();
                     }
 
                 }

@@ -14,12 +14,29 @@ import java.net.Socket;
 import java.util.Base64;
 
 public class Client {
+
     private String token;
     private Socket socket;
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
     private ED ed;
     private String type;
+
+    public Client() {
+        this.token = "";
+        this.type = "guest";
+        this.socket = null;
+        this.dataInputStream = null;
+        this.dataOutputStream = null;
+        System.out.println("yea");
+        View.setClient(this);
+    }
+
+    public static void main(String[] args) {
+        Client client = new Client();
+        client.run();
+    }
+
     public String getToken() {
         return token;
     }
@@ -32,19 +49,10 @@ public class Client {
         return dataOutputStream;
     }
 
-    public void Client() {
-        this.token = "";
-        this.type = "guest";
-        this.socket = null;
-        this.dataInputStream = null;
-        this.dataOutputStream = null;
-        View.setClient(this);
+    public String getType() {
+        return type;
     }
 
-    public static void main(String[] args) {
-        Client client = new Client();
-        client.run();
-    }
 
     public void run() {
         try {
@@ -52,11 +60,23 @@ public class Client {
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
             this.dataInputStream = new DataInputStream(socket.getInputStream());
             String key = dataInputStream.readUTF();
+            System.out.println(this.type);
             ed = new ED(key);
             View.run();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String setCategoriesInMainBar() {
+        try {
+            dataOutputStream.writeUTF("setCategoriesInMainBar");
+            dataOutputStream.flush();
+            return ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     class ED {
@@ -120,22 +140,6 @@ public class Client {
         }
     }
 
-
-    public String setCostumerAreaAndCartButtons() {
-        String type;
-        try {
-            dataOutputStream.writeUTF("setCostumerAreaAndCartButtons!@"+this.type);
-            dataOutputStream.flush();
-            type = dataInputStream.readUTF();
-            return type;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
     // !@
     // #$   BETWEEN OBJECTS
-
 }

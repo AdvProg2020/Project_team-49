@@ -1,5 +1,5 @@
 package View;
-
+import static View.View.*;
 import Controller.Controller;
 import Controller.DataBase;
 import Controller.Filter;
@@ -118,7 +118,7 @@ public class MainBarController implements Initializable {
     public ImageView costumerAreaButton;
     public Rectangle productsRectangle;
     public Rectangle offsRectangle;
-
+    private ArrayList<String> allCategoriesInformation = new ArrayList<>();
     private static int added = 0;
     public ImageView cartButton;
 
@@ -138,7 +138,7 @@ public class MainBarController implements Initializable {
     private void setCostumerAreaAndCartButtons() {
         cartButton.setDisable(true);
         cartButton.setOpacity(0.5);
-        String type = View.getClient().setCostumerAreaAndCartButtons();
+        String type = View.getClient().getType();
         if (type.equalsIgnoreCase("guest") || type.equalsIgnoreCase("costumer")) {
             cartButton.setOpacity(1.0);
             cartButton.setDisable(false);
@@ -152,10 +152,17 @@ public class MainBarController implements Initializable {
             categoryLabel.setDisable(true);
             categoryLabel.setVisible(false);
         }
-        if (DataBase.getAllCategories().size() == 0) return;
-        for (Category category : DataBase.getAllCategories()) {
-            if (category.getParentCategory() == null) {
-                categoryLabels.get(i).setText(category.getName());
+        String allCategories = getClient().setCategoriesInMainBar();
+        String[] splited = allCategories.split("#\\$");
+        allCategoriesInformation.clear();
+        for (String s : splited) {
+            allCategoriesInformation.add(s);
+        }
+        if (allCategoriesInformation.size() == 0) return;
+        for (String category :allCategoriesInformation) {
+            String[] separate = category.split("!@");
+            if (separate[2].equals("null")) {
+                categoryLabels.get(i).setText(separate[0]);
                 categoryLabels.get(i).setVisible(true);
                 categoryLabels.get(i).setDisable(false);
                 i++;

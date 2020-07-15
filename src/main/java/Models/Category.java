@@ -86,4 +86,20 @@ public class Category implements Serializable {
     public ArrayList<Category> getSubCategories() {
         return subCategories;
     }
+
+    @Override
+    public String toString() {
+        String parentName = "";
+        if (this.parentCategory == null) {
+            parentName = null;
+        } else {
+            parentName = this.parentCategory.getName();
+        }
+        return
+                "" + name + "!@"
+                        + specialAttributes + "!@"
+                        + parentName + "!@"
+                        ;
+
+    }
 }

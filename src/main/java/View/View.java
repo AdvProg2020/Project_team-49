@@ -29,7 +29,7 @@ import static Controller.DataBase.getProductById;
 
 
 public class View extends Application {
-    public static Client client = new Client();
+    public static Client client;
 
     public View() {
 
@@ -45,10 +45,6 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-//        cartAndBuyScene = new Scene( FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml")));
-//        Controller.setCurrentUser(getAllUsers().get(5));
-//        Product product = getProductById(1);
-//        Controller.setSelectedProduct(product);
         Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
         Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
         Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
@@ -62,13 +58,13 @@ public class View extends Application {
             Pane register = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/RegisterMenu.fxml"));
             Controller.setCurrentPane(register);
         }
-//        Controller.setCurrentPane(mainMenu);
+
         Scene scene = new Scene(Controller.getCurrentPane());
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(e -> {
             e.consume();
-            closeProgram();
+            System.exit(0);
         });
     }
 
