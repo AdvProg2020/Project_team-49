@@ -79,16 +79,28 @@ public class Client {
         return null;
     }
 
-    public void setMainPaneColor(String color) {
+    public void clickedOnACategoryOnMainBar(String category) {
         try {
-            dataOutputStream.writeUTF(ed.encrypt("setMainPaneColor"));
+            dataOutputStream.writeUTF(ed.encrypt("clickedOnACategoryOnMainBar"));
             dataOutputStream.flush();
-            dataOutputStream.writeUTF(ed.encrypt(color));
+            dataOutputStream.writeUTF(ed.encrypt(category));
             dataOutputStream.flush();
+            dataInputStream.readUTF();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public void goToOffsAndDiscountsPageFromMainBar() {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("goToOffsAndDiscountsPageFromMainBar"));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     class ED {
         private Cipher ecipher;

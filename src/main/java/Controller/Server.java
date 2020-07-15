@@ -1,6 +1,7 @@
 package Controller;
 
 import Models.User.User;
+import View.View;
 import com.sun.mail.util.BASE64DecoderStream;
 import com.sun.mail.util.BASE64EncoderStream;
 import javafx.scene.control.Control;
@@ -73,13 +74,21 @@ public class Server {
                         dataOutputStream.flush();
                         continue;
                     }
-                    if (command.startsWith("setMainPaneColor")) {
-                        String color = ed.decrypt(dataInputStream.readUTF());
-                        Controller.setColor(color);
+                    if (command.equals("clickedOnACategoryOnMainBar")) {
+                        Filter.restartFilters();
+                        Controller.setDoesItOffPage(false);
+                        Filter.filterByCategory(ed.decrypt(dataInputStream.readUTF()));
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
                         continue;
                     }
-
-
+                    if (command.equals("goToOffsAndDiscountsPageFromMainBar")) {
+                        Filter.restartFilters();
+                        Controller.setDoesItOffPage(true);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                        continue;
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

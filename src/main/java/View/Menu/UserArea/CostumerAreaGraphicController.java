@@ -7,6 +7,7 @@ import Models.Product;
 import Models.User.Costumer;
 import Controller.CostumerAreaController;
 import Models.User.Guest;
+import View.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -599,8 +600,8 @@ public class CostumerAreaGraphicController implements Initializable {
     public void goBackToLastPaneFromCostumerArea(MouseEvent mouseEvent) {
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
-        Controller.setCurrentPane(Controller.getLastPane());
-        scene.setRoot(Controller.getCurrentPane());
+        View.setCurrentPane(View.getLastPane());
+        scene.setRoot(View.getCurrentPane());
         stage.setScene(scene);
         stage.show();
     }
@@ -608,7 +609,7 @@ public class CostumerAreaGraphicController implements Initializable {
     public void goToCostumersCart(MouseEvent mouseEvent) {
         Scene scene = ((Label) mouseEvent.getSource()).getScene();
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        Controller.setLastPane(Controller.getCurrentPane());
+        View.setLastPane(View.getCurrentPane());
         Pane pane = null;
         try {
             pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml"));
@@ -617,7 +618,7 @@ public class CostumerAreaGraphicController implements Initializable {
         }
         ScrollPane scrollPane = (ScrollPane) pane.getChildren().get(0);
         scrollPane.setPrefHeight(800);
-        Controller.setCurrentPane(pane);
+        View.setCurrentPane(pane);
         scene.setRoot(pane);
         stage.setScene(scene);
         stage.show();
@@ -635,12 +636,12 @@ public class CostumerAreaGraphicController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+        View.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
         ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
         scrollPane.setPrefHeight(800);
         mainMenu.getChildren().add(mainBar);
-        Controller.setCurrentPane(mainMenu);
-        scene.setRoot(Controller.getCurrentPane());
+        View.setCurrentPane(mainMenu);
+        scene.setRoot(View.getCurrentPane());
         stage.setScene(scene);
         stage.show();
     }

@@ -9,12 +9,17 @@ import View.Menu.Menu;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -30,10 +35,50 @@ import static Controller.DataBase.getProductById;
 
 public class View extends Application {
     public static Client client;
-
+    private static Pane currentPane;
+    private static Pane lastPane;
+    private static String color = "f3f3f3";
+    private static Pane innerPaneForColor;
     public View() {
 
     }
+
+    public static Pane getLastPane() {
+        return lastPane;
+    }
+
+    public static void setLastPane(Pane lastPane) {
+        View.lastPane = lastPane;
+    }
+
+    public static String getColor() {
+        return color;
+    }
+
+    public static void setColor(String color) {
+        View.color = color;
+        innerPaneForColor.setBackground(new Background(new BackgroundFill(Color.web("#" + color), CornerRadii.EMPTY, Insets.EMPTY)));
+        innerPaneForColor.setStyle("-fx-background-color: #" + color);
+    }
+
+    public static Pane getInnerPaneForColor() {
+        return innerPaneForColor;
+    }
+
+    public static void setInnerPaneForColor(Pane innerPaneForColor) {
+        View.innerPaneForColor = innerPaneForColor;
+        innerPaneForColor.setBackground(new Background(new BackgroundFill(Color.web("#" + color), CornerRadii.EMPTY, Insets.EMPTY)));
+        innerPaneForColor.setStyle("-fx-background-color: #" + color);
+    }
+
+    public static Pane getCurrentPane() {
+        return currentPane;
+    }
+
+    public static void setCurrentPane(Pane currentPane) {
+        View.currentPane = currentPane;
+    }
+
 
     public static Client getClient() {
         return client;
@@ -47,19 +92,19 @@ public class View extends Application {
     public void start(Stage stage) throws Exception {
         Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
         Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
-        Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+        View.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
         ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
         scrollPane.setPrefHeight(800);
         mainMenu.getChildren().add(mainBar);
         if (Controller.getHasHeadManager()) {
-            Controller.setCurrentPane(mainMenu);
+            View.setCurrentPane(mainMenu);
         } else {
-            Controller.setLastPane(mainMenu);
+            View.setLastPane(mainMenu);
             Pane register = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/RegisterMenu.fxml"));
-            Controller.setCurrentPane(register);
+            View.setCurrentPane(register);
         }
 
-        Scene scene = new Scene(Controller.getCurrentPane());
+        Scene scene = new Scene(View.getCurrentPane());
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(e -> {

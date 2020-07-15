@@ -93,7 +93,7 @@ public class GuestAreaGraphicsController implements Initializable {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+                    View.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
                     ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
                     scrollPane.setPrefHeight(800);
                     mainMenu.getChildren().add(mainBar);
@@ -104,8 +104,8 @@ public class GuestAreaGraphicsController implements Initializable {
                 }else{
                     Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
                     Scene scene = ((Node) mouseEvent.getSource()).getScene();
-                    Controller.setCurrentPane(Controller.getLastPane());
-                    scene.setRoot(Controller.getCurrentPane());
+                    View.setCurrentPane(View.getLastPane());
+                    scene.setRoot(View.getCurrentPane());
                     stage.setScene(scene);
                     stage.show();
                 }
@@ -321,7 +321,7 @@ public class GuestAreaGraphicsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Controller.setCurrentPane(register);
+        View.setCurrentPane(register);
         scene.setRoot(register);
         stage.setScene(scene);
         stage.show();
@@ -355,16 +355,16 @@ public class GuestAreaGraphicsController implements Initializable {
             Controller.loginAccount(userLogin.getText());
             Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             Scene scene = ((Button) mouseEvent.getSource()).getScene();
-            if(Controller.getLastPane().getId().equals("mainPane")){
+            if(View.getLastPane().getId().equals("mainPane")){
                 try {
                     System.out.println(Controller.getCurrentUser().getType());
                     Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
                     Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
-                    Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+                    View.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
                     ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
                     scrollPane.setPrefHeight(800);
                     mainMenu.getChildren().add(mainBar);
-                    Controller.setLastPane(mainMenu);
+                    View.setLastPane(mainMenu);
                     System.out.println("shit");
 
                 } catch (IOException e) {
@@ -372,9 +372,9 @@ public class GuestAreaGraphicsController implements Initializable {
                 }
 
             }
-            Controller.setCurrentPane(Controller.getLastPane());
+            View.setCurrentPane(View.getLastPane());
 
-            scene.setRoot(Controller.getCurrentPane());
+            scene.setRoot(View.getCurrentPane());
             stage.setScene(scene);
             stage.show();
         }
@@ -407,7 +407,7 @@ public class GuestAreaGraphicsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Controller.setCurrentPane(register);
+        View.setCurrentPane(register);
         scene.setRoot(register);
         stage.setScene(scene);
         stage.show();
@@ -416,8 +416,8 @@ public class GuestAreaGraphicsController implements Initializable {
     public void goBackToLastPaneFromLogin(MouseEvent mouseEvent) {
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
-        Controller.setCurrentPane(Controller.getLastPane());
-        scene.setRoot(Controller.getCurrentPane());
+        View.setCurrentPane(View.getLastPane());
+        scene.setRoot(View.getCurrentPane());
         stage.setScene(scene);
         stage.show();
     }
@@ -434,7 +434,7 @@ public class GuestAreaGraphicsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+        View.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
         ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
         scrollPane.setPrefHeight(800);
         mainMenu.getChildren().add(mainBar);
