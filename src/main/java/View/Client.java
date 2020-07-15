@@ -93,10 +93,8 @@ public class Client {
         }
         request += type;
         try {
-            dataOutputStream.writeUTF(ed.encrypt("setCategoriesInMainBar"));
             dataOutputStream.writeUTF(ed.encrypt(request));
             dataOutputStream.flush();
-            return ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }

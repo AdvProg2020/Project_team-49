@@ -78,17 +78,12 @@ public class Server {
                     }
                     if (command.startsWith("hasHeadManager")) {
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getHasHeadManager())));
-                while (true) {
-                    String command = ed.decrypt(dataInputStream.readUTF());
-                    if (command.startsWith("setCategoriesInMainBar")) {
-                        dataOutputStream.writeUTF(ed.encrypt(Controller.getAllCategories()));
                         dataOutputStream.flush();
                         continue;
                     }
                     if (command.startsWith("hasUserWithUsername")) {
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.hasUserWithUsername(command.split("!@")[1]))));
                         dataOutputStream.flush();
-                        continue;
                         continue;
                     }
                     if (command.startsWith("isPasswordCorrect")) {
