@@ -220,6 +220,7 @@ public class SellerAreaGraphicController implements Initializable {
     public Rectangle explanationRec;
     public TextField explanationTextField;
     public TextField imageTextField;
+    private ArrayList<String> seller = new ArrayList<>();
     private Seller seller;
     private int offsIndex = 0;
     private int productsIndex = 0;
@@ -229,8 +230,11 @@ public class SellerAreaGraphicController implements Initializable {
     private int imagesOff2Index = 0;
     private int logIndex = 0;
     private int editProductIndex = 0;
+    ArrayList<String> logHistory = new ArrayList<>();
     ArrayList<SellLog> logHistory = new ArrayList<>();
+    ArrayList<String> offs = new ArrayList<>();
     ArrayList<Off> offs = new ArrayList<>();
+    ArrayList<String> products = new ArrayList<>();
     ArrayList<Product> products = new ArrayList<>();
     private SimpleDateFormat formatter;
     private Alert deleteProductAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are You Sure?");
@@ -238,7 +242,7 @@ public class SellerAreaGraphicController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         closeALlPanes();
-        seller = (Seller) Controller.getCurrentUser();
+        setSellerInfo();
         userInfoPane.setDisable(false);
         userInfoPane.setVisible(true);
         setPersonalInfoLabels();
@@ -254,14 +258,18 @@ public class SellerAreaGraphicController implements Initializable {
 
     }
 
+    private void setSellerInfo() {
+        seller = View.client.getCurrentUser();
+
+    }
 
     private void setPersonalInfoLabels() {
-        userNameLabel.setText(seller.getUsername());
-        firstNameLabel.setText(seller.getFirstName());
-        lastNameLabel.setText(seller.getLastName());
-        emailLabel.setText(seller.getEMail());
-        creditLabel.setText(String.valueOf(seller.getCredit()));
-        phoneNumberLabel.setText(String.valueOf(seller.getPhoneNumber()));
+        userNameLabel.setText(seller.get(0));
+        firstNameLabel.setText(seller.get(2));
+        lastNameLabel.setText(seller.get(3));
+        emailLabel.setText(seller.get(4));
+        creditLabel.setText(String.valueOf(seller.get(6)));
+        phoneNumberLabel.setText(String.valueOf(seller.get(5)));
     }
 
     public void goToEditPersonalInfo(MouseEvent mouseEvent) {
@@ -277,13 +285,13 @@ public class SellerAreaGraphicController implements Initializable {
 
     private void restartInsideEditPersonalPane() {
         creditTextField.setText("");
-        creditTextField.setPromptText(String.valueOf(seller.getCredit()));
+        creditTextField.setPromptText(String.valueOf(seller.get(6)));
         firstNameTextField.setText("");
-        firstNameTextField.setPromptText(seller.getFirstName());
+        firstNameTextField.setPromptText(seller.get(2));
         lastNameTextField.setText("");
-        lastNameTextField.setPromptText(seller.getLastName());
+        lastNameTextField.setPromptText(seller.get(3));
         emailTextField.setText("");
-        emailTextField.setPromptText(seller.getEMail());
+        emailTextField.setPromptText(seller.get(4));
         restartTextFieldRecsInEditPane();
         correctFormatEditImage.setVisible(false);
         wrongFormatEditImage.setVisible(false);
@@ -317,16 +325,16 @@ public class SellerAreaGraphicController implements Initializable {
             }
         }).start();
         if (!creditTextField.getText().matches("(\\s+)?"))
-            seller.setCredit(Double.parseDouble(creditTextField.getText()));
+            View.client.setUserInfo("Credit", String.valueOf(Double.parseDouble(creditTextField.getText())));
 
         if (!emailTextField.getText().matches("(\\s+)?")) {
-            seller.setEMail(emailTextField.getText());
+            View.client.setUserInfo("Email", emailTextField.getText());
         }
         if (!firstNameTextField.getText().matches("(\\s+)?")) {
-            seller.setFirstName(firstNameTextField.getText());
+            View.client.setUserInfo("FirstName", firstNameTextField.getText());
         }
         if (!lastNameTextField.getText().matches("(\\s+)?")) {
-            seller.setLastName(lastNameTextField.getText());
+            View.client.setUserInfo("LastName", lastNameTextField.getText());
         }
         personalInfoLabel.setVisible(true);
         editPersonalInfoLabel.setDisable(true);
@@ -954,7 +962,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     private void setAddOffPaneContents() {
-        for (String s : SellerAreaController.getAvailableProductsForOff(seller.getUsername())) {
+        for (String s : SellerAreaController.getAvailableProductsForOff(seller.get(0))) {
             CheckBox checkBox = new CheckBox();
             checkBox.setText(s);
             checkBox.setSelected(false);

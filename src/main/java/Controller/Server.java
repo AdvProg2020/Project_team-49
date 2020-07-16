@@ -1,5 +1,7 @@
 package Controller;
 
+import Models.User.Costumer;
+import Models.User.Seller;
 import Models.User.User;
 import com.sun.mail.util.BASE64DecoderStream;
 import com.sun.mail.util.BASE64EncoderStream;
@@ -88,6 +90,10 @@ public class Server {
                     }
                     if (command.startsWith("loginAccount")) {
                         Controller.loginAccount(command.split("!@")[1]);
+                        String token = ed.generateToken();
+                        onlineUsers.put(token, Controller.currentUser);
+                        dataOutputStream.writeUTF(ed.encrypt(Controller.getCurrentUser() + "!@" + token));
+                        dataOutputStream.flush();
                         continue;
                     }
                     if (command.startsWith("createAccount")) {
@@ -254,7 +260,26 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(rawInput));
                         dataOutputStream.flush();
                     }
-
+                    if (command.startsWith("getCurrentUser")) {
+                        String token = command.split("!@")[1];
+                        String user = "";
+                        user += onlineUsers.get(token).getUsername() + "!@";
+                        user += onlineUsers.get(token).getPassword() + "!@";
+                        user += onlineUsers.get(token).getFirstName() + "!@";
+                        user += onlineUsers.get(token).getLastName() + "!@";
+                        user += onlineUsers.get(token).getEMail() + "!@";
+                        user += String.valueOf(onlineUsers.get(token).getPhoneNumber()) + "!@";
+                        if (onlineUsers.get(token).getType().equalsIgnoreCase("costumer")) {
+                            user += String.valueOf(((Costumer) onlineUsers.get(token)).getCredit());
+                        }
+                        if (onlineUsers.get(token).getType().equalsIgnoreCase("seller")) {
+                            user += String.valueOf(((Seller) onlineUsers.get(token)).getCredit()) + "!@";
+                            user += ((Seller) onlineUsers.get(token)).getCompanyName();
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(user));
+                        dataOutputStream.flush();
+                        continue;
+                    }
 
                 }
             } catch (IOException e) {

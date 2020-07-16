@@ -118,12 +118,16 @@ public class Client {
     }
 
     public void loginAccount(String username) {
+        String answer = "";
         try {
             dataOutputStream.writeUTF(ed.encrypt("loginAccount!@" + username));
             dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        type = answer.split("!@")[0].toLowerCase();
+        token = answer.split("!@")[1];
     }
 
     public void clickedOnACategoryOnMainBar(String category) {
@@ -401,6 +405,62 @@ public class Client {
         return returnValue;
     }
 
+    public ArrayList<String> getCurrentUser() {
+        ArrayList<String> user = new ArrayList<>();
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getCurrentUser!@" + token));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String[] info = answer.split("!@");
+        for (String s : info) {
+            user.add(s);
+        }
+        return user;
+    }
+
+    public String setCostumerAreaAndCartButtons() {
+        String type;
+        try {
+            dataOutputStream.writeUTF("setCostumerAreaAndCartButtons!@" + this.type);
+            dataOutputStream.flush();
+            type = dataInputStream.readUTF();
+            return type;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean hasHeadManager() {
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("hasHeadManager"));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+            if (answer.equalsIgnoreCase("true")) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public void setUserInfo(String field, String content) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("set" + field + "!@" + token + "!@" + content));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     class ED {
         private Cipher ecipher;
@@ -461,37 +521,6 @@ public class Client {
             }
             return null;
         }
-    }
-
-
-    public String setCostumerAreaAndCartButtons() {
-        String type;
-        try {
-            dataOutputStream.writeUTF("setCostumerAreaAndCartButtons!@" + this.type);
-            dataOutputStream.flush();
-            type = dataInputStream.readUTF();
-            return type;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public boolean hasHeadManager() {
-        String answer = "";
-        try {
-            dataOutputStream.writeUTF(ed.encrypt("hasHeadManager"));
-            dataOutputStream.flush();
-            answer = ed.decrypt(dataInputStream.readUTF());
-            if (answer.equalsIgnoreCase("true")) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return true;
     }
     // !@
     // #$   BETWEEN OBJECTS
