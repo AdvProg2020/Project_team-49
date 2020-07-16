@@ -67,17 +67,10 @@ public class Server {
                 }
                 dataOutputStream.writeUTF(Base64.getEncoder().encodeToString(key));
                 dataOutputStream.flush();
-                dataOutputStream.writeUTF(ed.generateToken());
-                dataOutputStream.flush();
-
-
                 while (true) {
-                    String command = dataInputStream.readUTF();
-                    if (command.startsWith("setCostumerAreaAndCartButtons")) {
-
-                    }
-                    if (command.startsWith("hasHeadManager")) {
-                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getHasHeadManager())));
+                    String command = ed.decrypt(dataInputStream.readUTF());
+                    if (command.startsWith("setCategoriesInMainBar")) {
+                        dataOutputStream.writeUTF(ed.encrypt(Controller.getAllCategories()));
                         dataOutputStream.flush();
                         continue;
                     }
@@ -106,10 +99,160 @@ public class Server {
                         Controller.createAccount(accountInfo, info[info.length - 1]);
                         continue;
                     }
-                    if (command.startsWith("setMainPaneColor")) {
-                        String color = ed.decrypt(dataInputStream.readUTF());
-                        Controller.setColor(color);
+                    if (command.equals("clickedOnACategoryOnMainBar")) {
+                        Filter.restartFilters();
+                        Controller.setDoesItOffPage(false);
+                        Filter.filterByCategory(ed.decrypt(dataInputStream.readUTF()));
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
                         continue;
+                    }
+                    if (command.equals("goToOffsAndDiscountsPageFromMainBar")) {
+                        Filter.restartFilters();
+                        Controller.setDoesItOffPage(true);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if (command.equalsIgnoreCase("getSubCategories")){
+                        String rawCategories="";
+                        for (String showSubCategory : Filter.showSubCategories()) {
+                            rawCategories.concat(showSubCategory);
+                            rawCategories.concat("!@");
+                        }
+                        rawCategories=rawCategories.substring(0,rawCategories.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(rawCategories));
+                        dataOutputStream.flush();
+                    }
+                    if (command.equalsIgnoreCase("cancelSong")){
+                        Controller.cancelSong();
+                        dataOutputStream.writeUTF(ed.encrypt("songCanceled"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("startSong")){
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Controller.startSong(command.split("!@")[1]);
+                            }
+                        }).start();
+                        dataOutputStream.writeUTF(ed.encrypt("songStarted"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.equalsIgnoreCase("getIsDoesItOffPage")){
+                        if (Controller.isDoesItOffPage()){
+                            dataOutputStream.writeUTF(ed.encrypt("true"));
+                            dataOutputStream.flush();
+                        }else {
+                            dataOutputStream.writeUTF(ed.encrypt("false"));
+                            dataOutputStream.flush();
+                        }
+                    }
+                    if (command.startsWith("getHowMuchLeftForThisPage")){
+                        long counter=Long.parseLong(command.split("!@")[1]);
+                        int returnValue=Controller.getHowMuchLeftForThisPage(counter);
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(returnValue)));
+                        dataOutputStream.flush();
+                    }
+
+                    if (command.startsWith("getProductImageForFxml")){
+                        long counter=Long.parseLong(command.split("!@")[1]);
+                        String rawInput="";
+                        for (String s : Controller.getProductImageForFxml(counter)) {
+                            rawInput.concat(s);
+                            rawInput.concat("!@");
+                        }
+                        rawInput=rawInput.substring(0,rawInput.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(rawInput));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductPriceForFxml")){
+                        long counter=Long.parseLong(command.split("!@")[1]);
+                        String rawInput="";
+                        for (Double aDouble : Controller.getProductPriceForFxml(counter)) {
+                            rawInput.concat(String.valueOf(aDouble));
+                            rawInput.concat("!@");
+                        }
+                        rawInput=rawInput.substring(0,rawInput.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(rawInput));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductNameForFxml")){
+                        long counter=Long.parseLong(command.split("!@")[1]);
+                        String rawInput="";
+                        for (String s : Controller.getProductNameForFxml(counter)) {
+                            rawInput.concat(s);
+                            rawInput.concat("!@");
+                        }
+                        rawInput=rawInput.substring(0,rawInput.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(rawInput));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductScoreForFxml")){
+                        long counter=Long.parseLong(command.split("!@")[1]);
+                        String rawInput="";
+                        for (Double aDouble : Controller.getProductScoreForFxml(counter)) {
+                            rawInput.concat(String.valueOf(aDouble));
+                            rawInput.concat("!@");
+                        }
+                        rawInput=rawInput.substring(0,rawInput.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(rawInput));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductOffRemainForFxml")){
+                        long counter=Long.parseLong(command.split("!@")[1]);
+                        String rawInput="";
+                        for (Double aDouble : Controller.getProductOffRemainForFxml(counter)) {
+                            rawInput.concat(String.valueOf(aDouble));
+                            rawInput.concat("!@");
+                        }
+                        rawInput=rawInput.substring(0,rawInput.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(rawInput));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductIdForFxml")){
+                        long counter=Long.parseLong(command.split("!@")[1]);
+                        String rawInput="";
+                        for (Long aDouble : Controller.getProductIdForFxml(counter)) {
+                            rawInput.concat(String.valueOf(aDouble));
+                            rawInput.concat("!@");
+                        }
+                        rawInput=rawInput.substring(0,rawInput.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(rawInput));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getOffForFxml")){
+                        long counter=Long.parseLong(command.split("!@")[1]);
+                        String rawInput="";
+                        for (Boolean aDouble : Controller.getOffForFxml(counter)) {
+                            rawInput.concat(String.valueOf(aDouble));
+                            rawInput.concat("!@");
+                        }
+                        rawInput=rawInput.substring(0,rawInput.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(rawInput));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductOffPercentForFxml")){
+                        long counter=Long.parseLong(command.split("!@")[1]);
+                        String rawInput="";
+                        for (int aDouble : Controller.getProductOffPercentForFxml(counter)) {
+                            rawInput.concat(String.valueOf(aDouble));
+                            rawInput.concat("!@");
+                        }
+                        rawInput=rawInput.substring(0,rawInput.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(rawInput));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductRemainForFxml")){
+                        long counter=Long.parseLong(command.split("!@")[1]);
+                        String rawInput="";
+                        for (int aDouble : Controller.getProductRemainForFxml(counter)) {
+                            rawInput.concat(String.valueOf(aDouble));
+                            rawInput.concat("!@");
+                        }
+                        rawInput=rawInput.substring(0,rawInput.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(rawInput));
+                        dataOutputStream.flush();
                     }
 
 
@@ -165,7 +308,7 @@ public class Server {
                 return null;
             }
 
-            public  String decrypt(String str) {
+            public String decrypt(String str) {
                 try {
                     byte[] dec = BASE64DecoderStream.decode(str.getBytes());
                     byte[] utf8 = dcipher.doFinal(dec);
@@ -176,13 +319,13 @@ public class Server {
                 return null;
             }
 
-            public String generateToken(){
+            public String generateToken() {
                 try {
                     boolean flag = true;
-                    while (true){
+                    while (true) {
                         SecretKey key = KeyGenerator.getInstance("DES").generateKey();
-                        if(onlineUsers.keySet().contains(key.toString())) flag = false;
-                        if(!flag){
+                        if (onlineUsers.keySet().contains(key.toString())) flag = false;
+                        if (!flag) {
                             break;
                         }
                     }

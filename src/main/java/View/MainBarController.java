@@ -294,17 +294,17 @@ public class MainBarController implements Initializable {
     public void changeBackGroundColor(MouseEvent mouseEvent) {
 
         if (mouseEvent.getSource().equals(lightBlueButton)) {
-            View.getClient().setMainPaneColor("cee8f0");
+          View.setColor("cee8f0");
         } else if (mouseEvent.getSource().equals(lightGrayButton)) {
-            View.getClient().setMainPaneColor("f3f3f3");
+            View.setColor("f3f3f3");
         } else if (mouseEvent.getSource().equals(lightGreenButton)) {
-            View.getClient().setMainPaneColor("cdeae0");
+            View.setColor("cdeae0");
         } else if (mouseEvent.getSource().equals(lightRedButton)) {
-            View.getClient().setMainPaneColor("ff726f");
+            View.setColor("ff726f");
         } else if (mouseEvent.getSource().equals(lightOrangeButton)) {
-            View.getClient().setMainPaneColor("feddb6");
+            View.setColor("feddb6");
         } else if (mouseEvent.getSource().equals(lightWhiteButton)) {
-            View.getClient().setMainPaneColor("FFFFFF");
+            View.setColor("FFFFFF");
         }
         new Thread(new Runnable() {
             @Override
@@ -488,9 +488,7 @@ public class MainBarController implements Initializable {
                 player.play();
             }
         }).start();
-        Filter.restartFilters();
-        Filter.filterByCategory(category);
-        Controller.setDoesItOffPage(false);
+        client.clickedOnACategoryOnMainBar(category);
         Scene scene = label.getScene();
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         AnchorPane loginMenu2 = null;
@@ -504,7 +502,7 @@ public class MainBarController implements Initializable {
         ScrollPane scrollPane = (ScrollPane) loginMenu2.getChildren().get(0);
         scrollPane.setPrefHeight(800);
         loginMenu2.getChildren().add(mainBar);
-        Controller.setCurrentPane(loginMenu2);
+        View.setCurrentPane(loginMenu2);
         scene.setRoot(loginMenu2);
         stage.setScene(scene);
         stage.show();
@@ -527,7 +525,7 @@ public class MainBarController implements Initializable {
     public void goToCart(MouseEvent mouseEvent) {
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        Controller.setLastPane(Controller.getCurrentPane());
+        View.setLastPane(View.getCurrentPane());
         AnchorPane pane = null;
         try {
             pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml"));
@@ -536,7 +534,7 @@ public class MainBarController implements Initializable {
         }
         ScrollPane scrollPane = (ScrollPane) pane.getChildren().get(0);
         scrollPane.setPrefHeight(800);
-        Controller.setCurrentPane(pane);
+        View.setCurrentPane(pane);
         scene.setRoot(pane);
         stage.setScene(scene);
         stage.show();
@@ -546,34 +544,34 @@ public class MainBarController implements Initializable {
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Pane mainBar = null;
-        Controller.setLastPane(Controller.getCurrentPane());
+        View.setLastPane(View.getCurrentPane());
         try {
             mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         Pane pane = null;
-        if (Controller.getCurrentUserType().equalsIgnoreCase("guest")) {
+        if (client.getType().equalsIgnoreCase("guest")) {
             try {
                 pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/LoginMenu.fxml"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (Controller.getCurrentUserType().equalsIgnoreCase("costumer")) {
+        } else if (client.getType().equalsIgnoreCase("costumer")) {
             try {
                 pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/costumerArea.fxml"));
                 pane.getChildren().add(mainBar);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (Controller.getCurrentUserType().equalsIgnoreCase("seller")) {
+        } else if (client.getType().equalsIgnoreCase("seller")) {
             try {
                 pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/SellerArea.fxml"));
                 pane.getChildren().add(mainBar);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (Controller.getCurrentUserType().equalsIgnoreCase("manager")) {
+        } else if (client.getType().equalsIgnoreCase("manager")) {
             try {
                 pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/ManagerArea.fxml"));
                 pane.getChildren().add(mainBar);
@@ -582,8 +580,7 @@ public class MainBarController implements Initializable {
             }
         }
 
-
-        Controller.setCurrentPane(pane);
+        View.setCurrentPane(pane);
         scene.setRoot(pane);
         stage.setScene(scene);
         stage.show();
@@ -597,22 +594,22 @@ public class MainBarController implements Initializable {
         try {
             pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
             Pane mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
-            Controller.setInnerPaneForColor((Pane) ((ScrollPane) pane.getChildren().get(0)).getContent());
+            View.setInnerPaneForColor((Pane) ((ScrollPane) pane.getChildren().get(0)).getContent());
             pane.getChildren().add(mainBar);
         } catch (IOException e) {
             e.printStackTrace();
         }
         ScrollPane scrollPane = (ScrollPane) pane.getChildren().get(0);
         scrollPane.setPrefHeight(800);
-        Controller.setCurrentPane(pane);
+        View.setCurrentPane(pane);
         scene.setRoot(pane);
         stage.setScene(scene);
         stage.show();
     }
 
     public void goToOffsAndDiscountsPage(MouseEvent mouseEvent) {
-        Filter.restartFilters();
-        Controller.setDoesItOffPage(true);
+        client.goToOffsAndDiscountsPageFromMainBar();
+
         Label label = (Label) mouseEvent.getSource();
         Scene scene = label.getScene();
         Stage stage = (Stage) scene.getWindow();
@@ -627,7 +624,7 @@ public class MainBarController implements Initializable {
         }
         ScrollPane scrollPane = (ScrollPane) offPage.getChildren().get(0);
         scrollPane.setPrefHeight(800);
-        Controller.setCurrentPane(offPage);
+        View.setCurrentPane(offPage);
         scene.setRoot(offPage);
         stage.setScene(scene);
         Thread thread = new Thread(new Runnable() {

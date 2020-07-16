@@ -11,6 +11,7 @@ import Models.User.Cart;
 import Models.User.Costumer;
 import Models.User.Guest;
 import Models.User.Seller;
+import View.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -724,8 +725,8 @@ public class CartPageController implements Initializable {
     public void goBackToLastPane(MouseEvent mouseEvent) {
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
-        Controller.setCurrentPane(Controller.getLastPane());
-        scene.setRoot(Controller.getLastPane());
+        View.setCurrentPane(View.getLastPane());
+        scene.setRoot(View.getLastPane());
         stage.setScene(scene);
         stage.show();
     }

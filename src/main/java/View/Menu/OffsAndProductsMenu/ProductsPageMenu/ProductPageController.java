@@ -9,6 +9,7 @@ import Models.Comment;
 import Models.Product;
 import Models.Score;
 import Models.User.*;
+import View.View;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
@@ -608,7 +609,7 @@ public class ProductPageController implements Initializable {
         System.out.println(Controller.addToCart(Controller.getSelectedProduct(),Controller.getSelectedProduct().getSellerByUsername(sellerNameLabel.getText()),1));
         Scene scene = ((Node) mouseEvent.getSource()).getScene();
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        Controller.setLastPane(Controller.getCurrentPane());
+        View.setLastPane(View.getCurrentPane());
         Pane pane = null;
         try {
             pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/cartAndBuyPage.fxml"));
@@ -618,7 +619,7 @@ public class ProductPageController implements Initializable {
 
         ScrollPane scrollPane = (ScrollPane) pane.getChildren().get(0);
         scrollPane.setPrefHeight(800);
-        Controller.setCurrentPane(pane);
+        View.setCurrentPane(pane);
         scene.setRoot(pane);
         stage.setScene(scene);
         stage.show();
@@ -867,8 +868,8 @@ public class ProductPageController implements Initializable {
     public void goBackToLastPaneFromProductPage(MouseEvent mouseEvent) {
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
-        Controller.setCurrentPane(Controller.getLastPane());
-        scene.setRoot(Controller.getCurrentPane());
+        View.setCurrentPane(View.getLastPane());
+        scene.setRoot(View.getCurrentPane());
         stage.setScene(scene);
         Controller.cancelSong();
         Controller.startSong("src/main/resources/Sound/ProductsMenu/BackGround.mp3");

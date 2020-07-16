@@ -126,16 +126,281 @@ public class Client {
         }
     }
 
-    public void setMainPaneColor(String color) {
+    public void clickedOnACategoryOnMainBar(String category) {
         try {
-            dataOutputStream.writeUTF(ed.encrypt("setMainPaneColor"));
+            dataOutputStream.writeUTF(ed.encrypt("clickedOnACategoryOnMainBar"));
             dataOutputStream.flush();
-            dataOutputStream.writeUTF(ed.encrypt(color));
+            dataOutputStream.writeUTF(ed.encrypt(category));
             dataOutputStream.flush();
+            dataInputStream.readUTF();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public void goToOffsAndDiscountsPageFromMainBar() {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("goToOffsAndDiscountsPageFromMainBar"));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<String> getSubCategories(){
+        String rawCategories="";
+        try {
+            dataOutputStream.writeUTF("getSubCategories");
+            dataOutputStream.flush();
+            rawCategories=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<String > returnValue=new ArrayList<String>();
+        for (int i = 0; i < rawCategories.split("!@").length; i++) {
+            returnValue.add(rawCategories.split("!@")[i]);
+        }
+        return returnValue;
+    }
+
+    public void startSong(String path){
+        cancelSong();
+        String command="startSong";
+        command.concat("!@");
+        command.concat(path);
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            System.out.println("song Cant Start");
+            e.printStackTrace();
+        }
+    }
+
+    public void cancelSong(){
+        String command="cancelSong";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            System.out.println("song cant Canceled");
+            e.printStackTrace();
+        }
+    }
+
+    public boolean getIsDoesItOffPage(){
+        String command="getIsDoesItOffPage";
+        String rawGetIsItOffPage="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getIsDoesItOffPage"));
+            dataOutputStream.flush();
+            rawGetIsItOffPage=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            System.out.println("getIsDoesItOffPage problem");
+            e.printStackTrace();
+        }
+        if (rawGetIsItOffPage.equalsIgnoreCase("true")){
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+
+    public int getHowMuchLeftForThisPage(long counter){
+        String command="getHowMuchLeftForThisPage";
+        command.concat("!@");
+        command.concat(String.valueOf(counter));
+        int returnValue=0;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue=Integer.parseInt(ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            System.out.println("getHowMuchLeftForThisPage problem");
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public ArrayList<String> getProductImageForFxml(long counter){
+        String command="getProductImageForFxml";
+        command.concat("!@");
+        command.concat(String.valueOf(counter));
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<String> returnValue=new ArrayList<>();
+        for (String s : rawOutput.split("!@")) {
+            returnValue.add(s);
+        }
+        return returnValue;
+    }
+
+    public ArrayList<Double> getProductPriceForFxml(long counter){
+        String command="getProductPriceForFxml";
+        command.concat("!@");
+        command.concat(String.valueOf(counter));
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Double> returnValue=new ArrayList<>();
+        for (String s : rawOutput.split("!@")) {
+            returnValue.add(Double.parseDouble(s));
+        }
+        return returnValue;
+    }
+
+    public ArrayList<String> getProductNameForFxml(long counter){
+        String command="getProductNameForFxml";
+        command.concat("!@");
+        command.concat(String.valueOf(counter));
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<String> returnValue=new ArrayList<>();
+        for (String s : rawOutput.split("!@")) {
+            returnValue.add(s);
+        }
+        return returnValue;
+    }
+
+    public ArrayList<Double> getProductScoreForFxml(long counter){
+        String command="getProductScoreForFxml";
+        command.concat("!@");
+        command.concat(String.valueOf(counter));
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Double> returnValue=new ArrayList<>();
+        for (String s : rawOutput.split("!@")) {
+            returnValue.add(Double.parseDouble(s));
+        }
+        return returnValue;
+    }
+
+    public ArrayList<Double> getProductOffRemainForFxml(long counter){
+        String command="getProductOffRemainForFxml";
+        command.concat("!@");
+        command.concat(String.valueOf(counter));
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Double> returnValue=new ArrayList<>();
+        for (String s : rawOutput.split("!@")) {
+            returnValue.add(Double.parseDouble(s));
+        }
+        return returnValue;
+    }
+
+    public ArrayList<Long> getProductIdForFxml(long counter){
+        String command="getProductIdForFxml";
+        command.concat("!@");
+        command.concat(String.valueOf(counter));
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Long> returnValue=new ArrayList<>();
+        for (String s : rawOutput.split("!@")) {
+            returnValue.add(Long.parseLong(s));
+        }
+        return returnValue;
+    }
+
+    public ArrayList<Boolean> getOffForFxml(long counter){
+        String command="getOffForFxml";
+        command.concat("!@");
+        command.concat(String.valueOf(counter));
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Boolean> returnValue=new ArrayList<>();
+        for (String s : rawOutput.split("!@")) {
+            if (s.equalsIgnoreCase("true")){
+                returnValue.add(true);
+            }else {
+                returnValue.add(false);
+            }
+        }
+        return returnValue;
+    }
+
+    public ArrayList<Integer> getProductOffPercentForFxml(long counter){
+        String command="getProductOffPercentForFxml";
+        command.concat("!@");
+        command.concat(String.valueOf(counter));
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Integer> returnValue=new ArrayList<>();
+        for (String s : rawOutput.split("!@")) {
+            returnValue.add(Integer.parseInt(s));
+        }
+        return returnValue;
+    }
+
+    public ArrayList<Integer> getProductRemainForFxml(long counter){
+        String command="getProductRemainForFxml";
+        command.concat("!@");
+        command.concat(String.valueOf(counter));
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Integer> returnValue=new ArrayList<>();
+        for (String s : rawOutput.split("!@")) {
+            returnValue.add(Integer.parseInt(s));
+        }
+        return returnValue;
+    }
+
 
     class ED {
         private Cipher ecipher;

@@ -12,6 +12,7 @@ import Models.User.Costumer;
 import Controller.CostumerAreaController;
 import Models.User.Guest;
 import Models.User.Seller;
+import View.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -1373,8 +1374,8 @@ public class SellerAreaGraphicController implements Initializable {
     public void goBackToLastPaneFromSellerArea(MouseEvent mouseEvent) {
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
-        Controller.setCurrentPane(Controller.getLastPane());
-        scene.setRoot(Controller.getCurrentPane());
+        View.setCurrentPane(View.getLastPane());
+        scene.setRoot(View.getCurrentPane());
         stage.setScene(scene);
         stage.show();
     }
@@ -1391,12 +1392,12 @@ public class SellerAreaGraphicController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Controller.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+        View.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
         ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
         scrollPane.setPrefHeight(800);
         mainMenu.getChildren().add(mainBar);
-        Controller.setCurrentPane(mainMenu);
-        scene.setRoot(Controller.getCurrentPane());
+        View.setCurrentPane(mainMenu);
+        scene.setRoot(View.getCurrentPane());
         stage.setScene(scene);
         stage.show();
     }
