@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.Category;
 import Models.Log.BuyLog;
 import Models.Log.SellLog;
 import Models.Off;
@@ -430,6 +431,46 @@ public class Server {
                             answer += buyLog.toString() + "#$";
                         }
                         dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getCategories")) {
+                        String answer = "";
+                        for (Category allCategory : DataBase.getAllCategories()) {
+                            String info = "";
+                            info += allCategory.getName() + "!@";
+                            info += allCategory.getSpecialAttributes() + "!@";
+                            info += allCategory.getParentCategory().getName();
+                            answer += info + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getAllUsers")) {
+                        String answer = "";
+                        for (User allUser : DataBase.getAllUsers()) {
+                            String user = "";
+                            user += allUser.getType() + "!@";
+                            user += allUser.getUsername() + "!@";
+                            user += allUser.getFirstName() + "!@";
+                            user += allUser.getLastName() + "!@";
+                            user += allUser.getEMail() + "!@";
+                            user += allUser.getPhoneNumber();
+                            if (allUser.getType().equalsIgnoreCase("seller")) {
+                                user += "!@" + ((Seller) allUser).getCompanyName();
+                            }
+                            answer += user + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("deleteUser")) {
+                        ManagerAreaController.deleteUser(command.split("!@")[1]);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("removeCategory")) {
+                        ManagerAreaController.removeCategory(command.split("!@")[1]);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
                         dataOutputStream.flush();
                     }
                 }

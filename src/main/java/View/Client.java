@@ -533,6 +533,54 @@ public class Client {
         return buyLogs;
     }
 
+    public ArrayList<String> getCategories() {
+        ArrayList<String> categories = new ArrayList<>();
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getCategories"));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        categories.addAll(Arrays.asList(answer.split("#\\$")));
+        return categories;
+    }
+
+    public ArrayList<String> getAllUsers() {
+        ArrayList<String> allUsers = new ArrayList<>();
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getAllUsers"));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        allUsers.addAll(Arrays.asList(answer.split("#\\$")));
+        return allUsers;
+    }
+
+    public void deleteUser(String username) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("deleteUser!@" + username));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeCategory(String category) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("removeCategory!@" + category));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     class ED {
         private Cipher ecipher;
         private Cipher dcipher;

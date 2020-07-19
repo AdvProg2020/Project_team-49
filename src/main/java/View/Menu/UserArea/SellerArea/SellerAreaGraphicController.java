@@ -1,8 +1,5 @@
 package View.Menu.UserArea.SellerArea;
-import static Controller.DataBase.*;
-import Controller.Controller;
-import Controller.DataBase;
-import Controller.SellerAreaController;
+
 import View.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

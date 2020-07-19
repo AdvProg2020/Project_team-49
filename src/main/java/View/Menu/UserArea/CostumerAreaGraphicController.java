@@ -1,12 +1,5 @@
 package View.Menu.UserArea;
 
-import Controller.Controller;
-import Models.Log.BuyLog;
-import Models.Log.Log;
-import Models.Product;
-import Models.User.Costumer;
-import Controller.CostumerAreaController;
-import Models.User.Guest;
 import View.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
