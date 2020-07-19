@@ -519,6 +519,20 @@ public class Client {
         return new ArrayList<>(Arrays.asList(answer.split("#\\$")));
     }
 
+    public ArrayList<String> getBuyLogs() {
+        ArrayList<String> buyLogs = new ArrayList<>();
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getBuyLogs!@" + token));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        buyLogs.addAll(Arrays.asList(answer.split("#\\$")));
+        return buyLogs;
+    }
+
     class ED {
         private Cipher ecipher;
         private Cipher dcipher;

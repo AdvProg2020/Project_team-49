@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.Log.BuyLog;
 import Models.Log.SellLog;
 import Models.Off;
 import Models.Product;
@@ -418,6 +419,15 @@ public class Server {
                             info += product.getExplanation() + "!@";
                             info += product.getRemainingItemsForSeller(seller);
                             answer += info + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getBuyLogs")) {
+                        Costumer costumer = (Costumer) onlineUsers.get(command.split("!@")[1]);
+                        String answer = "";
+                        for (BuyLog buyLog : costumer.getBuyHistory()) {
+                            answer += buyLog.toString() + "#$";
                         }
                         dataOutputStream.writeUTF(ed.encrypt(answer));
                         dataOutputStream.flush();

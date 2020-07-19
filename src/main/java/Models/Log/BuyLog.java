@@ -3,6 +3,7 @@ package Models.Log;
 import Models.Product;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -48,5 +49,26 @@ public class BuyLog extends Log  implements Serializable {
 
     public ReceiveStatus getReceiveStatus() {
         return receiveStatus;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String products = "";
+        boolean test = false;
+        for (Product product : boughtProduct) {
+            if (test) {
+                products += "@#";
+            }
+            products += product.getProductId();
+            test = true;
+        }
+        return logId + "!@"
+                + formatter.format(logDate) + "!@"
+                + paidAmount + "!@"
+                + saleCodeApplied + "!@"
+                + products + "!@"
+                + sellerName + "!@"
+                + receiveStatus;
     }
 }
