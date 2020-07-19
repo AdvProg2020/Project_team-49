@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.Log.SellLog;
 import Models.User.Costumer;
 import Models.User.Seller;
 import Models.User.User;
@@ -11,6 +12,7 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.xml.crypto.Data;
+import java.awt.image.BandedSampleModel;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -279,6 +281,15 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(user));
                         dataOutputStream.flush();
                         continue;
+                    }
+                    if (command.startsWith("getSellLogs")) {
+                        Seller seller = (Seller) onlineUsers.get(command.split("!@")[1]);
+                        String answer = "";
+                        for (SellLog sellLog : seller.getSellHistory()) {
+                            answer += sellLog.toString() + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
                     }
 
                 }

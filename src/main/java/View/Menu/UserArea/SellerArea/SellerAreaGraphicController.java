@@ -260,7 +260,7 @@ public class SellerAreaGraphicController implements Initializable {
 
     private void setSellerInfo() {
         seller = View.client.getCurrentUser();
-
+        logHistory = View.client.getSellLogs();
     }
 
     private void setPersonalInfoLabels() {
@@ -430,7 +430,7 @@ public class SellerAreaGraphicController implements Initializable {
         }).start();
 
         if (mouseEvent.getSource().equals(seeMoreProductsImageLog1)) {
-            SellLog sellLog = logHistory.get(logIndex);
+            String sellLog = logHistory.get(logIndex);
             size = sellLog.getSoldProduct().size();
             if (imagesLog1Index + 8 >= size + 1) return;
             imagesLog1Index++;
