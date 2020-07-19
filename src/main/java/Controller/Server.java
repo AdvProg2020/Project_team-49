@@ -1,6 +1,8 @@
 package Controller;
 
 import Models.Log.SellLog;
+import Models.Off;
+import Models.Product;
 import Models.User.Costumer;
 import Models.User.Seller;
 import Models.User.User;
@@ -371,6 +373,16 @@ public class Server {
                         if (onlineUsers.get(token).getType().equalsIgnoreCase("seller")) {
                             user += String.valueOf(((Seller) onlineUsers.get(token)).getCredit()) + "!@";
                             user += ((Seller) onlineUsers.get(token)).getCompanyName();
+                            String products = "";
+                            boolean test = false;
+                            for (Product product : ((Seller) onlineUsers.get(token)).getProductsForSale()) {
+                                if (test) {
+                                    products += "@#";
+                                }
+                                products += product.getProductId();
+                                test = true;
+                            }
+                            user += products;
                         }
                         dataOutputStream.writeUTF(ed.encrypt(user));
                         dataOutputStream.flush();
@@ -381,6 +393,31 @@ public class Server {
                         String answer = "";
                         for (SellLog sellLog : seller.getSellHistory()) {
                             answer += sellLog.toString() + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getSellerOffs")) {
+                        Seller seller = (Seller) onlineUsers.get(command.split("!@")[1]);
+                        String answer = "";
+                        for (Off off : seller.getOffs()) {
+                            answer += off.toString() + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getSellerProduct")) {
+                        Seller seller = (Seller) onlineUsers.get(command.split("!@")[1]);
+                        String answer = "";
+                        for (Product product : seller.getProductsForSale()) {
+                            String info = "";
+                            info += product.getProductId() + "!@";
+                            info += product.getName() + "!@";
+                            info += product.getBrand() + "!@";
+                            info += product.getPrice(seller) + "!@";
+                            info += product.getExplanation() + "!@";
+                            info += product.getRemainingItemsForSeller(seller);
+                            answer += info + "#$";
                         }
                         dataOutputStream.writeUTF(ed.encrypt(answer));
                         dataOutputStream.flush();

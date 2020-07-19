@@ -56,19 +56,21 @@ public class SellLog extends Log implements Serializable {
     @Override
     public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
+        String products = "";
+        boolean test = false;
+        for (Product product : soldProduct) {
+            if (test) {
+                products += "@#";
+            }
+            products += product.getProductId();
+            test = true;
+        }
         return logId + "!@"
                 + formatter.format(logDate) + "!@"
-                + 
-
-        return "SellLog{" +
-                "receivedAmount=" + receivedAmount +
-                ", reducedAmountForOff=" + reducedAmountForOff +
-                ", soldProduct=" + soldProduct +
-                ", buyerName='" + buyerName + '\'' +
-                ", deliveryStatus=" + deliveryStatus +
-                ", logId=" + logId +
-                ", logDate=" + logDate +
-                '}';
+                + receivedAmount + "!@"
+                + reducedAmountForOff + "!@"
+                + products + "!@"
+                + buyerName + "!@"
+                + deliveryStatus;
     }
 }

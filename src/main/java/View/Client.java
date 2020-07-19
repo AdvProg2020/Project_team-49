@@ -9,6 +9,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -486,6 +487,36 @@ public class Client {
         }
         sellLogs.addAll(Arrays.asList(answer.split("#\\$")));
         return sellLogs;
+    }
+
+    public File getProductImage(long productId) {
+        return null;
+    }
+
+    public ArrayList<String> getSellerOffs() {
+        ArrayList<String> offs = new ArrayList<>();
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getSellerOffs!@" + token));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        offs.addAll(Arrays.asList(answer.split("#\\$")));
+        return offs;
+    }
+
+    public ArrayList<String> getSellerProducts() {
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getSellerProduct!@" + token));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>(Arrays.asList(answer.split("#\\$")));
     }
 
     class ED {
