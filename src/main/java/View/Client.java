@@ -70,6 +70,17 @@ public class Client {
         }
     }
 
+    public String setCategoriesInMainBar() {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("setCategoriesInMainBar"));
+            dataOutputStream.flush();
+            return ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public boolean hasUserWithUsername(String username) {
         String answer = "";
         try {
@@ -537,6 +548,7 @@ public class Client {
             return null;
         }
     }
+
     // !@
     // #$   BETWEEN OBJECTS
 }
