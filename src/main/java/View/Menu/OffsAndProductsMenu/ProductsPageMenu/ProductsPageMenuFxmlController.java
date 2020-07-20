@@ -482,8 +482,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
 //        Controller.restartSortedOrFilteredProduct();
         loadProduct(counter);
 
-
-        ArrayList<String> brands=new ArrayList<String>(Filter.getAvailableBrands()  );
+        ArrayList<String> brands=new ArrayList<String>(View.getClient().getAvailableBrands());
         for (String brand : brands) {
             CheckBox checkBox=new CheckBox();
             checkBox.setText(brand);
@@ -507,6 +506,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         Controller.setSelectedProduct(Controller.getProductById(gridPaneToProductId.get(gridPane)));
         Scene scene=gridPane.getScene();
         Stage stage=(Stage) (scene.getWindow());
+//        Controller.setLastPane(Controller.getCurrentPane());
         View.setLastPane(View.getCurrentPane());
         Pane pane = null;
         Pane minibar = null;
@@ -519,11 +519,11 @@ public class ProductsPageMenuFxmlController implements Initializable {
         ScrollPane scrollPane = (ScrollPane) pane.getChildren().get(0);
         scrollPane.setPrefHeight(800);
         pane.getChildren().add(minibar);
+//        Controller.setCurrentPane(pane);
         View.setCurrentPane(pane);
         scene.setRoot(pane);
         stage.setScene(scene);
         stage.show();
-
     }
 
     public void clear(){
@@ -679,7 +679,9 @@ public class ProductsPageMenuFxmlController implements Initializable {
         counter=+size;
 
         int pageNumber= (int) (counter/20+1);
-        int totalPage=Controller.getAllPageNumber();
+
+//        int totalPage=Controller.getAllPageNumber();
+        int totalPage=View.getClient().getAllPageNumber();
         pageCounter.setText(".. Page: "+pageNumber+" of "+totalPage+" ..");
         if (pageNumber!=1){
             prePageImage.setVisible(true);
@@ -827,12 +829,12 @@ public class ProductsPageMenuFxmlController implements Initializable {
         }
         DropShadow dropShadow=new DropShadow();
         gridPane.setEffect(dropShadow);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Controller.startClickSound();
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Controller.startClickSound();
+//            }
+//        }).start();
     }
 
     public void makeGridPaneCompareOff(MouseEvent mouseEvent) {
@@ -881,12 +883,14 @@ public class ProductsPageMenuFxmlController implements Initializable {
     public void filterByCategory(MouseEvent mouseEvent) {
 
         for (CheckBox brandsCheckBox : brandsCheckBoxes) {
-            Filter.disableBrandFilter(brandsCheckBox.getText());
+//            Filter.disableBrandFilter(brandsCheckBox.getText());
+            View.getClient().disableBrandFilterByName(brandsCheckBox.getText());
         }
 
         if (mouseEvent.getSource() instanceof Label){
             Label label=(Label) mouseEvent.getSource();
-            Filter.filterByCategory(label.getText());
+//            Filter.filterByCategory(label.getText());
+            View.getClient().filtering("Category",label.getText());
         }else{
             return;
         }
@@ -902,7 +906,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         brandsCheckBoxes.clear();
         brandFilter.getItems().clear();
 
-        ArrayList<String> brands=new ArrayList<String>(Filter.getAvailableBrands()  );
+        ArrayList<String> brands=new ArrayList<String>(View.getClient().getAvailableBrands()  );
         for (String brand : brands) {
             CheckBox checkBox=new CheckBox();
             checkBox.setText(brand);
@@ -930,11 +934,13 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
         for (CheckBox brandsCheckBox : brandsCheckBoxes) {
             if (brandsCheckBox.isSelected()){
-                Filter.setIsItFilteredByBrand(true);
-                Filter.addBrand(brandsCheckBox.getText());
-                Filter.filter();
+                View.getClient().filtering("Brand",brandsCheckBox.getText());
+//                Filter.setIsItFilteredByBrand(true);
+//                Filter.addBrand(brandsCheckBox.getText());
+//                Filter.filter();
             }else{
-                Filter.disableBrandFilter(brandsCheckBox.getText());
+//                Filter.disableBrandFilter(brandsCheckBox.getText());
+                View.getClient().disableBrandFilterByName(brandsCheckBox.getText());
             }
 
         }
@@ -946,10 +952,11 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
     public void FilterByName(ActionEvent actionEvent) {
         if (nameFilter.getText().isEmpty()){
-            Filter.disableNameFilter();
-
+//            Filter.disableNameFilter();
+            View.getClient().disableFilter("Name");
         }else {
-            Filter.filterByName(nameFilter.getText());
+//            Filter.filterByName(nameFilter.getText());
+            View.getClient().filtering("Name",nameFilter.getText());
         }
         counter=0;
         loadProduct(counter);
@@ -957,11 +964,15 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
     public void offFilter(ActionEvent actionEvent) {
         if (offFilter.isSelected()){
-            Filter.filterByOffs();
-            Controller.setDoesItOffPage(true);
+//            Filter.filterByOffs();
+            View.getClient().filtering("Off","");
+//            Controller.setDoesItOffPage(true);
+            View.getClient().setDoesItOffPage(true);
         }else{
-            Filter.disableOffsFilter();
-            Controller.setDoesItOffPage(false);
+//            Filter.disableOffsFilter();
+            View.getClient().disableFilter("Off");
+//            Controller.setDoesItOffPage(false);
+            View.getClient().setDoesItOffPage(false);
         }
 
         counter=0;
@@ -970,9 +981,11 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
     public void availabilityFilter(ActionEvent actionEvent) {
         if (availabilityFilter.isSelected()){
-            Filter.filterByAvailability();
+            View.getClient().filtering("Availability","");
+//            Filter.filterByAvailability();
         }else {
-            Filter.disableAvailabilityFilter();
+            View.getClient().disableFilter("Availability");
+//            Filter.disableAvailabilityFilter();
         }
         counter=0;
         loadProduct(counter);
@@ -998,13 +1011,15 @@ public class ProductsPageMenuFxmlController implements Initializable {
             viewLabel.setDisable(false);
             viewLabel.setVisible(true);
 
-            Sort.sortByScore();
+            View.getClient().sorting("Score");
+//            Sort.sortByScore();
 
             counter=0;
             loadProduct(0);
 
         }else {
-            Sort.disableSort();
+            View.getClient().sorting("disable");
+//            Sort.disableSort();
             counter=0;
             loadProduct(0);
             scoreClicked=false;
@@ -1048,12 +1063,14 @@ public class ProductsPageMenuFxmlController implements Initializable {
             scoreLabel.setDisable(false);
             scoreLabel.setVisible(true);
 
-            Sort.sortByView();
+            View.getClient().sorting("View");
+//            Sort.sortByView();
 
             counter=0;
             loadProduct(0);
         }else {
-            Sort.disableSort();
+            View.getClient().sorting("disable");
+//            Sort.disableSort();
             counter=0;
             loadProduct(0);
             viewClicked=false;
@@ -1096,13 +1113,15 @@ public class ProductsPageMenuFxmlController implements Initializable {
             scoreLabel.setDisable(false);
             scoreLabel.setVisible(true);
 
-            Sort.sortByTime();
+            View.getClient().sorting("Time");
+//            Sort.sortByTime();
 
             counter=0;
             loadProduct(counter);
 
         }else {
-            Sort.disableSort();
+            View.getClient().sorting("disable");
+//            Sort.disableSort();
             counter=0;
             loadProduct(counter);
             timeClicked =false;
@@ -1165,12 +1184,13 @@ public class ProductsPageMenuFxmlController implements Initializable {
             minPrice=0;
         }
 
-        Filter.disablePriceFilter();
-
-        Filter.setIsItFilteredByPrice(true);
-        Filter.setMinPrice(minPrice);
-        Filter.setMaxPrice(maxPrice);
-        Filter.filter();
+        View.getClient().priceFiltering(minPrice,maxPrice);
+//        Filter.disablePriceFilter();
+//
+//        Filter.setIsItFilteredByPrice(true);
+//        Filter.setMinPrice(minPrice);
+//        Filter.setMaxPrice(maxPrice);
+//        Filter.filter();
 
         previousMinValue=priceFilterMin.getValue();
         previousMaxValue=priceFilterMax.getValue();

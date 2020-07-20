@@ -232,8 +232,100 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(rawInput));
                         dataOutputStream.flush();
                     }
+                    if (command.equalsIgnoreCase("getAvailableBrands")){
+                        String rawInput="";
+                        for (String availableBrand : Filter.getAvailableBrands()) {
+                            rawInput.concat(availableBrand);
+                            rawInput.concat("!@");
+                        }
+                        rawInput=rawInput.substring(0,rawInput.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(rawInput));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("disableBrandFilterByName")){
+                        Filter.disableBrandFilter(command.split("!@")[1]);
+                    }
+                    if (command.startsWith("filterBy")){
+                        if (command.split("!@")[1].equalsIgnoreCase("Category")){
+                            Filter.filterByCategory(command.split("!@")[2]);
+                            continue;
+                        }
+                        if (command.split("!@")[1].equalsIgnoreCase("Brand")){
+                            Filter.setIsItFilteredByBrand(true);
+                            Filter.addBrand(command.split("!@")[2]);
+                            Filter.filter();
+                        }
+                        if (command.split("!@")[1].equalsIgnoreCase("Name")){
+                            Filter.filterByName(command.split("!@")[2]);
+                        }
+                        if (command.split("!@")[1].equalsIgnoreCase("Off")){
+                            Filter.filterByOffs();
+                        }
+                        if (command.split("!@")[1].equalsIgnoreCase("Availability")){
+                            Filter.filterByAvailability();
+                        }
+                        dataOutputStream.writeUTF("");
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("disableFilter")){
+                        if (command.split("!@")[1].equalsIgnoreCase("Name")){
+                            Filter.disableNameFilter();
+                        }
+                        if (command.split("!@")[1].equalsIgnoreCase("Off")){
+                            Filter.disableOffsFilter();
+                        }
+                        if (command.split("!@")[1].equalsIgnoreCase("Availability")){
+                            Filter.disableAvailabilityFilter();
+                        }
+                        dataOutputStream.writeUTF("");
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("setDoesItOffPage")){
+                        if (command.split("!@")[1].equalsIgnoreCase("true")){
+                            Controller.setDoesItOffPage(true);
+                        }else {
+                            Controller.setDoesItOffPage(false);
+                        }
+                        dataOutputStream.writeUTF("");
+                        dataOutputStream.flush();
+                    }
+                    if (command.equalsIgnoreCase("getAllPageNumber")){
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getAllPageNumber())));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("SortBy")){
+                        if (command.split("!@")[1].equalsIgnoreCase("disable")){
+                            Sort.disableSort();
+                            dataOutputStream.writeUTF("");
+                            dataOutputStream.flush();
+                        }
+                        if (command.split("!@")[1].equalsIgnoreCase("View")){
+                            Sort.sortByView();
+                            dataOutputStream.writeUTF("");
+                            dataOutputStream.flush();
+                        }
+                        if (command.split("!@")[1].equalsIgnoreCase("Time")){
+                            Sort.sortByTime();
+                            dataOutputStream.writeUTF("");
+                            dataOutputStream.flush();
+                        }
+                        if (command.split("!@")[1].equalsIgnoreCase("Score")){
+                            Sort.sortByScore();
+                            dataOutputStream.writeUTF("");
+                            dataOutputStream.flush();
+                        }
+                    }
+                    if (command.equalsIgnoreCase("priceFiltering")){
+                        double min=Double.parseDouble(command.split("!@")[1]);
+                        double max=Double.parseDouble(command.split("!@")[2]);
+                        Filter.disablePriceFilter();
 
-
+                        Filter.setIsItFilteredByPrice(true);
+                        Filter.setMinPrice(min);
+                        Filter.setMaxPrice(max);
+                        Filter.filter();
+                        dataOutputStream.writeUTF("");
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

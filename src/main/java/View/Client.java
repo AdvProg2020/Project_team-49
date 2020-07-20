@@ -54,7 +54,6 @@ public class Client {
         return type;
     }
 
-
     public void run() {
         try {
             this.socket = new Socket("127.0.0.1", 8888);
@@ -356,6 +355,116 @@ public class Client {
         return returnValue;
     }
 
+
+    public ArrayList<String> getAvailableBrands(){
+        String command="getAvailableBrands";
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<String> returnValue=new ArrayList<>();
+        for (String s : rawOutput.split("!@")) {
+            returnValue.add(s);
+        }
+        return returnValue;
+    }
+
+    public void disableBrandFilterByName(String name){
+        String command="disableBrandFilterByName";
+        command.concat("!@");
+        command.concat(name);
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void filtering(String filterType,String name){
+        String command="filterBy";
+        command.concat("!@");
+        command.concat(filterType);
+        command.concat("!@");
+        command.concat(name);
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void priceFiltering(double min,double max){
+        String command="priceFiltering";
+        command.concat("!@");
+        command.concat(String.valueOf(min));
+        command.concat("!@");
+        command.concat(String.valueOf(max));
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void disableFilter(String type){
+        String command="disableFilter";
+        command.concat("!@");
+        command.concat(type);
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setDoesItOffPage(boolean setter){
+        String command="setDoesItOffPage";
+        command.concat("!@");
+        command.concat(String.valueOf(setter));
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getAllPageNumber(){
+        String command="getAllPageNumber";
+        int number=0;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            number=Integer.parseInt(ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return number;
+    }
+
+    public void sorting(String type){
+        String command="SortBy";
+        command.concat("!@");
+        command.concat(type);
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     class ED {
         private Cipher ecipher;
