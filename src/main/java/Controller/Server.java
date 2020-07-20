@@ -68,8 +68,16 @@ public class Server {
                 dataOutputStream.flush();
                 while (true) {
                     String kham = dataInputStream.readUTF();
-                    System.out.println(kham);
                     String command = ed.decrypt(kham);
+
+                    if (command.startsWith("goToBankServer")) {
+                        String inputData = ed.decrypt(dataInputStream.readUTF());
+                        doBankServerConnection(inputData);
+                        dataOutputStream.writeUTF(ed.encrypt(Controller.getAllCategories()));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+
                     if (command.startsWith("setCategoriesInMainBar")) {
                         dataOutputStream.writeUTF(ed.encrypt(Controller.getAllCategories()));
                         dataOutputStream.flush();
@@ -232,92 +240,92 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(rawInput));
                         dataOutputStream.flush();
                     }
-                    if (command.equalsIgnoreCase("getAvailableBrands")){
-                        String rawInput="";
+                    if (command.equalsIgnoreCase("getAvailableBrands")) {
+                        String rawInput = "";
                         for (String availableBrand : Filter.getAvailableBrands()) {
                             rawInput.concat(availableBrand);
                             rawInput.concat("!@");
                         }
-                        rawInput=rawInput.substring(0,rawInput.length()-2);
+                        rawInput = rawInput.substring(0, rawInput.length() - 2);
                         dataOutputStream.writeUTF(ed.encrypt(rawInput));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("disableBrandFilterByName")){
+                    if (command.startsWith("disableBrandFilterByName")) {
                         Filter.disableBrandFilter(command.split("!@")[1]);
                     }
-                    if (command.startsWith("filterBy")){
-                        if (command.split("!@")[1].equalsIgnoreCase("Category")){
+                    if (command.startsWith("filterBy")) {
+                        if (command.split("!@")[1].equalsIgnoreCase("Category")) {
                             Filter.filterByCategory(command.split("!@")[2]);
                             continue;
                         }
-                        if (command.split("!@")[1].equalsIgnoreCase("Brand")){
+                        if (command.split("!@")[1].equalsIgnoreCase("Brand")) {
                             Filter.setIsItFilteredByBrand(true);
                             Filter.addBrand(command.split("!@")[2]);
                             Filter.filter();
                         }
-                        if (command.split("!@")[1].equalsIgnoreCase("Name")){
+                        if (command.split("!@")[1].equalsIgnoreCase("Name")) {
                             Filter.filterByName(command.split("!@")[2]);
                         }
-                        if (command.split("!@")[1].equalsIgnoreCase("Off")){
+                        if (command.split("!@")[1].equalsIgnoreCase("Off")) {
                             Filter.filterByOffs();
                         }
-                        if (command.split("!@")[1].equalsIgnoreCase("Availability")){
+                        if (command.split("!@")[1].equalsIgnoreCase("Availability")) {
                             Filter.filterByAvailability();
                         }
                         dataOutputStream.writeUTF("");
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("disableFilter")){
-                        if (command.split("!@")[1].equalsIgnoreCase("Name")){
+                    if (command.startsWith("disableFilter")) {
+                        if (command.split("!@")[1].equalsIgnoreCase("Name")) {
                             Filter.disableNameFilter();
                         }
-                        if (command.split("!@")[1].equalsIgnoreCase("Off")){
+                        if (command.split("!@")[1].equalsIgnoreCase("Off")) {
                             Filter.disableOffsFilter();
                         }
-                        if (command.split("!@")[1].equalsIgnoreCase("Availability")){
+                        if (command.split("!@")[1].equalsIgnoreCase("Availability")) {
                             Filter.disableAvailabilityFilter();
                         }
                         dataOutputStream.writeUTF("");
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("setDoesItOffPage")){
-                        if (command.split("!@")[1].equalsIgnoreCase("true")){
+                    if (command.startsWith("setDoesItOffPage")) {
+                        if (command.split("!@")[1].equalsIgnoreCase("true")) {
                             Controller.setDoesItOffPage(true);
-                        }else {
+                        } else {
                             Controller.setDoesItOffPage(false);
                         }
                         dataOutputStream.writeUTF("");
                         dataOutputStream.flush();
                     }
-                    if (command.equalsIgnoreCase("getAllPageNumber")){
+                    if (command.equalsIgnoreCase("getAllPageNumber")) {
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getAllPageNumber())));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("SortBy")){
-                        if (command.split("!@")[1].equalsIgnoreCase("disable")){
+                    if (command.startsWith("SortBy")) {
+                        if (command.split("!@")[1].equalsIgnoreCase("disable")) {
                             Sort.disableSort();
                             dataOutputStream.writeUTF("");
                             dataOutputStream.flush();
                         }
-                        if (command.split("!@")[1].equalsIgnoreCase("View")){
+                        if (command.split("!@")[1].equalsIgnoreCase("View")) {
                             Sort.sortByView();
                             dataOutputStream.writeUTF("");
                             dataOutputStream.flush();
                         }
-                        if (command.split("!@")[1].equalsIgnoreCase("Time")){
+                        if (command.split("!@")[1].equalsIgnoreCase("Time")) {
                             Sort.sortByTime();
                             dataOutputStream.writeUTF("");
                             dataOutputStream.flush();
                         }
-                        if (command.split("!@")[1].equalsIgnoreCase("Score")){
+                        if (command.split("!@")[1].equalsIgnoreCase("Score")) {
                             Sort.sortByScore();
                             dataOutputStream.writeUTF("");
                             dataOutputStream.flush();
                         }
                     }
-                    if (command.equalsIgnoreCase("priceFiltering")){
-                        double min=Double.parseDouble(command.split("!@")[1]);
-                        double max=Double.parseDouble(command.split("!@")[2]);
+                    if (command.equalsIgnoreCase("priceFiltering")) {
+                        double min = Double.parseDouble(command.split("!@")[1]);
+                        double max = Double.parseDouble(command.split("!@")[2]);
                         Filter.disablePriceFilter();
 
                         Filter.setIsItFilteredByPrice(true);
@@ -330,6 +338,34 @@ public class Server {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        private void doBankServerConnection(String userToken) {
+            Socket socket = null;
+            try {
+                socket = new Socket("127.0.0.1", 8080);
+                DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
+                DataInputStream din = new DataInputStream(socket.getInputStream());
+
+                while (true){
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
         }
 
         @Override

@@ -120,6 +120,7 @@ public class MainBarController implements Initializable {
     public ImageView costumerAreaButton;
     public Rectangle productsRectangle;
     public Rectangle offsRectangle;
+    public ImageView goToBankButton;
     private ArrayList<String> allCategoriesInformation = new ArrayList<>();
     private static int added = 0;
     public ImageView cartButton;
@@ -140,10 +141,17 @@ public class MainBarController implements Initializable {
     private void setCostumerAreaAndCartButtons() {
         cartButton.setDisable(true);
         cartButton.setOpacity(0.5);
+        goToBankButton.setDisable(true);
+        goToBankButton.setOpacity(0.5);
+
         String type = View.getClient().getType();
         if (type.equalsIgnoreCase("guest") || type.equalsIgnoreCase("costumer")) {
             cartButton.setOpacity(1.0);
             cartButton.setDisable(false);
+        }
+        if (type.equalsIgnoreCase("costumer") || type.equalsIgnoreCase("seller")) {
+            goToBankButton.setOpacity(1.0);
+            goToBankButton.setDisable(false);
         }
     }
 
@@ -294,7 +302,7 @@ public class MainBarController implements Initializable {
     public void changeBackGroundColor(MouseEvent mouseEvent) {
 
         if (mouseEvent.getSource().equals(lightBlueButton)) {
-          View.setColor("cee8f0");
+            View.setColor("cee8f0");
         } else if (mouseEvent.getSource().equals(lightGrayButton)) {
             View.setColor("f3f3f3");
         } else if (mouseEvent.getSource().equals(lightGreenButton)) {
@@ -640,5 +648,10 @@ public class MainBarController implements Initializable {
     }
 
     private void runPopUp() {
+
+    }
+
+    public void goToBankServer(MouseEvent mouseEvent) {
+        client.goToBankServer(true);
     }
 }

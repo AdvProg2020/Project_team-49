@@ -33,7 +33,7 @@
                     <Cursor fx:constant="TEXT" />
                 </cursor>
             </TextField>
-            <ImageView fx:id="costumerAreaButton" fitHeight="65.0" fitWidth="65.0" layoutX="1294.0" layoutY="41.0" onMouseClicked="#goToCustomerArea" pickOnBounds="true">
+            <ImageView fx:id="costumerAreaButton" fitHeight="46.0" fitWidth="46.0" layoutX="1263.0" layoutY="53.0" onMouseClicked="#goToCustomerArea" pickOnBounds="true">
                 <image>
                     <Image url="@../photos/MainMenu/mainBarImages/user.png" />
                 </image>
@@ -51,7 +51,7 @@
                <Cursor fx:constant="HAND" />
             </cursor>
             </ImageView>
-            <Pane layoutX="982.0" layoutY="20.0" prefHeight="122.0" prefWidth="288.0">
+            <Pane layoutX="953.0" layoutY="18.0" prefHeight="122.0" prefWidth="288.0">
                 <children>
                     <GridPane fx:id="settingPane" alignment="CENTER" hgap="5.0" layoutX="14.0" layoutY="13.0" nodeOrientation="LEFT_TO_RIGHT" onMouseExited="#settingPaneExited" prefHeight="95.0" prefWidth="199.0" style="-fx-background-color: #ffffff;" visible="false">
                         <columnConstraints>
@@ -610,10 +610,19 @@
                     </GridPane>
                 </children>
             </GridPane>
-         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9ca0a4" height="71.0" layoutX="1368.0" layoutY="46.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="2.0" />
-         <ImageView fx:id="cartButton" fitHeight="55.0" fitWidth="55.0" layoutX="1386.0" layoutY="54.0" onMouseClicked="#goToCart" pickOnBounds="true" preserveRatio="true">
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9ca0a4" height="50.0" layoutX="1323.0" layoutY="54.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="2.0" />
+         <ImageView fx:id="cartButton" fitHeight="46.0" fitWidth="46.0" layoutX="1338.0" layoutY="56.0" onMouseClicked="#goToCart" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../photos/MainMenu/options/cart.png" />
+            </image>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </ImageView>
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9ca0a4" height="50.0" layoutX="1400.0" layoutY="54.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="2.0" />
+         <ImageView fx:id="goToBankButton" fitHeight="46.0" fitWidth="46.0" layoutX="1412.0" layoutY="58.0" onMouseClicked="#goToBankServer" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../photos/MainMenu/mainBarImages/bank.png" />
             </image>
             <cursor>
                <Cursor fx:constant="HAND" />

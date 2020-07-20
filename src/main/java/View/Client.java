@@ -466,6 +466,19 @@ public class Client {
         }
     }
 
+    public void goToBankServer(boolean shouldOpenBankPage) {
+
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("goToBankServer"));
+            dataOutputStream.flush();
+            dataOutputStream.flush();
+
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     class ED {
         private Cipher ecipher;
         private Cipher dcipher;
