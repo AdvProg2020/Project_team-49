@@ -96,7 +96,7 @@ public class View extends Application {
         ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
         scrollPane.setPrefHeight(800);
         mainMenu.getChildren().add(mainBar);
-        if (Controller.getHasHeadManager()) {
+        if (client.hasHeadManager()) {
             View.setCurrentPane(mainMenu);
         } else {
             View.setLastPane(mainMenu);

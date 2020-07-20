@@ -21,14 +21,14 @@ public class AddProductRequest extends Request  implements Serializable {
     @Override
     public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String info = requestId + "\n";
-        info += getType() + "\n";
-        info += product.getProductId() + "\n";
-        info += product.getName() + "\n";
-        info += product.getBrand() + "\n";
-        info += product.getExplanation() + "\n";
-        info += product.getPrice(product.getDefaultSeller()) + "\n";
-        info += product.getDefaultSeller().getUsername() + "\n";
+        String info = requestId + "!@";
+        info += getType() + "!@";
+        info += product.getProductId() + "!@";
+        info += product.getName() + "!@";
+        info += product.getBrand() + "!@";
+        info += product.getExplanation() + "!@";
+        info += product.getPrice(product.getDefaultSeller()) + "!@";
+        info += product.getDefaultSeller().getUsername();
         return info;
     }
 

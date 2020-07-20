@@ -19,9 +19,9 @@ public class AddSellerRequest extends Request  implements Serializable {
 
     @Override
     public String toString() {
-        String info = requestId + "\n";
-        info += getType() + "\n";
-        info += seller.getUsername() + "\n";
+        String info = requestId + "!@";
+        info += getType() + "!@";
+        info += seller.getUsername() + "!@";
         info += seller.getCompanyName();
         return info;
     }

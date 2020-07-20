@@ -1,17 +1,5 @@
 package View.Menu.UserArea.SellerArea;
-import static Controller.DataBase.*;
-import Controller.Controller;
-import Controller.DataBase;
-import Controller.SellerAreaController;
-import Models.Log.BuyLog;
-import Models.Log.Log;
-import Models.Log.SellLog;
-import Models.Off;
-import Models.Product;
-import Models.User.Costumer;
-import Controller.CostumerAreaController;
-import Models.User.Guest;
-import Models.User.Seller;
+
 import View.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -23,8 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
@@ -33,15 +19,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.ResourceBundle;
-
-import static Controller.CostumerAreaController.*;
+import java.util.*;
 
 public class SellerAreaGraphicController implements Initializable {
 
@@ -220,7 +200,7 @@ public class SellerAreaGraphicController implements Initializable {
     public Rectangle explanationRec;
     public TextField explanationTextField;
     public TextField imageTextField;
-    private Seller seller;
+    private ArrayList<String> seller = new ArrayList<>();
     private int offsIndex = 0;
     private int productsIndex = 0;
     private int imagesLog1Index = 0;
@@ -229,16 +209,19 @@ public class SellerAreaGraphicController implements Initializable {
     private int imagesOff2Index = 0;
     private int logIndex = 0;
     private int editProductIndex = 0;
-    ArrayList<SellLog> logHistory = new ArrayList<>();
-    ArrayList<Off> offs = new ArrayList<>();
-    ArrayList<Product> products = new ArrayList<>();
+    ArrayList<String> logHistory = new ArrayList<>();
+    ArrayList<String> offs = new ArrayList<>();
+    ArrayList<String> products = new ArrayList<>();
     private SimpleDateFormat formatter;
     private Alert deleteProductAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are You Sure?");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         closeALlPanes();
-        seller = (Seller) Controller.getCurrentUser();
+        setSeller();
+        setLogHistory();
+        setOffs();
+        setProductsForSale();
         userInfoPane.setDisable(false);
         userInfoPane.setVisible(true);
         setPersonalInfoLabels();
@@ -254,14 +237,37 @@ public class SellerAreaGraphicController implements Initializable {
 
     }
 
+    private void setSeller() {
+        seller = View.client.getCurrentUser();
+    }
+
+    private void setLogHistory() {
+        logHistory = View.client.getSellLogs();
+    }
+
+    private void setOffs() {
+        offs = View.client.getSellerOffs();
+    }
+
+    private void setProductsForSale() {
+        products = View.client.getSellerProducts();
+    }
+
+    private ArrayList<String> getSoldProduct(String sellLog) {
+        return new ArrayList<>(Arrays.asList(sellLog.split("!@")[4].split("@#")));
+    }
+
+    private ArrayList<String> getOffProducts(String off) {
+        return new ArrayList<>(Arrays.asList(off.split("!@")[5].split("@#")));
+    }
 
     private void setPersonalInfoLabels() {
-        userNameLabel.setText(seller.getUsername());
-        firstNameLabel.setText(seller.getFirstName());
-        lastNameLabel.setText(seller.getLastName());
-        emailLabel.setText(seller.getEMail());
-        creditLabel.setText(String.valueOf(seller.getCredit()));
-        phoneNumberLabel.setText(String.valueOf(seller.getPhoneNumber()));
+        userNameLabel.setText(seller.get(0));
+        firstNameLabel.setText(seller.get(2));
+        lastNameLabel.setText(seller.get(3));
+        emailLabel.setText(seller.get(4));
+        creditLabel.setText(String.valueOf(seller.get(6)));
+        phoneNumberLabel.setText(String.valueOf(seller.get(5)));
     }
 
     public void goToEditPersonalInfo(MouseEvent mouseEvent) {
@@ -277,13 +283,13 @@ public class SellerAreaGraphicController implements Initializable {
 
     private void restartInsideEditPersonalPane() {
         creditTextField.setText("");
-        creditTextField.setPromptText(String.valueOf(seller.getCredit()));
+        creditTextField.setPromptText(String.valueOf(seller.get(6)));
         firstNameTextField.setText("");
-        firstNameTextField.setPromptText(seller.getFirstName());
+        firstNameTextField.setPromptText(seller.get(2));
         lastNameTextField.setText("");
-        lastNameTextField.setPromptText(seller.getLastName());
+        lastNameTextField.setPromptText(seller.get(3));
         emailTextField.setText("");
-        emailTextField.setPromptText(seller.getEMail());
+        emailTextField.setPromptText(seller.get(4));
         restartTextFieldRecsInEditPane();
         correctFormatEditImage.setVisible(false);
         wrongFormatEditImage.setVisible(false);
@@ -317,16 +323,16 @@ public class SellerAreaGraphicController implements Initializable {
             }
         }).start();
         if (!creditTextField.getText().matches("(\\s+)?"))
-            seller.setCredit(Double.parseDouble(creditTextField.getText()));
+            View.client.setUserInfo("Credit", String.valueOf(Double.parseDouble(creditTextField.getText())));
 
         if (!emailTextField.getText().matches("(\\s+)?")) {
-            seller.setEMail(emailTextField.getText());
+            View.client.setUserInfo("Email", emailTextField.getText());
         }
         if (!firstNameTextField.getText().matches("(\\s+)?")) {
-            seller.setFirstName(firstNameTextField.getText());
+            View.client.setUserInfo("FirstName", firstNameTextField.getText());
         }
         if (!lastNameTextField.getText().matches("(\\s+)?")) {
-            seller.setLastName(lastNameTextField.getText());
+            View.client.setUserInfo("LastName", lastNameTextField.getText());
         }
         personalInfoLabel.setVisible(true);
         editPersonalInfoLabel.setDisable(true);
@@ -422,29 +428,29 @@ public class SellerAreaGraphicController implements Initializable {
         }).start();
 
         if (mouseEvent.getSource().equals(seeMoreProductsImageLog1)) {
-            SellLog sellLog = logHistory.get(logIndex);
-            size = sellLog.getSoldProduct().size();
+            String sellLog = logHistory.get(logIndex);
+            size = getSoldProduct(sellLog).size();
             if (imagesLog1Index + 8 >= size + 1) return;
             imagesLog1Index++;
             setFirstImage();
 
         } else if (mouseEvent.getSource().equals(seeMoreProductsImageLog2)) {
-            SellLog sellLog = logHistory.get(logIndex + 1);
-            size = sellLog.getSoldProduct().size();
+            String sellLog = logHistory.get(logIndex + 1);
+            size = getSoldProduct(sellLog).size();
             if (imagesLog2Index + 8 >= size + 1) return;
             imagesLog2Index++;
             setSecondImage();
 
         } else if (mouseEvent.getSource().equals(seeLessProductsImageLog1)) {
-            SellLog sellLog = logHistory.get(logIndex);
-            size = sellLog.getSoldProduct().size();
+            String sellLog = logHistory.get(logIndex);
+            size = getSoldProduct(sellLog).size();
             if (imagesLog1Index == 0) return;
             imagesLog1Index--;
             setFirstImage();
 
         } else if (mouseEvent.getSource().equals(seeLessProductsImageLog2)) {
-            SellLog sellLog = logHistory.get(logIndex + 1);
-            size = sellLog.getSoldProduct().size();
+            String sellLog = logHistory.get(logIndex + 1);
+            size = getSoldProduct(sellLog).size();
             if (imagesLog2Index == 0) return;
             imagesLog2Index--;
             setSecondImage();
@@ -463,8 +469,7 @@ public class SellerAreaGraphicController implements Initializable {
         imagesLog1Index = 0;
         imagesLog2Index = 0;
         logIndex = 0;
-        logHistory.clear();
-        logHistory.addAll(seller.getSellHistory());
+        setLogHistory();
         sellHistoryLabel.setVisible(true);
         sellHistoryLabel.setOpacity(1);
         sellHistoryPane.setDisable(false);
@@ -488,14 +493,14 @@ public class SellerAreaGraphicController implements Initializable {
         if (size == 0) {
             return;
         }
-        SellLog sellLog1 = logHistory.get(logIndex);
+        String sellLog1 = logHistory.get(logIndex);
         firstLogPane.setVisible(true);
         firstLogPane.setDisable(false);
-        dateLabelLog1.setText(formatter.format(sellLog1.getLogDate()));
-        totalPriceLog1.setText(String.valueOf(sellLog1.getReceivedAmount()));
-        logIdLabelLog11.setText(String.valueOf(sellLog1.getLogId()));
-        receiveStatusLog1.setText(String.valueOf(sellLog1.getDeliveryStatus()));
-        if (sellLog1.getSoldProduct().size() < 9) {
+        dateLabelLog1.setText(sellLog1.split("!@")[1]);
+        totalPriceLog1.setText(sellLog1.split("!@")[2]);
+        logIdLabelLog11.setText(sellLog1.split("!@")[0]);
+        receiveStatusLog1.setText(sellLog1.split("!@")[6]);
+        if (getSoldProduct(sellLog1).size() < 9) {
             seeMoreProductsImageLog1.setDisable(true);
             seeMoreProductsImageLog1.setVisible(false);
             seeLessProductsImageLog1.setVisible(false);
@@ -509,15 +514,15 @@ public class SellerAreaGraphicController implements Initializable {
         setFirstImage();
 
         if (size == 1) return;
-        SellLog sellLog2 = logHistory.get(logIndex + 1);
+        String sellLog2 = logHistory.get(logIndex + 1);
 
         secondLogPane.setVisible(true);
         secondLogPane.setDisable(false);
-        dateLabelLog2.setText(formatter.format(sellLog2.getLogDate()));
-        totalPriceLog2.setText(String.valueOf(sellLog2.getReceivedAmount()));
-        logIdLabelLog2.setText(String.valueOf(sellLog2.getLogId()));
-        receiveStatusLog2.setText(String.valueOf(sellLog2.getDeliveryStatus()));
-        if (sellLog2.getSoldProduct().size() < 9) {
+        dateLabelLog2.setText(sellLog2.split("!@")[1]);
+        totalPriceLog2.setText(sellLog2.split("!@")[2]);
+        logIdLabelLog2.setText(sellLog2.split("!@")[0]);
+        receiveStatusLog2.setText(sellLog2.split("!@")[6]);
+        if (getSoldProduct(sellLog2).size() < 9) {
             seeMoreProductsImageLog2.setDisable(true);
             seeMoreProductsImageLog2.setVisible(false);
             seeLessProductsImageLog2.setVisible(false);
@@ -533,9 +538,9 @@ public class SellerAreaGraphicController implements Initializable {
 
     private void setFirstImage() {
         clearImages1();
-        ArrayList<Product> products = logHistory.get(logIndex).getSoldProduct();
+        ArrayList<String> products = getSoldProduct(logHistory.get(logIndex));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
-            Product product = products.get(i);
+            String product = products.get(i);
             if (i == 0) {
                 setProductsImage(image11, product.getImageAddress());
             } else if (i == 1) {
@@ -569,9 +574,9 @@ public class SellerAreaGraphicController implements Initializable {
 
     private void setSecondImage() {
         clearImages2();
-        ArrayList<Product> products = logHistory.get(logIndex + 1).getSoldProduct();
+        ArrayList<String> products = getSoldProduct(logHistory.get(logIndex + 1));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
-            Product product = products.get(i);
+            String product = products.get(i);
             if (i == 0) {
                 setProductsImage(image21, product.getImageAddress());
             } else if (i == 1) {
@@ -702,6 +707,8 @@ public class SellerAreaGraphicController implements Initializable {
         addProductLabel.setVisible(false);
         addProductPane.setVisible(false);
         addProductPane.setDisable(true);
+
+        setSeller();
     }
 
     public void goToManageOffsPain(MouseEvent mouseEvent) {
@@ -716,8 +723,7 @@ public class SellerAreaGraphicController implements Initializable {
         imagesOff1Index = 0;
         imagesOff2Index = 0;
         offsIndex = 0;
-        offs.clear();
-        offs.addAll(seller.getOffs());
+        setOffs();
         addOffButton.setVisible(true);
         addOffButton.setDisable(false);
         manageOffsLabel.setVisible(true);
@@ -743,15 +749,15 @@ public class SellerAreaGraphicController implements Initializable {
         if (size == 0) {
             return;
         }
-        Off off1 = offs.get(offsIndex);
+        String off1 = offs.get(offsIndex);
         firstOffPane.setVisible(true);
         firstOffPane.setDisable(false);
-        startTime2.setText(formatter.format(off1.getStartDate()));
-        endTime2.setText(formatter.format(off1.getEndDate()));
-        offPercentage2.setText(String.valueOf(off1.getOffAmount()));
-        offIdLabel2.setText(String.valueOf(off1.getOffId()));
-        offStatus2.setText(String.valueOf(off1.getOffStatus()));
-        if (off1.getProducts().size() < 9) {
+        startTime2.setText(off1.split("@#")[2]);
+        endTime2.setText(off1.split("@#")[3]);
+        offPercentage2.setText(off1.split("@#")[4]);
+        offIdLabel2.setText(off1.split("@#")[0]);
+        offStatus2.setText(off1.split("@#")[1]);
+        if (getOffProducts(off1).size() < 9) {
             seeMoreProductsImageOff2.setDisable(true);
             seeMoreProductsImageOff2.setVisible(false);
             seeLessProductsImageOff2.setVisible(false);
@@ -765,15 +771,15 @@ public class SellerAreaGraphicController implements Initializable {
         setFirstImageOff();
 
         if (size == 1) return;
-        Off off2 = offs.get(offsIndex + 1);
+        String off2 = offs.get(offsIndex + 1);
         secondOffPane.setVisible(true);
         secondOffPane.setDisable(false);
-        startTime1.setText(formatter.format(off2.getStartDate()));
-        endTime1.setText(formatter.format(off2.getEndDate()));
-        offPercentage1.setText(String.valueOf(off2.getOffAmount()));
-        offIdLabel1.setText(String.valueOf(off2.getOffId()));
-        offStatus1.setText(String.valueOf(off2.getOffStatus()));
-        if (off2.getProducts().size() < 9) {
+        startTime1.setText(off2.split("@#")[2]);
+        endTime1.setText(off2.split("@#")[3]);
+        offPercentage1.setText(off2.split("@#")[4]);
+        offIdLabel1.setText(off2.split("@#")[0]);
+        offStatus1.setText(off2.split("@#")[1]);
+        if (getOffProducts(off2).size() < 9) {
             seeMoreProductsImageOff1.setDisable(true);
             seeMoreProductsImageOff1.setVisible(false);
             seeLessProductsImageOff1.setVisible(false);
@@ -789,9 +795,9 @@ public class SellerAreaGraphicController implements Initializable {
 
     private void setSecondImageOff() {
         clearOffImages2();
-        ArrayList<Product> products = offs.get(offsIndex + 1).getProducts();
+        ArrayList<String> products = getOffProducts(offs.get(offsIndex + 1));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
-            Product product = products.get(i);
+            String product = products.get(i);
             if (i == 0) {
                 setProductsImage(image31, product.getImageAddress());
             } else if (i == 1) {
@@ -825,9 +831,9 @@ public class SellerAreaGraphicController implements Initializable {
 
     private void setFirstImageOff() {
         clearOffImages1();
-        ArrayList<Product> products = offs.get(offsIndex).getProducts();
+        ArrayList<String> products = getOffProducts(offs.get(offsIndex));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
-            Product product = products.get(i);
+            String product = products.get(i);
             if (i == 0) {
                 setProductsImage(image41, product.getImageAddress());
             } else if (i == 1) {
@@ -906,29 +912,29 @@ public class SellerAreaGraphicController implements Initializable {
         }).start();
 
         if (mouseEvent.getSource().equals(seeMoreProductsImageOff2)) {
-            Off off = offs.get(offsIndex);
-            size = off.getProducts().size();
+            String off = offs.get(offsIndex);
+            size = getOffProducts(off).size();
             if (imagesOff1Index + 8 >= size + 1) return;
             imagesOff1Index++;
             setFirstImageOff();
 
         } else if (mouseEvent.getSource().equals(seeMoreProductsImageOff1)) {
-            Off off = offs.get(offsIndex + 1);
-            size = off.getProducts().size();
+            String off = offs.get(offsIndex + 1);
+            size = getOffProducts(off).size();
             if (imagesOff2Index + 8 >= size + 1) return;
             imagesOff2Index++;
             setSecondImageOff();
 
         } else if (mouseEvent.getSource().equals(seeLessProductsImageOff2)) {
-            Off off = offs.get(offsIndex);
-            size = off.getProducts().size();
+            String off = offs.get(offsIndex);
+            size = getOffProducts(off).size();
             if (imagesOff1Index == 0) return;
             imagesOff1Index--;
             setFirstImageOff();
 
         } else if (mouseEvent.getSource().equals(seeLessProductsImageOff1)) {
-            Off off = offs.get(offsIndex + 1);
-            size = off.getProducts().size();
+            String off = offs.get(offsIndex + 1);
+            size = getOffProducts(off).size();
             if (imagesOff2Index == 0) return;
             imagesOff2Index--;
             setSecondImageOff();
@@ -954,7 +960,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     private void setAddOffPaneContents() {
-        for (String s : SellerAreaController.getAvailableProductsForOff(seller.getUsername())) {
+        for (String s : View.client.getAvailableProductsForOff(seller.get(0))) {
             CheckBox checkBox = new CheckBox();
             checkBox.setText(s);
             checkBox.setSelected(false);
@@ -1019,7 +1025,7 @@ public class SellerAreaGraphicController implements Initializable {
             info.add(startDateTextField.getText());
             info.add(endDateTextField.getText());
             info.add(offPercentTextField.getText());
-            SellerAreaController.addOff(info);
+            View.client.addOff(info);
             goToManageOffsPain(mouseEvent);
         }
     }
@@ -1050,8 +1056,7 @@ public class SellerAreaGraphicController implements Initializable {
         addProductButton.setVisible(true);
 
         productsIndex = 0;
-        products.clear();
-        products.addAll(seller.getProductsForSale());
+        setProductsForSale();
         int size = products.size();
         if (size > 2) {
             upArrowProducts.setVisible(true);
@@ -1071,27 +1076,27 @@ public class SellerAreaGraphicController implements Initializable {
         if (size == 0) {
             return;
         }
-        Product product1 = products.get(productsIndex);
+        ArrayList<String> product1 = new ArrayList<>(Arrays.asList(products.get(productsIndex).split("!@")));
         firstProductPane.setVisible(true);
         firstProductPane.setDisable(false);
-        productName1.setText(product1.getName());
-        productId1.setText(String.valueOf(product1.getProductId()));
-        productBrand1.setText(product1.getBrand());
-        productPrice1.setText(String.valueOf(product1.getPrice(seller)));
-        productCount1.setText(String.valueOf(product1.getRemainingItemsForSeller(seller)));
-        productExplanation1.setText(product1.getExplanation());
+        productName1.setText(product1.get(1));
+        productId1.setText(product1.get(0));
+        productBrand1.setText(product1.get(2));
+        productPrice1.setText(product1.get(3));
+        productCount1.setText(product1.get(5));
+        productExplanation1.setText(product1.get(4));
         productImage1.setImage(new Image(product1.getImageAddress()));
 
         if (size == 1) return;
-        Product product2 = products.get(productsIndex + 1);
+        ArrayList<String> product2 = new ArrayList<>(Arrays.asList(products.get(productsIndex + 1).split("!@")));
         secondProductPane.setVisible(true);
         secondProductPane.setDisable(false);
-        productName2.setText(product2.getName());
-        productId2.setText(String.valueOf(product2.getProductId()));
-        productBrand2.setText(product2.getBrand());
-        productPrice2.setText(String.valueOf(product2.getPrice(seller)));
-        productCount2.setText(String.valueOf(product2.getRemainingItemsForSeller(seller)));
-        productExplanation2.setText(product2.getExplanation());
+        productName2.setText(product2.get(1));
+        productId2.setText(product2.get(0));
+        productBrand2.setText(product2.get(2));
+        productPrice2.setText(product2.get(3));
+        productCount2.setText(product2.get(5));
+        productExplanation2.setText(product2.get(4));
         productImage2.setImage(new Image(product2.getImageAddress()));
     }
 
@@ -1151,11 +1156,11 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     private void setInsideOfEditProductPain(int index) {
-        productNameTextField.setText(products.get(index).getName());
-        productBrandTextField.setText(products.get(index).getBrand());
-        productPriceTextField.setText(String.valueOf(products.get(index).getPrice(seller)));
-        productCountTextField.setText(String.valueOf(products.get(index).getRemainingItemsForSeller(seller)));
-        productExplanationField.setText(products.get(index).getExplanation());
+        productNameTextField.setText(products.get(index).split("!@")[1]);
+        productBrandTextField.setText(products.get(index).split("!@")[2]);
+        productPriceTextField.setText(products.get(index).split("!@")[3]);
+        productCountTextField.setText(products.get(index).split("!@")[5]);
+        productExplanationField.setText(products.get(index).split("!@")[4]);
     }
 
     private void restartInsideOfEditProductPain() {
@@ -1178,20 +1183,20 @@ public class SellerAreaGraphicController implements Initializable {
                 Controller.startClickSound();
             }
         }).start();
-        if (!products.get(editProductIndex).getName().equals(productNameTextField.getText())) {
-            SellerAreaController.editProduct("name", productNameTextField.getText(), products.get(editProductIndex).getProductId());
+        if (!products.get(editProductIndex).split("!@")[1].equals(productNameTextField.getText())) {
+            SellerAreaController.editProduct("name", productNameTextField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
         }
-        if (products.get(editProductIndex).getPrice(seller) != Integer.parseInt(productNameTextField.getText())) {
-            SellerAreaController.editProduct("price", productPriceTextField.getText(), products.get(editProductIndex).getProductId());
+        if (Integer.parseInt(products.get(editProductIndex).split("!@")[3]) != Integer.parseInt(productNameTextField.getText())) {
+            SellerAreaController.editProduct("price", productPriceTextField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
         }
-        if (!products.get(editProductIndex).getBrand().equals(productBrandTextField.getText())) {
-            SellerAreaController.editProduct("brand", productBrandTextField.getText(), products.get(editProductIndex).getProductId());
+        if (!products.get(editProductIndex).split("!@")[2].equals(productBrandTextField.getText())) {
+            SellerAreaController.editProduct("brand", productBrandTextField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
         }
-        if (products.get(editProductIndex).getRemainingItemsForSeller(seller) != Integer.parseInt(productCountTextField.getText())) {
-            SellerAreaController.editProduct("count", productCountTextField.getText(), products.get(editProductIndex).getProductId());
+        if (Integer.parseInt(products.get(editProductIndex).split("!@")[5]) != Integer.parseInt(productCountTextField.getText())) {
+            SellerAreaController.editProduct("count", productCountTextField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
         }
-        if (!products.get(editProductIndex).getExplanation().equals(productExplanationField.getText())) {
-            SellerAreaController.editProduct("explanation", productExplanationField.getText(), products.get(editProductIndex).getProductId());
+        if (!products.get(editProductIndex).split("!@")[4].equals(productExplanationField.getText())) {
+            SellerAreaController.editProduct("explanation", productExplanationField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
         }
         goBackToManageProducts(mouseEvent);
     }
@@ -1208,7 +1213,7 @@ public class SellerAreaGraphicController implements Initializable {
         if (!productNameTextField.getText().matches("\\w+")) {
             productNameRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
-        } else if (!productNameTextField.getText().equals(products.get(editProductIndex).getName())) {
+        } else if (!productNameTextField.getText().equals(products.get(editProductIndex).split("!@")[1])) {
             if (SellerAreaController.hasProductWithName(productNameTextField.getText())) {
                 productNameRec.setStroke(Color.valueOf("#fb3449"));
                 errorFound = true;
@@ -1253,9 +1258,9 @@ public class SellerAreaGraphicController implements Initializable {
             return;
         }
         if (mouseEvent.getSource().equals(deleteProduct1)) {
-            SellerAreaController.removeProduct(products.get(productsIndex).getProductId());
+            SellerAreaController.removeProduct(Long.parseLong(products.get(productsIndex).split("!@")[0]));
         } else {
-            SellerAreaController.removeProduct(products.get(productsIndex + 1).getProductId());
+            SellerAreaController.removeProduct(Long.parseLong(products.get(productsIndex).split("!@")[0]));
         }
         goToManageProductsPain(mouseEvent);
     }

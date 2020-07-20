@@ -26,12 +26,12 @@ public class AddOffRequest extends Request  implements Serializable {
     @Override
     public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String info = requestId + "\n";
-        info += getType() + "\n";
-        info += seller.getUsername() + "\n";
-        info += off.getOffAmount() + "\n";
-        info += formatter.format(off.getStartDate()) + "\n";
-        info += formatter.format(off.getEndDate()) + "\n";
+        String info = requestId + "!@";
+        info += getType() + "!@";
+        info += seller.getUsername() + "!@";
+        info += off.getOffAmount() + "!@";
+        info += formatter.format(off.getStartDate()) + "!@";
+        info += formatter.format(off.getEndDate()) + "!@";
         for (Product product : off.getProducts()) {
             info += product.getName() + "_" + product.getProductId() + "/";
         }

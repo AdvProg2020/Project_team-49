@@ -1,5 +1,14 @@
 package Controller;
 
+import Models.Category;
+import Models.DiscountCode;
+import Models.Log.BuyLog;
+import Models.Log.SellLog;
+import Models.Off;
+import Models.Product;
+import Models.User.Costumer;
+import Models.User.Request.Request;
+import Models.User.Seller;
 import Models.User.User;
 import com.sun.mail.util.BASE64DecoderStream;
 import com.sun.mail.util.BASE64EncoderStream;
@@ -9,6 +18,7 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.xml.crypto.Data;
+import java.awt.image.BandedSampleModel;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -16,6 +26,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 
@@ -81,6 +92,35 @@ public class Server {
                     if (command.startsWith("setCategoriesInMainBar")) {
                         dataOutputStream.writeUTF(ed.encrypt(Controller.getAllCategories()));
                         dataOutputStream.flush();
+                        continue;
+                    }
+                    if (command.startsWith("hasUserWithUsername")) {
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.hasUserWithUsername(command.split("!@")[1]))));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if (command.startsWith("isPasswordCorrect")) {
+                        String password = command.split("!@")[2];
+                        String username = command.split("!@")[1];
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.isPasswordCorrect(password, username))));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if (command.startsWith("loginAccount")) {
+                        Controller.loginAccount(command.split("!@")[1]);
+                        String token = ed.generateToken();
+                        onlineUsers.put(token, Controller.currentUser);
+                        dataOutputStream.writeUTF(ed.encrypt(Controller.getCurrentUser() + "!@" + token));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if (command.startsWith("createAccount")) {
+                        String[] info = command.split("!@");
+                        ArrayList<String> accountInfo = new ArrayList<>();
+                        for (int i = 1; i < info.length - 1; i++) {
+                            accountInfo.add(info[i]);
+                        }
+                        Controller.createAccount(accountInfo, info[info.length - 1]);
                         continue;
                     }
                     if (command.equals("clickedOnACategoryOnMainBar")) {
@@ -333,6 +373,193 @@ public class Server {
                         Filter.setMaxPrice(max);
                         Filter.filter();
                         dataOutputStream.writeUTF("");
+                    }
+                    if (command.startsWith("getCurrentUser")) {
+                        String token = command.split("!@")[1];
+                        String user = "";
+                        user += onlineUsers.get(token).getUsername() + "!@";
+                        user += onlineUsers.get(token).getPassword() + "!@";
+                        user += onlineUsers.get(token).getFirstName() + "!@";
+                        user += onlineUsers.get(token).getLastName() + "!@";
+                        user += onlineUsers.get(token).getEMail() + "!@";
+                        user += String.valueOf(onlineUsers.get(token).getPhoneNumber()) + "!@";
+                        if (onlineUsers.get(token).getType().equalsIgnoreCase("costumer")) {
+                            user += String.valueOf(((Costumer) onlineUsers.get(token)).getCredit());
+                        }
+                        if (onlineUsers.get(token).getType().equalsIgnoreCase("seller")) {
+                            user += String.valueOf(((Seller) onlineUsers.get(token)).getCredit()) + "!@";
+                            user += ((Seller) onlineUsers.get(token)).getCompanyName();
+                            String products = "";
+                            boolean test = false;
+                            for (Product product : ((Seller) onlineUsers.get(token)).getProductsForSale()) {
+                                if (test) {
+                                    products += "@#";
+                                }
+                                products += product.getProductId();
+                                test = true;
+                            }
+                            user += products;
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(user));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if (command.startsWith("getSellLogs")) {
+                        Seller seller = (Seller) onlineUsers.get(command.split("!@")[1]);
+                        String answer = "";
+                        for (SellLog sellLog : seller.getSellHistory()) {
+                            answer += sellLog.toString() + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getSellerOffs")) {
+                        Seller seller = (Seller) onlineUsers.get(command.split("!@")[1]);
+                        String answer = "";
+                        for (Off off : seller.getOffs()) {
+                            answer += off.toString() + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getSellerProduct")) {
+                        Seller seller = (Seller) onlineUsers.get(command.split("!@")[1]);
+                        String answer = "";
+                        for (Product product : seller.getProductsForSale()) {
+                            String info = "";
+                            info += product.getProductId() + "!@";
+                            info += product.getName() + "!@";
+                            info += product.getBrand() + "!@";
+                            info += product.getPrice(seller) + "!@";
+                            info += product.getExplanation() + "!@";
+                            info += product.getRemainingItemsForSeller(seller);
+                            answer += info + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getBuyLogs")) {
+                        Costumer costumer = (Costumer) onlineUsers.get(command.split("!@")[1]);
+                        String answer = "";
+                        for (BuyLog buyLog : costumer.getBuyHistory()) {
+                            answer += buyLog.toString() + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getCategories")) {
+                        String answer = "";
+                        for (Category allCategory : DataBase.getAllCategories()) {
+                            String info = "";
+                            info += allCategory.getName() + "!@";
+                            info += allCategory.getSpecialAttributes() + "!@";
+                            info += allCategory.getParentCategory().getName();
+                            answer += info + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getAllUsers")) {
+                        String answer = "";
+                        for (User allUser : DataBase.getAllUsers()) {
+                            String user = "";
+                            user += allUser.getType() + "!@";
+                            user += allUser.getUsername() + "!@";
+                            user += allUser.getFirstName() + "!@";
+                            user += allUser.getLastName() + "!@";
+                            user += allUser.getEMail() + "!@";
+                            user += allUser.getPhoneNumber();
+                            if (allUser.getType().equalsIgnoreCase("seller")) {
+                                user += "!@" + ((Seller) allUser).getCompanyName();
+                            }
+                            answer += user + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("deleteUser")) {
+                        ManagerAreaController.deleteUser(command.split("!@")[1]);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("removeCategory")) {
+                        ManagerAreaController.removeCategory(command.split("!@")[1]);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("editCategory")) {
+                        String field = command.split("!@")[2];
+                        ManagerAreaController.editCategory(command.split("!@")[1], field, command.split("!@")[3]);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getAllActiveRequests")) {
+                        String answer = "";
+                        for (Request allActiveRequest : DataBase.getAllActiveRequests()) {
+                            answer += allActiveRequest.toString() + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("addCategory")) {
+                        String name = command.split("!@")[1];
+                        String attribute = command.split("!@")[2];
+                        String parent = command.split("!@")[3];
+                        if (parent.equalsIgnoreCase("null")) {
+                            DataBase.addCategory(new Category(name, attribute, null));
+                        } else {
+                            DataBase.addCategory(new Category(name, attribute, DataBase.getCategoryByName(parent)));
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("isThereAnyCategoryWithName")) {
+                        String answer = "";
+                        if (DataBase.isThereAnyCategoryWithName(command.split("!@")[1])) {
+                            answer = "true";
+                        } else {
+                            answer = "false";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("answerRequest")) {
+                        long id = Long.parseLong(command.split("!@")[2]);
+                        if (command.split("!@")[1].equalsIgnoreCase("accept")) {
+                            ManagerAreaController.acceptRequest(id);
+                        } else {
+                            ManagerAreaController.declineRequest(id);
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("logout")) {
+                        String token = command.split("!@")[1];
+                        onlineUsers.remove(token);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getDiscountCodes")) {
+                        String answer = "";
+                        for (DiscountCode allDiscountCode : DataBase.getAllDiscountCodes()) {
+                            answer += allDiscountCode.toString() + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("removeDiscountCode")) {
+                        ManagerAreaController.removeDiscountCode(command.split("!@")[1]);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getAvailableProductsForOff")) {
+                        ArrayList<String> products = SellerAreaController.getAvailableProductsForOff(command.split("!@")[1]);
+                        String answer = "";
+                        for (String product : products) {
+                            answer += product + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
                     }
                 }
             } catch (IOException e) {

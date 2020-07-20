@@ -1,23 +1,11 @@
 package View.Menu.UserArea;
 
-import Controller.DataBase;
-import Controller.Controller;
-import Models.Category;
-import Models.DiscountCode;
-import Models.Off;
-import Models.User.Manager;
-import Controller.ManagerAreaController;
-import Models.User.Request.*;
-import Models.User.Seller;
-import Models.User.User;
-import View.Menu.UserArea.ManagerArea.ManagerArea;
 import View.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,9 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -208,7 +194,11 @@ public class ManagerAreaGraphicController implements Initializable {
     public TextField newDiscountStartDate;
     public Rectangle newDiscountDurationRec1;
     public TextField newDiscountEndDate;
-    private Manager manager;
+    private ArrayList<String> manager = new ArrayList<>();
+    private ArrayList<String> categories = new ArrayList<>();
+    private ArrayList<String> allUsers = new ArrayList<>();
+    private ArrayList<String> requests = new ArrayList<>();
+    private ArrayList<String> discountCodes = new ArrayList<>();
     private int usersIndex = 0;
     private int categoriesIndex = 0;
     private int discountIndex = 0;
@@ -216,9 +206,11 @@ public class ManagerAreaGraphicController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        manager = (Manager) Controller.getCurrentUser();
-        String[] info = Controller.getCurrentUserSpecifications().split(",");
-        userNameLabel.setText(info[0]);
+        setManager();
+        setCategories();
+        setAllUsers();
+        setRequests();
+        userNameLabel.setText(manager.get(0));
         closeALlPanes();
         setPersonalInfoLabels();
         userInfoPane.setVisible(true);
@@ -234,14 +226,33 @@ public class ManagerAreaGraphicController implements Initializable {
 
     }
 
+    private void setManager() {
+        manager = View.client.getCurrentUser();
+    }
+
+    private void setCategories() {
+        categories = View.client.getCategories();
+    }
+
+    private void setAllUsers() {
+        allUsers = View.client.getAllUsers();
+    }
+
+    private void setRequests() {
+        requests = View.client.getRequests();
+    }
+
+    private void setDiscountCodes() {
+        discountCodes = View.client.getDiscountCodes();
+    }
+
     private void setPersonalInfoLabels() {
-        String[] info = Controller.getCurrentUserSpecifications().split(",");
-        firstNameLabel.setText(info[1]);
-        lastNameLabel.setText(info[2]);
-        emailLabel.setText(info[3]);
+        firstNameLabel.setText(manager.get(2));
+        lastNameLabel.setText(manager.get(3));
+        emailLabel.setText(manager.get(4));
         roleLabelInPersonalInfo.setText("manager");
-        phoneNumberLabel.setText(info[4]);
-        userNameLabel.setText(manager.getUsername());
+        phoneNumberLabel.setText(manager.get(5));
+        userNameLabel.setText(manager.get(0));
     }
 
     public void goToEditPersonalInfo(MouseEvent mouseEvent) {
@@ -256,15 +267,14 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     private void restartInsideEditPersonalPane() {
-        String[] info = Controller.getCurrentUserSpecifications().split(",");
         firstNameTextField.setText("");
-        firstNameTextField.setPromptText(info[1]);
+        firstNameTextField.setPromptText(manager.get(2));
         lastNameTextField.setText("");
-        lastNameTextField.setPromptText(info[2]);
+        lastNameTextField.setPromptText(manager.get(3));
         emailTextField.setText("");
-        emailTextField.setPromptText(info[3]);
+        emailTextField.setPromptText(manager.get(4));
         passwordTextField.setText("");
-        passwordTextField.setPromptText(manager.getPassword());
+        passwordTextField.setPromptText(manager.get(1));
         restartTextFieldRecsInEditPane();
         correctFormatEditImage.setVisible(false);
         wrongFormatEditImage.setVisible(false);
@@ -286,16 +296,16 @@ public class ManagerAreaGraphicController implements Initializable {
 
     public void submitPersonalInformation(MouseEvent mouseEvent) {
         if (!passwordTextField.getText().matches("(\\s+)?")) {
-            manager.setPassword(passwordTextField.getText());
+            View.client.setUserInfo("Password", passwordTextField.getText());
         }
         if (!emailTextField.getText().matches("(\\s+)?")) {
-            manager.setEMail(emailTextField.getText());
+            View.client.setUserInfo("Email", emailTextField.getText());
         }
         if (!firstNameTextField.getText().matches("(\\s+)?")) {
-            manager.setFirstName(firstNameTextField.getText());
+            View.client.setUserInfo("FirstName", firstNameTextField.getText());
         }
         if (!lastNameTextField.getText().matches("(\\s+)?")) {
-            manager.setLastName(lastNameTextField.getText());
+            View.client.setUserInfo("LastName", lastNameTextField.getText());
         }
         personalInfoLabel.setVisible(true);
         editPersonalInfoLabel.setDisable(true);
@@ -383,6 +393,8 @@ public class ManagerAreaGraphicController implements Initializable {
 //        imagesLog2Index = 0;
 //        logIndex = 0;
 //        discountCodesIndex = 0;
+
+        setManager();
     }
 
     private void disableSomeStuffInEditPane() {
@@ -403,7 +415,7 @@ public class ManagerAreaGraphicController implements Initializable {
         viewCategoriesPane.setVisible(true);
         categoryButtonsPane.setVisible(true);
         categoryButtonsPane.setDisable(false);
-        int size = DataBase.getAllCategories().size();
+        int size = categories.size();
         if (size == 0) {
 //            thereIsNoCategoriesPane.setDisable(false);
 //            thereIsNoCategoriesPane.setVisible(true);
@@ -455,7 +467,7 @@ public class ManagerAreaGraphicController implements Initializable {
 
     private void setEditCategoryPainContents() {
         restartInsideEditCategoryContents();
-        int size = DataBase.getAllCategories().size();
+        int size = categories.size();
         if (size == 0) return;
         if (size > 2) {
             categoryArrowAndRec.setVisible(true);
@@ -468,29 +480,29 @@ public class ManagerAreaGraphicController implements Initializable {
         firstCategoryPane.setVisible(true);
         firstCategoryPane.setDisable(false);
 
-        Category category = DataBase.getAllCategories().get(categoriesIndex);
-        categoryName1.setText(category.getName());
-        Category categoryP = category.getParentCategory();
+        String category = categories.get(categoriesIndex);
+        categoryName1.setText(category.split("!@")[0]);
+        String categoryP = category.split("!@")[2];
         if (categoryP == null) {
             parentCategory1.setText("-");
         } else {
-            parentCategory1.setText(categoryP.getName());
+            parentCategory1.setText(categoryP);
         }
-        attributes1.setText(category.getSpecialAttributes());
+        attributes1.setText(category.split("!@")[1]);
 
         if (categoriesIndex > size - 2) return;
 
         secondCategoryPane.setDisable(false);
         secondCategoryPane.setVisible(true);
-        category = DataBase.getAllCategories().get(categoriesIndex + 1);
-        categoryName2.setText(category.getName());
-        categoryP = category.getParentCategory();
+        category = categories.get(categoriesIndex + 1);
+        categoryName2.setText(category.split("!@")[0]);
+        categoryP = category.split("!@")[2];
         if (categoryP == null) {
             parentCategory2.setText("-");
         } else {
-            parentCategory2.setText(categoryP.getName());
+            parentCategory2.setText(categoryP);
         }
-        attributes2.setText(category.getSpecialAttributes());
+        attributes2.setText(category.split("!@")[1]);
 
     }
 
@@ -540,9 +552,9 @@ public class ManagerAreaGraphicController implements Initializable {
 
     private void setUsersPaneContents() {
         restartInsideUsersPane();
-        int size = DataBase.getAllUsers().size();
+        int size = allUsers.size();
         if (size == 0) return;
-        User user = DataBase.getAllUsers().get(usersIndex);
+        String[] user = allUsers.get(usersIndex).split("!@");
         if (size > 2) {
             usersArrowAndRec.setVisible(true);
             usersArrowAndRec.setDisable(false);
@@ -551,17 +563,18 @@ public class ManagerAreaGraphicController implements Initializable {
         firstUserPane.setDisable(false);
         firstUserPane.setVisible(true);
 
-        firstNameLabel1.setText(user.getFirstName());
-        lastNameLabel1.setText(user.getLastName());
-        emailLabel1.setText(user.getEMail());
-        phoneNumberLabel1.setText(String.valueOf(user.getPhoneNumber()));
-        userNameLabel1.setText(user.getUsername());
-        roleLabel1.setText(user.getType());
-        if (user.getType().equalsIgnoreCase("seller")) {
+        firstNameLabel1.setText(user[2]);
+        lastNameLabel1.setText(user[3]);
+        emailLabel1.setText(user[4]);
+        phoneNumberLabel1.setText(user[5]);
+        userNameLabel1.setText(user[1]);
+        roleLabel1.setText(user[0]);
+        if (user[0].equalsIgnoreCase("seller")) {
             companyNamePane1.setVisible(true);
-            companyNameLabel1.setText(((Seller) user).getCompanyName());
+            companyNameLabel1.setText(user[6]);
         }
-        if ((user.getUsername().equals(manager.getUsername()) && user.getPassword().equals(manager.getPassword()))) {
+        //password ro hazf kardam
+        if (user[1].equals(manager.get(0))) {
             removeUser1.setDisable(true);
             removeUser1.setVisible(false);
 
@@ -575,18 +588,18 @@ public class ManagerAreaGraphicController implements Initializable {
         secondUserPane.setDisable(false);
         secondUserPane.setVisible(true);
 
-        User user2 = DataBase.getAllUsers().get(usersIndex + 1);
-        firstNameLabel2.setText(user2.getFirstName());
-        lastNameLabel2.setText(user2.getLastName());
-        emailLabel2.setText(user2.getEMail());
-        phoneNumberLabel2.setText(String.valueOf(user2.getPhoneNumber()));
-        userNameLabel2.setText(user2.getUsername());
-        roleLabel2.setText(user2.getType());
-        if (user2.getType().equalsIgnoreCase("seller")) {
+        String[] user2 = allUsers.get(usersIndex + 1).split("!@");
+        firstNameLabel2.setText(user2[2]);
+        lastNameLabel2.setText(user2[3]);
+        emailLabel2.setText(user2[4]);
+        phoneNumberLabel2.setText(user2[5]);
+        userNameLabel2.setText(user2[1]);
+        roleLabel2.setText(user2[0]);
+        if (user2[0].equalsIgnoreCase("seller")) {
             companyNamePane2.setVisible(true);
-            companyNameLabel2.setText(((Seller) user2).getCompanyName());
+            companyNameLabel2.setText(user2[6]);
         }
-        if ((user2.getUsername().equals(manager.getUsername()) && user2.getPassword().equals(manager.getPassword()))) {
+        if (user2[1].equals(manager.get(0))) {
             removeUser2.setDisable(true);
             removeUser2.setVisible(false);
         } else {
@@ -602,7 +615,7 @@ public class ManagerAreaGraphicController implements Initializable {
         restartInsideUsersPane();
         viewUsersPane.setVisible(true);
         viewUsersPane.setDisable(false);
-        int size = DataBase.getAllUsers().size();
+        int size = allUsers.size();
         if (size == 0) {
             thereIsNoUsers.setVisible(true);
             thereIsNoUsers.setDisable(false);
@@ -662,16 +675,16 @@ public class ManagerAreaGraphicController implements Initializable {
 
     public void removeUser(MouseEvent mouseEvent) {
         if (mouseEvent.getSource().equals(removeUser1)) {
-            ManagerAreaController.deleteUser(userNameLabel1.getText());
+            View.client.deleteUser(userNameLabel1.getText());
         } else if (mouseEvent.getSource().equals(removeUser2)) {
-            ManagerAreaController.deleteUser(userNameLabel2.getText());
+            View.client.deleteUser(userNameLabel2.getText());
         }
         usersIndex = 0;
         setUsersPaneContents();
     }
 
     public void seeMoreUsers(MouseEvent mouseEvent) {
-        int size = DataBase.getAllUsers().size();
+        int size = allUsers.size();
         if (mouseEvent.getSource().equals(downArrowUsers)) {
             if (usersIndex >= size - 2) return;
             usersIndex += 2;
@@ -699,9 +712,9 @@ public class ManagerAreaGraphicController implements Initializable {
 
     public void removeCategory(MouseEvent mouseEvent) {
         if (mouseEvent.getSource().equals(removeCategory1)) {
-            ManagerAreaController.removeCategory(categoryName1.getText());
+            View.client.removeCategory(categoryName1.getText());
         } else if (mouseEvent.getSource().equals(removeCategory2)) {
-            ManagerAreaController.removeCategory(categoryName2.getText());
+            View.client.removeCategory(categoryName2.getText());
         }
         categoriesIndex = 0;
         setEditCategoryPainContents();
@@ -729,12 +742,12 @@ public class ManagerAreaGraphicController implements Initializable {
             editTheChanges1.setDisable(true);
             editTheChanges1.setVisible(false);
 
-            Category category = DataBase.getAllCategories().get(categoriesIndex);
+            String[] category = categories.get(categoriesIndex).split("!@");
             if (!(newCategoryNameTextField1.getText().matches("") || newCategoryNameTextField1.getText().matches("(\\s)+"))) {
-                category.setName(newCategoryNameTextField1.getText());
+                View.client.editCategory(category[0], "name", newCategoryNameTextField1.getText());
             }
             if (!(newCategoryAttributeTextField1.getText().matches("") || newCategoryAttributeTextField1.getText().matches("(\\s)+"))) {
-                category.setSpecialAttributes(newCategoryAttributeTextField1.getText());
+                View.client.editCategory(category[0], "attributes", newCategoryAttributeTextField1.getText());
             }
 
             editCategoryPain1.setVisible(false);
@@ -746,12 +759,12 @@ public class ManagerAreaGraphicController implements Initializable {
             editTheChanges2.setDisable(true);
             editTheChanges2.setVisible(false);
 
-            Category category = DataBase.getAllCategories().get(categoriesIndex + 1);
+            String[] category = categories.get(categoriesIndex + 1).split("!@");
             if (!(newCategoryNameTextField2.getText().matches("") || newCategoryNameTextField2.getText().matches("(\\s)+"))) {
-                category.setName(newCategoryNameTextField2.getText());
+                View.client.editCategory(category[0], "name", newCategoryNameTextField2.getText());
             }
             if (!(newCategoryAttributeTextField2.getText().matches("") || newCategoryAttributeTextField2.getText().matches("(\\s)+"))) {
-                category.setSpecialAttributes(newCategoryAttributeTextField2.getText());
+                View.client.editCategory(category[0], "attribute", newCategoryAttributeTextField2.getText());
             }
 
             editCategoryPain2.setVisible(false);
@@ -779,7 +792,7 @@ public class ManagerAreaGraphicController implements Initializable {
         manageRequestsPane.setVisible(true);
         manageRequestsPane.setDisable(false);
 
-        int size = DataBase.getAllActiveRequests().size();
+        int size = requests.size();
         System.out.println(size);
         if (size == 0) {
 
@@ -791,7 +804,7 @@ public class ManagerAreaGraphicController implements Initializable {
 
     private void setRequestsPaneContent() {
         restartInsideOFManageRequest();
-        int size = DataBase.getAllActiveRequests().size();
+        int size = requests.size();
         if (size == 0) {
             return;
         }
@@ -800,43 +813,37 @@ public class ManagerAreaGraphicController implements Initializable {
         if (size > 1) turnOnOrOffRequestsArrows(true);
         requestPane.setDisable(false);
         requestPane.setVisible(true);
-        Request request = DataBase.getAllActiveRequests().get(requestsIndex);
+        String[] request = requests.get(requestsIndex).split("!@");
         System.out.println("salam"+request);
-        requestId.setText(String.valueOf(request.getRequestId()));
-        if (request.getType().equalsIgnoreCase("Edit Off")) {
+        requestId.setText(String.valueOf(request[0]));
+        if (request[1].equalsIgnoreCase("Edit Off")) {
             editOffRequestPane.setVisible(true);
-            EditOffRequest info = ((EditOffRequest) request);
-            Off off = info.getOff();
-            editOffIdLabel.setText(String.valueOf(off.getOffId()));
-            editOffOldAmountLabel.setText(info.getOldContent());
-            editOffNewAmountLabel.setText(info.getNewContent());
-        } else if (request.getType().equalsIgnoreCase("Add Off")) {
-            String[] info = ((AddOffRequest) request).toString().split("\n");
+            editOffIdLabel.setText(request[5]);
+            editOffOldAmountLabel.setText(request[3]);
+            editOffNewAmountLabel.setText(request[4]);
+        } else if (request[1].equalsIgnoreCase("Add Off")) {
             addOffRequestPane.setVisible(true);
-            addOffRequestSellerLabel.setText(info[2]);
-            addOffRequestAmountLabel.setText(info[3]);
-            addOffRequestStartLabel.setText(info[4]);
-            addOffRequestEndLabel.setText(info[5]);
-        } else if (request.getType().equals("Add Product")) {
-            String[] info = ((AddProductRequest) request).toString().split("\n");
+            addOffRequestSellerLabel.setText(request[2]);
+            addOffRequestAmountLabel.setText(request[3]);
+            addOffRequestStartLabel.setText(request[4]);
+            addOffRequestEndLabel.setText(request[5]);
+        } else if (request[1].equals("Add Product")) {
             addProductRequestPane.setVisible(true);
-            addProductBrandLabel.setText(info[4]);
-            addProductExpLabel.setText(info[5]);
-            addProductIdLabel.setText(info[2]);
-            addProductNameLabel.setText(info[3]);
-            addProductPriceLabel.setText(info[6]);
-            addProductSellerLabel.setText(info[7]);
-        } else if (request.getType().equalsIgnoreCase("Add Seller")) {
-            String[] info = ((AddSellerRequest) request).toString().split("\n");
+            addProductBrandLabel.setText(request[4]);
+            addProductExpLabel.setText(request[5]);
+            addProductIdLabel.setText(request[2]);
+            addProductNameLabel.setText(request[3]);
+            addProductPriceLabel.setText(request[6]);
+            addProductSellerLabel.setText(request[7]);
+        } else if (request[1].equalsIgnoreCase("Add Seller")) {
             addSellerRequestPane.setVisible(true);
-            addSellerRequestCompanyLabel.setText(info[3]);
-            addSellerRequestSellerLabel.setText(info[2]);
-        } else if (request.getType().equalsIgnoreCase("Edit Product")) {
-            String[] info = ((EditProductRequest) request).toString().split("\n");
+            addSellerRequestCompanyLabel.setText(request[3]);
+            addSellerRequestSellerLabel.setText(request[2]);
+        } else if (request[1].equalsIgnoreCase("Edit Product")) {
             editProductRequestPane.setVisible(true);
-            editProductFieldLabel.setText(info[2]);
-            editProductOldContent.setText(info[3]);
-            editProductNewContent.setText(info[4]);
+            editProductFieldLabel.setText(request[2]);
+            editProductOldContent.setText(request[3]);
+            editProductNewContent.setText(request[4]);
         }
 
     }
@@ -878,7 +885,7 @@ public class ManagerAreaGraphicController implements Initializable {
         editCategoryPain1.setVisible(false);
         editCategoryPain2.setDisable(true);
         editCategoryPain2.setVisible(false);
-        int size = DataBase.getAllCategories().size();
+        int size = categories.size();
         if (mouseEvent.getSource().equals(downArrowCategory)) {
             if (categoriesIndex >= size - 2) return;
             categoriesIndex += 2;
@@ -891,11 +898,9 @@ public class ManagerAreaGraphicController implements Initializable {
 
     public void submitNewCategory(MouseEvent mouseEvent) {
         if (newParentCategoryTextField.getText().equals("")) {
-            DataBase.addCategory(new Category(newCategoryNameTextField.getText(), newAttributeTextField.getText(),
-                    null));
+            View.client.addCategory(newCategoryNameTextField.getText(), newAttributeTextField.getText(), null);
         } else {
-            DataBase.addCategory(new Category(newCategoryNameTextField.getText(), newAttributeTextField.getText(),
-                    DataBase.getCategoryByName(newParentCategoryTextField.getText())));
+            View.client.addCategory(newCategoryNameTextField.getText(), newAttributeTextField.getText(), newParentCategoryTextField.getText());
         }
 
         restartInsideCreateCategoriesTextField();
@@ -910,7 +915,7 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     public void checkInformationForCreateCategory(ActionEvent event) {
-        if (DataBase.isThereAnyCategoryWithName(newParentCategoryTextField.getText()) && !newCategoryNameTextField.getText().equals("")
+        if (View.client.isThereAnyCategoryWithName(newParentCategoryTextField.getText()) && !newCategoryNameTextField.getText().equals("")
                 && !newCategoryNameTextField.getText().matches("(\\s)+") && !newAttributeTextField.getText().equals("") && !newAttributeTextField.getText().matches("(\\s)+")) {
             parentCategoryNameRec.setStroke(Color.valueOf("#00ff00"));
             submitNewCategoryButton.setDisable(false);
@@ -929,21 +934,21 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     public void acceptRequest(ActionEvent event) {
-        ManagerAreaController.acceptRequest(DataBase.getAllActiveRequests().get(requestsIndex).getRequestId());
+        View.client.answerRequest("accept", requests.get(requestsIndex).split("!@")[0]);
 
         requestsIndex = 0;
         setRequestsPaneContent();
     }
 
     public void rejectRequest(ActionEvent event) {
-        ManagerAreaController.declineRequest(DataBase.getAllActiveRequests().get(requestsIndex).getRequestId());
+        View.client.answerRequest("decline", requests.get(requestsIndex).split("!@")[0]);
 
         requestsIndex = 0;
         setRequestsPaneContent();
     }
 
     public void seeMoreRequests(MouseEvent mouseEvent) {
-        int size = DataBase.getAllActiveRequests().size();
+        int size = requests.size();
         if (mouseEvent.getSource().equals(upArrowRequest)) {
             if (requestsIndex == 0) return;
             requestsIndex--;
@@ -1000,7 +1005,7 @@ public class ManagerAreaGraphicController implements Initializable {
 
     private void register() {
         boolean errorFound = false;
-        if (Controller.hasUserWithUsername(usernameReg.getText())) {
+        if (View.client.hasUserWithUsername(usernameReg.getText())) {
             usernameReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             userLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
@@ -1048,7 +1053,7 @@ public class ManagerAreaGraphicController implements Initializable {
             errorFound = true;
         }
         if (!errorFound) {
-            Controller.createAccount(getAccountInformation(usernameReg.getText(), "manager"), "manager");
+            View.client.createAccount(getAccountInformation(usernameReg.getText(), "manager"), "manager");
         }
     }
 
@@ -1126,20 +1131,19 @@ public class ManagerAreaGraphicController implements Initializable {
     private void setViewAndEditDiscountsPaneContent() {
         handleDiscountArrows();
         restartInsideViewDiscounts();
-        int size = DataBase.getAllDiscountCodes().size();
+        int size = discountCodes.size();
         if (size == 0) return;
         firstDiscountCode.setDisable(false);
         firstDiscountCode.setVisible(true);
         removeDiscountImage.setVisible(true);
         removeDiscountImage.setDisable(false);
-        DiscountCode discountCode = DataBase.getAllDiscountCodes().get(discountIndex);
-        ArrayList<String> info = ManagerAreaController.viewDiscountCode(discountCode.getDiscountId());
-        discountId.setText(discountCode.getDiscountId());
-        startDiscount.setText(info.get(1));
-        endDiscount.setText(info.get(2));
-        countDiscount.setText(info.get(5));
-        maximumAmount.setText(info.get(4));
-        discountPercent.setText(info.get(3));
+        String[] discountCode = discountCodes.get(discountIndex).split("!@");
+        discountId.setText(discountCode[0]);
+        startDiscount.setText(discountCode[1]);
+        endDiscount.setText(discountCode[2]);
+        countDiscount.setText(discountCode[4]);
+        maximumAmount.setText(discountCode[5]);
+        discountPercent.setText(discountCode[3]);
     }
 
     private void restartInsideViewDiscounts() {
@@ -1162,7 +1166,7 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     private void handleDiscountArrows() {
-        int size = DataBase.getAllDiscountCodes().size();
+        int size = discountCodes.size();
         if (size == 0 || size == 1) {
             upArrowDiscount.setVisible(false);
             upArrowDiscount.setDisable(true);
@@ -1213,7 +1217,7 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     public void removeDiscountCode(MouseEvent mouseEvent) {
-        ManagerAreaController.removeDiscountCode(String.valueOf(DataBase.getAllDiscountCodes().get(discountIndex).getDiscountId()));
+        View.client.removeDiscountCode(discountCodes.get(discountIndex).split("!@")[0]);
         discountIndex = 0;
         setViewAndEditDiscountsPaneContent();
     }
@@ -1224,7 +1228,7 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     public void seeMoreDiscounts(MouseEvent mouseEvent) {
-        int size = DataBase.getAllDiscountCodes().size();
+        int size = discountCodes.size();
         if (mouseEvent.getSource().equals(upArrowDiscount)) {
             if (discountIndex == 0) return;
             discountIndex--;
@@ -1300,7 +1304,7 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     public void logoutManager(MouseEvent mouseEvent) {
-        Controller.logout();
+        View.client.logout();
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
         Pane mainMenu = null;
