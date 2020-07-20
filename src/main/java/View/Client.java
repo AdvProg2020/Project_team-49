@@ -581,6 +581,29 @@ public class Client {
         }
     }
 
+    public void editCategory(String category, String field, String content) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("editCategory!@" + category + "!@" + field + "!@" + content));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<String> getRequests() {
+        ArrayList<String> requests = new ArrayList<>();
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getAllActiveRequests"));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        requests.addAll(Arrays.asList(answer.split("#\\$")));
+        return requests;
+    }
+
     class ED {
         private Cipher ecipher;
         private Cipher dcipher;

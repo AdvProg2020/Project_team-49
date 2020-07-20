@@ -6,6 +6,7 @@ import Models.Log.SellLog;
 import Models.Off;
 import Models.Product;
 import Models.User.Costumer;
+import Models.User.Request.Request;
 import Models.User.Seller;
 import Models.User.User;
 import com.sun.mail.util.BASE64DecoderStream;
@@ -471,6 +472,20 @@ public class Server {
                     if (command.startsWith("removeCategory")) {
                         ManagerAreaController.removeCategory(command.split("!@")[1]);
                         dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("editCategory")) {
+                        String field = command.split("!@")[2];
+                        ManagerAreaController.editCategory(command.split("!@")[1], field, command.split("!@")[3]);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getAllActiveRequests")) {
+                        String answer = "";
+                        for (Request allActiveRequest : DataBase.getAllActiveRequests()) {
+                            answer += allActiveRequest.toString() + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
                         dataOutputStream.flush();
                     }
                 }

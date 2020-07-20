@@ -197,6 +197,7 @@ public class ManagerAreaGraphicController implements Initializable {
     private ArrayList<String> manager = new ArrayList<>();
     private ArrayList<String> categories = new ArrayList<>();
     private ArrayList<String> allUsers = new ArrayList<>();
+    private ArrayList<String> requests = new ArrayList<>();
     private int usersIndex = 0;
     private int categoriesIndex = 0;
     private int discountIndex = 0;
@@ -207,6 +208,7 @@ public class ManagerAreaGraphicController implements Initializable {
         setManager();
         setCategories();
         setAllUsers();
+        setRequests();
         userNameLabel.setText(manager.get(0));
         closeALlPanes();
         setPersonalInfoLabels();
@@ -233,6 +235,10 @@ public class ManagerAreaGraphicController implements Initializable {
 
     private void setAllUsers() {
         allUsers = View.client.getAllUsers();
+    }
+
+    private void setRequests() {
+        requests = View.client.getRequests();
     }
 
     private void setPersonalInfoLabels() {
@@ -733,10 +739,10 @@ public class ManagerAreaGraphicController implements Initializable {
 
             String[] category = categories.get(categoriesIndex).split("!@");
             if (!(newCategoryNameTextField1.getText().matches("") || newCategoryNameTextField1.getText().matches("(\\s)+"))) {
-                category.setName(newCategoryNameTextField1.getText());
+                View.client.editCategory(category[0], "name", newCategoryNameTextField1.getText());
             }
             if (!(newCategoryAttributeTextField1.getText().matches("") || newCategoryAttributeTextField1.getText().matches("(\\s)+"))) {
-                category.setSpecialAttributes(newCategoryAttributeTextField1.getText());
+                View.client.editCategory(category[0], "attributes", newCategoryAttributeTextField1.getText());
             }
 
             editCategoryPain1.setVisible(false);
@@ -748,12 +754,12 @@ public class ManagerAreaGraphicController implements Initializable {
             editTheChanges2.setDisable(true);
             editTheChanges2.setVisible(false);
 
-            Category category = DataBase.getAllCategories().get(categoriesIndex + 1);
+            String[] category = categories.get(categoriesIndex + 1).split("!@");
             if (!(newCategoryNameTextField2.getText().matches("") || newCategoryNameTextField2.getText().matches("(\\s)+"))) {
-                category.setName(newCategoryNameTextField2.getText());
+                View.client.editCategory(category[0], "name", newCategoryNameTextField2.getText());
             }
             if (!(newCategoryAttributeTextField2.getText().matches("") || newCategoryAttributeTextField2.getText().matches("(\\s)+"))) {
-                category.setSpecialAttributes(newCategoryAttributeTextField2.getText());
+                View.client.editCategory(category[0], "attribute", newCategoryAttributeTextField2.getText());
             }
 
             editCategoryPain2.setVisible(false);
@@ -781,7 +787,7 @@ public class ManagerAreaGraphicController implements Initializable {
         manageRequestsPane.setVisible(true);
         manageRequestsPane.setDisable(false);
 
-        int size = DataBase.getAllActiveRequests().size();
+        int size = requests.size();
         System.out.println(size);
         if (size == 0) {
 
@@ -793,7 +799,7 @@ public class ManagerAreaGraphicController implements Initializable {
 
     private void setRequestsPaneContent() {
         restartInsideOFManageRequest();
-        int size = DataBase.getAllActiveRequests().size();
+        int size = requests.size();
         if (size == 0) {
             return;
         }
@@ -802,10 +808,10 @@ public class ManagerAreaGraphicController implements Initializable {
         if (size > 1) turnOnOrOffRequestsArrows(true);
         requestPane.setDisable(false);
         requestPane.setVisible(true);
-        Request request = DataBase.getAllActiveRequests().get(requestsIndex);
+        String[] request = requests.get(requestsIndex).split("!@");
         System.out.println("salam"+request);
-        requestId.setText(String.valueOf(request.getRequestId()));
-        if (request.getType().equalsIgnoreCase("Edit Off")) {
+        requestId.setText(String.valueOf(request[0]);
+        if (request[1].equalsIgnoreCase("Edit Off")) {
             editOffRequestPane.setVisible(true);
             EditOffRequest info = ((EditOffRequest) request);
             Off off = info.getOff();
