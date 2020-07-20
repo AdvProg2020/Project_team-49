@@ -3,6 +3,7 @@ package Models;
 import Models.User.Costumer;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -92,5 +93,16 @@ public class DiscountCode implements Serializable {
     public void addAllowedCustomer(Costumer costumer){
         this.allowedCostumers.add(costumer);
         this.allowedCostumers = allowedCostumers;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return DiscountId + "!@"
+                + formatter.format(startDate) + "!@"
+                + formatter.format(endDate) + "!@"
+                + discountPercent + "!@"
+                + discountCount + "!@"
+                + maximumDiscountAmount;
     }
 }

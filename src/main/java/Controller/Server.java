@@ -1,6 +1,7 @@
 package Controller;
 
 import Models.Category;
+import Models.DiscountCode;
 import Models.Log.BuyLog;
 import Models.Log.SellLog;
 import Models.Off;
@@ -486,6 +487,57 @@ public class Server {
                             answer += allActiveRequest.toString() + "#$";
                         }
                         dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("addCategory")) {
+                        String name = command.split("!@")[1];
+                        String attribute = command.split("!@")[2];
+                        String parent = command.split("!@")[3];
+                        if (parent.equalsIgnoreCase("null")) {
+                            DataBase.addCategory(new Category(name, attribute, null));
+                        } else {
+                            DataBase.addCategory(new Category(name, attribute, DataBase.getCategoryByName(parent)));
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("isThereAnyCategoryWithName")) {
+                        String answer = "";
+                        if (DataBase.isThereAnyCategoryWithName(command.split("!@")[1])) {
+                            answer = "true";
+                        } else {
+                            answer = "false";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("answerRequest")) {
+                        long id = Long.parseLong(command.split("!@")[2]);
+                        if (command.split("!@")[1].equalsIgnoreCase("accept")) {
+                            ManagerAreaController.acceptRequest(id);
+                        } else {
+                            ManagerAreaController.declineRequest(id);
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("logout")) {
+                        String token = command.split("!@")[1];
+                        onlineUsers.remove(token);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getDiscountCodes")) {
+                        String answer = "";
+                        for (DiscountCode allDiscountCode : DataBase.getAllDiscountCodes()) {
+                            answer += allDiscountCode.toString() + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("removeDiscountCode")) {
+                        ManagerAreaController.removeDiscountCode(command.split("!@")[1]);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
                         dataOutputStream.flush();
                     }
                 }

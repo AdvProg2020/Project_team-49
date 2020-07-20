@@ -604,6 +604,78 @@ public class Client {
         return requests;
     }
 
+    public void addCategory(String name, String attribute, String parent) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("addCategory!@" + name + "!@" + attribute + "!@" + parent));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isThereAnyCategoryWithName(String name) {
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("isThereAnyCategoryWithName!@" + name));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (answer.equalsIgnoreCase("true")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void answerRequest(String answer, String Id) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("answerRequest!@" + answer + "!@" + Id));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void logout() {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("logout!@" + token));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        type = "guest";
+        token = "";
+    }
+
+    public ArrayList<String> getDiscountCodes() {
+        ArrayList<String> discountCodes = new ArrayList<>();
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getDiscountCodes"));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        discountCodes.addAll(Arrays.asList(answer.split("#\\$")));
+        return discountCodes;
+    }
+
+    public void removeDiscountCode(String discountId) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("removeDiscountCode!@" + discountId));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     class ED {
         private Cipher ecipher;
         private Cipher dcipher;

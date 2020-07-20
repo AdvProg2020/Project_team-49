@@ -42,7 +42,8 @@ public class EditOffRequest extends Request  implements Serializable {
         info += getType() + "!@";
         info += field.toLowerCase() + "!@";
         info += getOldContent() + "!@";
-        info += newContent;
+        info += newContent + "!@";
+        info += off.getOffId();
         return info;
     }
 
