@@ -540,6 +540,15 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt("done"));
                         dataOutputStream.flush();
                     }
+                    if (command.startsWith("getAvailableProductsForOff")) {
+                        ArrayList<String> products = SellerAreaController.getAvailableProductsForOff(command.split("!@")[1]);
+                        String answer = "";
+                        for (String product : products) {
+                            answer += product + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

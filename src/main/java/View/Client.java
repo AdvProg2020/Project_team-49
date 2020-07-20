@@ -676,6 +676,28 @@ public class Client {
         }
     }
 
+    public String[] getAvailableProductsForOff(String username) {
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getAvailableProductsForOff!@" + username));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return answer.split("#\\$");
+    }
+
+    public void addOff(ArrayList<String> info) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("addOff!@" + info.get(0) + "!@" + info.get(1) + "!@" + info.get(2) + "!@" + info.get(3)));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     class ED {
         private Cipher ecipher;
         private Cipher dcipher;

@@ -960,7 +960,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     private void setAddOffPaneContents() {
-        for (String s : SellerAreaController.getAvailableProductsForOff(seller.get(0))) {
+        for (String s : View.client.getAvailableProductsForOff(seller.get(0))) {
             CheckBox checkBox = new CheckBox();
             checkBox.setText(s);
             checkBox.setSelected(false);
@@ -1025,7 +1025,7 @@ public class SellerAreaGraphicController implements Initializable {
             info.add(startDateTextField.getText());
             info.add(endDateTextField.getText());
             info.add(offPercentTextField.getText());
-            SellerAreaController.addOff(info);
+            View.client.addOff(info);
             goToManageOffsPain(mouseEvent);
         }
     }
