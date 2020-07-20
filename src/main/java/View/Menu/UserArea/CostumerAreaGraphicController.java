@@ -116,7 +116,6 @@ public class CostumerAreaGraphicController implements Initializable {
     public Pane noDiscountsYet;
     public Label discountId2;
     public Label discountId1;
-    private Costumer costumer;
     private int discountCodesIndex = 0;
     private int imagesLog1Index = 0;
     private int imagesLog2Index = 0;
@@ -124,7 +123,7 @@ public class CostumerAreaGraphicController implements Initializable {
     ArrayList<BuyLog> logHistory = new ArrayList<>();
     private SimpleDateFormat formatter;
     private ArrayList<String> discountCodes;
-
+    private Costumer costumer;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         closeALlPanes();

@@ -507,7 +507,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         Controller.setSelectedProduct(Controller.getProductById(gridPaneToProductId.get(gridPane)));
         Scene scene=gridPane.getScene();
         Stage stage=(Stage) (scene.getWindow());
-        Controller.setLastPane(Controller.getCurrentPane());
+        View.setLastPane(View.getCurrentPane());
         Pane pane = null;
         Pane minibar = null;
         try {
@@ -519,7 +519,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         ScrollPane scrollPane = (ScrollPane) pane.getChildren().get(0);
         scrollPane.setPrefHeight(800);
         pane.getChildren().add(minibar);
-        Controller.setCurrentPane(pane);
+        View.setCurrentPane(pane);
         scene.setRoot(pane);
         stage.setScene(scene);
         stage.show();

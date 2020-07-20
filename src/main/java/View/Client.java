@@ -83,6 +83,7 @@ public class Client {
     public void clickedOnACategoryOnMainBar(String category) {
         try {
             dataOutputStream.writeUTF(ed.encrypt("clickedOnACategoryOnMainBar"));
+            System.out.println("heloop");
             dataOutputStream.flush();
             dataOutputStream.writeUTF(ed.encrypt(category));
             dataOutputStream.flush();
@@ -105,7 +106,7 @@ public class Client {
     public ArrayList<String> getSubCategories(){
         String rawCategories="";
         try {
-            dataOutputStream.writeUTF("getSubCategories");
+            dataOutputStream.writeUTF((ed.encrypt("getSubCategories")));
             dataOutputStream.flush();
             rawCategories=ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
