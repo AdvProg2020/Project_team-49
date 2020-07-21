@@ -1,6 +1,14 @@
 package Controller;
 
+import Models.Category;
+import Models.Comment;
+import Models.Product;
+import Models.Score;
+import Models.User.Guest;
+import Models.User.Manager;
+import Models.User.Seller;
 import Models.User.User;
+import View.View;
 import com.sun.mail.util.BASE64DecoderStream;
 import com.sun.mail.util.BASE64EncoderStream;
 import javafx.scene.control.Control;
@@ -16,6 +24,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 
@@ -321,6 +330,241 @@ public class Server {
                         Filter.setMaxPrice(max);
                         Filter.filter();
                         dataOutputStream.writeUTF("");
+                    }
+                    if (command.equalsIgnoreCase("setCurrentUserForProductPage")){
+                        DataBase.getAllUsers().get(0);
+                        dataOutputStream.writeUTF("");
+                    }
+                    if (command.startsWith("checkScoreBuyer")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        for (Score score : Controller.getProductById(productId).getAllScores()) {
+                            if (score.getBuyer().equals(Controller.getCurrentUser())) {
+                                dataOutputStream.writeUTF(ed.encrypt("true"));
+                                dataOutputStream.flush();
+                            }
+                        }
+                    }
+                    if (command.startsWith("getScoreAfterCheckScoreBuyer")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        for (Score score : Controller.getProductById(productId).getAllScores()) {
+                            if (score.getBuyer().equals(Controller.getCurrentUser())) {
+                                dataOutputStream.writeUTF(ed.encrypt(String.valueOf(score.getScore())));
+                                dataOutputStream.flush();
+                            }
+                        }
+                    }
+                    if (command.startsWith("getDoesItHaveDiscount")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getDoesItHaveDiscount())));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getDoesItHaveOff")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getDoesItHaveOff())));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductAllSellerById")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getAllSellers().size())));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getSellerOfProductByIdCompanyName")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        int index=Integer.parseInt(command.split("!@")[2]);
+                        dataOutputStream.writeUTF(ed.encrypt(Controller.getProductById(productId).getAllSellers().get(index).getCompanyName()));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getSellerOfProductByIdCompanyName")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        String userName=command.split("!@")[2];
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getRemainingItemsForSeller(Controller.getProductById(productId).getSellerByUsername(userName)))));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductSellerNameByIndex")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        int index=Integer.parseInt(command.split("!@")[2]);
+                        dataOutputStream.writeUTF(ed.encrypt(Controller.getProductById(productId).getAllSellers().get(index).getUsername()));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductPriceBySellerUserName")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        String userName=command.split("!@")[2];
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getPrice(Controller.getProductById(productId).getSellerByUsername(userName)))));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductDiscountPercentage")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getDiscountPercentage())));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductParentCategory")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        dataOutputStream.writeUTF(ed.encrypt(Controller.getProductById(productId).getParentCategory().getName()));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductCommentsSize")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getAllComments().size())));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getRemainingItems")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).remainingItems())));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductAllParentCategories")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        String output="";
+                        ArrayList<String> address = new ArrayList<>();
+                        Product product=Controller.getProductById(productId);
+                        address.add(product.getName());
+                        Category category = product.getParentCategory();
+                        while (category != null) {
+                            address.add(category.getName());
+                            category = category.getParentCategory();
+                        }
+                        for (String s : address) {
+                            output=output.concat(s);
+                            output=output.concat("!@");
+                        }
+                        output=output.substring(0,output.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(output));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getStrangeInfoForProductPage")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        Product product=Controller.getProductById(productId);
+                        int one=0;
+                        int two=0;
+                        int three=0;
+                        int four=0;
+                        int five=0;
+                        for (Score score : product.getAllScores()) {
+                            double n = score.getScore();
+                            if (n >= 0 && n < 1) {
+                                one++;
+                            } else if (n >= 1 && n < 2) {
+                                two++;
+                            } else if (n >= 2 && n < 3) {
+                                three++;
+                            } else if (n >= 3 && n < 4) {
+                                four++;
+                            } else if (n >= 4 && n <= 5) {
+                                five++;
+                            }
+                        }
+                        String output=one+"!@"+two+"!@"+three+"!@"+four+"!@"+five;
+                        dataOutputStream.writeUTF(ed.encrypt(output));
+                        dataOutputStream.flush();
+                    }
+                    if (command.equalsIgnoreCase("isCurrentUserManagerOrSeller")){
+                        if (Controller.currentUser instanceof Manager || Controller.getCurrentUser() instanceof Seller){
+                            dataOutputStream.writeUTF(ed.encrypt("true"));
+                            dataOutputStream.flush();
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt("false"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.equalsIgnoreCase("addToCart")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        String sellerUserName=command.split("!@")[2];
+                        int count=Integer.parseInt(command.split("!@")[3]);
+                        Controller.addToCart(Controller.getProductById(productId),Controller.getProductById(productId).getSellerByUsername(sellerUserName),count);
+                        dataOutputStream.writeUTF(ed.encrypt(""));
+                        dataOutputStream.flush();
+                    }
+                    if (command.equalsIgnoreCase("isCurrentUserManagerOrGuest")){
+                        if (Controller.currentUser instanceof Manager || Controller.getCurrentUser() instanceof Guest){
+                            dataOutputStream.writeUTF(ed.encrypt("true"));
+                            dataOutputStream.flush();
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt("false"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.equalsIgnoreCase("getProductInfoForProductPage")){
+                        Product product=Controller.getSelectedProduct();
+                        String output=product.getName();
+                        output=output.concat("!@");
+                        output=output.concat(product.getImageAddress());
+                        output=output.concat("!@");
+                        output=output.concat(String.valueOf(product.getProductId()));
+                        output=output.concat("!@");
+                        output=output.concat(String.valueOf(product.remainingItems()));
+                        output=output.concat("!@");
+                        output=output.concat(product.getBrand());
+                        output=output.concat("!@");
+                        output=output.concat(product.getExplanation());
+                        output=output.concat("!@");
+                        output=output.concat(String.valueOf(product.getAllScores().size()));
+                        output=output.concat("!@");
+                        output=output.concat(String.valueOf(product.getAverageScore()));
+                        dataOutputStream.writeUTF(ed.encrypt(output));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("rateTheProduct")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        double score=Double.parseDouble(command.split("!@")[2]);
+                        CostumerAreaController.rate(productId, score);
+                        dataOutputStream.writeUTF(ed.encrypt(""));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("canRate")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        String outPut="false";
+                        if (CostumerAreaController.canRate(productId)){
+                            outPut="true";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(outPut));
+                        dataOutputStream.flush();
+                    }
+                    if (command.equalsIgnoreCase("isCurrentUserGuest")){
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getCurrentUserType().equalsIgnoreCase("guest"))));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("addComment")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        String title=command.split("!@")[2];
+                        String comment=command.split("!@")[3];
+                        OffAndProductMenuController.addCommentsById(productId, title, comment);
+                        dataOutputStream.writeUTF(ed.encrypt(""));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getCommentsNoted")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        String output="";
+                        for (Comment comment : Controller.getProductById(productId).getAllComments()) {
+                            output=output.concat(comment.getNote());
+                            output=output.concat("!@");
+                        }
+                        output=output.substring(0,output.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(output));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getCommentsUserNames")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        String output="";
+                        for (Comment comment : Controller.getProductById(productId).getAllComments()) {
+                            output=output.concat(comment.getUserWhoComment().getUsername());
+                            output=output.concat("!@");
+                        }
+                        output=output.substring(0,output.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(output));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getCommentsIsUserBought")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        String output="";
+                        for (Comment comment : Controller.getProductById(productId).getAllComments()) {
+                            output=output.concat(String.valueOf(comment.isUserBuyThisProduct()));
+                            output=output.concat("!@");
+                        }
+                        output=output.substring(0,output.length()-2);
+                        dataOutputStream.writeUTF(ed.encrypt(output));
+                        dataOutputStream.flush();
+                    }
+                    if (command.equalsIgnoreCase("getCurrentUserUserName")){
+                        dataOutputStream.writeUTF(ed.encrypt(Controller.getCurrentUser().getUsername()));
+                        dataOutputStream.flush();
                     }
                 }
             } catch (IOException e) {
