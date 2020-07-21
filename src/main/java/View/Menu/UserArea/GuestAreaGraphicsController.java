@@ -56,7 +56,7 @@ public class GuestAreaGraphicsController implements Initializable {
 
         reset();
 
-        if (!Controller.getHasHeadManager()) {
+        if (!View.client.hasHeadManager()) {
             accountTypeReg.setValue("Manager");
             accountTypeReg.setDisable(true);
             extraReg.setDisable(true);
@@ -166,8 +166,8 @@ public class GuestAreaGraphicsController implements Initializable {
         }).start();
         boolean errorFound = false;
         ArrayList<Boolean> booleans = new ArrayList<Boolean>();
-        booleans.add(Controller.getHasHeadManager());
-        if (Controller.hasUserWithUsername(usernameReg.getText())) {
+        booleans.add(View.client.hasHeadManager());
+        if (View.client.hasUserWithUsername(usernameReg.getText())) {
             usernameReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             userLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
@@ -228,7 +228,7 @@ public class GuestAreaGraphicsController implements Initializable {
             }
         }
         if (!errorFound) {
-            Controller.createAccount(getAccountInformation(usernameReg.getText(), (String) accountTypeReg.getValue()), (String) accountTypeReg.getValue());
+            View.client.createAccount(getAccountInformation(usernameReg.getText(), (String) accountTypeReg.getValue()), (String) accountTypeReg.getValue());
         }
         booleans.add(errorFound);
         return booleans;
@@ -340,18 +340,19 @@ public class GuestAreaGraphicsController implements Initializable {
         if (!userLogin.getText().matches("\\w+")) {
             userLogin.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             errorFound = true;
-        } else if (!Controller.hasUserWithUsername(userLogin.getText())) {
+        } else if (!View.client.hasUserWithUsername(userLogin.getText())) {
             userLogin.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             errorFound = true;
         }
         if (!passLogin.getText().matches("\\w+")) {
             passLogin.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             errorFound = true;
-        } else if (!Controller.isPasswordCorrect(passLogin.getText(), userLogin.getText())) {
+        } else if (!View.client.isPasswordCorrect(passLogin.getText(), userLogin.getText())) {
             passLogin.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             errorFound = true;
         }
         if (!errorFound) {
+            View.client.loginAccount(userLogin.getText());
             Controller.loginAccount(userLogin.getText());
             Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             Scene scene = ((Button) mouseEvent.getSource()).getScene();

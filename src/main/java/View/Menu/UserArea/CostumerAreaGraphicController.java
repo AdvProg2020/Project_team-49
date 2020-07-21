@@ -1,12 +1,5 @@
 package View.Menu.UserArea;
 
-import Controller.Controller;
-import Models.Log.BuyLog;
-import Models.Log.Log;
-import Models.Product;
-import Models.User.Costumer;
-import Controller.CostumerAreaController;
-import Models.User.Guest;
 import View.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import static Controller.CostumerAreaController.*;
@@ -116,12 +110,12 @@ public class CostumerAreaGraphicController implements Initializable {
     public Pane noDiscountsYet;
     public Label discountId2;
     public Label discountId1;
-    private Costumer costumer;
+    private ArrayList<String> costumer = new ArrayList<>();
     private int discountCodesIndex = 0;
     private int imagesLog1Index = 0;
     private int imagesLog2Index = 0;
     private int logIndex = 0;
-    ArrayList<BuyLog> logHistory = new ArrayList<>();
+    ArrayList<String> logHistory = new ArrayList<>();
     private SimpleDateFormat formatter;
     private ArrayList<String> discountCodes;
 
@@ -129,7 +123,8 @@ public class CostumerAreaGraphicController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         closeALlPanes();
         discountCodes = viewCostumerDiscountCodes();
-        costumer = (Costumer) Controller.getCurrentUser();
+        setCostumer();
+        setLogHistory();
         userInfoPane.setDisable(false);
         userInfoPane.setVisible(true);
         setPersonalInfoLabels();
@@ -143,14 +138,25 @@ public class CostumerAreaGraphicController implements Initializable {
         }).start();
     }
 
+    private void setCostumer() {
+        costumer = View.client.getCurrentUser();
+    }
+
+    private void setLogHistory() {
+        logHistory = View.client.getBuyLogs();
+    }
+
+    private ArrayList<String> getBoughtProduct(String buyLog) {
+        return new ArrayList<>(Arrays.asList(buyLog.split("!@")[4].split("@#")));
+    }
 
     private void setPersonalInfoLabels() {
-        userNameLabel.setText(costumer.getUsername());
-        firstNameLabel.setText(costumer.getFirstName());
-        lastNameLabel.setText(costumer.getLastName());
-        emailLabel.setText(costumer.getEMail());
-        creditLabel.setText(String.valueOf(costumer.getCredit()));
-        phoneNumberLabel.setText(String.valueOf(costumer.getPhoneNumber()));
+        userNameLabel.setText(costumer.get(0));
+        firstNameLabel.setText(costumer.get(2));
+        lastNameLabel.setText(costumer.get(3));
+        emailLabel.setText(costumer.get(4));
+        creditLabel.setText(costumer.get(6));
+        phoneNumberLabel.setText(costumer.get(5));
     }
 
     public void goToEditPersonalInfo(MouseEvent mouseEvent) {
@@ -166,13 +172,13 @@ public class CostumerAreaGraphicController implements Initializable {
 
     private void restartInsideEditPersonalPane() {
         creditTextField.setText("");
-        creditTextField.setPromptText(String.valueOf(costumer.getCredit()));
+        creditTextField.setPromptText(costumer.get(6));
         firstNameTextField.setText("");
-        firstNameTextField.setPromptText(costumer.getFirstName());
+        firstNameTextField.setPromptText(costumer.get(2));
         lastNameTextField.setText("");
-        lastNameTextField.setPromptText(costumer.getLastName());
+        lastNameTextField.setPromptText(costumer.get(3));
         emailTextField.setText("");
-        emailTextField.setPromptText(costumer.getEMail());
+        emailTextField.setPromptText(costumer.get(4));
         restartTextFieldRecsInEditPane();
         correctFormatEditImage.setVisible(false);
         wrongFormatEditImage.setVisible(false);
@@ -194,16 +200,16 @@ public class CostumerAreaGraphicController implements Initializable {
 
     public void submitPersonalInformation(MouseEvent mouseEvent) {
         if (!creditTextField.getText().matches("(\\s+)?"))
-            costumer.setCredit(Double.parseDouble(creditTextField.getText()));
+            View.client.setUserInfo("Credit", String.valueOf(Double.parseDouble(creditTextField.getText())));
 
         if (!emailTextField.getText().matches("(\\s+)?")) {
-            costumer.setEMail(emailTextField.getText());
+            View.client.setUserInfo("Email", emailTextField.getText());
         }
         if (!firstNameTextField.getText().matches("(\\s+)?")) {
-            costumer.setFirstName(firstNameTextField.getText());
+            View.client.setUserInfo("FirstName", firstNameTextField.getText());
         }
         if (!lastNameTextField.getText().matches("(\\s+)?")) {
-            costumer.setLastName(lastNameTextField.getText());
+            View.client.setUserInfo("LastName", lastNameTextField.getText());
         }
         personalInfoLabel.setVisible(true);
         editPersonalInfoLabel.setDisable(true);
@@ -280,29 +286,29 @@ public class CostumerAreaGraphicController implements Initializable {
         int size = 0;
 
         if (mouseEvent.getSource().equals(seeMoreProductsImageLog1)) {
-            BuyLog buyLog = logHistory.get(logIndex);
-            size = buyLog.getBoughtProduct().size();
+            String buyLog = logHistory.get(logIndex);
+            size = getBoughtProduct(buyLog).size();
             if (imagesLog1Index + 8 >= size + 1) return;
             imagesLog1Index++;
             setFirstImage();
 
         } else if (mouseEvent.getSource().equals(seeMoreProductsImageLog2)) {
-            BuyLog buyLog = logHistory.get(logIndex + 1);
-            size = buyLog.getBoughtProduct().size();
+            String buyLog = logHistory.get(logIndex + 1);
+            size = getBoughtProduct(buyLog).size();
             if (imagesLog2Index + 8 >= size + 1) return;
             imagesLog2Index++;
             setSecondImage();
 
         } else if (mouseEvent.getSource().equals(seeLessProductsImageLog1)) {
-            BuyLog buyLog = logHistory.get(logIndex);
-            size = buyLog.getBoughtProduct().size();
+            String buyLog = logHistory.get(logIndex);
+            size = getBoughtProduct(buyLog).size();
             if (imagesLog1Index == 0) return;
             imagesLog1Index--;
             setFirstImage();
 
         } else if (mouseEvent.getSource().equals(seeLessProductsImageLog2)) {
-            BuyLog buyLog = logHistory.get(logIndex + 1);
-            size = buyLog.getBoughtProduct().size();
+            String buyLog = logHistory.get(logIndex + 1);
+            size = getBoughtProduct(buyLog).size();
             if (imagesLog2Index == 0) return;
             imagesLog2Index--;
             setSecondImage();
@@ -315,8 +321,7 @@ public class CostumerAreaGraphicController implements Initializable {
         imagesLog1Index = 0;
         imagesLog2Index = 0;
         logIndex = 0;
-        logHistory.clear();
-        logHistory.addAll(costumer.getBuyHistory());
+        setLogHistory();
         buyHistoryLabel.setVisible(true);
         buyHistoryLabel.setOpacity(1);
         buyHistoryPane.setDisable(false);
@@ -340,14 +345,14 @@ public class CostumerAreaGraphicController implements Initializable {
         if (size == 0) {
             return;
         }
-        BuyLog buyLog1 = logHistory.get(logIndex);
+        String buyLog1 = logHistory.get(logIndex);
         firstLogPane.setVisible(true);
         firstLogPane.setDisable(false);
-        dateLabelLog1.setText(formatter.format(buyLog1.getLogDate()));
-        totalPriceLog1.setText(String.valueOf(buyLog1.getPaidAmount()));
-        logIdLabelLog11.setText(String.valueOf(buyLog1.getLogId()));
-        receiveStatusLog1.setText(String.valueOf(buyLog1.getReceiveStatus()));
-        if (buyLog1.getBoughtProduct().size() < 9) {
+        dateLabelLog1.setText(buyLog1.split("!@")[1]);
+        totalPriceLog1.setText(buyLog1.split("!@")[2]);
+        logIdLabelLog11.setText(buyLog1.split("!@")[0]);
+        receiveStatusLog1.setText(buyLog1.split("!@")[6]);
+        if (getBoughtProduct(buyLog1).size() < 9) {
             seeMoreProductsImageLog1.setDisable(true);
             seeMoreProductsImageLog1.setVisible(false);
             seeLessProductsImageLog1.setVisible(false);
@@ -361,15 +366,15 @@ public class CostumerAreaGraphicController implements Initializable {
         setFirstImage();
 
         if (size == 1) return;
-        BuyLog buyLog2 = logHistory.get(logIndex + 1);
+        String buyLog2 = logHistory.get(logIndex + 1);
 
         secondLogPane.setVisible(true);
         secondLogPane.setDisable(false);
-        dateLabelLog2.setText(formatter.format(buyLog2.getLogDate()));
-        totalPriceLog2.setText(String.valueOf(buyLog2.getPaidAmount()));
-        logIdLabelLog2.setText(String.valueOf(buyLog2.getLogId()));
-        receiveStatusLog2.setText(String.valueOf(buyLog2.getReceiveStatus()));
-        if (buyLog2.getBoughtProduct().size() < 9) {
+        dateLabelLog2.setText(buyLog2.split("!@")[1]);
+        totalPriceLog2.setText(buyLog2.split("!@")[2]);
+        logIdLabelLog2.setText(buyLog2.split("!@")[0]);
+        receiveStatusLog2.setText(buyLog2.split("!@")[6]);
+        if (getBoughtProduct(buyLog2).size() < 9) {
             seeMoreProductsImageLog2.setDisable(true);
             seeMoreProductsImageLog2.setVisible(false);
             seeLessProductsImageLog2.setVisible(false);
@@ -385,9 +390,9 @@ public class CostumerAreaGraphicController implements Initializable {
 
     private void setFirstImage() {
         clearImages1();
-        ArrayList<Product> products = logHistory.get(logIndex).getBoughtProduct();
+        ArrayList<String> products = getBoughtProduct(logHistory.get(logIndex));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
-            Product product = products.get(i);
+            String product = products.get(i);
             if (i == 0) {
                 setProductsImage(image11, product.getImageAddress());
             } else if (i == 1) {
@@ -421,9 +426,9 @@ public class CostumerAreaGraphicController implements Initializable {
 
     private void setSecondImage() {
         clearImages2();
-        ArrayList<Product> products = logHistory.get(logIndex + 1).getBoughtProduct();
+        ArrayList<String> products = getBoughtProduct(logHistory.get(logIndex + 1));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
-            Product product = products.get(i);
+            String product = products.get(i);
             if (i == 0) {
                 setProductsImage(image21, product.getImageAddress());
             } else if (i == 1) {
@@ -524,6 +529,8 @@ public class CostumerAreaGraphicController implements Initializable {
         imagesLog2Index = 0;
         logIndex = 0;
         discountCodesIndex = 0;
+
+        setCostumer();
     }
 
     public void goToDiscountCodesPain(MouseEvent mouseEvent) {

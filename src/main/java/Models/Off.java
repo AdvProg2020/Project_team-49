@@ -3,6 +3,7 @@ package Models;
 import Models.OffStatus;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -77,4 +78,23 @@ public class Off  implements Serializable {
         this.products.add(product);
     }
 
+    @Override
+    public String toString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String products = "";
+        boolean test = false;
+        for (Product product : this.products) {
+            if (test) {
+                products += "@#";
+            }
+            products += product.getProductId();
+            test = true;
+        }
+        return offId + "!@"
+                + offStatus + "!@"
+                + formatter.format(startDate) + "!@"
+                + formatter.format(endDate) + "!@"
+                + offAmount + "!@"
+                + products;
+    }
 }

@@ -45,11 +45,11 @@ public class EditProductRequest extends Request  implements Serializable {
 
     @Override
     public String toString() {
-        String info = requestId + "\n";
-        info += getType() + "\n";
-        info += field.toLowerCase() + "\n";
-        info += getOldContent() + "\n";
-        info += newContent + "\n";
+        String info = requestId + "!@";
+        info += getType() + "!@";
+        info += field.toLowerCase() + "!@";
+        info += getOldContent() + "!@";
+        info += newContent;
         return info;
     }
 
