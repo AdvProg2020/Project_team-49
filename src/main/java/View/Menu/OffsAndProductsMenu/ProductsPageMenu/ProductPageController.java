@@ -39,6 +39,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
+import java.time.temporal.ValueRange;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -175,18 +176,39 @@ public class ProductPageController implements Initializable {
     private int t;
     private static int sellerIndex;
 
+    private String productNameDetail="";
+    private String productImageAddressDetail="";
+    private long productIdDetail=0;
+    private int productRemainingItemDetail=0;
+    private String productBrandDerail="";
+    private String productExplanationDetail="";
+    private int productScoreSizeDetail=0;
+    private double productAverageScoreDetail=0;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        product = Controller.getSelectedProduct();
+        ArrayList<String> info=new ArrayList<>();
+        info=View.getClient().getProductInfoForProductPage();
+        productNameDetail=info.get(0);
+        productImageAddressDetail=info.get(1);
+        productIdDetail=Long.parseLong(info.get(2));
+        productRemainingItemDetail=Integer.parseInt(info.get(3));
+        productScoreSizeDetail=Integer.parseInt(info.get(4));
+        productAverageScoreDetail=Integer.parseInt(info.get(5));
+
+//        product = Controller.getSelectedProduct();
         sellerIndex = 0;
         commentsIndex = 0;
         t = 0;
         score = 0;
 //        doSomeDeepShit();
-        Controller.setCurrentUser(DataBase.getAllUsers().get(0));
+        View.getClient().setCurrentUser();
+//        Controller.setCurrentUser(DataBase.getAllUsers().get(0));
 //        product.setDoesItHaveOff(true);
-        System.out.println(product.getImageAddress());
+//        System.out.println(product.getImageAddress());
+        System.out.println(productImageAddressDetail);
         setYourRate();
         setRatingStuff();
         restartRateBar();
@@ -198,28 +220,30 @@ public class ProductPageController implements Initializable {
         setCommentPane();
         refreshScoreBar();
 
-        Controller.cancelSong();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Controller.startSong("src/main/resources/Sound/ProductsPage/BackGround.mp3");
-            }
-        }).start();
+        View.client.cancelSong();
+        View.client.startSong("src/main/resources/Sound/ProductsPage/BackGround.mp3");
 
     }
 
     private void setYourRate() {
         boolean flag = false;
         double n = 0;
-        for (Score score : product.getAllScores()) {
-            if (score.getBuyer().equals(Controller.getCurrentUser())) {
-                rateStarPane.setDisable(true);
-                rateStarPane.setOpacity(0.6);
-                flag = true;
-                n = score.getScore();
-                break;
-            }
+//        for (Score score : product.getAllScores()) {
+//            if (score.getBuyer().equals(Controller.getCurrentUser())) {
+//                rateStarPane.setDisable(true);
+//                rateStarPane.setOpacity(0.6);
+//                flag = true;
+//                n = score.getScore();
+//                break;
+//            }
+//        }
+        if (View.getClient().checkScoreBuyer(productIdDetail)){
+            rateStarPane.setDisable(true);
+            rateStarPane.setOpacity(0.6);
+            flag = true;
+            n = View.getClient().getScoreAfterCheckScoreBuyer(productIdDetail);
         }
+
         if (flag) {
             if (n >= 0.5 && n < 1.0) {
                 leftGreen1.toFront();
@@ -315,11 +339,13 @@ public class ProductPageController implements Initializable {
     private void setUnavailableLabels() {
         unavailableLabel.setStyle("-fx-text-alignment: center");
         unavailableLabel.setText("Unfortunately, this product is" + '\n' + '\n' + "not currently available.");
-        if (product.getDoesItHaveDiscount() || product.getDoesItHaveOff()) {
+
+//        if (product.getDoesItHaveDiscount() || product.getDoesItHaveOff()) {
+    if (View.getClient().getDoesItHaveDiscount(productIdDetail) || View.getClient().getDoesItHaveOff(productIdDetail)){
             offersBanner.setVisible(true);
         }
         sellerIndex = 0;
-        if (product.remainingItems() == 0) {
+        if (productRemainingItemDetail == 0) {
             totalUnavailablePane.setDisable(false);
             totalUnavailablePane.setVisible(true);
             totalUnavailableLabel.setStyle("-fx-text-alignment: center");
@@ -330,7 +356,9 @@ public class ProductPageController implements Initializable {
     }
 
     private void setArrow() {
-        if (product.getAllSellers().size() > 1) {
+
+//        if (product.getAllSellers().size() > 1) {
+        if (View.getClient().getProductAllSellerById(productIdDetail)>1){
             rightArrow.setDisable(false);
             rightArrow.setVisible(true);
             rightArrow.toFront();
@@ -340,10 +368,15 @@ public class ProductPageController implements Initializable {
     public void setBuyPane() {
         restartBuyPane();
         setArrow();
-        if (sellerIndex == product.getAllSellers().size()) sellerIndex = 0;
-        Seller seller = product.getAllSellers().get(sellerIndex++);
-        sellerNameLabel.setText(seller.getCompanyName());
-        if (product.remainingProductForSeller(seller) == 0) {
+        if (sellerIndex == View.getClient().getProductAllSellerById(productIdDetail)) sellerIndex = 0;
+//        Seller seller = product.getAllSellers().get(sellerIndex++);
+//        sellerNameLabel.setText(seller.getCompanyName());
+        int index=sellerIndex++;
+        sellerNameLabel.setText(View.getClient().getSellerOfProductByIdCompanyName(productIdDetail,index));
+        String userNameOfSeller=View.getClient().getProductSellerNameByIndex(productIdDetail,index);
+
+//        if (product.remainingProductForSeller(seller) == 0) {
+        if (View.getClient().remainingProductForSellerByUserName(productIdDetail,userNameOfSeller)==0){
             isAvailableImage.setDisable(true);
             isAvailableImage.setVisible(false);
             notAvailableImage.setDisable(false);
@@ -357,12 +390,14 @@ public class ProductPageController implements Initializable {
             isAvailableImage.setVisible(true);
             availablePane.setDisable(false);
             availablePane.setVisible(true);
-            finalPrice.setText(String.valueOf(product.getPrice(seller)));
+//            finalPrice.setText(String.valueOf(product.getPrice(seller)));
+            finalPrice.setText(String.valueOf(View.getClient().getProductPriceBySellerUserName(productIdDetail,userNameOfSeller)));
             if (product.getDoesItHaveOff()) {
                 offerPane.setDisable(false);
                 offerPane.setVisible(true);
-                oldPrice.setText(String.valueOf(product.getPrice(seller)));
-                String discountPercent = String.valueOf(product.getDiscountPercentage());
+                oldPrice.setText(String.valueOf(View.getClient().getProductPriceBySellerUserName(productIdDetail,userNameOfSeller)));
+//                String discountPercent = String.valueOf(product.getDiscountPercentage());
+                String discountPercent= String.valueOf(View.getClient().getProductDiscountPercentage(productIdDetail));
                 discountPercent = discountPercent.substring(0, 2);
                 if (discountPercent.charAt(discountPercent.length() - 1) == '.') {
                     discountPercent = discountPercent.substring(0, discountPercent.length() - 1);
@@ -416,34 +451,41 @@ public class ProductPageController implements Initializable {
     private void setProductAttributes() {
         int m = 9679;
         char M = (char) m;
-        productExplanation.setText(M + " " + product.getExplanation());
-        productName.setText(product.getName());
-        brandLabel.setText(product.getBrand());
+//        productExplanation.setText(M + " " + product.getExplanation());
+        productExplanation.setText(M + " " + productExplanationDetail);
+//        productName.setText(product.getName());
+        productName.setText(productNameDetail);
+//        brandLabel.setText(product.getBrand());
+        productName.setText(productBrandDerail);
         try {
-            categoryLabel.setText(product.getParentCategory().getName());
+            categoryLabel.setText(View.getClient().getProductParentCategory(productIdDetail));
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        discussionNumber.setText(String.valueOf(product.getAllComments().size()));
+//        discussionNumber.setText(String.valueOf(product.getAllComments().size()));
+        discussionNumber.setText(String.valueOf(View.getClient().getProductCommentsSize(productIdDetail)));
         setProductsImage();
         setAddressOfProduct();
     }
 
     private void setProductsImage() {
-        Image image=new Image(product.getImageAddress());
+//        Image image=new Image(product.getImageAddress());
+        Image image=new Image(productImageAddressDetail);
         productImage.setImage(image);
 
-        remainingItems.setText(String.valueOf(product.remainingItems()));
+//        remainingItems.setText(String.valueOf(product.remainingItems()));
+        remainingItems.setText(String.valueOf(View.getClient().getRemainingItems(productIdDetail)));
     }
 
     private void setAddressOfProduct() {
-        ArrayList<String> address = new ArrayList<>();
-        address.add(product.getName());
-        Category category = product.getParentCategory();
-        while (category != null) {
-            address.add(category.getName());
-            category = category.getParentCategory();
-        }
+//        ArrayList<String> address = new ArrayList<>();
+        ArrayList<String> address =View.getClient().getProductAllParentCategories(productIdDetail);
+//        address.add(product.getName());
+//        Category category = product.getParentCategory();
+//        while (category != null) {
+//            address.add(category.getName());
+//            category = category.getParentCategory();
+//        }
         String finalAddress = "";
         for (int i = 0; i < address.size(); i++) {
             finalAddress = finalAddress + address.get(address.size() - 1 - i);
@@ -451,26 +493,26 @@ public class ProductPageController implements Initializable {
                 finalAddress = finalAddress + "\\";
             }
         }
-        finalAddress = finalAddress.concat("\\" + product.getName());
+        finalAddress = finalAddress.concat("\\" + productNameDetail);
         addressOfProduct.setText(finalAddress);
         address.clear();
     }
 
     private void setScoreLabels() {
-        String averageScore = String.valueOf(product.getAverageScore());
+        String averageScore = String.valueOf(productAverageScoreDetail);
         averageScore = averageScore.substring(0, 3);
-        int size = product.getAllScores().size();
+        int size = productScoreSizeDetail;
         if(size == 0){
             averageScoreNumber.setText("0");
         }else{
             averageScoreNumber.setText(String.valueOf(averageScore));
 
         }
-        scoresNumber.setText(String.valueOf(product.getAllScores().size()));
+        scoresNumber.setText(String.valueOf(productScoreSizeDetail));
     }
 
     private void setStars() {
-        double n = product.getAverageScore();
+        double n = productAverageScoreDetail;
         emptyStar1.toFront();
         emptyStar2.toFront();
         emptyStar3.toFront();
@@ -539,22 +581,29 @@ public class ProductPageController implements Initializable {
         filledBar3.setWidth(0);
         filledBar4.setWidth(0);
         filledBar5.setWidth(0);
-        int total = product.getAllScores().size();
+        int total = productScoreSizeDetail;
         int one = 0, two = 0, three = 0, four = 0, five = 0;
-        for (Score score : product.getAllScores()) {
-            double n = score.getScore();
-            if (n >= 0 && n < 1) {
-                one++;
-            } else if (n >= 1 && n < 2) {
-                two++;
-            } else if (n >= 2 && n < 3) {
-                three++;
-            } else if (n >= 3 && n < 4) {
-                four++;
-            } else if (n >= 4 && n <= 5) {
-                five++;
-            }
-        }
+        ArrayList<Integer> info=View.getClient().getStrangeInfoForProductPage(productIdDetail);
+        one=info.get(0);
+        two=info.get(1);
+        three=info.get(2);
+        four=info.get(3);
+        five=info.get(4);
+//        for (Score score : product.getAllScores()) {
+//            double n = score.getScore();
+//            if (n >= 0 && n < 1) {
+//                one++;
+//            } else if (n >= 1 && n < 2) {
+//                two++;
+//            } else if (n >= 2 && n < 3) {
+//                three++;
+//            } else if (n >= 3 && n < 4) {
+//                four++;
+//            } else if (n >= 4 && n <= 5) {
+//                five++;
+//            }
+//        }
+
         double fraction1 = (1.0 * one) / (1.0 * total);
         double fraction2 = (1.0 * two) / (1.0 * total);
         double fraction3 = (1.0 * three) / (1.0 * total);
@@ -601,12 +650,14 @@ public class ProductPageController implements Initializable {
     }
 
     public void addProductToCart(MouseEvent mouseEvent) {
-        if (Controller.currentUser instanceof Manager || Controller.getCurrentUser() instanceof Seller){
+//        if (Controller.currentUser instanceof Manager || Controller.getCurrentUser() instanceof Seller){
+        if (View.getClient().isCurrentUserManagerOrSeller()){
             return;
         }
 
 //        Controller.addToCart(Controller.getSelectedProduct(),Controller.getSelectedProduct().getSellerByUsername(sellerNameLabel.getText()),1);
-        System.out.println(Controller.addToCart(Controller.getSelectedProduct(),Controller.getSelectedProduct().getSellerByUsername(sellerNameLabel.getText()),1));
+        View.getClient().addToCart(productIdDetail,sellerNameLabel.getText(),1);
+//        System.out.println(Controller.addToCart(Controller.getSelectedProduct(),Controller.getSelectedProduct().getSellerByUsername(sellerNameLabel.getText()),1));
         Scene scene = ((Node) mouseEvent.getSource()).getScene();
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         View.setLastPane(View.getCurrentPane());
@@ -675,14 +726,16 @@ public class ProductPageController implements Initializable {
         rateStarPane.setOpacity(0.6);
         messageTime = 0;
         rateStarPane.setDisable(true);
-        if (!canRate(product.getProductId())) {
+        if (!canRate(productIdDetail)) {
             buyProductFirstLabel.setVisible(true);
             Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> showBuyProductMessage()));
             timeline.setCycleCount(3);
             timeline.play();
 
         } else {
-            CostumerAreaController.rate(product.getProductId(), score);
+
+            View.getClient().rateTheProduct(productIdDetail,score);
+//            CostumerAreaController.rate(productIdDetail, score);
             submitDoneLabel.setVisible(true);
             Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> showDoneMessage(submitDoneLabel)));
             timeline.setCycleCount(3);
@@ -692,10 +745,12 @@ public class ProductPageController implements Initializable {
     }
 
     private boolean canRate(long productId) {
-        if (Controller.getCurrentUserType().equals("Guest") || Controller.getCurrentUserType().equals("Manager")) {
+//        if (Controller.getCurrentUserType().equals("Guest") || Controller.getCurrentUserType().equals("Manager")) {
+        if (View.getClient().isCurrentUserManagerOrGuest()){
             return false;
         } else {
-            if (!CostumerAreaController.canRate(productId)) {
+//            if (!CostumerAreaController.canRate(productId)) {
+            if (!View.getClient().canRate(productId)) {
                 return false;
             } else {
                 return true;
@@ -719,7 +774,7 @@ public class ProductPageController implements Initializable {
 
     public void seeMoreComments(MouseEvent mouseEvent) {
         commentsIndex += 4;
-        if (commentsIndex >= product.getAllComments().size()) {
+        if (commentsIndex >= View.getClient().getProductCommentsSize(productIdDetail)) {
             commentsIndex = 0;
         }
         setAllComments();
@@ -729,14 +784,16 @@ public class ProductPageController implements Initializable {
         String message = userComment.getText();
         if (message.equalsIgnoreCase("")) return;
         userComment.clear();
-        if (Controller.getCurrentUserType().equalsIgnoreCase("guest")) {
+//        if (Controller.getCurrentUserType().equalsIgnoreCase("guest")) {
+        if (View.getClient().isCurrentUserGuest()){
             loginFirstForComment.setVisible(true);
             Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> showDoneMessage(loginFirstForComment)));
             timeline.setCycleCount(3);
             timeline.play();
 
         } else {
-            OffAndProductMenuController.addCommentsById(product.getProductId(), "title", userComment.getText());
+            View.getClient().addComment(productIdDetail,"title",userComment.getText());
+//            OffAndProductMenuController.addCommentsById(productIdDetail, "title", userComment.getText());
             yourComment.setDisable(true);
             yourComment.setVisible(false);
             submitCommentButton.setDisable(true);
@@ -780,8 +837,20 @@ public class ProductPageController implements Initializable {
         submitCommentButton.setDisable(false);
         setCommentRectangle();
         usernameFirstCharLabel0.setText(String.valueOf(Controller.getCurrentUser().getUsername().charAt(0)));
-        for (Comment comment : product.getAllComments()) {
-            if (comment.getUserWhoComment().equals(Controller.getCurrentUser())) {
+
+        ArrayList<String> commentsNotes=new ArrayList<>();
+        commentsNotes=View.getClient().getCommentsNoted(productIdDetail);
+
+        ArrayList<String> userNameOfComments=new ArrayList<>();
+        userNameOfComments=View.getClient().getCommentsUserNames(productIdDetail);
+
+        ArrayList<Boolean> isUserBoughtThisProduct=new ArrayList<>();
+        isUserBoughtThisProduct=View.getClient().getCommentsIsUserBought(productIdDetail);
+
+        String currentUserUserName= View.getClient().getCurrentUserUserName();
+
+        for (String name : userNameOfComments) {
+            if (name.equalsIgnoreCase(currentUserUserName)) {
                 yourComment.setDisable(true);
                 yourComment.setVisible(false);
                 thanksForYourComment.setVisible(true);
@@ -789,28 +858,49 @@ public class ProductPageController implements Initializable {
                 submitCommentButton.setDisable(true);
             }
         }
-        for (int i = commentsIndex; i < commentsIndex + 4 && i < product.getAllComments().size(); i++) {
-            Comment comment = product.getAllComments().get(i);
+//        for (Comment comment : product.getAllComments()) {
+//            if (comment.getUserWhoComment().equals(Controller.getCurrentUser())) {
+//                yourComment.setDisable(true);
+//                yourComment.setVisible(false);
+//                thanksForYourComment.setVisible(true);
+//                submitCommentButton.setVisible(false);
+//                submitCommentButton.setDisable(true);
+//            }
+//        }
+
+//        for (int i = commentsIndex; i < commentsIndex + 4 && i < product.getAllComments().size(); i++) {
+        for (int i = commentsIndex; i < commentsIndex + 4 && i < commentsNotes.size(); i++) {
+//            Comment comment = product.getAllComments ().get(i);
             if (i == commentsIndex) {
                 comment1.setVisible(true);
                 comment1.setDisable(false);
-                userNameLabel1.setText(comment.getUserWhoComment().getUsername());
+//                userNameLabel1.setText(comment.getUserWhoComment().getUsername());
+                userNameLabel1.setText(userNameOfComments.get(i));
                 firstCharacterCircle1.setFill(generateRandomColor());
-                usernameFirstCharLabel1.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
-                commentContent1.setText(comment.getNote());
+//                usernameFirstCharLabel1.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
+                usernameFirstCharLabel1.setText(String.valueOf(userNameOfComments.get(i).charAt(0)));
+//                commentContent1.setText(comment.getNote());
+                commentContent1.setText(commentsNotes.get(i));
                 neverBoughtBar1.setVisible(true);
-                if (comment.isUserBuyThisProduct()) {
+//                if (comment.isUserBuyThisProduct()) {
+                if (isUserBoughtThisProduct.get(i)) {
                     neverBoughtBar1.setVisible(false);
                 }
             } else if (i == commentsIndex + 1) {
                 comment2.setVisible(true);
                 comment2.setDisable(false);
-                userNameLabel2.setText(comment.getUserWhoComment().getUsername());
+//                userNameLabel2.setText(comment.getUserWhoComment().getUsername());
+                userNameLabel2.setText(userNameOfComments.get(i));
+
                 firstCharacterCircle2.setFill(generateRandomColor());
-                usernameFirstCharLabel2.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
-                commentContent2.setText(comment.getNote());
+//                usernameFirstCharLabel2.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
+                usernameFirstCharLabel2.setText(String.valueOf(userNameOfComments.get(i).charAt(0)));
+
+//                commentContent2.setText(comment.getNote());
+                commentContent2.setText(commentsNotes.get(i));
                 neverBoughtBar2.setVisible(true);
-                if (comment.isUserBuyThisProduct()) {
+//                if (comment.isUserBuyThisProduct()) {
+                if (isUserBoughtThisProduct.get(i)) {
                     neverBoughtBar2.setVisible(false);
                 }
 
@@ -818,30 +908,38 @@ public class ProductPageController implements Initializable {
                 comment3.setVisible(true);
                 comment3.setDisable(false);
 
-                userNameLabel3.setText(comment.getUserWhoComment().getUsername());
-
+//                userNameLabel3.setText(comment.getUserWhoComment().getUsername());
+                userNameLabel3.setText(userNameOfComments.get(i));
                 firstCharacterCircle3.setFill(generateRandomColor());
-                usernameFirstCharLabel3.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
-                commentContent3.setText(comment.getNote());
+//                usernameFirstCharLabel3.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
+                usernameFirstCharLabel3.setText(String.valueOf(userNameOfComments.get(i).charAt(0)));
+//                commentContent3.setText(comment.getNote());
+                commentContent3.setText(commentsNotes.get(i));
                 neverBoughtBar3.setVisible(true);
-                if (comment.isUserBuyThisProduct()) {
+//                if (comment.isUserBuyThisProduct()) {
+                if (isUserBoughtThisProduct.get(i)) {
                     neverBoughtBar3.setVisible(false);
                 }
 
             } else if (i == commentsIndex + 3) {
                 comment4.setVisible(true);
                 comment4.setDisable(false);
-                userNameLabel4.setText(comment.getUserWhoComment().getUsername());
+//                userNameLabel4.setText(comment.getUserWhoComment().getUsername());
+                userNameLabel4.setText(userNameOfComments.get(i));
                 firstCharacterCircle4.setFill(generateRandomColor());
-                usernameFirstCharLabel4.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
-                commentContent4.setText(comment.getNote());
+//                usernameFirstCharLabel4.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
+                usernameFirstCharLabel4.setText(String.valueOf(userNameOfComments.get(i).charAt(0)));
+//                commentContent4.setText(comment.getNote());
+                commentContent4.setText(commentsNotes.get(i));
                 neverBoughtBar4.setVisible(true);
-                if (comment.isUserBuyThisProduct()) {
+
+//                if (comment.isUserBuyThisProduct()) {
+                if (isUserBoughtThisProduct.get(i)) {
                     neverBoughtBar4.setVisible(false);
                 }
             }
-        }
-        if (product.getAllComments().size() > 4) {
+//           if (product.getAllComments().size() > 4) {
+            if (View.getClient().getProductCommentsSize(productIdDetail)>4)
             seeMoreCommentsPane.setDisable(false);
             seeMoreCommentsPane.setVisible(true);
         }
@@ -853,7 +951,8 @@ public class ProductPageController implements Initializable {
 
     private void setCommentRectangle() {
         commentRectangle.setVisible(true);
-        int n = product.getAllComments().size();
+//        int n = product.getAllComments().size();
+        int n=View.getClient().getProductCommentsSize(productIdDetail);
         if (n > commentsIndex + 3) {
             commentRectangle.setHeight(400);
         } else if (n > commentsIndex + 2) {
@@ -871,8 +970,8 @@ public class ProductPageController implements Initializable {
         View.setCurrentPane(View.getLastPane());
         scene.setRoot(View.getCurrentPane());
         stage.setScene(scene);
-        Controller.cancelSong();
-        Controller.startSong("src/main/resources/Sound/ProductsMenu/BackGround.mp3");
+        View.client.cancelSong();
+        View.client.startSong("src/main/resources/Sound/ProductsMenu/BackGround.mp3");
         stage.show();
     }
 }
