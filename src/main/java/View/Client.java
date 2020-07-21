@@ -1338,6 +1338,16 @@ public class Client {
         return rawInput;
     }
 
+    public void clickSound(){
+        String command="clickSound";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     class ED {

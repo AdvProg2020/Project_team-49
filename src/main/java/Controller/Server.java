@@ -858,6 +858,14 @@ public class Server {
                         dataOutputStream.flush();
                         fileInputStream.close();
                     }
+                    if (command.equalsIgnoreCase("clickSound")){
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Controller.startClickSound();
+                            }
+                        }).start();
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
