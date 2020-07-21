@@ -1,5 +1,4 @@
 package View.Menu.UserArea.SellerArea;
-
 import View.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

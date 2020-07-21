@@ -1,29 +1,37 @@
 package Bank.Model;
 
+import Bank.Controller.AccountController;
+
+import java.util.ArrayList;
+
 public class Account {
     private String firstName;
     private String lastName;
     private String username;
     private String password;
-    private String accountId;
-    private String realUserName;
+    private long accountId;
     private double balance;
-    public Account(String firstName, String lastName, String username, String password , String realUserName) {
+    private ArrayList<Receipt> allReceipts;
+    public Account(String username, String password, String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
-        this.realUserName = realUserName;
-        balance = 0;
+        accountId = AccountController.generateAccountID();
+        balance = 1000000.0;
+        allReceipts = new ArrayList<>();
     }
 
-
-    public String getRealUserName() {
-        return realUserName;
+    public void addReceipt(Receipt receipt){
+        allReceipts.add(receipt);
     }
 
-    public void setRealUserName(String realUserName) {
-        this.realUserName = realUserName;
+    public ArrayList<Receipt> getAllReceipts() {
+        return allReceipts;
+    }
+
+    public void setAllReceipts(ArrayList<Receipt> allReceipts) {
+        this.allReceipts = allReceipts;
     }
 
     public double getBalance() {
@@ -66,11 +74,11 @@ public class Account {
         this.password = password;
     }
 
-    public String getAccountId() {
+    public long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(String accountId) {
+    public void setAccountId(long accountId) {
         this.accountId = accountId;
     }
 }

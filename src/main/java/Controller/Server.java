@@ -57,11 +57,13 @@ public class Server {
         private DataOutputStream dataOutputStream;
         private DataInputStream dataInputStream;
         private ED ed;
+        private String bankToken;
 
         public ClientHandler(Socket socket, DataOutputStream dataOutputStream, DataInputStream dataInputStream) {
             this.socket = socket;
             this.dataOutputStream = dataOutputStream;
             this.dataInputStream = dataInputStream;
+            
             ed = new ED();
         }
 
@@ -82,10 +84,7 @@ public class Server {
                     String command = ed.decrypt(kham);
 
                     if (command.startsWith("goToBankServer")) {
-                        String inputData = ed.decrypt(dataInputStream.readUTF());
-                        doBankServerConnection(inputData);
-                        dataOutputStream.writeUTF(ed.encrypt(Controller.getAllCategories()));
-                        dataOutputStream.flush();
+                        doBankServerConnection();
                         continue;
                     }
 
@@ -567,7 +566,7 @@ public class Server {
             }
         }
 
-        private void doBankServerConnection(String userToken) {
+        private void doBankServerConnection() {
             Socket socket = null;
             try {
                 socket = new Socket("127.0.0.1", 8080);
@@ -575,17 +574,116 @@ public class Server {
                 DataInputStream din = new DataInputStream(socket.getInputStream());
 
                 while (true){
+                    String command = ed.decrypt(dataInputStream.readUTF());
+                    if(command.equals("isThereAnyAccountWithUsernameInBank")){
+                        String username = ed.decrypt(dataInputStream.readUTF());
+                        dout.writeUTF("isThereAnyAccountWithUsernameInBank");
+                        dout.flush();
+                        dout.writeUTF(username);
+                        dout.flush();
+                        String bankResponse = din.readUTF();
+                        dataOutputStream.writeUTF(ed.encrypt(bankResponse));
+                        dataOutputStream.flush();
+                    }
+                    if(command.equals("createAccountInBank")){
+                        String message = ed.decrypt(dataInputStream.readUTF());
+                        dout.writeUTF("createAccountInBank");
+                        dout.flush();
+                        dout.writeUTF(message);
+                        dout.flush();
+                        String bankResponse = din.readUTF();
+                        dataOutputStream.writeUTF(ed.encrypt(bankResponse));
+                        dataOutputStream.flush();
+                    }
+                    if(command.equals("isPasswordCorrectForBankAccount")){
+                        String input = ed.decrypt(dataInputStream.readUTF());
+                        dout.writeUTF("createAccountInBank");
+                        dout.flush();
+                        dout.writeUTF(input);
+                        dout.flush();
+                        String bankResponse = din.readUTF();
+                        dataOutputStream.writeUTF(ed.encrypt(bankResponse));
+                        dataOutputStream.flush();
+                    }
+                    if(command.equals("getTokenInBank")){
+                        String username = ed.decrypt(dataInputStream.readUTF());
+                        dout.writeUTF("getTokenInBank");
+                        dout.flush();
+                        dout.writeUTF(username);
+                        dout.flush();
+                        String token = din.readUTF();
+                        dataOutputStream.writeUTF(ed.encrypt(token));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if(command.equals("isTokenExpired")){
+                        String bankToken = ed.decrypt(dataInputStream.readUTF());
+                        dout.writeUTF("isTokenExpired");
+                        dout.flush();
+                        dout.writeUTF(bankToken);
+                        dout.flush();
+                        String bool = din.readUTF();
+                        dataOutputStream.writeUTF(ed.encrypt(bool));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if(command.equals("getBankAccountInformation")){
+                        String bankToken = ed.decrypt(dataInputStream.readUTF());
+                        dout.writeUTF("getBankAccountInformation");
+                        dout.flush();
+                        dout.writeUTF(bankToken);
+                        dout.flush();
+                        String response = din.readUTF();
+                        dataOutputStream.writeUTF(ed.encrypt(response));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if(command.equals("isThereAnyBankAccountWithID")){
+                        String accountID = ed.decrypt(dataInputStream.readUTF());
+                        dout.writeUTF("isThereAnyBankAccountWithID");
+                        dout.flush();
+                        dout.writeUTF(accountID);
+                        dout.flush();
+                        String response = din.readUTF();
+                        dataOutputStream.writeUTF(ed.encrypt(response));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if(command.equals("createReceipt")){
+                        String message = ed.decrypt(dataInputStream.readUTF());
+                        dout.writeUTF("createReceipt");
+                        dout.flush();
+                        dout.writeUTF(message);
+                        dout.flush();
+                        String response = din.readUTF();
+                        dataOutputStream.writeUTF(ed.encrypt(response));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if(command.equals("isThereAnyReceiptWithID")){
+                        String input = ed.decrypt(dataInputStream.readUTF());
+                        dout.writeUTF("isThereAnyReceiptWithID");
+                        dout.flush();
+                        dout.writeUTF(input);
+                        dout.flush();
+                        String response = din.readUTF();
+                        dataOutputStream.writeUTF(ed.encrypt(response));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if(command.equals("getReceiptAndAccountDetailForPay")){
+                        String input = ed.decrypt(dataInputStream.readUTF());
+                        dout.writeUTF("getReceiptAndAccountDetailForPay");
+                        dout.flush();
+                        dout.writeUTF(input);
+                        dout.flush();
+                        String response = din.readUTF();
+                        dataOutputStream.writeUTF(ed.encrypt(response));
+                        dataOutputStream.flush();
+                        continue;
+                    }
 
                 }
-
-
-
-
-
-
-
-
-
 
 
             } catch (IOException e) {

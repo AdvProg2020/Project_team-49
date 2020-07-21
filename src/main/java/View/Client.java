@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.Base64;
 
 public class Client {
-
+    private String bankToken;
     private String token;
     private Socket socket;
     private DataInputStream dataInputStream;
@@ -26,12 +26,12 @@ public class Client {
     private String type;
 
     public Client() {
+        this.bankToken = "";
         this.token = "";
         this.type = "guest";
         this.socket = null;
         this.dataInputStream = null;
         this.dataOutputStream = null;
-        System.out.println("yea");
         View.setClient(this);
     }
 
@@ -166,25 +166,25 @@ public class Client {
         }
     }
 
-    public ArrayList<String> getSubCategories(){
-        String rawCategories="";
+    public ArrayList<String> getSubCategories() {
+        String rawCategories = "";
         try {
             dataOutputStream.writeUTF((ed.encrypt("getSubCategories")));
             dataOutputStream.flush();
-            rawCategories=ed.decrypt(dataInputStream.readUTF());
+            rawCategories = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<String > returnValue=new ArrayList<String>();
+        ArrayList<String> returnValue = new ArrayList<String>();
         for (int i = 0; i < rawCategories.split("!@").length; i++) {
             returnValue.add(rawCategories.split("!@")[i]);
         }
         return returnValue;
     }
 
-    public void startSong(String path){
+    public void startSong(String path) {
         cancelSong();
-        String command="startSong";
+        String command = "startSong";
         command.concat("!@");
         command.concat(path);
         try {
@@ -197,8 +197,8 @@ public class Client {
         }
     }
 
-    public void cancelSong(){
-        String command="cancelSong";
+    public void cancelSong() {
+        String command = "cancelSong";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
@@ -209,34 +209,34 @@ public class Client {
         }
     }
 
-    public boolean getIsDoesItOffPage(){
-        String command="getIsDoesItOffPage";
-        String rawGetIsItOffPage="";
+    public boolean getIsDoesItOffPage() {
+        String command = "getIsDoesItOffPage";
+        String rawGetIsItOffPage = "";
         try {
             dataOutputStream.writeUTF(ed.encrypt("getIsDoesItOffPage"));
             dataOutputStream.flush();
-            rawGetIsItOffPage=ed.decrypt(dataInputStream.readUTF());
+            rawGetIsItOffPage = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             System.out.println("getIsDoesItOffPage problem");
             e.printStackTrace();
         }
-        if (rawGetIsItOffPage.equalsIgnoreCase("true")){
+        if (rawGetIsItOffPage.equalsIgnoreCase("true")) {
             return true;
-        }else {
+        } else {
             return false;
         }
 
     }
 
-    public int getHowMuchLeftForThisPage(long counter){
-        String command="getHowMuchLeftForThisPage";
+    public int getHowMuchLeftForThisPage(long counter) {
+        String command = "getHowMuchLeftForThisPage";
         command.concat("!@");
         command.concat(String.valueOf(counter));
-        int returnValue=0;
+        int returnValue = 0;
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
-            returnValue=Integer.parseInt(ed.decrypt(dataInputStream.readUTF()));
+            returnValue = Integer.parseInt(ed.decrypt(dataInputStream.readUTF()));
         } catch (IOException e) {
             System.out.println("getHowMuchLeftForThisPage problem");
             e.printStackTrace();
@@ -244,175 +244,175 @@ public class Client {
         return returnValue;
     }
 
-    public ArrayList<String> getProductImageForFxml(long counter){
-        String command="getProductImageForFxml";
+    public ArrayList<String> getProductImageForFxml(long counter) {
+        String command = "getProductImageForFxml";
         command.concat("!@");
         command.concat(String.valueOf(counter));
-        String rawOutput="";
+        String rawOutput = "";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
-            rawOutput=ed.decrypt(dataInputStream.readUTF());
+            rawOutput = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<String> returnValue=new ArrayList<>();
+        ArrayList<String> returnValue = new ArrayList<>();
         for (String s : rawOutput.split("!@")) {
             returnValue.add(s);
         }
         return returnValue;
     }
 
-    public ArrayList<Double> getProductPriceForFxml(long counter){
-        String command="getProductPriceForFxml";
+    public ArrayList<Double> getProductPriceForFxml(long counter) {
+        String command = "getProductPriceForFxml";
         command.concat("!@");
         command.concat(String.valueOf(counter));
-        String rawOutput="";
+        String rawOutput = "";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
-            rawOutput=ed.decrypt(dataInputStream.readUTF());
+            rawOutput = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Double> returnValue=new ArrayList<>();
+        ArrayList<Double> returnValue = new ArrayList<>();
         for (String s : rawOutput.split("!@")) {
             returnValue.add(Double.parseDouble(s));
         }
         return returnValue;
     }
 
-    public ArrayList<String> getProductNameForFxml(long counter){
-        String command="getProductNameForFxml";
+    public ArrayList<String> getProductNameForFxml(long counter) {
+        String command = "getProductNameForFxml";
         command.concat("!@");
         command.concat(String.valueOf(counter));
-        String rawOutput="";
+        String rawOutput = "";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
-            rawOutput=ed.decrypt(dataInputStream.readUTF());
+            rawOutput = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<String> returnValue=new ArrayList<>();
+        ArrayList<String> returnValue = new ArrayList<>();
         for (String s : rawOutput.split("!@")) {
             returnValue.add(s);
         }
         return returnValue;
     }
 
-    public ArrayList<Double> getProductScoreForFxml(long counter){
-        String command="getProductScoreForFxml";
+    public ArrayList<Double> getProductScoreForFxml(long counter) {
+        String command = "getProductScoreForFxml";
         command.concat("!@");
         command.concat(String.valueOf(counter));
-        String rawOutput="";
+        String rawOutput = "";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
-            rawOutput=ed.decrypt(dataInputStream.readUTF());
+            rawOutput = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Double> returnValue=new ArrayList<>();
+        ArrayList<Double> returnValue = new ArrayList<>();
         for (String s : rawOutput.split("!@")) {
             returnValue.add(Double.parseDouble(s));
         }
         return returnValue;
     }
 
-    public ArrayList<Double> getProductOffRemainForFxml(long counter){
-        String command="getProductOffRemainForFxml";
+    public ArrayList<Double> getProductOffRemainForFxml(long counter) {
+        String command = "getProductOffRemainForFxml";
         command.concat("!@");
         command.concat(String.valueOf(counter));
-        String rawOutput="";
+        String rawOutput = "";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
-            rawOutput=ed.decrypt(dataInputStream.readUTF());
+            rawOutput = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Double> returnValue=new ArrayList<>();
+        ArrayList<Double> returnValue = new ArrayList<>();
         for (String s : rawOutput.split("!@")) {
             returnValue.add(Double.parseDouble(s));
         }
         return returnValue;
     }
 
-    public ArrayList<Long> getProductIdForFxml(long counter){
-        String command="getProductIdForFxml";
+    public ArrayList<Long> getProductIdForFxml(long counter) {
+        String command = "getProductIdForFxml";
         command.concat("!@");
         command.concat(String.valueOf(counter));
-        String rawOutput="";
+        String rawOutput = "";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
-            rawOutput=ed.decrypt(dataInputStream.readUTF());
+            rawOutput = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Long> returnValue=new ArrayList<>();
+        ArrayList<Long> returnValue = new ArrayList<>();
         for (String s : rawOutput.split("!@")) {
             returnValue.add(Long.parseLong(s));
         }
         return returnValue;
     }
 
-    public ArrayList<Boolean> getOffForFxml(long counter){
-        String command="getOffForFxml";
+    public ArrayList<Boolean> getOffForFxml(long counter) {
+        String command = "getOffForFxml";
         command.concat("!@");
         command.concat(String.valueOf(counter));
-        String rawOutput="";
+        String rawOutput = "";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
-            rawOutput=ed.decrypt(dataInputStream.readUTF());
+            rawOutput = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Boolean> returnValue=new ArrayList<>();
+        ArrayList<Boolean> returnValue = new ArrayList<>();
         for (String s : rawOutput.split("!@")) {
-            if (s.equalsIgnoreCase("true")){
+            if (s.equalsIgnoreCase("true")) {
                 returnValue.add(true);
-            }else {
+            } else {
                 returnValue.add(false);
             }
         }
         return returnValue;
     }
 
-    public ArrayList<Integer> getProductOffPercentForFxml(long counter){
-        String command="getProductOffPercentForFxml";
+    public ArrayList<Integer> getProductOffPercentForFxml(long counter) {
+        String command = "getProductOffPercentForFxml";
         command.concat("!@");
         command.concat(String.valueOf(counter));
-        String rawOutput="";
+        String rawOutput = "";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
-            rawOutput=ed.decrypt(dataInputStream.readUTF());
+            rawOutput = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Integer> returnValue=new ArrayList<>();
+        ArrayList<Integer> returnValue = new ArrayList<>();
         for (String s : rawOutput.split("!@")) {
             returnValue.add(Integer.parseInt(s));
         }
         return returnValue;
     }
 
-    public ArrayList<Integer> getProductRemainForFxml(long counter){
-        String command="getProductRemainForFxml";
+    public ArrayList<Integer> getProductRemainForFxml(long counter) {
+        String command = "getProductRemainForFxml";
         command.concat("!@");
         command.concat(String.valueOf(counter));
-        String rawOutput="";
+        String rawOutput = "";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
-            rawOutput=ed.decrypt(dataInputStream.readUTF());
+            rawOutput = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Integer> returnValue=new ArrayList<>();
+        ArrayList<Integer> returnValue = new ArrayList<>();
         for (String s : rawOutput.split("!@")) {
             returnValue.add(Integer.parseInt(s));
         }
@@ -700,7 +700,6 @@ public class Client {
     }
 
     public void goToBankServer(boolean shouldOpenBankPage) {
-
         try {
             dataOutputStream.writeUTF(ed.encrypt("goToBankServer"));
             dataOutputStream.flush();
@@ -711,6 +710,162 @@ public class Client {
             e.printStackTrace();
         }
     }
+
+    public boolean isThereAnyAccountWithUsernameInBank(String username) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("isThereAnyAccountWithUsernameInBank"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(username));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+            if (response.equals("false")) return false;
+            if (response.equals("true")) return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public void createAccountInBank(String message) { // not fucking complete
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("createAccountInBank"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(message));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public boolean isPasswordCorrectForBankAccount(String password, String username) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("isPasswordCorrectForBankAccount"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(username + "!@" + password));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+            if (response.equals("false")) return false;
+            if (response.equals("true")) return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void getTokenInBank(String username) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getTokenInBank"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(username));
+            dataOutputStream.flush();
+            bankToken = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isTokenExpired() {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("isTokenExpired"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(bankToken));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+            if (response.equals("false")) return false;
+            if (response.equals("true")) return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public String[] getBankAccountInformation() {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getBankAccountInformation"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(bankToken));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+            return response.split("!@");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean isThereAnyBankAccountWithID(String id) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("isThereAnyBankAccountWithID"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(id));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+            if (response.equals("false")) return false;
+            if (response.equals("true")) return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public void createReceipt(String type, String money, String source, String destination, String description) {
+        try {
+            String message = type + "!@" + money + "!@" + source + "!@" + destination + "!@" + description;
+            dataOutputStream.writeUTF(ed.encrypt("createReceipt"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(message));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public boolean isThereAnyReceiptWithID(String receiptID) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("isThereAnyReceiptWithID"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(receiptID + "!@" + bankToken));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+            if (response.equals("false")) return false;
+            if (response.equals("true")) return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public String[] getReceiptAndAccountDetailForPay(String receiptID) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getReceiptAndAccountDetailForPay"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(receiptID + "!@" + bankToken));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+            return response.split("!@");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void payThisReceipt(String receiptID) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("payThisReceipt"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(receiptID + "!@" + bankToken));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     class ED {
         private Cipher ecipher;
@@ -776,3 +931,4 @@ public class Client {
     // !@
     // #$   BETWEEN OBJECTS
 }
+

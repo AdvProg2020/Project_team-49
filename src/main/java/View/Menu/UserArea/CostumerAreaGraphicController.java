@@ -129,13 +129,13 @@ public class CostumerAreaGraphicController implements Initializable {
         userInfoPane.setVisible(true);
         setPersonalInfoLabels();
         formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Controller.cancelSong();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Controller.startSong("src/main/resources/Sound/CustomerArea/BackGround.mp3");
-            }
-        }).start();
+//        Controller.cancelSong();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Controller.startSong("src/main/resources/Sound/CustomerArea/BackGround.mp3");
+//            }
+//        }).start();
     }
 
     private void setCostumer() {
@@ -393,23 +393,23 @@ public class CostumerAreaGraphicController implements Initializable {
         ArrayList<String> products = getBoughtProduct(logHistory.get(logIndex));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
             String product = products.get(i);
-            if (i == 0) {
-                setProductsImage(image11, product.getImageAddress());
-            } else if (i == 1) {
-                setProductsImage(image12, product.getImageAddress());
-            } else if (i == 2) {
-                setProductsImage(image13, product.getImageAddress());
-            } else if (i == 3) {
-                setProductsImage(image14, product.getImageAddress());
-            } else if (i == 4) {
-                setProductsImage(image15, product.getImageAddress());
-            } else if (i == 5) {
-                setProductsImage(image16, product.getImageAddress());
-            } else if (i == 6) {
-                setProductsImage(image17, product.getImageAddress());
-            } else if (i == 7) {
-                setProductsImage(image18, product.getImageAddress());
-            }
+//            if (i == 0) {
+//                setProductsImage(image11, product.getImageAddress());
+//            } else if (i == 1) {
+//                setProductsImage(image12, product.getImageAddress());
+//            } else if (i == 2) {
+//                setProductsImage(image13, product.getImageAddress());
+//            } else if (i == 3) {
+//                setProductsImage(image14, product.getImageAddress());
+//            } else if (i == 4) {
+//                setProductsImage(image15, product.getImageAddress());
+//            } else if (i == 5) {
+//                setProductsImage(image16, product.getImageAddress());
+//            } else if (i == 6) {
+//                setProductsImage(image17, product.getImageAddress());
+//            } else if (i == 7) {
+//                setProductsImage(image18, product.getImageAddress());
+//            }
         }
     }
 
@@ -429,23 +429,23 @@ public class CostumerAreaGraphicController implements Initializable {
         ArrayList<String> products = getBoughtProduct(logHistory.get(logIndex + 1));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
             String product = products.get(i);
-            if (i == 0) {
-                setProductsImage(image21, product.getImageAddress());
-            } else if (i == 1) {
-                setProductsImage(image22, product.getImageAddress());
-            } else if (i == 2) {
-                setProductsImage(image23, product.getImageAddress());
-            } else if (i == 3) {
-                setProductsImage(image24, product.getImageAddress());
-            } else if (i == 4) {
-                setProductsImage(image25, product.getImageAddress());
-            } else if (i == 5) {
-                setProductsImage(image26, product.getImageAddress());
-            } else if (i == 6) {
-                setProductsImage(image27, product.getImageAddress());
-            } else if (i == 7) {
-                setProductsImage(image28, product.getImageAddress());
-            }
+//            if (i == 0) {
+//                setProductsImage(image21, product.getImageAddress());
+//            } else if (i == 1) {
+//                setProductsImage(image22, product.getImageAddress());
+//            } else if (i == 2) {
+//                setProductsImage(image23, product.getImageAddress());
+//            } else if (i == 3) {
+//                setProductsImage(image24, product.getImageAddress());
+//            } else if (i == 4) {
+//                setProductsImage(image25, product.getImageAddress());
+//            } else if (i == 5) {
+//                setProductsImage(image26, product.getImageAddress());
+//            } else if (i == 6) {
+//                setProductsImage(image27, product.getImageAddress());
+//            } else if (i == 7) {
+//                setProductsImage(image28, product.getImageAddress());
+//            }
         }
     }
 
@@ -632,7 +632,7 @@ public class CostumerAreaGraphicController implements Initializable {
     }
 
     public void logoutCostumer(MouseEvent mouseEvent) {
-        Controller.logout();
+//        Controller.logout();
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
         Pane mainMenu = null;

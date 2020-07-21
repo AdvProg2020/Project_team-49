@@ -45,6 +45,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.control.Tooltip;
@@ -652,6 +653,16 @@ public class MainBarController implements Initializable {
     }
 
     public void goToBankServer(MouseEvent mouseEvent) {
-        client.goToBankServer(true);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        Pane pane = null;
+        try {
+            pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/bank/getToken.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(pane);
+        stage.setScene(scene);
+        stage.show();
     }
 }

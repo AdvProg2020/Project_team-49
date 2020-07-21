@@ -216,13 +216,13 @@ public class ManagerAreaGraphicController implements Initializable {
         userInfoPane.setVisible(true);
         userInfoPane.setDisable(false);
 
-        Controller.cancelSong();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Controller.startSong("src/main/resources/Sound/ManagerArea/BackGround.mp3");
-            }
-        }).start();
+//        Controller.cancelSong();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Controller.startSong("src/main/resources/Sound/ManagerArea/BackGround.mp3");
+//            }
+//        }).start();
 
     }
 
@@ -1249,8 +1249,8 @@ public class ManagerAreaGraphicController implements Initializable {
         info.add(newDiscountPercent.getText());
         info.add(newDiscountAmount.getText());
         info.add(newDiscountCount.getText());
-        info.add(ManagerAreaController.getAllCostumersForDiscount());
-        ManagerAreaController.createDiscountCode(info);
+//        info.add(ManagerAreaController.getAllCostumersForDiscount());
+//        ManagerAreaController.createDiscountCode(info);
 
 //        restartTextFieldForNewDiscount();
 //        restartInsideMainDiscountPane();

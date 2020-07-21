@@ -1,12 +1,26 @@
 package Bank.Model;
 
+import Bank.Controller.Controller;
+
 public class Token {
     private Account account;
     private String tokenId;
     private boolean isAlive;
+    private int time;
 
     public Token(Account account) {
         this.account = account;
+        isAlive = true;
+        time = 3600;
+        this.tokenId = Controller.generateToken();
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 
     public Account getAccount() {

@@ -109,8 +109,6 @@ public class GuestAreaGraphicsController implements Initializable {
                     stage.setScene(scene);
                     stage.show();
                 }
-
-
             }
         }
         if (mouseEvent.getSource().equals(usernameReg)) {
@@ -353,7 +351,6 @@ public class GuestAreaGraphicsController implements Initializable {
         }
         if (!errorFound) {
             View.client.loginAccount(userLogin.getText());
-            Controller.loginAccount(userLogin.getText());
             Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             Scene scene = ((Button) mouseEvent.getSource()).getScene();
             if(View.getLastPane().getId().equals("mainPane")){

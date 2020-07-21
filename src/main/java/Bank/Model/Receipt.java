@@ -1,40 +1,53 @@
 package Bank.Model;
 
+import Bank.Controller.Controller;
+
 import java.io.Serializable;
 
 public class Receipt {
-    private Token token;
-    private String type;
+    private Account account;
+    private boolean done;
     private String receiptType;
     private double money;
-    private String sourceID;
-    private String destinationID;
+    private long sourceID;
+    private long destinationID;
     private String description;
+    private String receiptID;
 
-    public Receipt(Token token, String type, String receiptType, double money, String sourceID, String destinationID, String description) {
-        this.token = token;
-        this.type = type;
+    public Receipt(Account account, String receiptType, double money, long sourceID, long destinationID, String description) {
+        this.account = account;
+        done = false;
         this.receiptType = receiptType;
         this.money = money;
         this.sourceID = sourceID;
         this.destinationID = destinationID;
         this.description = description;
+        receiptID = Controller.generateToken();
+        account.addReceipt(this);
     }
 
-    public Token getToken() {
-        return token;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setToken(Token token) {
-        this.token = token;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
-    public String getType() {
-        return type;
+    public boolean isDone() {
+        return done;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
+    public String getReceiptID() {
+        return receiptID;
+    }
+
+    public void setReceiptID(String receiptID) {
+        this.receiptID = receiptID;
     }
 
     public String getReceiptType() {
@@ -53,19 +66,19 @@ public class Receipt {
         this.money = money;
     }
 
-    public String getSourceID() {
+    public long getSourceID() {
         return sourceID;
     }
 
-    public void setSourceID(String sourceID) {
+    public void setSourceID(long sourceID) {
         this.sourceID = sourceID;
     }
 
-    public String getDestinationID() {
+    public long getDestinationID() {
         return destinationID;
     }
 
-    public void setDestinationID(String destinationID) {
+    public void setDestinationID(long destinationID) {
         this.destinationID = destinationID;
     }
 
