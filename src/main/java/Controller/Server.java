@@ -86,6 +86,16 @@ public class Server {
                 dataOutputStream.flush();
                 while (true) {
                     String command = ed.decrypt(dataInputStream.readUTF());
+                    if (command.startsWith("hasHeadManager")) {
+                        String answer = "";
+                        if (Controller.getHasHeadManager()) {
+                            answer = "true";
+                        } else {
+                            answer = "false";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
                     if (command.startsWith("setCategoriesInMainBar")) {
                         dataOutputStream.writeUTF(ed.encrypt(Controller.getAllCategories()));
                         dataOutputStream.flush();

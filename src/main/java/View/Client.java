@@ -451,15 +451,15 @@ public class Client {
             dataOutputStream.writeUTF(ed.encrypt("hasHeadManager"));
             dataOutputStream.flush();
             answer = ed.decrypt(dataInputStream.readUTF());
-            if (answer.equalsIgnoreCase("true")) {
-                return true;
-            } else {
-                return false;
-            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
+        if (answer.equalsIgnoreCase("true")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void setUserInfo(String field, String content) {
