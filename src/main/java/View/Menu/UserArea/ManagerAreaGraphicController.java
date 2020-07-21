@@ -1249,8 +1249,8 @@ public class ManagerAreaGraphicController implements Initializable {
         info.add(newDiscountPercent.getText());
         info.add(newDiscountAmount.getText());
         info.add(newDiscountCount.getText());
-        info.add(ManagerAreaController.getAllCostumersForDiscount());
-        ManagerAreaController.createDiscountCode(info);
+        //info.add(ManagerAreaController.getAllCostumersForDiscount());
+        //ManagerAreaController.createDiscountCode(info);
 
 //        restartTextFieldForNewDiscount();
 //        restartInsideMainDiscountPane();

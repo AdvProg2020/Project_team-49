@@ -19,14 +19,13 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.xml.crypto.Data;
 import java.awt.image.BandedSampleModel;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
 
@@ -548,6 +547,73 @@ public class Server {
                         }
                         dataOutputStream.writeUTF(ed.encrypt(answer));
                         dataOutputStream.flush();
+                    }
+                    if (command.startsWith("addOff")) {
+                        ArrayList<String> info = new ArrayList<>(Arrays.asList(command.split("!@")));
+                        info.remove(0);
+                        SellerAreaController.addOff(info);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("editProduct")) {
+                        String field = command.split("!@")[1];
+                        String newContent = command.split("!@")[2];
+                        long productId = Long.parseLong(command.split("!@")[3]);
+                        SellerAreaController.editProduct(field, newContent, productId);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("hasProductWithName")) {
+                        String answer = "";
+                        if (SellerAreaController.hasProductWithName(command.split("!@")[1])) {
+                            answer = "true";
+                        } else {
+                            answer = "false";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("removeProduct")) {
+                        SellerAreaController.removeProduct(Long.parseLong(command.split("!@")[1]));
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("addProduct")) {
+                        ArrayList<String> info = new ArrayList<>(Arrays.asList(command.split("!@")));
+                        info.remove(0);
+                        long remainingBytes = Long.parseLong(info.get(0));
+                        info.remove(0);
+                        String fileType = info.get(0);
+                        info.remove(0);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                        String path = "photos\\productPhotos\\APRI" + (DataBase.getCreatedRequests() + 1) + "." + fileType;
+                        info.add(path);
+                        File file = new File(path);
+                        file.createNewFile();
+                        FileOutputStream fileOutputStream = new FileOutputStream(file);
+                        int readBytes = 0;
+                        byte[] buffer = new byte[4096];
+                        while ((readBytes = dataInputStream.read(buffer, 0, (int) Math.min(buffer.length, remainingBytes))) > 0) {
+                            remainingBytes -= readBytes;
+                            fileOutputStream.write(buffer, 0, readBytes);
+                        }
+                        SellerAreaController.addProduct(info);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                        fileOutputStream.close();
+                    }
+                    if (command.startsWith("getProductImage")) {
+                        File file = new File(DataBase.getProductById(Long.parseLong(command.split("!@")[1])).getImageAddress());
+                        dataOutputStream.writeUTF(ed.encrypt(file.getName() + "!@" + file.getTotalSpace()));
+                        dataOutputStream.flush();
+                        byte[] buffer = new byte[4096];
+                        FileInputStream fileInputStream = new FileInputStream(file);
+                        while (fileInputStream.read(buffer) > 0) {
+                            dataOutputStream.write(buffer);
+                        }
+                        dataOutputStream.flush();
+                        fileInputStream.close();
                     }
                 }
             } catch (IOException e) {

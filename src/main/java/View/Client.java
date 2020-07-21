@@ -1,5 +1,6 @@
 package View;
 
+import Controller.DataBase;
 import com.sun.mail.util.BASE64DecoderStream;
 import com.sun.mail.util.BASE64EncoderStream;
 
@@ -7,10 +8,7 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -696,6 +694,87 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void editProduct(String field, String content, long productId) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("editProduct!@" + field + "!@" + content + "!@" + productId));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean hasProductWithName(String name) {
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("hasProductWithName!@" + name));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (answer.equalsIgnoreCase("true")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void removeProduct(long productId) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("removeProduct!@" + productId));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addProduct(ArrayList<String> info, File file, String fileType) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("addProduct!@" + file.getTotalSpace() + "!@" + fileType + "!@"
+                    + info.get(0) + "!@" + info.get(1) + "!@" + info.get(2) + "!@" + info.get(3)
+                    + "!@" + info.get(4) + "!@" + info.get(5)));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+            byte[] buffer = new byte[4096];
+            FileInputStream fileInputStream = new FileInputStream(file);
+            while (fileInputStream.read(buffer) > 0) {
+                dataOutputStream.write(buffer);
+            }
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+            fileInputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getProductImageAddress(String productId) {
+        String answer;
+        String path = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getProductImage!@" + productId));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+            path = "photos\\productPhotos\\clientPhotos\\" + answer.split("!@")[0];
+            File file = new File(path);
+            file.createNewFile();
+            long remainingBytes = Long.parseLong(answer.split("!@")[1]);
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            int readBytes = 0;
+            byte[] buffer = new byte[4096];
+            while ((readBytes = dataInputStream.read(buffer, 0, (int) Math.min(buffer.length, remainingBytes))) > 0) {
+                remainingBytes -= readBytes;
+                fileOutputStream.write(buffer, 0, readBytes);
+            }
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return path;
     }
 
     class ED {

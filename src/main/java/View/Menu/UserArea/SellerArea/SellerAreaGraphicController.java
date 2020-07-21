@@ -541,22 +541,23 @@ public class SellerAreaGraphicController implements Initializable {
         ArrayList<String> products = getSoldProduct(logHistory.get(logIndex));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
             String product = products.get(i);
+            String path = View.client.getProductImageAddress(product.split("!@")[0]);
             if (i == 0) {
-                setProductsImage(image11, product.getImageAddress());
+                setProductsImage(image11, path);
             } else if (i == 1) {
-                setProductsImage(image12, product.getImageAddress());
+                setProductsImage(image12, path);
             } else if (i == 2) {
-                setProductsImage(image13, product.getImageAddress());
+                setProductsImage(image13, path);
             } else if (i == 3) {
-                setProductsImage(image14, product.getImageAddress());
+                setProductsImage(image14, path);
             } else if (i == 4) {
-                setProductsImage(image15, product.getImageAddress());
+                setProductsImage(image15, path);
             } else if (i == 5) {
-                setProductsImage(image16, product.getImageAddress());
+                setProductsImage(image16, path);
             } else if (i == 6) {
-                setProductsImage(image17, product.getImageAddress());
+                setProductsImage(image17, path);
             } else if (i == 7) {
-                setProductsImage(image18, product.getImageAddress());
+                setProductsImage(image18, path);
             }
         }
     }
@@ -577,22 +578,23 @@ public class SellerAreaGraphicController implements Initializable {
         ArrayList<String> products = getSoldProduct(logHistory.get(logIndex + 1));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
             String product = products.get(i);
+            String path = View.client.getProductImageAddress(product.split("!@")[0]);
             if (i == 0) {
-                setProductsImage(image21, product.getImageAddress());
+                setProductsImage(image21, path);
             } else if (i == 1) {
-                setProductsImage(image22, product.getImageAddress());
+                setProductsImage(image22, path);
             } else if (i == 2) {
-                setProductsImage(image23, product.getImageAddress());
+                setProductsImage(image23, path);
             } else if (i == 3) {
-                setProductsImage(image24, product.getImageAddress());
+                setProductsImage(image24, path);
             } else if (i == 4) {
-                setProductsImage(image25, product.getImageAddress());
+                setProductsImage(image25, path);
             } else if (i == 5) {
-                setProductsImage(image26, product.getImageAddress());
+                setProductsImage(image26, path);
             } else if (i == 6) {
-                setProductsImage(image27, product.getImageAddress());
+                setProductsImage(image27, path);
             } else if (i == 7) {
-                setProductsImage(image28, product.getImageAddress());
+                setProductsImage(image28, path);
             }
         }
     }
@@ -798,22 +800,23 @@ public class SellerAreaGraphicController implements Initializable {
         ArrayList<String> products = getOffProducts(offs.get(offsIndex + 1));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
             String product = products.get(i);
+            String path = View.client.getProductImageAddress(product.split("!@")[0]);
             if (i == 0) {
-                setProductsImage(image31, product.getImageAddress());
+                setProductsImage(image31, path);
             } else if (i == 1) {
-                setProductsImage(image32, product.getImageAddress());
+                setProductsImage(image32, path);
             } else if (i == 2) {
-                setProductsImage(image33, product.getImageAddress());
+                setProductsImage(image33, path);
             } else if (i == 3) {
-                setProductsImage(image34, product.getImageAddress());
+                setProductsImage(image34, path);
             } else if (i == 4) {
-                setProductsImage(image35, product.getImageAddress());
+                setProductsImage(image35, path);
             } else if (i == 5) {
-                setProductsImage(image36, product.getImageAddress());
+                setProductsImage(image36, path);
             } else if (i == 6) {
-                setProductsImage(image37, product.getImageAddress());
+                setProductsImage(image37, path);
             } else if (i == 7) {
-                setProductsImage(image38, product.getImageAddress());
+                setProductsImage(image38, path);
             }
         }
     }
@@ -834,22 +837,23 @@ public class SellerAreaGraphicController implements Initializable {
         ArrayList<String> products = getOffProducts(offs.get(offsIndex));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
             String product = products.get(i);
+            String path = View.client.getProductImageAddress(product.split("!@")[0]);
             if (i == 0) {
-                setProductsImage(image41, product.getImageAddress());
+                setProductsImage(image41, path);
             } else if (i == 1) {
-                setProductsImage(image42, product.getImageAddress());
+                setProductsImage(image42, path);
             } else if (i == 2) {
-                setProductsImage(image43, product.getImageAddress());
+                setProductsImage(image43, path);
             } else if (i == 3) {
-                setProductsImage(image44, product.getImageAddress());
+                setProductsImage(image44, path);
             } else if (i == 4) {
-                setProductsImage(image45, product.getImageAddress());
+                setProductsImage(image45, path);
             } else if (i == 5) {
-                setProductsImage(image46, product.getImageAddress());
+                setProductsImage(image46, path);
             } else if (i == 6) {
-                setProductsImage(image47, product.getImageAddress());
+                setProductsImage(image47, path);
             } else if (i == 7) {
-                setProductsImage(image48, product.getImageAddress());
+                setProductsImage(image48, path);
             }
         }
     }
@@ -1085,7 +1089,7 @@ public class SellerAreaGraphicController implements Initializable {
         productPrice1.setText(product1.get(3));
         productCount1.setText(product1.get(5));
         productExplanation1.setText(product1.get(4));
-        productImage1.setImage(new Image(product1.getImageAddress()));
+        productImage1.setImage(new Image(View.client.getProductImageAddress(product1.get(0))));
 
         if (size == 1) return;
         ArrayList<String> product2 = new ArrayList<>(Arrays.asList(products.get(productsIndex + 1).split("!@")));
@@ -1097,7 +1101,7 @@ public class SellerAreaGraphicController implements Initializable {
         productPrice2.setText(product2.get(3));
         productCount2.setText(product2.get(5));
         productExplanation2.setText(product2.get(4));
-        productImage2.setImage(new Image(product2.getImageAddress()));
+        productImage2.setImage(new Image(View.client.getProductImageAddress(product2.get(0))));
     }
 
     public void seeMoreProducts(MouseEvent mouseEvent) {
@@ -1184,19 +1188,19 @@ public class SellerAreaGraphicController implements Initializable {
             }
         }).start();
         if (!products.get(editProductIndex).split("!@")[1].equals(productNameTextField.getText())) {
-            SellerAreaController.editProduct("name", productNameTextField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
+            View.client.editProduct("name", productNameTextField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
         }
         if (Integer.parseInt(products.get(editProductIndex).split("!@")[3]) != Integer.parseInt(productNameTextField.getText())) {
-            SellerAreaController.editProduct("price", productPriceTextField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
+            View.client.editProduct("price", productPriceTextField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
         }
         if (!products.get(editProductIndex).split("!@")[2].equals(productBrandTextField.getText())) {
-            SellerAreaController.editProduct("brand", productBrandTextField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
+            View.client.editProduct("brand", productBrandTextField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
         }
         if (Integer.parseInt(products.get(editProductIndex).split("!@")[5]) != Integer.parseInt(productCountTextField.getText())) {
-            SellerAreaController.editProduct("count", productCountTextField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
+            View.client.editProduct("count", productCountTextField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
         }
         if (!products.get(editProductIndex).split("!@")[4].equals(productExplanationField.getText())) {
-            SellerAreaController.editProduct("explanation", productExplanationField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
+            View.client.editProduct("explanation", productExplanationField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
         }
         goBackToManageProducts(mouseEvent);
     }
@@ -1214,7 +1218,7 @@ public class SellerAreaGraphicController implements Initializable {
             productNameRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
         } else if (!productNameTextField.getText().equals(products.get(editProductIndex).split("!@")[1])) {
-            if (SellerAreaController.hasProductWithName(productNameTextField.getText())) {
+            if (View.client.hasProductWithName(productNameTextField.getText())) {
                 productNameRec.setStroke(Color.valueOf("#fb3449"));
                 errorFound = true;
             }
@@ -1258,9 +1262,9 @@ public class SellerAreaGraphicController implements Initializable {
             return;
         }
         if (mouseEvent.getSource().equals(deleteProduct1)) {
-            SellerAreaController.removeProduct(Long.parseLong(products.get(productsIndex).split("!@")[0]));
+            View.client.removeProduct(Long.parseLong(products.get(productsIndex).split("!@")[0]));
         } else {
-            SellerAreaController.removeProduct(Long.parseLong(products.get(productsIndex).split("!@")[0]));
+            View.client.removeProduct(Long.parseLong(products.get(productsIndex + 1).split("!@")[0]));
         }
         goToManageProductsPain(mouseEvent);
     }
@@ -1326,7 +1330,7 @@ public class SellerAreaGraphicController implements Initializable {
         if (!nameTextField.getText().matches("\\w+")) {
             nameRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
-        } else if (SellerAreaController.hasProductWithName(nameTextField.getText())) {
+        } else if (View.client.hasProductWithName(nameTextField.getText())) {
             nameRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
         }
@@ -1334,7 +1338,7 @@ public class SellerAreaGraphicController implements Initializable {
             brandRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
         }
-        if(!isThereAnyCategoryWithName(categoryTextField.getText())){
+        if(!View.client.isThereAnyCategoryWithName(categoryTextField.getText())){
             categoryRec.setStroke(Color.valueOf("#fb3449"));
             errorFound = true;
         }
@@ -1359,9 +1363,6 @@ public class SellerAreaGraphicController implements Initializable {
 
         if(!errorFound){
             File file = new File(imageTextField.getText());
-            String path = "resources\\photos\\productPhotos\\PR"
-                    + DataBase.getCreatedRequests()
-                    + imageTextField.getText().substring(imageTextField.getText().length() - 4);
             ArrayList<String> info = new ArrayList<>();
             info.add(nameTextField.getText());
             info.add(brandTextField.getText());
@@ -1369,8 +1370,8 @@ public class SellerAreaGraphicController implements Initializable {
             info.add(explanationTextField.getText());
             info.add(categoryTextField.getText());
             info.add(countTextField.getText());
-            info.add(imageTextField.getText());
-            System.out.println(SellerAreaController.addProduct(info));
+            String fileType = imageTextField.getText().substring(imageTextField.getText().length() - 3);
+            View.client.addProduct(info, file, fileType);
 //            SellerAreaController.addProduct(info);
             goBackToManageProducts(mouseEvent);
         }
@@ -1386,7 +1387,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void logoutSeller(MouseEvent mouseEvent) {
-        Controller.logout();
+        View.client.logout();
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
         Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
         Pane mainMenu = null;
