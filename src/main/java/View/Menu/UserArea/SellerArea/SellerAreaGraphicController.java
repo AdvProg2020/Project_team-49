@@ -227,13 +227,8 @@ public class SellerAreaGraphicController implements Initializable {
         setPersonalInfoLabels();
         formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-        Controller.cancelSong();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Controller.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
-            }
-        }).start();
+        View.client.cancelSong();
+        View.client.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
 
     }
 
