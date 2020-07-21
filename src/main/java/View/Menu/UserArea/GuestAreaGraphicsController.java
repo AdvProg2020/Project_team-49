@@ -66,13 +66,9 @@ public class GuestAreaGraphicsController implements Initializable {
             accountTypeReg.getItems().add("Costumer");
             accountTypeReg.getItems().add("Seller");
         }
-        Controller.cancelSong();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Controller.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
-            }
-        }).start();
+
+        View.client.cancelSong();
+        View.client.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
     }
 
     public void mouseClicked(MouseEvent mouseEvent) {

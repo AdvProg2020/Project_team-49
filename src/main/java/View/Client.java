@@ -1,6 +1,5 @@
 package View;
 
-import Controller.DataBase;
 import com.sun.mail.util.BASE64DecoderStream;
 import com.sun.mail.util.BASE64EncoderStream;
 
@@ -182,8 +181,8 @@ public class Client {
     public void startSong(String path){
         cancelSong();
         String command="startSong";
-        command.concat("!@");
-        command.concat(path);
+        command=command.concat("!@");
+        command=command.concat(path);
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
@@ -227,8 +226,8 @@ public class Client {
 
     public int getHowMuchLeftForThisPage(long counter){
         String command="getHowMuchLeftForThisPage";
-        command.concat("!@");
-        command.concat(String.valueOf(counter));
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(counter));
         int returnValue=0;
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -243,8 +242,8 @@ public class Client {
 
     public ArrayList<String> getProductImageForFxml(long counter){
         String command="getProductImageForFxml";
-        command.concat("!@");
-        command.concat(String.valueOf(counter));
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(counter));
         String rawOutput="";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -262,8 +261,8 @@ public class Client {
 
     public ArrayList<Double> getProductPriceForFxml(long counter){
         String command="getProductPriceForFxml";
-        command.concat("!@");
-        command.concat(String.valueOf(counter));
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(counter));
         String rawOutput="";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -281,8 +280,8 @@ public class Client {
 
     public ArrayList<String> getProductNameForFxml(long counter){
         String command="getProductNameForFxml";
-        command.concat("!@");
-        command.concat(String.valueOf(counter));
+        command= command.concat("!@");
+        command=command.concat(String.valueOf(counter));
         String rawOutput="";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -300,8 +299,8 @@ public class Client {
 
     public ArrayList<Double> getProductScoreForFxml(long counter){
         String command="getProductScoreForFxml";
-        command.concat("!@");
-        command.concat(String.valueOf(counter));
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(counter));
         String rawOutput="";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -319,8 +318,8 @@ public class Client {
 
     public ArrayList<Double> getProductOffRemainForFxml(long counter){
         String command="getProductOffRemainForFxml";
-        command.concat("!@");
-        command.concat(String.valueOf(counter));
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(counter));
         String rawOutput="";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -338,8 +337,8 @@ public class Client {
 
     public ArrayList<Long> getProductIdForFxml(long counter){
         String command="getProductIdForFxml";
-        command.concat("!@");
-        command.concat(String.valueOf(counter));
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(counter));
         String rawOutput="";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -357,8 +356,8 @@ public class Client {
 
     public ArrayList<Boolean> getOffForFxml(long counter){
         String command="getOffForFxml";
-        command.concat("!@");
-        command.concat(String.valueOf(counter));
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(counter));
         String rawOutput="";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -380,8 +379,8 @@ public class Client {
 
     public ArrayList<Integer> getProductOffPercentForFxml(long counter){
         String command="getProductOffPercentForFxml";
-        command.concat("!@");
-        command.concat(String.valueOf(counter));
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(counter));
         String rawOutput="";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -399,8 +398,8 @@ public class Client {
 
     public ArrayList<Integer> getProductRemainForFxml(long counter){
         String command="getProductRemainForFxml";
-        command.concat("!@");
-        command.concat(String.valueOf(counter));
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(counter));
         String rawOutput="";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -569,6 +568,23 @@ public class Client {
         }
     }
 
+    public ArrayList<String> getAvailableBrands(){
+        String command="getAvailableBrands";
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<String> returnValue=new ArrayList<>();
+        for (String s : rawOutput.split("!@")) {
+            returnValue.add(s);
+        }
+        return returnValue;
+    }
+
     public void removeCategory(String category) {
         try {
             dataOutputStream.writeUTF(ed.encrypt("removeCategory!@" + category));
@@ -582,6 +598,18 @@ public class Client {
     public void editCategory(String category, String field, String content) {
         try {
             dataOutputStream.writeUTF(ed.encrypt("editCategory!@" + category + "!@" + field + "!@" + content));
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void disableBrandFilterByName(String name){
+        String command="disableBrandFilterByName";
+        command=command.concat("!@");
+        command=command.concat(name);
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -602,9 +630,39 @@ public class Client {
         return requests;
     }
 
+    public void filtering(String filterType,String name){
+        String command="filterBy";
+        command=command.concat("!@");
+        command=command.concat(filterType);
+        command=command.concat("!@");
+        command=command.concat(name);
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addCategory(String name, String attribute, String parent) {
         try {
             dataOutputStream.writeUTF(ed.encrypt("addCategory!@" + name + "!@" + attribute + "!@" + parent));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void priceFiltering(double min,double max){
+        String command="priceFiltering";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(min));
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(max));
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
             dataInputStream.readUTF();
         } catch (IOException e) {
@@ -638,6 +696,18 @@ public class Client {
         }
     }
 
+    public void disableFilter(String type){
+        String command="disableFilter";
+        command=command.concat("!@");
+        command=command.concat(type);
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void logout() {
         try {
             dataOutputStream.writeUTF(ed.encrypt("logout!@" + token));
@@ -649,7 +719,18 @@ public class Client {
         type = "guest";
         token = "";
     }
-
+    public void setDoesItOffPage(boolean setter){
+        String command="setDoesItOffPage";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(setter));
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public ArrayList<String> getDiscountCodes() {
         ArrayList<String> discountCodes = new ArrayList<>();
         String answer = "";
@@ -672,6 +753,19 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getAllPageNumber(){
+        String command="getAllPageNumber";
+        int number=0;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            number=Integer.parseInt(ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return number;
     }
 
     public String[] getAvailableProductsForOff(String username) {
@@ -776,6 +870,475 @@ public class Client {
         }
         return path;
     }
+
+    public void sorting(String type){
+        String command="SortBy";
+        command=command.concat("!@");
+        command=command.concat(type);
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setCurrentUser(){
+        String command="setCurrentUserForProductPage";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean checkScoreBuyer(long productId){
+        String command="checkScoreBuyer";
+        command=command.concat("!@");
+        command= command.concat(String.valueOf(productId));
+        boolean returnValue = false;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            String check=ed.decrypt(dataInputStream.readUTF());
+            if (check.equalsIgnoreCase("true")){
+                returnValue=true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public double getScoreAfterCheckScoreBuyer(long productId){
+        String command="getScoreAfterCheckScoreBuyer";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        double returnValue=0;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue=Double.parseDouble(ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public boolean getDoesItHaveDiscount(long productId){
+        String command="getDoesItHaveDiscount";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        boolean returnValue = false;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            String check=ed.decrypt(dataInputStream.readUTF());
+            if (check.equalsIgnoreCase("true")){
+                returnValue=true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public boolean getDoesItHaveOff(long productId){
+        String command="getDoesItHaveOff";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        boolean returnValue = false;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            String check=ed.decrypt(dataInputStream.readUTF());
+            if (check.equalsIgnoreCase("true")){
+                returnValue=true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public int getProductAllSellerById(long productId){
+        String command="getProductAllSellerById";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        int returnValue=0;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue=Integer.parseInt(ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+    public String getSellerOfProductByIdCompanyName(long productId,int index){
+        String command="getSellerOfProductByIdCompanyName";
+        command= command.concat("!@");
+        command= command.concat(String.valueOf(productId));
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(index));
+        String returnValue="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue=(ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public int remainingProductForSellerByUserName(long productId,String userName){
+        String command="getSellerOfProductByIdCompanyName";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        command=command.concat("!@");
+        command=command.concat(userName);
+        int  returnValue=0;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue= Integer.parseInt((ed.decrypt(dataInputStream.readUTF())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public String getProductSellerNameByIndex(long productId,int index){
+        String command="getProductSellerNameByIndex";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(index));
+        String returnValue="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue=(ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public double getProductPriceBySellerUserName(long productId,String userName){
+        String command="getProductPriceBySellerUserName";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        command=command.concat("!@");
+        command=command.concat(userName);
+        double  returnValue=0;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue= Double.parseDouble((ed.decrypt(dataInputStream.readUTF())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public double getProductDiscountPercentage(long productId){
+        String command="getProductDiscountPercentage";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        double  returnValue=0;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue= Double.parseDouble((ed.decrypt(dataInputStream.readUTF())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public String getProductParentCategory(long productId){
+        String command="getProductParentCategory";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        String  returnValue="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue= (ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public int getProductCommentsSize(long productId){
+        String command="getProductCommentsSize";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        int  returnValue=0;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue= Integer.parseInt((ed.decrypt(dataInputStream.readUTF())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public int getRemainingItems(long productId){
+        String command="getRemainingItems";
+        command= command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        int  returnValue=0;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue= Integer.parseInt((ed.decrypt(dataInputStream.readUTF())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public ArrayList<String> getProductAllParentCategories(long productId){
+        String command="getProductAllParentCategories";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        String rawInput="";
+        ArrayList<String> returnValue=new ArrayList<>();
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawInput= (ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < rawInput.split("!@").length; i++) {
+            returnValue.add(rawInput.split("!@")[i]);
+        }
+        return returnValue;
+    }
+
+    public ArrayList<Integer> getStrangeInfoForProductPage(long productId){
+        String command="getStrangeInfoForProductPage";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        String rawInput="";
+        ArrayList<Integer> returnValue=new ArrayList<>();
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawInput= (ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < rawInput.split("!@").length; i++) {
+            returnValue.add(Integer.valueOf(rawInput.split("!@")[i]));
+        }
+        return returnValue;
+    }
+
+    public boolean isCurrentUserManagerOrSeller(){
+        String command="isCurrentUserManagerOrSeller";
+        boolean returnValue=false;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            String rawInput=(ed.decrypt(dataInputStream.readUTF()));
+            if (rawInput.equalsIgnoreCase("true")){
+                returnValue=true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public boolean isCurrentUserManagerOrGuest(){
+        String command="isCurrentUserManagerOrGuest";
+        boolean returnValue=false;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            String rawInput=(ed.decrypt(dataInputStream.readUTF()));
+            if (rawInput.equalsIgnoreCase("true")){
+                returnValue=true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public void addToCart(long productId,String sellerUserName,int count){
+        String command="addToCart";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        command=command.concat("!@");
+        command=command.concat(sellerUserName);
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(count));
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<String> getProductInfoForProductPage(){
+        String command="getProductInfoForProductPage";
+        String rawInput="";
+        ArrayList<String> returnValue=new ArrayList<>();
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawInput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < rawInput.split("!@").length; i++) {
+            returnValue.add(rawInput.split("!@")[i]);
+        }
+        return returnValue;
+    }
+
+    public boolean canRate(long productId){
+        String command="canRate";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        boolean returnValue=false;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            String rawInput=(ed.decrypt(dataInputStream.readUTF()));
+            if (rawInput.equalsIgnoreCase("true")){
+                returnValue=true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public void rateTheProduct(long productId,double score){
+        String command="rateTheProduct";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(productId));
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(score));
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isCurrentUserGuest(){
+        String command="isCurrentUserGuest";
+        boolean returnValue=false;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            String rawInput=(ed.decrypt(dataInputStream.readUTF()));
+            if (rawInput.equalsIgnoreCase("true")){
+                returnValue=true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public void addComment(long productId,String title,String comment){
+        String command="addComment"+"!@"+productId+"!@"+title+"!@"+comment;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<String> getCommentsNoted(long productId){
+        String command="getCommentsNoted"+"!@"+productId;
+        String rawInput="";
+        ArrayList<String> returnValue=new ArrayList<>();
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawInput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < rawInput.split("!@").length; i++) {
+            returnValue.add(rawInput.split("!@")[i]);
+        }
+        return returnValue;
+    }
+
+    public ArrayList<String> getCommentsUserNames(long productId){
+        String command="getCommentsUserNames"+"!@"+productId;
+        String rawInput="";
+        ArrayList<String> returnValue=new ArrayList<>();
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawInput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < rawInput.split("!@").length; i++) {
+            returnValue.add(rawInput.split("!@")[i]);
+        }
+        return returnValue;
+    }
+
+    public ArrayList<Boolean> getCommentsIsUserBought(long productId){
+        String command="getCommentsIsUserBought"+"!@"+productId;
+        String rawInput="";
+        ArrayList<Boolean> returnValue=new ArrayList<>();
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawInput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < rawInput.split("!@").length; i++) {
+            if (rawInput.split("!@")[i].equalsIgnoreCase("true")){
+                returnValue.add(true);
+            }else {
+                returnValue.add(false);
+            }
+        }
+        return returnValue;
+    }
+
+    public String getCurrentUserUserName(){
+        String command="getCurrentUserUserName";
+        String rawInput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawInput=ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return rawInput;
+    }
+
+
 
     class ED {
         private Cipher ecipher;
