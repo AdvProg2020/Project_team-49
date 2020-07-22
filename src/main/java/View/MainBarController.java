@@ -173,11 +173,13 @@ public class MainBarController implements Initializable {
         if (allCategoriesInformation.size() == 0) return;
         for (String category : allCategoriesInformation) {
             String[] separate = category.split("!@");
-            if (separate[2].equals("null")) {
-                categoryLabels.get(i).setText(separate[0]);
-                categoryLabels.get(i).setVisible(true);
-                categoryLabels.get(i).setDisable(false);
-                i++;
+            if (separate.length>1) {
+                if (separate[2].equals("null")) {
+                    categoryLabels.get(i).setText(separate[0]);
+                    categoryLabels.get(i).setVisible(true);
+                    categoryLabels.get(i).setDisable(false);
+                    i++;
+                }
             }
         }
     }
