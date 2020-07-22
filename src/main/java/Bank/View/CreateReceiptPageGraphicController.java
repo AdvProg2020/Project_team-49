@@ -58,12 +58,16 @@ public class CreateReceiptPageGraphicController implements Initializable {
         String type = (String) receiptTypeComboBox.getValue();
         destinationTextField.setDisable(true);
         sourceTextField.setDisable(true);
+        destinationTextField.clear();
+        sourceTextField.clear();
         if (type.equals("move")) {
             destinationTextField.setDisable(false);
             sourceTextField.setDisable(false);
         } else if (type.equals("deposit")) {
+            sourceTextField.setText("-");
             destinationTextField.setDisable(false);
         } else if (type.equals("withdraw")) {
+            destinationTextField.setText("-");
             sourceTextField.setDisable(false);
         }
     }

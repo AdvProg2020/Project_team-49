@@ -1,6 +1,7 @@
 package Bank.Controller;
 
 import Bank.Model.Account;
+import Bank.Model.Receipt;
 import Bank.Model.Token;
 import Bank.View.BankServer;
 
@@ -9,22 +10,28 @@ public class Controller {
         Account account = AccountController.getAccountWithUserName(username);
         Token tokenPrime = null;
         for (Token token : BankServer.onlineUsers.keySet()) {
-            if(BankServer.onlineUsers.get(token).equals(account)){
+            if (BankServer.onlineUsers.get(token).equals(account)) {
                 tokenPrime = token;
             }
         }
-        if(tokenPrime != null){
-            BankServer.onlineUsers.remove(tokenPrime , account);
+        if (tokenPrime != null) {
+            BankServer.onlineUsers.remove(tokenPrime, account);
         }
         Token token = new Token(account);
         BankServer.onlineUsers.put(token, account);
         return token.getTokenId();
     }
 
-    public static String generateToken(){
+    public static String generateToken() {
         return RandomString.getAlphaNumericString(20);
     }
 
+    public static void payThisReceipt(String receiptID, String bankToken) {
+        Account account = BankServer.onlineUsers.get(bankToken);
+        Receipt receipt = ReceiptController.getReceiptWithID(receiptID, bankToken);
+        receipt.setDone(true);
+        account.setBalance(account.getBalance() - receipt.getMoney());
+    }
 }
 
 class RandomString {

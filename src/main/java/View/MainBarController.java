@@ -164,6 +164,7 @@ public class MainBarController implements Initializable {
             categoryLabel.setVisible(false);
         }
         String allCategories = getClient().setCategoriesInMainBar();
+        if (allCategories.length() == 0) return;
         String[] splited = allCategories.split("#\\$");
         allCategoriesInformation.clear();
         for (String s : splited) {

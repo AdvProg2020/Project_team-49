@@ -47,9 +47,7 @@ public class PayPageGraphicController {
             return;
         }
         View.client.payThisReceipt(receiptIDTextField.getText());
-
-
-
+        restartPage();
     }
 
     public void goBackToMainMenu(MouseEvent mouseEvent) {

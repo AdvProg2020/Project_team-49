@@ -1,6 +1,7 @@
 package Bank.View;
 
 import Bank.Controller.AccountController;
+import Bank.Controller.Controller;
 import Bank.Controller.ReceiptController;
 import Bank.Controller.TokenController;
 import Bank.Model.Account;
@@ -29,13 +30,13 @@ public class BankServer {
         new ServerImp().run();
     }
 
-    private static void checkTokenIsDead(){
+    private static void checkTokenIsDead() {
         for (Token token : onlineUsers.keySet()) {
-            if(token.getTime() == 0){
+            if (token.getTime() == 0) {
                 token.setAlive(false);
-            }else{
+            } else {
                 token.setTime(token.getTime() - 1);
-                if(token.getTime() == 0) token.setAlive(false);
+                if (token.getTime() == 0) token.setAlive(false);
             }
         }
     }
@@ -147,20 +148,29 @@ public class BankServer {
                     }
                     if (command.equals("isThereAnyReceiptWithID")) {
                         String[] input = (dataInputStream.readUTF()).split("!@");
-                        String receiptID =  input[0];
+                        String receiptID = input[0];
                         String bankToken = input[1];
                         String response = "false";
-                       if(ReceiptController.isThereAnyReceiptWithID(receiptID , bankToken)) response = "true";
+                        if (ReceiptController.isThereAnyReceiptWithID(receiptID, bankToken)) response = "true";
                         dataOutputStream.writeUTF(response);
                         dataOutputStream.flush();
                         continue;
                     }
                     if (command.equals("getReceiptAndAccountDetailForPay")) {
                         String[] input = (dataInputStream.readUTF()).split("!@");
-                        String receiptID =  input[0];
+                        String receiptID = input[0];
                         String bankToken = input[1];
-                        String detail= ReceiptController.getReceiptDetails(receiptID , bankToken);
+                        String detail = ReceiptController.getReceiptDetails(receiptID, bankToken);
                         dataOutputStream.writeUTF(detail);
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if (command.equals("payThisReceipt")) {
+                        String[] input = (dataInputStream.readUTF()).split("!@");
+                        String receiptID = input[0];
+                        String bankToken = input[1];
+                        Controller.payThisReceipt(receiptID, bankToken);
+                        dataOutputStream.writeUTF("done");
                         dataOutputStream.flush();
                         continue;
                     }

@@ -15,7 +15,7 @@ public class TokenController {
         }
     }
 
-    private static Token getTokenByTokenID(String bankToken) {
+    public static Token getTokenByTokenID(String bankToken) {
         for (Token token : BankServer.onlineUsers.keySet()) {
             if(token.getTokenId().equals(bankToken)) return token;
         }
