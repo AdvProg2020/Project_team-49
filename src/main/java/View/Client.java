@@ -1036,11 +1036,17 @@ public class Client {
             dataInputStream.readUTF();
             byte[] buffer = new byte[4096];
             FileInputStream fileInputStream = new FileInputStream(file);
-            while (fileInputStream.read(buffer) > 0) {
+            long readBytes = 0;
+            while (true) {
+                readBytes += fileInputStream.read(buffer);
                 dataOutputStream.write(buffer);
+                if (readBytes >= file.length()) {
+                    break;
+                }
             }
             dataOutputStream.flush();
-            dataInputStream.readUTF();
+            dataOutputStream.close();
+            dataOutputStream = new DataOutputStream(socket.getOutputStream());
             fileInputStream.close();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1271,7 +1271,6 @@ public class SellerAreaGraphicController implements Initializable {
             info.add(countTextField.getText());
             String fileType = imageTextField.getText().substring(imageTextField.getText().length() - 3);
             View.client.addProduct(info, file, fileType);
-//            SellerAreaController.addProduct(info);
             goBackToManageProducts(mouseEvent);
         }
     }

@@ -894,13 +894,17 @@ public class Server {
                         FileOutputStream fileOutputStream = new FileOutputStream(file);
                         int readBytes = 0;
                         byte[] buffer = new byte[4096];
-                        while ((readBytes = dataInputStream.read(buffer, 0, (int) Math.min(buffer.length, remainingBytes))) > 0) {
+                        while (true) {
+                            readBytes = dataInputStream.read(buffer, 0, (int) Math.min(buffer.length, remainingBytes));
                             remainingBytes -= readBytes;
                             fileOutputStream.write(buffer, 0, readBytes);
+                            if (remainingBytes == 0) {
+                                break;
+                            }
                         }
+                        dataInputStream.close();
+                        dataInputStream = new DataInputStream(socket.getInputStream());
                         SellerAreaController.addProduct(info);
-                        dataOutputStream.writeUTF(ed.encrypt("done"));
-                        dataOutputStream.flush();
                         fileOutputStream.close();
                     }
                     if (command.startsWith("getProductImage")) {
