@@ -26,6 +26,7 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.xml.crypto.Data;
+import java.awt.*;
 import java.awt.image.BandedSampleModel;
 import java.io.*;
 import java.net.ServerSocket;
@@ -886,7 +887,7 @@ public class Server {
                         info.remove(0);
                         dataOutputStream.writeUTF(ed.encrypt("done"));
                         dataOutputStream.flush();
-                        String path = "photos\\productPhotos\\APRI" + (DataBase.getCreatedRequests() + 1) + "." + fileType;
+                        String path = "src/main/resources/photos/productPhotos/APRI" + (DataBase.getCreatedRequests() + 1) + "." + fileType;
                         info.add(path);
                         File file = new File(path);
                         file.createNewFile();
@@ -904,7 +905,7 @@ public class Server {
                     }
                     if (command.startsWith("getProductImage")) {
                         File file = new File(DataBase.getProductById(Long.parseLong(command.split("!@")[1])).getImageAddress());
-                        dataOutputStream.writeUTF(ed.encrypt(file.getName() + "!@" + file.getTotalSpace()));
+                        dataOutputStream.writeUTF(ed.encrypt(file.getName() + "!@" + file.length()));
                         dataOutputStream.flush();
                         byte[] buffer = new byte[4096];
                         FileInputStream fileInputStream = new FileInputStream(file);
@@ -915,12 +916,12 @@ public class Server {
                         fileInputStream.close();
                     }
                     if (command.equalsIgnoreCase("clickSound")){
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Controller.startClickSound();
-                            }
-                        }).start();
+//                        new Thread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Controller.startClickSound();
+//                            }
+//                        }).start();
                     }
                 }
             } catch (IOException e) {

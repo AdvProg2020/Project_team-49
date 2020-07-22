@@ -1029,7 +1029,7 @@ public class Client {
 
     public void addProduct(ArrayList<String> info, File file, String fileType) {
         try {
-            dataOutputStream.writeUTF(ed.encrypt("addProduct!@" + file.getTotalSpace() + "!@" + fileType + "!@"
+            dataOutputStream.writeUTF(ed.encrypt("addProduct!@" + file.length() + "!@" + fileType + "!@"
                     + info.get(0) + "!@" + info.get(1) + "!@" + info.get(2) + "!@" + info.get(3)
                     + "!@" + info.get(4) + "!@" + info.get(5)));
             dataOutputStream.flush();
@@ -1054,7 +1054,7 @@ public class Client {
             dataOutputStream.writeUTF(ed.encrypt("getProductImage!@" + productId));
             dataOutputStream.flush();
             answer = ed.decrypt(dataInputStream.readUTF());
-            path = "photos\\productPhotos\\clientPhotos\\" + answer.split("!@")[0];
+            path = "src/main/resources/photos/productPhotos/clientPhotos/" + answer.split("!@")[0];
             File file = new File(path);
             file.createNewFile();
             long remainingBytes = Long.parseLong(answer.split("!@")[1]);
