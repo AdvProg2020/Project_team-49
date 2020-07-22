@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Controller;
 import com.sun.mail.util.BASE64DecoderStream;
 import com.sun.mail.util.BASE64EncoderStream;
 
@@ -57,7 +58,7 @@ public class Client {
 
     public void run() {
         try {
-            this.socket = new Socket("127.0.0.1", 8888);
+            this.socket = new Socket("127.0.0.1", 1212);
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
             this.dataInputStream = new DataInputStream(socket.getInputStream());
             String key = dataInputStream.readUTF();
@@ -167,7 +168,7 @@ public class Client {
     public ArrayList<String> getSubCategories() {
         String rawCategories = "";
         try {
-            dataOutputStream.writeUTF("getSubCategories");
+            dataOutputStream.writeUTF(ed.encrypt("getSubCategories"));
             dataOutputStream.flush();
             rawCategories = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
@@ -183,8 +184,8 @@ public class Client {
     public void startSong(String path) {
         cancelSong();
         String command = "startSong";
-        command.concat("!@");
-        command.concat(path);
+        command = command.concat("!@");
+        command = command.concat(path);
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
@@ -242,11 +243,11 @@ public class Client {
         return returnValue;
     }
 
-    public ArrayList<String> getProductImageForFxml(long counter) {
-        String command = "getProductImageForFxml";
-        command = command.concat("!@");
-        command = command.concat(String.valueOf(counter));
-        String rawOutput = "";
+    public ArrayList<String> getForFxmlProductImage(long counter){
+        String command="getForFxmlProductImage";
+        command=command.concat("!@");
+        command=command.concat(String.valueOf(counter));
+        String rawOutput="";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
@@ -254,9 +255,11 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<String> returnValue = new ArrayList<>();
-        for (String s : rawOutput.split("!@")) {
-            returnValue.add(s);
+        ArrayList<String> returnValue=new ArrayList<>();
+        if (rawOutput.split("!@").length>1) {
+            for (String s : rawOutput.split("!@")) {
+                returnValue.add(s);
+            }
         }
         return returnValue;
     }
@@ -273,9 +276,12 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Double> returnValue = new ArrayList<>();
-        for (String s : rawOutput.split("!@")) {
-            returnValue.add(Double.parseDouble(s));
+        ArrayList<Double> returnValue=new ArrayList<>();
+        int check=rawOutput.split("!@").length;
+        if (rawOutput.split("!@").length>1) {
+            for (String s : rawOutput.split("!@")) {
+                returnValue.add(Double.parseDouble(s));
+            }
         }
         return returnValue;
     }
@@ -292,9 +298,11 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<String> returnValue = new ArrayList<>();
-        for (String s : rawOutput.split("!@")) {
-            returnValue.add(s);
+        ArrayList<String> returnValue=new ArrayList<>();
+        if (rawOutput.split("!@").length>1) {
+            for (String s : rawOutput.split("!@")) {
+                returnValue.add(s);
+            }
         }
         return returnValue;
     }
@@ -311,9 +319,12 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Double> returnValue = new ArrayList<>();
-        for (String s : rawOutput.split("!@")) {
-            returnValue.add(Double.parseDouble(s));
+        ArrayList<Double> returnValue=new ArrayList<>();
+        if (rawOutput.split("!@").length>1) {
+
+            for (String s : rawOutput.split("!@")) {
+                returnValue.add(Double.parseDouble(s));
+            }
         }
         return returnValue;
     }
@@ -330,9 +341,12 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Double> returnValue = new ArrayList<>();
-        for (String s : rawOutput.split("!@")) {
-            returnValue.add(Double.parseDouble(s));
+        ArrayList<Double> returnValue=new ArrayList<>();
+        if (rawOutput.split("!@").length>1) {
+
+            for (String s : rawOutput.split("!@")) {
+                returnValue.add(Double.parseDouble(s));
+            }
         }
         return returnValue;
     }
@@ -349,9 +363,11 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Long> returnValue = new ArrayList<>();
-        for (String s : rawOutput.split("!@")) {
-            returnValue.add(Long.parseLong(s));
+        ArrayList<Long> returnValue=new ArrayList<>();
+        if (rawOutput.split("!@").length>1) {
+            for (String s : rawOutput.split("!@")) {
+                returnValue.add(Long.parseLong(s));
+            }
         }
         return returnValue;
     }
@@ -368,12 +384,14 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Boolean> returnValue = new ArrayList<>();
-        for (String s : rawOutput.split("!@")) {
-            if (s.equalsIgnoreCase("true")) {
-                returnValue.add(true);
-            } else {
-                returnValue.add(false);
+        ArrayList<Boolean> returnValue=new ArrayList<>();
+        if (rawOutput.split("!@").length>1) {
+            for (String s : rawOutput.split("!@")) {
+                if (s.equalsIgnoreCase("true")) {
+                    returnValue.add(true);
+                } else {
+                    returnValue.add(false);
+                }
             }
         }
         return returnValue;
@@ -391,9 +409,12 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Integer> returnValue = new ArrayList<>();
-        for (String s : rawOutput.split("!@")) {
-            returnValue.add(Integer.parseInt(s));
+        ArrayList<Integer> returnValue=new ArrayList<>();
+        if (rawOutput.split("!@").length>1) {
+
+            for (String s : rawOutput.split("!@")) {
+                returnValue.add(Integer.parseInt(s));
+            }
         }
         return returnValue;
     }
@@ -410,9 +431,12 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Integer> returnValue = new ArrayList<>();
-        for (String s : rawOutput.split("!@")) {
-            returnValue.add(Integer.parseInt(s));
+        ArrayList<Integer> returnValue=new ArrayList<>();
+        if (rawOutput.split("!@").length>1) {
+
+            for (String s : rawOutput.split("!@")) {
+                returnValue.add(Integer.parseInt(s));
+            }
         }
         return returnValue;
     }
@@ -580,9 +604,11 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<String> returnValue = new ArrayList<>();
-        for (String s : rawOutput.split("!@")) {
-            returnValue.add(s);
+        ArrayList<String> returnValue=new ArrayList<>();
+        if (rawOutput.split("!@").length>1) {
+            for (String s : rawOutput.split("!@")) {
+                returnValue.add(s);
+            }
         }
         return returnValue;
     }

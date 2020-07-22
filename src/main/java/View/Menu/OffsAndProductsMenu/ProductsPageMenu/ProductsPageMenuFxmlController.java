@@ -498,7 +498,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
         }
 
         View.client.cancelSong();
-        View.client.startSong("src/main/resources/Sound/ProductsMenu/BackGround.mp3");
+//        View.client.startSong("src/main/resources/Sound/ProductsMenu/BackGround.mp3");
     }
 
     public void click(MouseEvent mouseEvent) {
@@ -550,7 +550,8 @@ public class ProductsPageMenuFxmlController implements Initializable {
         clear();
 
         if (View.client.getIsDoesItOffPage()){
-            Filter.filterByOffs();
+//            Filter.filterByOffs();
+            View.getClient().filtering("Off","");
             saleLeft.setVisible(true);
             saleRight.setVisible(true);
             saleRight.setDisable(false);
@@ -591,7 +592,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
 
 //        ArrayList<String> images = Controller.getProductImageForFxml(counter);
-        ArrayList<String> images = View.client.getProductImageForFxml(counter);
+        ArrayList<String> images = View.client.getForFxmlProductImage(counter);
 
 //        ArrayList<Double> prices = Controller.getProductPriceForFxml(counter);
         ArrayList<Double> prices=View.client.getProductPriceForFxml(counter);
