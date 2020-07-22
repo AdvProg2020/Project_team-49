@@ -1522,6 +1522,20 @@ public class Client {
         }
     }
 
+    public String[] getReceiptsWithGivenType(String type) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getReceiptsWithGivenType"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(type + "!@" + bankToken));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+            return response.split("#\\$");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     class ED {
         private Cipher ecipher;

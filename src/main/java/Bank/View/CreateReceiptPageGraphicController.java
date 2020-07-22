@@ -137,4 +137,7 @@ public class CreateReceiptPageGraphicController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void mouseClicked(MouseEvent mouseEvent) {
+    }
 }
