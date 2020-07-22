@@ -47,7 +47,7 @@ public class Server {
 
     static class ServerImp {
         public void run() throws IOException {
-            ServerSocket serverSocket = new ServerSocket(1212);
+            ServerSocket serverSocket = new ServerSocket(5678);
             while (true) {
                 Socket clientSocket;
                 clientSocket = serverSocket.accept();
@@ -108,14 +108,26 @@ public class Server {
                         continue;
                     }
                     if (command.startsWith("hasUserWithUsername")) {
-                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.hasUserWithUsername(command.split("!@")[1]))));
+                        String answer = "";
+                        if (Controller.hasUserWithUsername(command.split("!@")[1])) {
+                            answer = "true";
+                        } else {
+                            answer = "false";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
                         dataOutputStream.flush();
                         continue;
                     }
                     if (command.startsWith("isPasswordCorrect")) {
                         String password = command.split("!@")[2];
                         String username = command.split("!@")[1];
-                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.isPasswordCorrect(password, username))));
+                        String answer = "";
+                        if (Controller.isPasswordCorrect(password, username)) {
+                            answer = "true";
+                        } else {
+                            answer = "false";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
                         dataOutputStream.flush();
                         continue;
                     }
@@ -123,7 +135,7 @@ public class Server {
                         Controller.loginAccount(command.split("!@")[1]);
                         String token = ed.generateToken();
                         onlineUsers.put(token, Controller.currentUser);
-                        dataOutputStream.writeUTF(ed.encrypt(Controller.getCurrentUser() + "!@" + token));
+                        dataOutputStream.writeUTF(ed.encrypt(Controller.getCurrentUserType() + "!@" + token));
                         dataOutputStream.flush();
                         continue;
                     }
@@ -1110,7 +1122,7 @@ public class Server {
                     boolean flag = true;
                     while (true) {
                         SecretKey key = KeyGenerator.getInstance("DES").generateKey();
-                        if (onlineUsers.keySet().contains(key.toString())) flag = false;
+                        if (!onlineUsers.keySet().contains(key.toString())) flag = false;
                         if (!flag) {
                             break;
                         }

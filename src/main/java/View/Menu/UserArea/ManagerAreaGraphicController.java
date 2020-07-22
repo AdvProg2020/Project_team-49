@@ -217,7 +217,7 @@ public class ManagerAreaGraphicController implements Initializable {
         userInfoPane.setDisable(false);
 
         View.client.cancelSong();
-        View.client.startSong("src/main/resources/Sound/ManagerArea/BackGround.mp3");
+        //View.client.startSong("src/main/resources/Sound/ManagerArea/BackGround.mp3");
 
     }
 

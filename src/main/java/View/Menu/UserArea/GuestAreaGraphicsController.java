@@ -68,7 +68,7 @@ public class GuestAreaGraphicsController implements Initializable {
         }
 
         View.client.cancelSong();
-        View.client.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
+        //View.client.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
     }
 
     public void mouseClicked(MouseEvent mouseEvent) {
@@ -84,7 +84,7 @@ public class GuestAreaGraphicsController implements Initializable {
                     Pane mainBar = null;
                     try {
                         mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
-                         mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+                        mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -155,7 +155,7 @@ public class GuestAreaGraphicsController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Controller.startClickSound();
+                //Controller.startClickSound();
             }
         }).start();
         boolean errorFound = false;
@@ -304,7 +304,7 @@ public class GuestAreaGraphicsController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Controller.startClickSound();
+                //Controller.startClickSound();
             }
         }).start();
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
@@ -322,12 +322,12 @@ public class GuestAreaGraphicsController implements Initializable {
     }
 
     public void login(MouseEvent mouseEvent) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Controller.startClickSound();
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Controller.startClickSound();
+//            }
+//        }).start();
         userLogin.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
         passLogin.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
         boolean errorFound = false;
@@ -390,7 +390,7 @@ public class GuestAreaGraphicsController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Controller.startClickSound();
+                //Controller.startClickSound();
             }
         }).start();
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();

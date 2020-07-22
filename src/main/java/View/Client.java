@@ -58,7 +58,7 @@ public class Client {
 
     public void run() {
         try {
-            this.socket = new Socket("127.0.0.1", 1212);
+            this.socket = new Socket("127.0.0.1", 5678);
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
             this.dataInputStream = new DataInputStream(socket.getInputStream());
             String key = dataInputStream.readUTF();
