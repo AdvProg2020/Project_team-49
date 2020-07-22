@@ -175,8 +175,10 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<String> returnValue = new ArrayList<String>();
-        for (int i = 0; i < rawCategories.split("!@").length; i++) {
-            returnValue.add(rawCategories.split("!@")[i]);
+        if (!rawCategories.isEmpty()) {
+            for (int i = 0; i < rawCategories.split("!@").length; i++) {
+                returnValue.add(rawCategories.split("!@")[i]);
+            }
         }
         return returnValue;
     }
@@ -186,14 +188,14 @@ public class Client {
         String command = "startSong";
         command = command.concat("!@");
         command = command.concat(path);
-        try {
-            dataOutputStream.writeUTF(ed.encrypt(command));
-            dataOutputStream.flush();
-            dataInputStream.readUTF();
-        } catch (IOException e) {
-            System.out.println("song Cant Start");
-            e.printStackTrace();
-        }
+//        try {
+//            dataOutputStream.writeUTF(ed.encrypt(command));
+//            dataOutputStream.flush();
+//            dataInputStream.readUTF();
+//        } catch (IOException e) {
+//            System.out.println("song Cant Start");
+//            e.printStackTrace();
+//        }
     }
 
     public void cancelSong() {
@@ -256,7 +258,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<String> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(s);
             }
@@ -278,7 +280,7 @@ public class Client {
         }
         ArrayList<Double> returnValue=new ArrayList<>();
         int check=rawOutput.split("!@").length;
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Double.parseDouble(s));
             }
@@ -299,7 +301,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<String> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(s);
             }
@@ -320,7 +322,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<Double> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
 
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Double.parseDouble(s));
@@ -342,7 +344,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<Double> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
 
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Double.parseDouble(s));
@@ -364,7 +366,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<Long> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Long.parseLong(s));
             }
@@ -385,7 +387,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<Boolean> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 if (s.equalsIgnoreCase("true")) {
                     returnValue.add(true);
@@ -410,7 +412,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<Integer> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
 
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Integer.parseInt(s));
@@ -432,7 +434,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<Integer> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
 
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Integer.parseInt(s));
@@ -605,7 +607,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<String> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(s);
             }

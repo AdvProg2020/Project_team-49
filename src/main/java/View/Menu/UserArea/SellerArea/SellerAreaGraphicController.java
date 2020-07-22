@@ -227,7 +227,7 @@ public class SellerAreaGraphicController implements Initializable {
         formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         View.client.cancelSong();
-        View.client.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
+//        View.client.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
 
     }
 

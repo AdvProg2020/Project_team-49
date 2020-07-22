@@ -68,7 +68,7 @@ public class GuestAreaGraphicsController implements Initializable {
         }
 
         View.client.cancelSong();
-        //View.client.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
+//        View.client.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
     }
 
     public void mouseClicked(MouseEvent mouseEvent) {
@@ -152,12 +152,12 @@ public class GuestAreaGraphicsController implements Initializable {
     }
 
     private ArrayList<Boolean> register() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //Controller.startClickSound();
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Controller.startClickSound();
+//            }
+//        }).start();
         boolean errorFound = false;
         ArrayList<Boolean> booleans = new ArrayList<Boolean>();
         booleans.add(View.client.hasHeadManager());
@@ -301,12 +301,12 @@ public class GuestAreaGraphicsController implements Initializable {
 
     public void goLogin(MouseEvent mouseEvent) {
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //Controller.startClickSound();
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Controller.startClickSound();
+//            }
+//        }).start();
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
         Scene scene = ((Node) mouseEvent.getSource()).getScene();
         Pane register = null;
@@ -387,12 +387,12 @@ public class GuestAreaGraphicsController implements Initializable {
     }
 
     public void goToRegister(MouseEvent mouseEvent) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //Controller.startClickSound();
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Controller.startClickSound();
+//            }
+//        }).start();
         Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
         Scene scene = ((Node) mouseEvent.getSource()).getScene();
         Pane register = null;

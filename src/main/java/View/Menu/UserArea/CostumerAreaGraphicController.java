@@ -130,7 +130,7 @@ public class CostumerAreaGraphicController implements Initializable {
         setPersonalInfoLabels();
         formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         View.client.cancelSong();
-        //View.client.startSong("src/main/resources/Sound/CustomerArea/BackGround.mp3");
+//        View.client.startSong("src/main/resources/Sound/CustomerArea/BackGround.mp3");
     }
 
     private void setCostumer() {

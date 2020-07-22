@@ -169,7 +169,7 @@ public class Server {
                             rawCategories=rawCategories.concat(showSubCategory);
                             rawCategories=rawCategories.concat("!@");
                         }
-                        if (rawCategories.split("!@").length>1) {
+                        if (!rawCategories.isEmpty()) {
                             rawCategories = rawCategories.substring(0, rawCategories.length() - 2);
                         }
                         dataOutputStream.writeUTF(ed.encrypt(rawCategories));
@@ -492,8 +492,11 @@ public class Server {
                         for (Category allCategory : DataBase.getAllCategories()) {
                             String info = "";
                             info += allCategory.getName() + "!@";
-                            info += allCategory.getSpecialAttributes() + "!@";
-                            info += allCategory.getParentCategory().getName();
+                            info += allCategory.getSpecialAttributes()+ "!@";
+                            //paretn cagetgori mitone null bashe
+                            if (allCategory.getParentCategory()!=null) {
+                                info += allCategory.getParentCategory().getName();
+                            }
                             answer += info + "#$";
                         }
                         dataOutputStream.writeUTF(ed.encrypt(answer));
@@ -555,9 +558,12 @@ public class Server {
                     }
                     if (command.startsWith("isThereAnyCategoryWithName")) {
                         String answer = "";
-                        if (DataBase.isThereAnyCategoryWithName(command.split("!@")[1])) {
-                            answer = "true";
-                        } else {
+                        if (command.split("!@").length>1){
+                            if (DataBase.isThereAnyCategoryWithName(command.split("!@")[1])) {
+                                answer = "true";
+                            }
+                        }
+                        else {
                             answer = "false";
                         }
                         dataOutputStream.writeUTF(ed.encrypt(answer));
