@@ -118,13 +118,13 @@ public class SellerAreaControllerTest {
         infoTest.add("adsf");
         infoTest.add("adsf");
         infoTest.add("sfe43");
-        assertEquals("invalid price", addProduct(infoTest));
+        assertEquals("invalid price", addProduct(infoTest, ""));
         infoTest.set(2, "1344");
-        assertEquals("invalid category", addProduct(infoTest));
+        assertEquals("invalid category", addProduct(infoTest, ""));
         infoTest.set(4, "xx");
-        assertEquals("invalid number of items", addProduct(infoTest));
+        assertEquals("invalid number of items", addProduct(infoTest, ""));
         infoTest.set(5, "23");
-        assertEquals("request sent", addProduct(infoTest));
+        assertEquals("request sent", addProduct(infoTest, ""));
     }
 
     @Test
@@ -132,12 +132,12 @@ public class SellerAreaControllerTest {
         initialise();
         currentUser = seller1;
         a.setExplanation("adfasf(((#*($&R");
-        assertEquals("product not exist", editProduct("asdf", "asdf", 222));
-        assertEquals("request sent", editProduct("nAme", "asdfsd", 1));
-        assertEquals("request sent", editProduct("braND", "asdfsd", 1));
-        assertEquals("request sent", editProduct("Price", "320", 1));
-        assertEquals("invalid new content", editProduct("Price", "32d0", 1));
-        assertEquals("request sent", editProduct("exPlanation", "320", 1));
+        assertEquals("product not exist", editProduct("asdf", "asdf", 222, ""));
+        assertEquals("request sent", editProduct("nAme", "asdfsd", 1, ""));
+        assertEquals("request sent", editProduct("braND", "asdfsd", 1, ""));
+        assertEquals("request sent", editProduct("Price", "320", 1, ""));
+        assertEquals("invalid new content", editProduct("Price", "32d0", 1, ""));
+        assertEquals("request sent", editProduct("exPlanation", "320", 1, ""));
     }
 
     @Test
@@ -168,14 +168,14 @@ public class SellerAreaControllerTest {
     public void TestRemoveProduct() {
         initialise();
         currentUser = seller1;
-        assertEquals("product not exist", SellerAreaController.removeProduct(120L));
-        assertEquals( "product removed", SellerAreaController.removeProduct(3L));
+        assertEquals("product not exist", SellerAreaController.removeProduct(120L, ""));
+        assertEquals( "product removed", SellerAreaController.removeProduct(3L, ""));
 
         d.addItem(seller2 , 100 ,2 );
         d.addItem(seller1 , 30 , 333);
         seller1.addProduct(d);
         seller2.addProduct(d);
-        assertEquals( "product removed", SellerAreaController.removeProduct(4L));
+        assertEquals( "product removed", SellerAreaController.removeProduct(4L, ""));
 
 
     }
