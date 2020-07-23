@@ -67,7 +67,7 @@ public class Client {
     }
 
     public void connectToServer() throws IOException {
-        this.socket = new Socket("127.0.0.1", 5678);
+        this.socket = new Socket("127.0.0.1", 8086);
         this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
         this.dataInputStream = new DataInputStream(socket.getInputStream());
         String key = dataInputStream.readUTF();
@@ -1130,6 +1130,8 @@ public class Client {
         String command = "checkScoreBuyer";
         command = command.concat("!@");
         command = command.concat(String.valueOf(productId));
+        command = command.concat("!@");
+        command = command.concat(token);
         boolean returnValue = false;
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -1148,6 +1150,8 @@ public class Client {
         String command = "getScoreAfterCheckScoreBuyer";
         command = command.concat("!@");
         command = command.concat(String.valueOf(productId));
+        command = command.concat("!@");
+        command = command.concat(token);
         double returnValue = 0;
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -1378,6 +1382,8 @@ public class Client {
 
     public boolean isCurrentUserManagerOrSeller() {
         String command = "isCurrentUserManagerOrSeller";
+        command = command.concat("!@");
+        command = command.concat(token);
         boolean returnValue = false;
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -1394,6 +1400,8 @@ public class Client {
 
     public boolean isCurrentUserManagerOrGuest() {
         String command = "isCurrentUserManagerOrGuest";
+        command = command.concat("!@");
+        command = command.concat(token);
         boolean returnValue = false;
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -1416,6 +1424,8 @@ public class Client {
         command = command.concat(sellerUserName);
         command = command.concat("!@");
         command = command.concat(String.valueOf(count));
+        command = command.concat("!@");
+        command = command.concat(token);
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
@@ -1426,7 +1436,7 @@ public class Client {
     }
 
     public ArrayList<String> getProductInfoForProductPage() {
-        String command = "getProductInfoForProductPage";
+        String command = "getProductInfoForProductPage!@"+token;
         String rawInput = "";
         ArrayList<String> returnValue = new ArrayList<>();
         try {
@@ -1477,6 +1487,8 @@ public class Client {
 
     public boolean isCurrentUserGuest() {
         String command = "isCurrentUserGuest";
+        command = command.concat("!@");
+        command = command.concat(token);
         boolean returnValue = false;
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -1559,6 +1571,8 @@ public class Client {
 
     public String getCurrentUserUserName() {
         String command = "getCurrentUserUserName";
+        command = command.concat("!@");
+        command = command.concat(token);
         String rawInput = "";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
@@ -1607,6 +1621,17 @@ public class Client {
         }
         return null;
 
+    }
+
+    public void setSelectedProducts(long productId){
+        String command="setSelectedProducts!@"+productId+"!@"+token;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
