@@ -6,17 +6,13 @@ import Models.Log.BuyLog;
 import Models.Log.SellLog;
 import Models.Off;
 import Models.Product;
-import Models.User.Costumer;
+import Models.User.*;
 import Models.User.Request.Request;
-import Models.User.Seller;
 import Models.Category;
 import Models.Comment;
 import Models.Product;
 import Models.Score;
-import Models.User.Guest;
-import Models.User.Manager;
 import Models.User.Seller;
-import Models.User.User;
 import View.View;
 import com.sun.mail.util.BASE64DecoderStream;
 import com.sun.mail.util.BASE64EncoderStream;
@@ -940,6 +936,29 @@ public class Server {
                         socket.close();
                         fileInputStream.close();
                         break;
+                    }
+                    if (command.startsWith("getSupportsForCostumer")) {
+                        String answer = "";
+                        ArrayList<User> onlineSupports = new ArrayList<>();
+                        for (User user : onlineUsers.values()) {
+                            if (user.getType().equalsIgnoreCase("support")) {
+                                onlineSupports.add(user);
+                            }
+                        }
+                        for (User user : DataBase.getAllUsers()) {
+                            if (user.getType().equalsIgnoreCase("support")) {
+                                String status = "offline";
+                                for (User onlineSupport : onlineSupports) {
+                                    if (user.getUsername().equals(onlineSupport.getUsername())) {
+                                        status = "online";
+                                        break;
+                                    }
+                                }
+                                answer += user.getUsername() + "!@" + status + "#$";
+                            }
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
                     }
                     if (command.equalsIgnoreCase("clickSound")){
 //                        new Thread(new Runnable() {

@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -110,6 +107,9 @@ public class CostumerAreaGraphicController implements Initializable {
     public Pane noDiscountsYet;
     public Label discountId2;
     public Label discountId1;
+    public Pane supportPain;
+    public ListView supportsStatus;
+    public Label supportLabel;
     private ArrayList<String> costumer = new ArrayList<>();
     private int discountCodesIndex = 0;
     private int imagesLog1Index = 0;
@@ -122,7 +122,7 @@ public class CostumerAreaGraphicController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         closeALlPanes();
-        discountCodes = viewCostumerDiscountCodes();
+//        discountCodes = viewCostumerDiscountCodes();
         setCostumer();
         setLogHistory();
         userInfoPane.setDisable(false);
@@ -527,6 +527,11 @@ public class CostumerAreaGraphicController implements Initializable {
         logIndex = 0;
         discountCodesIndex = 0;
 
+        supportLabel.setDisable(true);
+        supportLabel.setVisible(false);
+        supportPain.setDisable(true);
+        supportPain.setVisible(false);
+
         setCostumer();
     }
 
@@ -648,5 +653,30 @@ public class CostumerAreaGraphicController implements Initializable {
         scene.setRoot(View.getCurrentPane());
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void goToSupportPain(MouseEvent mouseEvent) {
+        closeALlPanes();
+        supportLabel.setDisable(false);
+        supportLabel.setVisible(true);
+        supportPain.setDisable(false);
+        supportPain.setVisible(true);
+        setSupportsPainContent();
+    }
+
+    private void setSupportsPainContent() {
+        supportsStatus.getItems().clear();
+        ArrayList<String> supports = View.client.getSupportsForCostumer();
+        for (String support : supports) {
+            Label label = new Label();
+            label.setPrefWidth(200);
+            label.setPrefHeight(30);
+            label.setText(support.split("!@")[0] + "-" + support.split("!@")[1]);
+            if (support.split("!@")[0].equalsIgnoreCase("online")) {
+                label.setStyle("-fx-border-color: Green;" + "-fx-border-radius: 3;" + "-fx-background-radius: 3");
+                label.setTextFill(Color.GREEN);
+            }
+            supportsStatus.getItems().add(label);
+        }
     }
 }

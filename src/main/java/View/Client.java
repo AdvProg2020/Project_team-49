@@ -1611,6 +1611,22 @@ public class Client {
 
     }
 
+    public ArrayList<String> getSupportsForCostumer() {
+        ArrayList<String> supports = new ArrayList<>();
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getSupportsForCostumer"));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (!answer.equalsIgnoreCase("")) {
+            supports = new ArrayList<>(Arrays.asList(answer.split("#\\$")));
+        }
+        return supports;
+    }
+
 
     class ED {
         private Cipher ecipher;
