@@ -1173,10 +1173,11 @@ public class Server {
                             break;
                         }
                     }
+                    return key.toString();
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }
-                return key.toString();
+                return "";
             }
         }
     }
