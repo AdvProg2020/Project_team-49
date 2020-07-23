@@ -1166,8 +1166,9 @@ public class Server {
             public String generateToken() {
                 try {
                     boolean flag = true;
+                    SecretKey key;
                     while (true) {
-                        SecretKey key = KeyGenerator.getInstance("DES").generateKey();
+                         key = KeyGenerator.getInstance("DES").generateKey();
                         if (!onlineUsers.keySet().contains(key.toString())) flag = false;
                         if (!flag) {
                             break;
