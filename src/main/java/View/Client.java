@@ -838,7 +838,7 @@ public class Client {
 
     public void addOff(ArrayList<String> info) {
         try {
-            dataOutputStream.writeUTF(ed.encrypt("addOff!@" + info.get(0) + "!@" + info.get(1) + "!@" + info.get(2) + "!@" + info.get(3)));
+            dataOutputStream.writeUTF(ed.encrypt("addOff!@" + token + "!@" + info.get(0) + "!@" + info.get(1) + "!@" + info.get(2) + "!@" + info.get(3)));
             dataOutputStream.flush();
             dataInputStream.readUTF();
         } catch (IOException e) {
@@ -1016,7 +1016,7 @@ public class Client {
 
     public void editProduct(String field, String content, long productId) {
         try {
-            dataOutputStream.writeUTF(ed.encrypt("editProduct!@" + field + "!@" + content + "!@" + productId));
+            dataOutputStream.writeUTF(ed.encrypt("editProduct!@" + token + "!@" + field + "!@" + content + "!@" + productId));
             dataOutputStream.flush();
             dataInputStream.readUTF();
         } catch (IOException e) {
@@ -1042,7 +1042,7 @@ public class Client {
 
     public void removeProduct(long productId) {
         try {
-            dataOutputStream.writeUTF(ed.encrypt("removeProduct!@" + productId));
+            dataOutputStream.writeUTF(ed.encrypt("removeProduct!@" + productId + "!@" + token));
             dataOutputStream.flush();
             dataInputStream.readUTF();
         } catch (IOException e) {
@@ -1052,7 +1052,7 @@ public class Client {
 
     public void addProduct(ArrayList<String> info, File file, String fileType) {
         try {
-            dataOutputStream.writeUTF(ed.encrypt("addProduct!@" + file.length() + "!@" + fileType + "!@"
+            dataOutputStream.writeUTF(ed.encrypt("addProduct!@" + file.length() + "!@" + fileType + "!@" + token + "!@"
                     + info.get(0) + "!@" + info.get(1) + "!@" + info.get(2) + "!@" + info.get(3)
                     + "!@" + info.get(4) + "!@" + info.get(5)));
             dataOutputStream.flush();

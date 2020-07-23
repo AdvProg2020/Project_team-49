@@ -866,15 +866,18 @@ public class Server {
                     if (command.startsWith("addOff")) {
                         ArrayList<String> info = new ArrayList<String>(Arrays.asList(command.split("!@")));
                         info.remove(0);
-                        SellerAreaController.addOff(info);
+                        String token = info.get(0);
+                        info.remove(0);
+                        SellerAreaController.addOff(info, onlineUsers.get(token).getUsername());
                         dataOutputStream.writeUTF(ed.encrypt("done"));
                         dataOutputStream.flush();
                     }
                     if (command.startsWith("editProduct")) {
-                        String field = command.split("!@")[1];
-                        String newContent = command.split("!@")[2];
-                        long productId = Long.parseLong(command.split("!@")[3]);
-                        SellerAreaController.editProduct(field, newContent, productId);
+                        String token = command.split("!@")[1];
+                        String field = command.split("!@")[2];
+                        String newContent = command.split("!@")[3];
+                        long productId = Long.parseLong(command.split("!@")[4]);
+                        SellerAreaController.editProduct(field, newContent, productId, onlineUsers.get(token).getUsername());
                         dataOutputStream.writeUTF(ed.encrypt("done"));
                         dataOutputStream.flush();
                     }
@@ -889,7 +892,8 @@ public class Server {
                         dataOutputStream.flush();
                     }
                     if (command.startsWith("removeProduct")) {
-                        SellerAreaController.removeProduct(Long.parseLong(command.split("!@")[1]));
+                        String token = command.split("!@")[2];
+                        SellerAreaController.removeProduct(Long.parseLong(command.split("!@")[1]), token);
                         dataOutputStream.writeUTF(ed.encrypt("done"));
                         dataOutputStream.flush();
                     }
@@ -899,6 +903,8 @@ public class Server {
                         long remainingBytes = Long.parseLong(info.get(0));
                         info.remove(0);
                         String fileType = info.get(0);
+                        info.remove(0);
+                        String token = info.get(0);
                         info.remove(0);
                         dataOutputStream.writeUTF(ed.encrypt("done"));
                         dataOutputStream.flush();
@@ -913,7 +919,7 @@ public class Server {
                             remainingBytes -= readBytes;
                             fileOutputStream.write(buffer, 0, readBytes);
                         }
-                        SellerAreaController.addProduct(info);
+                        SellerAreaController.addProduct(info, onlineUsers.get(token).getUsername());
                         socket.close();
                         fileOutputStream.close();
                         break;

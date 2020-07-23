@@ -102,7 +102,7 @@ public class ViewOffs extends Menu {
                 info.add(scanner.nextLine().trim());
                 View.printString("enter off percentage:");
                 info.add(scanner.nextLine().trim());
-                View.printString(SellerAreaController.addOff(info));
+                View.printString(SellerAreaController.addOff(info, ""));
                 this.parentMenu.run(lastCommand);
             }
         };

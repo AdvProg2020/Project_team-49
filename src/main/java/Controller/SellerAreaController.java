@@ -21,11 +21,11 @@ import java.util.Locale;
 
 public class SellerAreaController {
 
-    public static String removeProduct(long productId) {
+    public static String removeProduct(long productId, String username) {
         if (DataBase.getProductById(productId) == null) {
             return "product not exist";
         } else {
-            Seller seller = (Seller) Controller.currentUser;
+            Seller seller = (Seller) DataBase.getUserByUsername(username);
             if (DataBase.getProductById(productId).getAllSellers().size() == 1) {
                 DataBase.removeProduct(productId);
             } else {
@@ -71,8 +71,8 @@ public class SellerAreaController {
     }
 
     //kamel nist
-    public static String addOff(ArrayList<String> info) {
-        Seller seller = (Seller) Controller.currentUser;
+    public static String addOff(ArrayList<String> info, String username) {
+        Seller seller = (Seller) DataBase.getUserByUsername(username);
         ArrayList<Product> products = new ArrayList<>();
         for (String Id : info.get(0).split("\\s")) {
             if (!Id.matches("\\d+")) {
@@ -185,26 +185,26 @@ public class SellerAreaController {
         return false;
     }
 
-    public static String editProduct(String field, String newContent, long productId) {
+    public static String editProduct(String field, String newContent, long productId, String username) {
         if (DataBase.getProductById(productId) == null) {
             return "product not exist";
         } else if (field.toLowerCase().equals("name")) {
-            Manager.addRequest(new EditProductRequest("name", newContent, DataBase.getProductById(productId), (Seller) Controller.currentUser));
+            Manager.addRequest(new EditProductRequest("name", newContent, DataBase.getProductById(productId), (Seller) DataBase.getUserByUsername(username)));
         } else if (field.toLowerCase().equals("brand")) {
-            Manager.addRequest(new EditProductRequest("brand", newContent, DataBase.getProductById(productId), (Seller) Controller.currentUser));
+            Manager.addRequest(new EditProductRequest("brand", newContent, DataBase.getProductById(productId), (Seller) DataBase.getUserByUsername(username)));
         } else if (field.toLowerCase().equals("price")) {
             if (!newContent.matches("(\\d+)(\\.?)(\\d*)")) {
                 return "invalid new content";
             }
-            Manager.addRequest(new EditProductRequest("price", newContent, DataBase.getProductById(productId), (Seller) Controller.currentUser));
+            Manager.addRequest(new EditProductRequest("price", newContent, DataBase.getProductById(productId), (Seller) DataBase.getUserByUsername(username)));
         } else if (field.toLowerCase().equals("explanation")) {
-            Manager.addRequest(new EditProductRequest("explanation", newContent, DataBase.getProductById(productId), (Seller) Controller.currentUser));
+            Manager.addRequest(new EditProductRequest("explanation", newContent, DataBase.getProductById(productId), (Seller) DataBase.getUserByUsername(username)));
         }
         DataBase.getProductById(productId).setStatus("edit");
         return "request sent";
     }
 
-    public static String addProduct(ArrayList<String> productInfo) {
+    public static String addProduct(ArrayList<String> productInfo, String username) {
         if (!productInfo.get(2).matches("(\\d+)(\\.?)(\\d*)")) {
             return "invalid price";
         } else if (DataBase.getCategoryByName(productInfo.get(4)) == null) {
@@ -217,7 +217,7 @@ public class SellerAreaController {
                     , Double.parseDouble(productInfo.get(2))
                     , productInfo.get(3)
                     , DataBase.getCategoryByName(productInfo.get(4))
-                    , (Seller) Controller.currentUser
+                    , (Seller) DataBase.getUserByUsername(username)
                     , Integer.parseInt(productInfo.get(5)), productInfo.get(6)) ));
             return "request sent";
         }
