@@ -189,7 +189,7 @@
                                                 <Font name="Raleway" size="18.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="roleLabel1" layoutX="173.0" layoutY="64.0" prefHeight="40.0" prefWidth="119.0" text="Role">
+                                        <Label fx:id="roleLabel1" layoutX="173.0" layoutY="51.0" prefHeight="40.0" prefWidth="119.0" text="Role">
                                             <font>
                                                 <Font name="Raleway Light" size="18.0" />
                                             </font>
@@ -257,6 +257,11 @@
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                         </ImageView>
+                              <Label fx:id="userStatusLabel1" layoutX="173.0" layoutY="104.0" prefHeight="40.0" prefWidth="119.0" text="Status">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
                                     </children>
                                 </Pane>
                                 <Pane fx:id="thereIsNoUsers" disable="true" layoutX="90.0" layoutY="-2.0" prefHeight="418.0" prefWidth="777.0" visible="false">
@@ -282,7 +287,7 @@
                                                 <Font name="Raleway" size="18.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="roleLabel2" layoutX="173.0" layoutY="64.0" prefHeight="40.0" prefWidth="119.0" text="Role">
+                                        <Label fx:id="roleLabel2" layoutX="173.0" layoutY="51.0" prefHeight="40.0" prefWidth="119.0" text="Role">
                                             <font>
                                                 <Font name="Raleway Light" size="18.0" />
                                             </font>
@@ -350,6 +355,11 @@
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                         </ImageView>
+                              <Label fx:id="userStatusLabel2" layoutX="173.0" layoutY="104.0" prefHeight="40.0" prefWidth="119.0" text="Status">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
                                     </children>
                                 </Pane>
                                 <Pane fx:id="usersArrowAndRec" layoutX="917.0" layoutY="-3.0" prefHeight="431.0" prefWidth="63.0">

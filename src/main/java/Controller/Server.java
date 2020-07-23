@@ -523,7 +523,14 @@ public class Server {
                             user += allUser.getFirstName() + "!@";
                             user += allUser.getLastName() + "!@";
                             user += allUser.getEMail() + "!@";
-                            user += allUser.getPhoneNumber();
+                            user += allUser.getPhoneNumber() + "!@";
+                            String status = "Offline";
+                            for (User value : onlineUsers.values()) {
+                                if (value.getUsername().equals(allUser.getUsername())) {
+                                    status = "Online";
+                                }
+                            }
+                            user += status;
                             if (allUser.getType().equalsIgnoreCase("seller")) {
                                 user += "!@" + ((Seller) allUser).getCompanyName();
                             }

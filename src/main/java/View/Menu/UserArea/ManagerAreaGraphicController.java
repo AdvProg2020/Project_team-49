@@ -210,6 +210,8 @@ public class ManagerAreaGraphicController implements Initializable {
     public Label emailSupLabel;
     public TextField phoneSupReg;
     public Label phoneSupLabel;
+    public Label userStatusLabel2;
+    public Label userStatusLabel1;
     private ArrayList<String> manager = new ArrayList<>();
     private ArrayList<String> categories = new ArrayList<>();
     private ArrayList<String> allUsers = new ArrayList<>();
@@ -582,9 +584,15 @@ public class ManagerAreaGraphicController implements Initializable {
         phoneNumberLabel1.setText(user[5]);
         userNameLabel1.setText(user[1]);
         roleLabel1.setText(user[0]);
+        userStatusLabel1.setText(user[6]);
+        if (user[6].equals("Offline")) {
+            userStatusLabel1.setTextFill(Color.RED);
+        } else {
+            userStatusLabel1.setTextFill(Color.GREEN);
+        }
         if (user[0].equalsIgnoreCase("seller")) {
             companyNamePane1.setVisible(true);
-            companyNameLabel1.setText(user[6]);
+            companyNameLabel1.setText(user[7]);
         }
         //password ro hazf kardam
         if (user[1].equals(manager.get(0))) {
@@ -608,9 +616,15 @@ public class ManagerAreaGraphicController implements Initializable {
         phoneNumberLabel2.setText(user2[5]);
         userNameLabel2.setText(user2[1]);
         roleLabel2.setText(user2[0]);
+        userStatusLabel2.setText(user2[6]);
+        if (user2[6].equals("Offline")) {
+            userStatusLabel2.setTextFill(Color.RED);
+        } else {
+            userStatusLabel2.setTextFill(Color.GREEN);
+        }
         if (user2[0].equalsIgnoreCase("seller")) {
             companyNamePane2.setVisible(true);
-            companyNameLabel2.setText(user2[6]);
+            companyNameLabel2.setText(user2[7]);
         }
         if (user2[1].equals(manager.get(0))) {
             removeUser2.setDisable(true);
