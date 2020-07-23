@@ -227,7 +227,7 @@ public class SellerAreaGraphicController implements Initializable {
         formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         View.client.cancelSong();
-        View.client.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
+//        View.client.startSong("src/main/resources/Sound/GeustArea/BackGround.mp3");
 
     }
 
@@ -292,7 +292,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void goBackToPersonalInfo(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         closeALlPanes();
         personalInfoLabel.setVisible(true);
         editPersonalInfoLabel.setDisable(true);
@@ -305,7 +305,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void submitPersonalInformation(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         if (!creditTextField.getText().matches("(\\s+)?"))
             View.client.setUserInfo("Credit", String.valueOf(Double.parseDouble(creditTextField.getText())));
 
@@ -329,7 +329,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void checkInformation(ActionEvent event) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         boolean flag = false;
         restartTextFieldRecsInEditPane();
         if (!creditTextField.getText().matches("(\\d+)(.?)((\\d+)?)") && !creditTextField.getText().equals("")) {
@@ -375,7 +375,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void seeMoreLogs(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         int size = logHistory.size();
         if (mouseEvent.getSource().equals(upArrowLogs)) {
             logIndex--;
@@ -394,7 +394,7 @@ public class SellerAreaGraphicController implements Initializable {
     public void seeMorePictures(MouseEvent mouseEvent) {
         int size = 0;
 
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
 
         if (mouseEvent.getSource().equals(seeMoreProductsImageLog1)) {
             String sellLog = logHistory.get(logIndex);
@@ -427,7 +427,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void goToSellHistoryPane(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         closeALlPanes();
         restartInsideOfSellHistoryPane();
         imagesLog1Index = 0;
@@ -678,7 +678,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void goToManageOffsPain(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         closeALlPanes();
         restartInsideOfManageOffsPain();
         imagesOff1Index = 0;
@@ -844,7 +844,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void seeMoreOffs(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         int size = offs.size();
         if (mouseEvent.getSource().equals(upArrowOffs)) {
             offsIndex--;
@@ -862,7 +862,7 @@ public class SellerAreaGraphicController implements Initializable {
 
     public void seeMorePicturesOff(MouseEvent mouseEvent) {
         int size = 0;
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
 
         if (mouseEvent.getSource().equals(seeMoreProductsImageOff2)) {
             String off = offs.get(offsIndex);
@@ -895,7 +895,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void goToAddOffPane(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         closeALlPanes();
         restartInsideOfAddOffPain();
 
@@ -931,7 +931,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void addOff(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         startDateRec.setStroke(Color.valueOf("#959595"));
         endDateRec.setStroke(Color.valueOf("#959595"));
         offPercentRec.setStroke(Color.valueOf("#959595"));
@@ -1044,7 +1044,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void seeMoreProducts(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         int size = products.size();
         if (mouseEvent.getSource().equals(upArrowProducts)) {
             productsIndex--;
@@ -1072,7 +1072,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void goToEditProductPane(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         closeALlPanes();
         editProductPane.setDisable(false);
         editProductPane.setVisible(true);
@@ -1110,7 +1110,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void submitProductInformation(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         if (!products.get(editProductIndex).split("!@")[1].equals(productNameTextField.getText())) {
             View.client.editProduct("name", productNameTextField.getText(), Long.parseLong(products.get(editProductIndex).split("!@")[0]));
         }
@@ -1130,7 +1130,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void checkProductInformation(ActionEvent actionEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         restartInsideOfEditProductPain();
         boolean errorFound = false;
         if (!productNameTextField.getText().matches("\\w+")) {
@@ -1170,7 +1170,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void doDeleteProduct(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         deleteProductAlert.show();
         if (deleteProductAlert.getResult().equals(ButtonType.CANCEL)) {
             return;
@@ -1184,7 +1184,7 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void goToAddProductPane(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         closeALlPanes();
         restartInsideOfAddProductPain();
 
@@ -1212,12 +1212,12 @@ public class SellerAreaGraphicController implements Initializable {
     }
 
     public void goBackToManageProducts(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         goToManageProductsPain(mouseEvent);
     }
 
     public void addProduct(MouseEvent mouseEvent) {
-        View.getClient().clickSound();
+//        View.getClient().clickSound();
         nameRec.setStroke(Color.valueOf("#959595"));
         brandRec.setStroke(Color.valueOf("#959595"));
         priceRec.setStroke(Color.valueOf("#959595"));
@@ -1271,7 +1271,6 @@ public class SellerAreaGraphicController implements Initializable {
             info.add(countTextField.getText());
             String fileType = imageTextField.getText().substring(imageTextField.getText().length() - 3);
             View.client.addProduct(info, file, fileType);
-//            SellerAreaController.addProduct(info);
             goBackToManageProducts(mouseEvent);
         }
     }

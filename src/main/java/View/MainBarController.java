@@ -321,10 +321,10 @@ public class MainBarController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
-                Media sound = new Media(new File(file).toURI().toString());
-                MediaPlayer player = new MediaPlayer(sound);
-                player.play();
+                //String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+                //Media sound = new Media(new File(file).toURI().toString());
+                //MediaPlayer player = new MediaPlayer(sound);
+                //player.play();
             }
         }).start();
     }
@@ -367,10 +367,10 @@ public class MainBarController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
-                Media sound = new Media(new File(file).toURI().toString());
-                MediaPlayer player = new MediaPlayer(sound);
-                player.play();
+                //String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+                //Media sound = new Media(new File(file).toURI().toString());
+                //MediaPlayer player = new MediaPlayer(sound);
+                //player.play();
             }
         }).start();
     }
@@ -386,10 +386,10 @@ public class MainBarController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
-                Media sound = new Media(new File(file).toURI().toString());
-                MediaPlayer player = new MediaPlayer(sound);
-                player.play();
+                //String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+                //Media sound = new Media(new File(file).toURI().toString());
+                //MediaPlayer player = new MediaPlayer(sound);
+                //player.play();
             }
         }).start();
 
@@ -406,10 +406,10 @@ public class MainBarController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
-                Media sound = new Media(new File(file).toURI().toString());
-                MediaPlayer player = new MediaPlayer(sound);
-                player.play();
+                //String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+                //Media sound = new Media(new File(file).toURI().toString());
+                //MediaPlayer player = new MediaPlayer(sound);
+                //player.play();
             }
         }).start();
 
@@ -462,10 +462,10 @@ public class MainBarController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
-                Media sound = new Media(new File(file).toURI().toString());
-                MediaPlayer player = new MediaPlayer(sound);
-                player.play();
+                //String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+                //Media sound = new Media(new File(file).toURI().toString());
+                //MediaPlayer player = new MediaPlayer(sound);
+                //player.play();
             }
         }).start();
     }
@@ -494,10 +494,10 @@ public class MainBarController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
-                Media sound = new Media(new File(file).toURI().toString());
-                MediaPlayer player = new MediaPlayer(sound);
-                player.play();
+                //String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+                //Media sound = new Media(new File(file).toURI().toString());
+                //MediaPlayer player = new MediaPlayer(sound);
+                //player.play();
             }
         }).start();
         client.clickedOnACategoryOnMainBar(category);

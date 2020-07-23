@@ -76,7 +76,7 @@ public class MainPageController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Controller.startSong("src/main/resources/Sound/MainPage/BackGround.mp3");
+                //Controller.startSong("src/main/resources/Sound/MainPage/BackGround.mp3");
             }
         }).start();
     }

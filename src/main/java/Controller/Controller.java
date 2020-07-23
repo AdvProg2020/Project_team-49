@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.Category;
 import Models.Off;
 import Models.OffStatus;
 import Models.Product;
@@ -24,8 +25,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static Controller.DataBase.allProducts;
-import static Controller.DataBase.sortedOrFilteredProduct;
+import static Controller.DataBase.*;
 
 
 public class Controller {
@@ -362,19 +362,24 @@ public class Controller {
 
     public static void check(){
 //        allProducts.get(2).setDoesItHaveOff(true);
-        Date start=new Date();
-        Date end=new Date(start.getTime()+10*3600*1000*24);
-        ArrayList<Product> arrayList=new ArrayList<Product>();
-        arrayList.add(Controller.getProductById(2));
-        Off off =new Off(arrayList, OffStatus.confirmed,start,end,20);
-        allProducts.get(2).setOff(off);
-        allProducts.get(2).setDoesItHaveOff(true);
-        allProducts.get(0).setAverageScore(0);
-        allProducts.get(1).setAverageScore(2.3);
-        allProducts.get(2).setAverageScore(0.2);
-        allProducts.get(3).setAverageScore(3.7);
-        allProducts.get(4).setAverageScore(4.5);
-
+//        Date start=new Date();
+//        Date end=new Date(start.getTime()+10*3600*1000*24);
+//        ArrayList<Product> arrayList=new ArrayList<Product>();
+//        arrayList.add(Controller.getProductById(2));
+//        Off off =new Off(arrayList, OffStatus.confirmed,start,end,20);
+//        allProducts.get(2).setOff(off);
+//        allProducts.get(2).setDoesItHaveOff(true);
+//        allProducts.get(0).setAverageScore(0);
+//        allProducts.get(1).setAverageScore(2.3);
+//        allProducts.get(2).setAverageScore(0.2);
+//        allProducts.get(3).setAverageScore(3.7);
+//        allProducts.get(4).setAverageScore(4.5);
+        Category category=new Category("bastani","oof",null);
+        allCategories.add(category);
+        Seller seller=new Seller("ahmad","por","mor","asd@gmail.com",123123123,"123","kale");
+        Product product1=new Product("khorma","mihan",1500,"joon",category,seller,10,"");
+        allProducts.add(product1);
+        sortedOrFilteredProduct.add(product1);
         for (Product product : allProducts) {
             product.setImageAddress("./photos/MainMenu/commercials/xbox1.png");
         }

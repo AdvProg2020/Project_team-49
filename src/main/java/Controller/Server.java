@@ -26,6 +26,7 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.xml.crypto.Data;
+import java.awt.*;
 import java.awt.image.BandedSampleModel;
 import java.io.*;
 import java.net.ServerSocket;
@@ -47,7 +48,7 @@ public class Server {
 
     static class ServerImp {
         public void run() throws IOException {
-            ServerSocket serverSocket = new ServerSocket(1212);
+            ServerSocket serverSocket = new ServerSocket(5678);
             while (true) {
                 Socket clientSocket;
                 clientSocket = serverSocket.accept();
@@ -108,14 +109,26 @@ public class Server {
                         continue;
                     }
                     if (command.startsWith("hasUserWithUsername")) {
-                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.hasUserWithUsername(command.split("!@")[1]))));
+                        String answer = "";
+                        if (Controller.hasUserWithUsername(command.split("!@")[1])) {
+                            answer = "true";
+                        } else {
+                            answer = "false";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
                         dataOutputStream.flush();
                         continue;
                     }
                     if (command.startsWith("isPasswordCorrect")) {
                         String password = command.split("!@")[2];
                         String username = command.split("!@")[1];
-                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.isPasswordCorrect(password, username))));
+                        String answer = "";
+                        if (Controller.isPasswordCorrect(password, username)) {
+                            answer = "true";
+                        } else {
+                            answer = "false";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
                         dataOutputStream.flush();
                         continue;
                     }
@@ -123,7 +136,7 @@ public class Server {
                         Controller.loginAccount(command.split("!@")[1]);
                         String token = ed.generateToken();
                         onlineUsers.put(token, Controller.currentUser);
-                        dataOutputStream.writeUTF(ed.encrypt(Controller.getCurrentUser() + "!@" + token));
+                        dataOutputStream.writeUTF(ed.encrypt(Controller.getCurrentUserType() + "!@" + token));
                         dataOutputStream.flush();
                         continue;
                     }
@@ -157,7 +170,7 @@ public class Server {
                             rawCategories=rawCategories.concat(showSubCategory);
                             rawCategories=rawCategories.concat("!@");
                         }
-                        if (rawCategories.split("!@").length>1) {
+                        if (!rawCategories.isEmpty()) {
                             rawCategories = rawCategories.substring(0, rawCategories.length() - 2);
                         }
                         dataOutputStream.writeUTF(ed.encrypt(rawCategories));
@@ -480,8 +493,11 @@ public class Server {
                         for (Category allCategory : DataBase.getAllCategories()) {
                             String info = "";
                             info += allCategory.getName() + "!@";
-                            info += allCategory.getSpecialAttributes() + "!@";
-                            info += allCategory.getParentCategory().getName();
+                            info += allCategory.getSpecialAttributes()+ "!@";
+                            //paretn cagetgori mitone null bashe
+                            if (allCategory.getParentCategory()!=null) {
+                                info += allCategory.getParentCategory().getName();
+                            }
                             answer += info + "#$";
                         }
                         dataOutputStream.writeUTF(ed.encrypt(answer));
@@ -543,9 +559,12 @@ public class Server {
                     }
                     if (command.startsWith("isThereAnyCategoryWithName")) {
                         String answer = "";
-                        if (DataBase.isThereAnyCategoryWithName(command.split("!@")[1])) {
-                            answer = "true";
-                        } else {
+                        if (command.split("!@").length>1){
+                            if (DataBase.isThereAnyCategoryWithName(command.split("!@")[1])) {
+                                answer = "true";
+                            }
+                        }
+                        else {
                             answer = "false";
                         }
                         dataOutputStream.writeUTF(ed.encrypt(answer));
@@ -868,25 +887,29 @@ public class Server {
                         info.remove(0);
                         dataOutputStream.writeUTF(ed.encrypt("done"));
                         dataOutputStream.flush();
-                        String path = "photos\\productPhotos\\APRI" + (DataBase.getCreatedRequests() + 1) + "." + fileType;
+                        String path = "src/main/resources/photos/productPhotos/APRI" + (DataBase.getCreatedRequests() + 1) + "." + fileType;
                         info.add(path);
                         File file = new File(path);
                         file.createNewFile();
                         FileOutputStream fileOutputStream = new FileOutputStream(file);
                         int readBytes = 0;
                         byte[] buffer = new byte[4096];
-                        while ((readBytes = dataInputStream.read(buffer, 0, (int) Math.min(buffer.length, remainingBytes))) > 0) {
+                        while (true) {
+                            readBytes = dataInputStream.read(buffer, 0, (int) Math.min(buffer.length, remainingBytes));
                             remainingBytes -= readBytes;
                             fileOutputStream.write(buffer, 0, readBytes);
+                            if (remainingBytes == 0) {
+                                break;
+                            }
                         }
+                        dataInputStream.close();
+                        dataInputStream = new DataInputStream(socket.getInputStream());
                         SellerAreaController.addProduct(info);
-                        dataOutputStream.writeUTF(ed.encrypt("done"));
-                        dataOutputStream.flush();
                         fileOutputStream.close();
                     }
                     if (command.startsWith("getProductImage")) {
                         File file = new File(DataBase.getProductById(Long.parseLong(command.split("!@")[1])).getImageAddress());
-                        dataOutputStream.writeUTF(ed.encrypt(file.getName() + "!@" + file.getTotalSpace()));
+                        dataOutputStream.writeUTF(ed.encrypt(file.getName() + "!@" + file.length()));
                         dataOutputStream.flush();
                         byte[] buffer = new byte[4096];
                         FileInputStream fileInputStream = new FileInputStream(file);
@@ -897,12 +920,12 @@ public class Server {
                         fileInputStream.close();
                     }
                     if (command.equalsIgnoreCase("clickSound")){
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Controller.startClickSound();
-                            }
-                        }).start();
+//                        new Thread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Controller.startClickSound();
+//                            }
+//                        }).start();
                     }
                 }
             } catch (IOException e) {
@@ -1132,7 +1155,7 @@ public class Server {
                     boolean flag = true;
                     while (true) {
                         SecretKey key = KeyGenerator.getInstance("DES").generateKey();
-                        if (onlineUsers.keySet().contains(key.toString())) flag = false;
+                        if (!onlineUsers.keySet().contains(key.toString())) flag = false;
                         if (!flag) {
                             break;
                         }

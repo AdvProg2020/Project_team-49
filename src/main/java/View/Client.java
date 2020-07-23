@@ -58,7 +58,7 @@ public class Client {
 
     public void run() {
         try {
-            this.socket = new Socket("127.0.0.1", 1212);
+            this.socket = new Socket("127.0.0.1", 5678);
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
             this.dataInputStream = new DataInputStream(socket.getInputStream());
             String key = dataInputStream.readUTF();
@@ -175,8 +175,10 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<String> returnValue = new ArrayList<String>();
-        for (int i = 0; i < rawCategories.split("!@").length; i++) {
-            returnValue.add(rawCategories.split("!@")[i]);
+        if (!rawCategories.isEmpty()) {
+            for (int i = 0; i < rawCategories.split("!@").length; i++) {
+                returnValue.add(rawCategories.split("!@")[i]);
+            }
         }
         return returnValue;
     }
@@ -186,14 +188,14 @@ public class Client {
         String command = "startSong";
         command = command.concat("!@");
         command = command.concat(path);
-        try {
-            dataOutputStream.writeUTF(ed.encrypt(command));
-            dataOutputStream.flush();
-            dataInputStream.readUTF();
-        } catch (IOException e) {
-            System.out.println("song Cant Start");
-            e.printStackTrace();
-        }
+//        try {
+//            dataOutputStream.writeUTF(ed.encrypt(command));
+//            dataOutputStream.flush();
+//            dataInputStream.readUTF();
+//        } catch (IOException e) {
+//            System.out.println("song Cant Start");
+//            e.printStackTrace();
+//        }
     }
 
     public void cancelSong() {
@@ -256,7 +258,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<String> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(s);
             }
@@ -278,7 +280,7 @@ public class Client {
         }
         ArrayList<Double> returnValue=new ArrayList<>();
         int check=rawOutput.split("!@").length;
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Double.parseDouble(s));
             }
@@ -299,7 +301,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<String> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(s);
             }
@@ -320,7 +322,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<Double> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
 
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Double.parseDouble(s));
@@ -342,7 +344,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<Double> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
 
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Double.parseDouble(s));
@@ -364,7 +366,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<Long> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Long.parseLong(s));
             }
@@ -385,7 +387,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<Boolean> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 if (s.equalsIgnoreCase("true")) {
                     returnValue.add(true);
@@ -410,7 +412,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<Integer> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
 
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Integer.parseInt(s));
@@ -432,7 +434,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<Integer> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
 
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Integer.parseInt(s));
@@ -605,7 +607,7 @@ public class Client {
             e.printStackTrace();
         }
         ArrayList<String> returnValue=new ArrayList<>();
-        if (rawOutput.split("!@").length>1) {
+        if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(s);
             }
@@ -1027,18 +1029,24 @@ public class Client {
 
     public void addProduct(ArrayList<String> info, File file, String fileType) {
         try {
-            dataOutputStream.writeUTF(ed.encrypt("addProduct!@" + file.getTotalSpace() + "!@" + fileType + "!@"
+            dataOutputStream.writeUTF(ed.encrypt("addProduct!@" + file.length() + "!@" + fileType + "!@"
                     + info.get(0) + "!@" + info.get(1) + "!@" + info.get(2) + "!@" + info.get(3)
                     + "!@" + info.get(4) + "!@" + info.get(5)));
             dataOutputStream.flush();
             dataInputStream.readUTF();
             byte[] buffer = new byte[4096];
             FileInputStream fileInputStream = new FileInputStream(file);
-            while (fileInputStream.read(buffer) > 0) {
+            long readBytes = 0;
+            while (true) {
+                readBytes += fileInputStream.read(buffer);
                 dataOutputStream.write(buffer);
+                if (readBytes >= file.length()) {
+                    break;
+                }
             }
             dataOutputStream.flush();
-            dataInputStream.readUTF();
+            dataOutputStream.close();
+            dataOutputStream = new DataOutputStream(socket.getOutputStream());
             fileInputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -1052,7 +1060,7 @@ public class Client {
             dataOutputStream.writeUTF(ed.encrypt("getProductImage!@" + productId));
             dataOutputStream.flush();
             answer = ed.decrypt(dataInputStream.readUTF());
-            path = "photos\\productPhotos\\clientPhotos\\" + answer.split("!@")[0];
+            path = "src/main/resources/photos/productPhotos/clientPhotos/" + answer.split("!@")[0];
             File file = new File(path);
             file.createNewFile();
             long remainingBytes = Long.parseLong(answer.split("!@")[1]);

@@ -1,6 +1,7 @@
 package View.Menu.OffsAndProductsMenu.ProductsPageMenu;
 
 import Controller.Controller;
+import Controller.DataBase;
 import Controller.Filter;
 import Controller.Sort;
 import View.Client;
@@ -10,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -478,9 +480,11 @@ public class ProductsPageMenuFxmlController implements Initializable {
         gridPaneToOffPercent.put(g40,offPercent_40);gridPaneToOffPercent.put(g41,offPercent_41);gridPaneToOffPercent.put(g42,offPercent_42);gridPaneToOffPercent.put(g43,offPercent_43);
 
 
-//        Controller.check();
+        Controller.check();
 //        Controller.restartSortedOrFilteredProduct();
         loadProduct(counter);
+
+
 
         ArrayList<String> brands=new ArrayList<String>(View.getClient().getAvailableBrands());
         for (String brand : brands) {
@@ -563,6 +567,7 @@ public class ProductsPageMenuFxmlController implements Initializable {
             saleRight.setDisable(true);
             saleLeft.setDisable(true);
         }
+        Controller.check();
 
         ArrayList<String> categories=new ArrayList<String>(View.client.getSubCategories());
         for (String category : categories) {
