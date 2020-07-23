@@ -1063,6 +1063,7 @@ public class Client {
             while (fileInputStream.read(buffer) > 0) {
                 dataOutputStream.write(buffer);
             }
+            dataOutputStream.write(new byte[1]);
             dataOutputStream.flush();
             connectToServer();
             fileInputStream.close();

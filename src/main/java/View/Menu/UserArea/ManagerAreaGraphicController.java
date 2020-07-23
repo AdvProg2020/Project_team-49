@@ -932,6 +932,7 @@ public class ManagerAreaGraphicController implements Initializable {
         View.client.answerRequest("accept", requests.get(requestsIndex).split("!@")[0]);
 
         requestsIndex = 0;
+        setRequests();
         setRequestsPaneContent();
     }
 
@@ -939,6 +940,7 @@ public class ManagerAreaGraphicController implements Initializable {
         View.client.answerRequest("decline", requests.get(requestsIndex).split("!@")[0]);
 
         requestsIndex = 0;
+        setRequests();
         setRequestsPaneContent();
     }
 

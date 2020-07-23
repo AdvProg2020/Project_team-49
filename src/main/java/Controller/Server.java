@@ -918,6 +918,9 @@ public class Server {
                         while ((readBytes = dataInputStream.read(buffer)) > 0) {
                             remainingBytes -= readBytes;
                             fileOutputStream.write(buffer, 0, readBytes);
+                            if (remainingBytes <= 0) {
+                                break;
+                            }
                         }
                         SellerAreaController.addProduct(info, onlineUsers.get(token).getUsername());
                         socket.close();
