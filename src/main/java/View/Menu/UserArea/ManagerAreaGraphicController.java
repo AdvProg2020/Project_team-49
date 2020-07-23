@@ -212,15 +212,36 @@ public class ManagerAreaGraphicController implements Initializable {
     public Label phoneSupLabel;
     public Label userStatusLabel2;
     public Label userStatusLabel1;
+    public Pane viewSoldProductsPane;
+    public Pane firstProductPane;
+    public Label ProductId1;
+    public Label soldCount1;
+    public Label ProductName1;
+    public Label sellerName1;
+    public Button setReceivedStatus1;
+    public Pane thereIsNoUsers1;
+    public Pane productsArrowAndRec;
+    public ImageView downArrowProducts;
+    public ImageView upArrowProducts;
+    public Pane secondProductPane;
+    public Label ProductId2;
+    public Label soldCount2;
+    public Label ProductName2;
+    public Label sellerName2;
+    public Button setReceivedStatus2;
+    public Label buyerName2;
+    public Label buyerName1;
     private ArrayList<String> manager = new ArrayList<>();
     private ArrayList<String> categories = new ArrayList<>();
     private ArrayList<String> allUsers = new ArrayList<>();
     private ArrayList<String> requests = new ArrayList<>();
     private ArrayList<String> discountCodes = new ArrayList<>();
+    private ArrayList<String> soldHistory = new ArrayList<>();
     private int usersIndex = 0;
     private int categoriesIndex = 0;
     private int discountIndex = 0;
     private int requestsIndex = 0;
+    private int soldHistoryIndex = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -253,6 +274,10 @@ public class ManagerAreaGraphicController implements Initializable {
 
     private void setRequests() {
         requests = View.client.getRequests();
+    }
+
+    private void setSoldHistory() {
+        soldHistory = View.client.getSoldHistory();
     }
 
     private void setDiscountCodes() {
@@ -403,6 +428,8 @@ public class ManagerAreaGraphicController implements Initializable {
         editAndSeeCategoriesPane.setDisable(true);
         addSupportPane.setDisable(true);
         addSupportPane.setVisible(false);
+        viewSoldProductsPane.setVisible(false);
+        viewSoldProductsPane.setDisable(true);
 //        noDiscountsYet.setVisible(false);
 //        imagesLog1Index = 0;
 //        imagesLog2Index = 0;
@@ -1505,5 +1532,77 @@ public class ManagerAreaGraphicController implements Initializable {
         scene.setRoot(View.getCurrentPane());
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void seeSoldProductsHistoryPage(MouseEvent mouseEvent) {
+        closeALlPanes();
+        setSoldHistory();
+        soldHistoryIndex = 0;
+        
+        viewSoldProductsPane.setDisable(false);
+        viewSoldProductsPane.setVisible(true);
+
+        if (soldHistory.size() == 0) {
+            return;
+        }
+        
+        setSoldProductsHistoryPaneContents();
+    }
+
+    private void setSoldProductsHistoryPaneContents() {
+        restartInsideUsersPane();
+        int size = soldHistory.size();
+        if (size == 0) return;
+        String[] history1 = soldHistory.get(soldHistoryIndex).split("!@");
+        if (size > 2) {
+            productsArrowAndRec.setVisible(true);
+            productsArrowAndRec.setDisable(false);
+        }
+
+        firstProductPane.setDisable(false);
+        firstProductPane.setVisible(true);
+
+        ProductName1.setText(history1[0]);
+        ProductId1.setText(history1[0]);
+        soldCount1.setText(history1[0]);
+        sellerName1.setText(history1[0]);
+        buyerName1.setText(history1[0]);
+
+
+        if (soldHistoryIndex > size - 2) return;
+        secondUserPane.setDisable(false);
+        secondUserPane.setVisible(true);
+
+        String[] user2 = soldHistory.get(soldHistoryIndex + 1).split("!@");
+        firstNameLabel2.setText(user2[2]);
+        lastNameLabel2.setText(user2[3]);
+        emailLabel2.setText(user2[4]);
+        phoneNumberLabel2.setText(user2[5]);
+        userNameLabel2.setText(user2[1]);
+        roleLabel2.setText(user2[0]);
+        userStatusLabel2.setText(user2[6]);
+        if (user2[1].equals(manager.get(0))) {
+            removeUser2.setDisable(true);
+            removeUser2.setVisible(false);
+        } else {
+            removeUser2.setDisable(false);
+            removeUser2.setVisible(true);
+        }
+    }
+
+    public void setReceivedStatus(MouseEvent mouseEvent) {
+    }
+
+    public void seeMoreHistory(MouseEvent mouseEvent) {
+        int size = soldHistory.size();
+        if (mouseEvent.getSource().equals(downArrowProducts)) {
+            if (soldHistoryIndex >= size - 2) return;
+            soldHistoryIndex += 2;
+
+        } else if (mouseEvent.getSource().equals(downArrowProducts)) {
+            if (soldHistoryIndex == 0) return;
+            soldHistoryIndex -= 2;
+        }
+        setSoldProductsHistoryPaneContents();
     }
 }

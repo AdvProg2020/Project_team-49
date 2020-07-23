@@ -1,17 +1,12 @@
 package Controller;
 
-import Models.Category;
-import Models.DiscountCode;
+import Models.*;
 import Models.Log.BuyLog;
 import Models.Log.SellLog;
-import Models.Off;
-import Models.Product;
 import Models.User.*;
 import Models.User.Request.Request;
 import Models.Category;
-import Models.Comment;
 import Models.Product;
-import Models.Score;
 import Models.User.Seller;
 import View.View;
 import com.sun.mail.util.BASE64DecoderStream;
@@ -962,6 +957,40 @@ public class Server {
                                     }
                                 }
                                 answer += user.getUsername() + "!@" + status + "#$";
+                            }
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getSoldHistory")) {
+                        String answer = "";
+                        for (ProductSellHistory productSellHistory : DataBase.getSellHistory()) {
+                            answer += productSellHistory.toString() + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getChatForCostumer")) {
+                        String support = command.split("!@")[2];
+                        String costumer = onlineUsers.get(command.split("!@")[1]).getUsername();
+                        String answer = "";
+                        for (Chat chat : ((Costumer) DataBase.getUserByUsername(costumer)).getChats()) {
+                            if (chat.getSupport().getUsername().equals(support)) {
+                                answer = chat.toString();
+                                break;
+                            }
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getChatForSupport")) {
+                        String costumer = command.split("!@")[2];
+                        String support = onlineUsers.get(command.split("!@")[1]).getUsername();
+                        String answer = "";
+                        for (Chat chat : ((Support) DataBase.getUserByUsername(support)).getChats()) {
+                            if (chat.getCostumer().getUsername().equals(costumer)) {
+                                answer = chat.toString();
+                                break;
                             }
                         }
                         dataOutputStream.writeUTF(ed.encrypt(answer));

@@ -378,6 +378,22 @@
                                 </Pane>
                             </children>
                         </Pane>
+                  <ImageView fitHeight="46.0" fitWidth="43.0" layoutX="95.0" layoutY="155.0" onMouseClicked="#logoutSupport" pickOnBounds="true" preserveRatio="true">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <image>
+                        <Image url="@../photos/UserArea/logout.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="37.0" layoutY="154.0" onMouseClicked="#goBackToLastPaneFromSupportArea" pickOnBounds="true" preserveRatio="true">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <image>
+                        <Image url="@../photos/UserArea/personalInfo/back.png" />
+                     </image>
+                  </ImageView>
                     </children>
                 </AnchorPane>
             </content>

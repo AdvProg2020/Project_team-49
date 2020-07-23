@@ -1627,6 +1627,54 @@ public class Client {
         return supports;
     }
 
+    public ArrayList<String> getSoldHistory() {
+        ArrayList<String> soldHistory = new ArrayList<>();
+        String answer = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getSoldHistory"));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (!answer.equalsIgnoreCase("")) {
+            soldHistory = new ArrayList<>(Arrays.asList(answer.split("#\\$")));
+        }
+        return soldHistory;
+    }
+
+    public ArrayList<String> getChatForCostumer(String username) {
+        String answer = "";
+        ArrayList<String> chat = new ArrayList<>();
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getChatForCostumer!@" + token + "!@" + username));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (!answer.equalsIgnoreCase("")) {
+            chat = new ArrayList<>(Arrays.asList(answer.split("#\\$")));
+        }
+        return chat;
+    }
+
+    public ArrayList<String> getChatForSupport(String username) {
+        String answer = "";
+        ArrayList<String> chat = new ArrayList<>();
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getChatForSupport!@" + token + "!@" + username));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (!answer.equalsIgnoreCase("")) {
+            chat = new ArrayList<>(Arrays.asList(answer.split("#\\$")));
+        }
+        return chat;
+    }
+
 
     class ED {
         private Cipher ecipher;

@@ -1,6 +1,7 @@
 package Models.User;
 
 import Controller.DataBase;
+import Models.Chat;
 import Models.DiscountCode;
 import Models.Log.BuyLog;
 import Models.Product;
@@ -14,6 +15,7 @@ public class Costumer extends User implements Serializable {
     private ArrayList<BuyLog> buyHistory;
     private ArrayList<DiscountCode> discountCodes;
     private double credit;
+    ArrayList<Chat> chats;
 
 
     public Costumer(String username, String firstName, String lastName, String eMail, long phoneNumber, String password, double credit) {
@@ -24,6 +26,7 @@ public class Costumer extends User implements Serializable {
         this.buyHistory = new ArrayList<BuyLog>();
         this.discountCodes = new ArrayList<DiscountCode>();
         this.credit = credit;
+        this.chats = new ArrayList<>();
     }
 
 
@@ -33,6 +36,14 @@ public class Costumer extends User implements Serializable {
 
     public double getCredit() {
         return credit;
+    }
+
+    public ArrayList<Chat> getChats() {
+        return chats;
+    }
+
+    public void addChat(Chat chat) {
+        chats.add(chat);
     }
 
     public ArrayList<BuyLog> getBuyHistory() {

@@ -2,16 +2,22 @@ package View.Menu.UserArea;
 
 import View.View;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -186,5 +192,36 @@ public class SupportAreaGraphicController implements Initializable {
         userInfoPane.setVisible(true);
         userInfoPane.setDisable(false);
         setPersonalInfoLabels();
+    }
+
+    public void logoutSupport(MouseEvent mouseEvent) {
+        View.client.logout();
+        Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
+        Pane mainMenu = null;
+        Pane mainBar = null;
+        try {
+            mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
+            mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        View.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+        ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
+        mainMenu.getChildren().add(mainBar);
+        View.setCurrentPane(mainMenu);
+        scene.setRoot(View.getCurrentPane());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void goBackToLastPaneFromSupportArea(MouseEvent mouseEvent) {
+        Stage stage = (Stage)((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
+        View.setCurrentPane(View.getLastPane());
+        scene.setRoot(View.getCurrentPane());
+        stage.setScene(scene);
+        stage.show();
     }
 }

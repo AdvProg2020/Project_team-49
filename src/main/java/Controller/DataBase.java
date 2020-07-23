@@ -4,6 +4,7 @@ package Controller;
 import Models.Category;
 import Models.DiscountCode;
 import Models.Product;
+import Models.ProductSellHistory;
 import Models.User.Costumer;
 import Models.User.Request.Request;
 import Models.User.Seller;
@@ -34,6 +35,8 @@ public class DataBase {
     public static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
     public static ArrayList<Request> answeredRequests = new ArrayList<>();
 
+    public static ArrayList<ProductSellHistory> sellHistory = new ArrayList<>();
+
     static ArrayList<String> allAvailableFilters = new ArrayList<String>();
     static ArrayList<String> allAvailableSorting = new ArrayList<String>();
 
@@ -61,6 +64,10 @@ public class DataBase {
 
     public static ArrayList<DiscountCode> getAllDiscountCodes() {
         return allDiscountCodes;
+    }
+
+    public static ArrayList<ProductSellHistory> getSellHistory() {
+        return sellHistory;
     }
 
     //    private void setReferences(){
