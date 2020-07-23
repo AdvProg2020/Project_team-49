@@ -590,6 +590,13 @@ public class MainBarController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else if (client.getType().equalsIgnoreCase("support")) {
+            try {
+                pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/SupportArea.fxml"));
+                pane.getChildren().add(mainBar);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         View.setCurrentPane(pane);

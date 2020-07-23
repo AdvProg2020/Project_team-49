@@ -679,7 +679,9 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        requests.addAll(Arrays.asList(answer.split("#\\$")));
+        if (!answer.equalsIgnoreCase("")) {
+            requests.addAll(Arrays.asList(answer.split("#\\$")));
+        }
         return requests;
     }
 

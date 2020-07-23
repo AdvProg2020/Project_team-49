@@ -194,6 +194,22 @@ public class ManagerAreaGraphicController implements Initializable {
     public TextField newDiscountStartDate;
     public Rectangle newDiscountDurationRec1;
     public TextField newDiscountEndDate;
+    public Pane addSupportPane;
+    public TextField usernameSupReg;
+    public Label userSupLabel;
+    public Button registerSupButton;
+    public PasswordField passSupReg;
+    public Label passSupLabel;
+    public PasswordField rePassSupReg;
+    public Label rePassSupLabel;
+    public TextField firstNameSupReg;
+    public Label fNameSupLabel;
+    public TextField lastNameSupReg;
+    public Label lNameSupLabel;
+    public TextField emailSupReg;
+    public Label emailSupLabel;
+    public TextField phoneSupReg;
+    public Label phoneSupLabel;
     private ArrayList<String> manager = new ArrayList<>();
     private ArrayList<String> categories = new ArrayList<>();
     private ArrayList<String> allUsers = new ArrayList<>();
@@ -383,6 +399,8 @@ public class ManagerAreaGraphicController implements Initializable {
         categoryButtonsPane.setDisable(true);
         editAndSeeCategoriesPane.setVisible(false);
         editAndSeeCategoriesPane.setDisable(true);
+        addSupportPane.setDisable(true);
+        addSupportPane.setVisible(false);
 //        noDiscountsYet.setVisible(false);
 //        imagesLog1Index = 0;
 //        imagesLog2Index = 0;
@@ -962,6 +980,9 @@ public class ManagerAreaGraphicController implements Initializable {
         if (mouseEvent.getSource().equals(registerButton)) {
             register();
         }
+        if (mouseEvent.getSource().equals(registerSupButton)) {
+            registerSup();
+        }
         if (mouseEvent.getSource().equals(usernameReg)) {
             usernameReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             userLabel.setVisible(true);
@@ -996,6 +1017,42 @@ public class ManagerAreaGraphicController implements Initializable {
             phoneReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             phoneLabel.setVisible(true);
             phoneLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+
+        if (mouseEvent.getSource().equals(usernameSupReg)) {
+            usernameSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            userSupLabel.setVisible(true);
+            userSupLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+        if (mouseEvent.getSource().equals(passSupReg)) {
+            passSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            passSupLabel.setVisible(true);
+            passSupLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+        if (mouseEvent.getSource().equals(rePassSupReg)) {
+            rePassSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            rePassSupLabel.setVisible(true);
+            rePassSupLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+        if (mouseEvent.getSource().equals(firstNameSupReg)) {
+            firstNameSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            fNameSupLabel.setVisible(true);
+            fNameSupLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+        if (mouseEvent.getSource().equals(lastNameSupReg)) {
+            lastNameSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            lNameSupLabel.setVisible(true);
+            lNameSupLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+        if (mouseEvent.getSource().equals(emailSupReg)) {
+            emailSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            emailSupLabel.setVisible(true);
+            emailSupLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+        if (mouseEvent.getSource().equals(phoneSupReg)) {
+            phoneSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            phoneSupLabel.setVisible(true);
+            phoneSupLabel.setTextFill(Color.valueOf("#1a73e8"));
         }
 
     }
@@ -1104,12 +1161,126 @@ public class ManagerAreaGraphicController implements Initializable {
         lastNameReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
         emailReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
         phoneReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+
+        if (usernameSupReg.getText().equals("")) {
+            userSupLabel.setVisible(false);
+        }
+        if (passSupReg.getText().equals("")) {
+            passSupLabel.setVisible(false);
+        }
+        if (rePassSupReg.getText().equals("")) {
+            rePassSupLabel.setVisible(false);
+        }
+        if (firstNameSupReg.getText().equals("")) {
+            fNameSupLabel.setVisible(false);
+        }
+        if (lastNameSupReg.getText().equals("")) {
+            lNameSupLabel.setVisible(false);
+        }
+        if (emailSupReg.getText().equals("")) {
+            emailSupLabel.setVisible(false);
+        }
+        if (phoneSupReg.getText().equals("")) {
+            phoneSupLabel.setVisible(false);
+        }
+
+        userSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+        passSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+        rePassSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+        fNameSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+        lNameSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+        emailSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+        phoneSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+
+        usernameSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        passSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        rePassSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        firstNameSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        lastNameSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        emailSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        phoneSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
     }
 
     public void seeAddManagerPage(MouseEvent mouseEvent) {
         closeALlPanes();
         addManagerPane.setDisable(false);
         addManagerPane.setVisible(true);
+    }
+
+    public  void seeAddSupportPage(MouseEvent mouseEvent) {
+        closeALlPanes();
+        addSupportPane.setVisible(true);
+        addSupportPane.setDisable(false);
+
+        usernameSupReg.setText("");
+        passSupReg.setText("");
+        rePassSupReg.setText("");
+        firstNameSupReg.setText("");
+        lastNameSupReg.setText("");
+        emailSupReg.setText("");
+        phoneSupReg.setText("");
+    }
+
+    public void registerSup() {
+        boolean errorFound = false;
+        if (View.client.hasUserWithUsername(usernameSupReg.getText())) {
+            usernameSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            userSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!usernameSupReg.getText().matches("\\w+")) {
+            usernameSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            userSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!passSupReg.getText().equals(rePassSupReg.getText())) {
+            passSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            passSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            rePassSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            rePassSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!passSupReg.getText().matches("\\w+")) {
+            passSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            passSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!rePassSupReg.getText().matches("\\w+")) {
+            rePassSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            rePassSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!firstNameSupReg.getText().matches("[a-zA-Z]+")) {
+            firstNameSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            fNameSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!lastNameSupReg.getText().matches("[a-zA-Z]+")) {
+            lastNameSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            lNameSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!emailSupReg.getText().matches("(\\w+)@(\\w+)")) {
+            emailSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            emailSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!phoneSupReg.getText().matches("\\d+")) {
+            phoneSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            phoneSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!errorFound) {
+            ArrayList<String> info = new ArrayList<>();
+            info.add(usernameSupReg.getText());
+            info.add(passSupReg.getText());
+            info.add(firstNameSupReg.getText());
+            info.add(lastNameSupReg.getText());
+            info.add(emailSupReg.getText());
+            info.add(phoneSupReg.getText());
+            View.client.createAccount(info, "Support");
+            setAllUsers();
+        }
     }
 
 
