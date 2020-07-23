@@ -755,11 +755,11 @@ public class Client {
             dataOutputStream.writeUTF(ed.encrypt("logout!@" + token));
             dataOutputStream.flush();
             dataInputStream.readUTF();
+            getGuestToken();
         } catch (IOException e) {
             e.printStackTrace();
         }
         type = "guest";
-        token = "";
     }
 
     public void setDoesItOffPage(boolean setter) {
