@@ -85,8 +85,16 @@ public class Server {
                 }
                 dataOutputStream.writeUTF(Base64.getEncoder().encodeToString(key));
                 dataOutputStream.flush();
+
                 while (true) {
                     String command = ed.decrypt(dataInputStream.readUTF());
+                    if (command.startsWith("getGuestToken")) {
+                        String token = ed.generateToken();
+                        onlineUsers.put(token, new Guest());
+                        dataOutputStream.writeUTF(ed.encrypt(token));
+                        dataOutputStream.flush();
+                        continue;
+                    }
                     if (command.startsWith("hasHeadManager")) {
                         String answer = "";
                         if (Controller.getHasHeadManager()) {
@@ -96,6 +104,7 @@ public class Server {
                         }
                         dataOutputStream.writeUTF(ed.encrypt(answer));
                         dataOutputStream.flush();
+                        continue;
                     }
 
                     if (command.startsWith("goToBankServer")) {
@@ -133,11 +142,17 @@ public class Server {
                         continue;
                     }
                     if (command.startsWith("loginAccount")) {
-                        Controller.loginAccount(command.split("!@")[1]);
+                        String username = command.split("!@")[1];
+                        if (DataBase.getUserByUsername(username).getType().equals("Costumer")) {
+                            if (((Guest) onlineUsers.get(command.split("!@")[2])).getCart().getProducts().size() != 0) {
+                                ((Costumer) DataBase.getUserByUsername(username)).setCart(((Guest) onlineUsers.get(command.split("!@")[2])).getCart());
+                            }
+                        }
                         String token = ed.generateToken();
-                        onlineUsers.put(token, Controller.currentUser);
-                        dataOutputStream.writeUTF(ed.encrypt(Controller.getCurrentUserType() + "!@" + token));
+                        onlineUsers.put(token, DataBase.getUserByUsername(username));
+                        dataOutputStream.writeUTF(ed.encrypt(DataBase.getUserByUsername(username).getType() + "!@" + token));
                         dataOutputStream.flush();
+                        onlineUsers.remove(command.split("!@")[2]);
                         continue;
                     }
                     if (command.startsWith("createAccount")) {
@@ -894,18 +909,14 @@ public class Server {
                         FileOutputStream fileOutputStream = new FileOutputStream(file);
                         int readBytes = 0;
                         byte[] buffer = new byte[4096];
-                        while (true) {
-                            readBytes = dataInputStream.read(buffer, 0, (int) Math.min(buffer.length, remainingBytes));
+                        while ((readBytes = dataInputStream.read(buffer)) > 0) {
                             remainingBytes -= readBytes;
                             fileOutputStream.write(buffer, 0, readBytes);
-                            if (remainingBytes == 0) {
-                                break;
-                            }
                         }
-                        dataInputStream.close();
-                        dataInputStream = new DataInputStream(socket.getInputStream());
                         SellerAreaController.addProduct(info);
+                        socket.close();
                         fileOutputStream.close();
+                        break;
                     }
                     if (command.startsWith("getProductImage")) {
                         File file = new File(DataBase.getProductById(Long.parseLong(command.split("!@")[1])).getImageAddress());
@@ -917,7 +928,9 @@ public class Server {
                             dataOutputStream.write(buffer);
                         }
                         dataOutputStream.flush();
+                        socket.close();
                         fileInputStream.close();
+                        break;
                     }
                     if (command.equalsIgnoreCase("clickSound")){
 //                        new Thread(new Runnable() {

@@ -58,16 +58,27 @@ public class Client {
 
     public void run() {
         try {
-            this.socket = new Socket("127.0.0.1", 5678);
-            this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            this.dataInputStream = new DataInputStream(socket.getInputStream());
-            String key = dataInputStream.readUTF();
-            System.out.println(this.type);
-            ed = new ED(key);
+            connectToServer();
+            getGuestToken();
             View.run();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void connectToServer() throws IOException {
+        this.socket = new Socket("127.0.0.1", 5678);
+        this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
+        this.dataInputStream = new DataInputStream(socket.getInputStream());
+        String key = dataInputStream.readUTF();
+        System.out.println(this.type);
+        ed = new ED(key);
+    }
+
+    public void getGuestToken() throws IOException {
+        dataOutputStream.writeUTF(ed.encrypt("getGuestToken"));
+        dataOutputStream.flush();
+        token = ed.decrypt(dataInputStream.readUTF());
     }
 
     public String setCategoriesInMainBar() {
@@ -133,7 +144,7 @@ public class Client {
     public void loginAccount(String username) {
         String answer = "";
         try {
-            dataOutputStream.writeUTF(ed.encrypt("loginAccount!@" + username));
+            dataOutputStream.writeUTF(ed.encrypt("loginAccount!@" + username + "!@" + token));
             dataOutputStream.flush();
             answer = ed.decrypt(dataInputStream.readUTF());
         } catch (IOException e) {
@@ -1037,18 +1048,15 @@ public class Client {
             byte[] buffer = new byte[4096];
             FileInputStream fileInputStream = new FileInputStream(file);
             long readBytes = 0;
-            while (true) {
-                readBytes += fileInputStream.read(buffer);
+            while (fileInputStream.read(buffer) > 0) {
                 dataOutputStream.write(buffer);
-                if (readBytes >= file.length()) {
-                    break;
-                }
             }
             dataOutputStream.flush();
-            dataOutputStream.close();
-            dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            connectToServer();
             fileInputStream.close();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -1067,12 +1075,15 @@ public class Client {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             int readBytes = 0;
             byte[] buffer = new byte[4096];
-            while ((readBytes = dataInputStream.read(buffer, 0, (int) Math.min(buffer.length, remainingBytes))) > 0) {
+            while ((readBytes = dataInputStream.read(buffer)) > 0) {
                 remainingBytes -= readBytes;
                 fileOutputStream.write(buffer, 0, readBytes);
             }
+            connectToServer();
             fileOutputStream.close();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return path;
