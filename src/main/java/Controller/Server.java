@@ -1037,6 +1037,28 @@ public class Server {
                         dataOutputStream.flush();
                         continue;
                     }
+                    if (command.equals("getReceiptsWithGivenType")) {
+                        String input = ed.decrypt(dataInputStream.readUTF());
+                        dout.writeUTF("getReceiptsWithGivenType");
+                        dout.flush();
+                        dout.writeUTF(input);
+                        dout.flush();
+                        String response = din.readUTF();
+                        dataOutputStream.writeUTF(ed.encrypt(response));
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if (command.equals("getReceiptDetailsWithID")) {
+                        String input = ed.decrypt(dataInputStream.readUTF());
+                        dout.writeUTF("getReceiptDetailsWithID");
+                        dout.flush();
+                        dout.writeUTF(input);
+                        dout.flush();
+                        String response = din.readUTF();
+                        dataOutputStream.writeUTF(ed.encrypt(response));
+                        dataOutputStream.flush();
+                        continue;
+                    }
 
                 }
 

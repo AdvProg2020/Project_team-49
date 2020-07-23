@@ -1,4 +1,4 @@
-package Bank.View;
+package View.bankGraphicControllers;
 
 import View.View;
 import com.sun.javafx.runtime.VersionInfo;

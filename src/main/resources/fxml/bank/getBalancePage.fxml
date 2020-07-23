@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="680.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bank.View.GetBalancePageGraphicController">
+<AnchorPane prefHeight="680.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.bankGraphicControllers.GetBalancePageGraphicController">
    <children>
       <Pane layoutX="219.0" layoutY="113.0" prefHeight="460.0" prefWidth="480.0" style="-fx-border-color: gray; -fx-border-radius: 8;">
          <children>

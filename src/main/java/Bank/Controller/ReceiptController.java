@@ -51,4 +51,41 @@ public class ReceiptController {
         Account account = BankServer.onlineUsers.get(bankToken);
         return receipt.getMoney() + "!@" + account.getBalance() + "!@" + receipt.isDone();
     }
+
+    public static String getReceiptsWithGivenType(String receiptType, String bankToken) {
+        Account mainAccount = BankServer.onlineUsers.get(bankToken);
+        long mainAccountID = mainAccount.getAccountId();
+        String response = "";
+        if (receiptType.equals("all")) {
+            for (Account account : BankServer.onlineUsers.values()) {
+                for (Receipt receipt : account.getAllReceipts()) {
+                    if (receipt.getDestinationID() == mainAccountID || receipt.getSourceID() == mainAccountID) {
+                        response += receipt.toString() + "#$";
+                    }
+                }
+            }
+        } else if (receiptType.equals("destination")) {
+            for (Account account : BankServer.onlineUsers.values()) {
+                for (Receipt receipt : account.getAllReceipts()) {
+                    if (receipt.getDestinationID() == mainAccountID) {
+                        response += receipt.toString() + "#$";
+                    }
+                }
+            }
+        } else if (receiptType.equals("source")) {
+            for (Account account : BankServer.onlineUsers.values()) {
+                for (Receipt receipt : account.getAllReceipts()) {
+                    if (receipt.getSourceID() == mainAccountID) {
+                        response += receipt.toString() + "#$";
+                    }
+                }
+            }
+        }
+        return response;
+    }
+
+    public static String getReceiptDetailsWithID(String receiptID, String bankToken) {
+        Receipt receipt = getReceiptWithID(receiptID , bankToken);
+        return receipt.toString();
+    }
 }

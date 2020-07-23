@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="680.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bank.View.GetTransactionsPageGraphicController">
+<AnchorPane prefHeight="680.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.bankGraphicControllers.GetTransactionsPageGraphicController">
    <children>
       <Pane layoutX="179.0" layoutY="45.0" prefHeight="589.0" prefWidth="542.0" style="-fx-border-color: gray; -fx-border-radius: 8;">
          <children>

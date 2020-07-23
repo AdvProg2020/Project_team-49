@@ -1,4 +1,4 @@
-package Bank.View;
+package View.bankGraphicControllers;
 
 import View.View;
 import javafx.event.ActionEvent;
@@ -83,10 +83,36 @@ public class GetTransactionsPageGraphicController implements Initializable {
             String[] input = View.client.getReceiptsWithGivenType(type);
             if (input == null || input.length == 0) return;
             addToArrayList(input);
+            setReceiptPaneContent();
 
         } else if (!receiptIDTextField.getText().equals("")) {
-
+            if (!View.client.isThereAnyReceiptWithID(receiptIDTextField.getText())){
+                return;
+            }else{
+                String[] input =View.client.getReceiptDetailsWithID(receiptIDTextField.getText()).split("!@");
+                receiptTypeLabel.setText(input[0]);
+                moneyLabel.setText(input[1]);
+                sourceIDLabel.setText(input[2]);
+                destinationIDLabel.setText(input[3]);
+                descriptionLabel.setText(input[4]);
+                receiptIDLabel.setText(input[5]);
+            }
         }
+    }
+
+    private void setReceiptPaneContent() {
+        restartWholePane();
+        if(receiptsIndex > 1){
+            downArrow.setVisible(true);
+            downArrow.setDisable(false);
+        }
+        String[] input = receiptsWithType.get(receiptsIndex).split("!@");
+        receiptTypeLabel.setText(input[0]);
+        moneyLabel.setText(input[1]);
+        sourceIDLabel.setText(input[2]);
+        destinationIDLabel.setText(input[3]);
+        descriptionLabel.setText(input[4]);
+        receiptIDLabel.setText(input[5]);
     }
 
     private void addToArrayList(String[] input) {
@@ -97,6 +123,12 @@ public class GetTransactionsPageGraphicController implements Initializable {
     }
 
     public void seeMoreReceipts(MouseEvent mouseEvent) {
+        if(receiptsIndex == receiptsWithType.size() - 1){
+            receiptsIndex = 0;
+        }else{
+            receiptsIndex ++;
+        }
+        setReceiptPaneContent();
     }
 
     private void goToSpecificPage(String pageName, MouseEvent mouseEvent) {

@@ -1562,6 +1562,21 @@ public class Client {
         return null;
     }
 
+    public String getReceiptDetailsWithID(String receiptID) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getReceiptDetailsWithID"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(receiptID + "!@" + bankToken));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+            return response;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
 
     class ED {
         private Cipher ecipher;

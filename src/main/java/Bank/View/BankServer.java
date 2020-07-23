@@ -174,7 +174,24 @@ public class BankServer {
                         dataOutputStream.flush();
                         continue;
                     }
-
+                    if (command.equals("getReceiptsWithGivenType")) {
+                        String[] input = (dataInputStream.readUTF()).split("!@");
+                        String receiptType = input[0];
+                        String bankToken = input[1];
+                        String response = ReceiptController.getReceiptsWithGivenType(receiptType, bankToken);
+                        dataOutputStream.writeUTF(response);
+                        dataOutputStream.flush();
+                        continue;
+                    }
+                    if (command.equals("getReceiptDetailsWithID")) {
+                        String[] input = (dataInputStream.readUTF()).split("!@");
+                        String receiptID = input[0];
+                        String bankToken = input[1];
+                        String response = ReceiptController.getReceiptDetailsWithID(receiptID, bankToken);
+                        dataOutputStream.writeUTF(response);
+                        dataOutputStream.flush();
+                        continue;
+                    }
                 }
                 dataInputStream.close();
                 dataOutputStream.close();

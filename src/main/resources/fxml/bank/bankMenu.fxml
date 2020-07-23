@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="680.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bank.View.BankMenuGraphicController">
+<AnchorPane prefHeight="680.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.bankGraphicControllers.BankMenuGraphicController">
    <children>
       <GridPane layoutX="232.0" layoutY="113.0" prefHeight="465.0" prefWidth="458.0" style="-fx-padding: 10; -fx-border-color: gray; -fx-border-radius: 5;">
          <columnConstraints>

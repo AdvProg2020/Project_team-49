@@ -1,4 +1,4 @@
-package Bank.View;
+package View.bankGraphicControllers;
 
 import Controller.Controller;
 import View.View;

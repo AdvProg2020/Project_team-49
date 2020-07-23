@@ -26,6 +26,17 @@ public class Receipt {
         account.addReceipt(this);
     }
 
+
+    @Override
+    public String toString() {
+        return receiptType + "!@" +
+                +money +
+                "!@" + sourceID +
+                "!@" + destinationID +
+                "!@" + description +
+                "!@" + receiptID;
+    }
+
     public Account getAccount() {
         return account;
     }
