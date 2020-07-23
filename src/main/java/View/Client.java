@@ -521,7 +521,9 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        sellLogs.addAll(Arrays.asList(answer.split("#\\$")));
+        if (!answer.equalsIgnoreCase("")) {
+            sellLogs.addAll(Arrays.asList(answer.split("#\\$")));
+        }
         return sellLogs;
     }
 
@@ -539,7 +541,9 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        offs.addAll(Arrays.asList(answer.split("#\\$")));
+        if (!answer.equalsIgnoreCase("")) {
+            offs.addAll(Arrays.asList(answer.split("#\\$")));
+        }
         return offs;
     }
 
@@ -552,7 +556,11 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new ArrayList<>(Arrays.asList(answer.split("#\\$")));
+        ArrayList<String> products = new ArrayList<>();
+        if (!answer.equalsIgnoreCase("")) {
+            products.addAll(Arrays.asList(answer.split("#\\$")));
+        }
+        return products;
     }
 
     public ArrayList<String> getBuyLogs() {
@@ -565,7 +573,9 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        buyLogs.addAll(Arrays.asList(answer.split("#\\$")));
+        if (!answer.equalsIgnoreCase("")) {
+            buyLogs.addAll(Arrays.asList(answer.split("#\\$")));
+        }
         return buyLogs;
     }
 
@@ -579,7 +589,9 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        categories.addAll(Arrays.asList(answer.split("#\\$")));
+        if (!answer.equalsIgnoreCase("")) {
+            categories.addAll(Arrays.asList(answer.split("#\\$")));
+        }
         return categories;
     }
 
