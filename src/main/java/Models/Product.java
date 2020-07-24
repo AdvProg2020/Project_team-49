@@ -22,6 +22,7 @@ public class Product implements Serializable {
     private ArrayList<Comment> allComments;
     private String imageAddress;
     private ProductStatus status;
+    private boolean isFile;
 
     private Off off;
     private boolean doesItHaveOff;
@@ -49,6 +50,15 @@ public class Product implements Serializable {
         this.offPercentage = 0.0;
         this.imageAddress = imageAddress;
         this.allScores = new ArrayList<>();
+        isFile = false;
+    }
+
+    public void setIsFile(boolean isFile) {
+        this.isFile = isFile;
+    }
+
+    public boolean isFile() {
+        return isFile;
     }
 
     public ArrayList<Score> getAllScores() {
