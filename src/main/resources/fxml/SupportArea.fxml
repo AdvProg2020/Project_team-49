@@ -45,7 +45,7 @@
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                         </Label>
-                                        <Label layoutX="30.0" layoutY="197.0" prefHeight="53.0" prefWidth="268.0" text="Discount Codes" GridPane.rowIndex="2">
+                                        <Label layoutX="30.0" layoutY="197.0" prefHeight="53.0" prefWidth="268.0" GridPane.rowIndex="2">
                                             <font>
                                                 <Font name="Raleway" size="20.0" />
                                             </font>
@@ -89,7 +89,7 @@
                                                 <Insets left="80.0" />
                                             </padding>
                                         </GridPane>
-                                        <Label layoutX="10.0" layoutY="163.0" prefHeight="53.0" prefWidth="268.0" text="Users" GridPane.rowIndex="3">
+                                        <Label layoutX="10.0" layoutY="163.0" prefHeight="53.0" prefWidth="268.0" GridPane.rowIndex="3">
                                             <font>
                                                 <Font name="Raleway" size="20.0" />
                                             </font>
@@ -97,7 +97,7 @@
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                         </Label>
-                                        <Label layoutX="10.0" layoutY="181.0" prefHeight="108.0" prefWidth="232.0" text="Support Request" GridPane.rowIndex="4">
+                                        <Label layoutX="10.0" layoutY="181.0" prefHeight="108.0" prefWidth="232.0" GridPane.rowIndex="4">
                                             <font>
                                                 <Font name="Raleway" size="20.0" />
                                             </font>
