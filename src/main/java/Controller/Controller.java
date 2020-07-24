@@ -193,6 +193,17 @@ public class Controller {
         return "product added";
     }
 
+    public static void  addToCartWithToken(User user,Product product, Seller seller, int count) {
+        if (product.remainingProductForSeller(seller) < count) {
+            return;
+        }
+        if (user.getType().equalsIgnoreCase("Guest")) {
+            ((Guest) user).addProductToCart(product, seller, count);
+        } else {
+            ((Costumer) user).addProductToCart(product, seller, count);
+        }
+    }
+
     public static void logout() {
         setCurrentUser(new Guest());
     }
