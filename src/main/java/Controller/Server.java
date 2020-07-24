@@ -371,8 +371,8 @@ public class Server {
                     }
                     if (command.startsWith("filterBy")) {
                         if (command.split("!@")[1].equalsIgnoreCase("Category")) {
+                            String test=command.split("!@")[2];
                             Filter.filterByCategory(command.split("!@")[2]);
-                            continue;
                         }
                         if (command.split("!@")[1].equalsIgnoreCase("Brand")) {
                             Filter.setIsItFilteredByBrand(true);
