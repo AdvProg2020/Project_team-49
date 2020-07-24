@@ -44,7 +44,7 @@ public class Server {
         while (true) {
             DataBase.saveAllData();
             try {
-                Thread.sleep(10000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

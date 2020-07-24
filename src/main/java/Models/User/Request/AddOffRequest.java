@@ -45,6 +45,7 @@ public class AddOffRequest extends Request  implements Serializable {
         off.setOffStatus(OffStatus.confirmed);
         for (Product product : off.getProducts()) {
             product.setDoesItHaveOff(true);
+            product.setOff(off);
             product.setPrice(product.getPrice(seller) * (1 - off.getOffAmount() / 100), seller);
         }
         seller.addOff(off);

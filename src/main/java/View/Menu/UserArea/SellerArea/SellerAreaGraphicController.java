@@ -716,11 +716,11 @@ public class SellerAreaGraphicController implements Initializable {
         String off1 = offs.get(offsIndex);
         firstOffPane.setVisible(true);
         firstOffPane.setDisable(false);
-        startTime2.setText(off1.split("@#")[2]);
-        endTime2.setText(off1.split("@#")[3]);
-        offPercentage2.setText(off1.split("@#")[4]);
-        offIdLabel2.setText(off1.split("@#")[0]);
-        offStatus2.setText(off1.split("@#")[1]);
+        startTime2.setText(off1.split("!@")[2]);
+        endTime2.setText(off1.split("!@")[3]);
+        offPercentage2.setText(off1.split("!@")[4]);
+        offIdLabel2.setText(off1.split("!@")[0]);
+        offStatus2.setText(off1.split("!@")[1]);
         if (getOffProducts(off1).size() < 9) {
             seeMoreProductsImageOff2.setDisable(true);
             seeMoreProductsImageOff2.setVisible(false);
@@ -738,11 +738,11 @@ public class SellerAreaGraphicController implements Initializable {
         String off2 = offs.get(offsIndex + 1);
         secondOffPane.setVisible(true);
         secondOffPane.setDisable(false);
-        startTime1.setText(off2.split("@#")[2]);
-        endTime1.setText(off2.split("@#")[3]);
-        offPercentage1.setText(off2.split("@#")[4]);
-        offIdLabel1.setText(off2.split("@#")[0]);
-        offStatus1.setText(off2.split("@#")[1]);
+        startTime1.setText(off2.split("!@")[2]);
+        endTime1.setText(off2.split("!@")[3]);
+        offPercentage1.setText(off2.split("!@")[4]);
+        offIdLabel1.setText(off2.split("!@")[0]);
+        offStatus1.setText(off2.split("!@")[1]);
         if (getOffProducts(off2).size() < 9) {
             seeMoreProductsImageOff1.setDisable(true);
             seeMoreProductsImageOff1.setVisible(false);
