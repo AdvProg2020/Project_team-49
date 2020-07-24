@@ -16,7 +16,7 @@ public class Receipt {
 
     public Receipt(Account account, String receiptType, double money, long sourceID, long destinationID, String description) {
         this.account = account;
-        done = false;
+        this.done = false;
         this.receiptType = receiptType;
         this.money = money;
         this.sourceID = sourceID;
@@ -24,6 +24,7 @@ public class Receipt {
         this.description = description;
         receiptID = Controller.generateToken();
         account.addReceipt(this);
+        System.out.println(this.receiptID);
     }
 
 
@@ -34,7 +35,8 @@ public class Receipt {
                 "!@" + sourceID +
                 "!@" + destinationID +
                 "!@" + description +
-                "!@" + receiptID;
+                "!@" + receiptID +
+                "!@" + done;
     }
 
     public Account getAccount() {
@@ -100,5 +102,5 @@ public class Receipt {
     public void setDescription(String description) {
         this.description = description;
     }
-}
 
+}

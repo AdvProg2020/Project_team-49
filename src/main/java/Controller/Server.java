@@ -101,6 +101,10 @@ public class Server {
                     }
 
                     if (command.startsWith("goToBankServer")) {
+                        System.out.println("here");
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                        System.out.println("yea");
                         doBankServerConnection();
                         continue;
                     }
@@ -1129,9 +1133,10 @@ public class Server {
                 socket = new Socket("127.0.0.1", 8080);
                 DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
                 DataInputStream din = new DataInputStream(socket.getInputStream());
-
+                System.out.println("shit");
                 while (true) {
                     String command = ed.decrypt(dataInputStream.readUTF());
+                    System.out.println(command);
                     if (command.equals("isThereAnyAccountWithUsernameInBank")) {
                         String username = ed.decrypt(dataInputStream.readUTF());
                         dout.writeUTF("isThereAnyAccountWithUsernameInBank");
@@ -1272,16 +1277,18 @@ public class Server {
                         dataOutputStream.flush();
                         continue;
                     }
-
-
+                    if (command.equals("exitFromBank")) {
+                        dout.writeUTF("exitFromBank");
+                        dout.flush();
+                        String response = din.readUTF();
+                        dataOutputStream.writeUTF(ed.encrypt(response));
+                        dataOutputStream.flush();
+                        break;
+                    }
                 }
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
         }
 
         @Override

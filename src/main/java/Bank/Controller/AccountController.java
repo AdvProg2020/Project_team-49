@@ -1,6 +1,8 @@
 package Bank.Controller;
 import static Bank.Controller.DataBase.*;
 import Bank.Model.Account;
+import Bank.Model.Token;
+import Bank.View.BankServer;
 
 public class AccountController {
     public static Account getAccountWithUserName(String username){
@@ -40,7 +42,9 @@ public class AccountController {
         return true;
     }
 
-    public static String getAccountInformation(Account account) {
+    public static String getAccountInformation(String bankToken) {
+        Account account = BankServer.onlineUsers.get(TokenController.getTokenByTokenID(bankToken));
+
         return account.getBalance() + "!@" + account.getUsername() + "!@" + account.getAccountId();
     }
 

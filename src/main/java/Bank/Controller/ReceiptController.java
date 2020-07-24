@@ -12,25 +12,28 @@ public class ReceiptController {
         try {
             String type = input[0];
             double money = Double.parseDouble(input[1]);
-            long source = Long.parseLong(input[2]);
-            long destination = Long.parseLong((input[3]));
             String description = (input[4]);
+            Account account = BankServer.onlineUsers.get(TokenController.getTokenByTokenID(input[5]));
+
             if (type.equals("move")) {
-                Receipt receipt = new Receipt(AccountController.getAccountWithID(input[2]), type, money, source, destination, description);
+                long source = Long.parseLong(input[2]);
+                long destination = Long.parseLong((input[3]));
+                Receipt receipt = new Receipt(account, type, money, source, destination, description);
             } else if (type.equals("deposit")) {
-                Receipt receipt = new Receipt(AccountController.getAccountWithID(input[2]), type, money, -1, destination, description);
+                long destination = Long.parseLong((input[3]));
+                Receipt receipt = new Receipt(account, type, money, -1, destination, description);
             } else if (type.equals("withdraw")) {
-                Receipt receipt = new Receipt(AccountController.getAccountWithID(input[2]), type, money, source, -1, description);
+                long source = Long.parseLong(input[2]);
+                Receipt receipt = new Receipt(account, type, money, source, -1, description);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("can not create receipt");
         }
-
-
     }
 
     public static boolean isThereAnyReceiptWithID(String receiptID, String bankToken) {
-        Account account = BankServer.onlineUsers.get(bankToken);
+        Account account = BankServer.onlineUsers.get(TokenController.getTokenByTokenID(bankToken));
         for (Receipt receipt : account.getAllReceipts()) {
             if (receipt.getReceiptID().equals(receiptID)) return true;
         }
@@ -38,7 +41,7 @@ public class ReceiptController {
     }
 
     public static Receipt getReceiptWithID(String receiptID, String bankToken) {
-        Account account = BankServer.onlineUsers.get(bankToken);
+        Account account = BankServer.onlineUsers.get(TokenController.getTokenByTokenID(bankToken));
         for (Receipt receipt : account.getAllReceipts()) {
             if (receipt.getReceiptID().equals(receiptID)) return receipt;
         }
@@ -48,16 +51,16 @@ public class ReceiptController {
 
     public static String getReceiptDetails(String receiptID, String bankToken) {
         Receipt receipt = getReceiptWithID(receiptID, bankToken);
-        Account account = BankServer.onlineUsers.get(bankToken);
+        Account account = BankServer.onlineUsers.get(TokenController.getTokenByTokenID(bankToken));
         return receipt.getMoney() + "!@" + account.getBalance() + "!@" + receipt.isDone();
     }
 
     public static String getReceiptsWithGivenType(String receiptType, String bankToken) {
-        Account mainAccount = BankServer.onlineUsers.get(bankToken);
+        Account mainAccount = BankServer.onlineUsers.get(TokenController.getTokenByTokenID(bankToken));
         long mainAccountID = mainAccount.getAccountId();
         String response = "";
         if (receiptType.equals("all")) {
-            for (Account account : BankServer.onlineUsers.values()) {
+            for (Account account : DataBase.allAccounts) {
                 for (Receipt receipt : account.getAllReceipts()) {
                     if (receipt.getDestinationID() == mainAccountID || receipt.getSourceID() == mainAccountID) {
                         response += receipt.toString() + "#$";
@@ -65,7 +68,7 @@ public class ReceiptController {
                 }
             }
         } else if (receiptType.equals("destination")) {
-            for (Account account : BankServer.onlineUsers.values()) {
+            for (Account account : DataBase.allAccounts) {
                 for (Receipt receipt : account.getAllReceipts()) {
                     if (receipt.getDestinationID() == mainAccountID) {
                         response += receipt.toString() + "#$";
@@ -73,7 +76,7 @@ public class ReceiptController {
                 }
             }
         } else if (receiptType.equals("source")) {
-            for (Account account : BankServer.onlineUsers.values()) {
+            for (Account account : DataBase.allAccounts) {
                 for (Receipt receipt : account.getAllReceipts()) {
                     if (receipt.getSourceID() == mainAccountID) {
                         response += receipt.toString() + "#$";
@@ -81,11 +84,17 @@ public class ReceiptController {
                 }
             }
         }
+        System.out.println("in controller  "+ response);
+        if(response.length() == 0) return response;
+
+        if (response.substring(response.length() - 2).equals("#$"))
+            response = response.substring(0, response.length() - 2);
+        System.out.println("in controller  "+ response);
         return response;
     }
 
     public static String getReceiptDetailsWithID(String receiptID, String bankToken) {
-        Receipt receipt = getReceiptWithID(receiptID , bankToken);
+        Receipt receipt = getReceiptWithID(receiptID, bankToken);
         return receipt.toString();
     }
 }

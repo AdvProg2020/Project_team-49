@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -8,12 +9,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="680.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.bankGraphicControllers.BankMenuGraphicController">
    <children>
       <GridPane layoutX="232.0" layoutY="113.0" prefHeight="465.0" prefWidth="458.0" style="-fx-padding: 10; -fx-border-color: gray; -fx-border-radius: 5;">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="422.4" minWidth="10.0" prefWidth="422.4" />
+            <ColumnConstraints />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -44,6 +45,9 @@
                <GridPane.margin>
                   <Insets left="112.0" />
                </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
             <Label fx:id="payLabel" alignment="CENTER" layoutX="21.0" layoutY="161.0" onMouseClicked="#payButton" prefHeight="41.0" prefWidth="216.0" text="Pay" GridPane.rowIndex="2">
                <font>
@@ -52,6 +56,9 @@
                <GridPane.margin>
                   <Insets left="112.0" />
                </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
             <Label fx:id="getTransactionsLabel" alignment="CENTER" layoutX="21.0" layoutY="225.0" onMouseClicked="#getTransactionsButton" prefHeight="41.0" prefWidth="216.0" text="Get Transactions" GridPane.rowIndex="3">
                <font>
@@ -60,6 +67,9 @@
                <GridPane.margin>
                   <Insets left="112.0" />
                </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
             <Label fx:id="getBalanceLabel" alignment="CENTER" layoutX="21.0" layoutY="225.0" onMouseClicked="#getBalanceButton" prefHeight="41.0" prefWidth="216.0" text="Get Balance" GridPane.rowIndex="4">
                <font>
@@ -68,6 +78,9 @@
                <GridPane.margin>
                   <Insets left="112.0" />
                </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
          </children>
       </GridPane>

@@ -38,6 +38,11 @@
                         <Font name="Raleway Light Italic" size="15.0" />
                      </font>
                   </Label>
+                  <Label fx:id="usernameNotAvailableLabel" alignment="CENTER" layoutX="251.0" layoutY="67.0" prefHeight="46.0" prefWidth="172.0" text="user name not available" textFill="#ff0505">
+                     <font>
+                        <Font name="Raleway" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane GridPane.rowIndex="2">

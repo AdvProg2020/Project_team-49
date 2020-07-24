@@ -1,9 +1,8 @@
 package View.bankGraphicControllers;
 
 import View.View;
-import com.sun.javafx.runtime.VersionInfo;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,8 +15,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class PayPageGraphicController {
+public class PayPageGraphicController implements Initializable {
     public ImageView goBackToMainMenuButton;
     public Label alertLabel;
     public Button payButton;
@@ -25,6 +26,7 @@ public class PayPageGraphicController {
 
     public void pay(MouseEvent event) {
         alertLabel.setTextFill(Color.RED);
+        alertLabel.setText("");
         boolean errorFound = false;
         if (View.client.isTokenExpired()) {
             errorFound = true;
@@ -36,6 +38,9 @@ public class PayPageGraphicController {
             return;
         }
         String[] receiptDetails = View.client.getReceiptAndAccountDetailForPay(receiptIDTextField.getText());
+        for (String receiptDetail : receiptDetails) {
+            System.out.println("receipt detail : " + receiptDetail);
+        }
         if(receiptDetails[2].equals("true")){
             alertLabel.setText("receipt is paid before");
             return;
@@ -46,6 +51,7 @@ public class PayPageGraphicController {
             alertLabel.setText("source account does not have enough money");
             return;
         }
+        System.out.println("now wanna pay");
         View.client.payThisReceipt(receiptIDTextField.getText());
         restartPage();
     }
@@ -71,5 +77,10 @@ public class PayPageGraphicController {
     private void restartPage() {
         receiptIDTextField.clear();
         alertLabel.setVisible(false);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        restartPage();
     }
 }
