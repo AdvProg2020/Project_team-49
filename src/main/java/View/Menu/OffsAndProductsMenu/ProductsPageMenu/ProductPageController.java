@@ -777,7 +777,6 @@ public class ProductPageController implements Initializable {
     public void submitComment(MouseEvent mouseEvent) {
         String message = userComment.getText();
         if (message.equalsIgnoreCase("")) return;
-        userComment.clear();
 //        if (Controller.getCurrentUserType().equalsIgnoreCase("guest")) {
         if (View.getClient().isCurrentUserGuest()){
             loginFirstForComment.setVisible(true);
@@ -786,6 +785,7 @@ public class ProductPageController implements Initializable {
             timeline.play();
 
         } else {
+            String test=userComment.getText();
             View.getClient().addComment(productIdDetail,"title",userComment.getText());
 //            OffAndProductMenuController.addCommentsById(productIdDetail, "title", userComment.getText());
             yourComment.setDisable(true);
@@ -795,6 +795,7 @@ public class ProductPageController implements Initializable {
             thanksForYourComment.setVisible(true);
             setAllComments();
         }
+        userComment.clear();
     }
 
     private void setCommentPane() {
@@ -862,7 +863,7 @@ public class ProductPageController implements Initializable {
 //            }
 //        }
 
-        if (!commentsNotes.get(0).isEmpty()&&commentsNotes.size()!=1) {
+        if (!commentsNotes.get(0).isEmpty()&&commentsNotes.size()!=0) {
 //        for (int i = commentsIndex; i < commentsIndex + 4 && i < product.getAllComments().size(); i++) {
             for (int i = commentsIndex; i < commentsIndex + 4 && i < commentsNotes.size(); i++) {
 //            Comment comment = product.getAllComments ().get(i);

@@ -3,6 +3,8 @@ package Controller;
 import Models.Comment;
 import Models.Product;
 import Models.User.Seller;
+import Models.User.User;
+
 import static Controller.DataBase.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -89,6 +91,10 @@ public class OffAndProductMenuController {
     }
     public static void addCommentsById(long productId, String title, String content) {
         Controller.getProductById(productId).addAComment(new Comment(Controller.currentUser,Controller.getProductById(productId),title,content));
+    }
+
+    public static void addNewCommentsById(long productId, String title, String content, User user) {
+        Controller.getProductById(productId).addAComment(new Comment(user,Controller.getProductById(productId),title,content));
     }
     public static void addToCartById(long productId, boolean commonSeller,String sellerUserName,int count){
         for (Product product : allProducts) {

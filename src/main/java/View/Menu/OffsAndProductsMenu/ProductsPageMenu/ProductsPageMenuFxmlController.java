@@ -632,9 +632,9 @@ public class ProductsPageMenuFxmlController implements Initializable {
         for (int i = 0; i < size; i++) {
             gridPanes.get(i).setVisible(true);
             gridPanes.get(i).setDisable(false);
-            Image image=new Image(images.get(i));
+            String path=View.getClient().getProductImageAddress(String.valueOf(productId.get(i))).substring(19);
             GridPane gridPane=gridPanes.get(i);
-            gridPaneToImageView.get(gridPane).setImage(image);
+            gridPaneToImageView.get(gridPane).setImage(new Image(path));
             gridPaneToNameAmount.get(gridPane).setText(names.get(i));
             gridPaneToPriceAmount.get(gridPane).setText(prices.get(i).toString());
             gridPaneToProductId.put(gridPane,productId.get(i));
@@ -1184,8 +1184,8 @@ public class ProductsPageMenuFxmlController implements Initializable {
         }
         System.out.println(minPercentage);
         System.out.println(maxPercentage);
-        double maxPrice = (maxPercentage * max) / 100;
-        double minPrice = (minPercentage * max) / 100;
+        double maxPrice =min+ (maxPercentage * (max-min)) / 100;
+        double minPrice =min+ (minPercentage * (max-min)) / 100;
 
         System.out.println(minPrice);
         System.out.println(maxPrice);
