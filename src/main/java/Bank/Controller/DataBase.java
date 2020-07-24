@@ -13,6 +13,10 @@ import java.util.Date;
 public class DataBase {
     public static ArrayList<Account> allAccounts = new ArrayList<>();
     public static ArrayList<Receipt> allReceipts = new ArrayList<>();
+    private static InputStream inputStream;
+    private static OutputStream outputStream;
+    private static ObjectInputStream objectInputStream;
+    private static ObjectOutputStream objectOutputStream;
 
 
     public static void bankDataBaseRun() {
@@ -50,8 +54,7 @@ public class DataBase {
     }
 
     private static void loadAllReceipts() {
-        InputStream inputStream;
-        ObjectInputStream objectInputStream;
+
         try {
             inputStream = new FileInputStream("src/main/resources/BankDataBase/receipts.txt");
             objectInputStream = new ObjectInputStream(inputStream);
@@ -64,8 +67,7 @@ public class DataBase {
     }
 
     public static void loadAllAccounts() {
-        InputStream inputStream;
-        ObjectInputStream objectInputStream;
+
         try {
             inputStream = new FileInputStream("src/main/resources/BankDataBase/accounts.txt");
             objectInputStream = new ObjectInputStream(inputStream);
@@ -78,8 +80,7 @@ public class DataBase {
     }
 
     private static void saveAllAccounts(){
-        OutputStream outputStream;
-        ObjectOutputStream objectOutputStream;
+
         try {
             outputStream = new FileOutputStream("src/main/resources/BankDataBase/accounts.txt");
             objectOutputStream = new ObjectOutputStream(outputStream);
@@ -92,8 +93,7 @@ public class DataBase {
     }
 
     private static void saveAllReceipts(){
-        OutputStream outputStream;
-        ObjectOutputStream objectOutputStream;
+
         try {
             outputStream = new FileOutputStream("src/main/resources/BankDataBase/receipts.txt");
             objectOutputStream = new ObjectOutputStream(outputStream);

@@ -34,24 +34,23 @@ public class PayPageGraphicController implements Initializable {
             return;
         }
         if(!View.client.isThereAnyReceiptWithID(receiptIDTextField.getText())){
+            alertLabel.setVisible(true);
             alertLabel.setText("invalid receipt id");
             return;
         }
         String[] receiptDetails = View.client.getReceiptAndAccountDetailForPay(receiptIDTextField.getText());
-        for (String receiptDetail : receiptDetails) {
-            System.out.println("receipt detail : " + receiptDetail);
-        }
         if(receiptDetails[2].equals("true")){
             alertLabel.setText("receipt is paid before");
+            alertLabel.setVisible(true);
             return;
         }
         double aMoney = Double.parseDouble(receiptDetails[1]);
         double rMoney = Double.parseDouble(receiptDetails[0]);
         if(rMoney > aMoney){
             alertLabel.setText("source account does not have enough money");
+            alertLabel.setVisible(true);
             return;
         }
-        System.out.println("now wanna pay");
         View.client.payThisReceipt(receiptIDTextField.getText());
         restartPage();
     }

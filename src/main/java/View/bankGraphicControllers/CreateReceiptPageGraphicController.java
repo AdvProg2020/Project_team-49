@@ -79,7 +79,16 @@ public class CreateReceiptPageGraphicController implements Initializable {
         boolean errorFound = false;
         String type = (String) receiptTypeComboBox.getValue();
         if (type.equals("move")) {
+
             if (sourceTextField.getText().equals("") || destinationTextField.getText().equals("")) return;
+            if (!sourceTextField.getText().matches("(\\d+)")) {
+                sourceTextField.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+                errorFound = true;
+            }
+            if (!destinationTextField.getText().matches("(\\d+)")) {
+                destinationTextField.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+                errorFound = true;
+            }
             if (!View.client.isThereAnyBankAccountWithID(sourceTextField.getText())) {
                 sourceTextField.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
                 errorFound = true;
@@ -95,12 +104,20 @@ public class CreateReceiptPageGraphicController implements Initializable {
             }
 
         } else if (type.equals("deposit")) {
+            if (!destinationTextField.getText().matches("(\\d+)")) {
+                destinationTextField.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+                errorFound = true;
+            }
             if (destinationTextField.getText().equals("")) return;
             if (!View.client.isThereAnyBankAccountWithID(destinationTextField.getText())) {
                 destinationTextField.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
                 errorFound = true;
             }
         } else if (type.equals("withdraw")) {
+            if (!sourceTextField.getText().matches("(\\d+)")) {
+                sourceTextField.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+                errorFound = true;
+            }
             if (sourceTextField.getText().equals("")) return;
             if (!View.client.isThereAnyBankAccountWithID(sourceTextField.getText())) {
                 sourceTextField.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
@@ -111,14 +128,7 @@ public class CreateReceiptPageGraphicController implements Initializable {
             moneyTextField.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             errorFound = true;
         }
-        if (!sourceTextField.getText().matches("(\\d+)")) {
-            sourceTextField.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
-            errorFound = true;
-        }
-        if (!destinationTextField.getText().matches("(\\d+)")) {
-            destinationTextField.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
-            errorFound = true;
-        }
+
         if (!errorFound) {
             View.client.createReceipt(type, moneyTextField.getText(), sourceTextField.getText(), destinationTextField.getText(), descriptionTextField.getText());
             goToSpecificPage("bankMenu", event);

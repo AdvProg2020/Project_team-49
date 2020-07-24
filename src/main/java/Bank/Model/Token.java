@@ -11,7 +11,7 @@ public class Token {
     public Token(Account account) {
         this.account = account;
         isAlive = true;
-        time = 15;
+        time = 3600;
         this.tokenId = Controller.generateToken();
     }
 

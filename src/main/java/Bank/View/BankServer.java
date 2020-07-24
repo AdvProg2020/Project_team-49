@@ -26,7 +26,6 @@ import static Bank.Controller.Controller.giveTokenToAccount;
 
 public class BankServer {
     public static HashMap<Token, Account> onlineUsers = new HashMap<>();
-    private static int t = 0;
 
     public static void main(String[] args) throws Exception {
         DataBase.bankDataBaseRun();
@@ -42,11 +41,7 @@ public class BankServer {
 
     public static void check() {
         while (true) {
-            t++;
-            if (t == 10) {
-                DataBase.saveAllBankData();
-                t = 0;
-            }
+
             checkTokenIsDead();
             try {
                 Thread.sleep(1000);
