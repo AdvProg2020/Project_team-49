@@ -53,7 +53,7 @@ public class Server {
 
     static class ServerImp {
         public void run() throws IOException {
-            ServerSocket serverSocket = new ServerSocket(5678);
+            ServerSocket serverSocket = new ServerSocket(8086);
             while (true) {
                 Socket clientSocket;
                 clientSocket = serverSocket.accept();
@@ -88,6 +88,7 @@ public class Server {
                         key[i] = (byte) (key[i] + 1);
                     }
                 }
+                dataInputStream.readUTF();
                 dataOutputStream.writeUTF(Base64.getEncoder().encodeToString(key));
                 dataOutputStream.flush();
 

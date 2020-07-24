@@ -201,6 +201,7 @@ public class SellerAreaGraphicController implements Initializable {
     public TextField imageTextField;
     public CheckBox isFileCheckBox;
     public Label addProductImageLabel;
+    public Button browseButton;
     private ArrayList<String> seller = new ArrayList<>();
     private int offsIndex = 0;
     private int productsIndex = 0;
@@ -1031,6 +1032,7 @@ public class SellerAreaGraphicController implements Initializable {
         productCount1.setText(product1.get(5));
         productExplanation1.setText(product1.get(4));
         productImage1.setImage(new Image(View.client.getProductImageAddress(product1.get(0)).substring(19)));
+        centerImage(productImage1);
 
         if (size == 1) return;
         ArrayList<String> product2 = new ArrayList<>(Arrays.asList(products.get(productsIndex + 1).split("!@")));
@@ -1043,6 +1045,7 @@ public class SellerAreaGraphicController implements Initializable {
         productCount2.setText(product2.get(5));
         productExplanation2.setText(product2.get(4));
         productImage2.setImage(new Image(View.client.getProductImageAddress(product2.get(0).substring(19))));
+        centerImage(productImage2);
     }
 
     public void seeMoreProducts(MouseEvent mouseEvent) {
@@ -1205,6 +1208,10 @@ public class SellerAreaGraphicController implements Initializable {
         countTextField.setText("");
         explanationTextField.setText("");
 
+        browseButton.setText("Browse Image");
+        addProductImageLabel.setText("image");
+        isFileCheckBox.setSelected(false);
+
         nameRec.setStroke(Color.valueOf("#959595"));
         brandRec.setStroke(Color.valueOf("#959595"));
         priceRec.setStroke(Color.valueOf("#959595"));
@@ -1320,7 +1327,8 @@ public class SellerAreaGraphicController implements Initializable {
             fileChooser.getExtensionFilters().addAll(
                     new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                     new FileChooser.ExtensionFilter("PNG", "*.png"),
-                    new FileChooser.ExtensionFilter("TEXT", "*.txt")
+                    new FileChooser.ExtensionFilter("TEXT", "*.txt"),
+                    new FileChooser.ExtensionFilter("PDF", "*.pdf")
             );
         } else {
             fileChooser.setTitle("Choose Image");
@@ -1337,10 +1345,10 @@ public class SellerAreaGraphicController implements Initializable {
 
     public void checkIsFile(ActionEvent actionEvent) {
         if (isFileCheckBox.isSelected()) {
-            addProductButton.setText("Browse File");
+            browseButton.setText("Browse File");
             addProductImageLabel.setText("file");
         } else {
-            addProductButton.setText("Browse Image");
+            browseButton.setText("Browse Image");
             addProductImageLabel.setText("image");
         }
     }

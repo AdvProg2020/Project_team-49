@@ -1421,7 +1421,7 @@
                            <font>
                               <Font size="16.0" />
                            </font></TextField>
-                        <Button layoutX="830.0" layoutY="262.0" mnemonicParsing="false" onMouseClicked="#browseImage" prefHeight="42.0" prefWidth="122.0" text="Browse Image">
+                        <Button fx:id="browseButton" layoutX="830.0" layoutY="262.0" mnemonicParsing="false" onMouseClicked="#browseImage" prefHeight="42.0" prefWidth="122.0" text="Browse Image">
                            <font>
                               <Font size="16.0" />
                            </font>

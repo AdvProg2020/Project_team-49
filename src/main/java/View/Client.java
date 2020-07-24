@@ -70,6 +70,7 @@ public class Client {
         this.socket = new Socket("127.0.0.1", 8086);
         this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
         this.dataInputStream = new DataInputStream(socket.getInputStream());
+        dataOutputStream.writeUTF("Hello");
         String key = dataInputStream.readUTF();
         System.out.println(this.type);
         ed = new ED(key);
@@ -1104,8 +1105,8 @@ public class Client {
             }
             dataOutputStream.write(new byte[1]);
             dataOutputStream.flush();
-            connectToServer();
             fileInputStream.close();
+            connectToServer();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -1131,8 +1132,8 @@ public class Client {
                 remainingBytes -= readBytes;
                 fileOutputStream.write(buffer, 0, readBytes);
             }
-            connectToServer();
             fileOutputStream.close();
+            connectToServer();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
