@@ -79,6 +79,12 @@ public class BankServer {
             shouldRun = true;
         }
 
+
+        @Override
+        public void run() {
+            handleClient();
+        }
+
         private void handleClient() {
             try {
                 while (shouldRun) {
