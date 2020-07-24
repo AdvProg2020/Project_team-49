@@ -1,15 +1,17 @@
 package View.Menu.OffsAndProductsMenu.ProductsPageMenu;
 
-import Controller.Controller;
-import Controller.DataBase;
-import Models.DiscountCode;
-import Models.Log.BuyLog;
-import Models.Log.SellLog;
-import Models.Off;
+//import Controller.Controller;
+//import Controller.DataBase;
+//import Models.DiscountCode;
+//import Models.Log.BuyLog;
+//import Models.Log.SellLog;
+//import Models.Off;
+//import Models.Product;
+//import Models.User.Cart;
+//import Models.User.Costumer;
+//import Models.User.Guest;
+//import Models.User.Seller;
 import Models.Product;
-import Models.User.Cart;
-import Models.User.Costumer;
-import Models.User.Guest;
 import Models.User.Seller;
 import View.View;
 import javafx.event.ActionEvent;
@@ -114,9 +116,11 @@ public class CartPageController implements Initializable {
     public Label confirmPurchaseLabel;
     public Label purchaseLabel;
     public Button checkInformationButton;
-    private Cart cart;
     private int rectangleIndex = 1;
     private int productIndex = 0;
+
+    private int cartProductSize=0;
+    private static int cartProductSizeStatic=0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -132,11 +136,8 @@ public class CartPageController implements Initializable {
         confirmPurchaseRectangle.setDisable(false);
         confirmPurchaseRectangle.setVisible(true);
 
-        if (Controller.getCurrentUserType().equalsIgnoreCase("costumer")) {
-            cart = ((Costumer) Controller.getCurrentUser()).getCart();
-        } else if (Controller.getCurrentUser().getType().equalsIgnoreCase("guest")) {
-            cart = ((Guest) Controller.getCurrentUser()).getCart();
-        }
+        cartProductSize=View.getClient().getCartProductsSize();
+
 //        System.out.println(cart + " this is cart");
         //deepShitStuff();
         setMainPains();
@@ -144,7 +145,7 @@ public class CartPageController implements Initializable {
         setProductsGridPane();
 
         View.client.cancelSong();
-        View.client.startSong("src/main/resources/Sound/CartAndPurchase/BackGround.mp3");
+//        View.client.startSong("src/main/resources/Sound/CartAndPurchase/BackGround.mp3");
 
     }
 
@@ -159,7 +160,7 @@ public class CartPageController implements Initializable {
         upArrow.setVisible(false);
         downArrow.setVisible(false);
         downArrow.setDisable(true);
-        if (cart.getProducts().size() > 3) {
+        if (cartProductSize > 3) {
             upArrow.setDisable(false);
             upArrow.setVisible(true);
             downArrow.setVisible(true);
@@ -184,19 +185,19 @@ public class CartPageController implements Initializable {
     }
 
     private void deepShitStuff() {
-        Seller seller = (Seller) DataBase.getAllUsers().get(1);
-        Product product = DataBase.getAllProducts().get(0);
-        cart.addProduct(DataBase.getAllProducts().get(0), (Seller) DataBase.getAllUsers().get(1), 1);
-        cart.addProduct(DataBase.getAllProducts().get(1), (Seller) DataBase.getAllUsers().get(1), 2);
-        cart.addProduct(DataBase.getAllProducts().get(2), (Seller) DataBase.getAllUsers().get(1), 2);
-        cart.addProduct(DataBase.getAllProducts().get(4), (Seller) DataBase.getAllUsers().get(1), 3);
-        DataBase.getAllProducts().get(0).setDiscountPercentage(0.36);
-        product.setOffPercentage(0.36);
-        DataBase.getAllProducts().get(0).setDoesItHaveOff(true);
-        DataBase.getAllProducts().get(0).setImageAddress("./photos/cart/run.png");
-        DataBase.getAllProducts().get(1).setImageAddress("photos/cart/plus.png");
-        DataBase.getAllProducts().get(2).setImageAddress("photos/cart/digikalaLogo.png");
-        DataBase.getAllProducts().get(4).setImageAddress("photos/cart/digikalaLogo.png");
+//        Seller seller = (Seller) DataBase.getAllUsers().get(1);
+//        Product product = DataBase.getAllProducts().get(0);
+//        cart.addProduct(DataBase.getAllProducts().get(0), (Seller) DataBase.getAllUsers().get(1), 1);
+//        cart.addProduct(DataBase.getAllProducts().get(1), (Seller) DataBase.getAllUsers().get(1), 2);
+//        cart.addProduct(DataBase.getAllProducts().get(2), (Seller) DataBase.getAllUsers().get(1), 2);
+//        cart.addProduct(DataBase.getAllProducts().get(4), (Seller) DataBase.getAllUsers().get(1), 3);
+//        DataBase.getAllProducts().get(0).setDiscountPercentage(0.36);
+//        product.setOffPercentage(0.36);
+//        DataBase.getAllProducts().get(0).setDoesItHaveOff(true);
+//        DataBase.getAllProducts().get(0).setImageAddress("./photos/cart/run.png");
+//        DataBase.getAllProducts().get(1).setImageAddress("photos/cart/plus.png");
+//        DataBase.getAllProducts().get(2).setImageAddress("photos/cart/digikalaLogo.png");
+//        DataBase.getAllProducts().get(4).setImageAddress("photos/cart/digikalaLogo.png");
     }
 
     private void setMainPains() {
@@ -204,7 +205,7 @@ public class CartPageController implements Initializable {
         cartIsEmpty.setDisable(true);
         isNotEmptyPane.setVisible(false);
         cartIsEmpty.setVisible(false);
-        if (cart.getProducts().size() == 0) {
+        if (cartProductSize== 0) {
             cartIsEmpty.setDisable(false);
             cartIsEmpty.setVisible(true);
         } else {
@@ -238,13 +239,13 @@ public class CartPageController implements Initializable {
             rectangleIndex++;
             if (rectangleIndex > 3) rectangleIndex = 3;
             setVRectangles();
-            if (productIndex + 2 == cart.getProducts().size() - 1) {
+            if (productIndex + 2 == cartProductSize- 1) {
                 return;
             }
             if (rectangleIndex == 3) {
                 productIndex++;
-                if (productIndex == cart.getProducts().size()) {
-                    productIndex = cart.getProducts().size() - 1;
+                if (productIndex == cartProductSize) {
+                    productIndex = cartProductSize - 1;
                     return;
                 }
                 setProductsGridPane();
@@ -265,24 +266,34 @@ public class CartPageController implements Initializable {
         product2.setVisible(false);
         product3.setDisable(true);
         product3.setVisible(false);
-        for (int i = productIndex; i < productIndex + 3 && i < cart.getProducts().size(); i++) {
-            Product product = cart.getProducts().get(i);
-            Seller seller = cart.getSellers().get(i);
+        for (int i = productIndex; i < productIndex + 3 && i < cartProductSize; i++) {
+//            Product product = cart.getProducts().get(i);
+//            Seller seller = cart.getSellers().get(i);
             double priceInit = 0;
-            int items = cart.getItemsByProductId(product.getProductId(), seller);
 
+            ArrayList<String> info=View.getClient().getProductDetailForCartPage(i);
+
+            String productName=info.get(0);
+            String productImageAddress=info.get(1);
+            String companyName=info.get(2);
+            double productPrice= Double.parseDouble(info.get(3));
+            boolean isProductOff=Boolean.parseBoolean(info.get(4));
+            double productOffPercentage= Double.parseDouble(info.get(5));
+            int items= Integer.parseInt(info.get(6));
+
+//            int items = cart.getItemsByProductId(product.getProductId(), seller);
             if (i == productIndex) {
                 product1.setVisible(true);
                 product1.setDisable(false);
                 firstProductBar.setVisible(true);
-                setProductsImage(productImage1, product.getImageAddress());
-                productName1.setText(product.getName());
-                companyName1.setText(seller.getCompanyName());
-                finalPriceForProduct1.setText(String.valueOf(product.getPrice(seller)));
+                setProductsImage(productImage1, productImageAddress);
+                productName1.setText(productName);
+                companyName1.setText(companyName);
+                finalPriceForProduct1.setText(String.valueOf(productPrice));
                 numberOfProduct1.setText(String.valueOf(items));
-                if (product.getDoesItHaveOff()) {
+                if (isProductOff) {
                     discountPriceForProduct1.setVisible(true);
-                    double discount = product.getPrice(seller) * Integer.parseInt(numberOfProduct1.getText()) * (product.getOffPercentage() / (1.0 + product.getOffPercentage()));
+                    double discount = productPrice * Integer.parseInt(numberOfProduct1.getText()) * (productOffPercentage / (1.0 + productOffPercentage));
                     int n = Math.round((float) discount);
                     discountPriceForProduct1.setText(String.valueOf(n));
                 }
@@ -291,21 +302,21 @@ public class CartPageController implements Initializable {
                 } else if (items > 1) {
                     minus1.setVisible(true);
                 }
-                priceInit = product.getPrice(seller) * Integer.parseInt(numberOfProduct1.getText());
+                priceInit = productOffPercentage * Integer.parseInt(numberOfProduct1.getText());
                 finalPriceForProduct1.setText(String.valueOf(priceInit));
 
             } else if (i == productIndex + 1) {
                 product2.setVisible(true);
                 product2.setDisable(false);
                 secondProductBar.setVisible(true);
-                setProductsImage(productImage2, product.getImageAddress());
-                productName2.setText(product.getName());
-                companyName2.setText(seller.getCompanyName());
+                setProductsImage(productImage2, productImageAddress);
+                productName2.setText(productName);
+                companyName2.setText(companyName);
                 numberOfProduct2.setText(String.valueOf(items));
-                finalPriceForProduct2.setText(String.valueOf(product.getPrice(seller)));
-                if (product.getDoesItHaveOff()) {
+                finalPriceForProduct2.setText(String.valueOf(productPrice));
+                if (isProductOff) {
                     discountPriceForProduct2.setVisible(true);
-                    double discount = product.getPrice(seller) * (product.getOffPercentage() / (1.0 + product.getOffPercentage()));
+                    double discount = productPrice * (productOffPercentage / (1.0 + productOffPercentage));
                     int n = Math.round((float) discount);
                     discountPriceForProduct2.setText(String.valueOf(n));
                 }
@@ -314,19 +325,19 @@ public class CartPageController implements Initializable {
                 } else if (items > 1) {
                     minus2.setVisible(true);
                 }
-                priceInit = product.getPrice(seller) * Integer.parseInt(numberOfProduct2.getText());
+                priceInit = productPrice * Integer.parseInt(numberOfProduct2.getText());
                 finalPriceForProduct2.setText(String.valueOf(priceInit));
             } else if (i == productIndex + 2) {
                 product3.setVisible(true);
                 product3.setDisable(false);
-                setProductsImage(productImage3, product.getImageAddress());
-                productName3.setText(product.getName());
-                companyName3.setText(seller.getCompanyName());
+                setProductsImage(productImage3, productImageAddress);
+                productName3.setText(productName);
+                companyName3.setText(companyName);
                 numberOfProduct3.setText(String.valueOf(items));
-                finalPriceForProduct3.setText(String.valueOf(product.getPrice(seller)));
-                if (product.getDoesItHaveOff()) {
+                finalPriceForProduct3.setText(String.valueOf(productPrice));
+                if (isProductOff) {
                     discountPriceForProduct3.setVisible(true);
-                    double discount = product.getPrice(seller) * (product.getOffPercentage() / (1.0 + product.getOffPercentage()));
+                    double discount = productPrice * (productOffPercentage / (1.0 +productOffPercentage));
                     int n = Math.round((float) discount);
                     discountPriceForProduct3.setText(String.valueOf(n));
                 }
@@ -335,14 +346,19 @@ public class CartPageController implements Initializable {
                 } else if (items > 1) {
                     minus3.setVisible(true);
                 }
-                priceInit = product.getPrice(seller) * Integer.parseInt(numberOfProduct3.getText());
+                priceInit = productPrice * Integer.parseInt(numberOfProduct3.getText());
                 finalPriceForProduct3.setText(String.valueOf(priceInit));
             }
         }
-        totalDiscount.setText(String.valueOf(cart.calculateOffPrice()));
-        totalPrice.setText(String.valueOf(cart.calculatePrice()));
-        moneyMinusDiscount.setText(String.valueOf(cart.calculateFinalPrice()));
-        finalPayNumber.setText(String.valueOf(cart.calculateFinalPrice()));
+
+        ArrayList<String > info=View.getClient().getProductCalculationCartPage();
+        String calculateOffPrice=info.get(0);
+        String calculatePrice=info.get(1);
+        String calculateFinalPrice=info.get(2);
+        totalDiscount.setText(String.valueOf(calculateOffPrice));
+        totalPrice.setText(String.valueOf(calculatePrice));
+        moneyMinusDiscount.setText(String.valueOf(calculateFinalPrice));
+        finalPayNumber.setText(String.valueOf(calculateFinalPrice));
     }
 
     private void centerImage(ImageView imageView) {
@@ -405,17 +421,17 @@ public class CartPageController implements Initializable {
     }
 
     private void doIncAndDecCalculation(int delta, int items) {
-        Product product = cart.getProducts().get(productIndex + delta);
-        Seller seller = cart.getSellers().get(cart.getProducts().indexOf(product));
-        cart.addItem(items, product, seller);
-        if (cart.getItemsByProductId(product.getProductId(), seller) == 0) {
-            int index = cart.getProducts().indexOf(product);
-            cart.removeItem(product, seller);
-            rectangleIndex = 1;
-            productIndex = 0;
-        }
-        setProductsGridPane();
-        setMainPains();
+//        Product product = cart.getProducts().get(productIndex + delta);
+//        Seller seller = cart.getSellers().get(cart.getProducts().indexOf(product));
+//        cart.addItem(items, product, seller);
+//        if (cart.getItemsByProductId(product.getProductId(), seller) == 0) {
+//            int index = cart.getProducts().indexOf(product);
+//            cart.removeItem(product, seller);
+//            rectangleIndex = 1;
+//            productIndex = 0;
+//        }
+//        setProductsGridPane();
+//        setMainPains();
     }
 
     public void gotoBuyMenu(MouseEvent mouseEvent) {
@@ -472,7 +488,7 @@ public class CartPageController implements Initializable {
         addressTextField.clear();
         explanationsTextField.clear();
         discountTextField.clear();
-        priceToPayLabel.setText(String.valueOf(cart.calculateFinalPrice()));
+        priceToPayLabel.setText(String.valueOf(View.getClient().getProductCalculationCartPage().get(2)));
     }
 
     public void mouseClicked(MouseEvent mouseEvent) {
@@ -610,21 +626,22 @@ public class CartPageController implements Initializable {
     }
 
     public boolean isDiscountAvailable(String discountCode) {
-        if (discountCode.equals("")) {
-            return true;
-        }
-        Costumer costumer = (Costumer) Controller.currentUser;
-        if (((Costumer) Controller.currentUser).getDiscountCodeById(discountCode) == null) {
-            return false;
-        }
-        if (costumer.getDiscountCodeById(discountCode).getStartDate().getTime() > new Date().getTime()) {
-            return false;
-        }
-        if (costumer.getDiscountCodeById(discountCode).getEndDate().getTime() < new Date().getTime()) {
-            costumer.removeDiscountCode(costumer.getDiscountCodeById(discountCode));
-            return false;
-        }
-        return true;
+//        if (discountCode.equals("")) {
+//            return true;
+//        }
+//        Costumer costumer = (Costumer) Controller.currentUser;
+//        if (((Costumer) Controller.currentUser).getDiscountCodeById(discountCode) == null) {
+//            return false;
+//        }
+//        if (costumer.getDiscountCodeById(discountCode).getStartDate().getTime() > new Date().getTime()) {
+//            return false;
+//        }
+//        if (costumer.getDiscountCodeById(discountCode).getEndDate().getTime() < new Date().getTime()) {
+//            costumer.removeDiscountCode(costumer.getDiscountCodeById(discountCode));
+//            return false;
+//        }
+//        return true;
+        return false;
     }
 
     //handle errors!!!
@@ -650,66 +667,70 @@ public class CartPageController implements Initializable {
     }
 
     public static String finishPayment(String discountCode) {
-        Costumer costumer = (Costumer) Controller.currentUser;
-        Cart cart = costumer.getCart();
-        Set<Seller> sellers = new HashSet<>(cart.getSellers());
-        int discount = 0;
-        if (!discountCode.equals("no")) {
-            discount = costumer.getDiscountCodeById(discountCode).getDiscountPercent();
-        }
-        if ((getTotalPrice() * (1 - discount / 100)) > costumer.getCredit()) {
-            return "your credit is not enough";
-        }
-        for (Seller seller : sellers) {
-            double paidAmount = 0;
-            double reducedAmountForOff = 0;
-            ArrayList<Product> products = new ArrayList<>();
-            for (int i = 0; i < cart.getSellers().size(); i++) {
-                if (cart.getSellers().get(i).equals(seller)) {
-                    paidAmount += (cart.getProducts().get(i).getPrice(seller) * cart.getItemsByProductId(cart.getProducts().get(i).getProductId(), seller));
-                    products.add(cart.getProducts().get(i));
-                }
-            }
-            for (Product product : products) {
-                if (product.remainingProductForSeller(seller) < cart.getItemsByProductId(product.getProductId(), seller)) {
-                    return product.getName() + " for seller " + seller.getUsername()
-                            + " not available for count " + cart.getItemsByProductId(product.getProductId(), seller);
-                }
-                product.addAvailableItemsForSeller(seller, cart.getItemsByProductId(product.getProductId(), seller) * -1);
-                int offPercent = 0;
-                for (Off off : seller.getOffs()) {
-                    if (off.getProducts().contains(product)) {
-                        offPercent = off.getOffAmount();
-                    }
-                }
-                reducedAmountForOff += (product.getPrice(seller) / (1 - offPercent / 100)) - (product.getPrice(seller));
-            }
-            costumer.addBuyLog(new BuyLog(paidAmount * (1 - discount / 100), discount, products
-                    , seller.getUsername(), DataBase.getLogId(), new Date()));
-            seller.addSellLog(new SellLog(paidAmount, reducedAmountForOff, products, costumer.getUsername(), DataBase.getLogId(), new Date()));
-            seller.addCredit(getTotalPrice());
-        }
-        String answer = "payment done";
-        if (getTotalPrice() > 1000000) {
-            answer += "\ngift discount code activated for your account";
-            ArrayList<Costumer> allowed = new ArrayList<>();
-            allowed.add(costumer);
-            costumer.addDiscountCode(new DiscountCode("monthly gift"
-                    , new Date(), new Date(2592000000L + new Date().getTime()), 10
-                    , 50000, 2, allowed));
-        }
-        costumer.addCredit((getTotalPrice() * -1) * (1 - (discount / 100)));
-        costumer.setCart(new Cart());
-        return answer;
+//        Costumer costumer = (Costumer) Controller.currentUser;
+//        Cart cart = costumer.getCart();
+//        Set<Seller> sellers = new HashSet<>(cart.getSellers());
+//        int discount = 0;
+//        if (!discountCode.equals("no")) {
+//            discount = costumer.getDiscountCodeById(discountCode).getDiscountPercent();
+//        }
+//        if ((getTotalPrice() * (1 - discount / 100)) > costumer.getCredit()) {
+//            return "your credit is not enough";
+//        }
+//        for (Seller seller : sellers) {
+//            double paidAmount = 0;
+//            double reducedAmountForOff = 0;
+//            ArrayList<Product> products = new ArrayList<>();
+//            for (int i = 0; i < cart.getSellers().size(); i++) {
+//                if (cart.getSellers().get(i).equals(seller)) {
+//                    paidAmount += (cart.getProducts().get(i).getPrice(seller) * cart.getItemsByProductId(cart.getProducts().get(i).getProductId(), seller));
+//                    products.add(cart.getProducts().get(i));
+//                }
+//            }
+//            for (Product product : products) {
+//                if (product.remainingProductForSeller(seller) < cart.getItemsByProductId(product.getProductId(), seller)) {
+//                    return product.getName() + " for seller " + seller.getUsername()
+//                            + " not available for count " + cart.getItemsByProductId(product.getProductId(), seller);
+//                }
+//                product.addAvailableItemsForSeller(seller, cart.getItemsByProductId(product.getProductId(), seller) * -1);
+//                int offPercent = 0;
+//                for (Off off : seller.getOffs()) {
+//                    if (off.getProducts().contains(product)) {
+//                        offPercent = off.getOffAmount();
+//                    }
+//                }
+//                reducedAmountForOff += (product.getPrice(seller) / (1 - offPercent / 100)) - (product.getPrice(seller));
+//            }
+//            costumer.addBuyLog(new BuyLog(paidAmount * (1 - discount / 100), discount, products
+//                    , seller.getUsername(), DataBase.getLogId(), new Date()));
+//            seller.addSellLog(new SellLog(paidAmount, reducedAmountForOff, products, costumer.getUsername(), DataBase.getLogId(), new Date()));
+//            seller.addCredit(getTotalPrice());
+//        }
+//        String answer = "payment done";
+//        if (getTotalPrice() > 1000000) {
+//            answer += "\ngift discount code activated for your account";
+//            ArrayList<Costumer> allowed = new ArrayList<>();
+//            allowed.add(costumer);
+//            costumer.addDiscountCode(new DiscountCode("monthly gift"
+//                    , new Date(), new Date(2592000000L + new Date().getTime()), 10
+//                    , 50000, 2, allowed));
+//        }
+//        costumer.addCredit((getTotalPrice() * -1) * (1 - (discount / 100)));
+//        costumer.setCart(new Cart());
+//        return answer;
+        return "";
     }
 
+
+
     public static double getTotalPrice() {
-        Cart cart = ((Costumer) Controller.currentUser).getCart();
-        double totalPrice = 0;
-        for (int i = 0; i < cart.getProducts().size(); i++) {
-            totalPrice += (cart.getProducts().get(i).getPrice(cart.getSellers().get(i)) * cart.getItemsByProductId(cart.getProducts().get(i).getProductId(), cart.getSellers().get(i)));
-        }
-        return totalPrice;
+//        Cart cart = ((Costumer) Controller.currentUser).getCart();
+//        double totalPrice = 0;
+//        for (int i = 0; i < cartProductSize; i++) {
+//            totalPrice += (cart.getProducts().get(i).getPrice(cart.getSellers().get(i)) * cart.getItemsByProductId(cart.getProducts().get(i).getProductId(), cart.getSellers().get(i)));
+//        }
+//        return totalPrice;
+        return 0.0;
     }
 
     public void checkInformation(ActionEvent event) {

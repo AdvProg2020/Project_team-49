@@ -1543,6 +1543,24 @@ public class Client {
         return returnValue;
     }
 
+    public boolean isCurrentUserCustomer() {
+        String command = "isCurrentUserCustomer";
+        command = command.concat("!@");
+        command = command.concat(token);
+        boolean returnValue = false;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            String rawInput = (ed.decrypt(dataInputStream.readUTF()));
+            if (rawInput.equalsIgnoreCase("true")) {
+                returnValue = true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
     public void addComment(long productId, String title, String comment) {
         String command = "addComment" + "!@" + productId + "!@" + title + "!@" + comment;
         try {
@@ -1772,6 +1790,69 @@ public class Client {
         }
         return returnValue;
     }
+
+    public String getSellerUserNameByCompanyName(String companyName, long productId) {
+        String command = "getSellerUserNameByCompanyName!@" + productId + "!@" + companyName;
+        String returnValue = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public int getCartProductsSize(){
+        String command="getCartProductsSize!@"+token;
+        int returnValue=0;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue = Integer.parseInt(ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public ArrayList<String> getProductDetailForCartPage(int index){
+        String command="getProductDetailForCartPage!@"+token+"!@"+index;
+        ArrayList<String> returnValue;
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput = (ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        for (int i = 0; i < rawOutput.split("!@").length; i++) {
+//            returnValue.add(command.split("!@")[i]);
+//        }
+        returnValue=new ArrayList<>(Arrays.asList(rawOutput.split("!@")));
+        return returnValue;
+    }
+
+    public ArrayList<String> getProductCalculationCartPage(){
+        String command="getProductCalculationCartPage!@"+token;
+        ArrayList<String> returnValue=new ArrayList<>();
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput = (ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        for (int i = 0; i < rawOutput.split("!@").length; i++) {
+//            returnValue.add(command.split("!@")[i]);
+//        }
+        returnValue=new ArrayList<>(Arrays.asList(rawOutput.split("!@")));
+        return returnValue;
+    }
+
 
 
     class ED {

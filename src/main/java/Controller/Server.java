@@ -44,7 +44,7 @@ public class Server {
         while (true) {
             DataBase.saveAllData();
             try {
-                Thread.sleep(100000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -710,7 +710,8 @@ public class Server {
                     if (command.startsWith("getProductSellerNameByIndex")) {
                         long productId = Long.parseLong(command.split("!@")[1]);
                         int index = Integer.parseInt(command.split("!@")[2]);
-                        dataOutputStream.writeUTF(ed.encrypt(Controller.getProductById(productId).getAllSellers().get(index).getUsername()));
+                        String test = Controller.getProductById(productId).getAllSellers().get(index).getUsername();
+                        dataOutputStream.writeUTF(ed.encrypt(test));
                         dataOutputStream.flush();
                     }
                     if (command.startsWith("getProductPriceBySellerUserName")) {
@@ -801,6 +802,7 @@ public class Server {
                         String sellerUserName = command.split("!@")[2];
                         int count = Integer.parseInt(command.split("!@")[3]);
                         String token = command.split("!@")[4];
+                        Seller seller = Controller.getProductById(productId).getSellerByUsername(sellerUserName);
                         Controller.addToCartWithToken(onlineUsers.get(token), Controller.getProductById(productId), Controller.getProductById(productId).getSellerByUsername(sellerUserName), count);
 //                        Controller.addToCart(Controller.getProductById(productId), Controller.getProductById(productId).getSellerByUsername(sellerUserName), count);
                         dataOutputStream.writeUTF(ed.encrypt(""));
@@ -1131,6 +1133,86 @@ public class Server {
                     if (command.startsWith("getIsProductOff")) {
                         long productId = Long.parseLong(command.split("!@")[1]);
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getDoesItHaveOff())));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getSellerUserNameByCompanyName")) {
+                        long productId = Long.parseLong(command.split("!@")[1]);
+                        String companyName = command.split("!@")[2];
+                        String output = "";
+                        for (Seller seller : Controller.getProductById(productId).getAllSellers()) {
+                            if (seller.getCompanyName().equalsIgnoreCase(companyName)) {
+                                output = seller.getUsername();
+                                break;
+                            }
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(output));
+                        dataOutputStream.flush();
+                    }
+
+                    if (command.startsWith("isCurrentUserCustomer")){
+                        String token = command.split("!@")[1];
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(onlineUsers.get(token).getType().equalsIgnoreCase("Customer"))));
+                        dataOutputStream.flush();
+                    }
+
+                    if (command.startsWith("getCartProductsSize")){
+                        String token = command.split("!@")[1];
+                        User user=onlineUsers.get(token);
+                        Cart cart = null;
+                        if (user.getType().equalsIgnoreCase("costumer")) {
+                            cart = ((Costumer) user).getCart();
+                        } else if (user.getType().equalsIgnoreCase("guest")) {
+                            cart = ((Guest) user).getCart();
+                        }
+                        if (cart==null){
+                            dataOutputStream.writeUTF(ed.encrypt("0"));
+                            dataOutputStream.flush();
+                            continue;
+                        }
+                        int output=cart.getProducts().size();
+                        dataOutputStream.writeUTF(ed.encrypt(String.valueOf(output)));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductDetailForCartPage")){
+                        String token = command.split("!@")[1];
+                        int index=Integer.parseInt(command.split("!@")[2]);
+                        User user=onlineUsers.get(token);
+                        Cart cart = null;
+                        if (user.getType().equalsIgnoreCase("costumer")) {
+                            cart = ((Costumer) user).getCart();
+                        } else if (user.getType().equalsIgnoreCase("guest")) {
+                            cart = ((Guest) user).getCart();
+                        }
+                        Product product=cart.getProducts().get(index);
+                        Seller seller=cart.getSellers().get(index);
+                        String output="";
+                        output=output.concat(product.getName());
+                        output=output.concat("!@");
+                        output=output.concat(product.getImageAddress());
+                        output=output.concat("!@");
+                        output=output.concat(seller.getCompanyName());
+                        output=output.concat("!@");
+                        output=output.concat(String.valueOf(product.getPrice(seller)));
+                        output=output.concat("!@");
+                        output=output.concat(String.valueOf(product.getDoesItHaveOff()));
+                        output=output.concat("!@");
+                        output=output.concat(String.valueOf(product.getOffPercentage()));
+                        output=output.concat("!@");
+                        output=output.concat(String.valueOf(cart.getItemsByProductId(product.getProductId(),seller)));
+                        dataOutputStream.writeUTF(ed.encrypt(output));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getProductCalculationCartPage")){
+                        String token = command.split("!@")[1];
+                        User user=onlineUsers.get(token);
+                        Cart cart = null;
+                        if (user.getType().equalsIgnoreCase("costumer")) {
+                            cart = ((Costumer) user).getCart();
+                        } else if (user.getType().equalsIgnoreCase("guest")) {
+                            cart = ((Guest) user).getCart();
+                        }
+                        String output=cart.calculateOffPrice()+"!@"+cart.calculatePrice()+"!@"+cart.calculateFinalPrice();
+                        dataOutputStream.writeUTF(ed.encrypt(output));
                         dataOutputStream.flush();
                     }
                 }
