@@ -1695,6 +1695,32 @@ public class Client {
         }
     }
 
+    public ArrayList<String> getContactsForSupport() {
+        String answer = "";
+        ArrayList<String> contacts = new ArrayList<>();
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getContactsForSupport!@" + token));
+            dataOutputStream.flush();
+            answer = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (!answer.equalsIgnoreCase("")) {
+            contacts = new ArrayList<>(Arrays.asList(answer.split("!@")));
+        }
+        return contacts;
+    }
+
+    public void sendMessageForSupport(String message, String username) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("sendMessageForSupport!@" + token + "!@" + username + "!@" + message));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     class ED {
         private Cipher ecipher;

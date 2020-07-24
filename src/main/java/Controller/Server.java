@@ -1011,7 +1011,11 @@ public class Server {
                                     , ((Support) DataBase.getUserByUsername(support)));
                             chat.addMessage("Chat Started!");
                             ((Costumer) DataBase.getUserByUsername(costumer)).addChat(chat);
+                            chat = new Chat(((Costumer) DataBase.getUserByUsername(costumer))
+                                    , ((Support) DataBase.getUserByUsername(support)));
+                            chat.addMessage("Chat Started!");
                             ((Support) DataBase.getUserByUsername(support)).addChat(chat);
+                            ((Support) DataBase.getUserByUsername(support)).addContact(DataBase.getUserByUsername(costumer));
                         }
                         dataOutputStream.writeUTF(ed.encrypt("Done"));
                         dataOutputStream.flush();
@@ -1019,6 +1023,33 @@ public class Server {
                     if (command.startsWith("sendMessageForCostumer")) {
                         String support = command.split("!@")[2];
                         String costumer = onlineUsers.get(command.split("!@")[1]).getUsername();
+                        for (Chat chat : ((Costumer) DataBase.getUserByUsername(costumer)).getChats()) {
+                            if (chat.getSupport().getUsername().equals(support)) {
+                                chat.addMessage(command.split("!@")[3]);
+                                break;
+                            }
+                        }
+                        for (Chat chat : ((Support) DataBase.getUserByUsername(support)).getChats()) {
+                            if (chat.getCostumer().getUsername().equals(costumer)) {
+                                chat.addMessage(command.split("!@")[3]);
+                                break;
+                            }
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt("Done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getContactsForSupport")) {
+                        Support support = (Support) onlineUsers.get(command.split("!@")[1]);
+                        String answer = "";
+                        for (User contact : support.getContacts()) {
+                            answer += contact.getUsername() + "!@";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("sendMessageForSupport")) {
+                        String costumer = command.split("!@")[2];
+                        String support = onlineUsers.get(command.split("!@")[1]).getUsername();
                         for (Chat chat : ((Costumer) DataBase.getUserByUsername(costumer)).getChats()) {
                             if (chat.getSupport().getUsername().equals(support)) {
                                 chat.addMessage(command.split("!@")[3]);

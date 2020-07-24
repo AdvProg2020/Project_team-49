@@ -26,6 +26,10 @@ public class Support extends User {
         chats.add(chat);
     }
 
+    public void addContact(User user) {
+        contacts.add(user);
+    }
+
     @Override
     public String getType() {
         return "Support";

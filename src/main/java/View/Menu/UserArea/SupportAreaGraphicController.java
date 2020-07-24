@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -48,7 +45,16 @@ public class SupportAreaGraphicController implements Initializable {
     public ImageView correctFormatEditImage;
     public ImageView wrongFormatEditImage;
     public Pane submitPersonalInformationPane;
+    public Button startChatButton;
+    public TextField chooseContact;
+    public ImageView sendMessageImage;
+    public TextField chatType;
+    public ListView chatMain;
+    public ListView contactsStatus;
+    public Pane supportPain;
     private ArrayList<String> support = new ArrayList<>();
+    private ArrayList<String> chat = new ArrayList<>();
+    private String contactForChat = "";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -63,6 +69,10 @@ public class SupportAreaGraphicController implements Initializable {
         View.client.cancelSong();
         //View.client.startSong("src/main/resources/Sound/ManagerArea/BackGround.mp3");
 
+    }
+
+    private void setChat() {
+        chat = View.client.getChatForSupport(contactForChat);
     }
 
     private void setPersonalInfoLabels() {
@@ -80,6 +90,8 @@ public class SupportAreaGraphicController implements Initializable {
         editPersonalInfoLabel.setDisable(true);
         editPersonalInfoLabel.setVisible(false);
         personalInfoLabel.setVisible(false);
+        supportPain.setVisible(false);
+        supportPain.setDisable(true);
 
         setSupport();
     }
@@ -223,5 +235,51 @@ public class SupportAreaGraphicController implements Initializable {
         scene.setRoot(View.getCurrentPane());
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void refreshChat(MouseEvent mouseEvent) {
+        if (contactForChat.equals("")) {
+            return;
+        }
+        setChat();
+        chatMain.getItems().clear();
+        for (String s : chat) {
+            chatMain.getItems().add(s);
+        }
+    }
+
+    public void sendMessage(MouseEvent mouseEvent) {
+        View.client.sendMessageForSupport("Support: " + chatType.getText(), contactForChat);
+        chatType.setText("");
+        refreshChat(mouseEvent);
+    }
+
+    public void startChat(MouseEvent mouseEvent) {
+        contactForChat = chooseContact.getText();
+        chooseContact.setText("");
+        refreshChat(mouseEvent);
+    }
+
+    public void goToChatsPain(MouseEvent mouseEvent) {
+        closeALlPanes();
+        supportPain.setVisible(true);
+        supportPain.setDisable(false);
+        setSupportsPainContent();
+    }
+
+    private void setSupportsPainContent() {
+        contactsStatus.getItems().clear();
+        ArrayList<String> contacts = View.client.getContactsForSupport();
+        for (String contact : contacts) {
+            Label label = new Label();
+            label.setPrefWidth(200);
+            label.setPrefHeight(30);
+            label.setText(contact);
+            contactsStatus.getItems().add(label);
+        }
+
+        chatMain.getItems().clear();
+        chatType.setText("");
+        chooseContact.setText("");
     }
 }
