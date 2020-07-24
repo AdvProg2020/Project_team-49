@@ -996,6 +996,44 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(answer));
                         dataOutputStream.flush();
                     }
+                    if (command.startsWith("startChatForCostumer")) {
+                        String support = command.split("!@")[2];
+                        String costumer = onlineUsers.get(command.split("!@")[1]).getUsername();
+                        boolean flag = false;
+                        for (Chat chat : ((Costumer) DataBase.getUserByUsername(costumer)).getChats()) {
+                            if (chat.getSupport().getUsername().equals(support)) {
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if (!flag) {
+                            Chat chat = new Chat(((Costumer) DataBase.getUserByUsername(costumer))
+                                    , ((Support) DataBase.getUserByUsername(support)));
+                            chat.addMessage("Chat Started!");
+                            ((Costumer) DataBase.getUserByUsername(costumer)).addChat(chat);
+                            ((Support) DataBase.getUserByUsername(support)).addChat(chat);
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt("Done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("sendMessageForCostumer")) {
+                        String support = command.split("!@")[2];
+                        String costumer = onlineUsers.get(command.split("!@")[1]).getUsername();
+                        for (Chat chat : ((Costumer) DataBase.getUserByUsername(costumer)).getChats()) {
+                            if (chat.getSupport().getUsername().equals(support)) {
+                                chat.addMessage(command.split("!@")[3]);
+                                break;
+                            }
+                        }
+                        for (Chat chat : ((Support) DataBase.getUserByUsername(support)).getChats()) {
+                            if (chat.getCostumer().getUsername().equals(costumer)) {
+                                chat.addMessage(command.split("!@")[3]);
+                                break;
+                            }
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt("Done"));
+                        dataOutputStream.flush();
+                    }
                     if (command.equalsIgnoreCase("clickSound")){
 //                        new Thread(new Runnable() {
 //                            @Override

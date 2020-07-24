@@ -10,8 +10,8 @@ public class Chat {
     private Costumer costumer;
     private Support support;
 
-    public Chat(ArrayList<String> messages, Costumer costumer, Support support) {
-        this.messages = messages;
+    public Chat(Costumer costumer, Support support) {
+        this.messages = new ArrayList<>();
         this.costumer = costumer;
         this.support = support;
     }
@@ -28,14 +28,16 @@ public class Chat {
         return support;
     }
 
+    public void addMessage(String message) {
+        messages.add(message);
+    }
+
     @Override
     public String toString() {
         String message = "";
         for (String s : messages) {
-            message += s + "@#";
+            message += s + "!@";
         }
-        return message + "!@" +
-                costumer.getUsername() + "!@" +
-                support.getUsername();
+        return message;
     }
 }

@@ -110,12 +110,19 @@ public class CostumerAreaGraphicController implements Initializable {
     public Pane supportPain;
     public ListView supportsStatus;
     public Label supportLabel;
+    public Button startChatButton;
+    public TextField chooseSupport;
+    public ImageView sendMessageImage;
+    public TextField chatType;
+    public ListView chatMain;
     private ArrayList<String> costumer = new ArrayList<>();
     private int discountCodesIndex = 0;
     private int imagesLog1Index = 0;
     private int imagesLog2Index = 0;
     private int logIndex = 0;
     ArrayList<String> logHistory = new ArrayList<>();
+    private ArrayList<String> chat = new ArrayList<>();
+    private String supportUsernameForChat = "";
     private SimpleDateFormat formatter;
     private ArrayList<String> discountCodes;
 
@@ -139,6 +146,10 @@ public class CostumerAreaGraphicController implements Initializable {
 
     private void setLogHistory() {
         logHistory = View.client.getBuyLogs();
+    }
+
+    private void setChat() {
+        chat = View.client.getChatForCostumer(supportUsernameForChat);
     }
 
     private ArrayList<String> getBoughtProduct(String buyLog) {
@@ -678,5 +689,38 @@ public class CostumerAreaGraphicController implements Initializable {
             }
             supportsStatus.getItems().add(label);
         }
+
+        chatMain.getItems().clear();
+        chatType.setText("");
+        chooseSupport.setText("");
+    }
+
+    public void refreshChat(MouseEvent mouseEvent) {
+        if (supportUsernameForChat.equals("")) {
+            return;
+        }
+        setChat();
+        for (String s : chat) {
+            Label label = new Label();
+            label.setPrefHeight(30);
+            label.setPrefWidth(620);
+            label.setText(s);
+            chatMain.getItems().add(label);
+        }
+    }
+
+    public void startChat(MouseEvent mouseEvent) {
+        if(chooseSupport.getText().equals("")) {
+            return;
+        }
+        supportUsernameForChat = chooseSupport.getText();
+        View.client.startChatForCostumer(supportUsernameForChat);
+        refreshChat(mouseEvent);
+    }
+
+    public void sendMessage(MouseEvent mouseEvent) {
+        View.client.sendMessageForCostumer("Costumer: " + chatType.getText(), supportUsernameForChat);
+        chatType.setText("");
+        refreshChat(mouseEvent);
     }
 }

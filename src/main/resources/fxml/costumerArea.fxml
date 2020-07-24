@@ -849,15 +849,38 @@
                         <DropShadow color="#959595" height="9.5" radius="4.375" width="10.0" />
                      </effect>
                      <children>
-                        <ListView fx:id="supportsStatus" layoutX="759.0" layoutY="70.0" prefHeight="300.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                        <ListView fx:id="supportsStatus" layoutX="759.0" layoutY="70.0" prefHeight="285.0" prefWidth="216.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
                            <effect>
                               <DropShadow color="#959595" height="9.75" radius="4.4375" width="10.0" />
                            </effect>
                         </ListView>
-                        <Label alignment="CENTER" layoutX="795.0" layoutY="29.0" prefHeight="32.0" prefWidth="128.0" text="Supports List">
+                        <Label alignment="CENTER" layoutX="803.0" layoutY="28.0" prefHeight="32.0" prefWidth="128.0" text="Supports List">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
+                        <Pane layoutX="69.0" layoutY="35.0" onMouseClicked="#refreshChat" prefHeight="376.0" prefWidth="640.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                           <effect>
+                              <DropShadow color="#959595" height="9.75" radius="4.4375" width="10.0" />
+                           </effect>
+                           <children>
+                              <ListView fx:id="chatMain" layoutX="10.0" layoutY="9.0" prefHeight="317.0" prefWidth="620.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                                 <effect>
+                                    <DropShadow color="#959595" height="9.75" radius="4.4375" width="10.0" />
+                                 </effect>
+                              </ListView>
+                              <TextField fx:id="chatType" layoutX="10.0" layoutY="333.0" prefHeight="40.0" prefWidth="572.0" />
+                              <ImageView fx:id="sendMessageImage" fitHeight="40.0" fitWidth="40.0" layoutX="590.0" layoutY="333.0" onMouseClicked="#sendMessage" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../photos/UserArea/costumerArea/sendMessage.png" />
+                                 </image></ImageView>
+                           </children>
+                        </Pane>
+                        <TextField fx:id="chooseSupport" layoutX="759.0" layoutY="368.0" prefHeight="42.0" prefWidth="155.0" />
+                        <Button fx:id="startChatButton" layoutX="923.0" layoutY="368.0" mnemonicParsing="false" onMouseClicked="#startChat" prefHeight="42.0" prefWidth="52.0" text="Chat">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
                      </children>
                   </Pane>
                   <Label fx:id="supportLabel" disable="true" layoutX="371.0" layoutY="157.0" prefHeight="36.0" prefWidth="102.0" text="Support" textFill="#959595" visible="false">

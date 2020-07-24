@@ -1654,7 +1654,7 @@ public class Client {
             e.printStackTrace();
         }
         if (!answer.equalsIgnoreCase("")) {
-            chat = new ArrayList<>(Arrays.asList(answer.split("#\\$")));
+            chat = new ArrayList<>(Arrays.asList(answer.split("!@")));
         }
         return chat;
     }
@@ -1670,9 +1670,29 @@ public class Client {
             e.printStackTrace();
         }
         if (!answer.equalsIgnoreCase("")) {
-            chat = new ArrayList<>(Arrays.asList(answer.split("#\\$")));
+            chat = new ArrayList<>(Arrays.asList(answer.split("!@")));
         }
         return chat;
+    }
+
+    public void startChatForCostumer(String username) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("startChatForCostumer!@" + token + "!@" + username));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendMessageForCostumer(String message, String username) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("sendMessageForCostumer!@" + token + "!@" + username + "!@" + message));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
