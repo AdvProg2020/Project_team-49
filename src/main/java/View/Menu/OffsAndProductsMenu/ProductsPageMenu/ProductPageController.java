@@ -448,7 +448,7 @@ public class ProductPageController implements Initializable {
 //        productName.setText(product.getName());
         productName.setText(productNameDetail);
 //        brandLabel.setText(product.getBrand());
-        productName.setText(productBrandDerail);
+        brandLabel.setText(productBrandDerail);
         try {
             categoryLabel.setText(View.getClient().getProductParentCategory(productIdDetail));
         } catch (NullPointerException e) {
@@ -649,7 +649,8 @@ public class ProductPageController implements Initializable {
         }
 
 //        Controller.addToCart(Controller.getSelectedProduct(),Controller.getSelectedProduct().getSellerByUsername(sellerNameLabel.getText()),1);
-        View.getClient().addToCart(productIdDetail,sellerNameLabel.getText(),1);
+        String sellerUserName=View.getClient().getSellerUserNameByCompanyName(sellerNameLabel.getText(),productIdDetail);
+        View.getClient().addToCart(productIdDetail,sellerUserName,1);
 //        System.out.println(Controller.addToCart(Controller.getSelectedProduct(),Controller.getSelectedProduct().getSellerByUsername(sellerNameLabel.getText()),1));
         Scene scene = ((Node) mouseEvent.getSource()).getScene();
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();

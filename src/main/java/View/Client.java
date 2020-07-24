@@ -70,6 +70,7 @@ public class Client {
         this.socket = new Socket("127.0.0.1", 8086);
         this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
         this.dataInputStream = new DataInputStream(socket.getInputStream());
+        dataOutputStream.writeUTF("Hello");
         String key = dataInputStream.readUTF();
         System.out.println(this.type);
         ed = new ED(key);
@@ -1093,7 +1094,7 @@ public class Client {
         try {
             dataOutputStream.writeUTF(ed.encrypt("addProduct!@" + file.length() + "!@" + fileType + "!@" + token + "!@"
                     + info.get(0) + "!@" + info.get(1) + "!@" + info.get(2) + "!@" + info.get(3)
-                    + "!@" + info.get(4) + "!@" + info.get(5)));
+                    + "!@" + info.get(4) + "!@" + info.get(5) + "!@" + info.get(6)));
             dataOutputStream.flush();
             dataInputStream.readUTF();
             byte[] buffer = new byte[4096];
@@ -1104,8 +1105,8 @@ public class Client {
             }
             dataOutputStream.write(new byte[1]);
             dataOutputStream.flush();
-            connectToServer();
             fileInputStream.close();
+            connectToServer();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -1131,8 +1132,8 @@ public class Client {
                 remainingBytes -= readBytes;
                 fileOutputStream.write(buffer, 0, readBytes);
             }
-            connectToServer();
             fileOutputStream.close();
+            connectToServer();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -1542,6 +1543,24 @@ public class Client {
         return returnValue;
     }
 
+    public boolean isCurrentUserCustomer() {
+        String command = "isCurrentUserCustomer";
+        command = command.concat("!@");
+        command = command.concat(token);
+        boolean returnValue = false;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            String rawInput = (ed.decrypt(dataInputStream.readUTF()));
+            if (rawInput.equalsIgnoreCase("true")) {
+                returnValue = true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
     public void addComment(long productId, String title, String comment) {
         String command = "addComment" + "!@" + productId + "!@" + title + "!@" + comment;
         try {
@@ -1771,6 +1790,69 @@ public class Client {
         }
         return returnValue;
     }
+
+    public String getSellerUserNameByCompanyName(String companyName, long productId) {
+        String command = "getSellerUserNameByCompanyName!@" + productId + "!@" + companyName;
+        String returnValue = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public int getCartProductsSize(){
+        String command="getCartProductsSize!@"+token;
+        int returnValue=0;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            returnValue = Integer.parseInt(ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public ArrayList<String> getProductDetailForCartPage(int index){
+        String command="getProductDetailForCartPage!@"+token+"!@"+index;
+        ArrayList<String> returnValue;
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput = (ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        for (int i = 0; i < rawOutput.split("!@").length; i++) {
+//            returnValue.add(command.split("!@")[i]);
+//        }
+        returnValue=new ArrayList<>(Arrays.asList(rawOutput.split("!@")));
+        return returnValue;
+    }
+
+    public ArrayList<String> getProductCalculationCartPage(){
+        String command="getProductCalculationCartPage!@"+token;
+        ArrayList<String> returnValue=new ArrayList<>();
+        String rawOutput="";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            rawOutput = (ed.decrypt(dataInputStream.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        for (int i = 0; i < rawOutput.split("!@").length; i++) {
+//            returnValue.add(command.split("!@")[i]);
+//        }
+        returnValue=new ArrayList<>(Arrays.asList(rawOutput.split("!@")));
+        return returnValue;
+    }
+
 
     public void exitFromSite() {
         try {

@@ -1139,7 +1139,7 @@ public class ManagerAreaGraphicController implements Initializable {
             lNameLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
         }
-        if (!emailReg.getText().matches("(\\w+)@(\\w+)")) {
+        if (!emailReg.getText().matches("(\\w+)@(\\w+)(\\.)(\\w+)")) {
             emailReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             emailLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
@@ -1303,7 +1303,7 @@ public class ManagerAreaGraphicController implements Initializable {
             lNameSupLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
         }
-        if (!emailSupReg.getText().matches("(\\w+)@(\\w+)")) {
+        if (!emailSupReg.getText().matches("(\\w+)@(\\w+)(\\.)(\\w+)")) {
             emailSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             emailSupLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;

@@ -199,6 +199,9 @@ public class SellerAreaGraphicController implements Initializable {
     public Rectangle explanationRec;
     public TextField explanationTextField;
     public TextField imageTextField;
+    public CheckBox isFileCheckBox;
+    public Label addProductImageLabel;
+    public Button browseButton;
     private ArrayList<String> seller = new ArrayList<>();
     private int offsIndex = 0;
     private int productsIndex = 0;
@@ -1029,6 +1032,7 @@ public class SellerAreaGraphicController implements Initializable {
         productCount1.setText(product1.get(5));
         productExplanation1.setText(product1.get(4));
         productImage1.setImage(new Image(View.client.getProductImageAddress(product1.get(0)).substring(19)));
+        centerImage(productImage1);
 
         if (size == 1) return;
         ArrayList<String> product2 = new ArrayList<>(Arrays.asList(products.get(productsIndex + 1).split("!@")));
@@ -1041,6 +1045,7 @@ public class SellerAreaGraphicController implements Initializable {
         productCount2.setText(product2.get(5));
         productExplanation2.setText(product2.get(4));
         productImage2.setImage(new Image(View.client.getProductImageAddress(product2.get(0).substring(19))));
+        centerImage(productImage2);
     }
 
     public void seeMoreProducts(MouseEvent mouseEvent) {
@@ -1203,6 +1208,10 @@ public class SellerAreaGraphicController implements Initializable {
         countTextField.setText("");
         explanationTextField.setText("");
 
+        browseButton.setText("Browse Image");
+        addProductImageLabel.setText("image");
+        isFileCheckBox.setSelected(false);
+
         nameRec.setStroke(Color.valueOf("#959595"));
         brandRec.setStroke(Color.valueOf("#959595"));
         priceRec.setStroke(Color.valueOf("#959595"));
@@ -1254,11 +1263,11 @@ public class SellerAreaGraphicController implements Initializable {
             errorFound = true;
         }
 
-        ImageView image = new ImageView(new File(imageTextField.getText()).toURI().toString());
-        if (image.getImage() == null) {
-            imageRec.setStroke(Color.valueOf("#fb3449"));
-            errorFound = true;
-        }
+//        ImageView image = new ImageView(new File(imageTextField.getText()).toURI().toString());
+//        if (image.getImage() == null) {
+//            imageRec.setStroke(Color.valueOf("#fb3449"));
+//            errorFound = true;
+//        }
 
         if(!errorFound){
             File file = new File(imageTextField.getText());
@@ -1269,6 +1278,11 @@ public class SellerAreaGraphicController implements Initializable {
             info.add(explanationTextField.getText());
             info.add(categoryTextField.getText());
             info.add(countTextField.getText());
+            if (isFileCheckBox.isSelected()) {
+                info.add("file");
+            } else {
+                info.add("image");
+            }
             String fileType = imageTextField.getText().substring(imageTextField.getText().length() - 3);
             View.client.addProduct(info, file, fileType);
             goBackToManageProducts(mouseEvent);
@@ -1308,14 +1322,34 @@ public class SellerAreaGraphicController implements Initializable {
 
     public void browseImage(MouseEvent mouseEvent) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose Image");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png")
-        );
+        if (isFileCheckBox.isSelected()) {
+            fileChooser.setTitle("Choose File");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                    new FileChooser.ExtensionFilter("PNG", "*.png"),
+                    new FileChooser.ExtensionFilter("TEXT", "*.txt"),
+                    new FileChooser.ExtensionFilter("PDF", "*.pdf")
+            );
+        } else {
+            fileChooser.setTitle("Choose Image");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                    new FileChooser.ExtensionFilter("PNG", "*.png")
+            );
+        }
         File image = fileChooser.showOpenDialog(((Node) mouseEvent.getSource()).getScene().getWindow());
         if (image != null) {
             imageTextField.setText(image.getAbsolutePath());
+        }
+    }
+
+    public void checkIsFile(ActionEvent actionEvent) {
+        if (isFileCheckBox.isSelected()) {
+            browseButton.setText("Browse File");
+            addProductImageLabel.setText("file");
+        } else {
+            browseButton.setText("Browse Image");
+            addProductImageLabel.setText("image");
         }
     }
 }
