@@ -2,7 +2,6 @@ package Bank.Controller;
 
 import Bank.Model.Account;
 import Bank.Model.Receipt;
-import Models.User.Request.Request;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -64,7 +63,7 @@ public class DataBase {
         }
     }
 
-    private static void loadAllAccounts() {
+    public static void loadAllAccounts() {
         InputStream inputStream;
         ObjectInputStream objectInputStream;
         try {
@@ -106,7 +105,7 @@ public class DataBase {
         }
     }
 
-    private static void saveAllBankData(){
+    public static void saveAllBankData(){
         saveAllAccounts();
         saveAllReceipts();
     }

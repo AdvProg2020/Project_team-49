@@ -6,12 +6,14 @@ import Bank.Controller.ReceiptController;
 import Bank.Controller.TokenController;
 import Bank.Model.Account;
 import Bank.Model.Token;
-import Controller.DataBase;
-import Controller.Server;
+import Bank.Controller.DataBase;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
+
+import javax.xml.crypto.Data;
+import java.awt.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -26,8 +28,27 @@ public class BankServer {
     public static HashMap<Token, Account> onlineUsers = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
-        DataBase.dataBaseRun();
+        DataBase.bankDataBaseRun();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                check();
+            }
+        }).start();
+
         new ServerImp().run();
+    }
+
+    public static void check() {
+        while(true){
+            checkTokenIsDead();
+            DataBase.saveAllBankData();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private static void checkTokenIsDead() {
@@ -44,16 +65,8 @@ public class BankServer {
 
     static class ServerImp {
         public void run() throws IOException {
-            ServerSocket serverSocket = new ServerSocket(8080);
+            ServerSocket serverSocket = new ServerSocket(1212);
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> checkTokenIsDead()));
-                    timeline.setCycleCount(Timeline.INDEFINITE);
-                    timeline.play();
-                }
-            }).start();
 
             while (true) {
                 Socket clientSocket;
@@ -79,11 +92,15 @@ public class BankServer {
             shouldRun = true;
         }
 
+        @Override
+        public void run() {
+            handleClient();
+        }
+
         private void handleClient() {
             try {
                 while (shouldRun) {
                     String command = dataInputStream.readUTF();
-
                     if (command.equals("isThereAnyAccountWithUsernameInBank")) {
                         String username = dataInputStream.readUTF();
                         String response = "false";
@@ -95,9 +112,11 @@ public class BankServer {
                     if (command.equals("createAccountInBank")) {
                         String message = dataInputStream.readUTF();
                         String[] input = message.split("!@");
+
                         AccountController.createAccount(input);
                         dataOutputStream.writeUTF("done");
                         dataOutputStream.flush();
+                        System.out.println(DataBase.allAccounts.size());
                         continue;
                     }
                     if (command.equals("isPasswordCorrectForBankAccount")) {
@@ -127,7 +146,9 @@ public class BankServer {
                     }
                     if (command.equals("getBankAccountInformation")) {
                         String bankToken = dataInputStream.readUTF();
-                        String response = AccountController.getAccountInformation(onlineUsers.get(bankToken));
+                        System.out.println(bankToken);
+                        String response = AccountController.getAccountInformation((bankToken));
+                        System.out.println("resopse for bank info " + response);
                         dataOutputStream.writeUTF(response);
                         dataOutputStream.flush();
                         continue;
@@ -179,6 +200,7 @@ public class BankServer {
                         String receiptType = input[0];
                         String bankToken = input[1];
                         String response = ReceiptController.getReceiptsWithGivenType(receiptType, bankToken);
+                        System.out.println("response in bank server : " + response);
                         dataOutputStream.writeUTF(response);
                         dataOutputStream.flush();
                         continue;
@@ -192,7 +214,16 @@ public class BankServer {
                         dataOutputStream.flush();
                         continue;
                     }
+                    if (command.equals("exitFromBank")) {
+                        String bankToken = (dataInputStream.readUTF());
+                        Controller.exitFromBankWithToken(bankToken);
+                        shouldRun = false;
+                        dataOutputStream.writeUTF("done");
+                        dataOutputStream.flush();
+                        continue;
+                    }
                 }
+                System.out.println("there we go");
                 dataInputStream.close();
                 dataOutputStream.close();
                 socket.close();

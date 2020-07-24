@@ -665,6 +665,11 @@ public class MainBarController implements Initializable {
     public void goToBankServer(MouseEvent mouseEvent) {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
+        client.goToBankServer();
+        stage.setOnCloseRequest(e -> {
+            e.consume();
+            client.exitFromBank();
+        });
         Pane pane = null;
         try {
             pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/bank/getToken.fxml"));

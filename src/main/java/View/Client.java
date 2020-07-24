@@ -846,10 +846,9 @@ public class Client {
         }
     }
 
-    public void goToBankServer(boolean shouldOpenBankPage) {
+    public void goToBankServer() {
         try {
             dataOutputStream.writeUTF(ed.encrypt("goToBankServer"));
-            dataOutputStream.flush();
             dataOutputStream.flush();
 
             dataInputStream.readUTF();
@@ -873,7 +872,7 @@ public class Client {
         return true;
     }
 
-    public void createAccountInBank(String message) { // not fucking complete
+    public void createAccountInBank(String message) {
         try {
             dataOutputStream.writeUTF(ed.encrypt("createAccountInBank"));
             dataOutputStream.flush();
@@ -959,7 +958,7 @@ public class Client {
 
     public void createReceipt(String type, String money, String source, String destination, String description) {
         try {
-            String message = type + "!@" + money + "!@" + source + "!@" + destination + "!@" + description;
+            String message = type + "!@" + money + "!@" + source + "!@" + destination + "!@" + description + "!@" + bankToken;
             dataOutputStream.writeUTF(ed.encrypt("createReceipt"));
             dataOutputStream.flush();
             dataOutputStream.writeUTF(ed.encrypt(message));
@@ -1010,7 +1009,47 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public String getReceiptsWithGivenType(String type) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getReceiptsWithGivenType"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(type + "!@" + bankToken));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+            return response;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getReceiptDetailsWithID(String receiptID) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getReceiptDetailsWithID"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(receiptID + "!@" + bankToken));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+            return response;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public void exitFromBank() {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("exitFromBank"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(bankToken));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -1436,7 +1475,7 @@ public class Client {
     }
 
     public ArrayList<String> getProductInfoForProductPage() {
-        String command = "getProductInfoForProductPage!@"+token;
+        String command = "getProductInfoForProductPage!@" + token;
         String rawInput = "";
         ArrayList<String> returnValue = new ArrayList<>();
         try {
@@ -1594,20 +1633,6 @@ public class Client {
         }
     }
 
-    public String[] getReceiptsWithGivenType(String type) {
-        try {
-            dataOutputStream.writeUTF(ed.encrypt("getReceiptsWithGivenType"));
-            dataOutputStream.flush();
-            dataOutputStream.writeUTF(ed.encrypt(type + "!@" + bankToken));
-            dataOutputStream.flush();
-            String response = ed.decrypt(dataInputStream.readUTF());
-            return response.split("#\\$");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 
     public ArrayList<String> getSupportsForCostumer() {
         ArrayList<String> supports = new ArrayList<>();
@@ -1719,23 +1744,9 @@ public class Client {
         }
     }
 
-    public String getReceiptDetailsWithID(String receiptID) {
-        try {
-            dataOutputStream.writeUTF(ed.encrypt("getReceiptDetailsWithID"));
-            dataOutputStream.flush();
-            dataOutputStream.writeUTF(ed.encrypt(receiptID + "!@" + bankToken));
-            dataOutputStream.flush();
-            String response = ed.decrypt(dataInputStream.readUTF());
-            return response;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
 
-    }
-
-    public void setSelectedProducts(long productId){
-        String command="setSelectedProducts!@"+productId+"!@"+token;
+    public void setSelectedProducts(long productId) {
+        String command = "setSelectedProducts!@" + productId + "!@" + token;
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
@@ -1745,15 +1756,15 @@ public class Client {
         }
     }
 
-    public boolean getIsProductOff(long productId){
-        String command="getIsProductOff!@"+productId;
-        boolean returnValue=false;
+    public boolean getIsProductOff(long productId) {
+        String command = "getIsProductOff!@" + productId;
+        boolean returnValue = false;
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
-            String rawInput=ed.decrypt(dataInputStream.readUTF());
-            if (rawInput.equalsIgnoreCase("true")){
-                returnValue=true;
+            String rawInput = ed.decrypt(dataInputStream.readUTF());
+            if (rawInput.equalsIgnoreCase("true")) {
+                returnValue = true;
             }
         } catch (IOException e) {
             e.printStackTrace();

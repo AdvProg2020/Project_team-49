@@ -1,13 +1,8 @@
 package View.bankGraphicControllers;
-
-import Controller.Controller;
 import View.View;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -41,16 +36,20 @@ public class GetTokenGraphicController {
         passLogin.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
         boolean errorFound = false;
         if (!userLogin.getText().matches("\\w+")) {
+            System.out.println("1");
             userLogin.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             errorFound = true;
         } else if (!View.client.isThereAnyAccountWithUsernameInBank(userLogin.getText())) {
+            System.out.println("2");
             userLogin.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             errorFound = true;
         }
         if (!passLogin.getText().matches("\\w+")) {
+            System.out.println("3");
             passLogin.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             errorFound = true;
         } else if (!View.client.isPasswordCorrectForBankAccount(passLogin.getText(), userLogin.getText())) {
+            System.out.println("4");
             passLogin.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             errorFound = true;
         }

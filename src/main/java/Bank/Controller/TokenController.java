@@ -1,5 +1,4 @@
 package Bank.Controller;
-
 import Bank.Model.Token;
 import Bank.View.BankServer;
 

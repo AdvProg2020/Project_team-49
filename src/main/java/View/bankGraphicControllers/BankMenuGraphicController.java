@@ -1,5 +1,4 @@
 package View.bankGraphicControllers;
-
 import View.View;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -58,19 +57,26 @@ public class BankMenuGraphicController {
     }
 
     public void getBalanceButton(MouseEvent mouseEvent) {
-        if (View.client.isTokenExpired()) {
+        boolean b = View.client.isTokenExpired();
+        System.out.println(b);
+        if (b) {
             goToSpecificPage("getToken", mouseEvent);
         } else {
             goToSpecificPage("getBalancePage", mouseEvent);
         }
     }
 
+
+
     private void goToSpecificPage(String pageName, MouseEvent mouseEvent) {
+
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         Scene scene = ((Node) mouseEvent.getSource()).getScene();
         Pane getToken = null;
         try {
+            System.out.println(pageName);
             getToken = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/bank/" + pageName + ".fxml"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }

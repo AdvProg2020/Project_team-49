@@ -1,5 +1,4 @@
 package View.bankGraphicControllers;
-
 import View.View;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,7 +26,9 @@ public class GetBalancePageGraphicController implements Initializable {
     }
 
     public void goBackToMainMenu(MouseEvent mouseEvent) {
-        if(View.client.isTokenExpired()){
+        boolean b = View.client.isTokenExpired();
+        System.out.println(b);
+        if(b){
             goToSpecificPage("getToken" , mouseEvent);
         }else{
             goToSpecificPage("bankMenu" , mouseEvent);
@@ -36,6 +38,9 @@ public class GetBalancePageGraphicController implements Initializable {
 
     private void setLabels() {
         String[] data =  View.client.getBankAccountInformation();
+        for (String datum : data) {
+            System.out.println(datum);
+        }
         balanceLabel.setText(data[0]);
         usernameLabel.setText(data[1]);
         accountNumberLabel.setText(data[2]);

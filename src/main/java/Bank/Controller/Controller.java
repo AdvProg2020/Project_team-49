@@ -27,10 +27,27 @@ public class Controller {
     }
 
     public static void payThisReceipt(String receiptID, String bankToken) {
-        Account account = BankServer.onlineUsers.get(bankToken);
+        Account account = BankServer.onlineUsers.get(TokenController.getTokenByTokenID(bankToken));
         Receipt receipt = ReceiptController.getReceiptWithID(receiptID, bankToken);
+        if (receipt.getReceiptType().equals("withdraw")) {
+            account.setBalance(account.getBalance() - receipt.getMoney());
+        } else if (receipt.getReceiptType().equals("deposit")) {
+            account.setBalance(account.getBalance() + receipt.getMoney());
+        } else if (receipt.getReceiptType().equals("move")) {
+            Account desAccount = AccountController.getAccountWithID(String.valueOf(receipt.getDestinationID()));
+            account.setBalance(account.getBalance() - receipt.getMoney());
+            desAccount.setBalance(desAccount.getBalance() + receipt.getMoney());
+        }
         receipt.setDone(true);
-        account.setBalance(account.getBalance() - receipt.getMoney());
+
+    }
+
+    public static void exitFromBankWithToken(String bankToken) {
+        try{
+            BankServer.onlineUsers.remove(TokenController.getTokenByTokenID(bankToken));
+        }catch (Exception e){
+
+        }
     }
 }
 

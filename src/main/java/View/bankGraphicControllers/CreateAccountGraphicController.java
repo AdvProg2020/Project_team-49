@@ -1,16 +1,18 @@
 package View.bankGraphicControllers;
-
 import View.View;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+import View.View;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ public class CreateAccountGraphicController implements Initializable {
     public PasswordField passReg;
     public Label userLabel;
     public TextField usernameReg;
+    public Label usernameNotAvailableLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,9 +56,8 @@ public class CreateAccountGraphicController implements Initializable {
         reset();
 
         if (mouseEvent.getSource().equals(createAccountButton)) {
-            ArrayList<Boolean> booleans = createAccount();
-            if (!booleans.get(1)) {
-                if (booleans.get(0)) {
+           boolean booleans = createAccount();
+            if (!booleans) {
                     Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
                     Scene scene = ((Node) mouseEvent.getSource()).getScene();
                     Pane getToken = null;
@@ -67,7 +69,6 @@ public class CreateAccountGraphicController implements Initializable {
                     scene.setRoot(getToken);
                     stage.setScene(scene);
                     stage.show();
-                }
             }
         }
         if (mouseEvent.getSource().equals(usernameReg)) {
@@ -98,6 +99,7 @@ public class CreateAccountGraphicController implements Initializable {
     }
 
     private void reset() {
+        usernameNotAvailableLabel.setVisible(false);
         if (usernameReg.getText().equals("")) {
             userLabel.setVisible(false);
         }
@@ -125,11 +127,11 @@ public class CreateAccountGraphicController implements Initializable {
         lastNameReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
     }
 
-    private ArrayList<Boolean> createAccount() {
+    private boolean createAccount() {
         boolean errorFound = false;
-        ArrayList<Boolean> booleans = new ArrayList<Boolean>();
-        booleans.add(View.client.hasHeadManager());
+
         if (View.client.isThereAnyAccountWithUsernameInBank(usernameReg.getText())) {
+            usernameNotAvailableLabel.setVisible(true);
             usernameReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             userLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
@@ -168,10 +170,10 @@ public class CreateAccountGraphicController implements Initializable {
         }
 
         if (!errorFound) {
-            View.client.createAccountInBank(userLabel.getText() + "!@" + passLabel.getText() + "!@" + fNameLabel.getText() + "!@" + lNameLabel.getText());
+            View.client.createAccountInBank(usernameReg.getText() + "!@" + passReg.getText() + "!@" + firstNameReg.getText() + "!@" + lastNameReg.getText());
         }
-        booleans.add(errorFound);
-        return booleans;
+
+        return errorFound;
     }
 
 }
