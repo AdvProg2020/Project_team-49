@@ -103,7 +103,7 @@ public class ManageProducts extends Menu {
                         if (content.matches("(?i)back")) {
                             break;
                         }
-                        View.printString(SellerAreaController.editProduct(field, content, Long.parseLong(lastCommand.split("\\s")[1])));
+                        View.printString(SellerAreaController.editProduct(field, content, Long.parseLong(lastCommand.split("\\s")[1]), ""));
                     }
                 }
                 this.parentMenu.run(lastCommand);

@@ -119,7 +119,7 @@ public class SellerArea extends Menu {
                 productInfo.add(scanner.nextLine().trim());
                 View.printString("enter image address:");
                 productInfo.add(scanner.nextLine().trim());
-                View.printString(SellerAreaController.addProduct(productInfo));
+                View.printString(SellerAreaController.addProduct(productInfo, ""));
                 this.parentMenu.run(lastCommand);
             }
         };
@@ -129,7 +129,7 @@ public class SellerArea extends Menu {
         return new Menu("Remove Product", this) {
             @Override
             public void run(String lastCommand) {
-                View.printString(SellerAreaController.removeProduct(Long.parseLong(lastCommand.split("\\s")[2])));
+                View.printString(SellerAreaController.removeProduct(Long.parseLong(lastCommand.split("\\s")[2]), ""));
                 this.parentMenu.run(lastCommand);
             }
         };

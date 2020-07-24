@@ -507,7 +507,8 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
     public void click(MouseEvent mouseEvent) {
         GridPane gridPane=(GridPane) mouseEvent.getSource();
-        Controller.setSelectedProduct(Controller.getProductById(gridPaneToProductId.get(gridPane)));
+//        Controller.setSelectedProduct(Controller.getProductById(gridPaneToProductId.get(gridPane)));
+        View.getClient().setSelectedProducts(gridPaneToProductId.get(gridPane));
         Scene scene=gridPane.getScene();
         Stage stage=(Stage) (scene.getWindow());
 //        Controller.setLastPane(Controller.getCurrentPane());
@@ -597,7 +598,13 @@ public class ProductsPageMenuFxmlController implements Initializable {
 
 
 //        ArrayList<String> images = Controller.getProductImageForFxml(counter);
-        ArrayList<String> images = View.client.getForFxmlProductImage(counter);
+        ArrayList<String> rawImages = View.client.getForFxmlProductImage(counter);
+        ArrayList<String> images=new ArrayList<>();
+        for (String image : rawImages) {
+            String test=image;
+            test=test.substring(19,image.length());
+            images.add(test);
+        }
 
 //        ArrayList<Double> prices = Controller.getProductPriceForFxml(counter);
         ArrayList<Double> prices=View.client.getProductPriceForFxml(counter);

@@ -149,6 +149,9 @@ public class Controller {
             hasHeadManager = true;
             DataBase.addNewUser(new Manager(info.get(0), info.get(2), info.get(3), info.get(4), Long.parseLong(info.get(5)), info.get(1)));
         }
+        if (type.toLowerCase().equalsIgnoreCase("support")) {
+            DataBase.addNewUser(new Support(info.get(0), info.get(2), info.get(3), info.get(4), Long.parseLong(info.get(5)), info.get(1)));
+        }
         return "account created";
     }
 
@@ -188,6 +191,17 @@ public class Controller {
             ((Costumer) currentUser).addProductToCart(product, seller, count);
         }
         return "product added";
+    }
+
+    public static void  addToCartWithToken(User user,Product product, Seller seller, int count) {
+        if (product.remainingProductForSeller(seller) < count) {
+            return;
+        }
+        if (user.getType().equalsIgnoreCase("Guest")) {
+            ((Guest) user).addProductToCart(product, seller, count);
+        } else {
+            ((Costumer) user).addProductToCart(product, seller, count);
+        }
     }
 
     public static void logout() {

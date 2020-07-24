@@ -161,12 +161,11 @@ public class GuestAreaGraphicsController implements Initializable {
         boolean errorFound = false;
         ArrayList<Boolean> booleans = new ArrayList<Boolean>();
         booleans.add(View.client.hasHeadManager());
-        if (View.client.hasUserWithUsername(usernameReg.getText())) {
+        if (!usernameReg.getText().matches("\\w+")) {
             usernameReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             userLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
-        }
-        if (!usernameReg.getText().matches("\\w+")) {
+        } else if (View.client.hasUserWithUsername(usernameReg.getText())) {
             usernameReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             userLabel.setTextFill(Color.valueOf("#fb3449"));
             errorFound = true;
