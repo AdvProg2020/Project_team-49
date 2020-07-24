@@ -212,13 +212,17 @@ public class SellerAreaController {
         } else if (!productInfo.get(5).matches("\\d+")) {
             return "invalid number of items";
         } else {
-            Manager.addRequest(new AddProductRequest(new Product(productInfo.get(0)
+            Product product = new Product(productInfo.get(0)
                     , productInfo.get(1)
                     , Double.parseDouble(productInfo.get(2))
                     , productInfo.get(3)
                     , DataBase.getCategoryByName(productInfo.get(4))
                     , (Seller) DataBase.getUserByUsername(username)
-                    , Integer.parseInt(productInfo.get(5)), productInfo.get(6)) ));
+                    , Integer.parseInt(productInfo.get(5)), productInfo.get(7));
+            if (productInfo.get(6).equals("file")) {
+                product.setIsFile(true);
+            }
+            Manager.addRequest(new AddProductRequest(product));
             return "request sent";
         }
     }

@@ -40,8 +40,8 @@ public class Server {
         new ServerImp().run();
     }
 
-    private static void savePermanently(){
-        while (true){
+    private static void savePermanently() {
+        while (true) {
             DataBase.saveAllData();
             try {
                 Thread.sleep(5000);
@@ -694,7 +694,7 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getAllSellers().size())));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getSellerOfProductByIdCompanyName")){
+                    if (command.startsWith("getSellerOfProductByIdCompanyName")) {
                         long productId = Long.parseLong(command.split("!@")[1]);
                         int index = Integer.parseInt(command.split("!@")[2]);
                         dataOutputStream.writeUTF(ed.encrypt(Controller.getProductById(productId).getAllSellers().get(index).getCompanyName()));

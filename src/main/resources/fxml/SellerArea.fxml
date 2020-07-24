@@ -1336,7 +1336,7 @@
                               <Font name="Raleway" size="21.0" />
                            </font>
                         </Label>
-                        <Label layoutX="439.0" layoutY="207.0" prefHeight="40.0" prefWidth="58.0" text="image" textFill="#7a7a7a">
+                        <Label fx:id="addProductImageLabel" layoutX="439.0" layoutY="207.0" prefHeight="40.0" prefWidth="58.0" text="image" textFill="#7a7a7a">
                            <font>
                               <Font name="Raleway" size="15.0" />
                            </font>
@@ -1417,7 +1417,7 @@
                               <Font size="16.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="imageTextField" layoutX="518.0" layoutY="207.0" prefHeight="39.0" prefWidth="427.0" promptText="image address (from resources)" style="-fx-background-color: #ffffff;">
+                        <TextField fx:id="imageTextField" layoutX="518.0" layoutY="207.0" prefHeight="39.0" prefWidth="427.0" promptText="address" style="-fx-background-color: #ffffff;">
                            <font>
                               <Font size="16.0" />
                            </font></TextField>
@@ -1426,6 +1426,10 @@
                               <Font size="16.0" />
                            </font>
                         </Button>
+                        <CheckBox fx:id="isFileCheckBox" layoutX="518.0" layoutY="262.0" mnemonicParsing="false" onAction="#checkIsFile" prefHeight="43.0" prefWidth="125.0" text="File Product">
+                           <font>
+                              <Font size="14.0" />
+                           </font></CheckBox>
                      </children>
                      <effect>
                         <DropShadow color="#959595" height="9.75" radius="4.4375" width="10.0" />

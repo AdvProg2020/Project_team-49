@@ -1093,7 +1093,7 @@ public class Client {
         try {
             dataOutputStream.writeUTF(ed.encrypt("addProduct!@" + file.length() + "!@" + fileType + "!@" + token + "!@"
                     + info.get(0) + "!@" + info.get(1) + "!@" + info.get(2) + "!@" + info.get(3)
-                    + "!@" + info.get(4) + "!@" + info.get(5)));
+                    + "!@" + info.get(4) + "!@" + info.get(5) + "!@" + info.get(6)));
             dataOutputStream.flush();
             dataInputStream.readUTF();
             byte[] buffer = new byte[4096];
