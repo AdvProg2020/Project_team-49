@@ -505,7 +505,7 @@ public class SellerAreaGraphicController implements Initializable {
         ArrayList<String> products = getSoldProduct(logHistory.get(logIndex));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
             String product = products.get(i);
-            String path = View.client.getProductImageAddress(product.split("!@")[0]);
+            String path = View.client.getProductImageAddress(product.split("!@")[0]).substring(19);
             if (i == 0) {
                 setProductsImage(image11, path);
             } else if (i == 1) {
@@ -542,7 +542,7 @@ public class SellerAreaGraphicController implements Initializable {
         ArrayList<String> products = getSoldProduct(logHistory.get(logIndex + 1));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
             String product = products.get(i);
-            String path = View.client.getProductImageAddress(product.split("!@")[0]);
+            String path = View.client.getProductImageAddress(product.split("!@")[0]).substring(19);
             if (i == 0) {
                 setProductsImage(image21, path);
             } else if (i == 1) {
@@ -759,7 +759,7 @@ public class SellerAreaGraphicController implements Initializable {
         ArrayList<String> products = getOffProducts(offs.get(offsIndex + 1));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
             String product = products.get(i);
-            String path = View.client.getProductImageAddress(product.split("!@")[0]);
+            String path = View.client.getProductImageAddress(product.split("!@")[0]).substring(19);
             if (i == 0) {
                 setProductsImage(image31, path);
             } else if (i == 1) {
@@ -796,7 +796,7 @@ public class SellerAreaGraphicController implements Initializable {
         ArrayList<String> products = getOffProducts(offs.get(offsIndex));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
             String product = products.get(i);
-            String path = View.client.getProductImageAddress(product.split("!@")[0]);
+            String path = View.client.getProductImageAddress(product.split("!@")[0]).substring(19);
             if (i == 0) {
                 setProductsImage(image41, path);
             } else if (i == 1) {
@@ -1028,7 +1028,7 @@ public class SellerAreaGraphicController implements Initializable {
         productPrice1.setText(product1.get(3));
         productCount1.setText(product1.get(5));
         productExplanation1.setText(product1.get(4));
-        productImage1.setImage(new Image(View.client.getProductImageAddress(product1.get(0))));
+        productImage1.setImage(new Image(View.client.getProductImageAddress(product1.get(0)).substring(19)));
 
         if (size == 1) return;
         ArrayList<String> product2 = new ArrayList<>(Arrays.asList(products.get(productsIndex + 1).split("!@")));
@@ -1040,7 +1040,7 @@ public class SellerAreaGraphicController implements Initializable {
         productPrice2.setText(product2.get(3));
         productCount2.setText(product2.get(5));
         productExplanation2.setText(product2.get(4));
-        productImage2.setImage(new Image(View.client.getProductImageAddress(product2.get(0))));
+        productImage2.setImage(new Image(View.client.getProductImageAddress(product2.get(0).substring(19))));
     }
 
     public void seeMoreProducts(MouseEvent mouseEvent) {

@@ -527,10 +527,6 @@ public class Client {
         return sellLogs;
     }
 
-    public File getProductImage(long productId) {
-        return null;
-    }
-
     public ArrayList<String> getSellerOffs() {
         ArrayList<String> offs = new ArrayList<>();
         String answer = "";
@@ -799,7 +795,9 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        discountCodes.addAll(Arrays.asList(answer.split("#\\$")));
+        if (!answer.equalsIgnoreCase("")) {
+            discountCodes.addAll(Arrays.asList(answer.split("#\\$")));
+        }
         return discountCodes;
     }
 
@@ -1122,7 +1120,7 @@ public class Client {
             dataOutputStream.writeUTF(ed.encrypt("getProductImage!@" + productId));
             dataOutputStream.flush();
             answer = ed.decrypt(dataInputStream.readUTF());
-            path = "src/main/resources/photos/productPhotos/clientPhotos/" + answer.split("!@")[0];
+            path = "src/main/resources/photos/clientPhotos/" + answer.split("!@")[0];
             File file = new File(path);
             file.createNewFile();
             long remainingBytes = Long.parseLong(answer.split("!@")[1]);

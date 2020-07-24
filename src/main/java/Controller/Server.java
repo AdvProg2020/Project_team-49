@@ -41,7 +41,7 @@ public class Server {
 
     static class ServerImp {
         public void run() throws IOException {
-            ServerSocket serverSocket = new ServerSocket(8086);
+            ServerSocket serverSocket = new ServerSocket(5678);
             while (true) {
                 Socket clientSocket;
                 clientSocket = serverSocket.accept();
@@ -517,6 +517,8 @@ public class Server {
                             //paretn cagetgori mitone null bashe
                             if (allCategory.getParentCategory() != null) {
                                 info += allCategory.getParentCategory().getName();
+                            } else {
+                                info += "null";
                             }
                             answer += info + "#$";
                         }
@@ -535,6 +537,9 @@ public class Server {
                             user += allUser.getPhoneNumber() + "!@";
                             String status = "Offline";
                             for (User value : onlineUsers.values()) {
+                                if (value.getType().equalsIgnoreCase("guest")) {
+                                    continue;
+                                }
                                 if (value.getUsername().equals(allUser.getUsername())) {
                                     status = "Online";
                                 }
@@ -677,12 +682,6 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getAllSellers().size())));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getSellerOfProductByIdCompanyName")) {
-                        long productId = Long.parseLong(command.split("!@")[1]);
-                        int index = Integer.parseInt(command.split("!@")[2]);
-                        dataOutputStream.writeUTF(ed.encrypt(Controller.getProductById(productId).getAllSellers().get(index).getCompanyName()));
-                        dataOutputStream.flush();
-                    }
                     if (command.startsWith("getSellerOfProductByIdCompanyName")){
                         long productId = Long.parseLong(command.split("!@")[1]);
                         int index = Integer.parseInt(command.split("!@")[2]);
@@ -742,7 +741,7 @@ public class Server {
                             output = output.concat(s);
                             output = output.concat("!@");
                         }
-                        if (output.split("!@").length > 1) {
+                        if (!output.isEmpty()) {
                             output = output.substring(0, output.length() - 2);
                         }
                         dataOutputStream.writeUTF(ed.encrypt(output));
@@ -824,18 +823,18 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(output));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("rateTheProduct")){
-                        long productId=Long.parseLong(command.split("!@")[1]);
-                        double score=Double.parseDouble(command.split("!@")[2]);
+                    if (command.startsWith("rateTheProduct")) {
+                        long productId = Long.parseLong(command.split("!@")[1]);
+                        double score = Double.parseDouble(command.split("!@")[2]);
                         CostumerAreaController.rate(productId, score);
                         dataOutputStream.writeUTF(ed.encrypt(""));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("canRate")){
-                        long productId=Long.parseLong(command.split("!@")[1]);
-                        String outPut="false";
-                        if (CostumerAreaController.canRate(productId)){
-                            outPut="true";
+                    if (command.startsWith("canRate")) {
+                        long productId = Long.parseLong(command.split("!@")[1]);
+                        String outPut = "false";
+                        if (CostumerAreaController.canRate(productId)) {
+                            outPut = "true";
                         }
                         dataOutputStream.writeUTF(ed.encrypt(outPut));
                         dataOutputStream.flush();
