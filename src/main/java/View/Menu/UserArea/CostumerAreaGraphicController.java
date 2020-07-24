@@ -399,7 +399,7 @@ public class CostumerAreaGraphicController implements Initializable {
         ArrayList<String> products = getBoughtProduct(logHistory.get(logIndex));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
             String product = products.get(i);
-            String path = View.client.getProductImageAddress(product.split("!@")[0]);
+            String path = View.client.getProductImageAddress(product.split("!@")[0]).substring(19);
             if (i == 0) {
                 setProductsImage(image11, path);
             } else if (i == 1) {
@@ -436,7 +436,7 @@ public class CostumerAreaGraphicController implements Initializable {
         ArrayList<String> products = getBoughtProduct(logHistory.get(logIndex + 1));
         for (int i = 0; i < 8 && i < products.size() - 1; i++) {
             String product = products.get(i);
-            String path = View.client.getProductImageAddress(product.split("!@")[0]);
+            String path = View.client.getProductImageAddress(product.split("!@")[0]).substring(19);
             if (i == 0) {
                 setProductsImage(image21, path);
             } else if (i == 1) {
@@ -721,6 +721,10 @@ public class CostumerAreaGraphicController implements Initializable {
     }
 
     public void sendMessage(MouseEvent mouseEvent) {
+        if (chatType.getText().equals("")) {
+            refreshChat(mouseEvent);
+            return;
+        }
         View.client.sendMessageForCostumer("Costumer: " + chatType.getText(), supportUsernameForChat);
         chatType.setText("");
         refreshChat(mouseEvent);

@@ -256,11 +256,11 @@ public class Client {
         return returnValue;
     }
 
-    public ArrayList<String> getForFxmlProductImage(long counter){
-        String command="getForFxmlProductImage";
-        command=command.concat("!@");
-        command=command.concat(String.valueOf(counter));
-        String rawOutput="";
+    public ArrayList<String> getForFxmlProductImage(long counter) {
+        String command = "getForFxmlProductImage";
+        command = command.concat("!@");
+        command = command.concat(String.valueOf(counter));
+        String rawOutput = "";
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();
@@ -268,7 +268,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<String> returnValue=new ArrayList<>();
+        ArrayList<String> returnValue = new ArrayList<>();
         if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(s);
@@ -289,8 +289,8 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Double> returnValue=new ArrayList<>();
-        int check=rawOutput.split("!@").length;
+        ArrayList<Double> returnValue = new ArrayList<>();
+        int check = rawOutput.split("!@").length;
         if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Double.parseDouble(s));
@@ -311,7 +311,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<String> returnValue=new ArrayList<>();
+        ArrayList<String> returnValue = new ArrayList<>();
         if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(s);
@@ -332,7 +332,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Double> returnValue=new ArrayList<>();
+        ArrayList<Double> returnValue = new ArrayList<>();
         if (!rawOutput.isEmpty()) {
 
             for (String s : rawOutput.split("!@")) {
@@ -354,7 +354,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Double> returnValue=new ArrayList<>();
+        ArrayList<Double> returnValue = new ArrayList<>();
         if (!rawOutput.isEmpty()) {
 
             for (String s : rawOutput.split("!@")) {
@@ -376,7 +376,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Long> returnValue=new ArrayList<>();
+        ArrayList<Long> returnValue = new ArrayList<>();
         if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(Long.parseLong(s));
@@ -397,7 +397,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Boolean> returnValue=new ArrayList<>();
+        ArrayList<Boolean> returnValue = new ArrayList<>();
         if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 if (s.equalsIgnoreCase("true")) {
@@ -422,7 +422,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Integer> returnValue=new ArrayList<>();
+        ArrayList<Integer> returnValue = new ArrayList<>();
         if (!rawOutput.isEmpty()) {
 
             for (String s : rawOutput.split("!@")) {
@@ -444,7 +444,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<Integer> returnValue=new ArrayList<>();
+        ArrayList<Integer> returnValue = new ArrayList<>();
         if (!rawOutput.isEmpty()) {
 
             for (String s : rawOutput.split("!@")) {
@@ -525,10 +525,6 @@ public class Client {
             sellLogs.addAll(Arrays.asList(answer.split("#\\$")));
         }
         return sellLogs;
-    }
-
-    public File getProductImage(long productId) {
-        return null;
     }
 
     public ArrayList<String> getSellerOffs() {
@@ -629,7 +625,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<String> returnValue=new ArrayList<>();
+        ArrayList<String> returnValue = new ArrayList<>();
         if (!rawOutput.isEmpty()) {
             for (String s : rawOutput.split("!@")) {
                 returnValue.add(s);
@@ -799,7 +795,9 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        discountCodes.addAll(Arrays.asList(answer.split("#\\$")));
+        if (!answer.equalsIgnoreCase("")) {
+            discountCodes.addAll(Arrays.asList(answer.split("#\\$")));
+        }
         return discountCodes;
     }
 
@@ -1083,7 +1081,7 @@ public class Client {
             dataOutputStream.writeUTF(ed.encrypt("getProductImage!@" + productId));
             dataOutputStream.flush();
             answer = ed.decrypt(dataInputStream.readUTF());
-            path = "src/main/resources/photos/productPhotos/clientPhotos/" + answer.split("!@")[0];
+            path = "src/main/resources/photos/clientPhotos/" + answer.split("!@")[0];
             File file = new File(path);
             file.createNewFile();
             long remainingBytes = Long.parseLong(answer.split("!@")[1]);

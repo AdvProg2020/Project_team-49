@@ -508,6 +508,7 @@ public class ManagerAreaGraphicController implements Initializable {
     }
 
     private void setEditCategoryPainContents() {
+        setCategories();
         restartInsideEditCategoryContents();
         int size = categories.size();
         if (size == 0) return;
@@ -525,7 +526,7 @@ public class ManagerAreaGraphicController implements Initializable {
         String category = categories.get(categoriesIndex);
         categoryName1.setText(category.split("!@")[0]);
         String categoryP = category.split("!@")[2];
-        if (categoryP == null) {
+        if (categoryP == "null") {
             parentCategory1.setText("-");
         } else {
             parentCategory1.setText(categoryP);
@@ -539,7 +540,7 @@ public class ManagerAreaGraphicController implements Initializable {
         category = categories.get(categoriesIndex + 1);
         categoryName2.setText(category.split("!@")[0]);
         categoryP = category.split("!@")[2];
-        if (categoryP == null) {
+        if (categoryP == "null") {
             parentCategory2.setText("-");
         } else {
             parentCategory2.setText(categoryP);
@@ -733,6 +734,7 @@ public class ManagerAreaGraphicController implements Initializable {
         } else if (mouseEvent.getSource().equals(removeUser2)) {
             View.client.deleteUser(userNameLabel2.getText());
         }
+        setAllUsers();
         usersIndex = 0;
         setUsersPaneContents();
     }

@@ -249,6 +249,10 @@ public class SupportAreaGraphicController implements Initializable {
     }
 
     public void sendMessage(MouseEvent mouseEvent) {
+        if (chatType.getText().equals("")) {
+            refreshChat(mouseEvent);
+            return;
+        }
         View.client.sendMessageForSupport("Support: " + chatType.getText(), contactForChat);
         chatType.setText("");
         refreshChat(mouseEvent);

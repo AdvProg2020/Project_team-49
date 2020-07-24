@@ -70,7 +70,7 @@
                                                         <Cursor fx:constant="HAND" />
                                                     </cursor>
                                                 </Label>
-                                                <Label fx:id="managerRoleLabel" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="232.0" text="manager" textFill="#aaaaaa" GridPane.rowIndex="1">
+                                                <Label fx:id="managerRoleLabel" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="232.0" text="support" textFill="#aaaaaa" GridPane.rowIndex="1">
                                                     <font>
                                                         <Font name="Raleway" size="20.0" />
                                                     </font>
@@ -408,12 +408,12 @@
                         </Label>
                         <Pane layoutX="69.0" layoutY="35.0" onMouseClicked="#refreshChat" prefHeight="376.0" prefWidth="640.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
                            <children>
-                              <ListView fx:id="chatMain" layoutX="10.0" layoutY="9.0" prefHeight="317.0" prefWidth="620.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
+                              <ListView fx:id="chatMain" layoutX="10.0" layoutY="9.0" onMouseClicked="#refreshChat" prefHeight="317.0" prefWidth="620.0" style="-fx-background-color: #ffffff; -fx-background-radius: 3; -fx-border-radius: 3;">
                                  <effect>
                                     <DropShadow color="#959595" height="9.75" radius="4.4375" width="10.0" />
                                  </effect>
                               </ListView>
-                              <TextField fx:id="chatType" layoutX="10.0" layoutY="333.0" prefHeight="40.0" prefWidth="572.0" />
+                              <TextField fx:id="chatType" layoutX="10.0" layoutY="333.0" onMouseClicked="#refreshChat" prefHeight="40.0" prefWidth="572.0" />
                               <ImageView fx:id="sendMessageImage" fitHeight="40.0" fitWidth="40.0" layoutX="590.0" layoutY="333.0" onMouseClicked="#sendMessage" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../photos/UserArea/costumerArea/sendMessage.png" />
