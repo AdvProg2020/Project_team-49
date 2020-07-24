@@ -1562,7 +1562,7 @@ public class Client {
     }
 
     public void addComment(long productId, String title, String comment) {
-        String command = "addComment" + "!@" + productId + "!@" + title + "!@" + comment;
+        String command = "addComment" + "!@" + productId + "!@" + title + "!@" + comment+"!@"+token;
         try {
             dataOutputStream.writeUTF(ed.encrypt(command));
             dataOutputStream.flush();

@@ -101,7 +101,7 @@ public class SellerAreaController {
         } catch (Exception ParseException) {
             return "invalid end date";
         }
-        Manager.addRequest(new AddOffRequest(new Off(products, OffStatus.inProgressToBuild, dateS, dateE, Integer.parseInt(info.get(3))), (Seller) Controller.currentUser));
+        Manager.addRequest(new AddOffRequest(new Off(products, OffStatus.inProgressToBuild, dateS, dateE, Integer.parseInt(info.get(3))), seller));
         return "request sent";
     }
 

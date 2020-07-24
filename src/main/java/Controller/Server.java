@@ -44,7 +44,7 @@ public class Server {
         while (true) {
             DataBase.saveAllData();
             try {
-                Thread.sleep(10000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -439,7 +439,7 @@ public class Server {
                             dataOutputStream.flush();
                         }
                     }
-                    if (command.equalsIgnoreCase("priceFiltering")) {
+                    if (command.startsWith("priceFiltering")) {
                         double min = Double.parseDouble(command.split("!@")[1]);
                         double max = Double.parseDouble(command.split("!@")[2]);
                         Filter.disablePriceFilter();
@@ -865,7 +865,8 @@ public class Server {
                         long productId = Long.parseLong(command.split("!@")[1]);
                         String title = command.split("!@")[2];
                         String comment = command.split("!@")[3];
-                        OffAndProductMenuController.addCommentsById(productId, title, comment);
+                        String token=command.split("!@")[4];
+                        OffAndProductMenuController.addNewCommentsById(productId, title, comment,onlineUsers.get(token));
                         dataOutputStream.writeUTF(ed.encrypt(""));
                         dataOutputStream.flush();
                     }
