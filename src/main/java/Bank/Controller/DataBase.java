@@ -63,7 +63,7 @@ public class DataBase {
         }
     }
 
-    private static void loadAllAccounts() {
+    public static void loadAllAccounts() {
         InputStream inputStream;
         ObjectInputStream objectInputStream;
         try {
@@ -105,7 +105,7 @@ public class DataBase {
         }
     }
 
-    private static void saveAllBankData(){
+    public static void saveAllBankData(){
         saveAllAccounts();
         saveAllReceipts();
     }

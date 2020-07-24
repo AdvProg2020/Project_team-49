@@ -12,6 +12,7 @@ import javafx.animation.Timeline;
 import javafx.util.Duration;
 
 
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -27,6 +28,7 @@ public class BankServer {
     public static HashMap<Token, Account> onlineUsers = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
+        DataBase.bankDataBaseRun();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -40,6 +42,7 @@ public class BankServer {
     public static void check() {
         while(true){
             checkTokenIsDead();
+            DataBase.saveAllBankData();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

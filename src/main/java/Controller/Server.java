@@ -8,22 +8,16 @@ import Models.User.Request.Request;
 import Models.Category;
 import Models.Product;
 import Models.User.Seller;
-import View.View;
 import com.sun.mail.util.BASE64DecoderStream;
 import com.sun.mail.util.BASE64EncoderStream;
-import javafx.scene.control.Control;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import javax.xml.crypto.Data;
-import java.awt.*;
-import java.awt.image.BandedSampleModel;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -36,7 +30,25 @@ public class Server {
 
     public static void main(String[] args) throws Exception {
         DataBase.dataBaseRun();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                savePermanently();
+            }
+        }).start();
         new ServerImp().run();
+    }
+
+    private static void savePermanently(){
+        while (true){
+            DataBase.saveAllData();
+            try {
+                Thread.sleep(100000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     static class ServerImp {
