@@ -1234,7 +1234,7 @@ public class Client {
     }
 
     public int remainingProductForSellerByUserName(long productId, String userName) {
-        String command = "getSellerOfProductByIdCompanyName";
+        String command = "remainingProductForSellerByUserName";
         command = command.concat("!@");
         command = command.concat(String.valueOf(productId));
         command = command.concat("!@");
@@ -1610,31 +1610,6 @@ public class Client {
         return null;
     }
 
-    public String getReceiptDetailsWithID(String receiptID) {
-        try {
-            dataOutputStream.writeUTF(ed.encrypt("getReceiptDetailsWithID"));
-            dataOutputStream.flush();
-            dataOutputStream.writeUTF(ed.encrypt(receiptID + "!@" + bankToken));
-            dataOutputStream.flush();
-            String response = ed.decrypt(dataInputStream.readUTF());
-            return response;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-
-    }
-
-    public void setSelectedProducts(long productId){
-        String command="setSelectedProducts!@"+productId+"!@"+token;
-        try {
-            dataOutputStream.writeUTF(ed.encrypt(command));
-            dataOutputStream.flush();
-            dataInputStream.readUTF();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public ArrayList<String> getSupportsForCostumer() {
         ArrayList<String> supports = new ArrayList<>();
@@ -1744,6 +1719,48 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getReceiptDetailsWithID(String receiptID) {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("getReceiptDetailsWithID"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(receiptID + "!@" + bankToken));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+            return response;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public void setSelectedProducts(long productId){
+        String command="setSelectedProducts!@"+productId+"!@"+token;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean getIsProductOff(long productId){
+        String command="getIsProductOff!@"+productId;
+        boolean returnValue=false;
+        try {
+            dataOutputStream.writeUTF(ed.encrypt(command));
+            dataOutputStream.flush();
+            String rawInput=ed.decrypt(dataInputStream.readUTF());
+            if (rawInput.equalsIgnoreCase("true")){
+                returnValue=true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
     }
 
 

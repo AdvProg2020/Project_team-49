@@ -1,14 +1,6 @@
 package View.Menu.OffsAndProductsMenu.ProductsPageMenu;
 
-import Controller.Controller;
-import Controller.CostumerAreaController;
-import Controller.OffAndProductMenuController;
-import Controller.DataBase;
-import Models.Category;
-import Models.Comment;
-import Models.Product;
-import Models.Score;
-import Models.User.*;
+
 import View.View;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -171,7 +163,6 @@ public class ProductPageController implements Initializable {
     private ArrayList<ImageView> rateStars = new ArrayList<>();
     private ArrayList<ImageView> rateBar = new ArrayList<>();
 
-    private Product product;
     private double score;
     private int t;
     private static int sellerIndex;
@@ -195,8 +186,9 @@ public class ProductPageController implements Initializable {
         productImageAddressDetail=info.get(1);
         productIdDetail=Long.parseLong(info.get(2));
         productRemainingItemDetail=Integer.parseInt(info.get(3));
-        productScoreSizeDetail=Integer.parseInt(info.get(4));
-        productAverageScoreDetail=Integer.parseInt(info.get(5));
+        productExplanationDetail=info.get(5);
+        productScoreSizeDetail=Integer.parseInt(info.get(6));
+        productAverageScoreDetail=Double.parseDouble(info.get(7));
 
 //        product = Controller.getSelectedProduct();
         sellerIndex = 0;
@@ -278,31 +270,31 @@ public class ProductPageController implements Initializable {
     }
 
     private void doSomeDeepShit() {
-        product.addScore(new Score(new Guest(), 0, product));
-        product.addScore(new Score(new Guest(), 1.6, product));
-        product.addScore(new Score(new Guest(), 0.6, product));
-        product.addScore(new Score(new Guest(), 2.6, product));
-        product.addScore(new Score(new Guest(), 4.6, product));
-        product.addScore(new Score(new Guest(), 5, product));
-        product.addScore(new Score(new Guest(), 3.6, product));
-        product.addScore(new Score(new Guest(), 4.6, product));
-        product.addScore(new Score(new Guest(), 4.6, product));
-        product.addScore(new Score(new Guest(), 4.6, product));
-        product.addScore(new Score(new Guest(), 2.6, product));
-        product.addScore(new Score(new Guest(), 4.6, product));
-
-        product.addAComment(new Comment(DataBase.getAllUsers().get(2), product, "", "it was shit"));
-        product.addAComment(new Comment(DataBase.getAllUsers().get(3), product, "", "it was deep "));
-        product.addAComment(new Comment(DataBase.getAllUsers().get(1), product, "", "it was fuck shit"));
-        product.addAComment(new Comment(DataBase.getAllUsers().get(4), product, "", "deep shit"));
-
-        product.addAComment(new Comment(DataBase.getAllUsers().get(5), product, "", "it was shit"));
-        product.addAComment(new Comment(DataBase.getAllUsers().get(3), product, "", "it was deep "));
-        product.addAComment(new Comment(DataBase.getAllUsers().get(5), product, "", "it was shit"));
-        product.addAComment(new Comment(DataBase.getAllUsers().get(3), product, "", "it was deep "));
-        product.addAComment(new Comment(DataBase.getAllUsers().get(6), product, "", "it was fuck shit"));
-        product.addAComment(new Comment(DataBase.getAllUsers().get(5), product, "", "deep shit"));
-        product.addAComment(new Comment(DataBase.getAllUsers().get(1), product, "", "it shit"));
+//        product.addScore(new Score(new Guest(), 0, product));
+//        product.addScore(new Score(new Guest(), 1.6, product));
+//        product.addScore(new Score(new Guest(), 0.6, product));
+//        product.addScore(new Score(new Guest(), 2.6, product));
+//        product.addScore(new Score(new Guest(), 4.6, product));
+//        product.addScore(new Score(new Guest(), 5, product));
+//        product.addScore(new Score(new Guest(), 3.6, product));
+//        product.addScore(new Score(new Guest(), 4.6, product));
+//        product.addScore(new Score(new Guest(), 4.6, product));
+//        product.addScore(new Score(new Guest(), 4.6, product));
+//        product.addScore(new Score(new Guest(), 2.6, product));
+//        product.addScore(new Score(new Guest(), 4.6, product));
+//
+//        product.addAComment(new Comment(DataBase.getAllUsers().get(2), product, "", "it was shit"));
+//        product.addAComment(new Comment(DataBase.getAllUsers().get(3), product, "", "it was deep "));
+//        product.addAComment(new Comment(DataBase.getAllUsers().get(1), product, "", "it was fuck shit"));
+//        product.addAComment(new Comment(DataBase.getAllUsers().get(4), product, "", "deep shit"));
+//
+//        product.addAComment(new Comment(DataBase.getAllUsers().get(5), product, "", "it was shit"));
+//        product.addAComment(new Comment(DataBase.getAllUsers().get(3), product, "", "it was deep "));
+//        product.addAComment(new Comment(DataBase.getAllUsers().get(5), product, "", "it was shit"));
+//        product.addAComment(new Comment(DataBase.getAllUsers().get(3), product, "", "it was deep "));
+//        product.addAComment(new Comment(DataBase.getAllUsers().get(6), product, "", "it was fuck shit"));
+//        product.addAComment(new Comment(DataBase.getAllUsers().get(5), product, "", "deep shit"));
+//        product.addAComment(new Comment(DataBase.getAllUsers().get(1), product, "", "it shit"));
 
     }
 
@@ -392,7 +384,7 @@ public class ProductPageController implements Initializable {
             availablePane.setVisible(true);
 //            finalPrice.setText(String.valueOf(product.getPrice(seller)));
             finalPrice.setText(String.valueOf(View.getClient().getProductPriceBySellerUserName(productIdDetail,userNameOfSeller)));
-            if (product.getDoesItHaveOff()) {
+            if (View.getClient().getIsProductOff(productIdDetail)) {
                 offerPane.setDisable(false);
                 offerPane.setVisible(true);
                 oldPrice.setText(String.valueOf(View.getClient().getProductPriceBySellerUserName(productIdDetail,userNameOfSeller)));
@@ -470,7 +462,8 @@ public class ProductPageController implements Initializable {
 
     private void setProductsImage() {
 //        Image image=new Image(product.getImageAddress());
-        Image image=new Image(productImageAddressDetail);
+        String imageaddres=productImageAddressDetail.substring(19,productImageAddressDetail.length());
+        Image image=new Image(imageaddres);
         productImage.setImage(image);
 
 //        remainingItems.setText(String.valueOf(product.remainingItems()));
@@ -836,7 +829,7 @@ public class ProductPageController implements Initializable {
         submitCommentButton.setVisible(true);
         submitCommentButton.setDisable(false);
         setCommentRectangle();
-        usernameFirstCharLabel0.setText(String.valueOf(Controller.getCurrentUser().getUsername().charAt(0)));
+        usernameFirstCharLabel0.setText(String.valueOf(View.getClient().getCurrentUserUserName().charAt(0)));
 
         ArrayList<String> commentsNotes=new ArrayList<>();
         commentsNotes=View.getClient().getCommentsNoted(productIdDetail);
@@ -868,80 +861,82 @@ public class ProductPageController implements Initializable {
 //            }
 //        }
 
+        if (!commentsNotes.get(0).isEmpty()&&commentsNotes.size()!=1) {
 //        for (int i = commentsIndex; i < commentsIndex + 4 && i < product.getAllComments().size(); i++) {
-        for (int i = commentsIndex; i < commentsIndex + 4 && i < commentsNotes.size(); i++) {
+            for (int i = commentsIndex; i < commentsIndex + 4 && i < commentsNotes.size(); i++) {
 //            Comment comment = product.getAllComments ().get(i);
-            if (i == commentsIndex) {
-                comment1.setVisible(true);
-                comment1.setDisable(false);
+                if (i == commentsIndex) {
+                    comment1.setVisible(true);
+                    comment1.setDisable(false);
 //                userNameLabel1.setText(comment.getUserWhoComment().getUsername());
-                userNameLabel1.setText(userNameOfComments.get(i));
-                firstCharacterCircle1.setFill(generateRandomColor());
+                    userNameLabel1.setText(userNameOfComments.get(i));
+                    firstCharacterCircle1.setFill(generateRandomColor());
 //                usernameFirstCharLabel1.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
-                usernameFirstCharLabel1.setText(String.valueOf(userNameOfComments.get(i).charAt(0)));
+                    usernameFirstCharLabel1.setText(String.valueOf(userNameOfComments.get(i).charAt(0)));
 //                commentContent1.setText(comment.getNote());
-                commentContent1.setText(commentsNotes.get(i));
-                neverBoughtBar1.setVisible(true);
+                    commentContent1.setText(commentsNotes.get(i));
+                    neverBoughtBar1.setVisible(true);
 //                if (comment.isUserBuyThisProduct()) {
-                if (isUserBoughtThisProduct.get(i)) {
-                    neverBoughtBar1.setVisible(false);
-                }
-            } else if (i == commentsIndex + 1) {
-                comment2.setVisible(true);
-                comment2.setDisable(false);
+                    if (isUserBoughtThisProduct.get(i)) {
+                        neverBoughtBar1.setVisible(false);
+                    }
+                } else if (i == commentsIndex + 1) {
+                    comment2.setVisible(true);
+                    comment2.setDisable(false);
 //                userNameLabel2.setText(comment.getUserWhoComment().getUsername());
-                userNameLabel2.setText(userNameOfComments.get(i));
+                    userNameLabel2.setText(userNameOfComments.get(i));
 
-                firstCharacterCircle2.setFill(generateRandomColor());
+                    firstCharacterCircle2.setFill(generateRandomColor());
 //                usernameFirstCharLabel2.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
-                usernameFirstCharLabel2.setText(String.valueOf(userNameOfComments.get(i).charAt(0)));
+                    usernameFirstCharLabel2.setText(String.valueOf(userNameOfComments.get(i).charAt(0)));
 
 //                commentContent2.setText(comment.getNote());
-                commentContent2.setText(commentsNotes.get(i));
-                neverBoughtBar2.setVisible(true);
+                    commentContent2.setText(commentsNotes.get(i));
+                    neverBoughtBar2.setVisible(true);
 //                if (comment.isUserBuyThisProduct()) {
-                if (isUserBoughtThisProduct.get(i)) {
-                    neverBoughtBar2.setVisible(false);
-                }
+                    if (isUserBoughtThisProduct.get(i)) {
+                        neverBoughtBar2.setVisible(false);
+                    }
 
-            } else if (i == commentsIndex + 2) {
-                comment3.setVisible(true);
-                comment3.setDisable(false);
+                } else if (i == commentsIndex + 2) {
+                    comment3.setVisible(true);
+                    comment3.setDisable(false);
 
 //                userNameLabel3.setText(comment.getUserWhoComment().getUsername());
-                userNameLabel3.setText(userNameOfComments.get(i));
-                firstCharacterCircle3.setFill(generateRandomColor());
+                    userNameLabel3.setText(userNameOfComments.get(i));
+                    firstCharacterCircle3.setFill(generateRandomColor());
 //                usernameFirstCharLabel3.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
-                usernameFirstCharLabel3.setText(String.valueOf(userNameOfComments.get(i).charAt(0)));
+                    usernameFirstCharLabel3.setText(String.valueOf(userNameOfComments.get(i).charAt(0)));
 //                commentContent3.setText(comment.getNote());
-                commentContent3.setText(commentsNotes.get(i));
-                neverBoughtBar3.setVisible(true);
+                    commentContent3.setText(commentsNotes.get(i));
+                    neverBoughtBar3.setVisible(true);
 //                if (comment.isUserBuyThisProduct()) {
-                if (isUserBoughtThisProduct.get(i)) {
-                    neverBoughtBar3.setVisible(false);
-                }
+                    if (isUserBoughtThisProduct.get(i)) {
+                        neverBoughtBar3.setVisible(false);
+                    }
 
-            } else if (i == commentsIndex + 3) {
-                comment4.setVisible(true);
-                comment4.setDisable(false);
+                } else if (i == commentsIndex + 3) {
+                    comment4.setVisible(true);
+                    comment4.setDisable(false);
 //                userNameLabel4.setText(comment.getUserWhoComment().getUsername());
-                userNameLabel4.setText(userNameOfComments.get(i));
-                firstCharacterCircle4.setFill(generateRandomColor());
+                    userNameLabel4.setText(userNameOfComments.get(i));
+                    firstCharacterCircle4.setFill(generateRandomColor());
 //                usernameFirstCharLabel4.setText(String.valueOf(comment.getUserWhoComment().getUsername().charAt(0)));
-                usernameFirstCharLabel4.setText(String.valueOf(userNameOfComments.get(i).charAt(0)));
+                    usernameFirstCharLabel4.setText(String.valueOf(userNameOfComments.get(i).charAt(0)));
 //                commentContent4.setText(comment.getNote());
-                commentContent4.setText(commentsNotes.get(i));
-                neverBoughtBar4.setVisible(true);
+                    commentContent4.setText(commentsNotes.get(i));
+                    neverBoughtBar4.setVisible(true);
 
 //                if (comment.isUserBuyThisProduct()) {
-                if (isUserBoughtThisProduct.get(i)) {
-                    neverBoughtBar4.setVisible(false);
+                    if (isUserBoughtThisProduct.get(i)) {
+                        neverBoughtBar4.setVisible(false);
+                    }
                 }
-            }
 //           if (product.getAllComments().size() > 4) {
-            if (View.getClient().getProductCommentsSize(productIdDetail)>4)
-            seeMoreCommentsPane.setDisable(false);
-            seeMoreCommentsPane.setVisible(true);
+                if (View.getClient().getProductCommentsSize(productIdDetail) > 4)
+                    seeMoreCommentsPane.setDisable(false);
+                seeMoreCommentsPane.setVisible(true);
+            }
         }
     }
 
