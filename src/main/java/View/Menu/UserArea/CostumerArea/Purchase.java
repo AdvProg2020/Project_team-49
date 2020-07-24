@@ -71,7 +71,7 @@ public class Purchase extends Menu {
                 break;
             }
             if (getMatcher(task, "(?i)pay").matches()) {
-                View.printString(CostumerAreaController.finishPayment(receiverInfo));
+                //View.printString(CostumerAreaController.finishPayment(receiverInfo));
                 break;
             }
             View.printString("invalid command");
