@@ -700,6 +700,7 @@ public class CostumerAreaGraphicController implements Initializable {
             return;
         }
         setChat();
+        chatMain.getItems().clear();
         for (String s : chat) {
             Label label = new Label();
             label.setPrefHeight(30);
@@ -714,6 +715,7 @@ public class CostumerAreaGraphicController implements Initializable {
             return;
         }
         supportUsernameForChat = chooseSupport.getText();
+        chooseSupport.setText("");
         View.client.startChatForCostumer(supportUsernameForChat);
         refreshChat(mouseEvent);
     }
