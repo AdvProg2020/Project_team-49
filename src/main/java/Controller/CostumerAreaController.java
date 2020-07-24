@@ -81,13 +81,13 @@ public class CostumerAreaController {
         return totalPrice;
     }
 
-    public static String finishPayment(ArrayList<String> receiverInfo) {
-        Costumer costumer = (Costumer) Controller.currentUser;
+    public static String finishPayment(String discountCode, String username) {
+        Costumer costumer = (Costumer) DataBase.getUserByUsername(username);
         Cart cart = costumer.getCart();
         Set<Seller> sellers = new HashSet<>(cart.getSellers());
         int discount = 0;
-        if (!receiverInfo.get(2).equals("no")) {
-            discount = costumer.getDiscountCodeById(receiverInfo.get(2)).getDiscountPercent();
+        if (!discountCode.equals("no")) {
+            discount = costumer.getDiscountCodeById(discountCode).getDiscountPercent();
         }
         if ((getTotalPrice() * (1 - discount / 100)) > costumer.getCredit()) {
             return "your credit is not enough";

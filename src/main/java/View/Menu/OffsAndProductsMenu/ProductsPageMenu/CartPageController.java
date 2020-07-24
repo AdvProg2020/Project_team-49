@@ -626,9 +626,9 @@ public class CartPageController implements Initializable {
     }
 
     public boolean isDiscountAvailable(String discountCode) {
-//        if (discountCode.equals("")) {
-//            return true;
-//        }
+        if (discountCode.equals("")) {
+            return true;
+        }
 //        Costumer costumer = (Costumer) Controller.currentUser;
 //        if (((Costumer) Controller.currentUser).getDiscountCodeById(discountCode) == null) {
 //            return false;
@@ -652,7 +652,7 @@ public class CartPageController implements Initializable {
         } else {
             discountCode = discountTextField.getText();
         }
-        String payment = finishPayment(discountCode);
+        String payment = View.client.finishPayment(discountCode);
         if (payment.equals("your credit is not enough")) {
 
         }
@@ -667,57 +667,7 @@ public class CartPageController implements Initializable {
     }
 
     public static String finishPayment(String discountCode) {
-//        Costumer costumer = (Costumer) Controller.currentUser;
-//        Cart cart = costumer.getCart();
-//        Set<Seller> sellers = new HashSet<>(cart.getSellers());
-//        int discount = 0;
-//        if (!discountCode.equals("no")) {
-//            discount = costumer.getDiscountCodeById(discountCode).getDiscountPercent();
-//        }
-//        if ((getTotalPrice() * (1 - discount / 100)) > costumer.getCredit()) {
-//            return "your credit is not enough";
-//        }
-//        for (Seller seller : sellers) {
-//            double paidAmount = 0;
-//            double reducedAmountForOff = 0;
-//            ArrayList<Product> products = new ArrayList<>();
-//            for (int i = 0; i < cart.getSellers().size(); i++) {
-//                if (cart.getSellers().get(i).equals(seller)) {
-//                    paidAmount += (cart.getProducts().get(i).getPrice(seller) * cart.getItemsByProductId(cart.getProducts().get(i).getProductId(), seller));
-//                    products.add(cart.getProducts().get(i));
-//                }
-//            }
-//            for (Product product : products) {
-//                if (product.remainingProductForSeller(seller) < cart.getItemsByProductId(product.getProductId(), seller)) {
-//                    return product.getName() + " for seller " + seller.getUsername()
-//                            + " not available for count " + cart.getItemsByProductId(product.getProductId(), seller);
-//                }
-//                product.addAvailableItemsForSeller(seller, cart.getItemsByProductId(product.getProductId(), seller) * -1);
-//                int offPercent = 0;
-//                for (Off off : seller.getOffs()) {
-//                    if (off.getProducts().contains(product)) {
-//                        offPercent = off.getOffAmount();
-//                    }
-//                }
-//                reducedAmountForOff += (product.getPrice(seller) / (1 - offPercent / 100)) - (product.getPrice(seller));
-//            }
-//            costumer.addBuyLog(new BuyLog(paidAmount * (1 - discount / 100), discount, products
-//                    , seller.getUsername(), DataBase.getLogId(), new Date()));
-//            seller.addSellLog(new SellLog(paidAmount, reducedAmountForOff, products, costumer.getUsername(), DataBase.getLogId(), new Date()));
-//            seller.addCredit(getTotalPrice());
-//        }
-//        String answer = "payment done";
-//        if (getTotalPrice() > 1000000) {
-//            answer += "\ngift discount code activated for your account";
-//            ArrayList<Costumer> allowed = new ArrayList<>();
-//            allowed.add(costumer);
-//            costumer.addDiscountCode(new DiscountCode("monthly gift"
-//                    , new Date(), new Date(2592000000L + new Date().getTime()), 10
-//                    , 50000, 2, allowed));
-//        }
-//        costumer.addCredit((getTotalPrice() * -1) * (1 - (discount / 100)));
-//        costumer.setCart(new Cart());
-//        return answer;
+
         return "";
     }
 

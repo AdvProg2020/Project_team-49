@@ -1399,6 +1399,12 @@ public class Server {
                         dataOutputStream.flush();
                         break;
                     }
+                    if (command.startsWith("finishPayment")) {
+                        String costumer = onlineUsers.get(command.split("!@")[1]).getUsername();
+                        CostumerAreaController.finishPayment(command.split("!@")[2], costumer);
+                        dataOutputStream.writeUTF(ed.encrypt("done"));
+                        dataOutputStream.flush();
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

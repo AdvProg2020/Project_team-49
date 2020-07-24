@@ -1866,6 +1866,18 @@ public class Client {
         }
     }
 
+    public String finishPayment(String discountCode) {
+        String response = "";
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("finishPayment!@" + token + "!@" + discountCode));
+            dataOutputStream.flush();
+            response = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
 
     class ED {
         private Cipher ecipher;
