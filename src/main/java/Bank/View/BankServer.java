@@ -26,6 +26,7 @@ import static Bank.Controller.Controller.giveTokenToAccount;
 
 public class BankServer {
     public static HashMap<Token, Account> onlineUsers = new HashMap<>();
+    private static int t = 0;
 
     public static void main(String[] args) throws Exception {
         DataBase.bankDataBaseRun();
@@ -40,9 +41,13 @@ public class BankServer {
     }
 
     public static void check() {
-        while(true){
+        while (true) {
+            t++;
+            if (t == 10) {
+                DataBase.saveAllBankData();
+                t = 0;
+            }
             checkTokenIsDead();
-            DataBase.saveAllBankData();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -101,6 +106,7 @@ public class BankServer {
             try {
                 while (shouldRun) {
                     String command = dataInputStream.readUTF();
+                    System.out.println("command received");
                     if (command.equals("isThereAnyAccountWithUsernameInBank")) {
                         String username = dataInputStream.readUTF();
                         String response = "false";
@@ -126,6 +132,7 @@ public class BankServer {
                         String password = input[1];
                         String response = "false";
                         if (AccountController.isThisPassCorrectForThisAccount(username, password)) response = "true";
+                        System.out.println("bank response : " + response);
                         dataOutputStream.writeUTF(response);
                         dataOutputStream.flush();
                         continue;
@@ -223,7 +230,6 @@ public class BankServer {
                         continue;
                     }
                 }
-                System.out.println("there we go");
                 dataInputStream.close();
                 dataOutputStream.close();
                 socket.close();

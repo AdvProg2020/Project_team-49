@@ -348,7 +348,7 @@ public class GuestAreaGraphicsController implements Initializable {
             View.client.loginAccount(userLogin.getText());
             Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             Scene scene = ((Button) mouseEvent.getSource()).getScene();
-            if(View.getLastPane().getId().equals("mainPane")){
+            if(true){
                 try {
                     System.out.println(Controller.getCurrentUser().getType());
                     Pane mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
@@ -366,7 +366,6 @@ public class GuestAreaGraphicsController implements Initializable {
 
             }
             View.setCurrentPane(View.getLastPane());
-
             scene.setRoot(View.getCurrentPane());
             stage.setScene(scene);
             stage.show();
@@ -408,9 +407,21 @@ public class GuestAreaGraphicsController implements Initializable {
 
     public void goBackToLastPaneFromLogin(MouseEvent mouseEvent) {
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        Scene scene = ((ImageView) mouseEvent.getSource()).getScene();
-        View.setCurrentPane(View.getLastPane());
-        scene.setRoot(View.getCurrentPane());
+        Scene scene = ((Node) mouseEvent.getSource()).getScene();
+        Pane mainMenu = null;
+        Pane mainBar = null;
+        try {
+            mainMenu = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainPage.fxml"));
+            mainBar = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/mainBar.fxml"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        View.setInnerPaneForColor((Pane) ((ScrollPane) mainMenu.getChildren().get(0)).getContent());
+        ScrollPane scrollPane = (ScrollPane) mainMenu.getChildren().get(0);
+        scrollPane.setPrefHeight(800);
+        mainMenu.getChildren().add(mainBar);
+        scene.setRoot(mainMenu);
         stage.setScene(scene);
         stage.show();
     }

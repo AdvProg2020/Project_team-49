@@ -1,5 +1,6 @@
 package Controller;
 
+import Bank.View.BankServer;
 import Models.Category;
 import Models.Off;
 import Models.OffStatus;
@@ -34,7 +35,7 @@ public class Controller {
     private static Product selectedProduct;
 
     private static boolean doesItOffPage;
-    private static ArrayList<Long> compareIds=new ArrayList<>();
+    private static ArrayList<Long> compareIds = new ArrayList<>();
 
     public static void setCompareIds(ArrayList<Long> compareIds) {
         Controller.compareIds = compareIds;
@@ -193,7 +194,7 @@ public class Controller {
         return "product added";
     }
 
-    public static void  addToCartWithToken(User user,Product product, Seller seller, int count) {
+    public static void addToCartWithToken(User user, Product product, Seller seller, int count) {
         if (product.remainingProductForSeller(seller) < count) {
             return;
         }
@@ -362,19 +363,19 @@ public class Controller {
     }
 
 
-    public static int getAllPageNumber(){
-        if (sortedOrFilteredProduct.size()%20==0){
-            return sortedOrFilteredProduct.size()/20;
+    public static int getAllPageNumber() {
+        if (sortedOrFilteredProduct.size() % 20 == 0) {
+            return sortedOrFilteredProduct.size() / 20;
         }
-        return sortedOrFilteredProduct.size()/20 +1;
+        return sortedOrFilteredProduct.size() / 20 + 1;
     }
 
-    public static void restartSortedOrFilteredProduct(){
+    public static void restartSortedOrFilteredProduct() {
         DataBase.sortedOrFilteredProduct.clear();
         DataBase.sortedOrFilteredProduct.addAll(allProducts);
     }
 
-    public static void check(){
+    public static void check() {
 //        allProducts.get(2).setDoesItHaveOff(true);
 //        Date start=new Date();
 //        Date end=new Date(start.getTime()+10*3600*1000*24);
@@ -388,53 +389,59 @@ public class Controller {
 //        allProducts.get(2).setAverageScore(0.2);
 //        allProducts.get(3).setAverageScore(3.7);
 //        allProducts.get(4).setAverageScore(4.5);
-        Category category=new Category("bastani","oof",null);
+        Category category = new Category("bastani", "oof", null);
         allCategories.add(category);
-        Seller seller=new Seller("ahmad","por","mor","asd@gmail.com",123123123,"123","kale");
-        Product product1=new Product("khorma","mihan",1500,"joon",category,seller,10,"");
+        Seller seller = new Seller("ahmad", "por", "mor", "asd@gmail.com", 123123123, "123", "kale");
+        Product product1 = new Product("khorma", "mihan", 1500, "joon", category, seller, 10, "");
         allProducts.add(product1);
         sortedOrFilteredProduct.add(product1);
         for (Product product : allProducts) {
             product.setImageAddress("./photos/MainMenu/commercials/xbox1.png");
         }
     }
+
     private static Media media;
 
     private static MediaPlayer mediaPlayer;
 
-    public static void startSong(String file){
-        media=new Media(new File(file).toURI().toString());
-        mediaPlayer=new MediaPlayer(media);
+    public static void startSong(String file) {
+        media = new Media(new File(file).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
         mediaPlayer.setCycleCount(100);
     }
-    public static void cancelSong(){
-        if (mediaPlayer!=null) {
+
+    public static void cancelSong() {
+        if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
     }
-    public static void resumeSong(){
+
+    public static void resumeSong() {
 //        mediaPlayer=new MediaPlayer(media);
         mediaPlayer.play();
         mediaPlayer.setCycleCount(100);
     }
 
-    public static void startClickSound(){
-        String file="src/main/resources/Sound/ProductsMenu/click.mp3";
-        Media sound=new Media(new File(file).toURI().toString());
-        MediaPlayer player=new MediaPlayer(sound);
+    public static void startClickSound() {
+        String file = "src/main/resources/Sound/ProductsMenu/click.mp3";
+        Media sound = new Media(new File(file).toURI().toString());
+        MediaPlayer player = new MediaPlayer(sound);
         player.play();
     }
 
-    public static String getAllCategories(){
+    public static String getAllCategories() {
         String allCategories = "";
         for (int i = 0; i < DataBase.getAllCategories().size(); i++) {
             allCategories = allCategories.concat(DataBase.getAllCategories().get(i).toString());
-            if(i != DataBase.getAllCategories().size() - 1){
+            if (i != DataBase.getAllCategories().size() - 1) {
                 allCategories = allCategories.concat("#$");
             }
         }
         return allCategories;
     }
 
+    public static void exitFromSite(String token) {
+        Server.onlineUsers.remove(token);
+    }
 }

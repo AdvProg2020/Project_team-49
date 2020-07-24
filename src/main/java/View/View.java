@@ -39,6 +39,7 @@ public class View extends Application {
     private static Pane lastPane;
     private static String color = "f3f3f3";
     private static Pane innerPaneForColor;
+
     public View() {
 
     }
@@ -109,13 +110,11 @@ public class View extends Application {
         stage.show();
         stage.setOnCloseRequest(e -> {
             e.consume();
+            client.exitFromSite();
             System.exit(0);
         });
     }
 
-    private void closeProgram() {
-        DataBase.endProgram();
-    }
 
     private ArrayList<User> getAllUsers() {
         return DataBase.getAllUsers();

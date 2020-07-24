@@ -173,7 +173,7 @@ public class MainBarController implements Initializable {
         if (allCategoriesInformation.size() == 0) return;
         for (String category : allCategoriesInformation) {
             String[] separate = category.split("!@");
-            if (separate.length>1) {
+            if (separate.length > 1) {
                 if (separate[2].equals("null")) {
                     categoryLabels.get(i).setText(separate[0]);
                     categoryLabels.get(i).setVisible(true);
@@ -666,10 +666,7 @@ public class MainBarController implements Initializable {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         client.goToBankServer();
-        stage.setOnCloseRequest(e -> {
-            e.consume();
-            client.exitFromBank();
-        });
+
         Pane pane = null;
         try {
             pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/bank/getToken.fxml"));
@@ -678,6 +675,11 @@ public class MainBarController implements Initializable {
         }
         Scene scene = new Scene(pane);
         stage.setScene(scene);
+        stage.setOnCloseRequest(e -> {
+            e.consume();
+            client.exitFromBank();
+            stage.close();
+        });
         stage.show();
     }
 }

@@ -1772,6 +1772,18 @@ public class Client {
         return returnValue;
     }
 
+    public void exitFromSite() {
+        try {
+            dataOutputStream.writeUTF(ed.encrypt("exitFromSite"));
+            dataOutputStream.flush();
+            dataOutputStream.writeUTF(ed.encrypt(token));
+            dataOutputStream.flush();
+            String response = ed.decrypt(dataInputStream.readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     class ED {
         private Cipher ecipher;
