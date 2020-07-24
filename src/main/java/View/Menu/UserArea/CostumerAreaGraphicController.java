@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -110,19 +107,29 @@ public class CostumerAreaGraphicController implements Initializable {
     public Pane noDiscountsYet;
     public Label discountId2;
     public Label discountId1;
+    public Pane supportPain;
+    public ListView supportsStatus;
+    public Label supportLabel;
+    public Button startChatButton;
+    public TextField chooseSupport;
+    public ImageView sendMessageImage;
+    public TextField chatType;
+    public ListView chatMain;
     private ArrayList<String> costumer = new ArrayList<>();
     private int discountCodesIndex = 0;
     private int imagesLog1Index = 0;
     private int imagesLog2Index = 0;
     private int logIndex = 0;
     ArrayList<String> logHistory = new ArrayList<>();
+    private ArrayList<String> chat = new ArrayList<>();
+    private String supportUsernameForChat = "";
     private SimpleDateFormat formatter;
     private ArrayList<String> discountCodes;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         closeALlPanes();
-        discountCodes = viewCostumerDiscountCodes();
+//        discountCodes = viewCostumerDiscountCodes();
         setCostumer();
         setLogHistory();
         userInfoPane.setDisable(false);
@@ -139,6 +146,10 @@ public class CostumerAreaGraphicController implements Initializable {
 
     private void setLogHistory() {
         logHistory = View.client.getBuyLogs();
+    }
+
+    private void setChat() {
+        chat = View.client.getChatForCostumer(supportUsernameForChat);
     }
 
     private ArrayList<String> getBoughtProduct(String buyLog) {
@@ -527,6 +538,11 @@ public class CostumerAreaGraphicController implements Initializable {
         logIndex = 0;
         discountCodesIndex = 0;
 
+        supportLabel.setDisable(true);
+        supportLabel.setVisible(false);
+        supportPain.setDisable(true);
+        supportPain.setVisible(false);
+
         setCostumer();
     }
 
@@ -648,5 +664,65 @@ public class CostumerAreaGraphicController implements Initializable {
         scene.setRoot(View.getCurrentPane());
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void goToSupportPain(MouseEvent mouseEvent) {
+        closeALlPanes();
+        supportLabel.setDisable(false);
+        supportLabel.setVisible(true);
+        supportPain.setDisable(false);
+        supportPain.setVisible(true);
+        setSupportsPainContent();
+    }
+
+    private void setSupportsPainContent() {
+        supportsStatus.getItems().clear();
+        ArrayList<String> supports = View.client.getSupportsForCostumer();
+        for (String support : supports) {
+            Label label = new Label();
+            label.setPrefWidth(200);
+            label.setPrefHeight(30);
+            label.setText(support.split("!@")[0] + "-" + support.split("!@")[1]);
+            if (support.split("!@")[0].equalsIgnoreCase("online")) {
+                label.setStyle("-fx-border-color: Green;" + "-fx-border-radius: 3;" + "-fx-background-radius: 3");
+                label.setTextFill(Color.GREEN);
+            }
+            supportsStatus.getItems().add(label);
+        }
+
+        chatMain.getItems().clear();
+        chatType.setText("");
+        chooseSupport.setText("");
+    }
+
+    public void refreshChat(MouseEvent mouseEvent) {
+        if (supportUsernameForChat.equals("")) {
+            return;
+        }
+        setChat();
+        chatMain.getItems().clear();
+        for (String s : chat) {
+            Label label = new Label();
+            label.setPrefHeight(30);
+            label.setPrefWidth(620);
+            label.setText(s);
+            chatMain.getItems().add(label);
+        }
+    }
+
+    public void startChat(MouseEvent mouseEvent) {
+        if(chooseSupport.getText().equals("")) {
+            return;
+        }
+        supportUsernameForChat = chooseSupport.getText();
+        chooseSupport.setText("");
+        View.client.startChatForCostumer(supportUsernameForChat);
+        refreshChat(mouseEvent);
+    }
+
+    public void sendMessage(MouseEvent mouseEvent) {
+        View.client.sendMessageForCostumer("Costumer: " + chatType.getText(), supportUsernameForChat);
+        chatType.setText("");
+        refreshChat(mouseEvent);
     }
 }

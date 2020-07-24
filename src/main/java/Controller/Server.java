@@ -1,12 +1,9 @@
 package Controller;
 
-import Models.Category;
-import Models.DiscountCode;
+import Models.*;
 import Models.Log.BuyLog;
 import Models.Log.SellLog;
-import Models.Off;
-import Models.Product;
-import Models.User.Costumer;
+import Models.User.*;
 import Models.User.Request.Request;
 import Models.User.Seller;
 import Models.Category;
@@ -181,11 +178,11 @@ public class Server {
                         dataOutputStream.flush();
                         continue;
                     }
-                    if (command.equalsIgnoreCase("getSubCategories")) {
-                        String rawCategories = "";
+                    if (command.equalsIgnoreCase("getSubCategories")){
+                        String rawCategories="";
                         for (String showSubCategory : Filter.showSubCategories()) {
-                            rawCategories = rawCategories.concat(showSubCategory);
-                            rawCategories = rawCategories.concat("!@");
+                            rawCategories=rawCategories.concat(showSubCategory);
+                            rawCategories=rawCategories.concat("!@");
                         }
                         if (!rawCategories.isEmpty()) {
                             rawCategories = rawCategories.substring(0, rawCategories.length() - 2);
@@ -193,17 +190,17 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(rawCategories));
                         dataOutputStream.flush();
                     }
-                    if (command.equalsIgnoreCase("cancelSong")) {
+                    if (command.equalsIgnoreCase("cancelSong")){
                         Controller.cancelSong();
                         dataOutputStream.writeUTF(ed.encrypt("songCanceled"));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("startSong")) {
-                        String comm = command;
+                    if (command.startsWith("startSong")){
+                        String comm=command;
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                String path = comm.split("!@")[1];
+                                String path=comm.split("!@")[1];
 //                                Controller.startSong(path);
                             }
                         }).start();
@@ -211,28 +208,28 @@ public class Server {
 //                        dataOutputStream.writeUTF(ed.encypt("songStarted"));
 //                        dataOutputStream.flush();
                     }
-                    if (command.equalsIgnoreCase("getIsDoesItOffPage")) {
-                        if (Controller.isDoesItOffPage()) {
+                    if (command.equalsIgnoreCase("getIsDoesItOffPage")){
+                        if (Controller.isDoesItOffPage()){
                             dataOutputStream.writeUTF(ed.encrypt("true"));
                             dataOutputStream.flush();
-                        } else {
+                        }else {
                             dataOutputStream.writeUTF(ed.encrypt("false"));
                             dataOutputStream.flush();
                         }
                     }
-                    if (command.startsWith("getHowMuchLeftForThisPage")) {
-                        long counter = Long.parseLong(command.split("!@")[1]);
-                        int returnValue = Controller.getHowMuchLeftForThisPage(counter);
+                    if (command.startsWith("getHowMuchLeftForThisPage")){
+                        long counter=Long.parseLong(command.split("!@")[1]);
+                        int returnValue=Controller.getHowMuchLeftForThisPage(counter);
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(returnValue)));
                         dataOutputStream.flush();
                     }
 
-                    if (command.startsWith("getForFxmlProductImage")) {
-                        long counter = Long.parseLong(command.split("!@")[1]);
-                        String rawInput = "";
+                    if (command.startsWith("getForFxmlProductImage")){
+                        long counter=Long.parseLong(command.split("!@")[1]);
+                        String rawInput="";
                         for (String s : Controller.getProductImageForFxml(counter)) {
-                            rawInput = rawInput.concat(s);
-                            rawInput = rawInput.concat("!@");
+                            rawInput=rawInput.concat(s);
+                            rawInput=rawInput.concat("!@");
                         }
                         if (!rawInput.isEmpty()) {
                             rawInput = rawInput.substring(0, rawInput.length() - 2);
@@ -537,7 +534,14 @@ public class Server {
                             user += allUser.getFirstName() + "!@";
                             user += allUser.getLastName() + "!@";
                             user += allUser.getEMail() + "!@";
-                            user += allUser.getPhoneNumber();
+                            user += allUser.getPhoneNumber() + "!@";
+                            String status = "Offline";
+                            for (User value : onlineUsers.values()) {
+                                if (value.getUsername().equals(allUser.getUsername())) {
+                                    status = "Online";
+                                }
+                            }
+                            user += status;
                             if (allUser.getType().equalsIgnoreCase("seller")) {
                                 user += "!@" + ((Seller) allUser).getCompanyName();
                             }
@@ -671,55 +675,55 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getAllSellers().size())));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getSellerOfProductByIdCompanyName")) {
-                        long productId = Long.parseLong(command.split("!@")[1]);
-                        int index = Integer.parseInt(command.split("!@")[2]);
+                    if (command.startsWith("getSellerOfProductByIdCompanyName")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        int index=Integer.parseInt(command.split("!@")[2]);
                         dataOutputStream.writeUTF(ed.encrypt(Controller.getProductById(productId).getAllSellers().get(index).getCompanyName()));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getSellerOfProductByIdCompanyName")) {
-                        long productId = Long.parseLong(command.split("!@")[1]);
-                        String userName = command.split("!@")[2];
+                    if (command.startsWith("getSellerOfProductByIdCompanyName")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        String userName=command.split("!@")[2];
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getRemainingItemsForSeller(Controller.getProductById(productId).getSellerByUsername(userName)))));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getProductSellerNameByIndex")) {
-                        long productId = Long.parseLong(command.split("!@")[1]);
-                        int index = Integer.parseInt(command.split("!@")[2]);
+                    if (command.startsWith("getProductSellerNameByIndex")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        int index=Integer.parseInt(command.split("!@")[2]);
                         dataOutputStream.writeUTF(ed.encrypt(Controller.getProductById(productId).getAllSellers().get(index).getUsername()));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getProductPriceBySellerUserName")) {
-                        long productId = Long.parseLong(command.split("!@")[1]);
-                        String userName = command.split("!@")[2];
+                    if (command.startsWith("getProductPriceBySellerUserName")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        String userName=command.split("!@")[2];
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getPrice(Controller.getProductById(productId).getSellerByUsername(userName)))));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getProductDiscountPercentage")) {
-                        long productId = Long.parseLong(command.split("!@")[1]);
+                    if (command.startsWith("getProductDiscountPercentage")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getDiscountPercentage())));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getProductParentCategory")) {
-                        long productId = Long.parseLong(command.split("!@")[1]);
+                    if (command.startsWith("getProductParentCategory")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
                         dataOutputStream.writeUTF(ed.encrypt(Controller.getProductById(productId).getParentCategory().getName()));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getProductCommentsSize")) {
-                        long productId = Long.parseLong(command.split("!@")[1]);
+                    if (command.startsWith("getProductCommentsSize")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getAllComments().size())));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getRemainingItems")) {
-                        long productId = Long.parseLong(command.split("!@")[1]);
+                    if (command.startsWith("getRemainingItems")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).remainingItems())));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getProductAllParentCategories")) {
-                        long productId = Long.parseLong(command.split("!@")[1]);
-                        String output = "";
+                    if (command.startsWith("getProductAllParentCategories")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        String output="";
                         ArrayList<String> address = new ArrayList<>();
-                        Product product = Controller.getProductById(productId);
+                        Product product=Controller.getProductById(productId);
                         address.add(product.getName());
                         Category category = product.getParentCategory();
                         while (category != null) {
@@ -727,23 +731,23 @@ public class Server {
                             category = category.getParentCategory();
                         }
                         for (String s : address) {
-                            output = output.concat(s);
-                            output = output.concat("!@");
+                            output=output.concat(s);
+                            output=output.concat("!@");
                         }
-                        if (output.split("!@").length > 1) {
+                        if (output.split("!@").length>1) {
                             output = output.substring(0, output.length() - 2);
                         }
                         dataOutputStream.writeUTF(ed.encrypt(output));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getStrangeInfoForProductPage")) {
-                        long productId = Long.parseLong(command.split("!@")[1]);
-                        Product product = Controller.getProductById(productId);
-                        int one = 0;
-                        int two = 0;
-                        int three = 0;
-                        int four = 0;
-                        int five = 0;
+                    if (command.startsWith("getStrangeInfoForProductPage")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        Product product=Controller.getProductById(productId);
+                        int one=0;
+                        int two=0;
+                        int three=0;
+                        int four=0;
+                        int five=0;
                         for (Score score : product.getAllScores()) {
                             double n = score.getScore();
                             if (n >= 0 && n < 1) {
@@ -758,11 +762,11 @@ public class Server {
                                 five++;
                             }
                         }
-                        String output = one + "!@" + two + "!@" + three + "!@" + four + "!@" + five;
+                        String output=one+"!@"+two+"!@"+three+"!@"+four+"!@"+five;
                         dataOutputStream.writeUTF(ed.encrypt(output));
                         dataOutputStream.flush();
                     }
-                    if (command.equalsIgnoreCase("isCurrentUserManagerOrSeller")) {
+                    if (command.startsWith("isCurrentUserManagerOrSeller")) {
                         String token=command.split("!@")[1];
                         if (onlineUsers.get(token) instanceof Manager || onlineUsers.get(token) instanceof Seller) {
                             dataOutputStream.writeUTF(ed.encrypt("true"));
@@ -771,7 +775,7 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt("false"));
                         dataOutputStream.flush();
                     }
-                    if (command.equalsIgnoreCase("addToCart")) {
+                    if (command.startsWith("addToCart")) {
                         long productId = Long.parseLong(command.split("!@")[1]);
                         String sellerUserName = command.split("!@")[2];
                         int count = Integer.parseInt(command.split("!@")[3]);
@@ -781,7 +785,7 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(""));
                         dataOutputStream.flush();
                     }
-                    if (command.equalsIgnoreCase("isCurrentUserManagerOrGuest")) {
+                    if (command.startsWith("isCurrentUserManagerOrGuest")) {
                         String token=command.split("!@")[1];
                         if (onlineUsers.get(token) instanceof Manager || onlineUsers.get(token) instanceof Guest) {
                             dataOutputStream.writeUTF(ed.encrypt("true"));
@@ -811,23 +815,23 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(output));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("rateTheProduct")) {
-                        long productId = Long.parseLong(command.split("!@")[1]);
-                        double score = Double.parseDouble(command.split("!@")[2]);
+                    if (command.startsWith("rateTheProduct")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        double score=Double.parseDouble(command.split("!@")[2]);
                         CostumerAreaController.rate(productId, score);
                         dataOutputStream.writeUTF(ed.encrypt(""));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("canRate")) {
-                        long productId = Long.parseLong(command.split("!@")[1]);
-                        String outPut = "false";
-                        if (CostumerAreaController.canRate(productId)) {
-                            outPut = "true";
+                    if (command.startsWith("canRate")){
+                        long productId=Long.parseLong(command.split("!@")[1]);
+                        String outPut="false";
+                        if (CostumerAreaController.canRate(productId)){
+                            outPut="true";
                         }
                         dataOutputStream.writeUTF(ed.encrypt(outPut));
                         dataOutputStream.flush();
                     }
-                    if (command.equalsIgnoreCase("isCurrentUserGuest")) {
+                    if (command.startsWith("isCurrentUserGuest")) {
                         String token=command.split("!@")[1];
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(onlineUsers.get(token).getType().equalsIgnoreCase("guest"))));
                         dataOutputStream.flush();
@@ -847,7 +851,7 @@ public class Server {
                             output = output.concat(comment.getNote());
                             output = output.concat("!@");
                         }
-                        if (output.split("!@").length > 1) {
+                        if (!output.isEmpty()) {
                             output = output.substring(0, output.length() - 2);
                         }
                         dataOutputStream.writeUTF(ed.encrypt(output));
@@ -860,7 +864,7 @@ public class Server {
                             output = output.concat(comment.getUserWhoComment().getUsername());
                             output = output.concat("!@");
                         }
-                        if (output.split("!@").length > 1) {
+                        if (!output.isEmpty()) {
                             output = output.substring(0, output.length() - 2);
                         }
                         dataOutputStream.writeUTF(ed.encrypt(output));
@@ -873,13 +877,13 @@ public class Server {
                             output = output.concat(String.valueOf(comment.isUserBuyThisProduct()));
                             output = output.concat("!@");
                         }
-                        if (output.split("!@").length > 1) {
+                        if (!output.isEmpty()) {
                             output = output.substring(0, output.length() - 2);
                         }
                         dataOutputStream.writeUTF(ed.encrypt(output));
                         dataOutputStream.flush();
                     }
-                    if (command.equalsIgnoreCase("getCurrentUserUserName")) {
+                    if (command.startsWith("getCurrentUserUserName")) {
                         String token=command.split("!@")[1];
                         dataOutputStream.writeUTF(ed.encrypt(onlineUsers.get(token).getUsername()));
                         dataOutputStream.flush();
@@ -962,7 +966,133 @@ public class Server {
                         fileInputStream.close();
                         break;
                     }
-                    if (command.equalsIgnoreCase("clickSound")) {
+                    if (command.startsWith("getSupportsForCostumer")) {
+                        String answer = "";
+                        ArrayList<User> onlineSupports = new ArrayList<>();
+                        for (User user : onlineUsers.values()) {
+                            if (user.getType().equalsIgnoreCase("support")) {
+                                onlineSupports.add(user);
+                            }
+                        }
+                        for (User user : DataBase.getAllUsers()) {
+                            if (user.getType().equalsIgnoreCase("support")) {
+                                String status = "offline";
+                                for (User onlineSupport : onlineSupports) {
+                                    if (user.getUsername().equals(onlineSupport.getUsername())) {
+                                        status = "online";
+                                        break;
+                                    }
+                                }
+                                answer += user.getUsername() + "!@" + status + "#$";
+                            }
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getSoldHistory")) {
+                        String answer = "";
+                        for (ProductSellHistory productSellHistory : DataBase.getSellHistory()) {
+                            answer += productSellHistory.toString() + "#$";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getChatForCostumer")) {
+                        String support = command.split("!@")[2];
+                        String costumer = onlineUsers.get(command.split("!@")[1]).getUsername();
+                        String answer = "";
+                        for (Chat chat : ((Costumer) DataBase.getUserByUsername(costumer)).getChats()) {
+                            if (chat.getSupport().getUsername().equals(support)) {
+                                answer = chat.toString();
+                                break;
+                            }
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getChatForSupport")) {
+                        String costumer = command.split("!@")[2];
+                        String support = onlineUsers.get(command.split("!@")[1]).getUsername();
+                        String answer = "";
+                        for (Chat chat : ((Support) DataBase.getUserByUsername(support)).getChats()) {
+                            if (chat.getCostumer().getUsername().equals(costumer)) {
+                                answer = chat.toString();
+                                break;
+                            }
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("startChatForCostumer")) {
+                        String support = command.split("!@")[2];
+                        String costumer = onlineUsers.get(command.split("!@")[1]).getUsername();
+                        boolean flag = false;
+                        for (Chat chat : ((Costumer) DataBase.getUserByUsername(costumer)).getChats()) {
+                            if (chat.getSupport().getUsername().equals(support)) {
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if (!flag) {
+                            Chat chat = new Chat(((Costumer) DataBase.getUserByUsername(costumer))
+                                    , ((Support) DataBase.getUserByUsername(support)));
+                            chat.addMessage("Chat Started!");
+                            ((Costumer) DataBase.getUserByUsername(costumer)).addChat(chat);
+                            chat = new Chat(((Costumer) DataBase.getUserByUsername(costumer))
+                                    , ((Support) DataBase.getUserByUsername(support)));
+                            chat.addMessage("Chat Started!");
+                            ((Support) DataBase.getUserByUsername(support)).addChat(chat);
+                            ((Support) DataBase.getUserByUsername(support)).addContact(DataBase.getUserByUsername(costumer));
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt("Done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("sendMessageForCostumer")) {
+                        String support = command.split("!@")[2];
+                        String costumer = onlineUsers.get(command.split("!@")[1]).getUsername();
+                        for (Chat chat : ((Costumer) DataBase.getUserByUsername(costumer)).getChats()) {
+                            if (chat.getSupport().getUsername().equals(support)) {
+                                chat.addMessage(command.split("!@")[3]);
+                                break;
+                            }
+                        }
+                        for (Chat chat : ((Support) DataBase.getUserByUsername(support)).getChats()) {
+                            if (chat.getCostumer().getUsername().equals(costumer)) {
+                                chat.addMessage(command.split("!@")[3]);
+                                break;
+                            }
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt("Done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("getContactsForSupport")) {
+                        Support support = (Support) onlineUsers.get(command.split("!@")[1]);
+                        String answer = "";
+                        for (User contact : support.getContacts()) {
+                            answer += contact.getUsername() + "!@";
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt(answer));
+                        dataOutputStream.flush();
+                    }
+                    if (command.startsWith("sendMessageForSupport")) {
+                        String costumer = command.split("!@")[2];
+                        String support = onlineUsers.get(command.split("!@")[1]).getUsername();
+                        for (Chat chat : ((Costumer) DataBase.getUserByUsername(costumer)).getChats()) {
+                            if (chat.getSupport().getUsername().equals(support)) {
+                                chat.addMessage(command.split("!@")[3]);
+                                break;
+                            }
+                        }
+                        for (Chat chat : ((Support) DataBase.getUserByUsername(support)).getChats()) {
+                            if (chat.getCostumer().getUsername().equals(costumer)) {
+                                chat.addMessage(command.split("!@")[3]);
+                                break;
+                            }
+                        }
+                        dataOutputStream.writeUTF(ed.encrypt("Done"));
+                        dataOutputStream.flush();
+                    }
+                    if (command.equalsIgnoreCase("clickSound")){
 //                        new Thread(new Runnable() {
 //                            @Override
 //                            public void run() {
@@ -983,9 +1113,9 @@ public class Server {
                 DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
                 DataInputStream din = new DataInputStream(socket.getInputStream());
 
-                while (true) {
+                while (true){
                     String command = ed.decrypt(dataInputStream.readUTF());
-                    if (command.equals("isThereAnyAccountWithUsernameInBank")) {
+                    if(command.equals("isThereAnyAccountWithUsernameInBank")){
                         String username = ed.decrypt(dataInputStream.readUTF());
                         dout.writeUTF("isThereAnyAccountWithUsernameInBank");
                         dout.flush();
@@ -995,7 +1125,7 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(bankResponse));
                         dataOutputStream.flush();
                     }
-                    if (command.equals("createAccountInBank")) {
+                    if(command.equals("createAccountInBank")){
                         String message = ed.decrypt(dataInputStream.readUTF());
                         dout.writeUTF("createAccountInBank");
                         dout.flush();
@@ -1005,7 +1135,7 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(bankResponse));
                         dataOutputStream.flush();
                     }
-                    if (command.equals("isPasswordCorrectForBankAccount")) {
+                    if(command.equals("isPasswordCorrectForBankAccount")){
                         String input = ed.decrypt(dataInputStream.readUTF());
                         dout.writeUTF("createAccountInBank");
                         dout.flush();
@@ -1015,7 +1145,7 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(bankResponse));
                         dataOutputStream.flush();
                     }
-                    if (command.equals("getTokenInBank")) {
+                    if(command.equals("getTokenInBank")){
                         String username = ed.decrypt(dataInputStream.readUTF());
                         dout.writeUTF("getTokenInBank");
                         dout.flush();
@@ -1026,7 +1156,7 @@ public class Server {
                         dataOutputStream.flush();
                         continue;
                     }
-                    if (command.equals("isTokenExpired")) {
+                    if(command.equals("isTokenExpired")){
                         String bankToken = ed.decrypt(dataInputStream.readUTF());
                         dout.writeUTF("isTokenExpired");
                         dout.flush();
@@ -1037,7 +1167,7 @@ public class Server {
                         dataOutputStream.flush();
                         continue;
                     }
-                    if (command.equals("getBankAccountInformation")) {
+                    if(command.equals("getBankAccountInformation")){
                         String bankToken = ed.decrypt(dataInputStream.readUTF());
                         dout.writeUTF("getBankAccountInformation");
                         dout.flush();
@@ -1048,7 +1178,7 @@ public class Server {
                         dataOutputStream.flush();
                         continue;
                     }
-                    if (command.equals("isThereAnyBankAccountWithID")) {
+                    if(command.equals("isThereAnyBankAccountWithID")){
                         String accountID = ed.decrypt(dataInputStream.readUTF());
                         dout.writeUTF("isThereAnyBankAccountWithID");
                         dout.flush();
@@ -1059,7 +1189,7 @@ public class Server {
                         dataOutputStream.flush();
                         continue;
                     }
-                    if (command.equals("createReceipt")) {
+                    if(command.equals("createReceipt")){
                         String message = ed.decrypt(dataInputStream.readUTF());
                         dout.writeUTF("createReceipt");
                         dout.flush();
@@ -1070,7 +1200,7 @@ public class Server {
                         dataOutputStream.flush();
                         continue;
                     }
-                    if (command.equals("isThereAnyReceiptWithID")) {
+                    if(command.equals("isThereAnyReceiptWithID")){
                         String input = ed.decrypt(dataInputStream.readUTF());
                         dout.writeUTF("isThereAnyReceiptWithID");
                         dout.flush();
@@ -1081,7 +1211,7 @@ public class Server {
                         dataOutputStream.flush();
                         continue;
                     }
-                    if (command.equals("getReceiptAndAccountDetailForPay")) {
+                    if(command.equals("getReceiptAndAccountDetailForPay")){
                         String input = ed.decrypt(dataInputStream.readUTF());
                         dout.writeUTF("getReceiptAndAccountDetailForPay");
                         dout.flush();
@@ -1124,13 +1254,6 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(response));
                         dataOutputStream.flush();
                         continue;
-                    }
-                    if (command.startsWith("setSelectedProducts")){
-                        long productId= Long.parseLong(command.split("!@")[1]);
-                        String token=command.split("!@")[2];
-                        selectedProduct.put(token,Controller.getProductById(productId));
-                        dataOutputStream.writeUTF("");
-                        dataOutputStream.flush();
                     }
 
                 }

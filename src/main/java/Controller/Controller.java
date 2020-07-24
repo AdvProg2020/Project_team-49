@@ -149,6 +149,9 @@ public class Controller {
             hasHeadManager = true;
             DataBase.addNewUser(new Manager(info.get(0), info.get(2), info.get(3), info.get(4), Long.parseLong(info.get(5)), info.get(1)));
         }
+        if (type.toLowerCase().equalsIgnoreCase("support")) {
+            DataBase.addNewUser(new Support(info.get(0), info.get(2), info.get(3), info.get(4), Long.parseLong(info.get(5)), info.get(1)));
+        }
         return "account created";
     }
 

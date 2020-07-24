@@ -194,15 +194,54 @@ public class ManagerAreaGraphicController implements Initializable {
     public TextField newDiscountStartDate;
     public Rectangle newDiscountDurationRec1;
     public TextField newDiscountEndDate;
+    public Pane addSupportPane;
+    public TextField usernameSupReg;
+    public Label userSupLabel;
+    public Button registerSupButton;
+    public PasswordField passSupReg;
+    public Label passSupLabel;
+    public PasswordField rePassSupReg;
+    public Label rePassSupLabel;
+    public TextField firstNameSupReg;
+    public Label fNameSupLabel;
+    public TextField lastNameSupReg;
+    public Label lNameSupLabel;
+    public TextField emailSupReg;
+    public Label emailSupLabel;
+    public TextField phoneSupReg;
+    public Label phoneSupLabel;
+    public Label userStatusLabel2;
+    public Label userStatusLabel1;
+    public Pane viewSoldProductsPane;
+    public Pane firstProductPane;
+    public Label ProductId1;
+    public Label soldCount1;
+    public Label ProductName1;
+    public Label sellerName1;
+    public Button setReceivedStatus1;
+    public Pane thereIsNoUsers1;
+    public Pane productsArrowAndRec;
+    public ImageView downArrowProducts;
+    public ImageView upArrowProducts;
+    public Pane secondProductPane;
+    public Label ProductId2;
+    public Label soldCount2;
+    public Label ProductName2;
+    public Label sellerName2;
+    public Button setReceivedStatus2;
+    public Label buyerName2;
+    public Label buyerName1;
     private ArrayList<String> manager = new ArrayList<>();
     private ArrayList<String> categories = new ArrayList<>();
     private ArrayList<String> allUsers = new ArrayList<>();
     private ArrayList<String> requests = new ArrayList<>();
     private ArrayList<String> discountCodes = new ArrayList<>();
+    private ArrayList<String> soldHistory = new ArrayList<>();
     private int usersIndex = 0;
     private int categoriesIndex = 0;
     private int discountIndex = 0;
     private int requestsIndex = 0;
+    private int soldHistoryIndex = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -235,6 +274,10 @@ public class ManagerAreaGraphicController implements Initializable {
 
     private void setRequests() {
         requests = View.client.getRequests();
+    }
+
+    private void setSoldHistory() {
+        soldHistory = View.client.getSoldHistory();
     }
 
     private void setDiscountCodes() {
@@ -383,6 +426,10 @@ public class ManagerAreaGraphicController implements Initializable {
         categoryButtonsPane.setDisable(true);
         editAndSeeCategoriesPane.setVisible(false);
         editAndSeeCategoriesPane.setDisable(true);
+        addSupportPane.setDisable(true);
+        addSupportPane.setVisible(false);
+        viewSoldProductsPane.setVisible(false);
+        viewSoldProductsPane.setDisable(true);
 //        noDiscountsYet.setVisible(false);
 //        imagesLog1Index = 0;
 //        imagesLog2Index = 0;
@@ -564,9 +611,15 @@ public class ManagerAreaGraphicController implements Initializable {
         phoneNumberLabel1.setText(user[5]);
         userNameLabel1.setText(user[1]);
         roleLabel1.setText(user[0]);
+        userStatusLabel1.setText(user[6]);
+        if (user[6].equals("Offline")) {
+            userStatusLabel1.setTextFill(Color.RED);
+        } else {
+            userStatusLabel1.setTextFill(Color.GREEN);
+        }
         if (user[0].equalsIgnoreCase("seller")) {
             companyNamePane1.setVisible(true);
-            companyNameLabel1.setText(user[6]);
+            companyNameLabel1.setText(user[7]);
         }
         //password ro hazf kardam
         if (user[1].equals(manager.get(0))) {
@@ -590,9 +643,15 @@ public class ManagerAreaGraphicController implements Initializable {
         phoneNumberLabel2.setText(user2[5]);
         userNameLabel2.setText(user2[1]);
         roleLabel2.setText(user2[0]);
+        userStatusLabel2.setText(user2[6]);
+        if (user2[6].equals("Offline")) {
+            userStatusLabel2.setTextFill(Color.RED);
+        } else {
+            userStatusLabel2.setTextFill(Color.GREEN);
+        }
         if (user2[0].equalsIgnoreCase("seller")) {
             companyNamePane2.setVisible(true);
-            companyNameLabel2.setText(user2[6]);
+            companyNameLabel2.setText(user2[7]);
         }
         if (user2[1].equals(manager.get(0))) {
             removeUser2.setDisable(true);
@@ -962,6 +1021,9 @@ public class ManagerAreaGraphicController implements Initializable {
         if (mouseEvent.getSource().equals(registerButton)) {
             register();
         }
+        if (mouseEvent.getSource().equals(registerSupButton)) {
+            registerSup();
+        }
         if (mouseEvent.getSource().equals(usernameReg)) {
             usernameReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             userLabel.setVisible(true);
@@ -996,6 +1058,42 @@ public class ManagerAreaGraphicController implements Initializable {
             phoneReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
             phoneLabel.setVisible(true);
             phoneLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+
+        if (mouseEvent.getSource().equals(usernameSupReg)) {
+            usernameSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            userSupLabel.setVisible(true);
+            userSupLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+        if (mouseEvent.getSource().equals(passSupReg)) {
+            passSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            passSupLabel.setVisible(true);
+            passSupLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+        if (mouseEvent.getSource().equals(rePassSupReg)) {
+            rePassSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            rePassSupLabel.setVisible(true);
+            rePassSupLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+        if (mouseEvent.getSource().equals(firstNameSupReg)) {
+            firstNameSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            fNameSupLabel.setVisible(true);
+            fNameSupLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+        if (mouseEvent.getSource().equals(lastNameSupReg)) {
+            lastNameSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            lNameSupLabel.setVisible(true);
+            lNameSupLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+        if (mouseEvent.getSource().equals(emailSupReg)) {
+            emailSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            emailSupLabel.setVisible(true);
+            emailSupLabel.setTextFill(Color.valueOf("#1a73e8"));
+        }
+        if (mouseEvent.getSource().equals(phoneSupReg)) {
+            phoneSupReg.setStyle("-fx-border-color: #1a73e8;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            phoneSupLabel.setVisible(true);
+            phoneSupLabel.setTextFill(Color.valueOf("#1a73e8"));
         }
 
     }
@@ -1104,12 +1202,126 @@ public class ManagerAreaGraphicController implements Initializable {
         lastNameReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
         emailReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
         phoneReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+
+        if (usernameSupReg.getText().equals("")) {
+            userSupLabel.setVisible(false);
+        }
+        if (passSupReg.getText().equals("")) {
+            passSupLabel.setVisible(false);
+        }
+        if (rePassSupReg.getText().equals("")) {
+            rePassSupLabel.setVisible(false);
+        }
+        if (firstNameSupReg.getText().equals("")) {
+            fNameSupLabel.setVisible(false);
+        }
+        if (lastNameSupReg.getText().equals("")) {
+            lNameSupLabel.setVisible(false);
+        }
+        if (emailSupReg.getText().equals("")) {
+            emailSupLabel.setVisible(false);
+        }
+        if (phoneSupReg.getText().equals("")) {
+            phoneSupLabel.setVisible(false);
+        }
+
+        userSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+        passSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+        rePassSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+        fNameSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+        lNameSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+        emailSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+        phoneSupLabel.setTextFill(Color.valueOf("#a9a9a9"));
+
+        usernameSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        passSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        rePassSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        firstNameSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        lastNameSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        emailSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+        phoneSupReg.setStyle("-fx-border-color: darkgray;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
     }
 
     public void seeAddManagerPage(MouseEvent mouseEvent) {
         closeALlPanes();
         addManagerPane.setDisable(false);
         addManagerPane.setVisible(true);
+    }
+
+    public  void seeAddSupportPage(MouseEvent mouseEvent) {
+        closeALlPanes();
+        addSupportPane.setVisible(true);
+        addSupportPane.setDisable(false);
+
+        usernameSupReg.setText("");
+        passSupReg.setText("");
+        rePassSupReg.setText("");
+        firstNameSupReg.setText("");
+        lastNameSupReg.setText("");
+        emailSupReg.setText("");
+        phoneSupReg.setText("");
+    }
+
+    public void registerSup() {
+        boolean errorFound = false;
+        if (View.client.hasUserWithUsername(usernameSupReg.getText())) {
+            usernameSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            userSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!usernameSupReg.getText().matches("\\w+")) {
+            usernameSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            userSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!passSupReg.getText().equals(rePassSupReg.getText())) {
+            passSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            passSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            rePassSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            rePassSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!passSupReg.getText().matches("\\w+")) {
+            passSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            passSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!rePassSupReg.getText().matches("\\w+")) {
+            rePassSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            rePassSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!firstNameSupReg.getText().matches("[a-zA-Z]+")) {
+            firstNameSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            fNameSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!lastNameSupReg.getText().matches("[a-zA-Z]+")) {
+            lastNameSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            lNameSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!emailSupReg.getText().matches("(\\w+)@(\\w+)")) {
+            emailSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            emailSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!phoneSupReg.getText().matches("\\d+")) {
+            phoneSupReg.setStyle("-fx-border-color: #fb3449;" + "-fx-border-radius: 8;" + "-fx-background-radius: 8");
+            phoneSupLabel.setTextFill(Color.valueOf("#fb3449"));
+            errorFound = true;
+        }
+        if (!errorFound) {
+            ArrayList<String> info = new ArrayList<>();
+            info.add(usernameSupReg.getText());
+            info.add(passSupReg.getText());
+            info.add(firstNameSupReg.getText());
+            info.add(lastNameSupReg.getText());
+            info.add(emailSupReg.getText());
+            info.add(phoneSupReg.getText());
+            View.client.createAccount(info, "Support");
+            setAllUsers();
+        }
     }
 
 
@@ -1320,5 +1532,77 @@ public class ManagerAreaGraphicController implements Initializable {
         scene.setRoot(View.getCurrentPane());
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void seeSoldProductsHistoryPage(MouseEvent mouseEvent) {
+        closeALlPanes();
+        setSoldHistory();
+        soldHistoryIndex = 0;
+        
+        viewSoldProductsPane.setDisable(false);
+        viewSoldProductsPane.setVisible(true);
+
+        if (soldHistory.size() == 0) {
+            return;
+        }
+        
+        setSoldProductsHistoryPaneContents();
+    }
+
+    private void setSoldProductsHistoryPaneContents() {
+        restartInsideUsersPane();
+        int size = soldHistory.size();
+        if (size == 0) return;
+        String[] history1 = soldHistory.get(soldHistoryIndex).split("!@");
+        if (size > 2) {
+            productsArrowAndRec.setVisible(true);
+            productsArrowAndRec.setDisable(false);
+        }
+
+        firstProductPane.setDisable(false);
+        firstProductPane.setVisible(true);
+
+        ProductName1.setText(history1[0]);
+        ProductId1.setText(history1[0]);
+        soldCount1.setText(history1[0]);
+        sellerName1.setText(history1[0]);
+        buyerName1.setText(history1[0]);
+
+
+        if (soldHistoryIndex > size - 2) return;
+        secondUserPane.setDisable(false);
+        secondUserPane.setVisible(true);
+
+        String[] user2 = soldHistory.get(soldHistoryIndex + 1).split("!@");
+        firstNameLabel2.setText(user2[2]);
+        lastNameLabel2.setText(user2[3]);
+        emailLabel2.setText(user2[4]);
+        phoneNumberLabel2.setText(user2[5]);
+        userNameLabel2.setText(user2[1]);
+        roleLabel2.setText(user2[0]);
+        userStatusLabel2.setText(user2[6]);
+        if (user2[1].equals(manager.get(0))) {
+            removeUser2.setDisable(true);
+            removeUser2.setVisible(false);
+        } else {
+            removeUser2.setDisable(false);
+            removeUser2.setVisible(true);
+        }
+    }
+
+    public void setReceivedStatus(MouseEvent mouseEvent) {
+    }
+
+    public void seeMoreHistory(MouseEvent mouseEvent) {
+        int size = soldHistory.size();
+        if (mouseEvent.getSource().equals(downArrowProducts)) {
+            if (soldHistoryIndex >= size - 2) return;
+            soldHistoryIndex += 2;
+
+        } else if (mouseEvent.getSource().equals(downArrowProducts)) {
+            if (soldHistoryIndex == 0) return;
+            soldHistoryIndex -= 2;
+        }
+        setSoldProductsHistoryPaneContents();
     }
 }
