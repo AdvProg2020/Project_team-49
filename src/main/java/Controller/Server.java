@@ -40,8 +40,8 @@ public class Server {
         new ServerImp().run();
     }
 
-    private static void savePermanently(){
-        while (true){
+    private static void savePermanently() {
+        while (true) {
             DataBase.saveAllData();
             try {
                 Thread.sleep(100000);
@@ -251,8 +251,8 @@ public class Server {
                         long counter = Long.parseLong(command.split("!@")[1]);
                         String rawInput = "";
                         for (Double aDouble : Controller.getProductPriceForFxml(counter)) {
-                            rawInput =rawInput.concat(String.valueOf(aDouble));
-                            rawInput =rawInput.concat("!@");
+                            rawInput = rawInput.concat(String.valueOf(aDouble));
+                            rawInput = rawInput.concat("!@");
                         }
                         if (!rawInput.isEmpty()) {
                             rawInput = rawInput.substring(0, rawInput.length() - 2);
@@ -264,8 +264,8 @@ public class Server {
                         long counter = Long.parseLong(command.split("!@")[1]);
                         String rawInput = "";
                         for (String s : Controller.getProductNameForFxml(counter)) {
-                            rawInput =rawInput.concat(s);
-                            rawInput =rawInput.concat("!@");
+                            rawInput = rawInput.concat(s);
+                            rawInput = rawInput.concat("!@");
                         }
                         if (!rawInput.isEmpty()) {
                             rawInput = rawInput.substring(0, rawInput.length() - 2);
@@ -277,8 +277,8 @@ public class Server {
                         long counter = Long.parseLong(command.split("!@")[1]);
                         String rawInput = "";
                         for (Double aDouble : Controller.getProductScoreForFxml(counter)) {
-                            rawInput =rawInput.concat(String.valueOf(aDouble));
-                            rawInput =rawInput.concat("!@");
+                            rawInput = rawInput.concat(String.valueOf(aDouble));
+                            rawInput = rawInput.concat("!@");
                         }
                         if (!rawInput.isEmpty()) {
                             rawInput = rawInput.substring(0, rawInput.length() - 2);
@@ -290,8 +290,8 @@ public class Server {
                         long counter = Long.parseLong(command.split("!@")[1]);
                         String rawInput = "";
                         for (Double aDouble : Controller.getProductOffRemainForFxml(counter)) {
-                            rawInput =rawInput.concat(String.valueOf(aDouble));
-                            rawInput =rawInput.concat("!@");
+                            rawInput = rawInput.concat(String.valueOf(aDouble));
+                            rawInput = rawInput.concat("!@");
                         }
                         if (!rawInput.isEmpty()) {
                             rawInput = rawInput.substring(0, rawInput.length() - 2);
@@ -303,8 +303,8 @@ public class Server {
                         long counter = Long.parseLong(command.split("!@")[1]);
                         String rawInput = "";
                         for (Long aDouble : Controller.getProductIdForFxml(counter)) {
-                            rawInput =rawInput.concat(String.valueOf(aDouble));
-                            rawInput =rawInput.concat("!@");
+                            rawInput = rawInput.concat(String.valueOf(aDouble));
+                            rawInput = rawInput.concat("!@");
                         }
                         if (!rawInput.isEmpty()) {
                             rawInput = rawInput.substring(0, rawInput.length() - 2);
@@ -316,8 +316,8 @@ public class Server {
                         long counter = Long.parseLong(command.split("!@")[1]);
                         String rawInput = "";
                         for (Boolean aDouble : Controller.getOffForFxml(counter)) {
-                            rawInput =rawInput.concat(String.valueOf(aDouble));
-                            rawInput =rawInput.concat("!@");
+                            rawInput = rawInput.concat(String.valueOf(aDouble));
+                            rawInput = rawInput.concat("!@");
                         }
                         if (!rawInput.isEmpty()) {
                             rawInput = rawInput.substring(0, rawInput.length() - 2);
@@ -329,8 +329,8 @@ public class Server {
                         long counter = Long.parseLong(command.split("!@")[1]);
                         String rawInput = "";
                         for (int aDouble : Controller.getProductOffPercentForFxml(counter)) {
-                            rawInput =rawInput.concat(String.valueOf(aDouble));
-                            rawInput =rawInput.concat("!@");
+                            rawInput = rawInput.concat(String.valueOf(aDouble));
+                            rawInput = rawInput.concat("!@");
                         }
                         if (!rawInput.isEmpty()) {
                             rawInput = rawInput.substring(0, rawInput.length() - 2);
@@ -342,8 +342,8 @@ public class Server {
                         long counter = Long.parseLong(command.split("!@")[1]);
                         String rawInput = "";
                         for (int aDouble : Controller.getProductRemainForFxml(counter)) {
-                            rawInput =rawInput.concat(String.valueOf(aDouble));
-                            rawInput =rawInput.concat("!@");
+                            rawInput = rawInput.concat(String.valueOf(aDouble));
+                            rawInput = rawInput.concat("!@");
                         }
                         if (!rawInput.isEmpty()) {
                             rawInput = rawInput.substring(0, rawInput.length() - 2);
@@ -354,8 +354,8 @@ public class Server {
                     if (command.equalsIgnoreCase("getAvailableBrands")) {
                         String rawInput = "";
                         for (String availableBrand : Filter.getAvailableBrands()) {
-                            rawInput =rawInput.concat(availableBrand);
-                            rawInput =rawInput.concat("!@");
+                            rawInput = rawInput.concat(availableBrand);
+                            rawInput = rawInput.concat("!@");
                         }
                         if (!rawInput.isEmpty()) {
                             rawInput = rawInput.substring(0, rawInput.length() - 2);
@@ -657,8 +657,8 @@ public class Server {
                     }
                     if (command.startsWith("checkScoreBuyer")) {
                         long productId = Long.parseLong(command.split("!@")[1]);
-                        String token=command.split("!@")[2];
-                        if (Controller.getProductById(productId).getAllScores().isEmpty()){
+                        String token = command.split("!@")[2];
+                        if (Controller.getProductById(productId).getAllScores().isEmpty()) {
                             dataOutputStream.writeUTF(ed.encrypt("flase"));
                             dataOutputStream.flush();
                         }
@@ -671,7 +671,7 @@ public class Server {
                     }
                     if (command.startsWith("getScoreAfterCheckScoreBuyer")) {
                         long productId = Long.parseLong(command.split("!@")[1]);
-                        String token=command.split("!@")[2];
+                        String token = command.split("!@")[2];
                         for (Score score : Controller.getProductById(productId).getAllScores()) {
                             if (score.getBuyer().equals(onlineUsers.get(token))) {
                                 dataOutputStream.writeUTF(ed.encrypt(String.valueOf(score.getScore())));
@@ -694,7 +694,7 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getAllSellers().size())));
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getSellerOfProductByIdCompanyName")){
+                    if (command.startsWith("getSellerOfProductByIdCompanyName")) {
                         long productId = Long.parseLong(command.split("!@")[1]);
                         int index = Integer.parseInt(command.split("!@")[2]);
                         dataOutputStream.writeUTF(ed.encrypt(Controller.getProductById(productId).getAllSellers().get(index).getCompanyName()));
@@ -786,7 +786,7 @@ public class Server {
                         dataOutputStream.flush();
                     }
                     if (command.startsWith("isCurrentUserManagerOrSeller")) {
-                        String token=command.split("!@")[1];
+                        String token = command.split("!@")[1];
                         if (onlineUsers.get(token) instanceof Manager || onlineUsers.get(token) instanceof Seller) {
                             dataOutputStream.writeUTF(ed.encrypt("true"));
                             dataOutputStream.flush();
@@ -799,14 +799,14 @@ public class Server {
                         long productId = Long.parseLong(command.split("!@")[1]);
                         String sellerUserName = command.split("!@")[2];
                         int count = Integer.parseInt(command.split("!@")[3]);
-                        String token=command.split("!@")[4];
-                        Controller.addToCartWithToken(onlineUsers.get(token),Controller.getProductById(productId), Controller.getProductById(productId).getSellerByUsername(sellerUserName), count);
+                        String token = command.split("!@")[4];
+                        Controller.addToCartWithToken(onlineUsers.get(token), Controller.getProductById(productId), Controller.getProductById(productId).getSellerByUsername(sellerUserName), count);
 //                        Controller.addToCart(Controller.getProductById(productId), Controller.getProductById(productId).getSellerByUsername(sellerUserName), count);
                         dataOutputStream.writeUTF(ed.encrypt(""));
                         dataOutputStream.flush();
                     }
                     if (command.startsWith("isCurrentUserManagerOrGuest")) {
-                        String token=command.split("!@")[1];
+                        String token = command.split("!@")[1];
                         if (onlineUsers.get(token) instanceof Manager || onlineUsers.get(token) instanceof Guest) {
                             dataOutputStream.writeUTF(ed.encrypt("true"));
                             dataOutputStream.flush();
@@ -815,7 +815,7 @@ public class Server {
                         dataOutputStream.flush();
                     }
                     if (command.startsWith("getProductInfoForProductPage")) {
-                        String token=command.split("!@")[1];
+                        String token = command.split("!@")[1];
                         Product product = selectedProduct.get(token);
                         String output = product.getName();
                         output = output.concat("!@");
@@ -852,7 +852,7 @@ public class Server {
                         dataOutputStream.flush();
                     }
                     if (command.startsWith("isCurrentUserGuest")) {
-                        String token=command.split("!@")[1];
+                        String token = command.split("!@")[1];
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(onlineUsers.get(token).getType().equalsIgnoreCase("guest"))));
                         dataOutputStream.flush();
                     }
@@ -904,7 +904,7 @@ public class Server {
                         dataOutputStream.flush();
                     }
                     if (command.startsWith("getCurrentUserUserName")) {
-                        String token=command.split("!@")[1];
+                        String token = command.split("!@")[1];
                         dataOutputStream.writeUTF(ed.encrypt(onlineUsers.get(token).getUsername()));
                         dataOutputStream.flush();
                     }
@@ -1112,7 +1112,7 @@ public class Server {
                         dataOutputStream.writeUTF(ed.encrypt("Done"));
                         dataOutputStream.flush();
                     }
-                    if (command.equalsIgnoreCase("clickSound")){
+                    if (command.equalsIgnoreCase("clickSound")) {
 //                        new Thread(new Runnable() {
 //                            @Override
 //                            public void run() {
@@ -1120,15 +1120,15 @@ public class Server {
 //                            }
 //                        }).start();
                     }
-                    if (command.startsWith("setSelectedProducts")){
-                        long productId= Long.parseLong(command.split("!@")[1]);
-                        String token=command.split("!@")[2];
-                        selectedProduct.put(token,Controller.getProductById(productId));
+                    if (command.startsWith("setSelectedProducts")) {
+                        long productId = Long.parseLong(command.split("!@")[1]);
+                        String token = command.split("!@")[2];
+                        selectedProduct.put(token, Controller.getProductById(productId));
                         dataOutputStream.writeUTF("");
                         dataOutputStream.flush();
                     }
-                    if (command.startsWith("getIsProductOff")){
-                        long productId= Long.parseLong(command.split("!@")[1]);
+                    if (command.startsWith("getIsProductOff")) {
+                        long productId = Long.parseLong(command.split("!@")[1]);
                         dataOutputStream.writeUTF(ed.encrypt(String.valueOf(Controller.getProductById(productId).getDoesItHaveOff())));
                         dataOutputStream.flush();
                     }
@@ -1364,7 +1364,7 @@ public class Server {
                     boolean flag = true;
                     SecretKey key;
                     while (true) {
-                         key = KeyGenerator.getInstance("DES").generateKey();
+                        key = KeyGenerator.getInstance("DES").generateKey();
                         if (!onlineUsers.keySet().contains(key.toString())) flag = false;
                         if (!flag) {
                             break;
