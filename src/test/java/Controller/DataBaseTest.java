@@ -267,7 +267,7 @@ public class DataBaseTest {
         allCategories.clear();
         loadAllData();
 
-        assertEquals(7, allUsers.size());
+        assertEquals(0, allUsers.size());
         assertEquals("alim1379", allUsers.get(0).getUsername());
         Costumer costumer = (Costumer) allUsers.get(0);
         assertEquals(1.1, costumer.getCredit(), 0.0001);
